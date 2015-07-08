@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>REPLACE WITH YOUR APP NAME</title>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-    <%= csrf_meta_tags %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
-      </script>
-    <![endif]-->
-  </head>
+  <%= render "layouts/head" %>
   <body>
+    <%= render "layouts/logged_in_header" %>
     <div class="container">
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-      <% end %>
+      <%= render "shared/flash_error_messages" %>
       <%= yield %>
+      <% if logged_in? %>
+        <%= render "layouts/logged_in_footer" %>
+      <% else %>
+      	<div class="center">
+          <br/>
+          <br/>
+          <br/>
+      		<small>
+      			&copy; Copyright 2015
+            <%= link_to "Leksi Education", root_path %>
+      		</small>
+      	</div>
+      <% end %>
+      <%= debug(params) if Rails.env.development? %>
     </div>
+    <%#= render "shared/google_analytics" %>
   </body>
 </html>

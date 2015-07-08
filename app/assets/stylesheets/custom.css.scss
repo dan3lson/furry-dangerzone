@@ -1,7 +1,165 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* Uncomment if using a navbar */
-/* body {
-  padding-top: 60px;
-} */
+//**********
+//*
+//* MIXINS, VARIABLES, ETC.
+//*
+//**********
+
+$leksiRed: #FF1300;
+$leksiOrange: orange;
+$leksiGreen: #24D12E;
+
+@mixin box_sizing{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+//**********
+//*
+//* UNIVERSAL
+//*
+//**********
+
+html {
+	overflow-y: scroll;
+}
+
+body {
+  padding: 100px 0;
+}
+
+//**********
+//*
+//* TYPOGRAPHY
+//*
+//**********
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 2em;
+  letter-spacing: -1px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #999;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+//**********
+//*
+//* LOGGED IN
+//*
+//**********
+
+//**********
+//*
+//* FORMS
+//*
+//**********
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+//**********
+//*
+//* FOOTER
+//*
+//**********
+
+.navbar_footer{
+	margin: 0;
+	font-weight: normal;
+  a{
+	  color: #000;
+	  &:hover{
+		  background: none;
+		  text-decoration: none;
+		  font-weight: bold;
+	  };
+	  &:active{
+		  background: none;
+		  text-decoration: none;
+			font-weight: bold;
+	  };
+  }
+}
+
+.footer_active_link{
+	color: red;
+}
+
+//**********
+//*
+//* MISCELLANEOUS
+//*
+//**********
+
+.leksiRed{
+	color: $leksiRed;
+}
+
+.red_circle{
+	border: 1px solid $leksiRed;
+	height: 15px;
+	width: 15px;
+	border-radius: 15px;
+	display: inline-block;
+}
+
+.center {
+	text-align: center;
+}
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}

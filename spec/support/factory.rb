@@ -1,16 +1,19 @@
 FactoryGirl.define do
-  # Below are example factories that can be used
-  # in your unit and acceptance tests.
-  
-  # factory :person do
-  #   fname "John"
-  #   lname "Doe"
-  # end
-  #
-  # factory :car do
-  #   color "black"
-  #   type "S"
-  #   maker "Tesla"
-  #   person
-  # end
+  factory :user do
+    sequence(:username) { |n| "foobar#{n}" }
+    password "password"
+    password_confirmation "password"
+  end
+
+  factory :word do
+    sequence(:name) { |n| "foobar#{n}" }
+    definition "lorem ipsum"
+    part_of_speech "noun"
+    pronunciation "foo-bar"
+  end
+
+  factory :user_word do
+    user
+    word
+  end
 end

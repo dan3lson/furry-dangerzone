@@ -1,0 +1,35 @@
+<footer class="navbar navbar-default navbar-fixed-bottom navbar_footer" role="navigation">
+  <br/>
+  <div class="row">
+    <div class="col-xs-3" align="center">
+      <%= link_to_unless_current image_tag("my_leksi_32.png") +
+      "<br/>myLeksi".html_safe, words_path,
+      alt: "myLeksi", class: "img-responsive footerActiveLink" %>
+
+    </div>
+
+    <div class="col-xs-3" align="center">
+      <%=
+        link_to_unless_current image_tag("search_32.png") +
+        "<br/>define".html_safe, words_path(search: params[:search]),
+        alt: "Define Word", class: "img-responsive"
+      %>
+    </div>
+
+    <div class="col-xs-3" align="center">
+      <%=
+        link_to_unless_current image_tag("sources_32.png") +
+        "<br/>sources".html_safe, "#",
+        alt: "Sources", class: "img-responsive"
+      %>
+    </div>
+
+    <div class="col-xs-3" align="center">
+      <%=
+        link_to_unless_current image_tag("menu_32.png") +
+        "<br/>menu".html_safe, menu_path,
+        alt: "Log Out", class: "img-responsive"
+      %>
+    </div>
+  </div>
+</footer>

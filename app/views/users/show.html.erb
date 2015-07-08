@@ -1,0 +1,10 @@
+<% provide(:title, @user.username) %>
+<% provide(:header, @user.username) %>
+
+<p class="lead">
+  Joined <%= time_ago_in_words(@user.created_at) %> ago.
+</p>
+
+<p class="lead">
+  Username: <%= @user.username %> 
+</p>

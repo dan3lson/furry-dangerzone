@@ -1,0 +1,57 @@
+<% provide(:title, "myLeksi") %>
+<% provide(:header, "myLeksi") %>
+
+<div class="center">
+  <div class="btn-group" role="group" aria-label="...">
+    <%= link_to "all", words_path(filter_by: :all), class: "btn btn-default" %>
+    <%= link_to "myLeksi", words_path(filter_by: :myLeksi), class: "btn btn-default" %>
+  </div>
+</div>
+<br/>
+
+<% if current_user.has_words? %>
+  <% current_user.words.each do |word| %>
+    <%= word.name %>
+  <% end %>
+<% else %>
+  <div class="center well well-sm">
+    <h2>
+      No words found.
+    </h1>
+    <div class="">
+      <%= form_tag(words_path, :method => 'get') do %>
+      <label class="control-label sr-only" for="inputSuccess5">
+        Hidden label
+      </label>
+      <%= text_field_tag(
+        :search, params[:search], placeholder: "Type a word",
+        class: "form-control center", id: "inputSuccess5"
+      ) %>
+      <%= submit_tag "define", name: nil, class: "btn btn-default" %>
+    <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if params[:search] && @words.nil? %>
+  <p class="lead">
+    Sorry, we didn't find that word. Try again!
+  </p>
+<% end %>
+
+<% @words.each do |word| %>
+  <div class="word_partial">
+  	<div class="pull-right">
+      X
+  		<%#= link_to image_tag("delete_gray25.png"), word_list_path(id: word.id),
+  			method: :delete, alt: "Remove word?", class: "img-responsive" %>
+  	</div>
+  	<h3 class="tightness">
+  		<div class="red_circle"></div>
+  		<span><%= word.name %></span>
+  	</h3>
+  	<p><%= word.pronunciation %> &nbsp; &nbsp; <em><%= word.part_of_speech %></em></p>
+  	<p><%= word.definition %></p>
+  	<hr/>
+  </div><!-- end of well -->
+<% end %>

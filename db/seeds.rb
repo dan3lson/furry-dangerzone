@@ -1,7 +1,34 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Users"
+Rails.logger.info "==============================================="
+
+User.create!(
+  username: "dan3lson",
+  password: "danelson",
+  password_confirmation: "danelson"
+)
+10.times do
+  user = User.create!(
+    username: Faker::Internet.user_name,
+    password: "password",
+    password_confirmation: "password"
+  )
+  Rails.logger.info "Username: #{user.username}"
+end
+
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Words"
+Rails.logger.info "==============================================="
+
+10.times do
+  name = Faker::Lorem.word
+  word = Word.create!(
+    name: name,
+    definition: Faker::Company.bs,
+    part_of_speech: %w(noun adjective verb adverb).sample,
+    pronunciation: name.split.join("-")
+  )
+  Rails.logger.info "Word: #{word.name} | #{word.definition} |"
+  Rails.logger.info "[cont'd]: #{word.part_of_speech} | #{word.pronunciation}"
+  Rails.logger.info "***"
+end
