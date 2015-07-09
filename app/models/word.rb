@@ -13,7 +13,7 @@ class Word < ActiveRecord::Base
 
   def self.search(word_name)
     if word_name
-      where("name like ?", "%#{word_name}%")
+      where("name like ?", "%#{word_name}%").limit(5)
     end
   end
 end

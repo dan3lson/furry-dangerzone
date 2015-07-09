@@ -5,36 +5,19 @@
   <% current_user.words.each do |word| %>
     <div class="word_partial">
       <div class="pull-right">
-        remove
+        <%=
+          link_to "remove",
+          user_word_path(id: UserWord.find_by(
+            user: current_user,
+            word: word).id,
+            word_name: word.name
+          ),
+          method: :delete, class: "btn btn-default btn-sm"
+        %>
       </div>
       <%= render "shared/word", word: word %>
     </div>
   <% end %>
 <% else %>
-  <div class="center well well-sm">
-    <div class="row basic_red_link">
-			<div class="col-sm-6" align="center">
-				<div class="">
-					<%= image_tag("sources32.png", alt: "Search", class: "img-responsive") %>
-				</div>
-				<p>
-					<span class=" badge">
-						1
-					</span>
-					<%= link_to 'Create at least one source', "#" %>
-					so that you know where your words come from.
-				</p>
-			</div>
-			<div class="col-sm-6"  align="center">
-				<div class="">
-					<%= image_tag("search32.png", alt: "Sources", class: "img-responsive") %>
-				</div>
-				<p>
-					<span class=" badge">2</span>
-					Grow your personal dictionary by
-					<%= link_to 'defining and adding a word', search_path %>!
-				</p>
-			</div>
-		</div>
-  </div>
+  <%= render "words/no_words_guide" %>
 <% end %>

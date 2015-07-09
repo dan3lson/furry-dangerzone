@@ -17,22 +17,18 @@ feature "user adds a word", %{
     let(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
 
-    scenario "scenario: logs out" do
+    scenario "scenario: add word" do
       log_in_as(user)
 
-      visit search_path
-
-      fill_in "Search", with: "foobar"
-
-      click_on "define"
-
-      click_on "add"
-
+      add_a_word
+      
       expect(page).to have_content("Awesome - you added #{word.name}!")
+      expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(word.name)
       expect(page).to have_content(word.definition)
       expect(page).to have_content(word.part_of_speech)
       expect(page).to have_content(word.pronunciation)
+      expect(UserWord.count).to eq(1)
     end
   end
 end
