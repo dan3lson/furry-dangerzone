@@ -30,7 +30,7 @@ feature "guest signs up", %{
       after_count = User.count
 
       expect(page).to have_content("Welcome to Leksi!")
-      expect(page).to have_content("Hey, you don't have any words. Add one now!")
+      expect(page).to have_content("Grow your personal dictionary by")
       expect(page).to have_content("myLeksi")
       expect(page).to have_link("define")
       expect(page).to have_link("sources")

@@ -2,23 +2,23 @@
   <br/>
   <div class="row">
     <div class="col-xs-3" align="center">
-      <%= link_to_unless_current image_tag("my_leksi_32.png") +
+      <%= link_to_unless_current image_tag("myLeksi_red_filled_32.png") +
       "<br/>myLeksi".html_safe, words_path,
-      alt: "myLeksi", class: "img-responsive footerActiveLink" %>
+      alt: "myLeksi", class: "img-responsive" %>
 
     </div>
 
     <div class="col-xs-3" align="center">
       <%=
-        link_to_unless_current image_tag("search_32.png") +
-        "<br/>define".html_safe, words_path(search: params[:search]),
+        link_to_unless_current image_tag("search_red_filled_32.png") +
+        "<br/>define".html_safe, search_path,
         alt: "Define Word", class: "img-responsive"
       %>
     </div>
 
     <div class="col-xs-3" align="center">
       <%=
-        link_to_unless_current image_tag("sources_32.png") +
+        link_to_unless_current image_tag("sources_red_filled_32.png") +
         "<br/>sources".html_safe, "#",
         alt: "Sources", class: "img-responsive"
       %>
@@ -26,7 +26,7 @@
 
     <div class="col-xs-3" align="center">
       <%=
-        link_to_unless_current image_tag("menu_32.png") +
+        link_to_unless_current image_tag("menu_red_filled_32.png") +
         "<br/>menu".html_safe, menu_path,
         alt: "Log Out", class: "img-responsive"
       %>

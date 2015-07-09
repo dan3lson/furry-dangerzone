@@ -116,22 +116,23 @@ input {
 	margin: 0;
 	font-weight: normal;
   a{
-	  color: #000;
+	  color: $leksiRed;
 	  &:hover{
 		  background: none;
 		  text-decoration: none;
-		  font-weight: bold;
+			color: lighten($leksiRed, 25%);
 	  };
 	  &:active{
 		  background: none;
 		  text-decoration: none;
-			font-weight: bold;
+			color: lighten($leksiRed, 25%);
 	  };
   }
 }
 
 .footer_active_link{
-	color: red;
+	font-weight: bold;
+	color: lighten($leksiRed, 25%);
 }
 
 //**********
@@ -139,6 +140,14 @@ input {
 //* MISCELLANEOUS
 //*
 //**********
+
+.word_partial a:hover {
+	background: none;
+}
+
+.word_partial .tightness{
+	margin-bottom: -.01em;
+}
 
 .leksiRed{
 	color: $leksiRed;
