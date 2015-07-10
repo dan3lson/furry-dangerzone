@@ -21,7 +21,7 @@ feature "user logs out", %{
 
       click_on "menu"
 
-      click_on "Log out"
+      click_on "Log Out"
 
       expect(page).to have_content("Successfully logged out. See you again soon!")
       expect(page).to have_link("Sign Up for Free")

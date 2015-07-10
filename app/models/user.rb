@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   def has_words?
     self.words.any?
   end
+
+  def has_sources?
+    self.sources.any?
+  end
 end

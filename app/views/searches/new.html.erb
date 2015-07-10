@@ -12,6 +12,11 @@
     <% @search_results.each do |word| %>
     <div class="word_partial">
       <div class="pull-right">
+        <!-- add a button that serves as an accordion  -->
+        <%= link_to "add", "#", class: "btn btn-default btn-sm" %>
+        <!-- the accordion will display a select box -->
+        <%= select_tag_field %>
+        <!-- after selection, user clicks the below add btn via the form  -->
         <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
           <%= hidden_field_tag :word_to_be_added, word.name %>
           <%= f.submit class: "btn btn-default btn-sm", value: "add" %>

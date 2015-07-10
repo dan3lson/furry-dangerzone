@@ -33,4 +33,14 @@ RSpec.describe User, type: :model do
       expect(user.has_words?).to eq(true)
     end
   end
+
+  describe "#has_sources?" do
+    it "returns false" do
+      expect(user.has_sources?).to eq(false)
+    end
+    it "returns true" do
+      user.sources << source
+      expect(user.has_sources?).to eq(true)
+    end
+  end
 end

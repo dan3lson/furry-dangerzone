@@ -107,5 +107,17 @@ def add_a_word
 
   click_on "define"
 
+  select "foo_source", from: "Sources"
+
   click_on "add"
+end
+
+def create_source
+  visit sources_path
+
+  click_on "add"
+
+  fill_in "Name", with: "foo"
+
+  click_on "Create source"
 end

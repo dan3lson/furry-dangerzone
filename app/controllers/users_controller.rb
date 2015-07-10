@@ -38,6 +38,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = "Account deleted; it\'s sad to see you go."
+      redirect_to root_path
+    else
+      flash[:danger] = "Yikes! Something went wrong. Please try again."
+      redirect_to menu_path
+    end
+  end
+
   private
 
   def user_params

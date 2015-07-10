@@ -16,4 +16,10 @@ FactoryGirl.define do
     user
     word
   end
+
+  factory :source do
+    sequence(:name) { |n| "foo_source#{n}" }
+
+    user
+  end
 end
