@@ -4,7 +4,7 @@
       Search
     </label>
     <%= text_field_tag(
-      :search, params[:search], placeholder: "Type a word",
+      :search, params[:search], placeholder: @random_word_placeholder,
       class: "form-control center", id: "inputSuccess5"
     ) %>
     <%= submit_tag "define", name: nil, class: "btn btn-default" %>

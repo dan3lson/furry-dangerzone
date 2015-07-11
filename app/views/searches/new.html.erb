@@ -9,13 +9,24 @@
       Sorry, we didn't find '<%= @query %>'. Try again!
     </p>
   <% else @search_results %>
-    <% @search_results.each do |word| %>
+    <% @search_results.each_with_index do |word, index| %>
     <div class="word_partial">
       <div class="pull-right">
         <!-- add a button that serves as an accordion  -->
-        <%= link_to "add", "#", class: "btn btn-default btn-sm" %>
+        <%=
+          link_to "add", "#", class: "btn btn-success btn-sm",
+          :"data-toggle" => "collapse"
+        %>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#word<%= index %>" aria-expanded="false" aria-controls="collapseExample">
+          add
+        </button>
+        <div class="collapse" id="word<%= index %>">
+          <div class="well">
+            ...
+          </div>
+        </div>
         <!-- the accordion will display a select box -->
-        <%= select_tag_field %>
+        <%#= select_tag_field %>
         <!-- after selection, user clicks the below add btn via the form  -->
         <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
           <%= hidden_field_tag :word_to_be_added, word.name %>
