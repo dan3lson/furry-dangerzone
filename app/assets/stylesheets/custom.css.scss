@@ -118,26 +118,27 @@ input {
 //**********
 
 .navbar_footer{
-	margin: 0;
 	font-weight: normal;
+	margin: 0;
+	color: lighten($leksiRed, 25%);
   a{
 	  color: $leksiRed;
 	  &:hover{
 		  background: none;
-		  text-decoration: none;
 			color: lighten($leksiRed, 25%);
+		  text-decoration: none;
 	  };
 	  &:active{
 		  background: none;
-		  text-decoration: none;
 			color: lighten($leksiRed, 25%);
+		  text-decoration: none;
 	  };
   }
 }
 
 .footer_active_link{
-	font-weight: bold;
 	color: lighten($leksiRed, 25%);
+	font-weight: bold;
 }
 
 //**********

@@ -15,11 +15,11 @@
         <!-- add a button that serves as an accordion  -->
         <%=
           link_to "add", "#", class: "btn btn-success btn-sm",
-          :"data-toggle" => "collapse"
+          :"data-toggle" => "collapse",
+          :"data-target" => "#word<%= index %>",
+          :"aria-expanded" => "false",
+          :"aria-controls" => "word<%= index %>"
         %>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#word<%= index %>" aria-expanded="false" aria-controls="collapseExample">
-          add
-        </button>
         <div class="collapse" id="word<%= index %>">
           <div class="well">
             ...
