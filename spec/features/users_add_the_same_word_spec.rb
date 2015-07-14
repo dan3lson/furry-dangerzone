@@ -15,30 +15,35 @@ feature "users add the same word", %{
   # [x] I see a message of success
 
   describe "\n two users add a word" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:user2) { FactoryGirl.create(:user) }
-    let!(:word) { FactoryGirl.create(:word) }
+    let!(:user_word) { FactoryGirl.create(:user_word) }
+    let(:word) { user_word.word }
+    let(:user_source) { FactoryGirl.create(:user_source) }
+    let(:user2) { user_source.user }
+    let!(:random_word_placeholder) { FactoryGirl.create(:word) }
 
-    pending "scenario: add word" do
-      log_in_as(user)
-
-      add_a_word
-
-      visit menu_path
-
-      click_on "Log Out"
-
+    scenario "scenario: add word" do
       log_in_as(user2)
 
-      add_a_word
+      visit search_path
+
+      fill_in "Search", with: word.name
+
+      click_on "define"
+
+      click_on "add"
+
+      select user_source.source.name, from: "Sources"
+
+      click_on "add to myLeksi"
 
       expect(page).to have_content("Awesome - you added \'#{word.name}\'!")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(word.name)
-      expect(page).to have_content(word.definition)
-      expect(page).to have_content(word.part_of_speech)
       expect(page).to have_content(word.pronunciation)
+      expect(page).to have_content(word.part_of_speech)
+      expect(page).to have_content(word.definition)
       expect(UserWord.count).to eq(2)
+      expect(WordSource.count).to eq(1)
     end
   end
 end

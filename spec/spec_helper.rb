@@ -100,25 +100,10 @@ def log_in_as(user)
   click_on "Log in"
 end
 
-def add_a_word
-  visit search_path
-
-  fill_in "Search", with: "foobar"
-
-  click_on "define"
-
-  click_on "add"
-  
-  save_and_open_page
-  select "foo_source1", from: "Sources"
-
-  click_on "add"
-end
-
 def create_source
   visit sources_path
 
-  click_on "add"
+  click_on "new source"
 
   fill_in "Name", with: "foo"
 

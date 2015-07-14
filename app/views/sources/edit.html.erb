@@ -1,5 +1,5 @@
-<% provide(:title, "New Source") %>
-<% provide(:header, "New Source") %>
+<% provide(:title, "Edit Source") %>
+<% provide(:header, "Edit Source") %>
 
 <div class="well">
   <%= form_for(@source) do |f| %>
@@ -8,6 +8,6 @@
     <%= f.label :name, class: "sr-only" %>
     <%= f.text_field :name, class: "form-control", placeholder: "Name *"  %>
 
-    <%= f.submit "Create source", class: "btn btn-default" %>
+    <%= f.submit "Save changes", class: "btn btn-default" %>
   <% end %>
 </div>

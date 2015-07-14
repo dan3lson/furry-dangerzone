@@ -150,16 +150,26 @@ input {
 	margin-bottom: -.01em;
 }
 
+.basic_red_link a{
+	color: $leksi-red;
+
+	&:hover {
+		background: none;
+		color: darken($leksi-red, 15%);
+		text-decoration: none;
+	}
+}
+
 .leksi-red{
 	color: $leksi-red;
 }
 
 .red_circle{
 	border: 1px solid $leksi-red;
-	height: 15px;
-	width: 15px;
 	border-radius: 15px;
 	display: inline-block;
+	height: 15px;
+	width: 15px;
 }
 
 .center {
@@ -167,9 +177,10 @@ input {
 }
 
 .debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
   @include box_sizing;
+
+	clear: both;
+  float: left;
+  margin-top: 45px;
+  width: 100%;
 }

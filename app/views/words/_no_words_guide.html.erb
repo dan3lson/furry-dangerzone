@@ -1,11 +1,11 @@
 <div class="center well well-sm">
   <div class="row basic_red_link">
     <div class="col-sm-6" align="center">
-      <div class="">
+      <div class="basic_red_link">
         <%=
           image_tag(
-            "sources32.png",
-            alt: "Search",
+            "sources_red_filled_32.png",
+            alt: "Sources",
             class: "img-responsive"
           )
         %>
@@ -14,13 +14,13 @@
         <span class="badge">
           1
         </span>
-        <%= link_to "Create at least one source", "#" %>
+        <%= link_to "Create at least one source", new_source_path %>
         so that you know where your words come from.
       </p>
     </div>
     <div class="col-sm-6"  align="center">
-      <div class="">
-        <%= image_tag("search32.png", alt: "Sources", class: "img-responsive") %>
+      <div class="basic_red_link">
+        <%= image_tag("search_red_filled_32.png", alt: "Define", class: "img-responsive") %>
       </div>
       <p>
         <span class=" badge">2</span>

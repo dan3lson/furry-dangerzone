@@ -12,32 +12,23 @@
     <% @search_results.each_with_index do |word, index| %>
     <div class="word_partial">
       <div class="pull-right">
-        <!-- add a button that serves as an accordion  -->
-        <%= button_tag "add", class: "btn btn-default btn-sm",
+        <%= button_tag "add", class: "btn btn-default btn-sm add_word_btn",
           "data-toggle" => "collapse",
           "data-target" => "#word_#{index}",
           "aria-expanded" => "false",
           "aria-controls" => "word_#{index}",
           "type" => "button"
         %>
-        <!-- after selection, user clicks the below add btn via the form  -->
-
       </div>
       <%= render "shared/word", word: word %>
-
-        <!-- the accordion will display a select box -->
       <div class="collapse" id="word_<%= index %>">
         <div class="well">
-          <p class="lead">
-            <%= label_tag :sources, "Sources" %>
-            <%=
-              collection_select :word, :source_id, @current_user_sources, :id,
-              :name, prompt: false,
-              class: "form-control"
-            %>
-          </p>
           <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
             <%= hidden_field_tag :word_to_be_added, word.name %>
+            <%= f.label :source_id, "Sources" %>
+            <%= f.collection_select :source_id,
+                @current_user_sources, :id, :name, prompt: true
+            %>
             <%= f.submit class: "btn btn-danger btn-sm", value: "add to myLeksi" %>
           <% end %>
         </div>

@@ -20,10 +20,6 @@ class SourcesController < ApplicationController
       user: current_user,
       source: @source
     )
-    # @word_source = WordSource.new(
-    #   word: ?,
-    #   source: @source
-    # )
     if @source.save && @user_source.save
       flash[:success] = "You successfully created a new source!"
       redirect_to sources_path
@@ -48,7 +44,7 @@ class SourcesController < ApplicationController
 
   def destroy
     @source = Source.find(params[:id])
-    if @user.destroy
+    if @source.destroy
       flash[:success] = "Source deleted."
       redirect_to sources_path
     else
@@ -71,10 +67,12 @@ class SourcesController < ApplicationController
   end
 
   def correct_user
-    @user = Source.find(params[:id])
+    @source = Source.find(params[:id])
+    @user_source = UserSource.find_by(user: current_user, source: @source)
+    @user = @user_source.user
     unless current_user?(@user)
       flash[:danger] = "Yikes! That\'s not something you can do."
-      redirect_to menu_path
+      redirect_to sources_path
     end
   end
 end

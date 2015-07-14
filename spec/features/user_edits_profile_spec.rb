@@ -21,7 +21,7 @@ feature "user edits their profile", %{
 
       visit menu_path
 
-      click_on "Edit My Info"
+      click_on "edit my profile"
 
       fill_in "Username", with: "FoooFooo"
       fill_in "Password", with: "fooobar"
@@ -43,7 +43,7 @@ feature "user edits their profile", %{
 
       visit menu_path
 
-      click_on "Edit My Info"
+      click_on "edit my profile"
 
       fill_in "Username", with: ""
       fill_in "Password", with: ""

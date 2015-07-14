@@ -15,21 +15,31 @@ feature "user adds a word", %{
   # [x] I see a message of success
 
   describe "\n user adds a word" do
-    let(:user) { FactoryGirl.create(:user) }
-    let!(:word) { FactoryGirl.create(:word) }
-    let!(:source) { FactoryGirl.create(:source) }
+    let(:user_source) { FactoryGirl.create(:user_source) }
+    let(:user) { user_source.user }
+    let!(:random_word_placeholder) { FactoryGirl.create(:word) }
 
     scenario "scenario: add word" do
       log_in_as(user)
 
-      add_a_word
+      visit search_path
 
-      expect(page).to have_content("Awesome - you added \'#{word.name}\'!")
+      fill_in "Search", with: "foobar1"
+
+      click_on "define"
+
+      click_on "add"
+
+      select user_source.source.name, from: "Sources"
+
+      click_on "add to myLeksi"
+
+      expect(page).to have_content("Awesome - you added \'foobar1\'!")
       expect(page).not_to have_content("Yikes!")
-      expect(page).to have_content(word.name)
-      expect(page).to have_content(word.definition)
-      expect(page).to have_content(word.part_of_speech)
-      expect(page).to have_content(word.pronunciation)
+      expect(page).to have_content("foobar1")
+      expect(page).to have_content("foo-bar")
+      expect(page).to have_content("lorem ipsum")
+      expect(page).to have_content("noun")
       expect(UserWord.count).to eq(1)
       expect(WordSource.count).to eq(1)
     end

@@ -9,23 +9,24 @@ feature "user edits a source", %{
 
   # Acceptance Criteria
   #
-  # [] I can visit edit_source_path(:id)
-  # [] I can see a form
-  # [] I see a button to update my source
-  # [] I can see errors if info isn't valid
+  # [x] I can visit edit_source_path(:id)
+  # [x] I can see a form
+  # [x] I see a button to update my source
+  # [x] I can see errors if info isn't valid
 
   describe "\n user updates source" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:source) { FactoryGirl.create(:source) }
+    let(:user_source) { FactoryGirl.create(:user_source) }
+    let(:user) { user_source.user }
+    let(:source) { user_source.source }
 
-    pending "scenario: with valid data" do
+    scenario "scenario: with valid data" do
       log_in_as(user)
 
       visit sources_path
 
       click_on source.name
 
-      click_on "Edit"
+      click_on "edit"
 
       fill_in "Name", with: "FoooFooo"
 
@@ -37,14 +38,14 @@ feature "user edits a source", %{
       expect(page).to_not have_content("fix")
     end
 
-    pending "scenario with invalid data" do
+    scenario "scenario with invalid data" do
       log_in_as(user)
 
       visit sources_path
 
       click_on source.name
 
-      click_on "Edit"
+      click_on "edit"
 
       fill_in "Name", with: ""
 
@@ -52,7 +53,7 @@ feature "user edits a source", %{
 
       expect(page).to have_content("Changes not successfully made.")
       expect(page).to have_content("Yikes!")
-      expect(page).to have_content("errors")
+      expect(page).to have_content("error")
       expect(page).to have_content("fix")
     end
   end

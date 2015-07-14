@@ -4,3 +4,14 @@
 <p class="lead">
   More info soon.
 </p>
+
+<p>
+  <%= link_to "edit", edit_source_path(@source), class: "btn btn-default form-control" %>
+</p>
+
+<p>
+  <%=
+    link_to "delete", source_path(@source), method: :delete,
+    class: "btn btn-default form-control"
+  %>
+</p>

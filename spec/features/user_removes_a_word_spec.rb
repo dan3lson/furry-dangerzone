@@ -14,21 +14,20 @@ feature "user removes a word", %{
   # [x] I see a message of removal-success
 
   describe "\n user removes a word" do
-    let(:user) { FactoryGirl.create(:user) }
-    let!(:word) { FactoryGirl.create(:word) }
+    let(:user_word) { FactoryGirl.create(:user_word) }
+    let(:user) { user_word.user }
+    let!(:random_word_placeholder) { FactoryGirl.create(:word) }
 
-    pending "scenario: remove word" do
+    scenario "scenario: remove word" do
       log_in_as(user)
-
-      add_a_word
 
       click_on "remove"
 
-      expect(page).to have_content("\'#{word.name}\' has been removed.")
+      expect(page).to have_content("has been removed.")
       expect(page).not_to have_content("Yikes!")
-      expect(page).not_to have_content(word.definition)
-      expect(page).not_to have_content(word.part_of_speech)
-      expect(page).not_to have_content(word.pronunciation)
+      expect(page).not_to have_content("foo-bar")
+      expect(page).not_to have_content("lorem ipsum")
+      expect(page).not_to have_content("noun")
       expect(UserWord.count).to eq(0)
       expect(WordSource.count).to eq(0)
     end

@@ -1,12 +1,17 @@
 class UserWordsController < ApplicationController
   def create
-    @word_name = params[:word_to_be_added]
+    @word = Word.find_by(name: params[:word_to_be_added])
+    @source = Source.find(params[:user_word][:source_id])
     @user_word = UserWord.new(
       user: current_user,
-      word: Word.find_by(name: @word_name)
+      word: @word
     )
-    if @user_word.save
-      flash[:success] = "Awesome - you added \'#{@word_name}\'!"
+    @word_source = WordSource.new(
+      word: @word,
+      source: @source
+    )
+    if @user_word.save && @word_source.save
+      flash[:success] = "Awesome - you added \'#{@word.name}\'!"
       redirect_to words_path
     else
       flash[:danger] = "Yikes! - something went wrong! Please try again."
@@ -16,9 +21,9 @@ class UserWordsController < ApplicationController
 
   def destroy
     @user_word = UserWord.find(params[:id])
-    @word_name = params[:word_name]
+    @word = Word.find_by(name: params[:word_name])
     if @user_word.destroy
-      flash[:success] = "\'#{@word_name}\' has been removed."
+      flash[:success] = "\'#{@word.name}\' has been removed."
       redirect_to words_path
     else
       flash[:danger] = "Yikes! - something went wrong! Please try again."

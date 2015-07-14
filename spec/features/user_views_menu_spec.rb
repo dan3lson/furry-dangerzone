@@ -19,8 +19,8 @@ feature "user views the menu", %{
 
       visit menu_path
 
-      expect(page).to have_link("Edit My Info")
-      expect(page).to have_link("Log Out")
+      expect(page).to have_link("edit my profile")
+      expect(page).to have_link("log out")
     end
   end
 end
