@@ -19,7 +19,15 @@ FactoryGirl.define do
 
   factory :source do
     sequence(:name) { |n| "foo_source#{n}" }
+  end
 
+  factory :user_source do
     user
+    source
+  end
+
+  factory :word_source do
+    word
+    source
   end
 end

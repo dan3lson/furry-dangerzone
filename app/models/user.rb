@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :user_words, dependent: :destroy
   has_many :words, through: :user_words
+  has_many :user_sources
+  has_many :sources, through: :user_sources
 
   validates :username,
     presence: true,

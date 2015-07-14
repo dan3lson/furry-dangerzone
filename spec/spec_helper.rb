@@ -107,7 +107,10 @@ def add_a_word
 
   click_on "define"
 
-  select "foo_source", from: "Sources"
+  click_on "add"
+  
+  save_and_open_page
+  select "foo_source1", from: "Sources"
 
   click_on "add"
 end

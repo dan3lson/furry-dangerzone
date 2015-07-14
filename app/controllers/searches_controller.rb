@@ -5,5 +5,6 @@ class SearchesController < ApplicationController
     if @query
       @search_results = Word.search(@query)
     end
+    @current_user_sources = current_user.sources
   end
 end

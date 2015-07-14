@@ -3,10 +3,13 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { FactoryGirl.create(:user) }
   let(:word) { FactoryGirl.create(:word) }
+  let(:source) { FactoryGirl.create(:source) }
 
   describe "associatons" do
     it { should have_many(:user_words) }
     it { should have_many(:words) }
+    it { should have_many(:user_sources) }
+    it { should have_many(:sources) }
   end
 
   describe "validations" do

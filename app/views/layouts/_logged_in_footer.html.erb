@@ -2,7 +2,7 @@
   <br/>
   <div class="row">
     <div class="col-xs-3" align="center">
-      <%= link_to_unless_current image_tag("myLeksi_red_filled_32.png") +
+      <%= link_to_unless_current image_tag("myLeksi_black_32.png") +
       "<br/>myLeksi".html_safe, words_path,
       alt: "myLeksi", class: "img-responsive" %>
 
@@ -10,7 +10,7 @@
 
     <div class="col-xs-3" align="center">
       <%=
-        link_to_unless_current image_tag("search_red_filled_32.png") +
+        link_to_unless_current image_tag("search_black_32.png") +
         "<br/>define".html_safe, search_path,
         alt: "Define Word", class: "img-responsive"
       %>
@@ -18,15 +18,15 @@
 
     <div class="col-xs-3" align="center">
       <%=
-        link_to_unless_current image_tag("sources_red_filled_32.png") +
-        "<br/>sources".html_safe, "#",
+        link_to_unless_current image_tag("sources_black_32.png") +
+        "<br/>sources".html_safe, sources_path,
         alt: "Sources", class: "img-responsive"
       %>
     </div>
 
     <div class="col-xs-3" align="center">
       <%=
-        link_to_unless_current image_tag("menu_red_filled_32.png") +
+        link_to_unless_current image_tag("menu_black_32.png") +
         "<br/>menu".html_safe, menu_path,
         alt: "Log Out", class: "img-responsive"
       %>

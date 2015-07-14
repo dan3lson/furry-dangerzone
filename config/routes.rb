@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :users
   resources :words
   resource :user_word, only: [:create, :destroy]
+  resources :sources
+  resource :user_source, only: [:create, :destroy]
 end

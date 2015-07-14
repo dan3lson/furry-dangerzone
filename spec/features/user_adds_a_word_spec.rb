@@ -10,7 +10,7 @@ feature "user adds a word", %{
   #
   # [x] I can see an "add" button for the
   #     word I want
-  # [] I can select a source for that word 
+  # [] I can select a source for that word
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
@@ -19,7 +19,7 @@ feature "user adds a word", %{
     let!(:word) { FactoryGirl.create(:word) }
     let!(:source) { FactoryGirl.create(:source) }
 
-    pending "scenario: add word" do
+    scenario "scenario: add word" do
       log_in_as(user)
 
       add_a_word

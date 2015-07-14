@@ -4,8 +4,8 @@ RSpec.describe UserSource, type: :model do
   let(:user_source) { FactoryGirl.create(:user_source) }
 
   describe "associatons" do
-    xit { should belong_to(:user) }
-    xit { should belong_to(:source) }
+    it { should belong_to(:user) }
+    it { should belong_to(:source) }
   end
 
   describe "validations" do
@@ -14,7 +14,7 @@ RSpec.describe UserSource, type: :model do
   end
 
   describe "#initialization" do
-    it "returns User and Word class types" do
+    it "returns User and Source class types" do
       expect(user_source.user.class).to be(User)
       expect(user_source.source.class).to be(Source)
     end

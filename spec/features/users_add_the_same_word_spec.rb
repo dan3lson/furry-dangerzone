@@ -19,7 +19,7 @@ feature "users add the same word", %{
     let(:user2) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
 
-    scenario "scenario: add word" do
+    pending "scenario: add word" do
       log_in_as(user)
 
       add_a_word

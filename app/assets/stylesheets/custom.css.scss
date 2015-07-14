@@ -7,20 +7,16 @@
 //*
 //**********
 
-$leksiRed: #FF1300;
-$leksiOrange: orange;
-$leksiGreen: #24D12E;
+$black: #000;
+$leksiGreen: #24d12e;
+$leksi-orange: orange;
+$leksi-red: #ff1300;
+$white: #fff;
 
-@mixin box_sizing{
+@mixin box_sizing {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-}
-
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
 }
 
 //**********
@@ -75,7 +71,6 @@ p {
 //**********
 
 .navbar-default {
-	background: #FFF;
 	border-color: #F2F2F2;
 }
 
@@ -118,26 +113,26 @@ input {
 //**********
 
 .navbar_footer{
+	color: $leksi-red;
 	font-weight: normal;
 	margin: 0;
-	color: lighten($leksiRed, 25%);
   a{
-	  color: $leksiRed;
+	  color: $black;
 	  &:hover{
 		  background: none;
-			color: lighten($leksiRed, 25%);
+			color: $leksi-red;
 		  text-decoration: none;
 	  };
 	  &:active{
 		  background: none;
-			color: lighten($leksiRed, 25%);
+			color: $leksi-red;
 		  text-decoration: none;
 	  };
   }
 }
 
 .footer_active_link{
-	color: lighten($leksiRed, 25%);
+	color: lighten($leksi-red, 25%);
 	font-weight: bold;
 }
 
@@ -155,12 +150,12 @@ input {
 	margin-bottom: -.01em;
 }
 
-.leksiRed{
-	color: $leksiRed;
+.leksi-red{
+	color: $leksi-red;
 }
 
 .red_circle{
-	border: 1px solid $leksiRed;
+	border: 1px solid $leksi-red;
 	height: 15px;
 	width: 15px;
 	border-radius: 15px;
