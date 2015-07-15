@@ -9,7 +9,8 @@ FactoryGirl.define do
     sequence(:name) { |n| "foobar#{n}" }
     definition "lorem ipsum"
     part_of_speech "noun"
-    pronunciation "foo-bar"
+    phonetic_spelling "foo-bar"
+    example_sentence "foobar is foo plus bar."
   end
 
   factory :user_word do

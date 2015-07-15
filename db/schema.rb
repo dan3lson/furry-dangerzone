@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714141949) do
+ActiveRecord::Schema.define(version: 20150715033236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,12 +63,13 @@ ActiveRecord::Schema.define(version: 20150714141949) do
   add_index "word_sources", ["word_id"], name: "index_word_sources_on_word_id", using: :btree
 
   create_table "words", force: :cascade do |t|
-    t.string   "definition",     null: false
-    t.string   "pronunciation",  null: false
-    t.string   "part_of_speech", null: false
-    t.string   "name",           null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "definition",        null: false
+    t.string   "phonetic_spelling", null: false
+    t.string   "part_of_speech",    null: false
+    t.string   "name",              null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "example_sentence",  null: false
   end
 
   add_index "words", ["name"], name: "index_words_on_name", unique: true, using: :btree

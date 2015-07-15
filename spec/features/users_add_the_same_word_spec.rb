@@ -39,9 +39,10 @@ feature "users add the same word", %{
       expect(page).to have_content("Awesome - you added \'#{word.name}\'!")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(word.name)
-      expect(page).to have_content(word.pronunciation)
+      expect(page).to have_content(word.phonetic_spelling)
       expect(page).to have_content(word.part_of_speech)
       expect(page).to have_content(word.definition)
+      expect(page).to have_content(word.example_sentence)
       expect(UserWord.count).to eq(2)
       expect(WordSource.count).to eq(1)
     end

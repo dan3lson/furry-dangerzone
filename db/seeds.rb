@@ -26,9 +26,12 @@ Rails.logger.info "==============================================="
     name: name,
     definition: Faker::Company.bs,
     part_of_speech: %w(noun adjective verb adverb).sample,
-    pronunciation: name.split.join("-")
+    phonetic_spelling: name.split.join("-"),
+    example_sentence: Faker::Company.bs
   )
   Rails.logger.info "Word: #{word.name} | #{word.definition} |"
-  Rails.logger.info "[cont'd]: #{word.part_of_speech} | #{word.pronunciation}"
+  Rails.logger.info "[cont'd]: #{word.part_of_speech} | "
+  Rails.logger.info "#{word.phonetic_spelling} | "
+  Rails.logger.info "#{word.example_sentence}"
   Rails.logger.info "***"
 end

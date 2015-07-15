@@ -7,15 +7,16 @@ class Word < ActiveRecord::Base
   before_create { self.name = name.downcase }
 
   validates :name, presence: true, uniqueness: true
-  validates :pronunciation, presence: true
+  validates :phonetic_spelling, presence: true
   validates :definition, presence: true
   validates :part_of_speech, presence: true
+  validates :example_sentence, presence: true
 
   default_scope -> { order('words.name ASC') }
 
-  def self.search(word_name)
-    if word_name
-      where("name like ?", "%#{word_name}%").limit(10)
+  def self.define(word)
+    if word
+      where("name like ?", "%#{word}%").limit(10)
     end
   end
 end
