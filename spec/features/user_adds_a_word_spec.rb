@@ -14,17 +14,17 @@ feature "user adds a word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  describe "\n user adds a word" do
+  describe "\n user adds a word -->" do
     let(:user_source) { FactoryGirl.create(:user_source) }
     let(:user) { user_source.user }
     let!(:random_word_placeholder) { FactoryGirl.create(:word) }
 
-    scenario "scenario: add word" do
+    scenario "scenario: add word that exists in words table" do
       log_in_as(user)
 
       visit search_path
 
-      fill_in "Search", with: "foobar1"
+      fill_in "Search", with: "chess"
 
       click_on "define"
 
@@ -34,12 +34,13 @@ feature "user adds a word", %{
 
       click_on "add to myLeksi"
 
-      expect(page).to have_content("Awesome - you added \'foobar1\'!")
+      expect(page).to have_content("Awesome - you added \'chess\'!")
       expect(page).not_to have_content("Yikes!")
-      expect(page).to have_content("foobar1")
-      expect(page).to have_content("foo-bar")
-      expect(page).to have_content("lorem ipsum")
+      expect(page).to have_content("chess")
       expect(page).to have_content("noun")
+      expect(page).to have_content("a game for two people, played on a board")
+      expect(page).to have_content("/tʃes/")
+      expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
       expect(WordSource.count).to eq(1)
     end

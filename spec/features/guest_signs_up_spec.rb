@@ -13,7 +13,7 @@ feature "guest signs up", %{
   # [x] I see a button to create my account
   # [x] I can see errors if info isn't valid
 
-  describe "\n guest signs up" do
+  describe "\n guest signs up -->" do
     scenario "scenario: with valid data" do
       before_count = User.count
 

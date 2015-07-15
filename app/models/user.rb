@@ -19,4 +19,12 @@ class User < ActiveRecord::Base
   def has_sources?
     self.sources.any?
   end
+
+  def already_has_source?(source)
+    if self.sources.find_by(name: source)
+      true
+    else
+      false
+    end
+  end
 end

@@ -13,7 +13,7 @@ feature "user edits their profile", %{
   # [x] I see a button to update my account
   # [x] I can see errors if info isn't valid
 
-  describe "\n user updates account" do
+  describe "\n user updates account -->" do
     let(:user) { FactoryGirl.create(:user) }
 
     scenario "scenario: with valid data" do
@@ -38,7 +38,7 @@ feature "user edits their profile", %{
       expect(page).to have_content("menu")
     end
 
-    scenario "scenario with invalid data" do
+    scenario "scenario: with invalid data" do
       log_in_as(user)
 
       visit menu_path

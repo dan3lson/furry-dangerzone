@@ -46,4 +46,14 @@ RSpec.describe User, type: :model do
       expect(user.has_sources?).to eq(true)
     end
   end
+
+  describe "#already_has_source?" do
+    it "returns false" do
+      expect(user.already_has_source?("foobar")).to eq(false)
+    end
+    it "returns true" do
+      user.sources << source
+      expect(user.already_has_source?(source.name)).to eq(true)
+    end
+  end
 end

@@ -11,7 +11,7 @@ feature "user edits another users page", %{
   # [x] I get redirected to the login_path
   # [x] I can see a friendly message
 
-  describe "\n visit unathorized pages" do
+  describe "\n visit unathorized pages -->" do
     let(:user) { FactoryGirl.create(:user) }
     let(:user2) { FactoryGirl.create(:user) }
 

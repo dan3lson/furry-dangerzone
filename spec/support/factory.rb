@@ -6,11 +6,11 @@ FactoryGirl.define do
   end
 
   factory :word do
-    sequence(:name) { |n| "foobar#{n}" }
-    definition "lorem ipsum"
+    name "chess"
+    definition "a game for two people, played on a board"
+    example_sentence "Do you play chess?"
     part_of_speech "noun"
-    phonetic_spelling "foo-bar"
-    example_sentence "foobar is foo plus bar."
+    phonetic_spelling "/tʃes/"
   end
 
   factory :user_word do

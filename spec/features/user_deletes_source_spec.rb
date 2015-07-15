@@ -11,7 +11,7 @@ feature "user deletes source", %{
   # [x] I can see a "delete" button
   # [x] I see a message of deletion-success
 
-  describe "\n user deletes source" do
+  describe "\n user deletes source -->" do
     let(:user_source) { FactoryGirl.create(:user_source) }
     let(:source) { user_source.source }
     let(:user) { user_source.user }

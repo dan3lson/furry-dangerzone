@@ -11,7 +11,7 @@ feature "user deletes (their (duh)) account", %{
   # [x] I can see a "delete account" button
   # [x] I see a message of (sad) success
 
-  describe "\n user deletes account" do
+  describe "\n user deletes account -->" do
     scenario "scenario: without words or sources" do
       user = FactoryGirl.create(:user)
 

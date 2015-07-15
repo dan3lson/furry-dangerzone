@@ -16,15 +16,20 @@ class SourcesController < ApplicationController
 
   def create
     @source = Source.new(source_params)
-    @user_source = UserSource.new(
-      user: current_user,
-      source: @source
-    )
-    if @source.save && @user_source.save
-      flash[:success] = "You successfully created a new source!"
-      redirect_to sources_path
-    else
+    if current_user.already_has_source?(@source.name)
+      flash.now[:warning] = "Whoa there - you already have that source!"
       render :new
+    else
+      @user_source = UserSource.new(
+        user: current_user,
+        source: @source
+      )
+      if @source.save && @user_source.save
+        flash[:success] = "You successfully created a new source!"
+        redirect_to sources_path
+      else
+        render :new
+      end
     end
   end
 

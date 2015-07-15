@@ -14,12 +14,11 @@ feature "users add the same word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  describe "\n two users add a word" do
+  describe "\n two users add a word -->" do
     let!(:user_word) { FactoryGirl.create(:user_word) }
-    let(:word) { user_word.word }
+    let!(:word) { user_word.word }
     let(:user_source) { FactoryGirl.create(:user_source) }
     let(:user2) { user_source.user }
-    let!(:random_word_placeholder) { FactoryGirl.create(:word) }
 
     scenario "scenario: add word" do
       log_in_as(user2)

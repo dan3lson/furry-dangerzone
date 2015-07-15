@@ -8,7 +8,7 @@ class MacmillanDictionary
   API_URL = "https://www.macmillandictionary.com/api/v1/"
 
   def initialize(
-    phonetic_spelling, 
+    phonetic_spelling,
     definition,
     part_of_speech,
     example_sentence
@@ -25,7 +25,7 @@ class MacmillanDictionary
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }
     )
 
-    if response.success?
+    if !response.has_key?("errorMessage")
       xml_doc = Nokogiri::XML(response["entryContent"])
 
       phonetic_spelling = xml_doc.xpath("/descendant::PRON[1]").text
@@ -40,8 +40,8 @@ class MacmillanDictionary
         example_sentence
       )
     else
-      raise response.response
+      Rails.logger.error { "Error: word likely not in Macmillan Dictionary." }
+      nil
     end
-
   end
 end

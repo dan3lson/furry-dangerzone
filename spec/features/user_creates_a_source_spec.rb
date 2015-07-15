@@ -12,7 +12,7 @@ feature "user creates a source", %{
   # [x] sources_path shows my newly added source
   # [x] I see a message of success
 
-  describe "\n user creates a source" do
+  describe "\n user creates a source -->" do
     let(:user) { FactoryGirl.create(:user) }
 
     scenario "scenario: with valid data" do
@@ -28,7 +28,7 @@ feature "user creates a source", %{
       expect(page).not_to have_content("fix")
     end
 
-    scenario "scenario with invalid data" do
+    scenario "scenario: with invalid data" do
       log_in_as(user)
 
       visit sources_path

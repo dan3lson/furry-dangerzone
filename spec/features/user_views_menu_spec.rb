@@ -11,7 +11,7 @@ feature "user views the menu", %{
   # [x] I can see a menu button
   # [x] I can see links
 
-  describe "\n user views links" do
+  describe "\n user views links -->" do
     let(:user) { FactoryGirl.create(:user) }
 
     scenario "scenario: click menu_path" do

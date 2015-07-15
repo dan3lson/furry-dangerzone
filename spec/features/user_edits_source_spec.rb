@@ -14,7 +14,7 @@ feature "user edits a source", %{
   # [x] I see a button to update my source
   # [x] I can see errors if info isn't valid
 
-  describe "\n user updates source" do
+  describe "\n user updates source -->" do
     let(:user_source) { FactoryGirl.create(:user_source) }
     let(:user) { user_source.user }
     let(:source) { user_source.source }
@@ -38,7 +38,7 @@ feature "user edits a source", %{
       expect(page).to_not have_content("fix")
     end
 
-    scenario "scenario with invalid data" do
+    scenario "scenario: with invalid data" do
       log_in_as(user)
 
       visit sources_path

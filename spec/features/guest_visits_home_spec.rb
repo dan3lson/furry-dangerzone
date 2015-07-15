@@ -12,7 +12,7 @@ feature "guest visits home page", %{
   # [x] I see a button to sign up
   # [x] I can see a button to log in
 
-  describe "\n visit home page" do
+  describe "\n visit home page -->" do
     scenario "scenario: homepage content is displayed" do
       visit root_path
 

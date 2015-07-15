@@ -4,11 +4,7 @@
 <%= render "searches/form" %>
 
 <% if @query %>
-  <% if @search_results.empty? %>
-    <p class="lead">
-      Sorry, we didn't find '<%= @query %>'. Try again!
-    </p>
-  <% else @search_results %>
+  <% if @search_results %>
     <% @search_results.each_with_index do |word, index| %>
     <div class="word_partial">
       <div class="pull-right">
@@ -29,7 +25,10 @@
             <%= f.collection_select :source_id,
                 @current_user_sources, :id, :name, prompt: true
             %>
-            <%= f.submit class: "btn btn-danger btn-sm", value: "add to myLeksi" %>
+            <%=
+              f.submit class: "btn btn-danger btn-sm",
+              value: "add to myLeksi"
+            %>
           <% end %>
         </div>
       </div>

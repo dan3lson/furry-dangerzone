@@ -14,7 +14,7 @@ feature "user logs in", %{
   #     are left blank
   # [x] Submitting the form redirects to my game_path(:id)
 
-  describe "user logs in" do
+  describe "user logs in -->" do
     let(:user) { FactoryGirl.create(:user) }
 
     scenario "scenario: input is valid" do

@@ -16,7 +16,15 @@ class Word < ActiveRecord::Base
 
   def self.define(word)
     if word
-      where("name like ?", "%#{word}%").limit(10)
+      self.find_by(name: word)
     end
+  end
+
+  def self.has_records?
+    self.count > 0
+  end
+
+  def self.random
+    self.all.sample.name
   end
 end
