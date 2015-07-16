@@ -25,7 +25,7 @@ class MacmillanDictionary
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }
     )
 
-    if !response.has_key?("errorMessage")
+    if response.success?
       xml_doc = Nokogiri::XML(response["entryContent"])
 
       phonetic_spelling = xml_doc.xpath("/descendant::PRON[1]").text
@@ -40,7 +40,7 @@ class MacmillanDictionary
         example_sentence
       )
     else
-      Rails.logger.error { "Error: word likely not in Macmillan Dictionary." }
+      Rails.logger.error { "Error: #{response["errorMessage"]}" }
       nil
     end
   end

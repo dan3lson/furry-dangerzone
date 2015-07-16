@@ -21,10 +21,6 @@ class User < ActiveRecord::Base
   end
 
   def already_has_source?(source)
-    if self.sources.find_by(name: source)
-      true
-    else
-      false
-    end
+    self.sources.find_by(name: source) ? true : false
   end
 end
