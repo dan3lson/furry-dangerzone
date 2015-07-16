@@ -11,7 +11,13 @@
 
 <p>
   <%=
-    link_to "delete", source_path(@source), method: :delete,
+    link_to "remove",
+    user_source_path(id: UserSource.find_by(
+      user: current_user,
+      source: @source).id,
+      source_name: @source.name
+    ),
+    method: :delete, class: "btn btn-default btn-sm",
     class: "btn btn-default form-control"
   %>
 </p>

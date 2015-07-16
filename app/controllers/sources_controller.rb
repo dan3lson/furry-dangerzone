@@ -15,7 +15,7 @@ class SourcesController < ApplicationController
   end
 
   def create
-    @source = Source.new(source_params)
+    @source = Source.where(name: source_params[:name]).first_or_initialize
     if current_user.already_has_source?(@source.name)
       flash.now[:warning] = "Whoa there - you already have that source!"
       render :new

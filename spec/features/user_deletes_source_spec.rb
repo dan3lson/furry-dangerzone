@@ -25,12 +25,12 @@ feature "user deletes source", %{
 
       click_on source.name
 
-      click_on "delete"
+      click_on "remove"
 
-      expect(page).to have_content("Source deleted.")
+      expect(page).to have_content("\'#{source.name}\' has been removed.")
       expect(page).not_to have_content("Yikes! Something went wrong.")
       expect(page).not_to have_content("Please try again.")
-      expect(Source.count).to eq(0)
+      expect(Source.count).to eq(1)
       expect(UserSource.count).to eq(0)
     end
   end
