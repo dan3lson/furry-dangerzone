@@ -32,7 +32,7 @@ feature "user adds a word", %{
 
       select user_source.source.name, from: "Sources"
 
-      click_on "add to myLeksi"
+      click_on "yes"
 
       expect(page).to have_content("Awesome - you added \'chess\'!")
       expect(page).not_to have_content("Yikes!")

@@ -39,10 +39,10 @@ class Word < ActiveRecord::Base
   end
 
   def self.has_records?
-    self.count > 0
+    count > 0
   end
 
   def self.random
-    self.all.sample.name
+    all.sample.name
   end
 end

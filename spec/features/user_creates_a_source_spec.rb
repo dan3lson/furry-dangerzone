@@ -14,6 +14,11 @@ feature "user creates a source", %{
 
   describe "\n user creates a source -->" do
     let(:user) { FactoryGirl.create(:user) }
+    before :each do
+      source = Source.find_by(name: "Untagged")
+      user.sources << source
+    end
+
 
     scenario "scenario: with valid data" do
       log_in_as(user)
@@ -21,8 +26,8 @@ feature "user creates a source", %{
       create_source
 
       expect(page).to have_content("You successfully created a new source!")
-      expect(UserSource.count).to eq(1)
-      expect(Source.count).to eq(1)
+      expect(UserSource.count).to eq(2)
+      expect(Source.count).to eq(2)
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("errors")
       expect(page).not_to have_content("fix")
@@ -31,7 +36,7 @@ feature "user creates a source", %{
     scenario "scenario: with invalid data" do
       log_in_as(user)
 
-      visit sources_path
+      visit mySources_path
 
       click_on "new source"
 
@@ -42,8 +47,8 @@ feature "user creates a source", %{
       expect(page).to have_content("Yikes!")
       expect(page).to have_content("error")
       expect(page).to have_content("fix")
-      expect(UserSource.count).to eq(0)
-      expect(Source.count).to eq(0)
+      expect(UserSource.count).to eq(1)
+      expect(Source.count).to eq(1)
       expect(page).not_to have_content("You successfully created a new source!")
     end
   end

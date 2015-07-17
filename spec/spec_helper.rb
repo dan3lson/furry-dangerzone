@@ -101,7 +101,7 @@ def log_in_as(user)
 end
 
 def create_source
-  visit sources_path
+  visit mySources_path
 
   click_on "new source"
 

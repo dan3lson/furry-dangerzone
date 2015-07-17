@@ -15,8 +15,6 @@ feature "guest signs up", %{
 
   describe "\n guest signs up -->" do
     scenario "scenario: with valid data" do
-      before_count = User.count
-
       visit root_path
 
       click_on "Get for free"
@@ -26,16 +24,16 @@ feature "guest signs up", %{
       fill_in "Password Confirmation", with: "foobar"
 
       click_on "Create my account"
-
-      after_count = User.count
-
+      
       expect(page).to have_content("Welcome to Leksi!")
       expect(page).to have_content("Grow your personal dictionary by")
       expect(page).to have_content("myLeksi")
       expect(page).to have_link("define")
       expect(page).to have_link("myTags")
       expect(page).to have_link("menu")
-      expect(before_count + 1).to eq(after_count)
+      expect(User.count).to eq(1)
+      expect(UserSource.count).to eq(1)
+      expect(Source.count).to eq(1)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end

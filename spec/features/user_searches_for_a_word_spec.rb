@@ -32,7 +32,8 @@ feature "user searches for a word", %{
       expect(page).to have_content(random_word_placeholder.example_sentence)
     end
 
-    pending "scenario: query should be found" do
+    scenario "scenario: query should be found",
+    pending: "Macmillan API Key needs to be reactivated" do
       log_in_as(user)
 
       visit search_path

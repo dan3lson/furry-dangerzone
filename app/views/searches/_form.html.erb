@@ -1,8 +1,12 @@
 <div id="search-bar-container" class="well">
+  <p>
+    Find a word or click <em>define</em> for a random one!
+  </p>
   <%= form_tag(search_path, :method => 'get') do %>
     <%= label_tag :inputSuccess5, "Search", class: "control-label sr-only" %>
     <%= text_field_tag(
-      :search, params[:search], placeholder: "look up a word or tap define",
+      :search, params[:search],
+      placeholder: @random_word_placeholder,
       class: "form-control center", id: "inputSuccess5"
     ) %>
     <%= submit_tag "define", name: nil, class: "btn btn-default" %>

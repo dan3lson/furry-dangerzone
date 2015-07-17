@@ -20,7 +20,7 @@ feature "users add the same source", %{
     scenario "scenario: add word" do
       log_in_as(user)
 
-      visit sources_path
+      visit mySources_path
 
       click_on "new source"
 
@@ -34,7 +34,7 @@ feature "users add the same source", %{
 
       log_in_as(user2)
 
-      visit sources_path
+      visit mySources_path
 
       click_on "new source"
 
@@ -44,7 +44,7 @@ feature "users add the same source", %{
 
       expect(page).to have_link("foo")
       expect(UserSource.count).to eq(2)
-      expect(Source.count).to eq(1)
+      expect(Source.count).to eq(2)
       expect(page).not_to have_content("Yikes!")
     end
   end

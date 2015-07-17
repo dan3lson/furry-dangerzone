@@ -36,21 +36,31 @@
       <br>
 
       <div class="collapse" id="word_<%= index %>">
-        <div class="well">
+        <div class="leksi-red-border">
           <p>
-            Tag your word!
+            Do you want to tag this word?
           </p>
           <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
             <%= hidden_field_tag :word_to_be_added, word.name %>
             <%= f.label :source_id, "Sources", class: "sr-only" %>
             <%= f.collection_select :source_id,
                 @current_user_sources, :id, :name,
-                prompt: false
+                { selected: @untagged_source.id }
             %>
-            <%=
-              f.submit class: "btn btn-danger btn-sm",
-              value: "add to myLeksi"
-            %>
+            <div class="row">
+              <div class="col-xs-6">
+                <%=
+                  f.submit class: "btn btn-default btn-sm",
+                  value: "no"
+                %>
+              </div>
+              <div class="col-xs-6">
+                <%=
+                  f.submit class: "btn btn-danger btn-sm",
+                  value: "yes"
+                %>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>

@@ -5,19 +5,21 @@
   More info soon.
 </p>
 
-<p>
-  <%= link_to "edit", edit_source_path(@source), class: "btn btn-default form-control" %>
-</p>
+<% unless @source.name == "Untagged" %>
+  <p>
+    <%= link_to "edit", edit_source_path(@source), class: "btn btn-default form-control" %>
+  </p>
 
-<p>
-  <%=
-    link_to "remove",
-    user_source_path(id: UserSource.find_by(
-      user: current_user,
-      source: @source).id,
-      source_name: @source.name
-    ),
-    method: :delete, class: "btn btn-default btn-sm",
-    class: "btn btn-default form-control"
-  %>
-</p>
+  <p>
+    <%=
+      link_to "remove",
+      user_source_path(id: UserSource.find_by(
+        user: current_user,
+        source: @source).id,
+        source_name: @source.name
+      ),
+      method: :delete, class: "btn btn-default btn-sm",
+      class: "btn btn-default form-control"
+    %>
+  </p>
+<% end %>

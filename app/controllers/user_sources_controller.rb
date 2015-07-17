@@ -4,10 +4,10 @@ class UserSourcesController < ApplicationController
     @source = Source.find_by(name: params[:source_name])
     if @user_source.destroy
       flash[:success] = "\'#{@source.name}\' has been removed."
-      redirect_to sources_path
+      redirect_to mySources_path
     else
       flash[:danger] = "Yikes! - something went wrong! Please try again."
-      redirect_to sources_path
+      redirect_to mySources_path
     end
   end
 end

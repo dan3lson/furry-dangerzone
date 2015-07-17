@@ -1,4 +1,11 @@
 Rails.logger.info "==============================================="
+Rails.logger.info "Creating Sources"
+Rails.logger.info "==============================================="
+
+source = Source.create!(name: "Untagged")
+Rails.logger.info "Source: #{source.name}"
+
+Rails.logger.info "==============================================="
 Rails.logger.info "Creating Users"
 Rails.logger.info "==============================================="
 
@@ -17,21 +24,10 @@ User.create!(
 end
 
 Rails.logger.info "==============================================="
-Rails.logger.info "Creating Words"
+Rails.logger.info "Creating UserSources"
 Rails.logger.info "==============================================="
 
-10.times do
-  name = Faker::Lorem.word
-  word = Word.create!(
-    name: name,
-    definition: Faker::Company.bs,
-    part_of_speech: %w(noun adjective verb adverb).sample,
-    phonetic_spelling: name.split.join("-"),
-    example_sentence: Faker::Company.bs
-  )
-  Rails.logger.info "Word: #{word.name} | #{word.definition} |"
-  Rails.logger.info "[cont'd]: #{word.part_of_speech} | "
-  Rails.logger.info "#{word.phonetic_spelling} | "
-  Rails.logger.info "#{word.example_sentence}"
-  Rails.logger.info "***"
+User.all.each do |user|
+  user_source = UserSource.create!(source: source, user: user)
+  Rails.logger.info "Source: #{source.name}"
 end

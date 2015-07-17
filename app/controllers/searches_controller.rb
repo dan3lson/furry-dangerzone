@@ -13,5 +13,6 @@ class SearchesController < ApplicationController
       end
     end
     @current_user_sources = current_user.sources
+    @untagged_source = Source.find_by(name: "Untagged")
   end
 end

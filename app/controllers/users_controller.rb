@@ -16,11 +16,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
+    @user_source = UserSource.new(user: @user)
+    if @user.save && @user_source.save
       log_in(@user)
       flash[:success] = "Welcome to Leksi!"
       redirect_to root_path
     else
+      flash[:danger] = "Yikes! Something went wrong. Please try again."
       render :new
     end
   end

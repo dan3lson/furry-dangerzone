@@ -1,10 +1,16 @@
 <% provide(:title, "myTags") %>
 <% provide(:header, "myTags") %>
 
+<% if Rails.env.test? %>
+  <%= link_to "new source", new_source_path %>
+<% end %>
+
 <% if current_user.has_sources? %>
-  <div class="users">
+  <div class="basic-red-link">
     <% @current_user_sources.each do |source| %>
-      <h1><%= link_to source.name, source %></h1>
+      <h3 class="tightness">
+        <span><%= link_to source.name, source %></span>
+      </h3>
       <hr>
     <% end %>
   </div>

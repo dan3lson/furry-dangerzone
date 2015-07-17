@@ -16,7 +16,10 @@
 				<% elsif params[:action] == "words" %>
 					<%= link_to image_tag("select_all_black_32.png"), words_path %>
 				<% elsif params[:controller] == "words" && params[:action] == "index" %>
-					<%= link_to image_tag("select_all_filled_black_32.png"), myLeksi_path %>
+					<%=
+						link_to image_tag("select_all_filled_black_32.png"),
+						myLeksi_path
+					%>
 				<% end %>
 			</span>
 		</h1>
