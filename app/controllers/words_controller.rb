@@ -1,5 +1,5 @@
 class WordsController < ApplicationController
   def index
-    @words = current_user.words
+    @words = Word.all
   end
 end

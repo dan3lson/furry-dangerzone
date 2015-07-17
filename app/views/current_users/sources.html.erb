@@ -1,0 +1,15 @@
+<% provide(:title, "myTags") %>
+<% provide(:header, "myTags") %>
+
+<% if current_user.has_sources? %>
+  <div class="users">
+    <% @current_user_sources.each do |source| %>
+      <h1><%= link_to source.name, source %></h1>
+      <hr>
+    <% end %>
+  </div>
+<% else %>
+  <p class="lead">
+    You don't have any sources.
+  </p>
+<% end %>

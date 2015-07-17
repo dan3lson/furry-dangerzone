@@ -1,10 +1,110 @@
-<div class="center">
-  <div>
-    <%= link_to "Sign Up for Free", signup_path, class: "btn btn-lg btn-default" %>
-    <br/>
-    <small>
-      Already have an account?
-      <%= link_to "Log in", login_path %>.
-    </small>
+<div class="row">
+  <div class="col-xs-4 col-sm-3">
+    <%=
+      image_tag("leksi_icon.png",
+      class: "img-responsive",
+      alt: "Leksi Icon")
+    %>
   </div>
+  <div class="col-xs-8 col-sm-5">
+    <p class="lead">
+      A simple and fun way to learn vocabulary.
+    </p>
+    <div class="row">
+      <div class="col-xs-6 col-sm-3">
+        <span class="apple-star-container">
+          <span class="apple-star-orange">
+            &#9733;&#9733;&#9733;&#9733;&#9733;
+          </span> (3,690)
+        </span>
+      </div>
+      <div class="col-xs-6 col-sm-3">
+        <%=
+          link_to "Get for free", signup_path,
+          class: "btn btn-default btn-sm apple-blue-button"
+        %>
+        <br/>
+        <div class="pull-right">
+          <small>
+          or
+            <%= link_to "log in", login_path, class: "apple-blue" %>.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="btn-group btn-group-justified btn-group-margin"
+  role="group"
+  aria-label="..."
+>
+  <div class="btn-group" role="group">
+    <%= link_to "Details", "#", class: "btn btn-default active" %>
+  </div>
+  <div class="btn-group" role="group">
+    <%= link_to "Reviews", "#", class: "btn btn-default" %>
+  </div>
+</div>
+<hr>
+<div>
+  <h4>Description</h4>
+  <p class="lead">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    Esse, recusandae. Similique, quidem, consequatur! Facere quod
+    exercitationem illo nesciunt minus ex accusantium eligendi tempora
+    nihil, officiis, quaerat minima, culpa similique velit...
+    <%=
+      link_to "more", "#",
+      class: "apple-blue"
+    %>
+  </p>
+</div>
+<hr>
+<div>
+  <%= render "layouts/carousel" %>
+</div>
+<hr>
+<div>
+  <h4>What's New <small>Aug 6, 2015</small></h4>
+  <p class="lead">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    Esse, recusandae. Similique, quidem, consequatur! Facere quod
+    exercitationem illo nesciunt minus ex accusantium eligendi tempora
+    nihil, officiis, quaerat minima, culpa similique velit...
+    <%=
+      link_to "more", "#",
+      class: "apple-blue"
+    %>
+  </p>
+</div>
+<hr>
+<div>
+  <h4>Information</h4>
+  <table class="table lead">
+    <tr>
+      <td class="dark-gray">Seller</td>
+      <td>Leksi LLC</td>
+    </tr>
+    <tr>
+      <td class="dark-gray">Category</td>
+      <td>Education</td>
+    </tr>
+    <tr>
+      <td class="dark-gray">Updated</td>
+      <td>Aug 6, 2015</td>
+    </tr>
+    <tr>
+      <td class="dark-gray">Size</td>
+      <td>0 MB (nothing to download!)</td>
+    </tr>
+    <tr>
+      <td class="dark-gray">Rating</td>
+      <td>not enough reviews yet</td>
+    </tr>
+    <tr>
+      <td class="dark-gray">Compatibility</td>
+      <td>Works and looks pretty on any device.</td>
+    </tr>
+  </table>
 </div>

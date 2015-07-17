@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xs-3" align="center">
       <%= link_to_unless_current image_tag("myLeksi_black_32.png") +
-      "<br/>myLeksi".html_safe, words_path,
+      "<br/>myLeksi".html_safe, myLeksi_path,
       alt: "myLeksi", class: "img-responsive" %>
 
     </div>
@@ -19,8 +19,8 @@
     <div class="col-xs-3" align="center">
       <%=
         link_to_unless_current image_tag("sources_black_32.png") +
-        "<br/>sources".html_safe, sources_path,
-        alt: "Sources", class: "img-responsive"
+        "<br/>myTags".html_safe, mySources_path,
+        alt: "myTags", class: "img-responsive"
       %>
     </div>
 

@@ -4,7 +4,7 @@
   <body>
     <%= render "layouts/logged_in_header" %>
     <div class="container">
-      <%= render "shared/flash_error_messages" %>
+      <%= render "shared/flash_messages" %>
       <%= yield %>
       <% if logged_in? %>
         <%= render "layouts/logged_in_footer" %>

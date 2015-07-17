@@ -14,9 +14,27 @@ class Word < ActiveRecord::Base
 
   default_scope -> { order('words.name ASC') }
 
-  def self.define(word)
-    if word
-      self.find_by(name: word)
+  def self.define(name)
+    if name
+      word = find_by(name: name)
+      if word.nil?
+        macmillan_word = MacmillanDictionary.define(word)
+        if macmillan_word.nil?
+          "Yikes! We couldn\'t find '#{name}'. Please search again!"
+        else
+          word =
+            Word.find_or_create_by(
+              name: @query,
+              phonetic_spelling: macmillan_word.phonetic_spelling,
+              part_of_speech: macmillan_word.part_of_speech,
+              definition: macmillan_word.definition,
+              example_sentence: macmillan_word.example_sentence
+            )
+          [word]
+        end
+      else
+        [word]
+      end
     end
   end
 

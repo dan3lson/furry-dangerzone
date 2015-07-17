@@ -7,11 +7,15 @@
 //*
 //**********
 
+$apple-blue: #097ff0;
+$apple-star-orange: #fd9603;
 $black: #000;
+$dark-gray: #8E8E93;
 $leksiGreen: #24d12e;
 $leksi-orange: orange;
 $leksi-red: #ff1300;
 $white: #fff;
+
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
@@ -30,7 +34,7 @@ html {
 }
 
 body {
-  padding: 100px 0;
+  padding: 90px 0;
 }
 
 //**********
@@ -48,15 +52,6 @@ h1 {
   letter-spacing: -1px;
   margin-bottom: 15px;
   text-align: center;
-}
-
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: #999;
 }
 
 p {
@@ -112,10 +107,16 @@ input {
 //*
 //**********
 
+.footer_active_link{
+	color: lighten($leksi-red, 25%);
+	font-weight: bold;
+}
+
 .navbar_footer{
 	color: $leksi-red;
 	font-weight: normal;
 	margin: 0;
+
   a{
 	  color: $black;
 	  &:hover{
@@ -131,26 +132,30 @@ input {
   }
 }
 
-.footer_active_link{
-	color: lighten($leksi-red, 25%);
-	font-weight: bold;
-}
-
 //**********
 //*
 //* MISCELLANEOUS
 //*
 //**********
 
-.word_partial a:hover {
-	background: none;
+.apple-blue {
+	color: $apple-blue;
 }
 
-.word_partial .tightness{
-	margin-bottom: -.01em;
+.apple-blue-button {
+	border: 1px solid $apple-blue;
+	color: $apple-blue;
 }
 
-.basic_red_link a{
+.apple-star-orange {
+	color: $apple-star-orange;
+}
+
+.apple-star-container {
+	font-size: .8em;
+}
+
+.basic_red_link a {
 	color: $leksi-red;
 
 	&:hover {
@@ -160,20 +165,20 @@ input {
 	}
 }
 
-.leksi-red{
-	color: $leksi-red;
-}
-
-.red_circle{
-	border: 1px solid $leksi-red;
-	border-radius: 15px;
-	display: inline-block;
-	height: 15px;
-	width: 15px;
+.btn-group-margin {
+	margin-top: 20px;
 }
 
 .center {
 	text-align: center;
+}
+
+.float-right {
+	float: right;
+}
+
+.dark-gray {
+	color: $dark-gray;
 }
 
 .debug_dump {
@@ -183,4 +188,34 @@ input {
   float: left;
   margin-top: 45px;
   width: 100%;
+}
+
+
+
+.leksi-red{
+	color: $leksi-red;
+}
+
+table {
+	border: none;
+
+	th, td {
+	  border-top: none !important;
+	}
+}
+
+.word_partial a:hover {
+	background: none;
+}
+
+.word_partial .tightness{
+	margin-bottom: -.01em;
+}
+
+.red_circle{
+	border: 1px solid $leksi-red;
+	border-radius: 15px;
+	display: inline-block;
+	height: 15px;
+	width: 15px;
 }

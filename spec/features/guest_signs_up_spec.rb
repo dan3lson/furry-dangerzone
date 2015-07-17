@@ -19,7 +19,7 @@ feature "guest signs up", %{
 
       visit root_path
 
-      click_on "Sign Up for Free"
+      click_on "Get for free"
 
       fill_in "Username", with: "FooFoo"
       fill_in "Password", with: "foobar"
@@ -33,7 +33,7 @@ feature "guest signs up", %{
       expect(page).to have_content("Grow your personal dictionary by")
       expect(page).to have_content("myLeksi")
       expect(page).to have_link("define")
-      expect(page).to have_link("sources")
+      expect(page).to have_link("myTags")
       expect(page).to have_link("menu")
       expect(before_count + 1).to eq(after_count)
       expect(page).to_not have_content("errors")
@@ -45,7 +45,7 @@ feature "guest signs up", %{
 
       visit root_path
 
-      click_on "Sign Up for Free"
+      click_on "Get for free"
 
       fill_in "Username", with: ""
       fill_in "Password", with: ""

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <%= render "layouts/head" %>
+  <body>
+    <%= render "shared/flash_error_messages" %>
+
+    <%= render "layouts/logged_in_header" %>
+    <% if logged_in? %>
+      <div class="container">
+        <%= yield %>
+      </div>
+      <%= render "layouts/logged_in_footer" %>
+    <% else %>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-4 col-sm-3">
+            <%=
+              image_tag("leksi_icon.png",
+              class: "img-responsive",
+              alt: "Leksi Icon")
+            %>
+          </div>
+          <div class="col-xs-8 col-sm-5">
+            <p class="lead">
+              Leksi - a Simple and Fun Way to Learn Vocabulary
+            </p>
+            <div class="row">
+              <div class="col-xs-6">
+                <span class="apple-star-container">
+                  <span class="apple-star-orange">
+                    &#9733;&#9733;&#9733;&#9733;&#9733;
+                  </span> (3,690)
+                </span>
+              </div>
+              <div class="col-xs-6">
+                <%=
+                  link_to "Free +", signup_path,
+                  class: "btn btn-default btn-sm apple-blue-button"
+                %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="btn-group btn-group-justified btn-group-margin"
+          role="group"
+          aria-label="..."
+        >
+          <div class="btn-group" role="group">
+            <%= link_to "Details", "#", class: "btn btn-default active" %>
+          </div>
+          <div class="btn-group" role="group">
+            <%= link_to "Reviews", "#", class: "btn btn-default" %>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <h4>Description</h4>
+          <p class="lead">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Esse, recusandae. Similique, quidem, consequatur! Facere quod
+            exercitationem illo nesciunt minus ex accusantium eligendi tempora
+            nihil, officiis, quaerat minima, culpa similique velit...
+            <%=
+              link_to "more", "#",
+              class: "apple-blue"
+            %>
+          </p>
+        </div>
+        <hr>
+        <div>
+          <%= render "layouts/carousel" %>
+        </div>
+        <hr>
+        <div>
+          <h4>What's New <small>Aug 6, 2015</small></h4>
+          <p class="lead">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Esse, recusandae. Similique, quidem, consequatur! Facere quod
+            exercitationem illo nesciunt minus ex accusantium eligendi tempora
+            nihil, officiis, quaerat minima, culpa similique velit...
+            <%=
+              link_to "more", "#",
+              class: "apple-blue"
+            %>
+          </p>
+        </div>
+        <hr>
+        <div>
+          <h4>Information</h4>
+          <table class="table lead">
+            <tr>
+              <td class="dark-gray">Seller</td>
+              <td>Leksi LLC</td>
+            </tr>
+            <tr>
+              <td class="dark-gray">Category</td>
+              <td>Education</td>
+            </tr>
+            <tr>
+              <td class="dark-gray">Updated</td>
+              <td>Aug 6, 2015</td>
+            </tr>
+            <tr>
+              <td class="dark-gray">Size</td>
+              <td>0 MB (nothing to download!)</td>
+            </tr>
+            <tr>
+              <td class="dark-gray">Rating</td>
+              <td>not enough reviews yet</td>
+            </tr>
+            <tr>
+              <td class="dark-gray">Compatibility</td>
+              <td>Works and looks pretty on any device.</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    	<div class="center">
+        <br/>
+        <br/>
+        <br/>
+    		<small>
+    			&copy; 2015 Leksi, Inc
+          <%= link_to "Leksi Education", root_path %>
+    		</small>
+    	</div>
+    <% end %>
+    <%= debug(params) if Rails.env.development? %>
+    <%#= render "shared/google_analytics" %>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+  <%= render "layouts/head" %>
+  <body>
+    <%= render "layouts/logged_in_header" %>
+    <div class="container">
+      <%= render "shared/flash_error_messages" %>
+      <%= yield %>
+      <% if logged_in? %>
+        <%= render "layouts/logged_in_footer" %>
+      <% else %>
+      	<div class="center">
+          <br/>
+          <br/>
+          <br/>
+      		<small>
+      			&copy; Copyright 2015
+            <%= link_to "Leksi Education", root_path %>
+      		</small>
+      	</div>
+      <% end %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+    <%#= render "shared/google_analytics" %>
+  </body>
+</html>

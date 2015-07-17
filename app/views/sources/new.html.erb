@@ -1,13 +1,11 @@
 <% provide(:title, "New Source") %>
-<% provide(:header, "New Source") %>
+<% provide(:header, "new source") %>
 
 <div class="well">
   <%= form_for(@source) do |f| %>
   <%= render 'shared/error_messages', object: @source %>
-
     <%= f.label :name, class: "sr-only" %>
     <%= f.text_field :name, class: "form-control", placeholder: "Name *"  %>
-
     <%= f.submit "Create source", class: "btn btn-default" %>
   <% end %>
 </div>

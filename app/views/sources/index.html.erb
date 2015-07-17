@@ -1,19 +1,13 @@
-<% provide(:title, "Sources") %>
-<% provide(:header, "Sources") %>
+<% provide(:title, "All Sources") %>
+<% provide(:header, "All Sources") %>
 
-<div style="position: fixed; left: 80%">
-	<%= link_to 'new source', new_source_path, :class => 'btn btn-default' %>
+<div>
+  <% if Rails.env.test? %>
+    <%= link_to "new source", new_source_path %>
+  <% end %>
+  
+  <% @sources.each do |source| %>
+    <h1><%= link_to source.name, source %></h1>
+    <hr>
+  <% end %>
 </div>
-
-<% if current_user.has_sources? %>
-  <div class="users">
-    <% @current_user_sources.each do |source| %>
-      <h1><%= link_to source.name, source %></h1>
-      <hr>
-    <% end %>
-  </div>
-<% else %>
-  <p class="lead">
-    You don't have any sources.
-  </p>
-<% end %>

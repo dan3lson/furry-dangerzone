@@ -1,24 +1,9 @@
-<% provide(:title, "myLeksi") %>
-<% provide(:header, "myLeksi") %>
+<% provide(:title, "All Words") %>
+<% provide(:header, "All Words") %>
 
-<% if current_user.has_words? %>
-  <% current_user.words.each do |word| %>
-    <div class="word_partial">
-      <div class="pull-right">
-        <%=
-          link_to "remove",
-          user_word_path(id: UserWord.find_by(
-            user: current_user,
-            word: word).id,
-            word_name: word.name
-          ),
-          method: :delete, class: "btn btn-default btn-sm"
-        %>
-      </div>
-      <%= render "shared/word", word: word %>
-      <hr>
-    </div>
-  <% end %>
-<% else %>
-  <%= render "words/no_words_guide" %>
+<% @words.each do |word| %>
+  <div class="word_partial">
+    <%= render "shared/word", word: word %>
+    <hr>
+  </div>
 <% end %>

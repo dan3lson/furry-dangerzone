@@ -45,7 +45,7 @@ RSpec.describe Word, type: :model do
 
   describe "#define" do
     it "returns Word object" do
-      expect(Word.define(word.name).class).to be(Word)
+      expect(Word.define(word.name).first.class).to be(Word)
     end
   end
 

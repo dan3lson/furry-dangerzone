@@ -23,10 +23,9 @@ feature "user logs out", %{
 
       click_on "log out"
 
-      expect(page).to have_content("Successfully logged out. See you again soon!")
-      expect(page).to have_link("Sign Up for Free")
-      expect(page).to have_link("Log in")
-      expect(page).to have_content("Already have an account?")
+      expect(page).to have_content("See you again, #{user.username}!")
+      expect(page).to have_link("Get for free")
+      expect(page).to have_link("log in")
     end
   end
 end

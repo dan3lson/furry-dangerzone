@@ -34,7 +34,7 @@ feature "user edits their profile", %{
       expect(page).to_not have_content("fix")
       expect(page).to have_link("myLeksi")
       expect(page).to have_link("define")
-      expect(page).to have_link("sources")
+      expect(page).to have_link("myTags")
       expect(page).to have_content("menu")
     end
 
@@ -56,7 +56,7 @@ feature "user edits their profile", %{
       expect(page).to have_content("fix")
       expect(page).to have_link("myLeksi")
       expect(page).to have_link("define")
-      expect(page).to have_link("sources")
+      expect(page).to have_link("myTags")
       expect(page).to have_content("Profile")
     end
   end

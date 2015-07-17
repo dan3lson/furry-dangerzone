@@ -1,7 +1,24 @@
 <div class="navbar navbar-default navbar-fixed-top logged_in_header" role="navigation">
 	<div class="container">
 		<h1 class="center">
+			<span class="pull-left">
+				<% if params[:controller] == "sources" && params[:action] == "new" ||
+							params[:controller] == "searches" && params[:action] == "new" ||
+							params[:action] == "menu"
+				%>
+					<%= link_to image_tag("back_black_32.png"), :back %>
+				<% end %>
+			</span>
 			<%= full_header(yield(:header)) %>
+			<span class="pull-right">
+				<% if params[:action] == "sources" %>
+					<%= link_to image_tag("add_black_32.png"), new_source_path %>
+				<% elsif params[:action] == "words" %>
+					<%= link_to image_tag("select_all_black_32.png"), words_path %>
+				<% elsif params[:controller] == "words" && params[:action] == "index" %>
+					<%= link_to image_tag("select_all_filled_black_32.png"), myLeksi_path %>
+				<% end %>
+			</span>
 		</h1>
 	</div>
 </div>

@@ -4,17 +4,31 @@
 <%= render "searches/form" %>
 
 <% if @query %>
-  <% if @search_results %>
+  <% if @search_results.class == String %>
+    <p class="lead leksi-red center">
+      <%= @search_results %>
+    </p>
+  <% else %>
     <% @search_results.each_with_index do |word, index| %>
     <div class="word_partial">
       <div class="pull-right">
-        <%= button_tag "add", class: "btn btn-default btn-sm add_word_btn",
-          "data-toggle" => "collapse",
-          "data-target" => "#word_#{index}",
-          "aria-expanded" => "false",
-          "aria-controls" => "word_#{index}",
-          "type" => "button"
-        %>
+        <% if Rails.env.test? %>
+          <%= link_to "add",
+            { "role" => "button" },
+            "data-toggle" => "collapse",
+            "href" => "#word_#{index}",
+            "aria-expanded" => "false",
+            "aria-controls" => "word_#{index}"
+          %>
+        <% else %>
+          <%= link_to image_tag("add_gray_25.png"),
+            { "role" => "button" },
+            "data-toggle" => "collapse",
+            "href" => "#word_#{index}",
+            "aria-expanded" => "false",
+            "aria-controls" => "word_#{index}"
+          %>
+        <% end %>
       </div>
       <%= render "shared/word", word: word %>
       <div class="collapse" id="word_<%= index %>">

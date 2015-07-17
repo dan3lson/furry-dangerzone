@@ -3,7 +3,7 @@ class SourcesController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    @current_user_sources = current_user.sources
+    @sources = Source.all
   end
 
   def show

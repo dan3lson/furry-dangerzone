@@ -1,0 +1,36 @@
+<% provide(:title, "myLeksi") %>
+<% provide(:header, "myLeksi") %>
+
+<% if current_user.has_words? %>
+  <% @current_user_words.each do |word| %>
+    <div class="word_partial">
+      <div class="pull-right">
+        <% if Rails.env.test? %>
+          <%=
+            link_to "remove",
+            user_word_path(id: UserWord.find_by(
+              user: current_user,
+              word: word).id,
+              word_name: word.name
+            ),
+            method: :delete
+          %>
+        <% else %>
+          <%=
+            link_to image_tag("remove_gray_25.png"),
+            user_word_path(id: UserWord.find_by(
+              user: current_user,
+              word: word).id,
+              word_name: word.name
+            ),
+            method: :delete
+          %>
+        <% end %>
+      </div>
+      <%= render "shared/word", word: word %>
+      <hr>
+    </div>
+  <% end %>
+<% else %>
+  <%= render "current_users/no_words_guide" %>
+<% end %>

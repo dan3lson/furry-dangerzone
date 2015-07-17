@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in(@user)
       flash[:success] = "Welcome to Leksi!"
-      redirect_to words_path
+      redirect_to root_path
     else
       render :new
     end
