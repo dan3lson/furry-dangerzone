@@ -44,29 +44,5 @@ feature "user adds a word", %{
       expect(UserWord.count).to eq(1)
       expect(WordSource.count).to eq(1)
     end
-
-    pending "scenario: invalid process" do
-      log_in_as(user)
-
-      visit search_path
-
-      fill_in "Search", with: "chess"
-
-      click_on "define"
-
-      click_on "add"
-
-      click_on "add to myLeksi"
-
-      expect(page).not_to have_content("Awesome - you added \'chess\'!")
-      expect(page).to have_content("Yikes!")
-      expect(page).not_to have_content("chess")
-      expect(page).not_to have_content("noun")
-      expect(page).not_to have_content("a game for two people, played on a board")
-      expect(page).not_to have_content("/tʃes/")
-      expect(Word.count).to eq(0)
-      expect(UserWord.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-    end
   end
 end

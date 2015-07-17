@@ -31,13 +31,21 @@
         <% end %>
       </div>
       <%= render "shared/word", word: word %>
+
+      <br>
+      <br>
+
       <div class="collapse" id="word_<%= index %>">
         <div class="well">
+          <p>
+            Tag your word!
+          </p>
           <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
             <%= hidden_field_tag :word_to_be_added, word.name %>
-            <%= f.label :source_id, "Sources" %>
+            <%= f.label :source_id, "Sources", class: "sr-only" %>
             <%= f.collection_select :source_id,
-                @current_user_sources, :id, :name, prompt: true
+                @current_user_sources, :id, :name,
+                prompt: false
             %>
             <%=
               f.submit class: "btn btn-danger btn-sm",
