@@ -2,17 +2,34 @@
 	<div class="container">
 		<h1 class="center">
 			<span class="pull-left">
-				<% if params[:controller] == "sources" && params[:action] == "new" ||
-							params[:controller] == "searches" && params[:action] == "new" ||
-							params[:action] == "menu"
+				<% unless logged_in? %>
+					<%=
+						link_to image_tag("Leksi.png", class: "img-responsive"), root_path
+					%>
+				<% end %>
+				<%
+					if params[:controller] == "sources" && params[:action] == "new"
 				%>
 					<%= link_to image_tag("back_black_32.png"), :back %>
 				<% end %>
 			</span>
 			<%= full_header(yield(:header)) %>
 			<span class="pull-right">
+				<% if !logged_in? && params[:action] == "home" %>
+				<p class="remove-line-height">
+					<%=
+						link_to "Get for free", signup_path,
+						class: "btn btn-default apple-blue-button form-control"
+					%>
+				</p>
+				<% end %>
 				<% if params[:action] == "sources" %>
 					<%= link_to image_tag("add_black_32.png"), new_source_path %>
+				<% elsif params[:action] == "menu" %>
+					<%=
+						link_to image_tag("signout_black_32.png"),
+						logout_path, method: :delete
+					%>
 				<% end %>
 			</span>
 		</h1>

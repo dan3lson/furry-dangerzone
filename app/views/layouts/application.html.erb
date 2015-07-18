@@ -8,19 +8,12 @@
       <%= yield %>
       <% if logged_in? %>
         <%= render "layouts/logged_in_footer" %>
-      <% else %>
-      	<div class="center">
-          <br/>
-          <br/>
-          <br/>
-      		<small>
-      			&copy; Copyright 2015
-            <%= link_to "Leksi Education", root_path %>
-      		</small>
-      	</div>
       <% end %>
       <%= debug(params) if Rails.env.development? %>
     </div>
+    <% unless logged_in? %>
+      <%= render "layouts/logged_out_footer" %>
+    <% end %>
     <%#= render "shared/google_analytics" %>
   </body>
 </html>

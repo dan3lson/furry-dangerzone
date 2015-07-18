@@ -19,6 +19,11 @@ feature "user adds a word", %{
     let(:user) { user_source.user }
     let!(:random_word_placeholder) { FactoryGirl.create(:word) }
 
+    before :each do
+      source = Source.find_by(name: "Untagged")
+      user.sources << source
+    end
+
     scenario "scenario: valid process" do
       log_in_as(user)
 
@@ -40,6 +45,9 @@ feature "user adds a word", %{
       expect(page).to have_content("noun")
       expect(page).to have_content("a game for two people, played on a board")
       expect(page).to have_content("/tʃes/")
+      # expect(page).to have_link("start")
+      # expect(page).to have_css("game-one-start-circle")
+      # expect(page).to have_css("game-one-circle-start-text")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
       expect(WordSource.count).to eq(1)

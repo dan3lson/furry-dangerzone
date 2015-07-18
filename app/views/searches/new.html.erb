@@ -10,61 +10,67 @@
     </p>
   <% else %>
     <% @search_results.each_with_index do |word, index| %>
-    <div class="word_partial">
-      <div class="pull-right">
-        <% if Rails.env.test? %>
-          <%= link_to "add",
-            { "role" => "button" },
-            "data-toggle" => "collapse",
-            "href" => "#word_#{index}",
-            "aria-expanded" => "false",
-            "aria-controls" => "word_#{index}"
-          %>
-        <% else %>
-          <%= link_to image_tag("add_black_32.png"),
-            { "role" => "button" },
-            "data-toggle" => "collapse",
-            "href" => "#word_#{index}",
-            "aria-expanded" => "false",
-            "aria-controls" => "word_#{index}"
-          %>
+      <div class="word_partial">
+        <% if logged_in? %>
+          <div class="pull-right">
+            <% if Rails.env.test? %>
+              <%= link_to "add",
+                { "role" => "button" },
+                "data-toggle" => "collapse",
+                "href" => "#word_#{index}",
+                "aria-expanded" => "false",
+                "aria-controls" => "word_#{index}"
+              %>
+            <% else %>
+              <%= link_to image_tag("add_black_32.png"),
+                { "role" => "button" },
+                "data-toggle" => "collapse",
+                "href" => "#word_#{index}",
+                "aria-expanded" => "false",
+                "aria-controls" => "word_#{index}"
+              %>
+            <% end %>
+          </div>
         <% end %>
-      </div>
-      <%= render "words/word", word: word %>
 
-      <br>
+        <%= render "words/word", word: word %>
 
-      <div class="collapse" id="word_<%= index %>">
-        <div class="leksi-red-border">
-          <p>
-            Do you want to tag this word?
-          </p>
-          <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
-            <%= hidden_field_tag :word_to_be_added, word.name %>
-            <%= f.label :source_id, "Sources", class: "sr-only" %>
-            <%= f.collection_select :source_id,
-                @current_user_sources, :id, :name,
-                { selected: @untagged_source.id }
-            %>
-            <div class="row">
-              <div class="col-xs-6">
-                <%=
-                  f.submit class: "btn btn-default btn-sm",
-                  value: "no"
+        <% if logged_in? %>
+          <br>
+
+          <div class="collapse" id="word_<%= index %>">
+            <div class="leksi-red-border">
+              <p>
+                Do you want to tag this word?
+              </p>
+              <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
+                <%= hidden_field_tag :word_to_be_added, word.name %>
+
+                <%= f.label :source_id, "Sources", class: "sr-only" %>
+                <%= f.collection_select :source_id,
+                    current_user.sources, :id, :name,
+                    { selected: @untagged_source.id }
                 %>
-              </div>
-              <div class="col-xs-6">
-                <%=
-                  f.submit class: "btn btn-danger btn-sm",
-                  value: "yes"
-                %>
-              </div>
+                <div class="row">
+                  <div class="col-xs-6">
+                    <%=
+                      f.submit class: "btn btn-default btn-sm",
+                      value: "no"
+                    %>
+                  </div>
+                  <div class="col-xs-6">
+                    <%=
+                      f.submit class: "btn btn-danger btn-sm",
+                      value: "yes"
+                    %>
+                  </div>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
+        <hr>
       </div>
-      <hr>
-    </div>
     <% end %>
   <% end %>
 <% end %>

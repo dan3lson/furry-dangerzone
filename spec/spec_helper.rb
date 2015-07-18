@@ -97,7 +97,7 @@ def log_in_as(user)
   fill_in "Username", with: user.username
   fill_in "Password", with: user.password
 
-  click_on "Log in"
+  first(:link, "Log in").click
 end
 
 def create_source

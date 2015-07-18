@@ -12,7 +12,6 @@ class SearchesController < ApplicationController
           Word.define(@query)
       end
     end
-    @current_user_sources = current_user.sources
-    @untagged_source = Source.find_by(name: "Untagged")
+    @untagged_source = Source.find(1)
   end
 end

@@ -17,14 +17,14 @@ feature "guest signs up", %{
     scenario "scenario: with valid data" do
       visit root_path
 
-      click_on "Get for free"
+      first(:link, "Get for free").click
 
       fill_in "Username", with: "FooFoo"
       fill_in "Password", with: "foobar"
       fill_in "Password Confirmation", with: "foobar"
 
       click_on "Create my account"
-      
+
       expect(page).to have_content("Welcome to Leksi!")
       expect(page).to have_content("Grow your personal dictionary by")
       expect(page).to have_content("myLeksi")
@@ -43,7 +43,7 @@ feature "guest signs up", %{
 
       visit root_path
 
-      click_on "Get for free"
+      first(:link, "Get for free").click
 
       fill_in "Username", with: ""
       fill_in "Password", with: ""
