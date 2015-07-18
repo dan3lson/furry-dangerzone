@@ -3,31 +3,15 @@
 
 <% if current_user.has_words? %>
   <% @current_user_words.each do |word| %>
-    <div class="word_partial">
-      <div class="pull-right">
-        <% if Rails.env.test? %>
-          <%=
-            link_to "remove",
-            user_word_path(id: UserWord.find_by(
-              user: current_user,
-              word: word).id,
-              word_name: word.name
-            ),
-            method: :delete
-          %>
-        <% else %>
-          <%=
-            link_to image_tag("remove_gray_25.png"),
-            user_word_path(id: UserWord.find_by(
-              user: current_user,
-              word: word).id,
-              word_name: word.name
-            ),
-            method: :delete
-          %>
-        <% end %>
+    <div class="pull-right">
+      <div class="game-one-start-circle">
+        <div class="center">
+          <span class="game-one-circle-start-text">start</span>
+        </div>
       </div>
-      <%= render "shared/word", word: word %>
+    </div>
+    <div class="word_partial">
+      <%= render "words/word", word: word %>
       <hr>
     </div>
   <% end %>

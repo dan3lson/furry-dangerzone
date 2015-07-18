@@ -6,7 +6,7 @@
 <% end %>
 
 <% if current_user.has_sources? %>
-  <div class="basic-red-link">
+  <div class="basic-black-link">
     <% @current_user_sources.each do |source| %>
       <h3 class="tightness">
         <span><%= link_to source.name, source %></span>

@@ -21,7 +21,7 @@
             "aria-controls" => "word_#{index}"
           %>
         <% else %>
-          <%= link_to image_tag("add_gray_25.png"),
+          <%= link_to image_tag("add_black_32.png"),
             { "role" => "button" },
             "data-toggle" => "collapse",
             "href" => "#word_#{index}",
@@ -30,9 +30,8 @@
           %>
         <% end %>
       </div>
-      <%= render "shared/word", word: word %>
+      <%= render "words/word", word: word %>
 
-      <br>
       <br>
 
       <div class="collapse" id="word_<%= index %>">

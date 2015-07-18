@@ -1,0 +1,11 @@
+<h3 class="tightness">
+  <span class="basic-black-link">
+    <% if params[:controller] == "searches" %>
+      <%= word.name %>
+    <% else %>
+      <%= link_to word.name, word %>
+    <% end %>
+  </span>
+</h3>
+
+<%= render "words/word_details", word: word %>

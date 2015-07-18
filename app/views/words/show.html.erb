@@ -1,0 +1,28 @@
+<% provide(:title, @word.name) %>
+<% provide(:header, @word.name) %>
+
+<div class="pull-right">
+  <% if Rails.env.test? %>
+    <%=
+      link_to "remove",
+      user_word_path(id: UserWord.find_by(
+        user: current_user,
+        word: @word).id,
+        word_name: @word.name
+      ),
+      method: :delete
+    %>
+  <% else %>
+    <%=
+      link_to image_tag("remove_gray_25.png"),
+      user_word_path(id: UserWord.find_by(
+        user: current_user,
+        word: @word).id,
+        word_name: @word.name
+      ),
+      method: :delete
+    %>
+  <% end %>
+</div>
+
+<%= render "words/word_details", word: @word %>
