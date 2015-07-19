@@ -11,7 +11,7 @@
       <h3 class="tightness">
         <span><%= link_to source.name, source %></span>
       </h3>
-      <% tagged_words(current_user, source).each do |word| %>
+      <% words_for_a(source).each do |word| %>
         <span class="basic-black-link">
           <%= link_to word.name, word %>
         </span>

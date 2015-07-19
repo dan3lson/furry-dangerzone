@@ -7,6 +7,7 @@ class UserWordsController < ApplicationController
     )
     if @user_word.save
       flash[:success] = "Awesome - you added \'#{@word.name}\'!"
+      WordSource.find_or_create_by(word: @word)
       redirect_to myLeksi_path
     else
       flash[:danger] = "Yikes! - something went wrong! Please try again."

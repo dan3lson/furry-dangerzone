@@ -28,6 +28,6 @@ Rails.logger.info "Creating UserSources"
 Rails.logger.info "==============================================="
 
 User.all.each do |user|
-  user_source = UserSource.create!(user: user)
+  user_source = UserSource.create!(user: user, source: source)
   Rails.logger.info "Source: #{source.name} User: #{user_source.user}"
 end

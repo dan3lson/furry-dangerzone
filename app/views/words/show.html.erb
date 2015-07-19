@@ -11,21 +11,25 @@
   <br>
 
   <div class="leksi-red-border">
-    <p>
-      Do you want to tag this word?
-    </p>
-    <%= form_for :word_source, url: word_source_path, method: :post do |f| %>
-      <%= hidden_field_tag :word_to_be_added, @word.name %>
-
-      <%= f.label :source_id, "Sources", class: "sr-only" %>
-      <%= f.collection_select :source_id,
-          @current_user_sources, :id, :name,
-          { selected: @untagged_source.id }
-      %>
-      <%=
-        f.submit class: "btn btn-danger btn-sm",
-        value: "yes"
-      %>
+    <h4>Current Tags</h4>
+    <% tags_for_a(@word).each do |source| %>
+      <span class="basic-black-link">
+        <%= link_to source.name, source %>
+      </span>
+      <br>
+    <% end %>
+    <% unless unused_tags(@word).first.nil? %>
+      <h4>Add Tag(s)</h4>
+      <%= form_for :word_source, url: word_source_path, method: :post do |f| %>
+        <%= hidden_field_tag :word_name, @word.name %>
+        <%= f.label :source_id, "Sources", class: "sr-only" %>
+        <%=
+          f.collection_select :source_id,
+          unused_tags(@word), :id, :name,
+          prompt: true
+        %>
+        <%= f.submit class: "btn btn-danger btn-sm", value: "add" %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

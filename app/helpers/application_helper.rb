@@ -1,4 +1,4 @@
-module ApplicationHelper  
+module ApplicationHelper
   def full_title(title)
     if title.empty?
       title = "Leksi"
@@ -21,9 +21,19 @@ module ApplicationHelper
     end
   end
 
-  def tagged_words(user, source)
-    source.words.map { |word| word }.keep_if { |word|
-      user.words.include?(word)
+  def words_for_a(tag)
+    tag.words.map { |word| word }.keep_if { |word|
+      current_user.words.include?(word)
     }
+  end
+
+  def tags_for_a(word)
+    word.sources.map { |source| source }.keep_if { |source|
+      current_user.sources.include?(source)
+    }
+  end
+
+  def unused_tags(word)
+    current_user.sources - tags_for_a(word)
   end
 end

@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20150717175149) do
   add_index "sources", ["name"], name: "index_sources_on_name", unique: true, using: :btree
 
   create_table "user_sources", force: :cascade do |t|
-    t.integer  "user_id",                null: false
-    t.integer  "source_id",  default: 1, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",    null: false
+    t.integer  "source_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_words", force: :cascade do |t|
@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 20150717175149) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "word_sources", force: :cascade do |t|
-    t.integer  "word_id",    null: false
-    t.integer  "source_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "word_id",                null: false
+    t.integer  "source_id",  default: 1, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "word_sources", ["source_id"], name: "index_word_sources_on_source_id", using: :btree
