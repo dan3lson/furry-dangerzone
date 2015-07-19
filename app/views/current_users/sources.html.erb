@@ -11,11 +11,20 @@
       <h3 class="tightness">
         <span><%= link_to source.name, source %></span>
       </h3>
+      <% tagged_words(current_user, source).each do |word| %>
+        <span class="basic-black-link">
+          <%= link_to word.name, word %>
+        </span>
+        <br>
+      <% end %>
       <hr>
     <% end %>
   </div>
 <% else %>
   <p class="lead">
     You don't have any sources.
+    <span class="basic-black-link">
+      <%= link_to "Create one", new_source_path %> now!
+    </span>
   </p>
 <% end %>

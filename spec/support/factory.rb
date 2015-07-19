@@ -7,10 +7,10 @@ FactoryGirl.define do
 
   factory :word do
     name "chess"
-    definition "a game for two people, played on a board"
-    example_sentence "Do you play chess?"
-    part_of_speech "noun"
     phonetic_spelling "/tʃes/"
+    definition "a game for two people, played on a board"
+    part_of_speech "noun"
+    example_sentence "Do you play chess?"
   end
 
   factory :user_word do

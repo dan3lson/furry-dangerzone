@@ -12,6 +12,5 @@ class SearchesController < ApplicationController
           Word.define(@query)
       end
     end
-    @untagged_source = Source.find(1)
   end
 end

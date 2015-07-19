@@ -2,27 +2,30 @@
 <% provide(:header, @word.name) %>
 
 <div class="pull-right">
-  <% if Rails.env.test? %>
-    <%=
-      link_to "remove",
-      user_word_path(id: UserWord.find_by(
-        user: current_user,
-        word: @word).id,
-        word_name: @word.name
-      ),
-      method: :delete
-    %>
-  <% else %>
-    <%=
-      link_to image_tag("remove_gray_25.png"),
-      user_word_path(id: UserWord.find_by(
-        user: current_user,
-        word: @word).id,
-        word_name: @word.name
-      ),
-      method: :delete
-    %>
-  <% end %>
+  <%= render "words/remove_word_btn", word: @word %>
 </div>
 
 <%= render "words/word_details", word: @word %>
+
+<% if logged_in? %>
+  <br>
+
+  <div class="leksi-red-border">
+    <p>
+      Do you want to tag this word?
+    </p>
+    <%= form_for :word_source, url: word_source_path, method: :post do |f| %>
+      <%= hidden_field_tag :word_to_be_added, @word.name %>
+
+      <%= f.label :source_id, "Sources", class: "sr-only" %>
+      <%= f.collection_select :source_id,
+          @current_user_sources, :id, :name,
+          { selected: @untagged_source.id }
+      %>
+      <%=
+        f.submit class: "btn btn-danger btn-sm",
+        value: "yes"
+      %>
+    <% end %>
+  </div>
+<% end %>

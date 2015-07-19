@@ -15,14 +15,13 @@ feature "user deletes source", %{
     let(:user_source) { FactoryGirl.create(:user_source) }
     let(:source) { user_source.source }
     let(:user) { user_source.user }
+    let(:word) { FactoryGirl.create(:word) }
     before :each do
       source = Source.find_by(name: "Untagged")
       user.sources << source
     end
 
-    # need to make all associated words
-    # go to Unsourced source
-    scenario "scenario: delete source" do
+    scenario "scenario: delete source without words" do
       log_in_as(user)
 
       visit mySources_path
@@ -36,6 +35,29 @@ feature "user deletes source", %{
       expect(page).not_to have_content("Please try again.")
       expect(Source.count).to eq(2)
       expect(UserSource.count).to eq(1)
+      expect(WordSource.count).to eq(0)
+    end
+
+    scenario "scenario: delete source with words" do
+      user.words << word
+      word_source = WordSource.create(word: word, source: source)
+      untagged_source = Source.find_by(name: "Untagged")
+
+      log_in_as(user)
+
+      visit mySources_path
+
+      click_on source.name
+
+      click_on "remove"
+
+      expect(page).to have_content("\'#{source.name}\' has been removed.")
+      expect(page).not_to have_content("Yikes! Something went wrong.")
+      expect(page).not_to have_content("Please try again.")
+      expect(Source.count).to eq(2)
+      expect(UserSource.count).to eq(1)
+      expect(WordSource.count).to eq(1)
+      expect(untagged_source.words).to eq(1)
     end
   end
 end

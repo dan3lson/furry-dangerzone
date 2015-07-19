@@ -11,6 +11,8 @@ feature "user searches for a word", %{
   # [x] I can visit search_path
   # [x] I see a form to submit my query
   # [x] I can see results
+  # [] I can see a remove button for a
+  #     word I already added
 
   describe "\n user searches for a word -->" do
     let(:user) { FactoryGirl.create(:user) }
@@ -59,6 +61,21 @@ feature "user searches for a word", %{
 
       expect(page).to have_content("Yikes! We couldn\'t find 'foobar'.")
       expect(page).to have_content("Please search again!")
+    end
+
+    scenario "scenario: query should be found and is already added" do
+      user.words << word
+
+      log_in_as(user)
+
+      visit search_path
+
+      fill_in "search", with: "chess"
+
+      click_on "define"
+
+      expect(page).to have_link("remove")
+      expect(page).not_to have_content("add")
     end
   end
 end

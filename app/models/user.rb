@@ -16,11 +16,15 @@ class User < ActiveRecord::Base
     self.words.any?
   end
 
+  def already_has_word?(word)
+    self.words.include?(word)
+  end
+
   def has_sources?
     self.sources.any?
   end
 
   def already_has_source?(source)
-    self.sources.find_by(name: source) ? true : false
+    self.sources.include?(source)
   end
 end

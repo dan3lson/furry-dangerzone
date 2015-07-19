@@ -13,62 +13,23 @@
       <div class="word_partial">
         <% if logged_in? %>
           <div class="pull-right">
-            <% if Rails.env.test? %>
-              <%= link_to "add",
-                { "role" => "button" },
-                "data-toggle" => "collapse",
-                "href" => "#word_#{index}",
-                "aria-expanded" => "false",
-                "aria-controls" => "word_#{index}"
-              %>
-            <% else %>
-              <%= link_to image_tag("add_black_32.png"),
-                { "role" => "button" },
-                "data-toggle" => "collapse",
-                "href" => "#word_#{index}",
-                "aria-expanded" => "false",
-                "aria-controls" => "word_#{index}"
-              %>
+            <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
+              <%= hidden_field_tag :word_to_be_added, word.name %>
+              <% if Rails.env.test? %>
+                <%= f.submit "add" %>
+              <% else %>
+                <% if current_user.already_has_word?(word) %>
+                  <%= render "words/remove_word_btn", word: word %>
+                <% else %>
+                  <%=
+                    image_submit_tag("add_black_32.png", class: "border-none")
+                  %>
+                <% end %>
+              <% end %>
             <% end %>
           </div>
         <% end %>
-
         <%= render "words/word", word: word %>
-
-        <% if logged_in? %>
-          <br>
-
-          <div class="collapse" id="word_<%= index %>">
-            <div class="leksi-red-border">
-              <p>
-                Do you want to tag this word?
-              </p>
-              <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
-                <%= hidden_field_tag :word_to_be_added, word.name %>
-
-                <%= f.label :source_id, "Sources", class: "sr-only" %>
-                <%= f.collection_select :source_id,
-                    current_user.sources, :id, :name,
-                    { selected: @untagged_source.id }
-                %>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <%=
-                      f.submit class: "btn btn-default btn-sm",
-                      value: "no"
-                    %>
-                  </div>
-                  <div class="col-xs-6">
-                    <%=
-                      f.submit class: "btn btn-danger btn-sm",
-                      value: "yes"
-                    %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
         <hr>
       </div>
     <% end %>

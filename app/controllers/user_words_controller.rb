@@ -1,16 +1,11 @@
 class UserWordsController < ApplicationController
   def create
     @word = Word.find_by(name: params[:word_to_be_added])
-    @source = Source.find(params[:user_word][:source_id])
     @user_word = UserWord.new(
       user: current_user,
       word: @word
     )
-    @word_source = WordSource.new(
-      word: @word,
-      source: @source
-    )
-    if @user_word.save && @word_source.save
+    if @user_word.save
       flash[:success] = "Awesome - you added \'#{@word.name}\'!"
       redirect_to myLeksi_path
     else

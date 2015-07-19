@@ -17,8 +17,7 @@ feature "users add the same word", %{
   describe "\n two users add a word -->" do
     let!(:user_word) { FactoryGirl.create(:user_word) }
     let!(:word) { user_word.word }
-    let(:user_source) { FactoryGirl.create(:user_source) }
-    let(:user2) { user_source.user }
+    let(:user2) { FactoryGirl.create(:user) }
 
     scenario "scenario: add word" do
       log_in_as(user2)
@@ -29,12 +28,6 @@ feature "users add the same word", %{
 
       click_on "define"
 
-      click_on "add"
-
-      select user_source.source.name, from: "Sources"
-
-      click_on "yes"
-
       expect(page).to have_content("Awesome - you added \'#{word.name}\'!")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(word.name)
@@ -42,8 +35,8 @@ feature "users add the same word", %{
       expect(page).to have_content(word.part_of_speech)
       expect(page).to have_content(word.definition)
       expect(page).to have_content(word.example_sentence)
+      expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(2)
-      expect(WordSource.count).to eq(1)
     end
   end
 end
