@@ -9,9 +9,8 @@
 
 <% if logged_in? %>
   <br>
-
   <div class="leksi-red-border">
-    <h4>Current Tags</h4>
+    <h4>myTags</h4>
     <% tags_for_a(@word).each do |source| %>
       <span class="basic-black-link">
         <%= link_to source.name, source %>

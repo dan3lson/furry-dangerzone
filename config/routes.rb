@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
   get "myLeksi" => "current_users#words"
-  get "mySources" => "current_users#sources"
+  get "myTags" => "current_users#sources"
   get "menu" => "static_pages#menu"
   get "search" => "searches#new"
   get "signup" => "users#new"

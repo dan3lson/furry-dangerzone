@@ -24,7 +24,7 @@ feature "user deletes source", %{
     scenario "scenario: delete source without words" do
       log_in_as(user)
 
-      visit mySources_path
+      visit myTags_path
 
       click_on source.name
 
@@ -45,7 +45,7 @@ feature "user deletes source", %{
 
       log_in_as(user)
 
-      visit mySources_path
+      visit myTags_path
 
       click_on source.name
 

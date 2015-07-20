@@ -5,10 +5,10 @@ class UserSourcesController < ApplicationController
 
     if @user_source.destroy
       flash[:success] = "\'#{@source.name}\' has been removed."
-      redirect_to mySources_path
+      redirect_to myTags_path
     else
       flash[:danger] = "Yikes! - something went wrong! Please try again."
-      redirect_to mySources_path
+      redirect_to myTags_path
     end
   end
 end

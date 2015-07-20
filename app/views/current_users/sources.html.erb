@@ -9,14 +9,13 @@
   <div class="basic-black-link">
     <% @current_user_sources.each do |source| %>
       <h3 class="tightness">
-        <span><%= link_to source.name, source %></span>
-      </h3>
-      <% words_for_a(source).each do |word| %>
-        <span class="basic-black-link">
-          <%= link_to word.name, word %>
+        <span>
+          <%= link_to source.name, source %>
+          <span class="badge">
+            <%= words_for_a(source).count %>
+          </span>
         </span>
-        <br>
-      <% end %>
+      </h3>
       <hr>
     <% end %>
   </div>

@@ -20,7 +20,7 @@ feature "users add the same source", %{
     scenario "scenario: add word" do
       log_in_as(user)
 
-      visit mySources_path
+      visit myTags_path
 
       click_on "new source"
 
@@ -34,7 +34,7 @@ feature "users add the same source", %{
 
       log_in_as(user2)
 
-      visit mySources_path
+      visit myTags_path
 
       click_on "new source"
 

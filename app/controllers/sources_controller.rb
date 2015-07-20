@@ -26,7 +26,7 @@ class SourcesController < ApplicationController
       )
       if @source.save && @user_source.save
         flash[:success] = "You successfully created a new source!"
-        redirect_to mySources_path
+        redirect_to myTags_path
       else
         render :new
       end

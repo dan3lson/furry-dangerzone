@@ -36,7 +36,7 @@ feature "user creates a source", %{
     scenario "scenario: with invalid data" do
       log_in_as(user)
 
-      visit mySources_path
+      visit myTags_path
 
       click_on "new source"
 

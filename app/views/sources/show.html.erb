@@ -1,10 +1,19 @@
 <% provide(:title, @source.name) %>
 <% provide(:header, @source.name) %>
 
-<p class="lead">
-  More info soon.
+<p>
+  Tagged Words:
 </p>
 
+<% words_for_a(@source).each do |word| %>
+  <span class="basic-black-link">
+    <%= link_to word.name, word %>
+  </span>
+  <br>
+<% end %>
+
+<br>
+<br>
 <% unless @source.name == "Untagged" %>
   <p>
     <%= link_to "edit", edit_source_path(@source), class: "btn btn-default form-control" %>

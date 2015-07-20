@@ -1,10 +1,14 @@
 <% provide(:title, @user.username) %>
 <% provide(:header, @user.username) %>
 
-<p class="lead">
+<p>
   Joined <%= time_ago_in_words(@user.created_at) %> ago.
 </p>
 
-<p class="lead">
-  Username: <%= @user.username %> 
+<p>
+  # of Words: <%= @user.words.count %>
+</p>
+
+<p>
+  # of Tags: <%= @user.sources.count %>
 </p>

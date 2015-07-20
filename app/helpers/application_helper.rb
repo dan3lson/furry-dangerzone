@@ -36,4 +36,8 @@ module ApplicationHelper
   def unused_tags(word)
     current_user.sources - tags_for_a(word)
   end
+
+  # def has_multiple_tags?(word)
+  #   tags_for_a(word).count > 1
+  # end
 end
