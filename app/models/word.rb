@@ -18,13 +18,13 @@ class Word < ActiveRecord::Base
     if name
       word = find_by(name: name)
       if word.nil?
-        macmillan_word = MacmillanDictionary.define(word)
+        macmillan_word = MacmillanDictionary.define(name)
         if macmillan_word.nil?
           "Yikes! We couldn\'t find '#{name}'. Please search again!"
         else
           word =
             Word.find_or_create_by(
-              name: @query,
+              name: name,
               phonetic_spelling: macmillan_word.phonetic_spelling,
               part_of_speech: macmillan_word.part_of_speech,
               definition: macmillan_word.definition,
@@ -44,5 +44,15 @@ class Word < ActiveRecord::Base
 
   def self.random
     all.sample.name
+  end
+
+  def self.untagged_for(user)
+    user.words.each do |word|
+      UserWordSource.find_by(
+        user: user,
+        word_source: WordSource.find_by(
+          word: self)
+        ).nil?
+    end
   end
 end

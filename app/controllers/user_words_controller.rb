@@ -7,10 +7,9 @@ class UserWordsController < ApplicationController
     )
     if @user_word.save
       flash[:success] = "Awesome - you added \'#{@word.name}\'!"
-      WordSource.find_or_create_by(word: @word)
       redirect_to myLeksi_path
     else
-      flash[:danger] = "Yikes! - something went wrong! Please try again."
+      flash[:danger] = "Yikes! - adding that word didn\'t work. Please try again."
       redirect_to search_path
     end
   end
@@ -22,7 +21,8 @@ class UserWordsController < ApplicationController
       flash[:success] = "\'#{@word.name}\' has been removed."
       redirect_to myLeksi_path
     else
-      flash[:danger] = "Yikes! - something went wrong! Please try again."
+      msg = "Yikes! - removing a word didn\'t work! Please try again."
+      flash[:danger] = msg
       redirect_to words_path
     end
   end

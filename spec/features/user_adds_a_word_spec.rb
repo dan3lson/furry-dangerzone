@@ -15,8 +15,13 @@ feature "user adds a word", %{
   # [x] I see a message of success
 
   describe "\n user adds a word -->" do
-    let(:user) { user_source.user }
+    let(:user) { FactoryGirl.create(:user) }
     let!(:random_word_placeholder) { FactoryGirl.create(:word) }
+
+    # before :each do
+    #   source = Source.find_by(name: "Untagged")
+    #   user.sources << source
+    # end
 
     scenario "scenario: valid process" do
       log_in_as(user)

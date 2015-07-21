@@ -5,6 +5,10 @@
   <%= link_to "new source", new_source_path %>
 <% end %>
 
+<% unless current_user.has_sources? %>
+  <%= render "current_users/no_sources_guide" %>
+<% end %>
+
 <% if current_user.has_sources? %>
   <div class="basic-black-link">
     <% @current_user_sources.each do |source| %>
@@ -19,11 +23,19 @@
       <hr>
     <% end %>
   </div>
-<% else %>
-  <p class="lead">
-    You don't have any sources.
-    <span class="basic-black-link">
-      <%= link_to "Create one", new_source_path %> now!
+<% end %>
+
+<h3 class="tightness">
+  <span>
+    Untagged
+    <span class="badge">
+      <%= Word.untagged_for(current_user).count %>
     </span>
-  </p>
+  </span>
+</h3>
+<% Word.untagged_for(current_user).each do |word| %>
+  <span class="basic-black-link">
+    <%= link_to word.name, word %>
+  </span>
+  <br>
 <% end %>

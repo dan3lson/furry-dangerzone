@@ -31,4 +31,9 @@ FactoryGirl.define do
     word
     source
   end
+
+  factory :user_word_source do
+    user
+    word_source
+  end
 end

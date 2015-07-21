@@ -10,16 +10,25 @@
 <% if logged_in? %>
   <br>
   <div class="leksi-red-border">
-    <h4>myTags</h4>
-    <% tags_for_a(@word).each do |source| %>
-      <span class="basic-black-link">
-        <%= link_to source.name, source %>
-      </span>
-      <br>
+    <% unless tags_for_a(@word).include?(@word) %>
+      <div class="alert alert-warning">
+          This word is Untagged.
+      </div>
+    <% else %>
+      <h4>myTags</h4>
+      <% tags_for_a(@word).each do |source| %>
+        <span class="basic-black-link">
+          <%= link_to source.name, source %>
+        </span>
+        <br>
+      <% end %>
     <% end %>
     <% unless unused_tags(@word).first.nil? %>
       <h4>Add Tag(s)</h4>
-      <%= form_for :word_source, url: word_source_path, method: :post do |f| %>
+      <%= form_for :user_word_source,
+        url: user_word_source_path,
+        method: :post do |f|
+      %>
         <%= hidden_field_tag :word_name, @word.name %>
         <%= f.label :source_id, "Sources", class: "sr-only" %>
         <%=
@@ -27,7 +36,7 @@
           unused_tags(@word), :id, :name,
           prompt: true
         %>
-        <%= f.submit class: "btn btn-danger btn-sm", value: "add" %>
+        <%= f.submit class: "btn btn-default btn-sm", value: "add" %>
       <% end %>
     <% end %>
   </div>

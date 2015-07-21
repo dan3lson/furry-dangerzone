@@ -12,13 +12,15 @@ feature "user deletes source", %{
   # [x] I see a message of deletion-success
 
   describe "\n user deletes source -->" do
+
     let(:user_source) { FactoryGirl.create(:user_source) }
     let(:source) { user_source.source }
     let(:user) { user_source.user }
     let(:word) { FactoryGirl.create(:word) }
+
     before :each do
-      source = Source.find_by(name: "Untagged")
-      user.sources << source
+      untagged_source = Source.first
+      user.sources <<  untagged_source
     end
 
     scenario "scenario: delete source without words" do
@@ -41,7 +43,7 @@ feature "user deletes source", %{
     scenario "scenario: delete source with words" do
       user.words << word
       word_source = WordSource.create(word: word, source: source)
-      untagged_source = Source.find_by(name: "Untagged")
+      untagged_source = Source.first
 
       log_in_as(user)
 
@@ -57,7 +59,7 @@ feature "user deletes source", %{
       expect(Source.count).to eq(2)
       expect(UserSource.count).to eq(1)
       expect(WordSource.count).to eq(1)
-      expect(untagged_source.words).to eq(1)
+      expect(untagged_source.words.count).to eq(1)
     end
   end
 end

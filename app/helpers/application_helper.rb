@@ -22,6 +22,7 @@ module ApplicationHelper
   end
 
   def words_for_a(tag)
+
     tag.words.map { |word| word }.keep_if { |word|
       current_user.words.include?(word)
     }
@@ -36,8 +37,4 @@ module ApplicationHelper
   def unused_tags(word)
     current_user.sources - tags_for_a(word)
   end
-
-  # def has_multiple_tags?(word)
-  #   tags_for_a(word).count > 1
-  # end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717175149) do
+ActiveRecord::Schema.define(version: 20150720193429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 20150717175149) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "user_word_sources", force: :cascade do |t|
+    t.integer  "word_source_id", null: false
+    t.integer  "user_id",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "user_word_sources", ["user_id", "word_source_id"], name: "index_user_word_sources_on_user_id_and_word_source_id", unique: true, using: :btree
+  add_index "user_word_sources", ["user_id"], name: "index_user_word_sources_on_user_id", using: :btree
+  add_index "user_word_sources", ["word_source_id"], name: "index_user_word_sources_on_word_source_id", using: :btree
 
   create_table "user_words", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -52,10 +63,10 @@ ActiveRecord::Schema.define(version: 20150717175149) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "word_sources", force: :cascade do |t|
-    t.integer  "word_id",                null: false
-    t.integer  "source_id",  default: 1, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "word_id",    null: false
+    t.integer  "source_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "word_sources", ["source_id"], name: "index_word_sources_on_source_id", using: :btree

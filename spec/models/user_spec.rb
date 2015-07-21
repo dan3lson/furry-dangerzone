@@ -55,6 +55,7 @@ RSpec.describe User, type: :model do
       user.sources << source
       expect(user.already_has_source?(source.name)).to eq(true)
     end
+  end
 
   describe "#already_has_word?" do
     it "returns false" do

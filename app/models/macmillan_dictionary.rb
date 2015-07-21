@@ -32,7 +32,6 @@ class MacmillanDictionary
       definition = xml_doc.xpath("/descendant::DEFINITION[1]").text
       part_of_speech = xml_doc.xpath("/descendant::PART-OF-SPEECH[1]").text
       example_sentence = xml_doc.xpath("/descendant::EXAMPLE[1]").text
-
       self.new(
         phonetic_spelling,
         definition,

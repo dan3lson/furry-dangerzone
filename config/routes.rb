@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   resources :sources, except: [:destroy]
   resource :user_source, only: [:create, :edit, :destroy]
   resource :word_source, only: [:create, :destroy]
+  resource :user_word_source, only: [:create, :edit, :destroy]
 
 end

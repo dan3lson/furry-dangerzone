@@ -3,13 +3,13 @@
 
 <% if current_user.has_words? %>
   <% @current_user_words.each do |word| %>
-    <!-- <div class="pull-right">
+    <div class="pull-right">
       <div class="game-one-start-circle">
         <div class="center">
           <span class="game-one-circle-start-text">start</span>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="word_partial">
       <%= render "words/word", word: word %>
       <hr>

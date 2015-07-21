@@ -1,13 +1,11 @@
-<div class="center well well-sm">
-  <div class="row basic-red-link">
-    <div align="center">
-      <div class="basic-red-link">
-        <%= image_tag("search_black_filled_32.png", alt: "Define", class: "img-responsive") %>
-      </div>
-      <p>
-        Grow your personal dictionary by
-        <%= link_to "defining and adding a word", search_path %>!
-      </p>
+<div class="alert alert-warning center">
+  <div align="center">
+    <div>
+      <%= image_tag("search_black_filled_32.png", alt: "Define", class: "img-responsive") %>
     </div>
+    <p class="basic-black-link">
+      You don't have any words;
+      <%= link_to "define and add one", search_path %> now!
+    </p>
   </div>
 </div>
