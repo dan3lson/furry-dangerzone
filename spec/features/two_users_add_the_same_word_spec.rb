@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "users add the same word", %{
+feature "two users add the same word", %{
 
   As a user,
   I want to add a word to myLeksi
@@ -28,6 +28,8 @@ feature "users add the same word", %{
 
       click_on "define"
 
+      click_on "add"
+
       expect(page).to have_content("Awesome - you added \'#{word.name}\'!")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(word.name)
@@ -37,6 +39,9 @@ feature "users add the same word", %{
       expect(page).to have_content(word.example_sentence)
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(2)
+      expect(UserSource.count).to eq(0)
+      expect(WordSource.count).to eq(0)
+      expect(UserWordSource.count).to eq(0)
     end
   end
 end

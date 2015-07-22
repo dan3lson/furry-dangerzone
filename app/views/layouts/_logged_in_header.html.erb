@@ -38,6 +38,8 @@
 					%>
 				<% elsif params[:controller] == "words" && params[:action] == "show" %>
 					<%= render "words/remove_word_btn", word: @word %>
+				<% elsif params[:controller] == "sources" && params[:action] == "show" %>
+					<%= render "sources/remove_tag_btn", tag: @source %>
 				<% end %>
 			</span>
 		</h1>

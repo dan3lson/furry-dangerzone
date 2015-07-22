@@ -26,21 +26,17 @@ feature "guest signs up", %{
       click_on "Create my account"
 
       expect(page).to have_content("Welcome to Leksi!")
-      expect(page).to have_content("Grow your personal dictionary by")
+      expect(page).to have_content("You don\'t have any words")
       expect(page).to have_content("myLeksi")
       expect(page).to have_link("define")
       expect(page).to have_link("myTags")
       expect(page).to have_link("menu")
       expect(User.count).to eq(1)
-      expect(UserSource.count).to eq(1)
-      expect(Source.count).to eq(1)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end
 
     scenario "scenario with invalid data" do
-      before_count = User.count
-
       visit root_path
 
       first(:link, "Get for free").click
@@ -51,12 +47,10 @@ feature "guest signs up", %{
 
       click_on "Create my account"
 
-      after_count = User.count
-
       expect(page).to_not have_content("Welcome to Leksi!")
       expect(page).to have_content("errors")
       expect(page).to have_content("fix")
-      expect(before_count).to eq(after_count)
+      expect(User.count).to eq(0)
     end
   end
 end

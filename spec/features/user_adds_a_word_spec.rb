@@ -16,12 +16,10 @@ feature "user adds a word", %{
 
   describe "\n user adds a word -->" do
     let(:user) { FactoryGirl.create(:user) }
-    let!(:random_word_placeholder) { FactoryGirl.create(:word) }
 
-    # before :each do
-    #   source = Source.find_by(name: "Untagged")
-    #   user.sources << source
-    # end
+    before :each do
+      FactoryGirl.create(:word)
+    end
 
     scenario "scenario: valid process" do
       log_in_as(user)

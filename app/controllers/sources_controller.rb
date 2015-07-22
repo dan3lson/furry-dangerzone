@@ -25,7 +25,7 @@ class SourcesController < ApplicationController
         source: @source
       )
       if @source.save && @user_source.save
-        flash[:success] = "You successfully created a new source!"
+        flash[:success] = "Awesome - you added \'#{@source.name}\'!"
         redirect_to myTags_path
       else
         render :new

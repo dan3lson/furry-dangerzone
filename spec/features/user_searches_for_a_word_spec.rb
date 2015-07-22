@@ -15,27 +15,26 @@ feature "user searches for a word", %{
   #     word I already added
 
   describe "\n user searches for a word -->" do
-    let(:user) { FactoryGirl.create(:user) }
-    let!(:random_word_placeholder) { FactoryGirl.create(:word) }
+    let!(:user) { FactoryGirl.create(:user) }
+    let!(:word) { FactoryGirl.create(:word) }
 
     scenario "scenario: query is blank" do
       log_in_as(user)
 
       visit search_path
 
-      fill_in "search", with: random_word_placeholder.name
+      fill_in "search", with: word.name
 
       click_on "define"
 
-      expect(page).to have_content(random_word_placeholder.name)
-      expect(page).to have_content(random_word_placeholder.phonetic_spelling)
-      expect(page).to have_content(random_word_placeholder.definition)
-      expect(page).to have_content(random_word_placeholder.part_of_speech)
-      expect(page).to have_content(random_word_placeholder.example_sentence)
+      expect(page).to have_content(word.name)
+      expect(page).to have_content(word.phonetic_spelling)
+      expect(page).to have_content(word.definition)
+      expect(page).to have_content(word.part_of_speech)
+      expect(page).to have_content(word.example_sentence)
     end
 
-    scenario "scenario: query should be found",
-    pending: "Macmillan API Key needs to be reactivated" do
+    scenario "scenario: query should be found" do
       log_in_as(user)
 
       visit search_path
@@ -63,8 +62,8 @@ feature "user searches for a word", %{
       expect(page).to have_content("Please search again!")
     end
 
-    scenario "scenario: query should be found and is already added" do
-      user.words << word
+    skip "scenario: query should be found and is already added" do
+      UserWord.create(user: user, word: word)
 
       log_in_as(user)
 
@@ -73,7 +72,7 @@ feature "user searches for a word", %{
       fill_in "search", with: "chess"
 
       click_on "define"
-
+      save_and_open_page
       expect(page).to have_link("remove")
       expect(page).not_to have_content("add")
     end

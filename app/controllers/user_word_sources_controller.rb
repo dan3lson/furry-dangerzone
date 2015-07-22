@@ -38,16 +38,17 @@ class UserWordSourcesController < ApplicationController
   end
 
   def destroy
-    @word = Word.find(params[:id])
-    @source = Source.find(params[:source_id])
-    @word_source = WordSource.find_by(word: @word, source: @source)
-    @user_word_source = UserWordSource.find_by(
-      user: current_user,
-      word_source: @word_source,
-    )
+    @source = Source.find_by(name: params[:source_name])
+    @source_has_other_users = @source.users.count > 1
+    @user_source = UserSource.find_by(user: current_user, source: @source)
+    @user_word_sources = current_user.user_word_sources
+    @user_word_sources.each do |user_word_source|
+      user_word_source.destroy
+    end
 
-    if @user_word_source.destroy
-      flash[:success] = "You removed #{@source.name} from \'#{@word.name}\'."
+    if @user_source.destroy && @user_word_sources.count == 0
+      flash[:success] = "You removed \'#{@source.name}\'."
+      @source.destroy unless @source_has_other_users
       redirect_to myTags_path
     else
       msg = "Yikes! - removing \'#{@source.name}\' didn\'t work. "

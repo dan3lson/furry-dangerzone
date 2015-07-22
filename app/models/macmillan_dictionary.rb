@@ -2,8 +2,10 @@ class MacmillanDictionary
   include HTTParty
   include Nokogiri
 
-  attr_accessor :phonetic_spelling, :definition
-  attr_accessor :part_of_speech, :example_sentence
+  attr_accessor :phonetic_spelling
+  attr_accessor :definition
+  attr_accessor :part_of_speech
+  attr_accessor :example_sentence
 
   API_URL = "https://www.macmillandictionary.com/api/v1/"
 
@@ -20,6 +22,7 @@ class MacmillanDictionary
   end
 
   def self.define(word)
+    word = word.split(" ").join("-") if word.include?(" ")
     response = HTTParty.get(
       "#{API_URL}dictionaries/american/search/first/?q=#{word}&format=xml",
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }

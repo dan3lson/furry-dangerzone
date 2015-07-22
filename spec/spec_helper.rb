@@ -99,13 +99,3 @@ def log_in_as(user)
 
   click_on "Log in"
 end
-
-def create_source
-  visit myTags_path
-
-  click_on "new source"
-
-  fill_in "Name", with: "foo"
-
-  click_on "Create source"
-end

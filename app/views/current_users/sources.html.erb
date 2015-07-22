@@ -25,18 +25,20 @@
   </div>
 <% end %>
 
-<h3 class="tightness">
-  <span>
-    Untagged
-    <span class="badge">
-      <%= Word.untagged_for(current_user).count %>
+<% if current_user.has_words? %>
+  <h3 class="tightness">
+    <span>
+      Untagged
+      <span class="badge">
+        <%= Word.untagged_for(current_user).count %>
+      </span>
     </span>
-  </span>
-</h3>
+  </h3>
 
-<% Word.untagged_for(current_user).each do |word| %>
-  <span class="basic-black-link">
-    <%= link_to word.name, word %>
-  </span>
-  <br>
+  <% Word.untagged_for(current_user).each do |word| %>
+    <span class="basic-black-link">
+      <%= link_to word.name, word %>
+    </span>
+    <br>
+  <% end %>
 <% end %>

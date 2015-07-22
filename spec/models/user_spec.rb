@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryGirl.create(:user) }
+  let!(:user) { FactoryGirl.create(:user) }
   let(:word) { FactoryGirl.create(:word) }
-  let(:source) { FactoryGirl.create(:source) }
+  let!(:source) { FactoryGirl.create(:source) }
 
   describe "associatons" do
     it { should have_many(:user_words) }
@@ -53,7 +53,7 @@ RSpec.describe User, type: :model do
     end
     it "returns true" do
       user.sources << source
-      expect(user.already_has_source?(source.name)).to eq(true)
+      expect(user.already_has_source?(source)).to eq(true)
     end
   end
 

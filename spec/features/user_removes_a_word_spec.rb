@@ -11,6 +11,7 @@ feature "user removes a word", %{
   # [x] I can see a "remove" button for the
   #     word I want
   # [x] myLeksi doesn't show my removed word
+  # [x] That word is no longer on my tags page
   # [x] I see a message of removal-success
 
   describe "\n user removes a word -->" do
@@ -30,6 +31,7 @@ feature "user removes a word", %{
       expect(page).not_to have_content("foo-bar")
       expect(page).not_to have_content("lorem ipsum")
       expect(page).not_to have_content("noun")
+      expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(0)
       expect(WordSource.count).to eq(0)
       expect(UserWordSource.count).to eq(0)
@@ -54,6 +56,7 @@ feature "user removes a word", %{
       expect(page).not_to have_content("foo-bar")
       expect(page).not_to have_content("lorem ipsum")
       expect(page).not_to have_content("noun")
+      expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(0)
       expect(WordSource.count).to eq(0)
       expect(UserWordSource.count).to eq(0)

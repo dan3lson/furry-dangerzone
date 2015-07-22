@@ -12,7 +12,6 @@ RSpec.describe Word, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:definition) }
     it { should validate_presence_of(:part_of_speech) }
-    it { should validate_presence_of(:phonetic_spelling) }
     subject {
       Word.new(
         part_of_speech: "part_of_speech",

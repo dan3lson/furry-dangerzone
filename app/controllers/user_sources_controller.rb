@@ -2,15 +2,12 @@ class UserSourcesController < ApplicationController
   def destroy
     @user_source = UserSource.find(params[:id])
     @source = @user_source.source
-    # @user_word_source = UserWordSource.find_by(
-    #   user: current_user,
-    #   word_source: WordSource.find_by(
-    #
-    #   )
-    # )
-    # binding.pry
+    @source_has_other_users = @source.users.count > 1
+    @source_has_other_words = @source.words.count > 1
+
     if @user_source.destroy
       flash[:success] = "\'#{@source.name}\' has been removed."
+      @source.destroy unless @source_has_other_users || @source_has_other_words
       redirect_to myTags_path
     else
       flash[:danger] = "Yikes! - something went wrong! Please try again."

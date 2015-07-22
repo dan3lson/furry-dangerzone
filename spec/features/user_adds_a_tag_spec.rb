@@ -1,33 +1,34 @@
 require 'rails_helper'
 
-feature "user creates a source", %{
+feature "user adds a tag", %{
 
   As a user,
-  I want to create a source.
+  I want to add a tag to myTags.
 } do
 
   # Acceptance Criteria
   #
-  # [x] I can see a form to add a source
-  # [x] sources_path shows my newly added source
+  # [x] I can see a form to add a tag
+  # [x] sources_path shows my newly added tag
   # [x] I see a message of success
 
-  describe "\n user creates a source -->" do
+  describe "\n user adds a tag -->" do
     let(:user) { FactoryGirl.create(:user) }
-    before :each do
-      source = Source.find_by(name: "Untagged")
-      user.sources << source
-    end
-
 
     scenario "scenario: with valid data" do
       log_in_as(user)
 
-      create_source
+      visit myTags_path
 
-      expect(page).to have_content("You successfully created a new source!")
-      expect(UserSource.count).to eq(2)
-      expect(Source.count).to eq(2)
+      click_on "new source"
+
+      fill_in "Name", with: "foo"
+
+      click_on "Create source"
+
+      expect(page).to have_content("Awesome - you added \'foo\'!")
+      expect(UserSource.count).to eq(1)
+      expect(Source.count).to eq(1)
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("errors")
       expect(page).not_to have_content("fix")
@@ -47,9 +48,9 @@ feature "user creates a source", %{
       expect(page).to have_content("Yikes!")
       expect(page).to have_content("error")
       expect(page).to have_content("fix")
-      expect(UserSource.count).to eq(1)
-      expect(Source.count).to eq(1)
-      expect(page).not_to have_content("You successfully created a new source!")
+      expect(UserSource.count).to eq(0)
+      expect(Source.count).to eq(0)
+      expect(page).not_to have_content("Awesome - you added \'foo\'!")
     end
   end
 end

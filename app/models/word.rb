@@ -7,7 +7,6 @@ class Word < ActiveRecord::Base
   before_create { self.name = name.downcase }
 
   validates :name, presence: true, uniqueness: true
-  validates :phonetic_spelling, presence: true
   validates :definition, presence: true
   validates :part_of_speech, presence: true
 
