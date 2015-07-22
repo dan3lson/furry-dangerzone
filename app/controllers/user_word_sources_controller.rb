@@ -12,20 +12,27 @@ class UserWordSourcesController < ApplicationController
         word: @word,
         source: @source
       ).first_or_initialize
+
       if @word_source.save
         @user_word_source = UserWordSource.new(
           user: current_user,
           word_source: @word_source
         )
+
         if @user_word_source.save
           msg = "Awesome - you tagged \'#{@source.name}\' to \'#{@word.name}\'!"
           flash[:success] = msg
           redirect_to @word
         else
           msg =  "Yikes! - adding a tag didn\'t work! Please try again."
-          flash[:danger] = msg 
+          flash[:danger] = msg
           redirect_to @word
         end
+
+      else
+        msg =  "Yikes! - adding a word source didn\'t work! Please try again."
+        flash[:danger] = msg
+        redirect_to @word
       end
     end
   end

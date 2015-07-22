@@ -16,7 +16,7 @@
         <span>
           <%= link_to source.name, source %>
           <span class="badge">
-            <%= words_for_a(source).count %>
+            <%= words_for(current_user, source).count %>
           </span>
         </span>
       </h3>
@@ -33,6 +33,7 @@
     </span>
   </span>
 </h3>
+
 <% Word.untagged_for(current_user).each do |word| %>
   <span class="basic-black-link">
     <%= link_to word.name, word %>

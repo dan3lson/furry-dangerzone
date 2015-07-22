@@ -10,7 +10,6 @@ class Word < ActiveRecord::Base
   validates :phonetic_spelling, presence: true
   validates :definition, presence: true
   validates :part_of_speech, presence: true
-  validates :example_sentence, presence: true
 
   default_scope -> { order('words.name ASC') }
 
@@ -47,12 +46,8 @@ class Word < ActiveRecord::Base
   end
 
   def self.untagged_for(user)
-    user.words.each do |word|
-      UserWordSource.find_by(
-        user: user,
-        word_source: WordSource.find_by(
-          word: self)
-        ).nil?
-    end
+    words_with_sources = user.word_sources.pluck(
+      :word_id).map { |word_id| Word.find(word_id) }
+    user.words - words_with_sources
   end
 end

@@ -7,24 +7,28 @@
 						link_to image_tag("Leksi.png", class: "img-responsive"), root_path
 					%>
 				<% end %>
-				<%
-					if params[:controller] == "sources" && params[:action] == "new" ||
-						 params[:action] == "show"
-
-				%>
-					<%= link_to image_tag("back_black_32.png"), :back %>
+				<% if logged_in? %>
+					<%
+						if params[:controller] == "sources" && params[:action] == "new" ||
+							 params[:action] == "show"
+					%>
+						<%= link_to image_tag("back_black_32.png"), :back %>
+					<% end %>
 				<% end %>
 			</span>
+
 			<%= full_header(yield(:header)) %>
+
 			<span class="pull-right">
 				<% if !logged_in? && params[:action] == "home" %>
-				<p class="remove-line-height">
-					<%=
-						link_to "Get for free", signup_path,
-						class: "btn btn-default apple-blue-button form-control"
-					%>
-				</p>
+					<p class="remove-line-height">
+						<%=
+							link_to "Get for free", signup_path,
+							class: "btn btn-default apple-blue-button form-control"
+						%>
+					</p>
 				<% end %>
+
 				<% if params[:action] == "sources" %>
 					<%= link_to image_tag("add_black_32.png"), new_source_path %>
 				<% elsif params[:action] == "menu" %>
@@ -32,6 +36,8 @@
 						link_to image_tag("signout_black_32.png"),
 						logout_path, method: :delete
 					%>
+				<% elsif params[:controller] == "words" && params[:action] == "show" %>
+					<%= render "words/remove_word_btn", word: @word %>
 				<% end %>
 			</span>
 		</h1>

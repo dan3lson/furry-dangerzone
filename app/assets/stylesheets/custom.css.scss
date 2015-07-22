@@ -264,6 +264,11 @@ input {
 	border: none;
 }
 
+.box-shadow-border {
+	box-shadow: 1px 1px 3px #888;
+	padding: 10px;
+}
+
 .btn-danger {
 	background: $white;
 	border-color: $leksi-red;
@@ -297,11 +302,6 @@ input {
 
 .leksi-red {
 	color: $leksi-red;
-}
-
-.leksi-red-border {
-	box-shadow: 1px 1px 3px #888;
-	padding: 10px;
 }
 
 .remove-line-height {

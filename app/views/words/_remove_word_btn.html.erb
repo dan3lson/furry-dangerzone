@@ -13,9 +13,7 @@
     link_to image_tag("remove_black_32.png"),
     user_word_path(id: UserWord.find_by(
       user: current_user,
-      word: word).id,
-      word_name: word.name
-    ),
+      word: word).id),
     method: :delete
   %>
 <% end %>

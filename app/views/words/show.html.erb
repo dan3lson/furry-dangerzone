@@ -1,21 +1,19 @@
 <% provide(:title, @word.name) %>
 <% provide(:header, @word.name) %>
 
-<div class="pull-right">
-  <%= render "words/remove_word_btn", word: @word %>
-</div>
-
 <%= render "words/word_details", word: @word %>
 
 <% if logged_in? %>
   <br>
-  <div class="leksi-red-border">
-    <% unless tags_for_a(@word).include?(@word) %>
+  <div class="box-shadow-border">
+
+    <% if Word.untagged_for(current_user).include?(@word) %>
       <div class="alert alert-warning">
           This word is Untagged.
       </div>
     <% else %>
       <h4>myTags</h4>
+      <br>
       <% tags_for_a(@word).each do |source| %>
         <span class="basic-black-link">
           <%= link_to source.name, source %>
@@ -23,6 +21,7 @@
         <br>
       <% end %>
     <% end %>
+
     <% unless unused_tags(@word).first.nil? %>
       <h4>Add Tag(s)</h4>
       <%= form_for :user_word_source,

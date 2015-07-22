@@ -18,7 +18,7 @@ feature "user removes a word", %{
     let(:user) { user_word.user }
     let!(:word) { user_word.word }
 
-    scenario "scenario: remove word" do
+    scenario "scenario: remove word that is untagged" do
       log_in_as(user)
 
       click_on word.name
@@ -32,6 +32,31 @@ feature "user removes a word", %{
       expect(page).not_to have_content("noun")
       expect(UserWord.count).to eq(0)
       expect(WordSource.count).to eq(0)
+      expect(UserWordSource.count).to eq(0)
+    end
+
+    scenario "scenario: remove word that is tagged" do
+      user_source = FactoryGirl.create(:user_source, user: user)
+      source = user_source.source
+      word_source = WordSource.create(word: word, source: source)
+      user_word_source = UserWordSource.create(
+        user: user, word_source: word_source
+      )
+
+      log_in_as(user)
+
+      click_on word.name
+
+      click_on "remove"
+
+      expect(page).to have_content("has been removed.")
+      expect(page).not_to have_content("Yikes!")
+      expect(page).not_to have_content("foo-bar")
+      expect(page).not_to have_content("lorem ipsum")
+      expect(page).not_to have_content("noun")
+      expect(UserWord.count).to eq(0)
+      expect(WordSource.count).to eq(0)
+      expect(UserWordSource.count).to eq(0)
     end
   end
 end

@@ -11,7 +11,6 @@ RSpec.describe Word, type: :model do
   describe "validations" do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:definition) }
-    it { should validate_presence_of(:example_sentence) }
     it { should validate_presence_of(:part_of_speech) }
     it { should validate_presence_of(:phonetic_spelling) }
     subject {

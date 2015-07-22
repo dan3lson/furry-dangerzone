@@ -5,9 +5,9 @@
   Tagged Words:
 </p>
 
-<% words_for_a(@source).each do |word| %>
+<% words_for(current_user, @source).each do |word| %>
   <span class="basic-black-link">
-    <%= link_to word.name, word %>
+    <%= link_to word, Word.find_by(name: word) %>
   </span>
   <br>
 <% end %>
