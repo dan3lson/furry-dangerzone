@@ -57,4 +57,4 @@ group :production do
   gem 'unicorn', '4.8.3'
 end
 
-# ruby '2.0.0'
+ruby '2.0.0'
