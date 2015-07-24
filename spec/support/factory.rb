@@ -36,4 +36,8 @@ FactoryGirl.define do
     user
     word_tag
   end
+
+  factory :version do
+    sequence(:number) { |n| "#{n}" }
+  end
 end

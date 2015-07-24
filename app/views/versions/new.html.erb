@@ -1,0 +1,13 @@
+<% provide(:title, "New Version") %>
+<% provide(:header, "New Version") %>
+
+<div class="well">
+  <%= form_for(@version) do |f| %>
+  <%= render 'shared/error_messages', object: @version %>
+
+    <%= f.label :number, class: "sr-only" %>
+    <%= f.text_field :number, class: "form-control", placeholder: "Number *"  %>
+
+    <%= f.submit "Create version", class: "btn btn-default" %>
+  <% end %>
+</div>

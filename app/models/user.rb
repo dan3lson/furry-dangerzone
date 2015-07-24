@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  default_scope -> { order('users.username ASC') }
+
   def has_words?
     self.words.any?
   end
@@ -28,5 +30,9 @@ class User < ActiveRecord::Base
 
   def already_has_tag?(tag)
     self.tags.include?(tag)
+  end
+
+  def is_admin?
+    self.role == "admin"
   end
 end

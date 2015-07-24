@@ -1,0 +1,20 @@
+<% provide(:title, "Edit Version") %>
+<% provide(:header, "Edit Version") %>
+
+<div class="well">
+  <%= form_for(@version) do |f| %>
+    <%= render 'shared/error_messages', object: @version %>
+
+    <%= f.label :number, class: "sr-only" %>
+    <%= f.text_field :number, class: "form-control", placeholder: "Number *"  %>
+
+    <%= f.submit "Save changes", class: "btn btn-default" %>
+  <% end %>
+</div>
+
+<p>
+  <%=
+    link_to "delete version", version_path(@version),
+    method: :delete, class: "btn btn-danger form-control"
+  %>
+</p>

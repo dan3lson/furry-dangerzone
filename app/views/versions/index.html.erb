@@ -1,0 +1,15 @@
+<% provide(:title, "Versions") %>
+<% provide(:header, "Versions") %>
+
+<div class="basic-black-link">
+  <% @versions.each do |version| %>
+    <div class="box-shadow-border">
+      <h3 class="tightness">
+        <span>
+          <%= link_to version.number, version %>
+        </span>
+      </h3>
+    </div>
+    <br>
+  <% end %>
+</div>

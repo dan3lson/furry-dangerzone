@@ -1,0 +1,10 @@
+<% provide(:title, "Version #{@version.number}") %>
+<% provide(:header, "Version #{@version.number}") %>
+
+<p>
+  Created <%= time_ago_in_words(@version.created_at) %> ago.
+</p>
+
+<p>
+  # of Reviews: <%#= @version.reviews.count %>
+</p>
