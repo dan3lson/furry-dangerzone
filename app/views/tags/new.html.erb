@@ -1,0 +1,11 @@
+<% provide(:title, "New tag") %>
+<% provide(:header, "new tag") %>
+
+<div class="well">
+  <%= form_for(@tag) do |f| %>
+  <%= render 'shared/error_messages', object: @tag %>
+    <%= f.label :name, class: "sr-only" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Name *"  %>
+    <%= f.submit "Create tag", class: "btn btn-default" %>
+  <% end %>
+</div>

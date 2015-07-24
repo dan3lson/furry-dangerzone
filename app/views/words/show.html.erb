@@ -18,7 +18,7 @@
       <div class="alert alert-warning">
           This word is Untagged.
           <span class="basic-black-link">
-            <%= link_to "Create one", new_source_path %> now!
+            <%= link_to "Create one", new_tag_path %> now!
           </span>
       </div>
     <% else %>
@@ -29,7 +29,7 @@
                 <%= link_to tag.name, tag %>
               </div>
               <div class="tag-on-word-show-page inline-block pull-right">
-                  <%= render "sources/remove_tag_btn_word_show_page", tag: tag %>
+                  <%= render "tags/remove_tag_btn_word_show_page", tag: tag %>
               </div>
             </div>
         </div>
@@ -41,14 +41,14 @@
     <% unless unused_tags(@word).first.nil? %>
       <br>
       <p class="lead">Add Tag(s)</p>
-      <%= form_for :user_word_source,
-        url: user_word_source_path,
+      <%= form_for :user_word_tag,
+        url: user_word_tag_path,
         method: :post do |f|
       %>
         <%= hidden_field_tag :word_name, @word.name %>
-        <%= f.label :source_id, "Sources", class: "sr-only" %>
+        <%= f.label :tag_id, "Tags", class: "sr-only" %>
         <%=
-          f.collection_select :source_id,
+          f.collection_select :tag_id,
           unused_tags(@word), :id, :name,
           prompt: true
         %>

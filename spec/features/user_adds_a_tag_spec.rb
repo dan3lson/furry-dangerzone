@@ -9,7 +9,7 @@ feature "user adds a tag", %{
   # Acceptance Criteria
   #
   # [x] I can see a form to add a tag
-  # [x] sources_path shows my newly added tag
+  # [x] tags_path shows my newly added tag
   # [x] I see a message of success
 
   describe "\n user adds a tag -->" do
@@ -20,15 +20,15 @@ feature "user adds a tag", %{
 
       visit myTags_path
 
-      click_on "new source"
+      click_on "new tag"
 
       fill_in "Name", with: "foo"
 
-      click_on "Create source"
+      click_on "Create tag"
 
       expect(page).to have_content("Awesome - you added \'foo\'!")
-      expect(UserSource.count).to eq(1)
-      expect(Source.count).to eq(1)
+      expect(UserTag.count).to eq(1)
+      expect(Tag.count).to eq(1)
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("errors")
       expect(page).not_to have_content("fix")
@@ -39,17 +39,17 @@ feature "user adds a tag", %{
 
       visit myTags_path
 
-      click_on "new source"
+      click_on "new tag"
 
       fill_in "Name", with: ""
 
-      click_on "Create source"
+      click_on "Create tag"
 
       expect(page).to have_content("Yikes!")
       expect(page).to have_content("error")
       expect(page).to have_content("fix")
-      expect(UserSource.count).to eq(0)
-      expect(Source.count).to eq(0)
+      expect(UserTag.count).to eq(0)
+      expect(Tag.count).to eq(0)
       expect(page).not_to have_content("Awesome - you added \'foo\'!")
     end
   end

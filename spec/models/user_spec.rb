@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let!(:user) { FactoryGirl.create(:user) }
   let(:word) { FactoryGirl.create(:word) }
-  let!(:source) { FactoryGirl.create(:source) }
+  let!(:tag) { FactoryGirl.create(:tag) }
 
   describe "associatons" do
     it { should have_many(:user_words) }
     it { should have_many(:words) }
-    it { should have_many(:user_sources) }
-    it { should have_many(:sources) }
+    it { should have_many(:user_tags) }
+    it { should have_many(:tags) }
   end
 
   describe "validations" do
@@ -37,23 +37,23 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#has_sources?" do
+  describe "#has_tags?" do
     it "returns false" do
-      expect(user.has_sources?).to eq(false)
+      expect(user.has_tags?).to eq(false)
     end
     it "returns true" do
-      user.sources << source
-      expect(user.has_sources?).to eq(true)
+      user.tags << tag
+      expect(user.has_tags?).to eq(true)
     end
   end
 
-  describe "#already_has_source?" do
+  describe "#already_has_tag?" do
     it "returns false" do
-      expect(user.already_has_source?("foobar")).to eq(false)
+      expect(user.already_has_tag?("foobar")).to eq(false)
     end
     it "returns true" do
-      user.sources << source
-      expect(user.already_has_source?(source)).to eq(true)
+      user.tags << tag
+      expect(user.already_has_tag?(tag)).to eq(true)
     end
   end
 

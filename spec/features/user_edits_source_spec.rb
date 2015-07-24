@@ -1,30 +1,30 @@
 require 'rails_helper'
 
-feature "user edits a source", %{
+feature "user edits a tag", %{
 
   As a user,
   I want to update one
-  of my sources.
+  of my tags.
 } do
 
   # Acceptance Criteria
   #
-  # [x] I can visit edit_source_path(:id)
+  # [x] I can visit edit_tag_path(:id)
   # [x] I can see a form
-  # [x] I see a button to update my source
+  # [x] I see a button to update my tag
   # [x] I can see errors if info isn't valid
 
-  describe "\n user updates source -->" do
-    let(:user_source) { FactoryGirl.create(:user_source) }
-    let(:user) { user_source.user }
-    let(:source) { user_source.source }
+  describe "\n user updates tag -->" do
+    let(:user_tag) { FactoryGirl.create(:user_tag) }
+    let(:user) { user_tag.user }
+    let(:tag) { user_tag.tag }
 
     scenario "scenario: with valid data" do
       log_in_as(user)
 
-      visit sources_path
+      visit tags_path
 
-      click_on source.name
+      click_on tag.name
 
       click_on "edit"
 
@@ -41,9 +41,9 @@ feature "user edits a source", %{
     scenario "scenario: with invalid data" do
       log_in_as(user)
 
-      visit sources_path
+      visit tags_path
 
-      click_on source.name
+      click_on tag.name
 
       click_on "edit"
 

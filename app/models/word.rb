@@ -1,8 +1,8 @@
 class Word < ActiveRecord::Base
   has_many :user_words, dependent: :destroy
   has_many :users, through: :user_words
-  has_many :word_sources, dependent: :destroy
-  has_many :sources, through: :word_sources
+  has_many :word_tags, dependent: :destroy
+  has_many :tags, through: :word_tags
 
   before_create { self.name = name.downcase }
 
@@ -45,8 +45,8 @@ class Word < ActiveRecord::Base
   end
 
   def self.untagged_for(user)
-    words_with_sources = user.word_sources.pluck(
+    words_with_tags = user.word_tags.pluck(
       :word_id).map { |word_id| Word.find(word_id) }
-    user.words - words_with_sources
+    user.words - words_with_tags
   end
 end

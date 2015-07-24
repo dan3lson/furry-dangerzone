@@ -1,9 +1,9 @@
-<% provide(:title, "Edit Source") %>
-<% provide(:header, "Edit Source") %>
+<% provide(:title, "Edit tag") %>
+<% provide(:header, "Edit tag") %>
 
 <div class="well">
-  <%= form_for(@source) do |f| %>
-  <%= render 'shared/error_messages', object: @source %>
+  <%= form_for(@tag) do |f| %>
+  <%= render 'shared/error_messages', object: @tag %>
 
     <%= f.label :name, class: "sr-only" %>
     <%= f.text_field :name, class: "form-control", placeholder: "Name *"  %>

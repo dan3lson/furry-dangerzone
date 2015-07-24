@@ -12,7 +12,7 @@ feature "user deletes (their (duh)) account", %{
   # [x] I see a message of (sad) success
 
   describe "\n user deletes account -->" do
-    scenario "scenario: without words or sources" do
+    scenario "scenario: without words or tags" do
       user = FactoryGirl.create(:user)
 
       log_in_as(user)
@@ -27,9 +27,9 @@ feature "user deletes (their (duh)) account", %{
       expect(User.count).to eq(0)
     end
 
-    scenario "scenario: just with sources" do
-      user_source = FactoryGirl.create(:user_source)
-      user = user_source.user
+    scenario "scenario: just with tags" do
+      user_tag = FactoryGirl.create(:user_tag)
+      user = user_tag.user
 
       log_in_as(user)
 
@@ -41,13 +41,13 @@ feature "user deletes (their (duh)) account", %{
       expect(page).not_to have_content("Yikes! Something went wrong.")
       expect(page).not_to have_content("Please try again.")
       expect(User.count).to eq(0)
-      expect(UserSource.count).to eq(0)
+      expect(UserTag.count).to eq(0)
     end
 
-    scenario "scenario: with words and sources" do
-      user_source = FactoryGirl.create(:user_source)
+    scenario "scenario: with words and tags" do
+      user_tag = FactoryGirl.create(:user_tag)
       user_word = FactoryGirl.create(:user_word)
-      user = user_source.user
+      user = user_tag.user
       old_user = user_word.user
       user_word.user = user
       old_user.destroy
@@ -62,7 +62,7 @@ feature "user deletes (their (duh)) account", %{
       expect(page).not_to have_content("Yikes! Something went wrong.")
       expect(page).not_to have_content("Please try again.")
       expect(User.count).to eq(0)
-      expect(UserSource.count).to eq(0)
+      expect(UserTag.count).to eq(0)
       expect(UserWord.count).to eq(0)
     end
   end

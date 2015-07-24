@@ -2,16 +2,16 @@
   <% if words_for(current_user, tag).count > 0 %>
     <%=
       link_to "remove",
-      user_word_source_path(tag_name: tag.name),
+      user_word_tag_path(tag_name: tag.name),
       method: :delete, class: "btn btn-default btn-sm",
       class: "btn btn-default form-control"
     %>
   <% else %>
     <%=
       link_to "remove",
-      user_source_path(id: UserSource.find_by(
+      user_tag_path(id: UserTag.find_by(
         user: current_user,
-        source: tag).id,
+        tag: tag).id,
         tag_name: tag.name
       ),
       method: :delete, class: "btn btn-default btn-sm",
@@ -22,15 +22,15 @@
   <% if words_for(current_user, tag).count > 0 %>
     <%=
       link_to image_tag("remove_black_32.png"),
-      user_word_source_path(tag_name: tag.name),
+      user_word_tag_path(tag_name: tag.name),
       method: :delete
     %>
   <% else %>
     <%=
       link_to image_tag("remove_black_32.png"),
-      user_source_path(id: UserSource.find_by(
+      user_tag_path(id: UserTag.find_by(
         user: current_user,
-        source: tag).id,
+        tag: tag).id,
         tag_name: tag.name
       ),
       method: :delete

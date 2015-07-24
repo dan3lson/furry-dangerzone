@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Source, type: :model do
+RSpec.describe Tag, type: :model do
   let(:user) { FactoryGirl.create(:user) }
-  let(:source) { FactoryGirl.create(:source) }
+  let(:tag) { FactoryGirl.create(:tag) }
 
   describe "associatons" do
-    it { should have_many(:user_sources) }
+    it { should have_many(:user_tags) }
     it { should have_many(:users) }
   end
 
@@ -15,8 +15,8 @@ RSpec.describe Source, type: :model do
   end
 
   describe "#initialization" do
-    it "returns a source name" do
-      expect(source.name).to include("foo_source")
+    it "returns a tag name" do
+      expect(tag.name).to include("foo_tag")
     end
   end
 end

@@ -12,9 +12,9 @@ feature "user removes tag", %{
   # [x] I see a message of success
 
   describe "\n user removes tag -->" do
-    let!(:user_source) { FactoryGirl.create(:user_source) }
-    let!(:source) { user_source.source }
-    let!(:user) { user_source.user }
+    let!(:user_tag) { FactoryGirl.create(:user_tag) }
+    let!(:tag) { user_tag.tag }
+    let!(:user) { user_tag.user }
     let(:word) { FactoryGirl.create(:word) }
 
     scenario "scenario: remove tag without words" do
@@ -22,45 +22,45 @@ feature "user removes tag", %{
 
       visit myTags_path
 
-      click_on source.name
+      click_on tag.name
 
       click_on "remove"
 
-      expect(page).to have_content("\'#{source.name}\' has been removed.")
+      expect(page).to have_content("\'#{tag.name}\' has been removed.")
       expect(page).not_to have_content("Yikes! Something went wrong.")
       expect(page).not_to have_content("Please try again.")
-      expect(Source.count).to eq(0)
-      expect(UserSource.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(Tag.count).to eq(0)
+      expect(UserTag.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: remove tag with words" do
       user_word = UserWord.create(user: user, word: word)
-      word_source = WordSource.create(word: word, source: source)
-      user_word_source = UserWordSource.create(
-        user: user, word_source: word_source
+      word_tag = WordTag.create(word: word, tag: tag)
+      user_word_tag = UserWordTag.create(
+        user: user, word_tag: word_tag
       )
 
       log_in_as(user)
 
       visit myTags_path
 
-      click_on source.name
+      click_on tag.name
 
       within ".header-buttons" do
         click_on "remove"
       end
 
-      expect(page).to have_content("You removed \'#{source.name}\'.")
+      expect(page).to have_content("You removed \'#{tag.name}\'.")
       expect(page).not_to have_content("Yikes! Something went wrong.")
       expect(page).not_to have_content("Please try again.")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(Source.count).to eq(0)
-      expect(UserSource.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(Tag.count).to eq(0)
+      expect(UserTag.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
   end
 end

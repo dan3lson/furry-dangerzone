@@ -10,7 +10,7 @@ feature "user adds a word", %{
   #
   # [x] I can see an "add" button for the
   #     word I want
-  # [] I can select a source for that word
+  # [] I can select a tag for that word
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 

@@ -1,26 +1,26 @@
-class UserWordSourcesController < ApplicationController
+class UserWordTagsController < ApplicationController
   def create
     @word = Word.find_by(name: params[:word_name])
-    @source_id = params[:user_word_source][:source_id]
+    @tag_id = params[:user_word_tag][:tag_id]
 
-    if @source_id.blank?
+    if @tag_id.blank?
       flash[:danger] = "Please select a tag before clicking \'add\'."
       redirect_to @word
     else
-      @source = Source.find(@source_id)
-      @word_source = WordSource.where(
+      @tag = Tag.find(@tag_id)
+      @word_tag = WordTag.where(
         word: @word,
-        source: @source
+        tag: @tag
       ).first_or_initialize
 
-      if @word_source.save
-        @user_word_source = UserWordSource.new(
+      if @word_tag.save
+        @user_word_tag = UserWordTag.new(
           user: current_user,
-          word_source: @word_source
+          word_tag: @word_tag
         )
 
-        if @user_word_source.save
-          msg = "Awesome - you tagged \'#{@source.name}\' to \'#{@word.name}\'!"
+        if @user_word_tag.save
+          msg = "Awesome - you tagged \'#{@tag.name}\' to \'#{@word.name}\'!"
           flash[:success] = msg
           redirect_to @word
         else
@@ -30,7 +30,7 @@ class UserWordSourcesController < ApplicationController
         end
 
       else
-        msg =  "Yikes! - adding a word source didn\'t work! Please try again."
+        msg =  "Yikes! - adding a word tag didn\'t work! Please try again."
         flash[:danger] = msg
         redirect_to @word
       end
@@ -38,20 +38,20 @@ class UserWordSourcesController < ApplicationController
   end
 
   def destroy
-    @tag = Source.find_by(name: params[:tag_name])
+    @tag = Tag.find_by(name: params[:tag_name])
     @tag_has_other_users = @tag.users.count > 1
-    @user_source = UserSource.find_by(user: current_user, source: @tag)
-    @user_word_sources = current_user.user_word_sources
+    @user_tag = UserTag.find_by(user: current_user, tag: @tag)
+    @user_word_tags = current_user.user_word_tags
 
-    @user_word_sources.each do |user_word_source|
-      if user_word_source.word_source == WordSource.find_by(
-        word: user_word_source.word_source.word, source: @tag
+    @user_word_tags.each do |user_word_tag|
+      if user_word_tag.word_tag == WordTag.find_by(
+        word: user_word_tag.word_tag.word, tag: @tag
       )
-      user_word_source.destroy
+      user_word_tag.destroy
       end
     end
 
-    if @user_source.destroy
+    if @user_tag.destroy
       flash[:success] = "You removed \'#{@tag.name}\'."
       @tag.destroy unless @tag_has_other_users
       redirect_to myTags_path

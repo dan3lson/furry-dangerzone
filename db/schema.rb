@@ -11,36 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722143028) do
+ActiveRecord::Schema.define(version: 20150724161824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "sources", force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "sources", ["name"], name: "index_sources_on_name", unique: true, using: :btree
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
-  create_table "user_sources", force: :cascade do |t|
+  create_table "user_tags", force: :cascade do |t|
     t.integer  "user_id",    null: false
-    t.integer  "source_id",  null: false
+    t.integer  "tag_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_word_sources", force: :cascade do |t|
-    t.integer  "word_source_id", null: false
-    t.integer  "user_id",        null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+  add_index "user_tags", ["tag_id"], name: "index_user_tags_on_tag_id", using: :btree
+  add_index "user_tags", ["user_id", "tag_id"], name: "index_user_tags_on_user_id_and_tag_id", unique: true, using: :btree
+  add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
+
+  create_table "user_word_tags", force: :cascade do |t|
+    t.integer  "word_tag_id", null: false
+    t.integer  "user_id",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "user_word_sources", ["user_id", "word_source_id"], name: "index_user_word_sources_on_user_id_and_word_source_id", unique: true, using: :btree
-  add_index "user_word_sources", ["user_id"], name: "index_user_word_sources_on_user_id", using: :btree
-  add_index "user_word_sources", ["word_source_id"], name: "index_user_word_sources_on_word_source_id", using: :btree
+  add_index "user_word_tags", ["user_id", "word_tag_id"], name: "index_user_word_tags_on_user_id_and_word_tag_id", unique: true, using: :btree
+  add_index "user_word_tags", ["user_id"], name: "index_user_word_tags_on_user_id", using: :btree
+  add_index "user_word_tags", ["word_tag_id"], name: "index_user_word_tags_on_word_tag_id", using: :btree
 
   create_table "user_words", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -62,16 +66,16 @@ ActiveRecord::Schema.define(version: 20150722143028) do
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
-  create_table "word_sources", force: :cascade do |t|
+  create_table "word_tags", force: :cascade do |t|
     t.integer  "word_id",    null: false
-    t.integer  "source_id",  null: false
+    t.integer  "tag_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "word_sources", ["source_id"], name: "index_word_sources_on_source_id", using: :btree
-  add_index "word_sources", ["word_id", "source_id"], name: "index_word_sources_on_word_id_and_source_id", unique: true, using: :btree
-  add_index "word_sources", ["word_id"], name: "index_word_sources_on_word_id", using: :btree
+  add_index "word_tags", ["tag_id"], name: "index_word_tags_on_tag_id", using: :btree
+  add_index "word_tags", ["word_id", "tag_id"], name: "index_word_tags_on_word_id_and_tag_id", unique: true, using: :btree
+  add_index "word_tags", ["word_id"], name: "index_word_tags_on_word_id", using: :btree
 
   create_table "words", force: :cascade do |t|
     t.string   "definition",        null: false

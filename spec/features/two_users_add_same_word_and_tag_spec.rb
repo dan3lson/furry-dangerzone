@@ -18,20 +18,20 @@ feature "two users add same word and tag", %{
 
   describe "\n two users remove the same tag -->" do
     let!(:word) { FactoryGirl.create(:word) }
-    let!(:source) { FactoryGirl.create(:source) }
+    let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_1) { FactoryGirl.create(:user) }
     let!(:user_2) { FactoryGirl.create(:user) }
     let!(:user_word_1) { UserWord.create(user: user_1, word: word) }
     let!(:user_word_2) { UserWord.create(user: user_2, word: word) }
-    let!(:user_source_1) { UserSource.create(user: user_1, source: source) }
-    let!(:user_source_2) { UserSource.create(user: user_2, source: source) }
+    let!(:user_tag_1) { UserTag.create(user: user_1, tag: tag) }
+    let!(:user_tag_2) { UserTag.create(user: user_2, tag: tag) }
 
     scenario "scenario: user_1 and user_2 add/apply same word and tag" do
       log_in_as(user_1)
 
       click_on word.name
 
-      select user_source_2.source.name, from: "Sources"
+      select user_tag_2.tag.name, from: "Tags"
 
       click_on "add"
 
@@ -43,16 +43,16 @@ feature "two users add same word and tag", %{
 
       click_on word.name
 
-      select user_source_2.source.name, from: "Sources"
+      select user_tag_2.tag.name, from: "Tags"
 
       click_on "add"
 
       expect(Word.count).to eq(1)
-      expect(Source.count).to eq(1)
+      expect(Tag.count).to eq(1)
       expect(UserWord.count).to eq(2)
-      expect(UserSource.count).to eq(2)
-      expect(WordSource.count).to eq(1)
-      expect(UserWordSource.count).to eq(2)
+      expect(UserTag.count).to eq(2)
+      expect(WordTag.count).to eq(1)
+      expect(UserWordTag.count).to eq(2)
     end
   end
 end

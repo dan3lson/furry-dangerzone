@@ -3,7 +3,7 @@ class CurrentUsersController < ApplicationController
     @current_user_words = current_user.words
   end
 
-  def sources
-    @current_user_sources = current_user.sources
+  def tags
+    @current_user_tags = current_user.tags
   end
 end

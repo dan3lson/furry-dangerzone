@@ -14,30 +14,30 @@ feature "two users add the same tag", %{
   # [x] I see a message of success
 
   describe "\n two users add the same tag -->" do
-    let!(:user_source) { FactoryGirl.create(:user_source) }
-    let!(:source) { user_source.source }
+    let!(:user_tag) { FactoryGirl.create(:user_tag) }
+    let!(:tag) { user_tag.tag }
     let(:user2) { FactoryGirl.create(:user) }
 
-    scenario "scenario: add same source" do
+    scenario "scenario: add same tag" do
       log_in_as(user2)
 
       visit myTags_path
 
-      click_on "new source"
+      click_on "new tag"
 
-      fill_in "Name", with: source.name
+      fill_in "Name", with: tag.name
 
-      click_on "Create source"
+      click_on "Create tag"
 
-      expect(page).to have_content("Awesome - you added \'#{source.name}\'!")
+      expect(page).to have_content("Awesome - you added \'#{tag.name}\'!")
       expect(page).not_to have_content("Yikes!")
-      expect(page).to have_content(source.name)
-      expect(Source.count).to eq(1)
-      expect(UserSource.count).to eq(2)
+      expect(page).to have_content(tag.name)
+      expect(Tag.count).to eq(1)
+      expect(UserTag.count).to eq(2)
       expect(Word.count).to eq(0)
       expect(UserWord.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
   end
 end

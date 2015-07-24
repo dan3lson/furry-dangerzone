@@ -9,7 +9,7 @@
 				<% end %>
 				<% if logged_in? %>
 					<%
-						if params[:controller] == "sources" && params[:action] == "new" ||
+						if params[:controller] == "tags" && params[:action] == "new" ||
 							 params[:action] == "show"
 					%>
 						<%= link_to image_tag("back_black_32.png"), :back %>
@@ -29,8 +29,8 @@
 					</p>
 				<% end %>
 
-				<% if params[:action] == "sources" %>
-					<%= link_to image_tag("add_black_32.png"), new_source_path %>
+				<% if params[:action] == "tags" %>
+					<%= link_to image_tag("add_black_32.png"), new_tag_path %>
 				<% elsif params[:action] == "menu" %>
 					<%=
 						link_to image_tag("signout_black_32.png"),
@@ -38,8 +38,8 @@
 					%>
 				<% elsif params[:controller] == "words" && params[:action] == "show" %>
 					<%= render "words/remove_word_btn_word_show_page", word: @word %>
-				<% elsif params[:controller] == "sources" && params[:action] == "show" %>
-					<%= render "sources/remove_tag_btn_tag_show_page", tag: @source %>
+				<% elsif params[:controller] == "tags" && params[:action] == "show" %>
+					<%= render "tags/remove_tag_btn_tag_show_page", tag: @tag %>
 				<% end %>
 			</span>
 		</h1>

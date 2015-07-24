@@ -1,2 +1,0 @@
-class WordSourcesController < ApplicationController
-end

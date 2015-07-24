@@ -18,22 +18,22 @@ FactoryGirl.define do
     word
   end
 
-  factory :source do
-    sequence(:name) { |n| "foo_source#{n}" }
+  factory :tag do
+    sequence(:name) { |n| "foo_tag#{n}" }
   end
 
-  factory :user_source do
+  factory :user_tag do
     user
-    source
+    tag
   end
 
-  factory :word_source do
+  factory :word_tag do
     word
-    source
+    tag
   end
 
-  factory :user_word_source do
+  factory :user_word_tag do
     user
-    word_source
+    word_tag
   end
 end

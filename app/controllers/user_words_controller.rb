@@ -17,19 +17,18 @@ class UserWordsController < ApplicationController
   def destroy
     @user_word = UserWord.find(params[:id])
     @word = @user_word.word
-    @word_sources = current_user.word_sources.where(word: @word)
-    @word_sources.each do |word_source|
-      if word_source.user_word_sources.count == 1
-        @user_word_source = word_source.user_word_sources.first
-        word_source.destroy
-        @user_word_source.destroy
+    @word_tags = current_user.word_tags.where(word: @word)
+    @word_tags.each do |word_tag|
+      if word_tag.user_word_tags.count == 1
+        @user_word_tag = word_tag.user_word_tags.first
+        word_tag.destroy
+        @user_word_tag.destroy
       else
-        # not totally working
-        @user_word_source = UserWordSource.find_by(
+        @user_word_tag = UserWordTag.find_by(
           user: current_user,
-          word_source: word_source
+          word_tag: word_tag
         )
-        @user_word_source.destroy
+        @user_word_tag.destroy
       end
     end
 

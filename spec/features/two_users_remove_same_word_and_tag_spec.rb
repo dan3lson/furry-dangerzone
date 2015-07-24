@@ -17,13 +17,13 @@ feature "two users remove same word and tag", %{
 
   describe "\n two users remove the same tag -->" do
     let!(:word) { FactoryGirl.create(:word) }
-    let!(:source) { FactoryGirl.create(:source) }
+    let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_1) { FactoryGirl.create(:user) }
     let!(:user_2) { FactoryGirl.create(:user) }
     let!(:user_word_1) { UserWord.create(user: user_1, word: word) }
     let!(:user_word_2) { UserWord.create(user: user_2, word: word) }
-    let!(:user_source_1) { UserSource.create(user: user_1, source: source) }
-    let!(:user_source_2) { UserSource.create(user: user_2, source: source) }
+    let!(:user_tag_1) { UserTag.create(user: user_1, tag: tag) }
+    let!(:user_tag_2) { UserTag.create(user: user_2, tag: tag) }
 
     s = "scenario: "
     scenario s << "user_1 and user_2 remove same word (1st) and tag (2nd)" do
@@ -35,7 +35,7 @@ feature "two users remove same word and tag", %{
 
       visit myTags_path
 
-      click_on source.name
+      click_on tag.name
 
       click_on "remove"
 
@@ -51,16 +51,16 @@ feature "two users remove same word and tag", %{
 
       visit myTags_path
 
-      click_on source.name
+      click_on tag.name
 
       click_on "remove"
 
       expect(Word.count).to eq(1)
-      expect(Source.count).to eq(0)
+      expect(Tag.count).to eq(0)
       expect(UserWord.count).to eq(0)
-      expect(UserSource.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(UserTag.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
 
     s = "scenario: "
@@ -69,7 +69,7 @@ feature "two users remove same word and tag", %{
 
       visit myTags_path
 
-      click_on source.name
+      click_on tag.name
 
       click_on "remove"
 
@@ -83,7 +83,7 @@ feature "two users remove same word and tag", %{
 
       visit myTags_path
 
-      click_on source.name
+      click_on tag.name
 
       click_on "remove"
 
@@ -94,11 +94,11 @@ feature "two users remove same word and tag", %{
       click_on "remove"
 
       expect(Word.count).to eq(1)
-      expect(Source.count).to eq(0)
+      expect(Tag.count).to eq(0)
       expect(UserWord.count).to eq(0)
-      expect(UserSource.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(UserTag.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
   end
 end

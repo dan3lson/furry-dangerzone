@@ -17,9 +17,9 @@ feature "user adds tag to a word", %{
   describe "\n user adds a tag to a word -->" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
-    let!(:source) { FactoryGirl.create(:source) }
+    let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_word) { UserWord.create(user: user, word: word) }
-    let!(:user_source) { UserSource.create(user: user, source: source) }
+    let!(:user_tag) { UserTag.create(user: user, tag: tag) }
 
     scenario "scenario: valid process" do
       log_in_as(user)
@@ -28,15 +28,15 @@ feature "user adds tag to a word", %{
 
       click_on word.name
 
-      select user_source.source.name, from: "Sources"
+      select user_tag.tag.name, from: "Tags"
 
       click_on "add"
 
       expect(page).to have_content("Awesome - you tagged")
       expect(page).to have_content("to 'chess'!")
       expect(page).not_to have_content("Yikes!")
-      expect(WordSource.count).to eq(1)
-      expect(UserWordSource.count).to eq(1)
+      expect(WordTag.count).to eq(1)
+      expect(UserWordTag.count).to eq(1)
     end
 
     scenario "scenario: invalid process" do
@@ -53,7 +53,7 @@ feature "user adds tag to a word", %{
       expect(page).to have_content(
         "Please select a tag before clicking \'add\'."
       )
-      expect(WordSource.count).to eq(0)
+      expect(WordTag.count).to eq(0)
     end
   end
 end

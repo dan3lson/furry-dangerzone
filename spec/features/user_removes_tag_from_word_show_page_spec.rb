@@ -18,12 +18,12 @@ feature "user removes tag from word show page", %{
   describe "\n user removes a tag -->" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
-    let!(:source) { FactoryGirl.create(:source) }
-    let!(:user_source) { UserSource.create(user: user, source: source) }
+    let!(:tag) { FactoryGirl.create(:tag) }
+    let!(:user_tag) { UserTag.create(user: user, tag: tag) }
     let!(:user_word) { UserWord.create(user: user, word: word) }
-    let!(:word_source) { WordSource.create(word: word, source: source) }
-    let!(:user_word_source) { UserWordSource.create(
-      user: user, word_source: word_source) }
+    let!(:word_tag) { WordTag.create(word: word, tag: tag) }
+    let!(:user_word_tag) { UserWordTag.create(
+      user: user, word_tag: word_tag) }
 
     scenario "scenario: remove one tag from word show page" do
       log_in_as(user)
@@ -38,18 +38,18 @@ feature "user removes tag from word show page", %{
       expect(page).not_to have_content("Yikes!")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(Source.count).to eq(1)
-      expect(UserSource.count).to eq(1)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(Tag.count).to eq(1)
+      expect(UserTag.count).to eq(1)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: remove one of two tags from word show page" do
-      source_2 = FactoryGirl.create(:source, name: "foo_bar_source")
-      user_source_2 = UserSource.create(user: user, source: source_2)
-      word_source_2 = WordSource.create(word: word, source: source_2)
-      user_word_source = UserWordSource.create(
-        user: user, word_source: word_source_2
+      tag_2 = FactoryGirl.create(:tag, name: "foo_bar_tag")
+      user_tag_2 = UserTag.create(user: user, tag: tag_2)
+      word_tag_2 = WordTag.create(word: word, tag: tag_2)
+      user_word_tag = UserWordTag.create(
+        user: user, word_tag: word_tag_2
       )
 
       log_in_as(user)
@@ -64,10 +64,10 @@ feature "user removes tag from word show page", %{
       expect(page).not_to have_content("Yikes!")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(Source.count).to eq(2)
-      expect(UserSource.count).to eq(2)
-      expect(WordSource.count).to eq(1)
-      expect(UserWordSource.count).to eq(1)
+      expect(Tag.count).to eq(2)
+      expect(UserTag.count).to eq(2)
+      expect(WordTag.count).to eq(1)
+      expect(UserWordTag.count).to eq(1)
     end
   end
 end

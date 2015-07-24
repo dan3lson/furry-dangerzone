@@ -42,16 +42,16 @@ feature "two users remove a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: user_1 removes tagged word (not tagged for user_2)" do
-      user_source = FactoryGirl.create(:user_source, user: user_1)
-      source = user_source.source
-      word_source = WordSource.create(word: word, source: source)
-      user_word_source = UserWordSource.create(
-        user: user_1, word_source: word_source
+      user_tag = FactoryGirl.create(:user_tag, user: user_1)
+      tag = user_tag.tag
+      word_tag = WordTag.create(word: word, tag: tag)
+      user_word_tag = UserWordTag.create(
+        user: user_1, word_tag: word_tag
       )
 
       log_in_as(user_1)
@@ -69,20 +69,20 @@ feature "two users remove a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: user_1 removes tagged word (also tagged for user_2)" do
-      user_source = FactoryGirl.create(:user_source, user: user_1)
-      source = user_source.source
-      user_source_2 = UserSource.create(source: source, user: user_2)
-      word_source = WordSource.create(word: word, source: source)
-      user_word_source = UserWordSource.create(
-        user: user_1, word_source: word_source
+      user_tag = FactoryGirl.create(:user_tag, user: user_1)
+      tag = user_tag.tag
+      user_tag_2 = UserTag.create(tag: tag, user: user_2)
+      word_tag = WordTag.create(word: word, tag: tag)
+      user_word_tag = UserWordTag.create(
+        user: user_1, word_tag: word_tag
       )
-      user_word_source = UserWordSource.create(
-        user: user_2, word_source: word_source
+      user_word_tag = UserWordTag.create(
+        user: user_2, word_tag: word_tag
       )
 
       log_in_as(user_1)
@@ -100,20 +100,20 @@ feature "two users remove a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(WordSource.count).to eq(1)
-      expect(UserWordSource.count).to eq(1)
+      expect(WordTag.count).to eq(1)
+      expect(UserWordTag.count).to eq(1)
     end
 
     scenario "scenario: user_1 and user_2 remove the same tagged word" do
-      user_source = FactoryGirl.create(:user_source, user: user_1)
-      source = user_source.source
-      user_source_2 = UserSource.create(source: source, user: user_2)
-      word_source = WordSource.create(word: word, source: source)
-      user_word_source = UserWordSource.create(
-        user: user_1, word_source: word_source
+      user_tag = FactoryGirl.create(:user_tag, user: user_1)
+      tag = user_tag.tag
+      user_tag_2 = UserTag.create(tag: tag, user: user_2)
+      word_tag = WordTag.create(word: word, tag: tag)
+      user_word_tag = UserWordTag.create(
+        user: user_1, word_tag: word_tag
       )
-      user_word_source = UserWordSource.create(
-        user: user_2, word_source: word_source
+      user_word_tag = UserWordTag.create(
+        user: user_2, word_tag: word_tag
       )
 
       log_in_as(user_1)
@@ -143,8 +143,8 @@ feature "two users remove a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
   end
 end

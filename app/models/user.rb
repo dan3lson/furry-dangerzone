@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
   has_many :user_words, dependent: :destroy
   has_many :words, through: :user_words
-  has_many :user_sources, dependent: :destroy
-  has_many :sources, through: :user_sources
-  has_many :user_word_sources, dependent: :destroy
-  has_many :word_sources, through: :user_word_sources
+  has_many :user_tags, dependent: :destroy
+  has_many :tags, through: :user_tags
+  has_many :user_word_tags, dependent: :destroy
+  has_many :word_tags, through: :user_word_tags
 
   validates :username,
     presence: true,
@@ -22,11 +22,11 @@ class User < ActiveRecord::Base
     self.words.include?(word)
   end
 
-  def has_sources?
-    self.sources.any?
+  def has_tags?
+    self.tags.any?
   end
 
-  def already_has_source?(source)
-    self.sources.include?(source)
+  def already_has_tag?(tag)
+    self.tags.include?(tag)
   end
 end

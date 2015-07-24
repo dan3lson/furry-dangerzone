@@ -2,22 +2,22 @@
 <% provide(:header, "myTags") %>
 
 <% if Rails.env.test? %>
-  <%= link_to "new source", new_source_path %>
+  <%= link_to "new tag", new_tag_path %>
 <% end %>
 
-<% unless current_user.has_sources? %>
-  <%= render "current_users/no_sources_guide" %>
+<% unless current_user.has_tags? %>
+  <%= render "current_users/no_tags_guide" %>
 <% end %>
 
-<% if current_user.has_sources? %>
+<% if current_user.has_tags? %>
   <div class="basic-black-link">
-    <% @current_user_sources.each do |source| %>
+    <% @current_user_tags.each do |tag| %>
       <div class="box-shadow-border">
         <h3 class="tightness">
           <span>
-            <%= link_to source.name, source %>
+            <%= link_to tag.name, tag %>
             <span class="badge">
-              <%= words_for(current_user, source).count %>
+              <%= words_for(current_user, tag).count %>
             </span>
           </span>
         </h3>

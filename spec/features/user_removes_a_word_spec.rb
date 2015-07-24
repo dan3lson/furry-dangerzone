@@ -35,16 +35,16 @@ feature "user removes a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: remove word that is tagged" do
-      user_source = FactoryGirl.create(:user_source, user: user)
-      source = user_source.source
-      word_source = WordSource.create(word: word, source: source)
-      user_word_source = UserWordSource.create(
-        user: user, word_source: word_source
+      user_tag = FactoryGirl.create(:user_tag, user: user)
+      tag = user_tag.tag
+      word_tag = WordTag.create(word: word, tag: tag)
+      user_word_tag = UserWordTag.create(
+        user: user, word_tag: word_tag
       )
 
       log_in_as(user)
@@ -62,8 +62,8 @@ feature "user removes a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(0)
-      expect(WordSource.count).to eq(0)
-      expect(UserWordSource.count).to eq(0)
+      expect(WordTag.count).to eq(0)
+      expect(UserWordTag.count).to eq(0)
     end
   end
 end

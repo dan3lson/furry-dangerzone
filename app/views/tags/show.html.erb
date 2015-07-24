@@ -1,19 +1,19 @@
-<% provide(:title, @source.name) %>
-<% provide(:header, @source.name) %>
+<% provide(:title, @tag.name) %>
+<% provide(:header, @tag.name) %>
 
 <div class="box-shadow-border">
   <div class="pull-right">
     <%= image_tag("myLeksi_black_filled_25.png", alt: "myTags", class: "img-responsive") %>
   </div>
-  <% if words_for(current_user, @source).count > 0 %>
-    <% words_for(current_user, @source).each do |word| %>
+  <% if words_for(current_user, @tag).count > 0 %>
+    <% words_for(current_user, @tag).each do |word| %>
       <div class="words-for-a-tag">
         <div class="tag col-xs-9">
           <div class="basic-black-link inline-block">
             <%= link_to word, Word.find_by(name: word) %>
           </div>
           <div class="word-on-tag-show-page inline-block pull-right">
-            <%= render "words/remove_word_btn_tag_show_page", word: word, tag: @source %>
+            <%= render "words/remove_word_btn_tag_show_page", word: word, tag: @tag %>
           </div>
         </div>
       </div>
@@ -28,8 +28,8 @@
 
 <br>
 
-<% unless @source.name == "Untagged" %>
+<% unless @tag.name == "Untagged" %>
   <p>
-    <%= link_to "edit", edit_source_path(@source), class: "btn btn-default form-control" %>
+    <%= link_to "edit", edit_tag_path(@tag), class: "btn btn-default form-control" %>
   </p>
 <% end %>
