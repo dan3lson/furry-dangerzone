@@ -27,8 +27,8 @@
   </div>
 <% end %>
 
-<div class="box-shadow-border">
-  <% if current_user.has_words? %>
+<% if current_user.has_words? %>
+  <div class="box-shadow-border">
     <h3 class="tightness">
       <span>
         Untagged
@@ -45,8 +45,6 @@
         </span>
       </div>
     <% end %>
-    <div class="clear">
-
-    </div>
-  <% end %>
-</div>
+    <div class="clear"></div>
+  </div>
+<% end %>
