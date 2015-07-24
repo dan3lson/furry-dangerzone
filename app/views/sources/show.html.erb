@@ -1,19 +1,33 @@
 <% provide(:title, @source.name) %>
 <% provide(:header, @source.name) %>
 
-<p>
-  Tagged Words:
-</p>
-
-<% words_for(current_user, @source).each do |word| %>
-  <span class="basic-black-link">
-    <%= link_to word, Word.find_by(name: word) %>
-  </span>
-  <br>
-<% end %>
+<div class="box-shadow-border">
+  <div class="pull-right">
+    <%= image_tag("myLeksi_black_filled_25.png", alt: "myTags", class: "img-responsive") %>
+  </div>
+  <% if words_for(current_user, @source).count > 0 %>
+    <% words_for(current_user, @source).each do |word| %>
+      <div class="words-for-a-tag">
+        <div class="tag col-xs-9">
+          <div class="basic-black-link inline-block">
+            <%= link_to word, Word.find_by(name: word) %>
+          </div>
+          <div class="word-on-tag-show-page inline-block pull-right">
+            <%= render "words/remove_word_btn_tag_show_page", word: word, tag: @source %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  <% else %>
+    <div class="alert alert-warning">
+        This tag doesn't have any words.
+    </div>
+  <% end %>
+</div>
 
 <br>
-<br>
+
 <% unless @source.name == "Untagged" %>
   <p>
     <%= link_to "edit", edit_source_path(@source), class: "btn btn-default form-control" %>

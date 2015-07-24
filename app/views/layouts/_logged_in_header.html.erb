@@ -19,7 +19,7 @@
 
 			<%= full_header(yield(:header)) %>
 
-			<span class="pull-right">
+			<span class="pull-right header-buttons">
 				<% if !logged_in? && params[:action] == "home" %>
 					<p class="remove-line-height">
 						<%=
@@ -37,9 +37,9 @@
 						logout_path, method: :delete
 					%>
 				<% elsif params[:controller] == "words" && params[:action] == "show" %>
-					<%= render "words/remove_word_btn", word: @word %>
+					<%= render "words/remove_word_btn_word_show_page", word: @word %>
 				<% elsif params[:controller] == "sources" && params[:action] == "show" %>
-					<%= render "sources/remove_tag_btn", tag: @source %>
+					<%= render "sources/remove_tag_btn_tag_show_page", tag: @source %>
 				<% end %>
 			</span>
 		</h1>

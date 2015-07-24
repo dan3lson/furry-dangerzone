@@ -58,7 +58,9 @@ feature "two users remove a word", %{
 
       click_on word.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       expect(page).to have_content("has been removed.")
       expect(page).not_to have_content("Yikes!")
@@ -87,7 +89,9 @@ feature "two users remove a word", %{
 
       click_on word.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       expect(page).to have_content("has been removed.")
       expect(page).not_to have_content("Yikes!")
@@ -116,7 +120,9 @@ feature "two users remove a word", %{
 
       click_on word.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       visit menu_path
 
@@ -126,7 +132,9 @@ feature "two users remove a word", %{
 
       click_on word.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       expect(page).to have_content("has been removed.")
       expect(page).not_to have_content("Yikes!")

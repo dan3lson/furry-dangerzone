@@ -62,7 +62,7 @@ feature "user searches for a word", %{
       expect(page).to have_content("Please search again!")
     end
 
-    skip "scenario: query should be found and is already added" do
+    scenario "scenario: query should be found and is already added" do
       UserWord.create(user: user, word: word)
 
       log_in_as(user)
@@ -72,7 +72,7 @@ feature "user searches for a word", %{
       fill_in "search", with: "chess"
 
       click_on "define"
-      save_and_open_page
+
       expect(page).to have_link("remove")
       expect(page).not_to have_content("add")
     end

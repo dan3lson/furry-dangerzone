@@ -1,0 +1,17 @@
+<% if Rails.env.test? %>
+  <%=
+    link_to "remove",
+    user_word_source_tag_show_page_path(
+      word_name: word,
+      tag: tag),
+    method: :delete
+  %>
+<% else %>
+  <%=
+    link_to image_tag("remove_gray_25.png"),
+    user_word_source_tag_show_page_path(
+      word_name: word,
+      tag: tag),
+    method: :delete
+  %>
+<% end %>

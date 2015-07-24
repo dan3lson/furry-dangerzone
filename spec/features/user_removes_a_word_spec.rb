@@ -24,7 +24,9 @@ feature "user removes a word", %{
 
       click_on word.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       expect(page).to have_content("has been removed.")
       expect(page).not_to have_content("Yikes!")
@@ -49,8 +51,10 @@ feature "user removes a word", %{
 
       click_on word.name
 
-      click_on "remove"
-
+      within ".header-buttons" do
+        click_on "remove"
+      end
+      
       expect(page).to have_content("has been removed.")
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("foo-bar")

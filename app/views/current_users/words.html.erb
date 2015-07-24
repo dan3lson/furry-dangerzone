@@ -3,17 +3,19 @@
 
 <% if current_user.has_words? %>
   <% @current_user_words.each do |word| %>
-    <div class="pull-right">
-      <div class="game-one-start-circle">
-        <div class="center">
-          <span class="game-one-circle-start-text">start</span>
+    <div class="box-shadow-border">
+      <div class="pull-right">
+        <div class="game-one-start-circle">
+          <div class="center">
+            <span class="game-one-circle-start-text">start</span>
+          </div>
         </div>
       </div>
+      <div class="word_partial">
+        <%= render "words/word", word: word %>
+      </div>
     </div>
-    <div class="word_partial">
-      <%= render "words/word", word: word %>
-      <hr>
-    </div>
+    <br>
   <% end %>
 <% else %>
   <%= render "current_users/no_words_guide" %>

@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   resource :user_source, only: [:create, :edit, :destroy]
   resource :word_source, only: [:create, :destroy]
   resource :user_word_source, only: [:create, :edit, :destroy]
-
+  resource :user_word_source_word_show_page, only: [:destroy]
+  resource :user_word_source_tag_show_page, only: [:destroy]
 end

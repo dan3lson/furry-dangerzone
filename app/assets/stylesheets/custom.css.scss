@@ -142,6 +142,14 @@ p {
 	border-color: lighten($dark-gray, 30%);
 }
 
+.tag {
+	border: 2px solid $light-gray;
+	border-left: 3px solid lighten($dark-gray, 30%);
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+
 //**********
 //*
 //* FORMS
@@ -283,6 +291,10 @@ input {
 	text-align: center;
 }
 
+.clear {
+	clear: both;
+}
+
 .dark-gray {
 	color: $dark-gray;
 }
@@ -306,6 +318,10 @@ input {
 
 .remove-line-height {
 	line-height: normal;
+}
+
+.remove-padding-left {
+	padding-left: 0;
 }
 
 table {

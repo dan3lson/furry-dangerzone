@@ -48,7 +48,9 @@ feature "user removes tag", %{
 
       click_on source.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       expect(page).to have_content("You removed \'#{source.name}\'.")
       expect(page).not_to have_content("Yikes! Something went wrong.")

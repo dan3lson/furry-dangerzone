@@ -12,33 +12,41 @@
 <% if current_user.has_sources? %>
   <div class="basic-black-link">
     <% @current_user_sources.each do |source| %>
-      <h3 class="tightness">
-        <span>
-          <%= link_to source.name, source %>
-          <span class="badge">
-            <%= words_for(current_user, source).count %>
+      <div class="box-shadow-border">
+        <h3 class="tightness">
+          <span>
+            <%= link_to source.name, source %>
+            <span class="badge">
+              <%= words_for(current_user, source).count %>
+            </span>
           </span>
-        </span>
-      </h3>
-      <hr>
+        </h3>
+      </div>
+      <br>
     <% end %>
   </div>
 <% end %>
 
-<% if current_user.has_words? %>
-  <h3 class="tightness">
-    <span>
-      Untagged
-      <span class="badge">
-        <%= Word.untagged_for(current_user).count %>
+<div class="box-shadow-border">
+  <% if current_user.has_words? %>
+    <h3 class="tightness">
+      <span>
+        Untagged
+        <span class="badge">
+          <%= Word.untagged_for(current_user).count %>
+        </span>
       </span>
-    </span>
-  </h3>
+    </h3>
 
-  <% Word.untagged_for(current_user).each do |word| %>
-    <span class="basic-black-link">
-      <%= link_to word.name, word %>
-    </span>
-    <br>
+    <% Word.untagged_for(current_user).each do |word| %>
+      <div class="col-xs-4 col-sm-4 remove-padding-left">
+        <span class="basic-black-link">
+          <%= link_to word.name, word %>
+        </span>
+      </div>
+    <% end %>
+    <div class="clear">
+
+    </div>
   <% end %>
-<% end %>
+</div>

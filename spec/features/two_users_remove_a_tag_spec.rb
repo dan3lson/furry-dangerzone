@@ -74,7 +74,9 @@ feature "two users remove a tag", %{
 
       click_on source.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       visit menu_path
 
@@ -86,7 +88,9 @@ feature "two users remove a tag", %{
 
       click_on source.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(2)
@@ -121,7 +125,9 @@ feature "two users remove a tag", %{
 
       click_on source.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       visit menu_path
 
@@ -133,7 +139,9 @@ feature "two users remove a tag", %{
 
       click_on source.name
 
-      click_on "remove"
+      within ".header-buttons" do
+        click_on "remove"
+      end
 
       expect(Word.count).to eq(2)
       expect(UserWord.count).to eq(4)

@@ -1,29 +1,43 @@
 <% provide(:title, @word.name) %>
 <% provide(:header, @word.name) %>
 
-<%= render "words/word_details", word: @word %>
+<div class="box-shadow-border">
+  <div class="pull-right">
+    <%= image_tag("myLeksi_black_filled_25.png", alt: "myLeksi", class: "img-responsive") %>
+  </div>
+  <%= render "words/word_details", word: @word %>
+</div>
 
 <% if logged_in? %>
   <br>
   <div class="box-shadow-border">
-
+    <div class="pull-right">
+      <%= image_tag("tag_black_filled_25.png", alt: "myTags", class: "img-responsive") %>
+    </div>
     <% if Word.untagged_for(current_user).include?(@word) %>
       <div class="alert alert-warning">
           This word is Untagged.
       </div>
     <% else %>
-      <h4>myTags</h4>
-      <br>
-      <% tags_for_a(@word).each do |source| %>
-        <span class="basic-black-link">
-          <%= link_to source.name, source %>
-        </span>
-        <br>
+      <% tags_for_a(@word).each do |tag| %>
+        <div class="tags-for-a-word">
+            <div class="tag col-xs-9">
+              <div class="basic-black-link inline-block">
+                <%= link_to tag.name, tag %>
+              </div>
+              <div class="tag-on-word-show-page inline-block pull-right">
+                  <%= render "sources/remove_tag_btn_word_show_page", tag: tag %>
+              </div>
+            </div>
+        </div>
       <% end %>
     <% end %>
 
+    <div class="clear"></div>
+
     <% unless unused_tags(@word).first.nil? %>
-      <h4>Add Tag(s)</h4>
+      <br>
+      <p class="lead">Add Tag(s)</p>
       <%= form_for :user_word_source,
         url: user_word_source_path,
         method: :post do |f|

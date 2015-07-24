@@ -1,0 +1,47 @@
+<% if Rails.env.test? %>
+  <% if words_for(current_user, tag).count > 0 %>
+    <%=
+      link_to "remove",
+      user_word_source_word_show_page_path(tag_name: tag.name),
+      method: :delete, class: "btn btn-default btn-sm",
+      class: "btn btn-default form-control"
+    %>
+  <% else %>
+    <%=
+      link_to "remove",
+      user_word_source_word_show_page_path(id: UserSource.find_by(
+        user: current_user,
+        source: tag).id,
+        tag_name: tag.name
+      ),
+      method: :delete, class: "btn btn-default btn-sm",
+      class: "btn btn-default form-control"
+    %>
+  <% end %>
+<% else %>
+  <% if words_for(current_user, tag).count > 0 %>
+    <% if params[:controller] == "words" && params[:action] == "show" %>
+      <%=
+        link_to image_tag("remove_gray_25.png"),
+        user_word_source_word_show_page_path(tag_name: tag.name),
+        method: :delete
+      %>
+    <% else %>
+      <%=
+        link_to image_tag("remove_black_32.png"),
+        user_word_source_path(tag_name: tag.name),
+        method: :delete
+      %>
+    <% end %>
+  <% else %>
+    <%=
+      link_to image_tag("remove_black_32.png"),
+      user_word_source_word_show_page_path(id: UserSource.find_by(
+        user: current_user,
+        source: tag).id,
+        tag_name: tag.name
+      ),
+      method: :delete
+    %>
+  <% end %>
+<% end %>

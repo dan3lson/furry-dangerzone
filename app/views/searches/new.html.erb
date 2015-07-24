@@ -11,16 +11,27 @@
   <% else %>
     <% @search_results.each_with_index do |word, index| %>
       <div class="word_partial">
-
         <% if logged_in? %>
           <div class="pull-right">
             <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
               <%= hidden_field_tag :word_to_be_added, word.name %>
               <% if Rails.env.test? %>
-                <%= f.submit "add" %>
+                <% if current_user.already_has_word?(word) %>
+                  <%=
+                    link_to "remove",
+                    user_word_path(id: UserWord.find_by(
+                      user: current_user,
+                      word: word).id,
+                      word_name: word.name
+                    ),
+                    method: :delete
+                  %>
+                <% else %>
+                  <%= f.submit "add" %>
+                <% end %>
               <% else %>
                 <% if current_user.already_has_word?(word) %>
-                  <%= render "words/remove_word_btn", word: word %>
+                  <%= render "words/remove_word_btn_word_show_page", word: word %>
                 <% else %>
                   <%=
                     image_submit_tag("add_black_32.png", class: "border-none")
