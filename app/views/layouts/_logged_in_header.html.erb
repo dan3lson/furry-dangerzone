@@ -32,6 +32,12 @@
 				<% if params[:action] == "tags" %>
 					<%= link_to image_tag("add_black_32.png"), new_tag_path %>
 
+				<% elsif params[:controller] == "tags" && params[:action] == "show" %>
+					<%= link_to image_tag("edit_black_32.png"), edit_tag_path(@tag) %>
+
+				<% elsif params[:controller] == "tags" && params[:action] == "edit" %>
+					<%= render "tags/remove_tag_btn_tag_show_page", tag: @tag %>
+
 				<% elsif params[:controller] == "versions" &&
 								 params[:action] == "index" %>
 					<%= link_to image_tag("add_black_32.png"), new_version_path %>
@@ -50,12 +56,9 @@
 						logout_path, method: :delete
 					%>
 
-
 				<% elsif params[:controller] == "words" && params[:action] == "show" %>
 					<%= render "words/remove_word_btn_word_show_page", word: @word %>
 
-				<% elsif params[:controller] == "tags" && params[:action] == "show" %>
-					<%= render "tags/remove_tag_btn_tag_show_page", tag: @tag %>
 				<% end %>
 			</span>
 		</h1>
