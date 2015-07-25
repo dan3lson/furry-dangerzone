@@ -28,7 +28,7 @@ feature "admin deletes version", %{
       expect(Version.count).to eq(0)
     end
 
-    skip "scenario: with reviews" do
+    scenario "scenario: with reviews" do
       log_in_as(admin)
 
       visit edit_version_path(version)

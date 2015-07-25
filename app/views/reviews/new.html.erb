@@ -1,0 +1,8 @@
+<% provide(:title, "New Review") %>
+<% provide(:header, "New Review") %>
+
+<% if logged_in? %>
+  <div class="well">
+    <%= render "form" %>
+  </div>
+<% end %>

@@ -14,6 +14,10 @@ feature "guest signs up", %{
   # [x] I can see errors if info isn't valid
 
   describe "\n guest signs up -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+
     scenario "scenario: with valid data" do
       visit root_path
 

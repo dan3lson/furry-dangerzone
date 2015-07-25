@@ -22,6 +22,10 @@ feature "two users remove a word", %{
   # [x] I see a message of removal-success
 
   describe "\n two users remove a word -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+    
     let!(:user_word) { FactoryGirl.create(:user_word) }
     let!(:word) { user_word.word }
     let!(:user_word_2) { UserWord.create(word: word, user: user_2) }

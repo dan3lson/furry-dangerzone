@@ -13,6 +13,10 @@ feature "guest visits home page", %{
   # [x] I can see a button to log in
 
   describe "\n visit home page -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+    
     scenario "scenario: homepage content is displayed" do
       visit root_path
 

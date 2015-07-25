@@ -1,0 +1,9 @@
+<% provide(:title, "Reviews") %>
+<% provide(:header, "Reviews") %>
+
+<% @reviews.each do |review| %>
+  <%= review.version.number %>
+  <%= review.rating %>
+  <%= review.description %>
+  <%= review.user.username %>
+<% end %>

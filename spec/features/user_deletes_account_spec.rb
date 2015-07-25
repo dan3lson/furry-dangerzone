@@ -12,6 +12,10 @@ feature "user deletes (their (duh)) account", %{
   # [x] I see a message of (sad) success
 
   describe "\n user deletes account -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+    
     scenario "scenario: without words or tags" do
       user = FactoryGirl.create(:user)
 

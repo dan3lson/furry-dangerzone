@@ -14,6 +14,10 @@ feature "user edits their profile", %{
   # [x] I can see errors if info isn't valid
 
   describe "\n user updates account -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+
     let(:user) { FactoryGirl.create(:user) }
 
     scenario "scenario: with valid data" do

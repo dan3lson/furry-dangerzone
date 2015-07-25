@@ -12,6 +12,10 @@ feature "user edits another users page", %{
   # [x] I can see a friendly message
 
   describe "\n visit unathorized pages -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+
     let(:user) { FactoryGirl.create(:user) }
     let(:user2) { FactoryGirl.create(:user) }
 

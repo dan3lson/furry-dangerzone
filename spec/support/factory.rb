@@ -41,4 +41,12 @@ FactoryGirl.define do
     sequence(:number) { |n| "1.0.#{n}" }
     description "Awesome new feature"
   end
+
+  factory :review do
+    rating 5
+    description "this app is dope and pretty useful!"
+
+    user
+    version
+  end
 end

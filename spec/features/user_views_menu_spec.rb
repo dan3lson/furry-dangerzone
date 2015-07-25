@@ -12,6 +12,10 @@ feature "user views the menu", %{
   # [x] I can see links
 
   describe "\n user views links -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+
     let(:user) { FactoryGirl.create(:user) }
 
     scenario "scenario: click menu_path" do

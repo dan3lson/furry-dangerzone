@@ -21,6 +21,10 @@ feature "two users remove a tag", %{
   # [x] I see a message of removal-success
 
   describe "\n two users remove the same tag -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+    
     let!(:word) { FactoryGirl.create(:word) }
     let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_1) { FactoryGirl.create(:user) }

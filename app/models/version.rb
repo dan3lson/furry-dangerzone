@@ -1,5 +1,5 @@
 class Version < ActiveRecord::Base
-  # has_many :reviews, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates :number, presence: true, uniqueness: true
   validates :description, presence: true
@@ -12,5 +12,13 @@ class Version < ActiveRecord::Base
 
   def full_name
     "Version #{self.number}"
+  end
+
+  def number_of_reviews
+    self.reviews.count
+  end
+
+  def average_rating
+    true
   end
 end

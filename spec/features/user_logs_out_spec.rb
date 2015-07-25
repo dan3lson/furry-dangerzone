@@ -14,6 +14,10 @@ feature "user logs out", %{
   # [x] I'm taken to the root_path
 
   describe "\n user logs out -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+
     let(:user) { FactoryGirl.create(:user) }
 
     scenario "scenario: logs out" do

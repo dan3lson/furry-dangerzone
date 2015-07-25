@@ -1,6 +1,6 @@
 module VersionsHelper
   def latest_version
-    Version.first
+    Version.first unless Version.first.nil?
   end
 
   def version_display_name

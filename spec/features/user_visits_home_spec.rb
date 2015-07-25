@@ -12,6 +12,10 @@ feature "user visits home page", %{
   # [x] I see myLeksi
 
   describe "\n visit home page -->" do
+    before :each do
+      FactoryGirl.create(:version)
+    end
+
     let(:user_word) { FactoryGirl.create(:user_word) }
     let(:user) { user_word.user }
     let(:word) { user_word.word }
