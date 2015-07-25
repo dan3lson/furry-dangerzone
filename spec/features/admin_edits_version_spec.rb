@@ -23,6 +23,7 @@ feature "admin edits version", %{
       visit edit_version_path(version)
 
       fill_in "Number", with: "3"
+      fill_in "Description", with: "Another new feature!"
 
       click_on "Save changes"
 
@@ -37,6 +38,7 @@ feature "admin edits version", %{
       visit edit_version_path(version)
 
       fill_in "Number", with: ""
+      fill_in "Description", with: ""
 
       click_on "Save changes"
 

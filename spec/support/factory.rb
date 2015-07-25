@@ -38,6 +38,7 @@ FactoryGirl.define do
   end
 
   factory :version do
-    sequence(:number) { |n| "#{n}" }
+    sequence(:number) { |n| "1.0.#{n}" }
+    description "Awesome new feature"
   end
 end

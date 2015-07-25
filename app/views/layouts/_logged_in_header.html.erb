@@ -38,8 +38,12 @@
 
 				<% elsif params[:controller] == "versions" &&
 								 params[:action] == "show" %>
-					<%= link_to image_tag("edit_black_32.png"), edit_version_path(@edit) %>
-
+					<% if logged_in? && current_user.is_admin? %>
+						<%=
+							link_to image_tag("edit_black_32.png"),
+							edit_version_path(@version)
+						%>
+					<% end %>
 				<% elsif params[:action] == "menu" %>
 					<%=
 						link_to image_tag("signout_black_32.png"),

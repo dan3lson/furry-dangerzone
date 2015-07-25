@@ -15,12 +15,14 @@ feature "add creates version", %{
   # [x] I can see a success-message
 
   describe "\n admin creates version -->" do
+    before :each do
+      Version.create(number: "1.0.0", description: "Dope new feature!")
+    end
+
     let!(:brainiac) { FactoryGirl.create(:user) }
     let!(:admin) { FactoryGirl.create(:user, role: "admin") }
 
     scenario "scenario: guest tries to create version" do
-      visit root_path
-
       visit new_version_path
 
       expect(page).to have_content("Yikes! Admins only ;)")
@@ -41,12 +43,13 @@ feature "add creates version", %{
 
       visit new_version_path
 
-      fill_in "Name", with: "1.0"
+      fill_in "Number", with: "1.0.1"
+      fill_in "Description", with: "Awesome new feature"
 
       click_on "Create version"
 
-      expect(page).to have_content("Version \'1.0\' successfully created.")
-      expect(Version.count).to eq(1)
+      expect(page).to have_content("Version \'1.0.1\' successfully created.")
+      expect(Version.count).to eq(2)
       expect(page).to_not have_content("error")
       expect(page).to_not have_content("fix")
     end
@@ -56,12 +59,13 @@ feature "add creates version", %{
 
       visit new_version_path
 
-      fill_in "Name", with: ""
+      fill_in "Number", with: ""
+      fill_in "Description", with: ""
 
       click_on "Create version"
 
-      expect(page).not_to have_content("Version \'1.0\' successfully created.")
-      expect(Version.count).to eq(0)
+      expect(page).not_to have_content("Version \'1.0.1\' successfully created.")
+      expect(Version.count).to eq(1)
       expect(page).to have_content("error")
       expect(page).to have_content("fix")
     end

@@ -1,5 +1,5 @@
 class VersionsController < ApplicationController
-  before_action :admin_only, except: [:index]
+  before_action :admin_only, except: [:index, :show]
 
   def index
     @versions = Version.all
@@ -52,7 +52,7 @@ class VersionsController < ApplicationController
   private
 
   def version_params
-    params.require(:version).permit(:number)
+    params.require(:version).permit(:number, :description)
   end
 
   def admin_only

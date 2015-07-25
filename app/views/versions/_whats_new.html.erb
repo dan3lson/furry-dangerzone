@@ -1,0 +1,17 @@
+<h4>
+  <% unless params[:controller] == "versions" &&
+            params[:action] == "show"
+  %>
+    What's New in
+    <span class="basic-apple-blue-link">
+      <%= link_to version_display_name, version_path(latest_version) %>
+    </span>
+    <small>
+      released <%= time_ago_in_words(latest_version.created_at) %> ago
+    </small>
+  <% end %>
+</h4>
+
+<p class="lead">
+  <%= simple_format(latest_version_description) %>
+</p>

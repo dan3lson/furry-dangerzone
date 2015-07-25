@@ -68,9 +68,10 @@ ActiveRecord::Schema.define(version: 20150724194810) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "versions", force: :cascade do |t|
-    t.decimal  "number",     precision: 4, scale: 2, null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "number",      null: false
+    t.text     "description", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "versions", ["number"], name: "index_versions_on_number", unique: true, using: :btree

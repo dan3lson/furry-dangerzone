@@ -8,6 +8,9 @@
     <%= f.label :number, class: "sr-only" %>
     <%= f.text_field :number, class: "form-control", placeholder: "Number *"  %>
 
+    <%= f.label :description, class: "sr-only" %>
+    <%= f.text_area :description, class: "form-control", placeholder: "Description *"  %>
+
     <%= f.submit "Create version", class: "btn btn-default" %>
   <% end %>
 </div>

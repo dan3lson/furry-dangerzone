@@ -6,8 +6,11 @@
     <div class="box-shadow-border">
       <h3 class="tightness">
         <span>
-          <%= link_to version.number, version %>
+          <%= link_to version.full_name, version %>
         </span>
+        <small>
+          Released <%= time_ago_in_words(version.created_at) %> ago.
+        </small>
       </h3>
     </div>
     <br>

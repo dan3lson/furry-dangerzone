@@ -17,9 +17,11 @@
     <% if Word.untagged_for(current_user).include?(@word) %>
       <div class="alert alert-warning">
           This word is Untagged.
-          <span class="basic-black-link">
-            <%= link_to "Create one", new_tag_path %> now!
-          </span>
+          <% unless current_user.has_tags? %>
+            <span class="basic-black-link">
+              <%= link_to "Create one", new_tag_path %> now!
+            </span>
+          <% end %>
       </div>
     <% else %>
       <% tags_for_a(@word).each do |tag| %>
