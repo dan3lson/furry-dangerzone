@@ -20,7 +20,10 @@ feature "user logs in", %{
     scenario "scenario: input is valid" do
       log_in_as(user)
 
-      expect(page).to have_content("Welcome back, #{user.username}!")
+      expect(page).to have_content("myLeksi")
+      expect(page).to have_link("define")
+      expect(page).to have_link("myTags")
+      expect(page).to have_link("menu")
       expect(page).not_to have_content("Invalid email and / or password combination.")
     end
 
@@ -31,8 +34,11 @@ feature "user logs in", %{
       fill_in "Password", with: ""
       click_on "Log in"
 
-      expect(page).not_to have_content("Welcome back, #{user.username}")
       expect(page).to have_content("Invalid email and / or password combination.")
+      expect(page).not_to have_content("myLeksi")
+      expect(page).not_to have_link("define")
+      expect(page).not_to have_link("myTags")
+      expect(page).not_to have_link("menu")
     end
   end
 end

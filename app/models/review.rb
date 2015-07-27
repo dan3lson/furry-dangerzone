@@ -7,4 +7,6 @@ class Review < ActiveRecord::Base
   validates :version, presence: true
 
   RATINGS = (1..5).to_a
+
+  default_scope -> { order('reviews.created_at DESC') }
 end

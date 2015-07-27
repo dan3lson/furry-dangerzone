@@ -10,4 +10,8 @@ module VersionsHelper
   def latest_version_description
     latest_version.description
   end
+
+  def display_stars(total_avg_rating)
+    "★" * total_avg_rating
+  end
 end

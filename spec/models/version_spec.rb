@@ -24,12 +24,6 @@ RSpec.describe Version, type: :model do
     end
   end
 
-  def version_name
-    it "returns full number string" do
-      expect(version.full_name).to include("Version 1.0.")
-    end
-  end
-
   describe "#has_reviews?" do
     it "returns false" do
       expect(version.has_reviews?).to eq(false)
@@ -37,6 +31,50 @@ RSpec.describe Version, type: :model do
     it "returns true" do
       version.reviews << review
       expect(version.has_reviews?).to eq(true)
+    end
+  end
+
+  describe "#number_of_reviews" do
+    it "returns a count integer" do
+      version.reviews << review
+      expect(version.reviews.count).to eq(1)
+    end
+  end
+
+  describe "#review_ratings" do
+    it "returns an array of ratings" do
+      version.reviews << review
+      version.reviews << FactoryGirl.create(:review, rating: 3)
+      version.reviews << FactoryGirl.create(:review, rating: 4)
+      expect(version.review_ratings.count).to eq(3)
+      expect(version.review_ratings.reduce(:+)).to eq(12)
+    end
+  end
+
+  describe "#average_rating" do
+    it "returns an integer" do
+      version.reviews << review
+      version.reviews << FactoryGirl.create(:review, rating: 3)
+      version.reviews << FactoryGirl.create(:review, rating: 4)
+      expect(version.average_rating).to eq(4)
+    end
+  end
+
+  describe "#total_number_of_reviews" do
+    it "returns an integer" do
+      version.reviews << review
+      version.reviews << FactoryGirl.create(:review, rating: 3)
+      version.reviews << FactoryGirl.create(:review, rating: 4)
+      expect(Version.total_number_of_reviews).to eq(3)
+    end
+  end
+
+  describe "#total_average_rating" do
+    it "returns an integer" do
+      version.reviews << review
+      version.reviews << FactoryGirl.create(:review, rating: 3)
+      version.reviews << FactoryGirl.create(:review, rating: 4)
+      expect(Version.total_average_rating).to eq(4)
     end
   end
 end

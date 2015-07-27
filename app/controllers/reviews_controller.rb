@@ -29,7 +29,7 @@ class ReviewsController < ApplicationController
       if @review.save
         msg = "Thanks for reviewing Leksi Version #{@version.number}!"
         flash[:success] = msg
-        redirect_to version_path(@version)
+        redirect_to reviews_path
       else
         flash.now[:danger] = "Yikes! Something went wrong. Please try again."
         render "versions/show"

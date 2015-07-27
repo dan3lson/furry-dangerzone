@@ -4,9 +4,7 @@
 <%= render "versions/whats_new" %>
 
 <p>
-  # of Reviews: <%= @version.number_of_reviews %>
-</p>
-
-<p>
-  Average Rating: <%#= @version.average_rating %>
+  Average Rating:
+  <%= render "reviews/stars", rating: @version.average_rating %>
+  (<%= @version.number_of_reviews %>)
 </p>

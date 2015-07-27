@@ -13,14 +13,14 @@
   <div class="basic-black-link">
     <% @current_user_tags.each do |tag| %>
       <div class="box-shadow-border">
-        <h3 class="tightness">
+        <h4 class="tightness">
           <span>
             <%= link_to tag.name, tag %>
             <span class="badge">
               <%= words_for(current_user, tag).count %>
             </span>
           </span>
-        </h3>
+        </h4>
       </div>
       <br>
     <% end %>
@@ -29,14 +29,14 @@
 
 <% if current_user.has_words? %>
   <div class="box-shadow-border">
-    <h3 class="tightness">
+    <h4 class="tightness">
       <span>
         Untagged
         <span class="badge">
           <%= Word.untagged_for(current_user).count %>
         </span>
       </span>
-    </h3>
+    </h4>
 
     <% Word.untagged_for(current_user).each do |word| %>
       <div class="col-xs-4 col-sm-4 remove-padding-left">

@@ -24,6 +24,8 @@ feature "user removes tag", %{
 
       click_on tag.name
 
+      click_on "edit"
+
       click_on "remove"
 
       expect(page).to have_content("\'#{tag.name}\' has been removed.")
@@ -47,6 +49,8 @@ feature "user removes tag", %{
       visit myTags_path
 
       click_on tag.name
+
+      click_on "edit"
 
       within ".header-buttons" do
         click_on "remove"

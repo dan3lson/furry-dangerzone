@@ -24,7 +24,7 @@ feature "two users remove a tag", %{
     before :each do
       FactoryGirl.create(:version)
     end
-    
+
     let!(:word) { FactoryGirl.create(:word) }
     let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_1) { FactoryGirl.create(:user) }
@@ -42,6 +42,8 @@ feature "two users remove a tag", %{
 
       click_on tag.name
 
+      click_on "edit"
+
       click_on "remove"
 
       visit menu_path
@@ -53,6 +55,8 @@ feature "two users remove a tag", %{
       visit myTags_path
 
       click_on tag.name
+
+      click_on "edit"
 
       click_on "remove"
 
@@ -78,6 +82,8 @@ feature "two users remove a tag", %{
 
       click_on tag.name
 
+      click_on "edit"
+
       within ".header-buttons" do
         click_on "remove"
       end
@@ -91,6 +97,8 @@ feature "two users remove a tag", %{
       visit myTags_path
 
       click_on tag.name
+
+      click_on "edit"
 
       within ".header-buttons" do
         click_on "remove"
@@ -129,6 +137,8 @@ feature "two users remove a tag", %{
 
       click_on tag.name
 
+      click_on "edit"
+
       within ".header-buttons" do
         click_on "remove"
       end
@@ -142,6 +152,8 @@ feature "two users remove a tag", %{
       visit myTags_path
 
       click_on tag.name
+
+      click_on "edit"
 
       within ".header-buttons" do
         click_on "remove"

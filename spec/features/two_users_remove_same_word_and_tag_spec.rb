@@ -19,7 +19,7 @@ feature "two users remove same word and tag", %{
     before :each do
       FactoryGirl.create(:version)
     end
-    
+
     let!(:word) { FactoryGirl.create(:word) }
     let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_1) { FactoryGirl.create(:user) }
@@ -41,6 +41,8 @@ feature "two users remove same word and tag", %{
 
       click_on tag.name
 
+      click_on "edit"
+
       click_on "remove"
 
       visit menu_path
@@ -56,6 +58,8 @@ feature "two users remove same word and tag", %{
       visit myTags_path
 
       click_on tag.name
+
+      click_on "edit"
 
       click_on "remove"
 
@@ -75,6 +79,8 @@ feature "two users remove same word and tag", %{
 
       click_on tag.name
 
+      click_on "edit"
+
       click_on "remove"
 
       visit myLeksi_path
@@ -88,6 +94,8 @@ feature "two users remove same word and tag", %{
       visit myTags_path
 
       click_on tag.name
+
+      click_on "edit"
 
       click_on "remove"
 

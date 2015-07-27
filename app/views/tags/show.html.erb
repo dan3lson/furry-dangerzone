@@ -3,7 +3,11 @@
 
 <div class="box-shadow-border">
   <div class="pull-right">
-    <%= image_tag("myLeksi_black_filled_25.png", alt: "myTags", class: "img-responsive") %>
+    <%=
+      image_tag("myLeksi_black_filled_25.png",
+        alt: "myTags", class: "img-responsive"
+      )
+    %>
   </div>
   <% if words_for(current_user, @tag).count > 0 %>
     <% words_for(current_user, @tag).each do |word| %>
@@ -25,11 +29,3 @@
     </div>
   <% end %>
 </div>
-
-<br>
-
-<% unless @tag.name == "Untagged" %>
-  <p>
-    <%= link_to "edit", edit_tag_path(@tag), class: "btn btn-default form-control" %>
-  </p>
-<% end %>

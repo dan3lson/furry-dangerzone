@@ -1,42 +1,54 @@
 <% provide(:title, "menu") %>
 <% provide(:header, "menu") %>
 
-<% if Rails.env.test? %>
-  <p>
-    <%= link_to "log out", logout_path, method: :delete, class: "btn btn-default form-control" %>
+<div class="menu-header-container">
+  <p class="lead menu-header">
+    Profile (<%= current_user.username %>)
   </p>
-<% end %>
+  Joined <%= time_ago_in_words(current_user.created_at) %> ago.
+  <br>
+  # of Words: <%= @current_user.words.count %>
+  <br>
+  # of Tags: <%= @current_user.tags.count %>
+  <br>
+  <br>
+  <div class="inline-block">
+    <%= image_tag("edit_black_filled_25.png", alt: "Edit My Profile") %>
+  </div>
+  <div class="basic-black-link inline-block">
+    <% if logged_in_and_current_user?(current_user) %>
+      <%= link_to "Edit My Profile", edit_user_path(current_user) %>
+    <% end %>
+  </div>
+</div>
 
-<% if user_already_reviewed_latest_version? %>
-  Thanks for reviewing the current Leksi version!
-<% else %>
-  <p>
-    <%=
-      link_to "Rate this app", new_version_review_path(latest_version),
-      class: "btn btn-default form-control"
-    %>
+<div class="menu-header-container">
+  <p class="lead menu-header">
+    Rate This App
   </p>
-<% end %>
-
-<br>
-<br>
-<br>
-
-<div class="well">
-  <% if logged_in_and_current_user?(current_user) %>
-    <p>
+  <% if user_already_reviewed_latest_version? %>
+    Thanks for rating Leksi <%= version_display_name %>!
+    <span class="basic-black-link">
       <%=
-        link_to "edit my profile", edit_user_path(current_user),
-        class: "btn btn-default form-control" %>
-    </p>
-    <br/>
-    <br/>
-    <br/>
-    <p>
-      <%=
-        link_to "delete my account", user_path(current_user),
-        method: :delete, class: "btn btn-danger form-control"
-      %>
-    </p>
+        link_to "See all reviews",
+        reviews_path
+      %>.
+    </span>
+  <% else %>
+    <div class="well">
+      <%= render "reviews/form" %>
+    </div>
   <% end %>
+</div>
+
+<div class="menu-header-container">
+  <p class="lead menu-header">
+    Settings
+  </p>
+  <div class="inline-block">
+    <%= image_tag("logout_black_filled_25.png", alt: "Log Out") %>
+  </div>
+  <div class="basic-black-link inline-block">
+    <%= link_to "Log Out", logout_path, method: :delete %>
+  </div>
 </div>

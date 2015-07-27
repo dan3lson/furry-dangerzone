@@ -17,3 +17,14 @@
     <%= f.submit "Save changes", class: "btn btn-default" %>
   <% end %>
 </div>
+
+<br>
+<br>
+<br>
+
+<p>
+  <%=
+    link_to "delete my account", user_path(current_user),
+    method: :delete, class: "btn btn-danger form-control"
+  %>
+</p>

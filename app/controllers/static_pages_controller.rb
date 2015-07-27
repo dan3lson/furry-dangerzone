@@ -4,5 +4,6 @@ class StaticPagesController < ApplicationController
   end
 
   def menu
+    @review = Review.new
   end
 end

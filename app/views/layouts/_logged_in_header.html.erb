@@ -33,6 +33,9 @@
 					<%= link_to image_tag("add_black_32.png"), new_tag_path %>
 
 				<% elsif params[:controller] == "tags" && params[:action] == "show" %>
+					<% if Rails.env.test? %>
+							<%= link_to "edit", edit_tag_path(@tag) %>
+					<% end %>
 					<%= link_to image_tag("edit_black_32.png"), edit_tag_path(@tag) %>
 
 				<% elsif params[:controller] == "tags" && params[:action] == "edit" %>
@@ -50,11 +53,6 @@
 							edit_version_path(@version)
 						%>
 					<% end %>
-				<% elsif params[:action] == "menu" %>
-					<%=
-						link_to image_tag("signout_black_32.png"),
-						logout_path, method: :delete
-					%>
 
 				<% elsif params[:controller] == "words" && params[:action] == "show" %>
 					<%= render "words/remove_word_btn_word_show_page", word: @word %>
