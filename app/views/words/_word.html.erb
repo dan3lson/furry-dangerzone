@@ -1,4 +1,4 @@
-<h3 class="tightness">
+<h4 class="tightness">
   <span class="basic-black-link">
     <% if params[:controller] == "searches" %>
       <%= word.name %>
@@ -6,6 +6,6 @@
       <%= link_to word.name, word %>
     <% end %>
   </span>
-</h3>
+</h4>
 
 <%= render "words/word_details", word: word %>

@@ -22,6 +22,7 @@ class MacmillanDictionary
   end
 
   def self.define(word)
+    word = word.downcase
     word = word.split(" ").join("-") if word.include?(" ")
     response = HTTParty.get(
       "#{API_URL}dictionaries/american/search/first/?q=#{word}&format=xml",

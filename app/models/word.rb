@@ -21,7 +21,7 @@ class Word < ActiveRecord::Base
           "Yikes! We couldn\'t find '#{name}'. Please search again!"
         else
           word =
-            Word.find_or_create_by(
+            Word.find_or_create_by!(
               name: name,
               phonetic_spelling: macmillan_word.phonetic_spelling,
               part_of_speech: macmillan_word.part_of_speech,

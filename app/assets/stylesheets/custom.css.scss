@@ -168,9 +168,9 @@ input {
 }
 
 #error_explanation {
-  color: red;
+  color: $leksi-red;
   ul {
-    color: red;
+    color: $leksi-red;
     margin: 0 0 30px 0;
   }
 }
@@ -218,7 +218,6 @@ input {
 
 .basic-black-link a {
 	color: $black;
-	font-weight: bold;
 
 	&:hover {
 		background: none;
@@ -294,10 +293,11 @@ input {
 	padding: 5px;
 }
 
-.navbar_footer{
+.navbar-footer{
 	color: $leksi-red;
 	font-weight: normal;
 	margin: 0;
+	margin-top: 50px;
 
   a:not(.footer-cta){
 	  color: $black;
