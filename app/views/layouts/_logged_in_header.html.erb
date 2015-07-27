@@ -23,8 +23,8 @@
 				<% if !logged_in? && params[:action] == "home" %>
 					<p class="remove-line-height">
 						<%=
-							link_to "Get for free", signup_path,
-							class: "btn btn-default apple-blue-button form-control"
+						  link_to "Get for free", signup_path,
+						  class: "btn btn-default btn-sm apple-blue-button"
 						%>
 					</p>
 				<% end %>

@@ -32,15 +32,13 @@ feature "user reviews app", %{
 
       visit menu_path
 
-      click_on "Rate this app"
-
       select "5", from: "Rating"
 
       fill_in "Description", with: "Dope app!"
 
       click_on "submit"
 
-      expect(page).to have_content("Thanks for reviewing Leksi Version ")
+      expect(page).to have_content("Thanks for rating Leksi Version")
       expect(page).to have_content("Reviews")
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("error")
@@ -52,13 +50,11 @@ feature "user reviews app", %{
 
       visit menu_path
 
-      click_on "Rate this app"
-
       select "5", from: "Rating"
 
       click_on "submit"
 
-      expect(page).to have_content("Thanks for reviewing Leksi Version ")
+      expect(page).to have_content("Thanks for rating Leksi Version")
       expect(page).to have_content("Reviews")
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("error")
@@ -70,14 +66,12 @@ feature "user reviews app", %{
 
       visit menu_path
 
-      click_on "Rate this app"
-
       click_on "submit"
 
       expect(page).to have_content(
         "Please select a rating before clicking \'submit\'."
       )
-      expect(page).not_to have_content("Thanks for reviewing Leksi Version ")
+      expect(page).not_to have_content("Thanks for rating Leksi Version")
       expect(page).not_to have_content("Reviews")
       expect(Review.count).to eq(0)
     end
@@ -89,9 +83,7 @@ feature "user reviews app", %{
 
       visit menu_path
 
-      expect(page).to have_content(
-        "Thanks for reviewing the current Leksi version!"
-      )
+      expect(page).to have_content("Thanks for rating Leksi Version")
       expect(page).not_to have_content("New Review")
       expect(page).not_to have_link("submit")
       expect(page).not_to have_css("form")
@@ -107,13 +99,11 @@ feature "user reviews app", %{
 
       visit menu_path
 
-      click_on "Rate this app"
-
       select "5", from: "Rating"
 
       click_on "submit"
 
-      expect(page).to have_content("Thanks for reviewing Leksi Version ")
+      expect(page).to have_content("Thanks for rating Leksi Version")
       expect(page).to have_content("Reviews")
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("error")

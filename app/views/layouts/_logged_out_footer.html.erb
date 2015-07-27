@@ -1,13 +1,19 @@
 <footer class="navbar navbar-default center navbar_footer">
   <br/>
+
   <div class="basic-apple-black-link">
     <p>
       &copy; 2015 Leksi <sup>TM</sup> Education
     </p>
+    <span>
+      <%=
+        link_to "Get for free", signup_path,
+        class: "btn btn-default btn-lg apple-blue-button footer-cta"
+      %>
+    </span>
+
     <p>
       <small>
-        <%= link_to "Get for free", signup_path %>
-        |
         <%= link_to "Already have an account? Log in.", login_path %>
         |
         <%= link_to "Versions", versions_path %>

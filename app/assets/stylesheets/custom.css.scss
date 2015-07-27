@@ -185,37 +185,6 @@ input {
 
 //**********
 //*
-//* FOOTER
-//*
-//**********
-
-.footer_active_link{
-	color: lighten($leksi-red, 25%);
-	font-weight: bold;
-}
-
-.navbar_footer{
-	color: $leksi-red;
-	font-weight: normal;
-	margin: 0;
-
-  a{
-	  color: $black;
-	  &:hover{
-		  background: none;
-			color: $leksi-red;
-		  text-decoration: none;
-	  };
-	  &:active{
-		  background: none;
-			color: $leksi-red;
-		  text-decoration: none;
-	  };
-  }
-}
-
-//**********
-//*
 //* MISCELLANEOUS
 //*
 //**********
@@ -323,6 +292,26 @@ input {
 .menu-header {
 	background: $light-gray;
 	padding: 5px;
+}
+
+.navbar_footer{
+	color: $leksi-red;
+	font-weight: normal;
+	margin: 0;
+
+  a:not(.footer-cta){
+	  color: $black;
+	  &:hover{
+		  background: none;
+			color: $leksi-red;
+		  text-decoration: none;
+	  };
+	  &:active{
+		  background: none;
+			color: $leksi-red;
+		  text-decoration: none;
+	  };
+  }
 }
 
 .remove-line-height {

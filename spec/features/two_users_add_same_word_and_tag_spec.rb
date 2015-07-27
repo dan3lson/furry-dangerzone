@@ -20,7 +20,7 @@ feature "two users add same word and tag", %{
     before :each do
       FactoryGirl.create(:version)
     end
-    
+
     let!(:word) { FactoryGirl.create(:word) }
     let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_1) { FactoryGirl.create(:user) }
@@ -41,7 +41,7 @@ feature "two users add same word and tag", %{
 
       visit menu_path
 
-      click_on "log out"
+      click_on "Log Out"
 
       log_in_as(user_2)
 

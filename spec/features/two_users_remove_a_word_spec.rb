@@ -130,7 +130,7 @@ feature "two users remove a word", %{
 
       visit menu_path
 
-      click_on "log out"
+      click_on "Log Out"
 
       log_in_as(user_2)
 

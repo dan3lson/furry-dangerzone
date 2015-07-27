@@ -23,8 +23,10 @@ feature "user views the menu", %{
 
       visit menu_path
 
-      expect(page).to have_link("edit my profile")
-      expect(page).to have_link("log out")
+      expect(page).to have_link("Edit My Profile")
+      expect(page).to have_link("Log Out")
+      expect(page).to have_content("Rate This App")
+      expect(page).to have_button("submit")
     end
   end
 end

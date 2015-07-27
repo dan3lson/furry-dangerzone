@@ -48,7 +48,7 @@ feature "two users remove a tag", %{
 
       visit menu_path
 
-      click_on "log out"
+      click_on "Log Out"
 
       log_in_as(user_2)
 
@@ -90,7 +90,7 @@ feature "two users remove a tag", %{
 
       visit menu_path
 
-      click_on "log out"
+      click_on "Log Out"
 
       log_in_as(user_2)
 
@@ -145,7 +145,7 @@ feature "two users remove a tag", %{
 
       visit menu_path
 
-      click_on "log out"
+      click_on "Log Out"
 
       log_in_as(user_2)
 

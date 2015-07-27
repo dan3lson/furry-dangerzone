@@ -15,13 +15,15 @@ feature "user deletes (their (duh)) account", %{
     before :each do
       FactoryGirl.create(:version)
     end
-    
+
     scenario "scenario: without words or tags" do
       user = FactoryGirl.create(:user)
 
       log_in_as(user)
 
       visit menu_path
+
+      click_on "Edit My Profile"
 
       click_on "delete my account"
 
@@ -38,6 +40,8 @@ feature "user deletes (their (duh)) account", %{
       log_in_as(user)
 
       visit menu_path
+
+      click_on "Edit My Profile"
 
       click_on "delete my account"
 
@@ -59,6 +63,8 @@ feature "user deletes (their (duh)) account", %{
       log_in_as(user)
 
       visit menu_path
+
+      click_on "Edit My Profile"
 
       click_on "delete my account"
 

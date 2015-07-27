@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "user logs out", %{
 
   As a user,
-  I want to log out of Leksi.
+  I want to Log Out of Leksi.
 } do
 
   # Acceptance Criteria
@@ -25,7 +25,7 @@ feature "user logs out", %{
 
       click_on "menu"
 
-      click_on "log out"
+      click_on "Log Out"
 
       expect(page).to have_content("See you again, #{user.username}!")
       expect(page).to have_link("Get for free")

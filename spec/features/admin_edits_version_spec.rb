@@ -15,12 +15,12 @@ feature "admin edits version", %{
 
   describe "\n admin updates version -->" do
     let(:admin) { FactoryGirl.create(:user, role: "admin") }
-    let!(:version) { FactoryGirl.create(:version) }
+    let!(:review) { FactoryGirl.create(:review) }
 
     scenario "scenario: with valid data" do
       log_in_as(admin)
 
-      visit edit_version_path(version)
+      visit edit_version_path(review.version)
 
       fill_in "Number", with: "3"
       fill_in "Description", with: "Another new feature!"
@@ -35,7 +35,7 @@ feature "admin edits version", %{
     scenario "scenario: with invalid data" do
       log_in_as(admin)
 
-      visit edit_version_path(version)
+      visit edit_version_path(review.version)
 
       fill_in "Number", with: ""
       fill_in "Description", with: ""

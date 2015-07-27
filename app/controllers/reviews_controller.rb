@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update]
-  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     @reviews = Review.all
@@ -9,10 +8,6 @@ class ReviewsController < ApplicationController
   def new
     @version = Version.find(params[:version_id])
     @review = Review.new
-  end
-
-  def edit
-    @review = Review.find(params[:id])
   end
 
   def create
@@ -27,26 +22,13 @@ class ReviewsController < ApplicationController
       redirect_to new_version_review_path(@version)
     else
       if @review.save
-        msg = "Thanks for reviewing Leksi Version #{@version.number}!"
+        msg = "Thanks for rating Leksi Version #{@version.number}!"
         flash[:success] = msg
         redirect_to reviews_path
       else
         flash.now[:danger] = "Yikes! Something went wrong. Please try again."
         render "versions/show"
       end
-    end
-  end
-
-  def update
-    @version = Version.find(params[:version_id])
-    @review = Review.find(params[:id])
-
-    if @review.update(review_params)
-      flash[:success] = "Review edited successfully."
-      redirect_to @review
-    else
-      flash.now[:danger] = "Review not edited successfully."
-      render :edit
     end
   end
 
@@ -71,14 +53,6 @@ class ReviewsController < ApplicationController
     unless logged_in?
       flash[:danger] = "Yikes! Please log in first to do that."
       redirect_to login_path
-    end
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-    unless current_user?(@user)
-      flash[:danger] = "Yikes! That\'s not something you can do."
-      redirect_to root_path
     end
   end
 end
