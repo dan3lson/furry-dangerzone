@@ -9,4 +9,8 @@ class Review < ActiveRecord::Base
   RATINGS = (1..5).to_a
 
   default_scope -> { order('reviews.created_at DESC') }
+
+  def has_description?
+    !self.description.blank?
+  end
 end

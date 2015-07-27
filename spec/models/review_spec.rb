@@ -26,4 +26,14 @@ RSpec.describe Review, type: :model do
       expect(review.version.class).to be(Version)
     end
   end
+
+  describe "#has_description?" do
+    it "returns true" do
+      expect(review.has_description?).to eq(true)
+    end
+    it "returns false" do
+      review.description = nil
+      expect(review.has_description?).to eq(false)
+    end
+  end
 end
