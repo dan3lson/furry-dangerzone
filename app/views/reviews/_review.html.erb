@@ -1,0 +1,24 @@
+<% if review.has_description? %>
+	<div class="box-shadow-border">
+		<div class="pull-right">
+			<%= render "reviews/stars", rating: review.rating %>
+		</div>
+
+		<blockquote>
+			<%= review.description %>
+		</blockquote>
+
+		<small>
+			rated by <%= review.user.username %>
+			<%= time_ago_in_words(review.created_at) %> ago
+			for
+			<span class="basic-black-link">
+				<%=
+					link_to "Version #{review.version.number}",
+					version_path(review.version)
+				%>
+			</span>
+		</small>
+	</div>
+	<br>
+<% end %>

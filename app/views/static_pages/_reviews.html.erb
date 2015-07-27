@@ -1,5 +1,9 @@
 <h4>Customer Reviews</h4>
 
-<p>
-  Not enough reviews yet.
-</p>
+<% @reviews.each do |review| %>
+  <%= render "reviews/review", review: review %>
+<% end %>
+
+<div class="basic-apple-blue-link pull-right">
+  <%= link_to "see all reviews", reviews_path %>
+</div>
