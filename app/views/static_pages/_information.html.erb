@@ -21,8 +21,8 @@
     <td class="dark-gray">Customer Reviews</td>
     <td>
       <% if there_are_any_reviews? %>
-        Current Version
         <% if latest_version.has_reviews? %>
+          Current Version
           <span class="apple-star-container">
             <span class="apple-star-orange">
               <%= display_stars(latest_version.average_rating) %>
