@@ -3,8 +3,10 @@
 
 <%= render "versions/whats_new" %>
 
-<p>
-  Average Rating:
-  <%= render "reviews/stars", rating: @version.average_rating %>
-  (<%= @version.number_of_reviews %>)
-</p>
+<% if @version.has_reviews? %>
+  <p>
+    Average Rating:
+    <%= render "reviews/stars", rating: @version.average_rating %>
+    (<%= @version.number_of_reviews %>)
+  </p>
+<% end %>
