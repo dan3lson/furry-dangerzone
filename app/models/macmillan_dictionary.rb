@@ -8,6 +8,7 @@ class MacmillanDictionary
   attr_accessor :example_sentence
 
   API_URL = "https://www.macmillandictionary.com/api/v1/"
+  URL_ENDING = "&pagesize=10&pageindex=1"
 
   def initialize(
     phonetic_spelling,
@@ -22,15 +23,15 @@ class MacmillanDictionary
   end
 
   def self.define(word)
-    word = word.downcase
-    word = word.split(" ").join("-") if word.include?(" ")
+    word = word.gsub(" ", "-")
     response = HTTParty.get(
-      "#{API_URL}dictionaries/american/search/first/?q=#{word}&format=xml",
+      "#{API_URL}dictionaries/american/search/first/?q=#{word}#{URL_ENDING}",
+      # "#{API_URL}dictionaries/american/search/first/?q=#{word}&format=xml",
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }
     )
-
     if response.success?
       xml_doc = Nokogiri::XML(response["entryContent"])
+      binding.pry
 
       phonetic_spelling = xml_doc.xpath("/descendant::PRON[1]").text
       definition = xml_doc.xpath("/descendant::DEFINITION[1]").text

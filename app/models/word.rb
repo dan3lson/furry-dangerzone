@@ -6,32 +6,43 @@ class Word < ActiveRecord::Base
 
   before_create { self.name = name.downcase }
 
-  validates :name, presence: true, uniqueness: true
+  validates :name,
+    presence: true,
+    uniqueness: { scope: :definition }
   validates :definition, presence: true
-  validates :part_of_speech, presence: true
 
   default_scope -> { order('words.name ASC') }
 
+  def self.search(word)
+    where(name: word)
+  end
+
+  def self.word_is_found?(word)
+    !search(word).empty?
+  end
+
   def self.define(name)
     if name
-      word = find_by(name: name)
-      if word.nil?
+      if word_is_found?(name)
+        search(name)
+      else
         macmillan_word = MacmillanDictionary.define(name)
         if macmillan_word.nil?
           "Yikes! We couldn\'t find '#{name}'. Please search again!"
         else
-          word =
-            Word.find_or_create_by!(
-              name: name,
-              phonetic_spelling: macmillan_word.phonetic_spelling,
-              part_of_speech: macmillan_word.part_of_speech,
-              definition: macmillan_word.definition,
-              example_sentence: macmillan_word.example_sentence
+          word = Word.new(
+            name: name,
+            phonetic_spelling: macmillan_word.phonetic_spelling,
+            part_of_speech: macmillan_word.part_of_speech,
+            definition: macmillan_word.definition,
+            example_sentence: macmillan_word.example_sentence
             )
-          [word]
+          if word.save
+            [word]
+          else
+            "Yikes! Something went wrong :'( Please search again!"
+          end
         end
-      else
-        [word]
       end
     end
   end

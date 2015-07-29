@@ -11,7 +11,6 @@ RSpec.describe Word, type: :model do
   describe "validations" do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:definition) }
-    it { should validate_presence_of(:part_of_speech) }
     subject {
       Word.new(
         part_of_speech: "part_of_speech",
