@@ -14,16 +14,15 @@
         <% if logged_in? %>
           <div class="pull-right">
             <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
-              <%= hidden_field_tag :word_to_be_added, word.name %>
+              <%= hidden_field_tag :name, word.name %>
+              <%= hidden_field_tag :definition, word.definition %>
               <% if Rails.env.test? %>
                 <% if current_user.already_has_word?(word) %>
                   <%=
                     link_to "remove",
                     user_word_path(id: UserWord.find_by(
                       user: current_user,
-                      word: word).id,
-                      word_name: word.name
-                    ),
+                      word: word).id),
                     method: :delete
                   %>
                 <% else %>
@@ -44,6 +43,7 @@
         <div class="box-shadow-border">
           <%= render "words/word", word: word %>
         </div>
+        <br>
       </div>
     <% end %>
   <% end %>

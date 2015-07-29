@@ -3,9 +3,7 @@
     link_to "remove",
     user_word_path(id: UserWord.find_by(
       user: current_user,
-      word: word).id,
-      word_name: @word.name
-    ),
+      word: word).id),
     method: :delete
   %>
 <% else %>

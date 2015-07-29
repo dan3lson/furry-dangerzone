@@ -1,6 +1,9 @@
 class UserWordsController < ApplicationController
   def create
-    @word = Word.find_by(name: params[:word_to_be_added])
+    @word = Word.find_by(
+      name: params[:name],
+      definition: params[:definition]
+    )
     @user_word = UserWord.new(
       user: current_user,
       word: @word

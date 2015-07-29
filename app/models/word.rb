@@ -17,31 +17,36 @@ class Word < ActiveRecord::Base
     where(name: word)
   end
 
-  def self.word_is_found?(word)
+  def self.words_are_found?(word)
     !search(word).empty?
   end
 
   def self.define(name)
     if name
-      if word_is_found?(name)
+      if words_are_found?(name)
         search(name)
       else
-        macmillan_word = MacmillanDictionary.define(name)
-        if macmillan_word.nil?
+        macmillan_search = MacmillanDictionary.define(name)
+
+        if macmillan_search.nil?
           "Yikes! We couldn\'t find '#{name}'. Please search again!"
         else
-          word = Word.new(
-            name: name,
-            phonetic_spelling: macmillan_word.phonetic_spelling,
-            part_of_speech: macmillan_word.part_of_speech,
-            definition: macmillan_word.definition,
-            example_sentence: macmillan_word.example_sentence
-            )
-          if word.save
-            [word]
-          else
-            "Yikes! Something went wrong :'( Please search again!"
+          words = []
+          macmillan_search.each do |entry|
+            word = Word.new(
+              name: name,
+              phonetic_spelling: entry.phonetic_spelling,
+              part_of_speech: entry.part_of_speech,
+              definition: entry.definition,
+              example_sentence: entry.example_sentence
+              )
+            if word.save
+              words << word
+            else
+              "Yikes! Something went wrong :'( Please search again!"
+            end
           end
+          words
         end
       end
     end

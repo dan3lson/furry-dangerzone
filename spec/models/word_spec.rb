@@ -11,15 +11,6 @@ RSpec.describe Word, type: :model do
   describe "validations" do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:definition) }
-    subject {
-      Word.new(
-        part_of_speech: "part_of_speech",
-        phonetic_spelling: "phonetic_spelling",
-        definition: "definition",
-        example_sentence: "example_sentence"
-      )
-    }
-    it { should validate_uniqueness_of(:name) }
   end
 
   describe "#initialization" do
