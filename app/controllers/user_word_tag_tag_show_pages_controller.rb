@@ -1,14 +1,19 @@
 class UserWordTagTagShowPagesController < ApplicationController
   def destroy
-    @word = Word.find_by(name: params[:word_name])
-    @tag = Tag.find(params[:tag])
+    @word = Word.find_by(
+      name: params[:name],
+      definition: params[:definition]
+    )
+    @tag = Tag.find(params[:tag_id])
     @word_tag = WordTag.find_by(word: @word, tag: @tag)
-    @user_word_tag = current_user.user_word_tags.where(
+    @user_word_tag = UserWordTag.find_by(
+      user: current_user,
       word_tag: @word_tag
-    ).first
-    @word_tag_used_by_multiple_users = @word_tag.users.count > 1
+    )
+    @word_tag_used_by_other_users = @word_tag.users.count > 1
+
     if @user_word_tag.destroy
-      @word_tag.destroy unless @word_tag_used_by_multiple_users
+      @word_tag.destroy unless @word_tag_used_by_other_users
       flash[:success] = "You removed \'#{@word.name}\'."
       redirect_to @tag
     else

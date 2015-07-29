@@ -14,10 +14,15 @@
       <div class="words-for-a-tag">
         <div class="tag col-xs-9">
           <div class="basic-black-link inline-block">
-            <%= link_to word, Word.find_by(name: word) %>
+            <%=
+              link_to word.name, word
+            %>
           </div>
           <div class="word-on-tag-show-page inline-block pull-right">
-            <%= render "words/remove_word_btn_tag_show_page", word: word, tag: @tag %>
+            <%=
+              render "words/remove_word_btn_tag_show_page",
+              word: word, tag: @tag
+            %>
           </div>
         </div>
       </div>

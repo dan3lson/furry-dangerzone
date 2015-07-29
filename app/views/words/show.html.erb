@@ -31,7 +31,10 @@
                 <%= link_to tag.name, tag %>
               </div>
               <div class="tag-on-word-show-page inline-block pull-right">
-                  <%= render "tags/remove_tag_btn_word_show_page", tag: tag %>
+                  <%=
+                    render "tags/remove_tag_btn_word_show_page",
+                    word: @word, tag: tag 
+                  %>
               </div>
             </div>
         </div>
@@ -47,7 +50,8 @@
         url: user_word_tag_path,
         method: :post do |f|
       %>
-        <%= hidden_field_tag :word_name, @word.name %>
+        <%= hidden_field_tag :name, @word.name %>
+        <%= hidden_field_tag :definition, @word.definition %>
         <%= f.label :tag_id, "Tags", class: "sr-only" %>
         <%=
           f.collection_select :tag_id,

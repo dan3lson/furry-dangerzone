@@ -1,6 +1,9 @@
 class UserWordTagsController < ApplicationController
   def create
-    @word = Word.find_by(name: params[:word_name])
+    @word = Word.find_by(
+      name: params[:name],
+      definition: params[:definition]
+    )
     @tag_id = params[:user_word_tag][:tag_id]
 
     if @tag_id.blank?

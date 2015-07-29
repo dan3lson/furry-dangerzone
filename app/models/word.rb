@@ -27,7 +27,6 @@ class Word < ActiveRecord::Base
         search(name)
       else
         macmillan_search = MacmillanDictionary.define(name)
-
         if macmillan_search.nil?
           "Yikes! We couldn\'t find '#{name}'. Please search again!"
         else
