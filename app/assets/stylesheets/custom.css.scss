@@ -83,19 +83,25 @@ p {
 .game-one-circle-start-text {
 	@extend .game-circle-start-text;
 
-	color: $leksi-red;
+	a {
+	  color: $leksi-red;
+	}
 }
 
 .game-two-circle-start-text {
 	@extend .game-circle-start-text;
 
-	color: $leksi-orange;
+	a {
+		color: $leksi-orange;
+	}
 }
 
 .game-three-circle-start-text {
 	@extend .game-circle-start-text;
 
-	color: $leksi-green;
+	a {
+		color: $leksi-green;
+	}
 }
 
 .game-one-start-circle{

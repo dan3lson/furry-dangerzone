@@ -2,15 +2,23 @@
 <% provide(:header, "myLeksi") %>
 
 <% if current_user.has_words? %>
-  <% @current_user_words.each do |word| %>
+  <% current_user.user_words.each do |user_word| %>
+    <% word = user_word.word %>
     <div class="box-shadow-border">
-      <!-- <div class="pull-right">
-        <div class="game-one-start-circle">
-          <div class="center">
-            <span class="game-one-circle-start-text">start</span>
+      <div class="pull-right">
+        <!-- if user_word current_game hasn't been started  -->
+          <div class="game-<%= user_word.current_game %>-start-circle">
+            <div class="center">
+              <span
+                class="game-<%= user_word.current_game %>-circle-start-text"
+              >
+                <%= link_to "start", menu_path %>
+              </span>
+            </div>
           </div>
-        </div>
-      </div> -->
+        <!-- else show in-progress circle  -->
+        <!-- end -->
+      </div>
       <div class="word_partial">
         <%= render "words/word", word: word %>
       </div>

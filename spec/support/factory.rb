@@ -38,15 +38,36 @@ FactoryGirl.define do
   end
 
   factory :version do
-    sequence(:number) { |n| "1.0.#{n}" }
     description "Awesome new feature"
+    sequence(:number) { |n| "1.0.#{n}" }
   end
 
   factory :review do
-    rating 5
     description "this app is dope and pretty useful!"
+    rating 5
 
     user
     version
+  end
+
+  factory :game do
+    description "Begin to understand a word ..."
+    name "Fundamentals"
+  end
+
+  factory :level do
+    direction "Type the word below:"
+    focus "Spelling"
+  end
+
+  factory :game_level do
+    game
+    level
+  end
+
+  factory :user_word_game_level do
+    game_level
+    user_word
+    status "not started"
   end
 end

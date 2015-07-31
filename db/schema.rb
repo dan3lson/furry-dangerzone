@@ -11,10 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729021011) do
+ActiveRecord::Schema.define(version: 20150730195402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_levels", force: :cascade do |t|
+    t.integer  "game_id",    null: false
+    t.integer  "level_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "game_levels", ["game_id", "level_id"], name: "index_game_levels_on_game_id_and_level_id", using: :btree
+  add_index "game_levels", ["game_id"], name: "index_game_levels_on_game_id", using: :btree
+  add_index "game_levels", ["level_id"], name: "index_game_levels_on_level_id", using: :btree
+
+  create_table "games", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.string   "focus",      null: false
+    t.string   "direction",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating",      null: false
@@ -48,6 +73,14 @@ ActiveRecord::Schema.define(version: 20150729021011) do
   add_index "user_tags", ["tag_id"], name: "index_user_tags_on_tag_id", using: :btree
   add_index "user_tags", ["user_id", "tag_id"], name: "index_user_tags_on_user_id_and_tag_id", unique: true, using: :btree
   add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
+
+  create_table "user_word_game_levels", force: :cascade do |t|
+    t.integer  "user_word_id",                          null: false
+    t.integer  "game_level_id",                         null: false
+    t.string   "status",        default: "not started", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
 
   create_table "user_word_tags", force: :cascade do |t|
     t.integer  "word_tag_id", null: false

@@ -6,9 +6,7 @@ class Word < ActiveRecord::Base
 
   before_create { self.name = name.downcase }
 
-  validates :name,
-    presence: true,
-    uniqueness: { scope: :definition }
+  validates :name, presence: true
   validates :definition, presence: true
 
   default_scope -> { order('words.name ASC') }

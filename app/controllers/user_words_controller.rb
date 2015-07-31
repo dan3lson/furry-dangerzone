@@ -8,12 +8,27 @@ class UserWordsController < ApplicationController
       user: current_user,
       word: @word
     )
+
     if @user_word.save
-      flash[:success] = "Awesome - you added \'#{@word.name}\'!"
-      redirect_to @word
-    else
-      flash[:danger] = "Yikes! - adding that word didn\'t work. Please try again."
-      redirect_to search_path
+      @user_word_game_levels = []
+      @user_word_game_levels_before_count = UserWordGameLevel.count
+
+      GameLevel.all.each do |game_level|
+        if game_level.game.name == "Fundamentals"
+          @user_word_game_levels << UserWordGameLevel.create!(
+            user_word: @user_word,
+            game_level: game_level
+          )
+        end
+      end
+
+      if @user_word_game_levels_before_count == UserWordGameLevel.count - 8
+        flash[:success] = "Awesome - you added \'#{@word.name}\'!"
+        redirect_to @word
+      else
+        flash[:danger] = "Yikes! - adding that word didn\'t work. Please try again."
+        redirect_to search_path
+      end
     end
   end
 

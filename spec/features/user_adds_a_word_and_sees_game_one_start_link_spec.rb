@@ -1,18 +1,17 @@
 require 'rails_helper'
 
-feature "user adds a word", %{
+feature "user adds a word and sees game one start link", %{
 
   As a user,
-  I want to add a word to myLeksi.
+  I want to see a link to
+  start game one for a word
+  I just added to myLeksi.
 } do
 
   # Acceptance Criteria
   #
-  # [x] I can see an "add" button for the
-  #     word I want
-  # [x] I see a tag form to select a tag for that word
-  # [x] myLeksi shows my newly added word
-  # [x] I see a message of success
+  # [x] I can see a "start" button for game
+  #     one for a word just added
 
   describe "\n user adds a word -->" do
     scenario "scenario: valid process" do
@@ -104,7 +103,6 @@ feature "user adds a word", %{
         user_word: user_word,
         game_level: game_level_8
       )
-      
       log_in_as(user_2)
 
       visit search_path
@@ -115,12 +113,14 @@ feature "user adds a word", %{
 
       click_on "add"
 
-      expect(page).to have_content("Awesome - you added \'chess\'!")
-      expect(page).not_to have_content("Yikes!")
+      visit myLeksi_path
+
       expect(page).to have_content("chess")
       expect(page).to have_content("noun")
       expect(page).to have_content("a game for two people, played on a board")
       expect(page).to have_content("/tʃes/")
+      expect(page).to have_css(".game-one-start-circle")
+      expect(page).to have_css(".game-one-circle-start-text")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(2)
       expect(UserWordGameLevel.count).to eq(16)
