@@ -25,10 +25,10 @@ feature "two users remove a tag", %{
       FactoryGirl.create(:version)
     end
 
-    let!(:word) { FactoryGirl.create(:word) }
-    let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_1) { FactoryGirl.create(:user) }
     let!(:user_2) { FactoryGirl.create(:user) }
+    let!(:word) { FactoryGirl.create(:word) }
+    let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_word_1) { UserWord.create(user: user_1, word: word) }
     let!(:user_word_2) { UserWord.create(user: user_2, word: word) }
     let!(:user_tag_1) { UserTag.create(user: user_1, tag: tag) }
@@ -36,52 +36,16 @@ feature "two users remove a tag", %{
     let!(:word_tag) { WordTag.create(word: word, tag: tag) }
 
     scenario "scenario: user_1 and user_2 remove same tag w/o words" do
-      game = Game.create!(
-        name: "Fundamentals",
-        description: "Learn the basics."
-      )
+      create_levels_and_games
 
-      level = Level.create!(
-        focus: "focus 1",
-        direction: "direction 1"
-      )
-      level_2 = Level.create!(
-        focus: "focus 2",
-        direction: "direction 2"
-      )
-      level_3 = Level.create!(
-        focus: "focus 3",
-        direction: "direction 3"
-      )
-      level_4 = Level.create!(
-        focus: "focus 4",
-        direction: "direction 4"
-      )
-      level_5 = Level.create!(
-        focus: "focus 5",
-        direction: "direction 5"
-      )
-      level_6 = Level.create!(
-        focus: "focus 6",
-        direction: "direction 6"
-      )
-      level_7 = Level.create!(
-        focus: "focus 7",
-        direction: "direction 7"
-      )
-      level_8 = Level.create!(
-        focus: "focus 8",
-        direction: "direction 8"
-      )
-
-      game_level = GameLevel.create!(game: game, level: level)
-      game_level_2 = GameLevel.create!(game: game, level: level_2)
-      game_level_3 = GameLevel.create!(game: game, level: level_3)
-      game_level_4 = GameLevel.create!(game: game, level: level_4)
-      game_level_5 = GameLevel.create!(game: game, level: level_5)
-      game_level_6 = GameLevel.create!(game: game, level: level_6)
-      game_level_7 = GameLevel.create!(game: game, level: level_7)
-      game_level_8 = GameLevel.create!(game: game, level: level_8)
+      game_level = GameLevel.all[-8]
+      game_level_2 = GameLevel.all[-7]
+      game_level_3 = GameLevel.all[-6]
+      game_level_4 = GameLevel.all[-5]
+      game_level_5 = GameLevel.all[-4]
+      game_level_6 = GameLevel.all[-3]
+      game_level_7 = GameLevel.all[-2]
+      game_level_8 = GameLevel.all[-1]
 
       UserWordGameLevel.create!(
         user_word: user_word_1,
@@ -182,52 +146,16 @@ feature "two users remove a tag", %{
     end
 
     scenario "scenario: user_1 and user_2 remove same tag that has one word" do
-      game = Game.create!(
-        name: "Fundamentals",
-        description: "Learn the basics."
-      )
+      create_levels_and_games
 
-      level = Level.create!(
-        focus: "focus 1",
-        direction: "direction 1"
-      )
-      level_2 = Level.create!(
-        focus: "focus 2",
-        direction: "direction 2"
-      )
-      level_3 = Level.create!(
-        focus: "focus 3",
-        direction: "direction 3"
-      )
-      level_4 = Level.create!(
-        focus: "focus 4",
-        direction: "direction 4"
-      )
-      level_5 = Level.create!(
-        focus: "focus 5",
-        direction: "direction 5"
-      )
-      level_6 = Level.create!(
-        focus: "focus 6",
-        direction: "direction 6"
-      )
-      level_7 = Level.create!(
-        focus: "focus 7",
-        direction: "direction 7"
-      )
-      level_8 = Level.create!(
-        focus: "focus 8",
-        direction: "direction 8"
-      )
-
-      game_level = GameLevel.create!(game: game, level: level)
-      game_level_2 = GameLevel.create!(game: game, level: level_2)
-      game_level_3 = GameLevel.create!(game: game, level: level_3)
-      game_level_4 = GameLevel.create!(game: game, level: level_4)
-      game_level_5 = GameLevel.create!(game: game, level: level_5)
-      game_level_6 = GameLevel.create!(game: game, level: level_6)
-      game_level_7 = GameLevel.create!(game: game, level: level_7)
-      game_level_8 = GameLevel.create!(game: game, level: level_8)
+      game_level = GameLevel.all[-8]
+      game_level_2 = GameLevel.all[-7]
+      game_level_3 = GameLevel.all[-6]
+      game_level_4 = GameLevel.all[-5]
+      game_level_5 = GameLevel.all[-4]
+      game_level_6 = GameLevel.all[-3]
+      game_level_7 = GameLevel.all[-2]
+      game_level_8 = GameLevel.all[-1]
 
       UserWordGameLevel.create!(
         user_word: user_word_1,
@@ -339,10 +267,16 @@ feature "two users remove a tag", %{
     end
 
     scenario "scenario: user_1 and user_2 remove tag with two words" do
-      word_2 = FactoryGirl.create(:word, name: "foo")
-      word_tag_2 = WordTag.create(word: word_2, tag: tag)
-      user_word_2 = UserWord.create(user: user_1, word: word_2)
-      user_word_4 = UserWord.create(user: user_2, word: word_2)
+      word_2 = FactoryGirl.create(:word, name: "foofoo")
+      word_3 = FactoryGirl.create(:word, name: "googoo")
+      word_4 = FactoryGirl.create(:word, name: "joojoo")
+
+      user_word_3 = UserWord.create!(user: user_1, word: word_3)
+      user_word_4 = UserWord.create!(user: user_2, word: word_4)
+
+      word_tag_2 = WordTag.create!(word: word_2, tag: tag)
+      word_tag_2 = WordTag.create!(word: word_3, tag: tag)
+      word_tag_2 = WordTag.create!(word: word_4, tag: tag)
 
       user_word_tag_1 = UserWordTag.create(
         user: user_1, word_tag: word_tag
@@ -357,52 +291,50 @@ feature "two users remove a tag", %{
         user: user_2, word_tag: word_tag_2
       )
 
-      game = Game.create!(
-        name: "Fundamentals",
-        description: "Learn the basics."
-      )
+      create_levels_and_games
 
-      level = Level.create!(
-        focus: "focus 1",
-        direction: "direction 1"
-      )
-      level_2 = Level.create!(
-        focus: "focus 2",
-        direction: "direction 2"
-      )
-      level_3 = Level.create!(
-        focus: "focus 3",
-        direction: "direction 3"
-      )
-      level_4 = Level.create!(
-        focus: "focus 4",
-        direction: "direction 4"
-      )
-      level_5 = Level.create!(
-        focus: "focus 5",
-        direction: "direction 5"
-      )
-      level_6 = Level.create!(
-        focus: "focus 6",
-        direction: "direction 6"
-      )
-      level_7 = Level.create!(
-        focus: "focus 7",
-        direction: "direction 7"
-      )
-      level_8 = Level.create!(
-        focus: "focus 8",
-        direction: "direction 8"
-      )
+      game_level = GameLevel.all[-8]
+      game_level_2 = GameLevel.all[-7]
+      game_level_3 = GameLevel.all[-6]
+      game_level_4 = GameLevel.all[-5]
+      game_level_5 = GameLevel.all[-4]
+      game_level_6 = GameLevel.all[-3]
+      game_level_7 = GameLevel.all[-2]
+      game_level_8 = GameLevel.all[-1]
 
-      game_level = GameLevel.create!(game: game, level: level)
-      game_level_2 = GameLevel.create!(game: game, level: level_2)
-      game_level_3 = GameLevel.create!(game: game, level: level_3)
-      game_level_4 = GameLevel.create!(game: game, level: level_4)
-      game_level_5 = GameLevel.create!(game: game, level: level_5)
-      game_level_6 = GameLevel.create!(game: game, level: level_6)
-      game_level_7 = GameLevel.create!(game: game, level: level_7)
-      game_level_8 = GameLevel.create!(game: game, level: level_8)
+
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_2
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_3
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_4
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_5
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_6
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_7
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_8
+      )
 
       UserWordGameLevel.create!(
         user_word: user_word_2,
@@ -434,6 +366,39 @@ feature "two users remove a tag", %{
       )
       UserWordGameLevel.create!(
         user_word: user_word_2,
+        game_level: game_level_8
+      )
+
+      UserWordGameLevel.create!(
+        user_word: user_word_3,
+        game_level: game_level
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_3,
+        game_level: game_level_2
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_3,
+        game_level: game_level_3
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_3,
+        game_level: game_level_4
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_3,
+        game_level: game_level_5
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_3,
+        game_level: game_level_6
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_3,
+        game_level: game_level_7
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_3,
         game_level: game_level_8
       )
 
@@ -498,7 +463,7 @@ feature "two users remove a tag", %{
         click_on "remove"
       end
 
-      expect(Word.count).to eq(2)
+      expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(4)
       expect(Tag.count).to eq(0)
       expect(UserTag.count).to eq(0)

@@ -1,15 +1,15 @@
 class Word < ActiveRecord::Base
+  default_scope -> { order('words.name ASC') }
+
   has_many :user_words, dependent: :destroy
   has_many :users, through: :user_words
   has_many :word_tags, dependent: :destroy
   has_many :tags, through: :word_tags
 
-  before_create { self.name = name.downcase }
-
   validates :name, presence: true
   validates :definition, presence: true
-
-  default_scope -> { order('words.name ASC') }
+  
+  before_create { self.name = name.downcase }
 
   def self.search(word)
     where(name: word)

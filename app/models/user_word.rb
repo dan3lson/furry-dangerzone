@@ -10,7 +10,7 @@ class UserWord < ActiveRecord::Base
   def current_game
     game_ids = self.game_levels.pluck(:game_id).uniq
     game_name = Game.find(game_ids.first).name unless game_ids.count > 1
-    binding.pry
+
     if game_name == "Fundamentals"
       "one"
     elsif game_name == "Jeopardy"

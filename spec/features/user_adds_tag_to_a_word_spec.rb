@@ -18,10 +18,54 @@ feature "user adds tag to a word", %{
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
     let!(:tag) { FactoryGirl.create(:tag) }
-    let!(:user_word) { UserWord.create(user: user, word: word) }
+    let!(:user_word_1) { UserWord.create(user: user, word: word) }
     let!(:user_tag) { UserTag.create(user: user, tag: tag) }
 
     scenario "scenario: valid process" do
+      create_levels_and_games
+
+      game_level = GameLevel.all[-8]
+      game_level_2 = GameLevel.all[-7]
+      game_level_3 = GameLevel.all[-6]
+      game_level_4 = GameLevel.all[-5]
+      game_level_5 = GameLevel.all[-4]
+      game_level_6 = GameLevel.all[-3]
+      game_level_7 = GameLevel.all[-2]
+      game_level_8 = GameLevel.all[-1]
+
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_2
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_3
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_4
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_5
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_6
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_7
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_8
+      )
+
       log_in_as(user)
 
       visit myLeksi_path
@@ -40,6 +84,50 @@ feature "user adds tag to a word", %{
     end
 
     scenario "scenario: invalid process" do
+      create_levels_and_games
+
+      game_level = GameLevel.all[-8]
+      game_level_2 = GameLevel.all[-7]
+      game_level_3 = GameLevel.all[-6]
+      game_level_4 = GameLevel.all[-5]
+      game_level_5 = GameLevel.all[-4]
+      game_level_6 = GameLevel.all[-3]
+      game_level_7 = GameLevel.all[-2]
+      game_level_8 = GameLevel.all[-1]
+
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_2
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_3
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_4
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_5
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_6
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_7
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_8
+      )
+
       log_in_as(user)
 
       visit myLeksi_path

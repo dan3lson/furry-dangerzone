@@ -1,4 +1,6 @@
 class GameLevel < ActiveRecord::Base
+  default_scope -> { order('game_levels.level_id ASC') }
+  
   belongs_to :game
   belongs_to :level
   has_many :user_word_game_levels
@@ -7,5 +9,4 @@ class GameLevel < ActiveRecord::Base
   validates :game, presence: true
   validates :level, presence: true
 
-  default_scope -> { order('game_levels.level_id ASC') }
 end

@@ -15,11 +15,55 @@ feature "user removes a word", %{
   # [x] I see a message of removal-success
 
   describe "\n user removes a word -->" do
-    let(:user_word) { FactoryGirl.create(:user_word) }
-    let(:user) { user_word.user }
-    let!(:word) { user_word.word }
+    let(:user_word_1) { FactoryGirl.create(:user_word) }
+    let(:user) { user_word_1.user }
+    let!(:word) { user_word_1.word }
 
     scenario "scenario: remove word that is untagged" do
+      create_levels_and_games
+
+      game_level = GameLevel.all[-8]
+      game_level_2 = GameLevel.all[-7]
+      game_level_3 = GameLevel.all[-6]
+      game_level_4 = GameLevel.all[-5]
+      game_level_5 = GameLevel.all[-4]
+      game_level_6 = GameLevel.all[-3]
+      game_level_7 = GameLevel.all[-2]
+      game_level_8 = GameLevel.all[-1]
+
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_2
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_3
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_4
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_5
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_6
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_7
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_8
+      )
+
       log_in_as(user)
 
       click_on word.name
@@ -37,6 +81,7 @@ feature "user removes a word", %{
       expect(UserWord.count).to eq(0)
       expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
+      expect(UserWordGameLevel.count).to eq(0)
     end
 
     scenario "scenario: remove word that is tagged" do
@@ -47,6 +92,50 @@ feature "user removes a word", %{
         user: user, word_tag: word_tag
       )
 
+      create_levels_and_games
+
+      game_level = GameLevel.all[-8]
+      game_level_2 = GameLevel.all[-7]
+      game_level_3 = GameLevel.all[-6]
+      game_level_4 = GameLevel.all[-5]
+      game_level_5 = GameLevel.all[-4]
+      game_level_6 = GameLevel.all[-3]
+      game_level_7 = GameLevel.all[-2]
+      game_level_8 = GameLevel.all[-1]
+
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_2
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_3
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_4
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_5
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_6
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_7
+      )
+      UserWordGameLevel.create!(
+        user_word: user_word_1,
+        game_level: game_level_8
+      )
+
       log_in_as(user)
 
       click_on word.name
@@ -54,7 +143,7 @@ feature "user removes a word", %{
       within ".header-buttons" do
         click_on "remove"
       end
-      
+
       expect(page).to have_content("has been removed.")
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("foo-bar")
@@ -64,6 +153,7 @@ feature "user removes a word", %{
       expect(UserWord.count).to eq(0)
       expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
+      expect(UserWordGameLevel.count).to eq(0)
     end
   end
 end

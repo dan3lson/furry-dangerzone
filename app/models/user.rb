@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  default_scope -> { order('users.username ASC') }
+
   has_many :user_words, dependent: :destroy
   has_many :words, through: :user_words
   has_many :user_tags, dependent: :destroy
@@ -14,8 +16,6 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-
-  default_scope -> { order('users.username ASC') }
 
   def has_words?
     self.words.any?
