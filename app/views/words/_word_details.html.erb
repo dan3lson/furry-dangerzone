@@ -1,9 +1,15 @@
 <div class="word-details">
   <p>
-    <%= word.phonetic_spelling %>
+    <span class="word-phonetic-spelling"><%= word.phonetic_spelling %></span>
     &nbsp; &nbsp;
-    <em><%= word.part_of_speech %></em>
+    <span class="word-part-of-speech">
+      <em><%= word.part_of_speech %></em>
+    </span>
   </p>
-  <p><%= word.definition %></p>
-  <em><%= word.example_sentence %></em>
+  <p>
+    <span class="word-definition"><%= word.definition %></span>
+  </p>
+  <span class="word-example-sentence">
+    <em><%= word.example_sentence %></em>
+  </span>
 </div>

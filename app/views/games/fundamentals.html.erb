@@ -1,0 +1,88 @@
+<div class="palabra">
+	<%= render "words/word", word: @word %>
+</div>
+
+<!-- start of level 1 details -->
+<div id="level_1_details">
+	<!-- Display level focus, directions, and word for each respective activity -->
+	<div id="directions_container" class="lead">
+		<span id="activity_name"></span>
+		<span id="specific_instruction"></span>
+	</div>
+	<div id="chosen_word_header_container"></div>
+	<!-- end -->
+</div>
+<!-- end of level 1 details -->
+
+<!-- start of level 1 form -->
+<form id="level_1_form">
+	<!-- start of spell the word section -->
+	<div class="form-group" id="spell_the_word_form">
+		<label for="spell_the_word" class="sr-only" ></label>
+		<input id="spell_the_word" class="form-control input-lg" type="text" placeholder=""></input>
+	</div>
+	<!-- end of spell the word section -->
+</form> <!-- end of level 1 form -->
+
+<!-- start of fill in the blank activity -->
+<div class="row" id="fill_in_the_blank_container">
+	<div class="text-default lead" id="fill_in_the_blank_game_over_message">
+		Hey, are you having trouble? Go back to see the spelling of the word and try again!
+	</div>
+</div>
+<!-- end of fill in the blank activity -->
+
+<!-- start of pronunciation activity -->
+<div id="pronunciation_container" align="center">
+	<%= image_tag("pronunciation.png", alt: "Pronounce the word below.",
+		class: "img-responsive pointer",
+		id: "pronunciation_image_button")
+	%>
+</div>
+<!-- end of pronunciation activity -->
+
+<!-- start of meanings container -->
+<div id="meanings_container"></div>
+<!-- end of meanings container -->
+
+<!-- start of synonyms container -->
+<div id="synonyms_container"></div>
+<!-- end of synonyms container -->
+
+<!-- start of antonyms container -->
+<div id="antonyms_container"></div>
+<!-- end of antonyms container -->
+
+<!-- start of syn_ant checkpoint container -->
+<div id="syn_ant_checkpoint_container"></div>
+<!-- end of syn_ant checkpoint container -->
+
+<!-- start of real world examples checkpoint container -->
+<div id="real_world_examples_container"></div>
+<!-- end of real world examples checkpoint container -->
+
+<!-- start of review level one container -->
+<div id="review_level_one_container" align="center">
+	<%= image_tag("medal.png", alt: "You\'ve earned a medal") %>
+	<h1>Congratulations!</h1>
+	<p class="lead">
+		<span id="level_congrats_text">You've completed Level 1 for </span>
+		and earned
+		<span id="goodies_total"></span>
+		experience points!
+	</p>
+	<a class="btn btn-default btn-block btn-lg" href="two.html" id="review_level_one_continue_button" role="button">start next level</a>
+</div>
+<!-- end of start of review level one container -->
+
+<div id="continue_button_container" class="pointer">
+	<button type="button" class="btn btn-default btn-block btn-lg" id="start_level_1_button">start!</button>
+	<button type="button" class="btn btn-default btn-block btn-lg" id="spell_the_word_continue_button">continue</button>
+	<button type="button" class="btn btn-default btn-block btn-lg" id="fill_in_the_blank_continue_button">continue</button>
+	<button type="button" class="btn btn-default btn-block btn-lg" id="pronunciation_continue_button">continue</button>
+	<button type="button" class="btn btn-default btn-block btn-lg" id="meanings_continue_button">continue</button>
+	<button type="button" class="btn btn-default btn-block btn-lg" id="synonyms_continue_button">continue</button>
+	<button type="button" class="btn btn-default btn-block btn-lg" id="antonyms_continue_button">continue</button>
+	<button type="button" class="btn btn-default btn-block btn-lg" id="syn_ant_checkpoint_continue_button">continue</button>
+	<button type="button" class="btn btn-default btn-block btn-lg" id="real_world_examples_continue_button">continue</button>
+</div>

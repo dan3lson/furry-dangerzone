@@ -1,0 +1,119 @@
+form{
+	margin-top: 25px;
+}
+input{
+	border: 1px gray solid !important;
+}
+#continue_button_container{
+	margin-bottom: 20px;
+}
+#spell_the_word_form, #pronunciation_container, #fill_in_the_blank_container,
+#fill_in_the_blank_game_over_message, #restart_back_button,
+#fill_in_the_blank_back_button, #pronunciation_back_button,
+#meanings_back_button, #synonyms_back_button, #antonyms_back_button,
+#syn_ant_checkpoint_back_button, #real_world_examples_back_button,
+#review_level_one_back_button, #start_level_1_button,
+#spell_the_word_continue_button, #fill_in_the_blank_continue_button,
+#pronunciation_continue_button, #meanings_continue_button,
+#synonyms_continue_button, #antonyms_continue_button,
+#syn_ant_checkpoint_continue_button, #real_world_examples_continue_button,
+#review_level_one_container {
+	display: none;
+}
+.pointer{
+	cursor: pointer;
+}
+mark{
+	background:gray;
+}
+.change_text_to_red{
+	color: red;
+}
+#fill_in_the_blank_container{
+	margin: 0px;
+}
+.fill_in_the_blank_letters{
+	border: 2px solid gray;
+	border-radius: 5px;
+	width: 22% !important;
+	font-size: 40px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+	padding: 0px !important;
+}
+.fill_in_the_blank_letters_hover{
+	background: #F7F7F7;
+}
+#fill_in_the_blank_game_over_message{
+	font-size: xx-large;
+}
+.incorrect_fill_in_the_blank_letter{
+	color: red;
+}
+#pronunciation_container{
+	border: 1px solid gray;
+	border-radius: 130px;
+	width: 130px;
+	height: 130px;
+	padding: 15px;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+.pronunciation_container{
+	font-size: 20px !important;
+	margin-bottom: 10px !important;
+}
+.red_circle{
+	border: #FF1300 1px solid;
+	border-radius: 25px;
+	width: 25px;
+	height: 25px;
+	margin-right: 7px;
+}
+.syn_ant_checkpoint_red_circle{
+	border: gray 1px solid;
+	border-radius: 25px;
+	width: 25px;
+	height: 25px;
+	margin-right: 7px;
+	padding: 2px 0px 0px 6px;
+}
+.red_circle_background{
+	background: #FF1300;
+}
+.meaning_pos_container, .synonym_word_container, .antonym_word_container, .syn_ant_word_container, .rwe_source_container{
+	vertical-align: 7px;
+	font-size: 20px !important;
+}
+.syn_ant_word_container{
+	vertical-align: 0px;
+	font-size: 20px !important;
+}
+.meaning_row, .synonym_row, .antonym_row, .syn_ant_row, .rwe_row{
+	padding-left: 0px !important;
+}
+.meanings_container, .word_details_container, .rwe_container{
+	font-size: 20px !important;
+	line-height: 2.3 !important;
+}
+.part_of_speech_container{
+	font-style: italic;
+}
+.meaning_container, .rwe_content_container{
+	line-height: normal !important;
+}
+.red{
+	color: #FF1300;
+}
+.current_syn_ant_checkpoint_word{
+	font-size: 63px !important;
+	margin: -7px 0 30px 0px;
+}
+#syn_ant_checkpoint_synonym_button_div{
+	padding-left: 0px !important;
+	padding-right: 30px !important;
+}
+#syn_ant_checkpoint_antonym_button_div{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}

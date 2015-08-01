@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-  get "myLeksi" => "current_users#words"
-  get "myTags" => "current_users#tags"
   get "menu" => "static_pages#menu"
   get "search" => "searches#new"
+  get "myLeksi" => "current_users#words"
+  get "myTags" => "current_users#tags"
+  get "fundamentals" => "games#fundamentals"
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"

@@ -2,7 +2,7 @@
 <% provide(:header, "myLeksi") %>
 
 <% if current_user.has_words? %>
-  <% current_user.user_words.each do |user_word| %>
+  <% @current_user_user_words.each do |user_word| %>
     <% word = user_word.word %>
     <div class="box-shadow-border">
       <div class="pull-right">
@@ -12,7 +12,7 @@
               <span
                 class="game-<%= user_word.current_game %>-circle-start-text"
               >
-                <%= link_to "start", menu_path %>
+                <%= link_to "start", fundamentals_path(word: word) %>
               </span>
             </div>
           </div>
