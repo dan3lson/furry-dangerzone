@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @delete_account_msg = "Are you sure? All of your Leksi data will be lost."
   end
 
   def update
