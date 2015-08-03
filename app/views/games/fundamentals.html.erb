@@ -46,7 +46,30 @@
 <!-- end of meanings container -->
 
 <!-- start of synonyms container -->
-<div id="synonyms_container"></div>
+<div id="synonyms_container">
+	<% if @word.has_synonyms? %>
+		<% @synonyms.each_with_index do |synonym, index| %>
+			<div class="synonym_row pointer" type="button"
+					 data-toggle="collapse" data-target="#syn<%= index %>"
+					 aria-expanded="false" aria-controls= "<%= index %>"
+			>
+				<div class="red_circle inline-block"></div>
+				<div class="synonym_word_container lead pointer inline-block">
+					<%= synonym.name %>
+				</div>
+			</div>
+			<div class="word_details_container well lead collapse"
+					 id="syn<%= index %>"
+			>
+				<%= render "words/word_details", word: synonym %>
+			</div>
+		<% end %>
+	<% else %>
+		<p id="no_results" class="lead please-tap-continue">
+			&#9785; We don't have any synonyms to show. Please tap continue.
+		</p>
+	<% end %>
+</div>
 <!-- end of synonyms container -->
 
 <!-- start of antonyms container -->

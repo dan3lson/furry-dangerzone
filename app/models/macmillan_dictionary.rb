@@ -48,6 +48,16 @@ class MacmillanDictionary
           part_of_speech = xml_doc.xpath("/descendant::PART-OF-SPEECH[1]").text
           example_sentence = xml_doc.xpath("/descendant::EXAMPLE[1]").text
 
+          phonetic_spelling[0] = "" if phonetic_spelling[0] == " "
+
+          if part_of_speech[0] == " "
+            part_of_speech[0] = "" unless part_of_speech[0] == "p"
+          end
+
+          definition[0] = ""
+
+          example_sentence[0] == "" if example_sentence[0] == " "
+
           words << self.new(
             phonetic_spelling,
             definition,

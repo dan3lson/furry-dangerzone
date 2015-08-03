@@ -181,9 +181,7 @@ $(document).ready(function(){
 		progressBar(60);
 
 		// Start the next activity, i.e. Synonyms, if not already started
-		if ($("#synonyms_container").children().length == 0) {
-			start_synonyms_activity($chosen_word_value);
-		};
+		start_synonyms_activity($chosen_word_value);
 
 		// If all words have been clicked on, show the synonyms continue button
 		if ($synonym_circle_activity_boolean) {
@@ -571,8 +569,6 @@ $(document).ready(function(){
 			// end of xml_pos loop to get all defs
 		} // end of the POS for loop
 
-		// CODE BELOW IS OUTSIDE THE XML.FIND.EACH FUNCTION
-
 		// Click anywhere (row, circle, or word) to change element features
 		$(".meaning_row").click(function(){
 			// Fill in the circle
@@ -599,91 +595,22 @@ $(document).ready(function(){
 
 	// Start the synonyms activity
 	function start_synonyms_activity(chosen_word_value) {
-		// Read the XML file
-		$.ajax({
-			type: "GET",
-			url: "dictionary.xml",
-			dataType: "xml",
-			success: function (xml) {
-				$(xml).find(chosen_word_value).children().find('synonym').each(function(index){
-					// Get the actual word
-					$xml_similar_word = $(this).text();
-					// Create a row for the circle and word itself
-					$synonym_row = $("<div>", {class: "synonym_row pointer", type: "button", 'data-toggle': "collapse", 'data-target': "#syn"+index, 'aria-expanded': "false", 'aria-controls': index } );
-					$synonym_circle_div = $("<div>", {class: "red_circle inline-block"} );
-					$synonym_word_div = $("<div>", {class: "synonym_word_container lead pointer inline-block"} );
-					// Add the individual row to the synonyms container
-					$("#synonyms_container").append($synonym_row);
-					// Add the circle and word div to the synonym row
-					$($synonym_row).append($synonym_circle_div, $synonym_word_div);
-					// Add the word itself to the word div so it can be displayed
-					$($synonym_word_div).append($xml_similar_word);
-
-					// Create word details containter (inclues pro, pos, and meanings), which is the collapsible-content
-					$word_details_container = $("<div>", {class: "word_details_container well lead collapse", id: "syn"+index} );
-					$("#synonyms_container").append($word_details_container);
-
-					$pronunciation_div = $("<div>", {class: "pronunciation_container inline-block lead"} );
-					$($word_details_container).append($pronunciation_div);
-					$xml_pronunciation = $(xml).find($xml_similar_word).children(":first-child").text();
-					$($pronunciation_div).append($xml_pronunciation);
-
-					// If there is info for the clicked word, remove any existing details and display the
-					// Pronunciation, Part of speech, and Meaning(s)
-					$xml_part_of_speech_elements = $(xml).find($xml_similar_word).children("part_of_speech");
-
-					// If there isn't any info for the clicked word, display a sorry message [LOOK INTO THIS]
-					for (var i = 0; i < $xml_part_of_speech_elements.length; i++) {
-						// part of speech divs and text to display
-						$part_of_speech_div = $("<div>", {class: "part_of_speech_container"} );
-						$word_details_container.append($part_of_speech_div);
-						$part_of_speech_div.append($($xml_part_of_speech_elements[i]).attr("type"));
-
-						// meaning divs and text to display
-						$meaning_div = $("<div>", {class: "meaning_container"} );
-						$word_details_container.append($meaning_div);
-						$meaning_div.append("&#8605; " + $($xml_part_of_speech_elements[i]).find("meaning").text());
-					}
-				}); //end of the original .each loop
-
-				// CODE BELOW IS OUTSIDE THE XML.FIND.EACH FUNCTION
-
-
-				// Click anywhere (row, circle, or word) to change element features
-				$(".synonym_row").click(function(){
-					// Fill in the circle
-					$(this).children(":first").addClass("red_circle_background");
-					// See if the synonym exists in the xml file to display its details
-					if ($(xml).find($(this).children(":last").text()).length == 0) {
-
-						$(this).next().children(":first").remove();
-						var $no_word_info_container = $("<div>", {class: "no_word_info lead text-danger"} );
-						var $message = "&#9785; Aww man, there's no info for this word yet.";
-						if ($(this).next().find(".no_word_info").length < 1) {
-							$(this).next().append($no_word_info_container);
-							$($no_word_info_container).append($message);
-						}
-					}
-
-					// If all words have been clicked on, show the continue button
-					if ($("#synonyms_container .red_circle_background").length == $(".synonym_row").length) {
-						$("#synonyms_continue_button").show("fade");
-						$synonym_circle_activity_boolean = true;
-						boost_goodies(1500);
-					};
-				}); // end of the $synonym_row .click fn
-
-				//Checks if there are any synonyms. If not, display a message and show the continue button
-				$(".no_word_info").remove();
-				if ($(xml).find($chosen_word_value).children().find('synonym').length == 0) {
-					var $no_word_info_container = $("<div>", {class: "no_word_info lead text-danger"} );
-					var $message = "&#9785; We don't have any synonyms to show. Please tap continue.";
-					$("#synonyms_container").append($no_word_info_container);
-					$($no_word_info_container).append($message);
+		if ($("#no_results").hasClass("please-tap-continue")) {
+			$("#synonyms_continue_button").show("fade");
+			$synonym_circle_activity_boolean = true;
+		} else {
+			// Click anywhere (row, circle, or word) to change element features
+			$(".synonym_row").click(function(){
+				// Fill in the circle
+				$(this).children(":first").addClass("red_circle_background");
+				// If all words have been clicked on, show the continue button
+				if ($("#synonyms_container .red_circle_background").length == $(".synonym_row").length) {
 					$("#synonyms_continue_button").show("fade");
-				}
-			} // end of the success parameter in the ajax fn
-		}); // end of the ajax function
+					$synonym_circle_activity_boolean = true;
+					boost_goodies(1500);
+				};
+			}); // end of the $synonym_row .click fn
+		}
 	}; // end of the start synonyms activity function
 
 	// Start the antonyms activity

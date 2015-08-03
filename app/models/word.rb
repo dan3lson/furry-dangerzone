@@ -59,6 +59,10 @@ class Word < ActiveRecord::Base
     all.sample.name
   end
 
+  def has_synonyms?
+    synonyms.any?
+  end
+
   def self.untagged_for(user)
     words_with_tags = user.word_tags.pluck(
       :word_id).map { |word_id| Word.find(word_id) }

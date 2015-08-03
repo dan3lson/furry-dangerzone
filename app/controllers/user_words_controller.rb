@@ -22,6 +22,20 @@ class UserWordsController < ApplicationController
         end
       end
 
+      @synonyms = Synonym.provide(@word.name, @word.part_of_speech)
+      @synonyms.delete_if { |synonym| MacmillanDictionary.define(synonym).nil? }
+      @pos_synonymous_words = []
+
+      @synonyms.each do |synonym|
+        Word.define(synonym)
+        @pos_synonymous_words << Word.where(
+          name: synonym,
+          part_of_speech: @word.part_of_speech
+        )
+      end
+
+      @pos_synonymous_words.flatten.each { |word| @word.synonyms << word }
+
       if @user_word_game_levels_before_count == UserWordGameLevel.count - 8
         flash[:success] = "Awesome - you added \'#{@word.name}\'!"
         redirect_to @word

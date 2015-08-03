@@ -6,7 +6,6 @@
     <% word = user_word.word %>
     <div class="box-shadow-border">
       <div class="pull-right">
-        <!-- if user_word current_game hasn't been started  -->
           <div class="game-<%= user_word.current_game %>-start-circle">
             <div class="center">
               <span
@@ -16,8 +15,6 @@
               </span>
             </div>
           </div>
-        <!-- else show in-progress circle  -->
-        <!-- end -->
       </div>
       <div class="word_partial">
         <%= render "words/word", word: word %>
