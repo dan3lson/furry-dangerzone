@@ -5,10 +5,12 @@ class Word < ActiveRecord::Base
   has_many :users, through: :user_words
   has_many :word_tags, dependent: :destroy
   has_many :tags, through: :word_tags
+  has_many :word_synonyms
+  has_many :synonyms, through: :word_synonyms
 
   validates :name, presence: true
   validates :definition, presence: true
-  
+
   before_create { self.name = name.downcase }
 
   def self.search(word)
