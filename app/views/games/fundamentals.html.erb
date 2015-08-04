@@ -65,7 +65,7 @@
 			</div>
 		<% end %>
 	<% else %>
-		<p id="no_results" class="lead please-tap-continue">
+		<p id="synonym_no_results" class="lead please-tap-continue">
 			&#9785; We don't have any synonyms to show. Please tap continue.
 		</p>
 	<% end %>
@@ -73,7 +73,30 @@
 <!-- end of synonyms container -->
 
 <!-- start of antonyms container -->
-<div id="antonyms_container"></div>
+<div id="antonyms_container">
+	<% if @word.has_antonyms? %>
+		<% @antonyms.each_with_index do |antonym, index| %>
+			<div class="antonym_row pointer" type="button"
+					 data-toggle="collapse" data-target="#ant<%= index %>"
+					 aria-expanded="false" aria-controls= "<%= index %>"
+			>
+				<div class="red_circle inline-block"></div>
+				<div class="antonym_word_container lead pointer inline-block">
+					<%= antonym.name %>
+				</div>
+			</div>
+			<div class="word_details_container well lead collapse"
+					 id="ant<%= index %>"
+			>
+				<%= render "words/word_details", word: antonym %>
+			</div>
+		<% end %>
+	<% else %>
+		<p id="antonym_no_results" class="lead please-tap-continue">
+			&#9785; We don't have any antonyms to show. Please tap continue.
+		</p>
+	<% end %>
+</div>
 <!-- end of antonyms container -->
 
 <!-- start of syn_ant checkpoint container -->

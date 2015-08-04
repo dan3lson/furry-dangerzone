@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803023758) do
+ActiveRecord::Schema.define(version: 20150804021738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,17 @@ ActiveRecord::Schema.define(version: 20150803023758) do
   end
 
   add_index "versions", ["number"], name: "index_versions_on_number", unique: true, using: :btree
+
+  create_table "word_antonyms", force: :cascade do |t|
+    t.integer  "word_id",    null: false
+    t.integer  "antonym_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "word_antonyms", ["antonym_id"], name: "index_word_antonyms_on_antonym_id", using: :btree
+  add_index "word_antonyms", ["word_id", "antonym_id"], name: "index_word_antonyms_on_word_id_and_antonym_id", unique: true, using: :btree
+  add_index "word_antonyms", ["word_id"], name: "index_word_antonyms_on_word_id", using: :btree
 
   create_table "word_synonyms", force: :cascade do |t|
     t.integer  "word_id",    null: false

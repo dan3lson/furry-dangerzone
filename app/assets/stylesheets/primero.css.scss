@@ -8,7 +8,7 @@ input{
 	margin-bottom: 20px;
 }
 #spell_the_word_form, #pronunciation_container, #fill_in_the_blank_container,
-#fill_in_the_blank_game_over_message, #synonyms_container,
+#fill_in_the_blank_game_over_message, #synonyms_container, #antonyms_container,
 #restart_back_button,
 #fill_in_the_blank_back_button, #pronunciation_back_button,
 #meanings_back_button, #synonyms_back_button, #antonyms_back_button,
@@ -95,7 +95,6 @@ mark{
 }
 .meanings_container, .word_details_container, .rwe_container{
 	font-size: 20px !important;
-	line-height: 2.3 !important;
 }
 .part_of_speech_container{
 	font-style: italic;

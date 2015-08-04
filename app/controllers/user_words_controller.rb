@@ -23,18 +23,42 @@ class UserWordsController < ApplicationController
       end
 
       @synonyms = Synonym.provide(@word.name, @word.part_of_speech)
-      @synonyms.delete_if { |synonym| MacmillanDictionary.define(synonym).nil? }
-      @pos_synonymous_words = []
+      unless @synonyms.nil?
+        @synonyms.delete_if { |synonym|
+          MacmillanDictionary.define(synonym).nil?
+        }
 
-      @synonyms.each do |synonym|
-        Word.define(synonym)
-        @pos_synonymous_words << Word.where(
-          name: synonym,
-          part_of_speech: @word.part_of_speech
-        )
+        @pos_synonymous_words = []
+
+        @synonyms.each do |synonym|
+          Word.define(synonym)
+          @pos_synonymous_words << Word.where(
+            name: synonym,
+            part_of_speech: @word.part_of_speech
+          )
+        end
+
+        @pos_synonymous_words.flatten.each { |word| @word.synonyms << word }
       end
 
-      @pos_synonymous_words.flatten.each { |word| @word.synonyms << word }
+      @antonyms = Antonym.provide(@word.name, @word.part_of_speech)
+      unless @antonyms.nil?
+        @antonyms.delete_if { |antonym|
+          MacmillanDictionary.define(antonym).nil?
+        }
+
+        @pos_antonymous_words = []
+
+        @antonyms.each do |antonym|
+          Word.define(antonym)
+          @pos_antonymous_words << Word.where(
+            name: antonym,
+            part_of_speech: @word.part_of_speech
+          )
+        end
+
+        @pos_antonymous_words.flatten.each { |word| @word.antonyms << word }
+      end
 
       if @user_word_game_levels_before_count == UserWordGameLevel.count - 8
         flash[:success] = "Awesome - you added \'#{@word.name}\'!"

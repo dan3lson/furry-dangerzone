@@ -1,14 +1,14 @@
-class Synonym
+class Antonym
   include HTTParty
   include Nokogiri
 
-  attr_accessor :synonyms
+  attr_accessor :antonyms
 
   API_URL = "http://words.bighugelabs.com/api/2"
   API_KEY = ENV["BIG_HUGE_THESAURUS"]
 
   def initialize
-    @synonyms
+    @antonyms
   end
 
   def self.provide(word, part_of_speech)
@@ -17,10 +17,10 @@ class Synonym
     if response.success?
       response = JSON.parse(response)
 
-      synonyms = if response[part_of_speech]["syn"].nil?
+      antonyms = if response[part_of_speech]["ant"].nil?
                    nil
                  else
-                   response[part_of_speech]["syn"]
+                   response[part_of_speech]["ant"]
                  end
     else
       Rails.logger.error { "Error: something didn\'t work..." }

@@ -7,6 +7,8 @@ class Word < ActiveRecord::Base
   has_many :tags, through: :word_tags
   has_many :word_synonyms
   has_many :synonyms, through: :word_synonyms
+  has_many :word_antonyms
+  has_many :antonyms, through: :word_antonyms
 
   validates :name, presence: true
   validates :definition, presence: true
@@ -61,6 +63,10 @@ class Word < ActiveRecord::Base
 
   def has_synonyms?
     synonyms.any?
+  end
+
+  def has_antonyms?
+    antonyms.any?
   end
 
   def self.untagged_for(user)
