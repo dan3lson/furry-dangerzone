@@ -23,14 +23,17 @@ class UserWordsController < ApplicationController
       end
 
       @synonyms = Synonym.provide(@word.name, @word.part_of_speech)
+
       unless @synonyms.nil?
-        @synonyms.delete_if { |s| MacmillanDictionary.define(s).nil? }
+        @synonyms.each do |s|
+          next if MacmillanDictionary.define(s).nil?
 
-        @synonyms.each do |synonym|
-          Word.define(synonym)
+          word = Word.define(s).first
 
-          unless @word.synonyms.pluck(:id).include?(word.id)
-            @word.synonyms << word
+          unless word.blank?
+            if !@word.synonyms.pluck(:id).include?(word.id)
+              @word.synonyms << word
+            end
           end
         end
       end

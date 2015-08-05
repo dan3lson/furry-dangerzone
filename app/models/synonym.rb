@@ -22,7 +22,7 @@ class Synonym
       synonyms = if response[part_of_speech]["syn"].nil?
                    nil
                  else
-                   response[part_of_speech]["syn"]
+                   response[part_of_speech]["syn"].take(3)
                  end
     else
       Rails.logger.error { "Error: something didn\'t work..." }

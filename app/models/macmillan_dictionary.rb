@@ -48,31 +48,39 @@ class MacmillanDictionary
           part_of_speech = xml_doc.xpath("/descendant::PART-OF-SPEECH[1]").text
           example_sentence = xml_doc.xpath("/descendant::EXAMPLE[1]").text
 
-          phonetic_spelling[0] = "" if phonetic_spelling[0] == " "
+          if definition.empty?
+            # Rails.logger.info { "INFO: #{entry} has no definition!" }
+            nil
+          else
+            phonetic_spelling[0] = "" if phonetic_spelling[0] == " "
 
-          if part_of_speech[0] == " "
-            part_of_speech[0] = "" unless part_of_speech[0] == "p"
+            if part_of_speech[0] == " "
+              part_of_speech[0] = "" unless part_of_speech[0] == "p"
+            end
+
+            definition[0] = ""
+
+            example_sentence[0] == "" if example_sentence[0] == " "
+
+            words << self.new(
+              phonetic_spelling,
+              definition,
+              part_of_speech,
+              example_sentence
+            )
           end
-
-          definition[0] = ""
-
-          example_sentence[0] == "" if example_sentence[0] == " "
-
-          words << self.new(
-            phonetic_spelling,
-            definition,
-            part_of_speech,
-            example_sentence
-          )
         else
-          Rails.logger.error { "ERROR!: ADDING #{entry} didn\'t work!" }
+          # Rails.logger.error { "ERROR!: ADDING #{entry} didn\'t work!" }
           nil
         end
       end
       words
     else
-      Rails.logger.error { "ERROR: #{response["errorMessage"]}" }
+      # Rails.logger.error { "ERROR: #{response["errorMessage"]}" }
       nil
     end
   end
 end
+
+# ERROR IS BEING RETURNED BECAUSE THE ENTRY IS NOT FOUND AND NIL IS RETURNED
+# BUT ERROR IS LOGGED --> STILL NOT SURE WHY JUST "ERROR" IS SHOWN
