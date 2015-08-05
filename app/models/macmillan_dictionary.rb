@@ -65,13 +65,13 @@ class MacmillanDictionary
             example_sentence
           )
         else
-          Rails.logger.error { "Error: #{response["errorMessage"]}" }
+          Rails.logger.error { "ERROR!: ADDING #{entry} didn\'t work!" }
           nil
         end
       end
       words
     else
-      Rails.logger.error { "Error: #{response["errorMessage"]}" }
+      Rails.logger.error { "ERROR: #{response["errorMessage"]}" }
       nil
     end
   end

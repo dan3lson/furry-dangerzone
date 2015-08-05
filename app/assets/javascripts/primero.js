@@ -240,7 +240,7 @@ $(document).ready(function(){
 
 		// Show and hide buttons
 		$("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container, #syn_ant_checkpoint_continue_button, #syn_ant_checkpoint_score_div").hide();
-		$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container").show();
+		$("#real_world_examples_back_button, #real_world_examples_container").show();
 
 		// Update the activity name and instruction
 		display_activity_instruction("Real-World Examples","See how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
@@ -249,9 +249,7 @@ $(document).ready(function(){
 		progressBar(90);
 
 		// Start the next activity, i.e. Real World Examples, if not already started
-		if ($("#real_world_examples_container").children().length == 0) {
-			start_real_world_examples_activity($chosen_word_value);
-		};
+		start_real_world_examples_activity($chosen_word_value);
 
 		// If all words have been clicked on, show the real world examples container
 		if ($rwe_circle_activity_boolean) {
@@ -631,8 +629,6 @@ $(document).ready(function(){
 		}
 	}; // end of the start antonyms activity function
 
-
-
 	// Start the synonyms / antonyms checkpoint activity
 	function start_syn_ant_checkpoint_activity(chosen_word_value) {
 		// Create a score counter:  0 / X
@@ -724,67 +720,19 @@ $(document).ready(function(){
 
 	// Start the real world examples activity
 	function start_real_world_examples_activity(chosen_word_value) {
-		// Read the XML file
-		$.ajax({
-			type: "GET",
-			url: "dictionary.xml",
-			dataType: "xml",
-			success: function (xml) {
+		// Click anywhere (row, circle, or word) to change element features
+		$(".rwe_row").click(function(){
+			// Fill in the circle
+			$(this).children(":first").addClass("red_circle_background");
 
-				// Find how mnay Real World examples there are and create a row for each one
-				$xml_part_of_speech_elements = $(xml).find(chosen_word_value).find("sentence[type='real world example']");
-				for (var index = 0; index < $xml_part_of_speech_elements.length; index++) {
-					// Create a row for the circle and rwe
-					$rwe_row = $("<div>", {class: "rwe_row pointer", type: "button", 'data-toggle': "collapse", 'data-target': "#rwe"+index, 'aria-expanded': "false", 'aria-controls': index } );
-					$rwe_circle_div = $("<div>", {class: "red_circle inline-block"} );
-					$rwe_source_div = $("<div>", {class: "rwe_source_container lead pointer inline-block"} );
-					// Add the individual row to the rwe container
-					$("#real_world_examples_container").append($rwe_row);
-					// Add the circle and rwe div to the rwe row
-					$($rwe_row).append($rwe_circle_div, $rwe_source_div);
-					// Add the rwe to which the meaning will be under so it can be displayed
-					$rwe_collapse_header = $($xml_part_of_speech_elements[index]).attr("source");
-					$($rwe_source_div).append($rwe_collapse_header);
-
-					//Create the containter that displays the rwe, which is the collapsible-content
-					$rwe_container = $("<div>", {class: "rwe_container well lead collapse", id: "rwe"+index} );
-					$("#real_world_examples_container").append($rwe_container);
-
-					// rwe divs and text to display
-		            $($xml_part_of_speech_elements[index]).each(function() {
-						$rwe_div = $("<div>", {class: "rwe_content_container"} );
-						$rwe_container.append($rwe_div);
-						$rwe_div.append("&#9997; " + $(this).text());
-					}); // end of xml_pos loop to get all rwe
-				} // end of the POS for loop
-
-				// CODE BELOW IS OUTSIDE THE XML.FIND.EACH FUNCTION
-
-				// Click anywhere (row, circle, or word) to change element features
-				$(".rwe_row").click(function(){
-					// Fill in the circle
-					$(this).children(":first").addClass("red_circle_background");
-
-					// If all words have been clicked on, show the continue button
-					if ($("#real_world_examples_container .red_circle_background").length == $(".rwe_row").length) {
-						$("#rwe_continue_button").fadeIn();
-						$rwe_circle_activity_boolean = true;
-						boost_goodies(2400);
-					};
-				}); // end of the $meaning_row .click fn
-
-				//Checks if there are any meanings. If not, display a message and show the continue button
-				$(".no_word_info").remove();
-				if ($(xml).find($chosen_word_value).children().find("sentence[type='real world example']").length == 0) {
-					var $no_word_info_container = $("<div>", {class: "no_word_info lead text-danger"} );
-					var $message = "&#9785; We don't have any real world examples to show. Please tap continue.";
-					$("#rwe_content_container").append($no_word_info_container);
-					$($no_word_info_container).append($message);
-					$("#real_world_examples_continue_button").fadeIn();
-				}
-			} // end of the success parameter in the ajax fn
-		}); // end of the ajax function
-	};
+			// If all words have been clicked on, show the continue button
+			if ($("#real_world_examples_container .red_circle_background").length == $(".rwe_row").length) {
+				$("#real_world_examples_continue_button").fadeIn();
+				$rwe_circle_activity_boolean = true;
+				boost_goodies(2400);
+			};
+		});
+	}; // end of the $rwe_row .click fn
 
 	// Start the review level one activity
 	function start_review_level_one_activity(chosen_word_value) {

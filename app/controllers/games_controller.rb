@@ -4,6 +4,7 @@ class GamesController < ApplicationController
   def fundamentals
     @synonyms = @word.synonyms if @word.has_synonyms?
     @antonyms = @word.antonyms if @word.has_antonyms?
+    @real_world_examples = RealWorldExample.provide(@word.name)
   end
 
   private

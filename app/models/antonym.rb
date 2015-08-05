@@ -15,12 +15,14 @@ class Antonym
     response = HTTParty.get("#{API_URL}/#{API_KEY}/#{word}/json")
 
     if response.success?
+      part_of_speech[0].gsub(" ","")
+
       response = JSON.parse(response)
 
       antonyms = if response[part_of_speech]["ant"].nil?
                    nil
                  else
-                   response[part_of_speech]["ant"]
+                   response[part_of_speech]["ant"].take(3)
                  end
     else
       Rails.logger.error { "Error: something didn\'t work..." }

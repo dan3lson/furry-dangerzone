@@ -15,6 +15,8 @@ class Synonym
     response = HTTParty.get("#{API_URL}/#{API_KEY}/#{word}/json")
 
     if response.success?
+      part_of_speech[0].gsub(" ","")
+
       response = JSON.parse(response)
 
       synonyms = if response[part_of_speech]["syn"].nil?

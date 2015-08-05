@@ -24,21 +24,15 @@ class UserWordsController < ApplicationController
 
       @synonyms = Synonym.provide(@word.name, @word.part_of_speech)
       unless @synonyms.nil?
-        @synonyms.delete_if { |synonym|
-          MacmillanDictionary.define(synonym).nil?
-        }
-
-        @pos_synonymous_words = []
+        @synonyms.delete_if { |s| MacmillanDictionary.define(s).nil? }
 
         @synonyms.each do |synonym|
           Word.define(synonym)
-          @pos_synonymous_words << Word.where(
-            name: synonym,
-            part_of_speech: @word.part_of_speech
-          )
-        end
 
-        @pos_synonymous_words.flatten.each { |word| @word.synonyms << word }
+          unless @word.synonyms.pluck(:id).include?(word.id)
+            @word.synonyms << word
+          end
+        end
       end
 
       @antonyms = Antonym.provide(@word.name, @word.part_of_speech)
@@ -57,7 +51,11 @@ class UserWordsController < ApplicationController
           )
         end
 
-        @pos_antonymous_words.flatten.each { |word| @word.antonyms << word }
+        @pos_antonymous_words.flatten.each do |word|
+          unless @word.antonyms.pluck(:id).include?(word.id)
+            @word.antonyms << word
+          end
+        end
       end
 
       if @user_word_game_levels_before_count == UserWordGameLevel.count - 8
