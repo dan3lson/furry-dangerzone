@@ -1,6 +1,13 @@
 <% provide(:title, @word.name) %>
 <% provide(:header, @word.name) %>
 
+<%= render "games/display_game_start_btn", user_word: @user_word,
+                                           word: @word
+%>
+
+<br>
+<br>
+
 <div class="box-shadow-border">
   <div class="pull-right">
     <%= image_tag("myLeksi_black_filled_25.png", alt: "myLeksi", class: "img-responsive") %>
@@ -33,7 +40,7 @@
               <div class="tag-on-word-show-page inline-block pull-right">
                   <%=
                     render "tags/remove_tag_btn_word_show_page",
-                    word: @word, tag: tag 
+                    word: @word, tag: tag
                   %>
               </div>
             </div>

@@ -6,15 +6,9 @@
     <% word = user_word.word %>
     <div class="box-shadow-border">
       <div class="pull-right">
-          <div class="game-<%= user_word.current_game %>-start-circle">
-            <div class="center">
-              <span
-                class="game-<%= user_word.current_game %>-circle-start-text"
-              >
-                <%= link_to "start", fundamentals_path(word: word) %>
-              </span>
-            </div>
-          </div>
+        <%= render "games/display_game_start_btn", user_word: user_word,
+                                                   word: word
+        %>
       </div>
       <div class="word_partial">
         <%= render "words/word", word: word %>

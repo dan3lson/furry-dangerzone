@@ -8,7 +8,7 @@ class MacmillanDictionary
   attr_accessor :example_sentence
 
   API_URL = "https://www.macmillandictionary.com/api/v1/"
-  URL_ENDING = "&pagesize=5&pageindex=1"
+  URL_ENDING = "&pagesize=3&pageindex=1"
 
   def initialize(
     phonetic_spelling,
@@ -23,7 +23,8 @@ class MacmillanDictionary
   end
 
   def self.define(word)
-    word = word.gsub(" ", "-")
+    word.gsub!(" ", "-")
+    
     response = HTTParty.get(
       "#{API_URL}dictionaries/american/search/?q=#{word}#{URL_ENDING}",
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }
@@ -49,7 +50,7 @@ class MacmillanDictionary
           example_sentence = xml_doc.xpath("/descendant::EXAMPLE[1]").text
 
           if definition.empty?
-            # Rails.logger.info { "INFO: #{entry} has no definition!" }
+            # logger.info { "INFO: #{entry} has no definition!" }
             nil
           else
             phonetic_spelling[0] = "" if phonetic_spelling[0] == " "

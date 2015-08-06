@@ -10,62 +10,20 @@ class UserWordsController < ApplicationController
     )
 
     if @user_word.save
-      @user_word_game_levels = []
       @user_word_game_levels_before_count = UserWordGameLevel.count
 
-      GameLevel.all.each do |game_level|
-        if game_level.game.name == "Fundamentals"
-          @user_word_game_levels << UserWordGameLevel.create!(
-            user_word: @user_word,
-            game_level: game_level
-          )
-        end
-      end
+      GameLevel.create_fundamentals_for(@user_word)
 
-      @synonyms = Synonym.provide(@word.name, @word.part_of_speech)
+      Thesaurus.insert_words_for(@word, "syn", @word.part_of_speech)
 
-      unless @synonyms.nil?
-        @synonyms.each do |s|
-          next if MacmillanDictionary.define(s).nil?
-
-          word = Word.define(s).first
-
-          unless word.blank?
-            if !@word.synonyms.pluck(:id).include?(word.id)
-              @word.synonyms << word
-            end
-          end
-        end
-      end
-
-      @antonyms = Antonym.provide(@word.name, @word.part_of_speech)
-      unless @antonyms.nil?
-        @antonyms.delete_if { |antonym|
-          MacmillanDictionary.define(antonym).nil?
-        }
-
-        @pos_antonymous_words = []
-
-        @antonyms.each do |antonym|
-          Word.define(antonym)
-          @pos_antonymous_words << Word.where(
-            name: antonym,
-            part_of_speech: @word.part_of_speech
-          )
-        end
-
-        @pos_antonymous_words.flatten.each do |word|
-          unless @word.antonyms.pluck(:id).include?(word.id)
-            @word.antonyms << word
-          end
-        end
-      end
+      Thesaurus.insert_words_for(@word, "ant", @word.part_of_speech)
 
       if @user_word_game_levels_before_count == UserWordGameLevel.count - 8
         flash[:success] = "Awesome - you added \'#{@word.name}\'!"
         redirect_to @word
       else
-        flash[:danger] = "Yikes! - adding that word didn\'t work. Please try again."
+        msg = "Yikes! - adding that word didn\'t work. Please try again."
+        flash[:danger] = msg
         redirect_to search_path
       end
     end
