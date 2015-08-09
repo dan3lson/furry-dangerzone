@@ -433,12 +433,6 @@ $(document).ready(function(){
 
 	// Start Level 1 with the spelling activity
 	function spell_chosen_word() {
-		// Create an array of all the substrings leading up to the entire chosen word
-		for (var i = 1; i < $chosen_word_value.length+1; i++) {
-			$chosen_word_substring = $chosen_word_value.substr(0,i);
-			$chosen_word_substring_array.push($chosen_word_substring);
-		}
-
 		$("#spell_the_word").on('input', function(){
 			$word_being_spelled = $.trim($(this).val().toLowerCase());
 
@@ -601,6 +595,7 @@ $(document).ready(function(){
 				$(this).children(":first").addClass("red_circle_background");
 				// If all words have been clicked on, show the continue button
 				if ($("#synonyms_container .red_circle_background").length == $(".synonym_row").length) {
+					scroll_to_bottom();
 					$("#synonyms_continue_button").fadeIn();
 					$synonym_circle_activity_boolean = true;
 					boost_goodies(1500);
@@ -621,6 +616,7 @@ $(document).ready(function(){
 				$(this).children(":first").addClass("red_circle_background");
 				// If all words have been clicked on, show the continue button
 				if ($("#antonyms_container .red_circle_background").length == $(".antonym_row").length) {
+					scroll_to_bottom();
 					$("#antonyms_continue_button").fadeIn();
 					$antonym_circle_activity_boolean = true;
 					boost_goodies(1500);
@@ -900,6 +896,12 @@ $(document).ready(function(){
 	// Get a random number between y and x
 	function randomRange (x,y) {
 		return Math.floor(Math.random()* (x-y) + y);
+	};
+
+	// Global fn
+	// Scroll to the bottom of the page when user can continue
+	function scroll_to_bottom () {
+		$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 	};
 
 	// Global fn
