@@ -14,7 +14,7 @@ feature "two users add the same word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  describe "\n two users add a word -->" do
+  describe "\n two users add same word -->" do
     let!(:user_word) { FactoryGirl.create(:user_word) }
     let!(:word) { user_word.word }
     let(:user2) { FactoryGirl.create(:user) }
@@ -81,7 +81,7 @@ feature "two users add the same word", %{
       expect(page).to have_content(word.part_of_speech)
       expect(page).to have_content(word.definition)
       expect(page).to have_content(word.example_sentence)
-      expect(Word.count).to eq(1)
+      expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(2)
       expect(UserTag.count).to eq(0)
       expect(WordTag.count).to eq(0)
