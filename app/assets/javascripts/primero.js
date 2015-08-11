@@ -13,7 +13,9 @@ $(document).ready(function(){
 	var $word_being_spelled;
 	var $chosen_word_substring;
 	var $chosen_word_substring_array = [];
-	var $chosen_word_each_letter_array = $chosen_word_value.split('');
+	if ($chosen_word_value != undefined) {
+		var $chosen_word_each_letter_array = $chosen_word_value.split('');
+	}
 	// Fill in the blank
 	var $each_life_span;
 	var	$each_letter_fill_in_the_blank_div; // letters shown in the fill in the blanks activity
@@ -110,6 +112,9 @@ $(document).ready(function(){
 		// Update the progress made
 		progressBar(15);
 
+		// Update the user_word_game_level's status to complete
+		update_user_word_game_level_status("1", 1);
+
 		// Check if Fill in the blank activity was already won
 		if ($fill_in_the_blank_game_won) {
 			$alphabet_random_letters_array = [];
@@ -135,6 +140,8 @@ $(document).ready(function(){
 		// Update the activity name and instruction
 		display_activity_instruction("Pronunciation","Say <strong>'" + $chosen_word_value + "'</strong> aloud and then hit the mic.");
 
+		// Update the user_word_game_level's status to complete
+		update_user_word_game_level_status("2", 2);
 
 		// Update the progress made
 		progressBar(30);
@@ -153,6 +160,9 @@ $(document).ready(function(){
 
 		// Update the activity name and instruction
 		display_activity_instruction("Meanings","<strong>'" + $chosen_word_value + "'</strong> can have different meanings depending on how you use it.");
+
+		// Update the user_word_game_level's status to complete
+		update_user_word_game_level_status("3", 3);
 
 		// Update the progress made
 		progressBar(45);
@@ -177,6 +187,9 @@ $(document).ready(function(){
 		// Update the activity name and instruction
 		display_activity_instruction("Synonyms","The words below are similar to " + "<strong>'" + $chosen_word_value + "'</strong>.");
 
+		// Update the user_word_game_level's status to complete
+		update_user_word_game_level_status("4", 4);
+
 		// Update the progress made
 		progressBar(60);
 
@@ -198,6 +211,9 @@ $(document).ready(function(){
 		// Update the activity name and instruction
 		display_activity_instruction("Antonyms","The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>.");
 
+		// Update the user_word_game_level's status to complete
+		update_user_word_game_level_status("5", 5);
+
 		// Update the progress made
 		progressBar(75);
 
@@ -218,6 +234,9 @@ $(document).ready(function(){
 
 		// Update the activity name and instruction
 		display_activity_instruction("Checkpoint!","Is <strong>'" + $chosen_word_value + "'</strong> a synonym or antonym to:");
+
+		// Update the user_word_game_level's status to complete
+		update_user_word_game_level_status("6", 6);
 
 		// Update the progress made
 		progressBar(75);
@@ -245,6 +264,9 @@ $(document).ready(function(){
 		// Update the activity name and instruction
 		display_activity_instruction("Real-World Examples","See how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
 
+		// Update the user_word_game_level's status to complete
+		update_user_word_game_level_status("7", 7);
+
 		// Update the progress made
 		progressBar(90);
 
@@ -263,6 +285,9 @@ $(document).ready(function(){
 		// Show and hide buttons
 		$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
 		$("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
+
+		// Update the user_word_game_level's status to complete
+		update_user_word_game_level_status("8", 8);
 
 		// Update the progress made
 		progressBar(100);
@@ -742,6 +767,28 @@ $(document).ready(function(){
 	/**
 	 * Helper Functions: Support ones that help each activity above
 	 */
+
+	// Update user_word_game_level_status
+	function update_user_word_game_level_status(level_id, num) {
+		var url = window.location.href
+		var word_id = url.slice(40, 43)
+		var game_info = {
+			"game_name": "Fundamentals",
+			"level_id": level_id,
+			"word_id": word_id
+		}
+
+		$.ajax({
+			type: "PATCH",
+			url: "/user_word_game_level",
+			contentType: "application/json",
+			dataType: "json",
+			data: JSON.stringify(game_info),
+			success: function() {
+				console.log("UserWordGameLevel status completed for GameLevel" + num);
+			}
+		});
+	};
 
 	// Synonym, Antonym, Sentence Examples fn
 	// If there isn't any info for the clicked word, display a sorry message
