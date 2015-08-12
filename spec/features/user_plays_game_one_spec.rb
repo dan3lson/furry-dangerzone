@@ -15,11 +15,14 @@ feature "user plays game one", %{
   #    to /words/:id
 
   describe "\n user plays game one -->" do
-    let(:user_word_1) { FactoryGirl.create(:user_word) }
-    let(:word) { user_word_1.word }
-    let(:user) { user_word_1.user }
+    scenario "scenario: plays game one without stopping", js: true do
+      word = Word.create(
+        name: "time",
+        definition: "the quantity that you measure using a clock"
+      )
+      user = FactoryGirl.create(:user)
+      user_word_1 = UserWord.create(user: user, word: word)
 
-    scenario "scenario: plays game one without stopping" do
 			create_levels_and_games
 
 			game_level = GameLevel.all[-8]
@@ -69,40 +72,59 @@ feature "user plays game one", %{
       click_on "start"
 
       # Level 1
-      fill_in "spell_the_word", with: "chess"
+      fill_in "spell_the_word", with: "time"
+      sleep 1
+
       click_on "continue"
+      sleep 1
 
       # Level 2
-      click_on "c"
-      click_on "h"
-      click_on "e"
-      click_on "s"
-      click_on "s"
+      page.find(".letter_t").click
+      sleep 1
+      page.find(".letter_i").click
+      sleep 1
+      page.find(".letter_m").click
+      sleep 1
+      page.find(".letter_e").click
+      sleep 1
       click_on "continue"
+      sleep 1
 
       # Level 3
-      click_on "pronunciation_button"
+      page.find("#pronunciation_image_button").click
+      sleep 1
       click_on "continue"
+      sleep 1
 
       # Level 4
-      click_on "meaning_row_button"
+      page.find(".meaning_row").click
+      sleep 1
       click_on "continue"
+      sleep 1
 
       # Level 5
-      click_on "synonym_row_button"
+      page.find(".synonym_row").click
+      sleep 1
       click_on "continue"
+      sleep 1
 
       # Level 6
       click_on "antonym_row_button"
+      sleep 1
       click_on "continue"
+      sleep 1
 
       # Level 7
       click_on "synonym_antonym_checkpoint_button"
+      sleep 1
       click_on "continue"
+      sleep 1
 
       # Level 8
       click_on "real_world_example_row_button"
+      sleep 1
       click_on "continue"
+      sleep 1
 
       expect(page).to have_content("Congratulations!")
       expect(page).to have_content("You\'ve completed Game 1 for")

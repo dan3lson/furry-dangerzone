@@ -9,13 +9,12 @@ class UserWord < ActiveRecord::Base
 
   def current_game
     game_ids = self.game_levels.pluck(:game_id).uniq
-    game_name = Game.find(game_ids.first).name unless game_ids.count > 1
 
-    if game_name == "Fundamentals"
+    if game_ids.count == 1
       "one"
-    elsif game_name == "Jeopardy"
+    elsif game_ids.count == 2
       "two"
-    elsif game_name == "Freestyle"
+    elsif game_ids.count == 3
       "three"
     else
       nil

@@ -72,7 +72,11 @@ RSpec.describe UserWord, type: :model do
         password_confirmation: "password"
       )
       user_word = UserWord.create!(word: word, user: user)
-      game = Game.create!(
+      game_fundamentals = Game.create!(
+        name: "Fundamentals",
+        description: "Fun jeopardy twist"
+      )
+      game_jeopardy = Game.create!(
         name: "Jeopardy",
         description: "Fun jeopardy twist"
       )
@@ -84,8 +88,13 @@ RSpec.describe UserWord, type: :model do
         focus: "Meanings",
         direction: "View diff meanings."
       )
-      game_level = GameLevel.create!(game: game, level: level)
-      game_level_2 = GameLevel.create!(game: game, level: level_2)
+      game_level_0 = GameLevel.create!(game: game_fundamentals, level: level)
+      game_level = GameLevel.create!(game: game_jeopardy, level: level)
+      game_level_2 = GameLevel.create!(game: game_jeopardy, level: level_2)
+      user_word_game_level = UserWordGameLevel.create!(
+        user_word: user_word,
+        game_level: game_level_0
+      )
       user_word_game_level = UserWordGameLevel.create!(
         user_word: user_word,
         game_level: game_level
@@ -109,7 +118,15 @@ RSpec.describe UserWord, type: :model do
         password_confirmation: "password"
       )
       user_word = UserWord.create!(word: word, user: user)
-      game = Game.create!(
+      game_fundamentals = Game.create!(
+        name: "Fundamentals",
+        description: "Be creative"
+      )
+      game_jeopardy = Game.create!(
+        name: "Jeopardy",
+        description: "Be creative"
+      )
+      game_freestyle = Game.create!(
         name: "Freestyle",
         description: "Be creative"
       )
@@ -121,11 +138,21 @@ RSpec.describe UserWord, type: :model do
         focus: "Meanings",
         direction: "View diff meanings."
       )
-      game_level = GameLevel.create!(game: game, level: level)
-      game_level_2 = GameLevel.create!(game: game, level: level_2)
+      game_level_0 = GameLevel.create!(game: game_fundamentals, level: level)
+      game_level_0_0 = GameLevel.create!(game: game_jeopardy, level: level)
+      game_level = GameLevel.create!(game: game_freestyle, level: level)
+      game_level_2 = GameLevel.create!(game: game_freestyle, level: level_2)
       user_word_game_level = UserWordGameLevel.create!(
         user_word: user_word,
-        game_level: game_level
+        game_level: game_level_0
+      )
+      user_word_game_level = UserWordGameLevel.create!(
+        user_word: user_word,
+        game_level: game_level_0_0
+      )
+      user_word_game_level = UserWordGameLevel.create!(
+        user_word: user_word,
+        game_level: game_level_2
       )
       user_word_game_level = UserWordGameLevel.create!(
         user_word: user_word,
@@ -133,52 +160,6 @@ RSpec.describe UserWord, type: :model do
       )
 
       expect(user_word.current_game).to eq("three")
-    end
-
-    it "returns a nil" do
-      word = Word.create(
-        name: "foobar",
-        definition: "foo plus bar equals foobar"
-      )
-      user = User.create(
-        username: "fizzBuzzzzed",
-        password: "password",
-        password_confirmation: "password"
-      )
-      user_word = UserWord.create!(word: word, user: user)
-      game = Game.create!(
-        name: "Freestyle",
-        description: "Be creative"
-      )
-      game_2 = Game.create!(
-        name: "Jeopardy",
-        description: "Fun jeopardy twist"
-      )
-      level = Level.create!(
-        focus: "Spelling",
-        direction: "Type the word below:"
-      )
-      level_2 = Level.create!(
-        focus: "Meanings",
-        direction: "View diff meanings."
-      )
-      level_3 = Level.create!(
-        focus: "Checkpoint",
-        direction: "Select the syn or ant."
-      )
-      game_level = GameLevel.create!(game: game, level: level)
-      game_level_2 = GameLevel.create!(game: game, level: level_2)
-      game_level_3 = GameLevel.create!(game: game_2, level: level_3)
-      user_word_game_level = UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level
-      )
-      user_word_game_level = UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_3
-      )
-
-      expect(user_word.current_game).to eq(nil)
     end
   end
 end

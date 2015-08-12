@@ -63,6 +63,106 @@ Level.create!(
   direction: "See how \'foobar\' has been used in everyday life."
 )
 
+Level.create!(
+  focus: "Focus 1",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 2",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 3",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 4",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 5",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 6",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 7",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 8",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 9",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 10",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 11",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 12",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 13",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 14",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 15",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 16",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 17",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 18",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 19",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
+Level.create!(
+  focus: "Focus 20",
+  direction: "Tap one of the four words to match the statement in the middle."
+)
+
 Rails.logger.info "==============================================="
 Rails.logger.info "Creating Games"
 Rails.logger.info "==============================================="
@@ -86,9 +186,22 @@ Rails.logger.info "==============================================="
 Rails.logger.info "Creating Game Levels"
 Rails.logger.info "==============================================="
 
-Level.all.each do |level|
+fundamentals_levels = Level.all.take(8)
+fundamentals = Game.find_by(name: "Fundamentals")
+
+fundamentals_levels.each do |level|
   GameLevel.create!(
-    game: Game.find_by(name: "Fundamentals"),
+    game: fundamentals,
+    level: level
+  )
+end
+
+jeopardy_levels = Level.all.drop(8)
+jeopardy = Game.find_by(name: "Jeopardy")
+
+jeopardy_levels.each do |level|
+  GameLevel.create!(
+    game: jeopardy,
     level: level
   )
 end

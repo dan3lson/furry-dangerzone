@@ -289,6 +289,24 @@ $(document).ready(function(){
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("8", 8);
 
+		// Create the game_level's for Jeopardy
+		var url = window.location.href;
+		var word_id = url.slice(40, 43);
+		var game_info = {
+			"word_id": word_id
+		};
+
+		$.ajax({
+			type: "POST",
+			url: "/user_word_game_level_jeopardy",
+			contentType: "application/json",
+			dataType: "json",
+			data: JSON.stringify(game_info),
+			success: function(response) {
+				console.log(response);
+			}
+		});
+
 		// Update the progress made
 		progressBar(100);
 
@@ -489,7 +507,7 @@ $(document).ready(function(){
 		$merged_letters_array = shuffle_array($merged_letters_array);
 
 		$.each($merged_letters_array, function(index, value){
-			$each_letter_fill_in_the_blank_div = $("<div>", {class: "col-xs-4 col-sm-3 text-center fill_in_the_blank_letters pointer"} );
+			$each_letter_fill_in_the_blank_div = $("<div>", { class: "col-xs-4 col-sm-3 text-center fill_in_the_blank_letters pointer letter_" + value } );
 			$("#fill_in_the_blank_container").append($each_letter_fill_in_the_blank_div);
 			$($each_letter_fill_in_the_blank_div).append(value).html();
 		});
@@ -770,13 +788,13 @@ $(document).ready(function(){
 
 	// Update user_word_game_level_status
 	function update_user_word_game_level_status(level_id, num) {
-		var url = window.location.href
-		var word_id = url.slice(40, 43)
+		var url = window.location.href;
+		var word_id = url.slice(40, 43);
 		var game_info = {
 			"game_name": "Fundamentals",
 			"level_id": level_id,
 			"word_id": word_id
-		}
+		};
 
 		$.ajax({
 			type: "PATCH",
@@ -784,8 +802,8 @@ $(document).ready(function(){
 			contentType: "application/json",
 			dataType: "json",
 			data: JSON.stringify(game_info),
-			success: function() {
-				console.log("UserWordGameLevel status completed for GameLevel" + num);
+			success: function(response) {
+				console.log(response);
 			}
 		});
 	};
