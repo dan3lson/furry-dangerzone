@@ -3,7 +3,11 @@
 		<span
 			class="game-<%= user_word.current_game %>-circle-start-text"
 		>
-			<%= link_to "start", fundamentals_path(word: word) %>
+			<% if user_word.current_game == "one" %>
+				<%= link_to "start", fundamentals_path(word: word) %>
+			<% else %>
+				<%= link_to "start", jeopardies_path(word: word) %>
+			<% end %>
 		</span>
 	</div>
 </div>

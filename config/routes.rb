@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "myLeksi" => "current_users#words"
   get "myTags" => "current_users#tags"
   get "fundamentals" => "games#fundamentals"
+  get "jeopardies" => "games#jeopardies"
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"

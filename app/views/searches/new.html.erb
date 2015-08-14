@@ -1,7 +1,11 @@
 <% provide(:title, "define") %>
 <% provide(:header, "define") %>
 
-<%= render "searches/form" %>
+<div class="well">
+  Find a word or click <em>define</em> for a random one!
+  <%= render "searches/form" %>
+</div>
+
 
 <% if @query %>
   <% if @search_results.class == String %>
