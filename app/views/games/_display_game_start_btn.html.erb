@@ -4,9 +4,9 @@
 			class="game-<%= user_word.current_game %>-circle-start-text"
 		>
 			<% if user_word.current_game == "one" %>
-				<%= link_to "start", fundamentals_path(word: word) %>
+				<%= link_to "start", fundamentals_path(word_id: word) %>
 			<% else %>
-				<%= link_to "start", jeopardies_path(word: word) %>
+				<%= link_to "start", jeopardy_path(word_id: word) %>
 			<% end %>
 		</span>
 	</div>

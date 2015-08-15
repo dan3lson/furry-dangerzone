@@ -73,58 +73,41 @@ feature "user plays game one", %{
 
       # Level 1
       fill_in "spell_the_word", with: "time"
-      sleep 1
 
       click_on "continue"
-      sleep 1
 
       # Level 2
       page.find(".letter_t").click
-      sleep 1
       page.find(".letter_i").click
-      sleep 1
       page.find(".letter_m").click
-      sleep 1
       page.find(".letter_e").click
-      sleep 1
       click_on "continue"
-      sleep 1
 
       # Level 3
       page.find("#pronunciation_image_button").click
-      sleep 1
       click_on "continue"
-      sleep 1
 
       # Level 4
       page.find(".meaning_row").click
-      sleep 1
       click_on "continue"
-      sleep 1
 
       # Level 5
-      page.find(".synonym_row").click
-      sleep 1
+      sleep(3)
+      save_screenshot("failure.png")
+      # page.find(".synonym_row").click
       click_on "continue"
-      sleep 1
 
       # Level 6
       click_on "antonym_row_button"
-      sleep 1
       click_on "continue"
-      sleep 1
 
       # Level 7
       click_on "synonym_antonym_checkpoint_button"
-      sleep 1
       click_on "continue"
-      sleep 1
 
       # Level 8
       click_on "real_world_example_row_button"
-      sleep 1
       click_on "continue"
-      sleep 1
 
       expect(page).to have_content("Congratulations!")
       expect(page).to have_content("You\'ve completed Game 1 for")

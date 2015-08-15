@@ -1,64 +1,11 @@
 <div class="navbar navbar-default navbar-fixed-top logged_in_header" role="navigation">
 	<div class="container">
 		<h1 class="center">
-			<span class="pull-left">
-				<% unless logged_in? %>
-					<%=
-						link_to image_tag("Leksi.png", class: "img-responsive"), root_path
-					%>
-				<% end %>
-				<% if logged_in? %>
-					<%
-						if params[:controller] == "tags" && params[:action] == "new" ||
-							 params[:action] == "show"
-					%>
-						<%= link_to image_tag("back_black_32.png"), :back %>
-					<% end %>
-				<% end %>
-			</span>
+			<%= render "layouts/header_pull_left" %>
 
 			<%= full_header(yield(:header)) %>
 
-			<span class="pull-right header-buttons">
-				<% if !logged_in? && params[:action] == "home" %>
-					<p class="remove-line-height">
-						<%=
-						  link_to "Get for free", signup_path,
-						  class: "btn btn-default btn-sm apple-blue-button"
-						%>
-					</p>
-				<% end %>
-
-				<% if params[:action] == "tags" %>
-					<%= link_to image_tag("add_black_32.png"), new_tag_path %>
-
-				<% elsif params[:controller] == "tags" && params[:action] == "show" %>
-					<% if Rails.env.test? %>
-							<%= link_to "edit", edit_tag_path(@tag) %>
-					<% end %>
-					<%= link_to image_tag("edit_black_32.png"), edit_tag_path(@tag) %>
-
-				<% elsif params[:controller] == "tags" && params[:action] == "edit" %>
-					<%= render "tags/remove_tag_btn_tag_show_page", tag: @tag %>
-
-				<% elsif params[:controller] == "versions" &&
-								 params[:action] == "index" %>
-					<%= link_to image_tag("add_black_32.png"), new_version_path %>
-
-				<% elsif params[:controller] == "versions" &&
-								 params[:action] == "show" %>
-					<% if logged_in? && current_user.is_admin? %>
-						<%=
-							link_to image_tag("edit_black_32.png"),
-							edit_version_path(@version)
-						%>
-					<% end %>
-
-				<% elsif params[:controller] == "words" && params[:action] == "show" %>
-					<%= render "words/remove_word_btn_word_show_page", word: @word %>
-
-				<% end %>
-			</span>
+			<%= render "layouts/header_pull_right" %>
 		</h1>
 	</div>
 </div>

@@ -291,7 +291,7 @@ $(document).ready(function(){
 
 		// Create the game_level's for Jeopardy
 		var url = window.location.href;
-		var word_id = url.slice(40, 43);
+		var word_id = url.slice(43, 46);
 		var game_info = {
 			"word_id": word_id
 		};
@@ -789,7 +789,7 @@ $(document).ready(function(){
 	// Update user_word_game_level_status
 	function update_user_word_game_level_status(level_id, num) {
 		var url = window.location.href;
-		var word_id = url.slice(40, 43);
+		var word_id = url.slice(43, 46);
 		var game_info = {
 			"game_name": "Fundamentals",
 			"level_id": level_id,

@@ -7,9 +7,12 @@ class GamesController < ApplicationController
     @real_world_examples = RealWorldExample.provide(@word.name)
   end
 
+  def jeopardy
+  end
+
   private
 
   def word
-    @word = Word.find(params[:word])
+    @word = Word.find(params[:word_id])
   end
 end

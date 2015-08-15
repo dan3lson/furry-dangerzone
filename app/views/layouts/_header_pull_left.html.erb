@@ -1,0 +1,15 @@
+<span class="pull-left">
+	<% unless logged_in? %>
+		<%=
+			link_to image_tag("Leksi.png", class: "img-responsive"), root_path
+		%>
+	<% end %>
+	<% if logged_in? %>
+		<%
+			if params[:controller] == "tags" && params[:action] == "new" ||
+				 params[:action] == "show"
+		%>
+			<%= link_to image_tag("back_black_32.png"), :back %>
+		<% end %>
+	<% end %>
+</span>

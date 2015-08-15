@@ -2,10 +2,14 @@
 <% provide(:header, "define") %>
 
 <div class="well">
-  Find a word or click <em>define</em> for a random one!
   <%= render "searches/form" %>
+  <br>
+  <div class="center">
+    <small>
+      Find a word or click <em>define</em> for a random one!
+    </small>
+  </div>
 </div>
-
 
 <% if @query %>
   <% if @search_results.class == String %>

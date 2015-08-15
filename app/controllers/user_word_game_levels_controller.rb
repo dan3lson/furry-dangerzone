@@ -1,5 +1,6 @@
 class UserWordGameLevelsController < ApplicationController
   def update
+    puts "WORD: #{Word.all}"
     @word = Word.find(params[:word_id])
     @level = Level.find(params[:level_id])
     @game = Game.find_by(name: params[:game_name])
