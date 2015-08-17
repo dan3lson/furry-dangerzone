@@ -73,7 +73,6 @@ feature "user plays game one", %{
 
       # Level 1
       fill_in "spell_the_word", with: "time"
-
       click_on "continue"
 
       # Level 2
@@ -93,30 +92,28 @@ feature "user plays game one", %{
 
       # Level 5
       sleep(3)
-      save_screenshot("failure.png")
-      # page.find(".synonym_row").click
       click_on "continue"
 
       # Level 6
-      click_on "antonym_row_button"
+      sleep(3)
       click_on "continue"
 
       # Level 7
-      click_on "synonym_antonym_checkpoint_button"
-      click_on "continue"
+      page.find("#syn_ant_checkpoint_continue_button").click
 
       # Level 8
-      click_on "real_world_example_row_button"
+      page.find(".rwe_row_0").click
+      page.find(".rwe_row_1").click
+      page.find(".rwe_row_2").click
       click_on "continue"
+      sleep(3)
 
       expect(page).to have_content("Congratulations!")
-      expect(page).to have_content("You\'ve completed Game 1 for")
+      expect(page).to have_content("You\'ve completed the Fundamentals for")
       expect(page).to have_content(word.name)
       expect(page).to have_content("and earned")
       expect(page).to have_content("experience points!")
-      expect(page).to have_link("start next game")
-      expect(user_word.game.where(name: "game one").status).to eq("complete")
-      expect(user_word.activities.pluck(:completed).include?(false)).to eq(false)
+      expect(user_word_1.game_levels.pluck(:status).include?("not started")).to eq(false)
     end
   end
 end

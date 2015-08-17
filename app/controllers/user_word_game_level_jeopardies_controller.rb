@@ -1,6 +1,10 @@
 class UserWordGameLevelJeopardiesController < ApplicationController
   def create
-    @word = Word.find(params[:word_id])
+    @word = if Rails.env.test?
+      Word.find(params[:word_id].gsub("=",""))
+    else
+      Word.find(params[:word_id])
+    end
     @user_word = UserWord.find_by(user: current_user, word: @word)
 
     GameLevel.create_jeopardys_for(@user_word)

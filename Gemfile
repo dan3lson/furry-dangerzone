@@ -24,26 +24,24 @@ gem 'sass-rails', '~> 5.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+group :test do
+  gem 'database_cleaner'
+  # A library for setting up Ruby objects as test data. (https://github.com/thoughtbot/factory_girl)
+  gem 'poltergeist'
+  # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
+end
 
 group :development, :test do
   # Acceptance test framework for web applications. (https://github.com/jnicklas/capybara)
   gem 'capybara'
   # Ensures a clean state during tests
-  gem 'database_cleaner'
-  # A library for setting up Ruby objects as test data. (https://github.com/thoughtbot/factory_girl)
   gem 'factory_girl'
   # Enables you to use fake people, places, or things (e.g. addresses)
   gem 'faker'
   # Saves and opens a page for when debugging tests
   gem 'launchy'
   # Headless driver for capybara testing based on PhantomJS
-  gem 'poltergeist'
-  # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry-rails'
   # Rspec is used for Bheavior Driven Development (http://rspec.info, https://github.com/rspec/rspec)
   gem 'rspec-rails', '~> 3.0'
@@ -57,7 +55,6 @@ end
 
 group :production do
   gem 'unicorn', '4.8.3'
-  # TBD
   gem 'rails_12factor', '0.0.2'
 end
 

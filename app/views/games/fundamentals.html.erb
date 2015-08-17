@@ -123,7 +123,7 @@
 		</div>
 	<% else %>
 		<% @real_world_examples.each_with_index do |rwe, index| %>
-			<div class="rwe_row pointer" type="button"
+			<div class="rwe_row rwe_row_<%= index %> pointer" type="button"
 					 data-toggle="collapse" data-target="#rwe<%= index %>"
 					 aria-expanded="false" aria-controls="<%= index %>"
 			>
@@ -147,7 +147,7 @@
 	<%= image_tag("medal.png", alt: "You\'ve earned a medal") %>
 	<h1>Congratulations!</h1>
 	<p class="lead">
-		<span id="level_congrats_text">You've completed Level 1 for </span>
+		<span id="level_congrats_text">You've completed the Fundamentals for </span>
 		and earned
 		<span id="goodies_total"></span>
 		experience points!
