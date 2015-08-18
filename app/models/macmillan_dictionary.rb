@@ -24,7 +24,7 @@ class MacmillanDictionary
 
   def self.define(word)
     word.gsub!(" ", "-")
-    
+
     response = HTTParty.get(
       "#{API_URL}dictionaries/american/search/?q=#{word}#{URL_ENDING}",
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }
@@ -50,7 +50,6 @@ class MacmillanDictionary
           example_sentence = xml_doc.xpath("/descendant::EXAMPLE[1]").text
 
           if definition.empty?
-            # logger.info { "INFO: #{entry} has no definition!" }
             nil
           else
             phonetic_spelling[0] = "" if phonetic_spelling[0] == " "
@@ -71,17 +70,12 @@ class MacmillanDictionary
             )
           end
         else
-          # Rails.logger.error { "ERROR!: ADDING #{entry} didn\'t work!" }
           nil
         end
       end
       words
     else
-      # Rails.logger.error { "ERROR: #{response["errorMessage"]}" }
       nil
     end
   end
 end
-
-# ERROR IS BEING RETURNED BECAUSE THE ENTRY IS NOT FOUND AND NIL IS RETURNED
-# BUT ERROR IS LOGGED --> STILL NOT SURE WHY JUST "ERROR" IS SHOWN

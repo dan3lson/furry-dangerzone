@@ -19,7 +19,9 @@ class UserWordsController < ApplicationController
       Thesaurus.insert_words_for(@word, "ant", @word.part_of_speech)
 
       if @user_word_game_levels_before_count == UserWordGameLevel.count - 8
-        flash[:success] = "Awesome - you added \'#{@word.name}\'!"
+        msg = "Awesome - you added \'#{@word.name}\'! Tap \'start\' to begin "
+        msg_2 = "learning it."
+        flash[:success] = msg << msg_2
         redirect_to @word
       else
         msg = "Yikes! - adding that word didn\'t work. Please try again."

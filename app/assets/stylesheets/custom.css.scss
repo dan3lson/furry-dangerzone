@@ -11,7 +11,7 @@ $apple-blue: #097ff0;
 $apple-star-orange: #fd9603;
 $black: #000;
 $dark-gray: #8e8e93;
-$game-circle-sizes: 32px;
+$game-circle-sizes: 45px;
 $leksi-green: #24d12e;
 $leksi-orange: orange;
 $leksi-red: #ff1300;
@@ -72,10 +72,10 @@ p {
 	width: $game-circle-sizes;
 	border-width: 2px;
 	border-style: solid;
+	line-height: 38px;
 }
 
 .game-circle-start-text {
-	font-size: .75em;
 	font-weight: 200;
 	vertical-align: middle;
 }
@@ -291,6 +291,10 @@ input {
 .menu-header {
 	background: $light-gray;
 	padding: 5px;
+}
+
+#more-description {
+	display: none;
 }
 
 .navbar-footer{

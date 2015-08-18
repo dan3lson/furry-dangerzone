@@ -99,7 +99,7 @@ $(document).ready(function(){
 	 * Handle the continue buttons
 	 */
 
-	$("#spell_the_word_continue_button").click(function(){
+	$("#spell_the_word_continue_button").click(function(event){
 		// Hide the first activity
 		$("#spell_the_word_form").hide();
 

@@ -4,6 +4,7 @@
 			link_to image_tag("Leksi.png", class: "img-responsive"), root_path
 		%>
 	<% end %>
+
 	<% if logged_in? %>
 		<%
 			if params[:controller] == "tags" && params[:action] == "new" ||

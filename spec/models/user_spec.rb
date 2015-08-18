@@ -66,4 +66,14 @@ RSpec.describe User, type: :model do
       expect(user.already_has_word?(word)).to eq(true)
     end
   end
+
+  describe "#has_reached_free_version_limit?" do
+    it "returns false" do
+      expect(user.has_reached_free_version_limit?).to eq(false)
+    end
+    it "returns true" do
+      user.words << word
+      expect(user.has_reached_free_version_limit?).to eq(true)
+    end
+  end
 end

@@ -1,11 +1,21 @@
-<h1>The next game, <em>Leksi Jeopardy</em>, is coming soon ;)</h1>
+<% provide(:title, "Pro Version") %>
+<% provide(:header, "Leksi") %>
+
+<h1>
+	Thank you, <%= current_user.username %>, for using the Free Version of Leksi!
+</h1>
 
 <br>
 
-<p class="lead center">
-	In the meantime, what do you think of Leksi? We'd love it if you could
-	<span class="basic-apple-blue-link">
-		<%= link_to "give us a rating", menu_path %>.
-	</span>
-	<strong>Thank you!</strong>
-</p>
+<div class="lead center">
+	<p>
+		The Pro Version is coming out soon!
+	</p>
+
+	<p>
+		In the meantime, what do you think of Leksi? Please
+		<span class="basic-apple-blue-link">
+			<%= link_to "give us a rating", menu_path %>.
+		</span>
+	</p>
+</div>

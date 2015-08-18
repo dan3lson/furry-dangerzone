@@ -11,11 +11,13 @@ class User < ActiveRecord::Base
 
   validates :username,
     presence: true,
-    uniqueness: true,
+    uniqueness: { case_sensitive: false },
     length: { minimum: 3, maximum: 33 }
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+  before_create { self.username = username.downcase }
 
   def has_words?
     self.words.any?
@@ -35,5 +37,9 @@ class User < ActiveRecord::Base
 
   def is_admin?
     self.role == "admin"
+  end
+
+  def has_reached_free_version_limit?
+    self.words.count > 9
   end
 end
