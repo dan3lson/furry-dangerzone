@@ -15,7 +15,7 @@ feature "user plays game one", %{
   #    to /words/:id
 
   describe "\n user plays game one -->" do
-    scenario "scenario: plays game one without stopping", js: true do
+    skip "scenario: plays game one without stopping", js: true do
       word = Word.create(
         name: "time",
         definition: "the quantity that you measure using a clock"

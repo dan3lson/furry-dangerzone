@@ -63,6 +63,7 @@ feature "user adds a word and sees game one start link", %{
         focus: "focus 8",
         direction: "direction 8"
       )
+
       game_level = GameLevel.create!(game: game, level: level)
       game_level_2 = GameLevel.create!(game: game, level: level_2)
       game_level_3 = GameLevel.create!(game: game, level: level_3)
@@ -71,6 +72,7 @@ feature "user adds a word and sees game one start link", %{
       game_level_6 = GameLevel.create!(game: game, level: level_6)
       game_level_7 = GameLevel.create!(game: game, level: level_7)
       game_level_8 = GameLevel.create!(game: game, level: level_8)
+
       UserWordGameLevel.create!(
         user_word: user_word,
         game_level: game_level
@@ -103,6 +105,7 @@ feature "user adds a word and sees game one start link", %{
         user_word: user_word,
         game_level: game_level_8
       )
+
       log_in_as(user_2)
 
       visit search_path
@@ -121,7 +124,7 @@ feature "user adds a word and sees game one start link", %{
       expect(page).to have_content("/tʃes/")
       expect(page).to have_css(".game-one-start-circle")
       expect(page).to have_css(".game-one-circle-start-text")
-      expect(Word.count).to eq(1)
+      expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(2)
       expect(UserWordGameLevel.count).to eq(16)
     end

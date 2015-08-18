@@ -68,10 +68,10 @@ RSpec.describe User, type: :model do
   end
 
   describe "#has_reached_free_version_limit?" do
-    it "returns false" do
+    xit "returns false" do
       expect(user.has_reached_free_version_limit?).to eq(false)
     end
-    it "returns true" do
+    xit "returns true" do
       user.words << word
       expect(user.has_reached_free_version_limit?).to eq(true)
     end

@@ -72,6 +72,7 @@ feature "user adds a word", %{
       game_level_6 = GameLevel.create!(game: game, level: level_6)
       game_level_7 = GameLevel.create!(game: game, level: level_7)
       game_level_8 = GameLevel.create!(game: game, level: level_8)
+
       UserWordGameLevel.create!(
         user_word: user_word,
         game_level: game_level
@@ -104,7 +105,7 @@ feature "user adds a word", %{
         user_word: user_word,
         game_level: game_level_8
       )
-      
+
       log_in_as(user_2)
 
       visit search_path
@@ -121,7 +122,7 @@ feature "user adds a word", %{
       expect(page).to have_content("noun")
       expect(page).to have_content("a game for two people, played on a board")
       expect(page).to have_content("/tʃes/")
-      expect(Word.count).to eq(1)
+      expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(2)
       expect(UserWordGameLevel.count).to eq(16)
     end
