@@ -16,16 +16,19 @@ class Thesaurus
 
     if connection.success?
       part_of_speech.gsub!(" ", "")
-
       response = JSON.parse(connection)
 
-      response = if response[part_of_speech][syn_or_ant].nil?
-                   nil
-                 else
-                   response[part_of_speech][syn_or_ant].take(3)
-                 end
+      response_pos = response[part_of_speech]
+      if response_pos.nil?
+        nil
+      else
+        response = if response_pos[syn_or_ant].nil?
+                     nil
+                   else
+                     response_pos[syn_or_ant].take(3)
+                   end
+      end
     else
-      # Rails.logger.error { "Error: something didn\'t work..." }
       nil
     end
   end
