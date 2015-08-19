@@ -24,10 +24,15 @@ class UserWordsController < ApplicationController
         flash[:success] = msg << msg_2
         redirect_to @word
       else
-        msg = "Yikes! - adding that word didn\'t work. Please try again."
+        msg = "Yikes! - creating Fundamental game_levels didn\'t work."
         flash[:danger] = msg
-        redirect_to search_path
+        redirect_to @word
       end
+    else
+        msg = "Yikes! - adding that word to your Leksi didn\'t work. "
+        msg_2 = " Please try again."
+        flash[:danger] = msg << msg_2
+        redirect_to search_path
     end
   end
 
