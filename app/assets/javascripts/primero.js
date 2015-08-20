@@ -5,6 +5,7 @@ $(document).ready(function(){
 
 	// General
 	var $chosen_word_value = $(".word-name").html();
+	var $chosen_word_id = $(".palabra-id").html();
 	var $styled_chosen_word_value = "";
 	var $each_letter_span; // letters shown in the header
 	var $regex = /^[a-zA-Z. ]+$/; // No numbers or special characters just letters and spaces; /^[a-zA-Z]*$/; is only letters and no spaces or numbers
@@ -793,12 +794,10 @@ $(document).ready(function(){
 
 	// Update user_word_game_level_status
 	function update_user_word_game_level_status(level_id, num) {
-		var url = window.location.href;
-		var word_id = url.slice(43, 46);
 		var game_info = {
 			"game_name": "Fundamentals",
 			"level_id": level_id,
-			"word_id": word_id
+			"word_id": $chosen_word_id
 		};
 
 		$.ajax({
