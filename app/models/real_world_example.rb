@@ -24,8 +24,6 @@ class RealWorldExample
 		no_results = page.css("div.no-results").text
 
 		if no_results.empty?
-			nil
-		else
 			page.css("h3.search-result-title").each do |title|
 				rwe_mapped_examples = real_world_examples.map { |r| r.example }
 
@@ -34,6 +32,7 @@ class RealWorldExample
 				unless title_text.split(" ").count < 5
 					rwe = RealWorldExample.new
 					rwe.type = "title"
+
 					if word_included_in_string?(word, title_text)
 						rwe.example = title_text
 						unless rwe_mapped_examples.include?(rwe.example)
@@ -57,8 +56,9 @@ class RealWorldExample
 					end
 				end
 			end
-			binding.pry
 			real_world_examples.take(3)
+		else
+			nil
     end
   end
 end
