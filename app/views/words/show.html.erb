@@ -19,7 +19,9 @@
 
     <% if Word.untagged_for(current_user).include?(@word) %>
       <div class="alert alert-warning">
-          This word is Untagged.
+          <p>
+            This word is Untagged.
+          </p>
           <% unless current_user.has_tags? %>
             <span class="basic-black-link">
               <%= link_to "Create your first tag", new_tag_path %> now.
@@ -27,7 +29,7 @@
           <% end %>
       </div>
     <% else %>
-      <% tags_for_a(@word).each do |tag| %>
+      <% tags_for_a(current_user, @word).each do |tag| %>
         <div class="tags-for-a-word">
             <div class="tag col-xs-9">
               <div class="basic-black-link inline-block">
@@ -46,7 +48,7 @@
 
     <div class="clear"></div>
 
-    <% unless unused_tags(@word).first.nil? %>
+    <% unless unused_tags(current_user, @word).first.nil? %>
       <br>
       <p class="lead">Add Tag</p>
       <%= form_for :user_word_tag,
@@ -58,7 +60,7 @@
         <%= f.label :tag_id, "Tags", class: "sr-only" %>
         <%=
           f.collection_select :tag_id,
-          unused_tags(@word), :id, :name,
+          unused_tags(current_user, @word), :id, :name,
           prompt: true
         %>
         <%= f.submit class: "btn btn-default btn-sm", value: "add" %>

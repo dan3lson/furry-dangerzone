@@ -25,13 +25,13 @@ module ApplicationHelper
     current_user.word_tags.where(tag: tag).map { |word_tag| word_tag.word }
   end
 
-  def tags_for_a(word)
-    current_user.user_word_tags.map do |uwt|
+  def tags_for_a(user, word)
+    user.user_word_tags.map do |uwt|
       uwt.word_tag.tag if uwt.word_tag.word == word
     end.compact
   end
 
-  def unused_tags(word)
-    current_user.tags - tags_for_a(word)
+  def unused_tags(user, word)
+    current_user.tags - tags_for_a(user, word)
   end
 end
