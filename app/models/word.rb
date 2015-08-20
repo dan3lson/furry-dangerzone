@@ -31,7 +31,6 @@ class Word < ActiveRecord::Base
         macmillan_search = MacmillanDictionary.define(name)
         if macmillan_search.nil?
           "Yikes! We couldn\'t find '#{name}'. Please search again!"
-          # Rails.logger.info { "Macmillan couldn\'t find '#{name}'." }
         else
           words = []
           macmillan_search.each do |entry|

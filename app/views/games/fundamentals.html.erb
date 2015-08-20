@@ -38,8 +38,11 @@
 <!-- start of fill in the blank activity -->
 <div class="row" id="fill_in_the_blank_container">
 	<div class="text-default lead" id="fill_in_the_blank_game_over_message">
-		Hey, are you having trouble? Go back to see the spelling of the word and
-		try again!
+		Hey, are you having trouble?
+		<span class="pointer apple-blue" id="fill_in_the_blank_back_button">
+			Tap here
+		</span>
+		to see the spelling of the word and try again!
 	</div>
 </div>
 <!-- end of fill in the blank activity -->
@@ -78,7 +81,7 @@
 		<% end %>
 	<% else %>
 		<p id="synonym_no_results" class="lead please-tap-continue">
-			&#9785; We don't have any synonyms to show. Please tap continue.
+			&#9785; There aren't any synonyms to show. Please tap continue.
 		</p>
 	<% end %>
 </div>
@@ -105,7 +108,7 @@
 		<% end %>
 	<% else %>
 		<p id="antonym_no_results" class="lead please-tap-continue">
-			&#9785; We don't have any antonyms to show. Please tap continue.
+			&#9785; There aren't any antonyms to show. Please tap continue.
 		</p>
 	<% end %>
 </div>
@@ -118,8 +121,8 @@
 <!-- start of real world examples checkpoint container -->
 <div id="real_world_examples_container">
 	<% if @real_world_examples.nil? %>
-		<div class="no_word_info lead text-danger">
-			&#9785; We don't have any real world examples yet. Please tap continue.
+		<div id="rwe_no_results" class="lead please-tap-continue">
+			&#9785; There aren't any real world examples to show. Please tap continue.
 		</div>
 	<% else %>
 		<% @real_world_examples.each_with_index do |rwe, index| %>

@@ -598,7 +598,7 @@ $(document).ready(function(){
 			// meaning divs and text to display
 			$meaning_div = $("<div>", {class: "meaning_container"} );
 			$meanings_container.append($meaning_div);
-			$meaning_div.append("&#8605; " + $(".word-definition").html());
+			$meaning_div.append($(".word-definition").html());
 			// end of xml_pos loop to get all defs
 		} // end of the POS for loop
 
@@ -638,7 +638,7 @@ $(document).ready(function(){
 				$(this).children(":first").addClass("red_circle_background");
 				// If all words have been clicked on, show the continue button
 				if ($("#synonyms_container .red_circle_background").length == $(".synonym_row").length) {
-					scroll_to_bottom();
+					// scroll_to_bottom();
 					$("#synonyms_continue_button").fadeIn();
 					$synonym_circle_activity_boolean = true;
 					boost_goodies(1500);
@@ -759,19 +759,24 @@ $(document).ready(function(){
 
 	// Start the real world examples activity
 	function start_real_world_examples_activity(chosen_word_value) {
-		// Click anywhere (row, circle, or word) to change element features
-		$(".rwe_row").click(function(){
-			// Fill in the circle
-			$(this).children(":first").addClass("red_circle_background");
+		if ($("#rwe_no_results").hasClass("please-tap-continue")) {
+			$("#real_world_examples_continue_button").fadeIn();
+			$rwe_circle_activity_boolean = true;
+		} else {
+			// Click anywhere (row, circle, or word) to change element features
+			$(".rwe_row").click(function(){
+				// Fill in the circle
+				$(this).children(":first").addClass("red_circle_background");
 
-			// If all words have been clicked on, show the continue button
-			if ($("#real_world_examples_container .red_circle_background").length == $(".rwe_row").length) {
-				$("#real_world_examples_continue_button").fadeIn();
-				$rwe_circle_activity_boolean = true;
-				boost_goodies(2400);
-			};
-		});
-	}; // end of the $rwe_row .click fn
+				// If all words have been clicked on, show the continue button
+				if ($("#real_world_examples_container .red_circle_background").length == $(".rwe_row").length) {
+					$("#real_world_examples_continue_button").fadeIn();
+					$rwe_circle_activity_boolean = true;
+					boost_goodies(2400);
+				};
+			}); // end of the $rwe_row .click fn
+		}
+	};
 
 	// Start the review level one activity
 	function start_review_level_one_activity(chosen_word_value) {

@@ -78,42 +78,25 @@ p {
 .game-circle-start-text {
 	font-weight: 200;
 	vertical-align: middle;
-}
-
-.game-one-circle-start-text {
-	@extend .game-circle-start-text;
 
 	a {
-	  color: $leksi-red;
-	}
-}
-
-.game-two-circle-start-text {
-	@extend .game-circle-start-text;
-
-	a {
-		color: $leksi-orange;
-	}
-}
-
-.game-three-circle-start-text {
-	@extend .game-circle-start-text;
-
-	a {
-		color: $leksi-green;
+	  color: $white;
 	}
 }
 
 .game-one-start-circle{
 	@extend .game-circle;
 
+	background: $leksi-red;
 	border-color: $leksi-red;
 }
 
 .game-two-start-circle{
 	@extend .game-circle;
 
+	background: $leksi-orange;
 	border-color: $leksi-orange;
+
 }
 
 .game-three-start-circle{

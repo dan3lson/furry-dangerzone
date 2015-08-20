@@ -29,11 +29,9 @@ class MacmillanDictionary
       "#{API_URL}dictionaries/american/search/?q=#{word}#{URL_ENDING}",
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }
     )
-
     if response.success? && response["resultNumber"] > 0
       entry_ids = []
       response["results"].each { |result| entry_ids << result["entryId"] }
-
       words = []
       entry_ids.each do |entry|
         response_2 = HTTParty.get(
@@ -45,11 +43,11 @@ class MacmillanDictionary
           xml_doc = Nokogiri::XML(response_2["entryContent"])
 
           phonetic_spelling = xml_doc.xpath("/descendant::PRON[1]").text
-          definition = xml_doc.xpath("/descendant::DEFINITION[1]").text
+          definitions = xml_doc.xpath("/descendant::DEFINITION")
           part_of_speech = xml_doc.xpath("/descendant::PART-OF-SPEECH[1]").text
-          example_sentence = xml_doc.xpath("/descendant::EXAMPLE[1]").text
+          example_sentences = xml_doc.xpath("/descendant::EXAMPLE")
 
-          if definition.empty?
+          if definitions.count == 0
             nil
           else
             phonetic_spelling[0] = "" if phonetic_spelling[0] == " "
@@ -58,9 +56,17 @@ class MacmillanDictionary
               part_of_speech[0] = "" unless part_of_speech[0] == "p"
             end
 
-            definition[0] = ""
+            definitions = definitions.map { |d| d.text }
 
-            example_sentence[0] == "" if example_sentence[0] == " "
+            definitions.each { |d| d[0] = "" }
+
+            definition = definitions.join(";")
+
+            example_sentences = example_sentences.map { |d| d.text }
+
+            example_sentences.each { |es| es[0] = "" if es[0] == " " }
+
+            example_sentence = example_sentences.join(";")
 
             words << self.new(
               phonetic_spelling,

@@ -7,9 +7,18 @@
     </span>
   </p>
   <p>
-    <span class="word-definition"><%= word.definition %></span>
+    <% word.definition.split(";").take(3).each do |d| %>
+      <p>
+        <span class="word-definition">&#8605; <%= d %></span>
+      </p>
+    <% end %>
   </p>
-  <span class="word-example-sentence">
-    <em><%= word.example_sentence %></em>
-  </span>
+    <% word.example_sentence.split(";").take(3).each do |es| %>
+      <hr>
+      <p>
+        <span class="word-example-sentence">
+          <em><%= es %></em>
+        </span>
+      </p>
+    <% end %>
 </div>

@@ -24,6 +24,9 @@ class RealWorldExample
 		no_results = page.css("div.no-results").text
 
 		if no_results.empty?
+			binding.pry
+			nil
+		else
 			page.css("h3.search-result-title").each do |title|
 				rwe_mapped_examples = real_world_examples.map { |r| r.example }
 
@@ -55,9 +58,8 @@ class RealWorldExample
 					end
 				end
 			end
+			binding.pry
 			real_world_examples.take(3)
-		else
-			nil
     end
   end
 end
