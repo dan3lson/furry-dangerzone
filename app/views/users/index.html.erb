@@ -3,8 +3,9 @@
 
 <% @users.each do |user| %>
   <div class="box-shadow-border">
-    <h4 class="tightness">
+    <h4 class="tightness basic-apple-blue-link">
       <%= link_to user.username, user %>
+      <small>joined <%= time_ago_in_words(user.created_at) %> ago.</small>
     </h4>
   </div>
   <br>
