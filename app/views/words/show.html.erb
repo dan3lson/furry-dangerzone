@@ -47,7 +47,7 @@
 
     <% unless unused_tags(@word).first.nil? %>
       <br>
-      <p class="lead">Add Tag(s)</p>
+      <p class="lead">Add Tag</p>
       <%= form_for :user_word_tag,
         url: user_word_tag_path,
         method: :post do |f|

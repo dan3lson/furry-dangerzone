@@ -29,10 +29,17 @@ class MacmillanDictionary
       "#{API_URL}dictionaries/american/search/?q=#{word}#{URL_ENDING}",
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }
     )
+
     if response.success? && response["resultNumber"] > 0
       entry_ids = []
-      response["results"].each { |result| entry_ids << result["entryId"] }
       words = []
+
+      response["results"].each do |result|
+        entry = result["entryId"]
+        next if entry_ids.include?(entry)
+        entry_ids << entry
+      end
+
       entry_ids.each do |entry|
         response_2 = HTTParty.get(
           "#{API_URL}dictionaries/american/entries/#{entry}/?format=xml",
@@ -41,7 +48,6 @@ class MacmillanDictionary
 
         if response_2.success?
           xml_doc = Nokogiri::XML(response_2["entryContent"])
-
           phonetic_spelling = xml_doc.xpath("/descendant::PRON[1]").text
           definitions = xml_doc.xpath("/descendant::DEFINITION")
           part_of_speech = xml_doc.xpath("/descendant::PART-OF-SPEECH[1]").text
