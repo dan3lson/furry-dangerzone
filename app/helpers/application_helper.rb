@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def words_for(user, tag)
-    current_user.word_tags.where(tag: tag).map { |word_tag| word_tag.word }
+    user.word_tags.where(tag: tag).map { |word_tag| word_tag.word }
   end
 
   def tags_for_a(user, word)
@@ -32,6 +32,6 @@ module ApplicationHelper
   end
 
   def unused_tags(user, word)
-    current_user.tags - tags_for_a(user, word)
+    user.tags - tags_for_a(user, word)
   end
 end
