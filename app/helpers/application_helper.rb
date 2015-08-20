@@ -26,17 +26,9 @@ module ApplicationHelper
   end
 
   def tags_for_a(word)
-    tags_for_a_word = []
-    current_user.user_word_tags.each do |user_word_tag|
-      current_user.tags.each do |tag|
-        if user_word_tag.user == current_user &&
-           user_word_tag.word_tag.word == word &&
-           user_word_tag.word_tag.tag == tag
-          tags_for_a_word << user_word_tag.word_tag.tag
-        end
-      end
-    end
-    tags_for_a_word
+    current_user.user_word_tags.map do |uwt|
+      uwt.word_tag.tag if uwt.word_tag.word == word
+    end.compact
   end
 
   def unused_tags(word)

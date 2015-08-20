@@ -7,8 +7,7 @@
 
 	<% if logged_in? %>
 		<%
-			if params[:controller] == "tags" && params[:action] == "new" ||
-				 params[:action] == "show"
+			if params[:controller] == "tags" && params[:action] == "new"
 		%>
 			<%= link_to image_tag("back_black_32.png"), :back %>
 		<% end %>
