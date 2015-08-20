@@ -24,7 +24,6 @@ class RealWorldExample
 		no_results = page.css("div.no-results").text
 
 		if no_results.empty?
-			binding.pry
 			nil
 		else
 			page.css("h3.search-result-title").each do |title|
