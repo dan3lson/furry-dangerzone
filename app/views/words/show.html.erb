@@ -51,8 +51,7 @@
     <% unless unused_tags(current_user, @word).first.nil? %>
       <br>
       <p class="lead">Add Tag</p>
-      <%= form_for :user_word_tag,
-        url: user_word_tag_path,
+      <%= form_for :user_word_tag, url: user_word_tag_path,
         method: :post do |f|
       %>
         <%= hidden_field_tag :name, @word.name %>
