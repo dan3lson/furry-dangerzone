@@ -1,11 +1,11 @@
 <div class="navbar navbar-default navbar-fixed-top logged_in_header" role="navigation">
 	<div class="container">
-		<h1 class="center">
+		<h3 class="center">
 			<%= render "layouts/header_pull_left" %>
 
-			<%= full_header(yield(:header)) %>
+			<%= full_header(yield(:header).truncate(23)) %>
 
 			<%= render "layouts/header_pull_right" %>
-		</h1>
+		</h3>
 	</div>
 </div>
