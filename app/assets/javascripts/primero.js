@@ -291,10 +291,8 @@ $(document).ready(function(){
 		update_user_word_game_level_status("8", 8);
 
 		// Create the game_level's for Jeopardy
-		var url = window.location.href;
-		var word_id = url.slice(43, 46);
 		var game_info = {
-			"word_id": word_id
+			"word_id": $chosen_word_id
 		};
 
 		$.ajax({
