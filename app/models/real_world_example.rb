@@ -56,7 +56,7 @@ class RealWorldExample
 					end
 				end
 			end
-			real_world_examples.take(3)
+			real_world_examples.first.nil? ? nil : real_world_examples.take(3)
 		else
 			nil
     end
