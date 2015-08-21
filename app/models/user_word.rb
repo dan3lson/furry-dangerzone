@@ -22,10 +22,10 @@ class UserWord < ActiveRecord::Base
   end
 
   def completed_game_one?
-    self.user_word_game_levels.pluck(:status).take(8).uniq.count == 1
+    !self.user_word_game_levels.pluck(:status).take(8).include?("not started")
   end
 
   def game_one_in_progress?
-    self.user_word_game_levels.pluck(:status).take(8).uniq.count > 1
+    self.user_word_game_levels.pluck(:status).take(8).include?("not started")
   end
 end
