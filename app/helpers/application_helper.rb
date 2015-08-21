@@ -38,7 +38,7 @@ module ApplicationHelper
   def num_fundamentals_games_completed(user)
     num = 0
     user.user_words.each do |uw|
-      num += 1 if uw.completed_game_one?
+      num += 1 if uw.completed_fundamentals?
     end
     num
   end
@@ -46,7 +46,15 @@ module ApplicationHelper
   def num_fundamentals_games_in_progress(user)
     num = 0
     user.user_words.each do |uw|
-      num += 1 if uw.game_one_in_progress?
+      num += 1 if uw.fundamentals_in_progress?
+    end
+    num
+  end
+
+  def num_fundamentals_games_not_started(user)
+    num = 0
+    user.user_words.each do |uw|
+      num += 1 if uw.fundamentals_not_started?
     end
     num
   end

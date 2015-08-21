@@ -21,11 +21,29 @@ class UserWord < ActiveRecord::Base
     end
   end
 
-  def completed_game_one?
-    !self.user_word_game_levels.pluck(:status).take(8).include?("not started")
+  def uwgl_fundamentals
+    self.user_word_game_levels.map do |uwgl|
+      uwgl if uwgl.game_level.game.name == "Fundamentals"
+    end.compact
   end
 
-  def game_one_in_progress?
-    self.user_word_game_levels.pluck(:status).take(8).include?("not started")
+  def completed_fundamentals?
+    num = 0
+
+    uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "complete" }
+
+    num == 8
+  end
+
+  def fundamentals_in_progress?
+    uwgl_fundamentals.map { |uwgl| uwgl.status }.uniq.count == 2
+  end
+
+  def fundamentals_not_started?
+    num = 0
+
+    uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "not started" }
+
+    num == 8
   end
 end
