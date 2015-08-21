@@ -5,10 +5,4 @@
   Joined <%= time_ago_in_words(@user.created_at) %> ago.
 </p>
 
-<p>
-  # of Words: <%= @user.words.count %>
-</p>
-
-<p>
-  # of Tags: <%= @user.tags.count %>
-</p>
+<%= render "users/stats", user: @user %>

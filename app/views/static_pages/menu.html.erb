@@ -2,26 +2,24 @@
 <% provide(:header, "menu") %>
 
 <div class="menu-header-container">
+
   <p class="lead menu-header">
     Profile (<%= current_user.username %>)
   </p>
+
   <p>
     Joined <%= time_ago_in_words(current_user.created_at) %> ago.
   </p>
-  # of Words: <%= current_user.words.count %>
-  <br>
-  # of Fundamentals games completed:
-  <%= num_fundamentals_games_completed(current_user) %>
-  <br>
-  # of Fundamentals games in progress:
-  <%= num_fundamentals_games_in_progress(current_user) %>
-  <br>
-  # of Tags: <%= current_user.tags.count %>
+
+  <%= render "users/stats", user: current_user %>
+
   <br>
   <br>
+
   <div class="inline-block">
     <%= image_tag("edit_black_filled_25.png", alt: "Edit My Profile") %>
   </div>
+
   <div class="basic-black-link inline-block">
     <% if logged_in_and_current_user?(current_user) %>
       <%= link_to "Edit My Profile", edit_user_path(current_user) %>
@@ -33,6 +31,7 @@
   <p class="lead menu-header">
     Rate This App
   </p>
+
   <% if user_already_reviewed_latest_version? %>
     Thanks for rating Leksi <%= version_display_name %>!
     <span class="basic-black-link">
@@ -52,9 +51,11 @@
   <p class="lead menu-header">
     Settings
   </p>
+
   <div class="inline-block">
     <%= image_tag("logout_black_filled_25.png", alt: "Log Out") %>
   </div>
+  
   <div class="basic-black-link inline-block">
     <%= link_to "Log Out", logout_path, method: :delete %>
   </div>

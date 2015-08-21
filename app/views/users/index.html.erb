@@ -13,13 +13,13 @@
         <%= link_to "A-Z", users_path, class: "btn btn-default" %>
       </div>
       <div class="btn-group" role="group">
-        <%= link_to "Latest", users_path(filter: "latest"),
+        <%= link_to "#", users_path(filter: "latest"),
           class: "btn btn-default active"
         %>
       </div>
     <% else %>
       <div class="btn-group" role="group">
-        <%= link_to "A-Z", users_path, class: "btn btn-default active" %>
+        <%= link_to "A-Z", "#", class: "btn btn-default active" %>
       </div>
       <div class="btn-group" role="group">
         <%= link_to "Latest", users_path(filter: "latest"),
