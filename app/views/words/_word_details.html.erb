@@ -6,19 +6,26 @@
       <em><%= word.part_of_speech %></em>
     </span>
   </p>
-  <p>
+
+  <div>
     <% word.definition.split(";").take(3).each do |d| %>
       <p>
         <span class="word-definition">&#8605; <%= d %></span>
       </p>
     <% end %>
-  </p>
-    <% word.example_sentence.split(";").take(3).each do |es| %>
-      <hr>
-      <p>
-        <span class="word-example-sentence">
-          <em><%= es %></em>
-        </span>
-      </p>
-    <% end %>
+  </div>
+
+  <% unless word.example_sentence.length == 0 %>
+    <hr>
+
+    <div class="">
+      <% word.example_sentence.split(";").take(3).each do |es| %>
+        <p>
+          <span class="word-example-sentence">
+            <em>&#9997; <%= es %></em>
+          </span>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
 </div>

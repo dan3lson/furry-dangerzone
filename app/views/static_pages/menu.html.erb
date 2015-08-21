@@ -3,9 +3,19 @@
 
 <div class="menu-header-container">
 
-  <p class="lead menu-header">
-    Profile (<%= current_user.username %>)
-  </p>
+  <div class="">
+    <div class="pull-right">
+      <% if logged_in_and_current_user?(current_user) %>
+        <%= link_to image_tag(
+            "edit_black_filled_25.png", alt: "Edit My Profile"
+          ), edit_user_path(current_user)
+        %>
+      <% end %>
+    </div>
+    <div class="lead menu-header">
+      Profile (<%= current_user.username %>)
+    </div>
+  </div>
 
   <p>
     Joined <%= time_ago_in_words(current_user.created_at) %> ago.
@@ -16,15 +26,7 @@
   <br>
   <br>
 
-  <div class="inline-block">
-    <%= image_tag("edit_black_filled_25.png", alt: "Edit My Profile") %>
-  </div>
 
-  <div class="basic-black-link inline-block">
-    <% if logged_in_and_current_user?(current_user) %>
-      <%= link_to "Edit My Profile", edit_user_path(current_user) %>
-    <% end %>
-  </div>
 </div>
 
 <div class="menu-header-container">
@@ -55,7 +57,7 @@
   <div class="inline-block">
     <%= image_tag("logout_black_filled_25.png", alt: "Log Out") %>
   </div>
-  
+
   <div class="basic-black-link inline-block">
     <%= link_to "Log Out", logout_path, method: :delete %>
   </div>
