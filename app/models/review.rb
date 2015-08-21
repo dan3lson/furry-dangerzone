@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
   default_scope -> { order('reviews.created_at DESC') }
-  
+
   belongs_to :user
   belongs_to :version
 
@@ -9,7 +9,6 @@ class Review < ActiveRecord::Base
   validates :version, presence: true
 
   RATINGS = (1..5).to_a
-
 
   def has_description?
     !self.description.blank?

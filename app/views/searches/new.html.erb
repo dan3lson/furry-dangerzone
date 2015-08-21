@@ -2,12 +2,14 @@
 <% provide(:header, "define") %>
 
 <div class="well">
-  <p>
-    Look up a word or tap <em>define</em> for a random one!
-  </p>
   <%= render "searches/form" %>
   <br>
-  <div class="center">
+  <div class="center basic-apple-blue-link">
+    <small>
+      powered by the
+      <%= link_to "Macmillan Dictionary",
+        "https://www.macmillandictionary.com", target: "_blank" %>
+    </small>
   </div>
 </div>
 
