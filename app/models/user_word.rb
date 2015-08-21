@@ -20,4 +20,12 @@ class UserWord < ActiveRecord::Base
       nil
     end
   end
+
+  def completed_game_one?
+    self.user_word_game_levels.pluck(:status).take(8).uniq.count == 1
+  end
+
+  def game_one_in_progress?
+    self.user_word_game_levels.pluck(:status).take(8).uniq.count > 1
+  end
 end

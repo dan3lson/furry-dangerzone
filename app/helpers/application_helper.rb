@@ -34,4 +34,20 @@ module ApplicationHelper
   def unused_tags(user, word)
     user.tags - tags_for_a(user, word)
   end
+
+  def num_fundamentals_games_completed(user)
+    num = 0
+    user.user_words.each do |uw|
+      num += 1 if uw.completed_game_one?
+    end
+    num
+  end
+
+  def num_fundamentals_games_in_progress(user)
+    num = 0
+    user.user_words.each do |uw|
+      num += 1 if uw.game_one_in_progress?
+    end
+    num
+  end
 end

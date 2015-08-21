@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  default_scope -> { order('users.username ASC') }
-
   has_many :user_words, dependent: :destroy
   has_many :words, through: :user_words
   has_many :user_tags, dependent: :destroy

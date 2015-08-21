@@ -5,11 +5,18 @@
   <p class="lead menu-header">
     Profile (<%= current_user.username %>)
   </p>
-  Joined <%= time_ago_in_words(current_user.created_at) %> ago.
+  <p>
+    Joined <%= time_ago_in_words(current_user.created_at) %> ago.
+  </p>
+  # of Words: <%= current_user.words.count %>
   <br>
-  # of Words: <%= @current_user.words.count %>
+  # of Fundamentals games completed:
+  <%= num_fundamentals_games_completed(current_user) %>
   <br>
-  # of Tags: <%= @current_user.tags.count %>
+  # of Fundamentals games in progress:
+  <%= num_fundamentals_games_in_progress(current_user) %>
+  <br>
+  # of Tags: <%= current_user.tags.count %>
   <br>
   <br>
   <div class="inline-block">

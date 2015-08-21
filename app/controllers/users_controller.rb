@@ -3,8 +3,15 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def index
-    @users = User.all
-    @user_count = @users.count
+    @filter = params[:filter]
+    if @filter
+      if @filter == "latest"
+        @users = User.order("created_at DESC")
+      end
+    else
+      @users = User.order("username ASC")
+    end
+    @user_count = User.all.count
   end
 
   def show
