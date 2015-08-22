@@ -10,7 +10,7 @@
 <% end %>
 
 <% if current_user.has_tags? %>
-  <div class="basic-apple-blue-link">
+  <div class="basic-black-link">
     <% @current_user_tags.each do |tag| %>
       <div class="box-shadow-border">
         <h4 class="tightness">
@@ -34,7 +34,7 @@
 
     <% Word.untagged_for(current_user).each do |word| %>
       <div class="col-xs-4 col-sm-4 remove-padding-left">
-        <span class="basic-apple-blue-link">
+        <span class="basic-black-link">
           <%= link_to word.name, word %>
         </span>
       </div>

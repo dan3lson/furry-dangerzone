@@ -1,11 +1,16 @@
 <div class="navbar navbar-default navbar-fixed-top logged_in_header" role="navigation">
 	<div class="container">
-		<h3 class="center">
+		<h1 class="center full-header">
 			<%= render "layouts/header_pull_left" %>
 
-			<%= full_header(yield(:header).truncate(23)) %>
+			<% if params[:controller] == "games" %>
+				<span id="games-score">score:</span>
+				<span class="lead" id="goodies">0</span>
+			<% else %>
+				<%= full_header(yield(:header).truncate(23)) %>
+			<% end %>
 
 			<%= render "layouts/header_pull_right" %>
-		</h3>
+		</h1>
 	</div>
 </div>

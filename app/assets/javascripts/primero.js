@@ -113,6 +113,9 @@ $(document).ready(function(){
 		// Update the progress made
 		progressBar(15);
 
+		// Boost user goodies
+		update_user_points(300);
+
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("1", 1);
 
@@ -146,6 +149,9 @@ $(document).ready(function(){
 
 		// Update the progress made
 		progressBar(30);
+
+		// Boost user goodies
+		update_user_points(600);
 	});
 
 	$("#pronunciation_image_button").click(function(){
@@ -167,6 +173,9 @@ $(document).ready(function(){
 
 		// Update the progress made
 		progressBar(45);
+
+		// Boost user goodies
+		update_user_points(900);
 
 		// Start the next activity, i.e. Meanings, if not already started
 		if ($("#meanings_container").children().length == 0) {
@@ -194,6 +203,9 @@ $(document).ready(function(){
 		// Update the progress made
 		progressBar(60);
 
+		// Boost user goodies
+		update_user_points(1200);
+
 		// Start the next activity, i.e. Synonyms, if not already started
 		start_synonyms_activity($chosen_word_value);
 
@@ -218,6 +230,9 @@ $(document).ready(function(){
 		// Update the progress made
 		progressBar(75);
 
+		// Boost user goodies
+		update_user_points(1500);
+
 		// Start the next activity, i.e. Synonyms, if not already started
 		start_antonyms_activity($chosen_word_value);
 
@@ -241,6 +256,9 @@ $(document).ready(function(){
 
 		// Update the progress made
 		progressBar(75);
+
+		// Boost user goodies
+		update_user_points(1500);
 
 		// Start the next activity, i.e. Syn / Ant checkpoint, if not already started
 		if ($(".current_syn_ant_checkpoint_word")[0] == undefined) {
@@ -270,6 +288,9 @@ $(document).ready(function(){
 
 		// Update the progress made
 		progressBar(90);
+
+		// Boost user goodies
+		update_user_points(2400);
 
 		// Start the next activity, i.e. Real World Examples, if not already started
 		start_real_world_examples_activity($chosen_word_value);
@@ -308,6 +329,9 @@ $(document).ready(function(){
 
 		// Update the progress made
 		progressBar(100);
+
+		// Update user goodies
+		update_user_points(2400);
 
 		// Start the next activity, i.e. review level one
 		start_review_level_one_activity($chosen_word_value);
@@ -747,10 +771,11 @@ $(document).ready(function(){
 		$(".no_word_info").remove();
 		if ($shuffled_syn_ant_array.length == 0) {
 			$(".syn_ant_checkpoint_btns").hide();
-			var $no_word_info_container = $("<div>", {class: "no_word_info lead text-danger"} );
-			var $message = "&#9785; We don't have any synonyms or antonyms to do a checkpoint. Please tap continue.";
-			$("#syn_ant_checkpoint_container").append($no_word_info_container);
-			$($no_word_info_container).append($message);
+			// var $no_word_info_container = $("<span>", {class: "no_word_info lead"} );
+			// var $message = "&#9785; We don't have any synonyms or antonyms to do a checkpoint. Please tap continue.";
+			// $("#syn_ant_checkpoint_container").append($no_word_info_container);
+			// $($no_word_info_container).append($message);
+			$("#syn-ant-no-results").fadeIn();
 			$("#syn_ant_checkpoint_continue_button").fadeIn();
 			boost_goodies(2100);
 		}
@@ -780,7 +805,7 @@ $(document).ready(function(){
 	// Start the review level one activity
 	function start_review_level_one_activity(chosen_word_value) {
 		$("#review_level_one_back_button").hide();
-		$("#goodies, #progress_bar_container").css("visibility","hidden");
+		$("#goodies, #games-score, #progress_bar_container").css("visibility","hidden");
 		$("#all_levels_button").show();
 		$("#level_congrats_text").append("<strong>'" + $chosen_word_value + "'</strong> ");
 		$("#goodies_total").html($new_goodies_total);
@@ -804,6 +829,22 @@ $(document).ready(function(){
 			contentType: "application/json",
 			dataType: "json",
 			data: JSON.stringify(game_info),
+			success: function(response) {
+				console.log(response);
+			}
+		});
+	};
+
+	// Update user_word_game_level_status
+	function update_user_points(num) {
+		var points = { "points": num }
+
+		$.ajax({
+			type: "PATCH",
+			url: "/user_points",
+			contentType: "application/json",
+			dataType: "json",
+			data: JSON.stringify(points),
 			success: function(response) {
 				console.log(response);
 			}

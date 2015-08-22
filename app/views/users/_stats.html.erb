@@ -1,20 +1,27 @@
 # of Words: <%= user.words.count %>
-
 <br>
+# of Tags: <%= user.tags.count %>
 
-# of Fundamentals games completed:
+<p>
+	# of Experience Points: <%= user.points %>
+</p>
+<hr>
+
+<p>
+	Fundamentals:
+</p>
+
+# of Games completed:
 <%= num_fundamentals_games_completed(user) %>
 
 <br>
 
-# of Fundamentals games in progress:
+# of Games in progress:
 <%= num_fundamentals_games_in_progress(user) %>
 
 <br>
 
-# of Fundamentals games not started:
+# of Games not started:
 <%= num_fundamentals_games_not_started(user) %>
 
 <br>
-
-# of Tags: <%= user.tags.count %>

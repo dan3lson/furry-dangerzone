@@ -1,5 +1,4 @@
 <% provide(:title, "Fundamentals for #{@word.name}") %>
-<% provide(:header, "Fundamentals") %>
 
 <div class="palabra">
 	<%= render "words/word", word: @word %>
@@ -116,7 +115,14 @@
 <!-- end of antonyms container -->
 
 <!-- start of syn_ant checkpoint container -->
-<div id="syn_ant_checkpoint_container"></div>
+<div id="syn_ant_checkpoint_container">
+	<% if @word.doesnt_have_any_syn_or_ant? %>
+		<div id="syn-ant-no-results" class="lead">
+			&#9785; We don't have any synonyms or antonyms to do a checkpoint.
+			Please tap continue.
+		</div>
+	<% end %>
+</div>
 <!-- end of syn_ant checkpoint container -->
 
 <!-- start of real world examples checkpoint container -->

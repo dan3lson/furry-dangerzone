@@ -69,6 +69,10 @@ class Word < ActiveRecord::Base
     antonyms.any?
   end
 
+  def doesnt_have_any_syn_or_ant?
+    !has_synonyms? && !has_antonyms?
+  end
+
   def self.untagged_for(user)
     words_with_tags = user.word_tags.pluck(
       :word_id).map { |word_id| Word.find(word_id) }

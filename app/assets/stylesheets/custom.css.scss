@@ -11,6 +11,7 @@ $apple-blue: #097ff0;
 $apple-star-orange: #fd9603;
 $black: #000;
 $dark-gray: #8e8e93;
+$even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 45px;
 $leksi-green: #24d12e;
 $leksi-orange: orange;
@@ -36,6 +37,7 @@ html {
 
 body {
   padding: 90px 0;
+	color: $even-darker-gray;
 }
 
 //**********
@@ -53,6 +55,10 @@ h1 {
   letter-spacing: -1px;
   margin-bottom: 15px;
   text-align: center;
+}
+
+.full-header {
+  font-size: 1.5em;
 }
 
 p {
@@ -211,7 +217,7 @@ input {
 
 	&:hover {
 		background: none;
-		color: $leksi-red;
+		color: $apple-blue;
 		text-decoration: none;
 	}
 }
@@ -288,7 +294,7 @@ input {
 	margin-top: 50px;
 
   a:not(.footer-cta){
-	  color: $black;
+	  color: $even-darker-gray;
 	  &:hover{
 		  background: none;
 			color: $apple-blue;

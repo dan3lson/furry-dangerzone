@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
     presence: true,
     uniqueness: { case_sensitive: false },
     length: { minimum: 3, maximum: 33 }
+  validates :points, presence: true
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true

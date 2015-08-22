@@ -3,15 +3,7 @@
 
 <div class="menu-header-container">
 
-  <div class="">
-    <div class="pull-right">
-      <% if logged_in_and_current_user?(current_user) %>
-        <%= link_to image_tag(
-            "edit_black_filled_25.png", alt: "Edit My Profile"
-          ), edit_user_path(current_user)
-        %>
-      <% end %>
-    </div>
+  <div>
     <div class="lead menu-header">
       Profile (<%= current_user.username %>)
     </div>
@@ -21,9 +13,15 @@
     Joined <%= time_ago_in_words(current_user.created_at) %> ago.
   </p>
 
-  <%= render "users/stats", user: current_user %>
-
-  <br>
+  <% if logged_in_and_current_user?(current_user) %>
+    <div class="inline-block">
+      <%= image_tag("edit_black_filled_25.png", alt: "Edit Profile") %>
+    </div>
+    &nbsp;
+    <div class="basic-apple-blue-link inline-block">
+      <%= link_to "Edit Profile", edit_user_path(current_user) %>
+    </div>
+  <% end %>
 </div>
 
 <div class="menu-header-container">
@@ -33,17 +31,19 @@
 
   <% if user_already_reviewed_latest_version? %>
     Thanks for rating Leksi <%= version_display_name %>!
-    <span class="basic-black-link">
-      <%=
-        link_to "See all reviews",
-        reviews_path
-      %>.
-    </span>
   <% else %>
-    <div class="well">
+    <div class="well well-sm">
       <%= render "reviews/form" %>
     </div>
   <% end %>
+</div>
+
+<div class="menu-header-container">
+  <p class="lead menu-header">
+    Stats
+  </p>
+
+  <%= render "users/stats", user: current_user %>
 </div>
 
 <div class="menu-header-container">
@@ -54,7 +54,7 @@
   <div class="inline-block">
     <%= image_tag("logout_black_filled_25.png", alt: "Log Out") %>
   </div>
-
+  &nbsp;
   <div class="basic-apple-blue-link inline-block">
     <%= link_to "Log Out", logout_path, method: :delete %>
   </div>
