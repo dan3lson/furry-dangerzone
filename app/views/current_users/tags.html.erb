@@ -10,15 +10,12 @@
 <% end %>
 
 <% if current_user.has_tags? %>
-  <div class="basic-black-link">
+  <div class="basic-apple-blue-link">
     <% @current_user_tags.each do |tag| %>
       <div class="box-shadow-border">
         <h4 class="tightness">
           <span>
             <%= link_to tag.name, tag %>
-            <span class="badge">
-              <%= words_for(current_user, tag).count %>
-            </span>
           </span>
         </h4>
       </div>
@@ -32,15 +29,12 @@
     <h4 class="tightness">
       <span>
         Untagged
-        <span class="badge">
-          <%= Word.untagged_for(current_user).count %>
-        </span>
       </span>
     </h4>
 
     <% Word.untagged_for(current_user).each do |word| %>
       <div class="col-xs-4 col-sm-4 remove-padding-left">
-        <span class="basic-black-link">
+        <span class="basic-apple-blue-link">
           <%= link_to word.name, word %>
         </span>
       </div>

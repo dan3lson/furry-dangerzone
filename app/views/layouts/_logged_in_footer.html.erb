@@ -4,7 +4,7 @@
     <div class="col-xs-3" align="center">
       <% if params[:action] == "words" %>
         <%=
-          link_to_unless_current image_tag("myLeksi_red_32.png",
+          link_to_unless_current image_tag("myLeksi_black_filled_32.png",
           alt: "myLeksi") + "<br/>myLeksi".html_safe, myLeksi_path,
           class: "img-responsive"
         %>
@@ -20,7 +20,7 @@
     <div class="col-xs-3" align="center">
       <% if params[:controller] == "searches" %>
         <%=
-          link_to_unless_current image_tag("search_red_32.png", alt: "define") +
+          link_to_unless_current image_tag("search_black_filled_32.png", alt: "define") +
           "<br/>define".html_safe, search_path,
           class: "img-responsive"
         %>
@@ -36,7 +36,7 @@
     <div class="col-xs-3" align="center">
       <% if params[:action] == "tags" %>
         <%=
-          link_to_unless_current image_tag("tag_red_32.png", alt: "myTags") +
+          link_to_unless_current image_tag("tag_black_filled_32.png", alt: "myTags") +
           "<br/>myTags".html_safe, myTags_path,
           class: "img-responsive"
         %>
@@ -52,7 +52,7 @@
     <div class="col-xs-3" align="center">
       <% if params[:action] == "menu" %>
         <%=
-          link_to_unless_current image_tag("menu_red_32.png", alt: "Menu") +
+          link_to_unless_current image_tag("menu_black_filled_32.png", alt: "Menu") +
           "<br/>menu".html_safe, menu_path,
           class: "img-responsive"
         %>
