@@ -844,10 +844,10 @@ $(document).ready(function(){
 			url: "/user_points",
 			contentType: "application/json",
 			dataType: "json",
-			data: JSON.stringify(points),
-			success: function(response) {
-				console.log(response);
-			}
+			data: JSON.stringify(points)
+		})
+		.done(function(response) {
+			console.log(response.errors)
 		});
 	};
 
