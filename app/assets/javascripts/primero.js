@@ -837,14 +837,11 @@ $(document).ready(function(){
 
 	// Update user_word_game_level_status
 	function update_user_points(num) {
-		var points = { "points": num }
-
 		$.ajax({
 			type: "PATCH",
 			url: "/user_points",
-			contentType: "application/json",
 			dataType: "json",
-			data: JSON.stringify(points)
+			data: { "points": num }
 		})
 		.done(function(response) {
 			console.log(response.errors)

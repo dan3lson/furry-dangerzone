@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "myTags" => "current_users#tags"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
+  get "leaderboard" => "games#leaderboard"
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"

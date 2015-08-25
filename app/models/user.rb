@@ -41,4 +41,8 @@ class User < ActiveRecord::Base
   def has_reached_free_version_limit?
     self.words.count > 9
   end
+
+  def self.top_ten_highest_points
+    all.take(10).reverse
+  end
 end

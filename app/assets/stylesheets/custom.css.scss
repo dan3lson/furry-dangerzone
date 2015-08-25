@@ -163,21 +163,6 @@ input {
   height: auto !important;
 }
 
-#error_explanation {
-  color: $leksi-red;
-  ul {
-    color: $leksi-red;
-    margin: 0 0 30px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .has-error;
-
-  .form-control {
-    color: $state-danger-text;
-  }
-}
 
 //**********
 //*
@@ -266,8 +251,51 @@ input {
   width: 100%;
 }
 
+#error_explanation {
+  color: $leksi-red;
+  ul {
+    color: $leksi-red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
 .inline-block {
 	display: inline-block;
+}
+
+.leaderboard-bronze {
+	@extend .leaderboard-container;
+
+	background: darken(#ff9500, 20);
+}
+
+.leaderboard-container {
+	text-align: center;
+	color: $white;
+}
+
+.leaderboard-gold {
+	@extend .leaderboard-container;
+
+	background: #ffcc00;
+}
+
+.leaderboard-header {
+	font-size: 30px;
+}
+
+.leaderboard-silver {
+	@extend .leaderboard-container;
+
+	background: #c7c7cc;
 }
 
 .leksi-red {
@@ -310,6 +338,11 @@ input {
 
 .remove-line-height {
 	line-height: normal;
+}
+
+.remove-list-style ul {
+	list-style-type: none;
+	padding: 0;
 }
 
 .remove-padding-left {

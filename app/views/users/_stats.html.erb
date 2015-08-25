@@ -3,7 +3,7 @@
 # of Tags: <%= user.tags.count %>
 
 <p>
-	# of Experience Points: <%= user.points %>
+	# of Experience Points: <%= user.points.to_s(:delimited) %>
 </p>
 <hr>
 

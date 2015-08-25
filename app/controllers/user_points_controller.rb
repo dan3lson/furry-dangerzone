@@ -1,13 +1,12 @@
 class UserPointsController < ApplicationController
   def update
-    @points = params[:points]
+    @points = params[:points].to_i
 
     current_user.points += @points
 
     if current_user.save
       render json: {
-        errors: "No errors",
-        status: "#{current_user.username}\'s points successfully modified"
+        errors: "No errors; points successfully modified."
       }
     else
       render json: {
