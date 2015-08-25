@@ -47,11 +47,11 @@
 <div class="remove-list-style">
 	<ul>
 		<% @seven_through_ten_users.each.with_index(4) do |u, i| %>
-			<h2>
+			<h4>
 				<%= i %>.
 				<%= u.username %>
 				<small><%= u.points.to_s(:delimited) %></small>
-			</h2>
+			</h4>
 		<% end %>
 	</ul>
 </div>
