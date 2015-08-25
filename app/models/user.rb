@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
   end
 
   def self.top_ten_highest_points
-    all.take(10).reverse
+    top_ten = []
+    all.pluck(:points).reverse.take(10).each do |points|
+      top_ten << User.find_by(points: points)
+    end
+    top_ten
   end
 end
