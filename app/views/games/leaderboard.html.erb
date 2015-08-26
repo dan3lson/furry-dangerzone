@@ -5,39 +5,33 @@
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3 leaderboard-gold">
 			<div class="inline-block">
-				<%= image_tag("gold_white_filled_32.png", alt: "Gold Medal") %>
+				<%= image_tag("gold_white_filled_64.png", alt: "Gold Medal") %>
 			</div>
 			<div class="leaderboard-header inline-block">
 				<%= @gold_user.username %>
+				<span><%= @gold_user.points.to_s(:delimited) %></span>
 			</div>
-			<p class="lead">
-				<%= @gold_user.points.to_s(:delimited) %>
-			</p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-6 leaderboard-silver">
 			<div class="inline-block">
-				<%= image_tag("silver_white_filled_32.png", alt: "Silver Medal") %>
+				<%= image_tag("silver_white_filled_64.png", alt: "Silver Medal") %>
 			</div>
 			<div class="leaderboard-header inline-block">
 				<%= @silver_user.username %>
+				<span><%= @silver_user.points.to_s(:delimited) %></span>
 			</div>
-			<p class="lead">
-				<%= @silver_user.points.to_s(:delimited) %>
-			</p>
 		</div>
 		<div class="col-sm-6 leaderboard-bronze">
 			<div class="inline-block">
-				<%= image_tag("bronze_white_filled_32.png", alt: "Bronze Medal") %>
+				<%= image_tag("bronze_white_filled_64.png", alt: "Bronze Medal") %>
 			</div>
 			<div class="leaderboard-header inline-block">
 				<%= @bronze_user.username %>
+				<span><%= @bronze_user.points.to_s(:delimited) %></span>
 			</div>
-			<p class="lead">
-				<%= @bronze_user.points.to_s(:delimited) %>
-			</p>
 		</div>
 	</div>
 </div>
@@ -50,7 +44,7 @@
 			<h4>
 				<%= i %>.
 				<%= u.username %>
-				<small><%= u.points.to_s(:delimited) %></small>
+				<span><%= u.points.to_s(:delimited) %></span>
 			</h4>
 		<% end %>
 	</ul>

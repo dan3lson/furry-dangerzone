@@ -289,7 +289,12 @@ input {
 }
 
 .leaderboard-header {
+	vertical-align: bottom;
 	font-size: 30px;
+}
+
+.leaderboard-header span {
+	font-size: 18px;
 }
 
 .leaderboard-silver {
