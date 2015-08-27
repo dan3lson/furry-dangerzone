@@ -9,7 +9,7 @@
 <div id="level_1_details">
 	<div class="lead" align="center" id="progress_bar_container">
 		<div class="progress">
-			<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0"
+			<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
 				aria-valuemin="0" aria-valuemax="100" style="width: 0%">
 					<span class="sr-only">0%</span>
 			</div>
@@ -57,7 +57,15 @@
 <!-- end of pronunciation activity -->
 
 <!-- start of meanings container -->
-<div id="meanings_container"></div>
+<div id="meanings_container">
+	<div class="well lead">
+		<% @word.definition.split(";").take(3).each do |d| %>
+			<p>
+				<span class="word-definition">&#8605; <%= d %></span>
+			</p>
+		<% end %>
+	</div>
+</div>
 <!-- end of meanings container -->
 
 <!-- start of synonyms container -->
@@ -172,12 +180,13 @@
 <!-- end of start of review level one container -->
 
 <div id="continue_button_container" class="pointer">
-	<button type="button" class="btn btn-danger btn-block btn-lg" id="spell_the_word_continue_button">continue</button>
-	<button type="button" class="btn btn-danger btn-block btn-lg" id="fill_in_the_blank_continue_button">continue</button>
-	<button type="button" class="btn btn-danger btn-block btn-lg" id="pronunciation_continue_button">continue</button>
-	<button type="button" class="btn btn-danger btn-block btn-lg" id="meanings_continue_button">continue</button>
-	<button type="button" class="btn btn-danger btn-block btn-lg" id="synonyms_continue_button">continue</button>
-	<button type="button" class="btn btn-danger btn-block btn-lg" id="antonyms_continue_button">continue</button>
-	<button type="button" class="btn btn-danger btn-block btn-lg" id="syn_ant_checkpoint_continue_button">continue</button>
-	<button type="button" class="btn btn-danger btn-block btn-lg" id="real_world_examples_continue_button">continue</button>
+	<br>
+	<button type="button" class="btn btn-success btn-block" id="spell_the_word_continue_button">Continue</button>
+	<button type="button" class="btn btn-success btn-block" id="fill_in_the_blank_continue_button">Continue</button>
+	<button type="button" class="btn btn-success btn-block" id="pronunciation_continue_button">Continue</button>
+	<button type="button" class="btn btn-success btn-block" id="meanings_continue_button">Continue</button>
+	<button type="button" class="btn btn-success btn-block" id="synonyms_continue_button">Continue</button>
+	<button type="button" class="btn btn-success btn-block" id="antonyms_continue_button">Continue</button>
+	<button type="button" class="btn btn-success btn-block" id="syn_ant_checkpoint_continue_button">Continue</button>
+	<button type="button" class="btn btn-success btn-block" id="real_world_examples_continue_button">Continue</button>
 </div>

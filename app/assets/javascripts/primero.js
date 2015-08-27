@@ -108,13 +108,14 @@ $(document).ready(function(){
 		hide_and_show_button("#restart_back_button, #spell_the_word_continue_button", "#fill_in_the_blank_back_button");
 
 		// Update the activity name and instruction
-		display_activity_instruction("Checkpoint!","Spell the word in order.");
+		display_activity_instruction("Checkpoint!","Tap the letters to spell the word correctly.");
 
 		// Update the progress made
 		progressBar(15);
 
 		// Boost user goodies
-		update_user_points(300);
+		boost_goodies(30);
+		update_user_points(30);
 
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("1", 1);
@@ -142,7 +143,7 @@ $(document).ready(function(){
 		$("#chosen_word_header_container").hide();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Pronunciation","Say <strong>'" + $chosen_word_value + "'</strong> aloud and then hit the mic.");
+		display_activity_instruction("Pronunciation","Say <strong>'" + $chosen_word_value + "'</strong> aloud and then tap the mic.");
 
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("2", 2);
@@ -151,12 +152,12 @@ $(document).ready(function(){
 		progressBar(30);
 
 		// Boost user goodies
-		update_user_points(600);
+		boost_goodies(60);
+		update_user_points(60);
 	});
 
 	$("#pronunciation_image_button").click(function(){
 		$("#pronunciation_continue_button").fadeIn();
-		boost_goodies(900);
 	});
 
 	$("#pronunciation_continue_button").click(function(){
@@ -166,7 +167,8 @@ $(document).ready(function(){
 		$("#meanings_back_button, #meanings_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Meanings","<strong>'" + $chosen_word_value + "'</strong> can have different meanings depending on how you use it.");
+		$part_of_speech = $(".word-part-of-speech").html();
+		display_activity_instruction("Meanings", "As a(n) " + $part_of_speech + ", read the meaning(s) for <strong>'" + $chosen_word_value + "'</strong>.")
 
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("3", 3);
@@ -175,12 +177,11 @@ $(document).ready(function(){
 		progressBar(45);
 
 		// Boost user goodies
-		update_user_points(900);
+		boost_goodies(90);
+		update_user_points(90);
 
 		// Start the next activity, i.e. Meanings, if not already started
-		if ($("#meanings_container").children().length == 0) {
-			start_meanings_activity($chosen_word_value);
-		};
+		start_meanings_activity($chosen_word_value);
 
 		// If all words have been clicked on, show the meanings continue button
 		if ($meaning_circle_activity_boolean) {
@@ -195,7 +196,7 @@ $(document).ready(function(){
 		$("#synonyms_back_button, #synonyms_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Synonyms","The words below are similar to " + "<strong>'" + $chosen_word_value + "'</strong>.");
+		display_activity_instruction("Synonyms","The words below are similar to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
 
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("4", 4);
@@ -204,7 +205,8 @@ $(document).ready(function(){
 		progressBar(60);
 
 		// Boost user goodies
-		update_user_points(1200);
+		boost_goodies(120);
+		update_user_points(120);
 
 		// Start the next activity, i.e. Synonyms, if not already started
 		start_synonyms_activity($chosen_word_value);
@@ -222,7 +224,7 @@ $(document).ready(function(){
 		$("#antonyms_back_button, #antonyms_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Antonyms","The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>.");
+		display_activity_instruction("Antonyms","The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
 
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("5", 5);
@@ -231,7 +233,8 @@ $(document).ready(function(){
 		progressBar(75);
 
 		// Boost user goodies
-		update_user_points(1500);
+		boost_goodies(150);
+		update_user_points(150);
 
 		// Start the next activity, i.e. Synonyms, if not already started
 		start_antonyms_activity($chosen_word_value);
@@ -258,7 +261,8 @@ $(document).ready(function(){
 		progressBar(75);
 
 		// Boost user goodies
-		update_user_points(1500);
+		boost_goodies(150);
+		update_user_points(150);
 
 		// Start the next activity, i.e. Syn / Ant checkpoint, if not already started
 		if ($(".current_syn_ant_checkpoint_word")[0] == undefined) {
@@ -281,7 +285,7 @@ $(document).ready(function(){
 		$("#real_world_examples_back_button, #real_world_examples_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Real-World Examples","See how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
+		display_activity_instruction("Real-World Examples","Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
 
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("7", 7);
@@ -290,7 +294,8 @@ $(document).ready(function(){
 		progressBar(90);
 
 		// Boost user goodies
-		update_user_points(2400);
+		boost_goodies(240);
+		update_user_points(240);
 
 		// Start the next activity, i.e. Real World Examples, if not already started
 		start_real_world_examples_activity($chosen_word_value);
@@ -331,7 +336,8 @@ $(document).ready(function(){
 		progressBar(100);
 
 		// Update user goodies
-		update_user_points(2400);
+		boost_goodies(240);
+		update_user_points(240);
 
 		// Start the next activity, i.e. review level one
 		start_review_level_one_activity($chosen_word_value);
@@ -392,7 +398,7 @@ $(document).ready(function(){
 		$("#fill_in_the_blank_continue_button, #fill_in_the_blank_back_button, #fill_in_the_blank_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Checkpoint!","Spell the word in order.");
+		display_activity_instruction("Checkpoint!","Tap the letters to spell the word correctly.");
 
 		// Return the progress back to 0
 		progressBar(15);
@@ -405,7 +411,7 @@ $(document).ready(function(){
 		$("#pronunciation_back_button, #pronunciation_continue_button, #pronunciation_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Pronunciation","Say <strong>'" + $chosen_word_value + "'</strong> aloud and then hit the mic.");
+		display_activity_instruction("Pronunciation","Say <strong>'" + $chosen_word_value + "'</strong> aloud and then tap the mic.");
 
 		// Return the progress back to 0
 		progressBar(30);
@@ -418,7 +424,8 @@ $(document).ready(function(){
 		$("#meanings_back_button, #meanings_continue_button, #meanings_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Meanings","<strong>'" + $chosen_word_value + "'</strong> can have different meanings depending on how you use it.");
+		$part_of_speech = $(".word-part-of-speech").html();
+		display_activity_instruction("Meanings", "As a(n) " + $part_of_speech + ", read the meaning(s) for <strong>'" + $chosen_word_value + "'</strong>.")
 
 		// Return the progress back to 0
 		progressBar(30);
@@ -432,7 +439,7 @@ $(document).ready(function(){
 		$("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").hide();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Synonyms","The words below are similar to <strong>'" + $chosen_word_value + "'</strong>.");
+		display_activity_instruction("Synonyms","The words below are similar to <strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
 
 		// Return the progress back to 0
 		progressBar(45);
@@ -446,7 +453,7 @@ $(document).ready(function(){
 		$("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Antonyms","The words below are opposite to <strong>'" + $chosen_word_value + "'</strong>.");
+		display_activity_instruction("Antonyms","The words below are opposite to <strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
 
 		// Return the progress back to 0
 		progressBar(60);
@@ -486,7 +493,7 @@ $(document).ready(function(){
 		$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container").show();
 
 		// Update the activity name and instruction
-		display_activity_instruction("Real-World Examples","See how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
+		display_activity_instruction("Real-World Examples","Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
 
 		// Return the progress back to 0
 		progressBar(90);
@@ -504,10 +511,8 @@ $(document).ready(function(){
 
 			if ($word_being_spelled == $chosen_word_value) {
 				$("#spell_the_word_continue_button").fadeIn();
-				boost_goodies(300);
 			} else {
 				$("#spell_the_word_continue_button").fadeOut();
-				reset_goodies(0);
 			}
 		});
 	};
@@ -574,10 +579,8 @@ $(document).ready(function(){
 				$("#fill_in_the_blank_continue_button").fadeIn();
 				$(".fill_in_the_blank_letters").hide();
 				$fill_in_the_blank_game_won = true;
-				boost_goodies(600);
 			} else {
-				$("#fill_in_the_blank_continue_button").fadeOut();;
-				reset_goodies(300);
+				$("#fill_in_the_blank_continue_button").fadeOut();
 			}
 
 			if ($fill_in_the_blank_incorrect_count == 3) {
@@ -594,59 +597,8 @@ $(document).ready(function(){
 
 	// Start the meanings activity
 	function start_meanings_activity(chosen_word_value) {
-		for (var index = 0; index < 1; index++) {
-			// Create a row for the circle and POSs
-			$meaning_row = $("<div>", { class: "meaning_row pointer",
-																	type: "button",
-																	'data-toggle': "collapse",
-																	'data-target': "#def"+index,
-																	'aria-expanded': "false",
-																	'aria-controls': index
-																}
-											);
-			$meaning_circle_div = $("<div>", {class: "red_circle inline-block"} );
-			$meaning_part_of_speech_div = $("<div>", { class: "meaning_pos_container lead pointer inline-block" } );
-			// Add the individual row to the meanings container
-			$("#meanings_container").append($meaning_row);
-			// Add the circle and meaning div to the meaning row
-			$($meaning_row).append($meaning_circle_div, $meaning_part_of_speech_div);
-			// Add the part of speech to which the meaning will be under so it can be displayed
-			$meaning_pos_collapse_header = $(".word-part-of-speech").html();
-			$($meaning_part_of_speech_div).append("as a(n) "+"<span class='red'>"+$meaning_pos_collapse_header+"</span>"+"...");
-
-			//Create the containter that displays the meanings, which is the collapsible-content
-			$meanings_container = $("<div>", {class: "meanings_container well lead collapse", id: "def"+index} );
-			$("#meanings_container").append($meanings_container);
-
-			// meaning divs and text to display
-			$meaning_div = $("<div>", {class: "meaning_container"} );
-			$meanings_container.append($meaning_div);
-			$meaning_div.append($(".word-definition").html());
-			// end of xml_pos loop to get all defs
-		} // end of the POS for loop
-
-		// Click anywhere (row, circle, or word) to change element features
-		$(".meaning_row").click(function(){
-			// Fill in the circle
-			$(this).children(":first").addClass("red_circle_background");
-
-			// If all words have been clicked on, show the continue button
-			if ($("#meanings_container .red_circle_background").length == $(".meaning_row").length) {
-				$("#meanings_continue_button").fadeIn();
-				$meaning_circle_activity_boolean = true;
-				boost_goodies(1200);
-			};
-		}); // end of the $meaning_row .click fn
-
-		//Checks if there are any meanings. If not, display a message and show the continue button
-		$(".no_word_info").remove();
-		if ($(".word-definition") == "") {
-			var $no_word_info_container = $("<div>", {class: "no_word_info lead text-danger"} );
-			var $message = "&#9785; We don't have any meanings to show. Please tap continue.";
-			$("#meanings_container").append($no_word_info_container);
-			$($no_word_info_container).append($message);
-			$("#meanings_continue_button").fadeIn();
-		}
+		$("#meanings_container, #meanings_continue_button").fadeIn();
+		$meaning_circle_activity_boolean = true;
 	}; // end of the start meanings activity function
 
 	// Start the synonyms activity
@@ -664,7 +616,6 @@ $(document).ready(function(){
 					// scroll_to_bottom();
 					$("#synonyms_continue_button").fadeIn();
 					$synonym_circle_activity_boolean = true;
-					boost_goodies(1500);
 				};
 			}); // end of the $synonym_row .click fn
 		}
@@ -682,10 +633,8 @@ $(document).ready(function(){
 				$(this).children(":first").addClass("red_circle_background");
 				// If all words have been clicked on, show the continue button
 				if ($("#antonyms_container .red_circle_background").length == $(".antonym_row").length) {
-					scroll_to_bottom();
 					$("#antonyms_continue_button").fadeIn();
 					$antonym_circle_activity_boolean = true;
-					boost_goodies(1500);
 				};
 			}); // end of the $antonym_row .click fn
 		}
@@ -746,13 +695,13 @@ $(document).ready(function(){
 			$syn_ant_checkpoint_antonym_button_div = $("<div>", { class: "col-xs-6", id: "syn_ant_checkpoint_antonym_button_div" } );
 			$syn_ant_checkpoint_synonym_button = $("<button/>", { type: "button",
 																	text: "synonym",
-																	class: "btn btn-lg btn-danger btn-block syn_ant_checkpoint_btns",
+																	class: "btn btn-lg btn-info btn-block syn_ant_checkpoint_btns",
 																	id: "syn_ant_checkpoint_synonym_button"
 																}
 												 );
 			$syn_ant_checkpoint_antonym_button = $("<button/>", { type: "button",
 																	text: "antonym",
-																	class: "btn btn-lg btn-danger btn-block syn_ant_checkpoint_btns",
+																	class: "btn btn-lg btn-info btn-block syn_ant_checkpoint_btns",
 																	id: "syn_ant_checkpoint_antonym_button"
 																}
 													);
@@ -777,7 +726,6 @@ $(document).ready(function(){
 			// $($no_word_info_container).append($message);
 			$("#syn-ant-no-results").fadeIn();
 			$("#syn_ant_checkpoint_continue_button").fadeIn();
-			boost_goodies(2100);
 		}
 	};
 
@@ -796,7 +744,6 @@ $(document).ready(function(){
 				if ($("#real_world_examples_container .red_circle_background").length == $(".rwe_row").length) {
 					$("#real_world_examples_continue_button").fadeIn();
 					$rwe_circle_activity_boolean = true;
-					boost_goodies(2400);
 				};
 			}); // end of the $rwe_row .click fn
 		}
@@ -945,7 +892,7 @@ $(document).ready(function(){
 				// Show the continue button
 				$("#syn_ant_checkpoint_continue_button").fadeIn();
 
-				boost_goodies(2400);
+				boost_goodies(240);
 			}
 
 			// If all the syn_ant_rows are visible, update the boolean to true
