@@ -19,6 +19,12 @@ $leksi-red: #ff1300;
 $light-gray: #f2f2f2;
 $white: #fff;
 
+@media (min-width: 1030px) {
+  .container {
+    width: 830px;
+  }
+}
+
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -176,6 +182,18 @@ input {
 
 .apple-blue-button {
 	border: 1px solid $apple-blue;
+}
+
+.apple-blue-button-filled {
+	@extend .apple-blue-button;
+
+	background: $apple-blue;
+	color: $white;
+}
+
+.apple-blue-button-unfilled {
+	@extend .apple-blue-button;
+
 	color: $apple-blue;
 }
 
