@@ -243,6 +243,7 @@ input {
 .box-shadow-border {
 	box-shadow: 1px 1px 3px #888;
 	padding: 10px;
+  margin-bottom: 25px;
 }
 
 .btn-group-margin {
@@ -381,11 +382,11 @@ table {
 	}
 }
 
-.word_partial a:hover {
+.word-partial a:hover {
 	background: none;
 }
 
-.word_partial .tightness{
+.word-partial .tightness{
 	margin-bottom: -.01em;
 }
 

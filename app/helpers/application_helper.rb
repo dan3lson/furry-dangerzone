@@ -38,7 +38,7 @@ module ApplicationHelper
   def num_fundamentals_games_completed(user)
     num = 0
     user.user_words.each do |uw|
-      num += 1 if uw.completed_fundamentals?
+      num += 1 if uw.fundamentals_completed?
     end
     num
   end

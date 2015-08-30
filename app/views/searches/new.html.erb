@@ -20,7 +20,7 @@
     </p>
   <% else %>
     <% @search_results.each_with_index do |word, index| %>
-      <div class="word_partial">
+      <div class="word-partial">
         <% if logged_in? %>
           <div class="pull-right">
             <%= form_for :user_word, url: user_word_path, method: :post do |f| %>

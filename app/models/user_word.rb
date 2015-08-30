@@ -27,10 +27,10 @@ class UserWord < ActiveRecord::Base
     end.compact
   end
 
-  def completed_fundamentals?
+  def fundamentals_completed?
     num = 0
 
-    uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "complete" }
+    self.uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
     num == 8
   end
