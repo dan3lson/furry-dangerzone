@@ -12,16 +12,16 @@ $apple-star-orange: #fd9603;
 $black: #000;
 $dark-gray: #8e8e93;
 $even-darker-gray: darken($dark-gray, 20);
-$game-circle-sizes: 45px;
+$game-circle-sizes: 55px;
 $leksi-green: #24d12e;
 $leksi-orange: orange;
 $leksi-red: #ff1300;
 $light-gray: #f2f2f2;
 $white: #fff;
 
-@media (min-width: 1030px) {
-  .container {
-    width: 830px;
+@media (min-width: 1000px) {
+  .logged-in-container {
+    width: 375px;
   }
 }
 
@@ -42,8 +42,8 @@ html {
 }
 
 body {
-  padding: 90px 0;
 	color: $even-darker-gray;
+  padding: 90px 0;
 }
 
 //**********
@@ -79,13 +79,14 @@ p {
 
 .game-circle {
 	border-radius: $game-circle-sizes;
-	display: inline-block;
-	height: $game-circle-sizes;
-	width: $game-circle-sizes;
-	border-width: 2px;
 	border-style: solid;
-	line-height: 38px;
+	border-width: 2px;
+	display: inline-block;
+  font-size: 17px;
+	height: $game-circle-sizes;
+	line-height: 47px;
 	margin: 5px;
+	width: $game-circle-sizes;
 }
 
 .game-circle-start-text {
@@ -94,22 +95,22 @@ p {
 
 	a {
 	  color: $white;
+    font-weight: bold;
 	}
 }
 
 .game-one-start-circle{
 	@extend .game-circle;
 
-	background: $leksi-red;
-	border-color: $leksi-red;
+	background: lighten($apple-blue, 38.5%);
+	border-color: lighten($apple-blue, 38.5%);
 }
 
 .game-two-start-circle{
 	@extend .game-circle;
 
-	background: $leksi-orange;
-	border-color: $leksi-orange;
-
+	background: lighten($apple-blue, 23%);
+	border-color: lighten($apple-blue, 23%);
 }
 
 .game-three-start-circle{

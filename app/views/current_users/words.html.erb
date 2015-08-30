@@ -1,21 +1,23 @@
 <% provide(:title, "myLeksi") %>
 <% provide(:header, "myLeksi") %>
 
-<% if current_user.has_words? %>
-  <% @current_user_user_words.each do |user_word| %>
-    <% word = user_word.word %>
-    <div class="box-shadow-border">
-      <div class="pull-right">
-        <%= render "games/display_game_start_btn", user_word: user_word,
-                                                   word: word
-        %>
+<div class="logged-in-container">
+  <% if current_user.has_words? %>
+    <% @current_user_user_words.each do |user_word| %>
+      <% word = user_word.word %>
+      <div class="box-shadow-border">
+        <div class="pull-right">
+          <%= render "games/display_game_start_btn", user_word: user_word,
+                                                     word: word
+          %>
+        </div>
+        <div class="word_partial">
+          <%= render "words/word", word: word %>
+        </div>
       </div>
-      <div class="word_partial">
-        <%= render "words/word", word: word %>
-      </div>
-    </div>
-    <br>
+      <br>
+    <% end %>
+  <% else %>
+    <%= render "current_users/no_words_guide" %>
   <% end %>
-<% else %>
-  <%= render "current_users/no_words_guide" %>
-<% end %>
+</div>

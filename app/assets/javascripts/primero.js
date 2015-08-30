@@ -210,9 +210,9 @@ $(document).ready(function(){
 
 		// Start the next activity, i.e. Synonyms or Antonyms
 		if ($("#synonym_no_results").hasClass("please-tap-continue")) {
-			start_synonyms_activity($chosen_word_value);
-		} else {
 			start_antonyms_activity($chosen_word_value);
+		} else {
+			start_synonyms_activity($chosen_word_value);
 		}
 
 		// If all words have been clicked on, show the synonyms continue button
@@ -242,7 +242,7 @@ $(document).ready(function(){
 
 		// Start the next activity, i.e. Antonyms or RWE --> CHECK IF ANTONYMS HAS CLASS AND IF SO, SKIP TO RWE
 		if ($("#antonym_no_results").hasClass("please-tap-continue")) {
-			start_rwe_activity($chosen_word_value);
+			start_real_world_examples_activity($chosen_word_value);
 		} else {
 			start_antonyms_activity($chosen_word_value);
 		}
