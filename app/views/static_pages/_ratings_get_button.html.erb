@@ -1,14 +1,7 @@
 <%=
   link_to "Get for free", signup_path,
-  class: "btn btn-default btn-sm apple-blue-button-unfilled"
+  class: "btn btn-default btn-sm apple-blue-button-filled"
 %>
-
-<div class="basic-apple-blue-link inline-block">
-  <small>
-  or
-    <%= link_to "log in", login_path %>.
-  </small>
-</div>
 
 <% if there_are_any_reviews? %>
   <span class="apple-star-container">

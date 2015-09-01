@@ -29,7 +29,7 @@ feature "user logs out", %{
 
       expect(page).to have_content("See you again, #{user.username}!")
       expect(page).to have_link("Get for free")
-      expect(page).to have_link("log in")
+      expect(page).to have_link("Log in")
     end
   end
 end

@@ -16,13 +16,13 @@ feature "guest visits home page", %{
     before :each do
       FactoryGirl.create(:version)
     end
-    
+
     scenario "scenario: homepage content is displayed" do
       visit root_path
 
       expect(page).to have_content("Leksi")
       expect(page).to have_link("Get for free")
-      expect(page).to have_link("log in")
+      expect(page).to have_link("Log in")
       expect(page).to have_content("2015 Leksi")
     end
   end

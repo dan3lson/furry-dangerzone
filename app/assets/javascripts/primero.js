@@ -190,29 +190,44 @@ $(document).ready(function(){
 	});
 
 	$("#meanings_continue_button").click(function(){
-
 		// Show and hide buttons
 		$("#meanings_back_button, #meanings_container, #meanings_continue_button").hide();
-		$("#synonyms_back_button, #synonyms_container").show();
-
-		// Update the activity name and instruction
-		display_activity_instruction("Synonyms","The words below are similar to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
 
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("4", 4);
-
-		// Update the progress made
-		progressBar(60);
 
 		// Boost user goodies
 		boost_goodies(120);
 		update_user_points(120);
 
-		// Start the next activity, i.e. Synonyms or Antonyms
-		if ($("#synonym_no_results").hasClass("please-tap-continue")) {
-			start_antonyms_activity($chosen_word_value);
-		} else {
+		if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
+			// Show and hide buttons
+			$("#synonyms_back_button, #synonyms_container").show();
+
+			// Update the activity name and instruction
+			display_activity_instruction("Synonyms","The words below are similar to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
+
+			// Update the progress made
+			progressBar(60);
+
 			start_synonyms_activity($chosen_word_value);
+		} else if ($("#synonym_no_results").hasClass("please-tap-continue") && $("#antonym_no_results").hasClass("please-tap-continue")) {
+			// Show and hide buttons
+			$("#real_world_examples_back_button, #real_world_examples_container").show();
+
+			// Update the activity name and instruction
+			display_activity_instruction("Real-World Examples","Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
+
+			// Update the user_word_game_level's status to complete
+			update_user_word_game_level_status("5", 5);
+			update_user_word_game_level_status("6", 6);
+			update_user_word_game_level_status("7", 7);
+
+			// Update the progress made
+			progressBar(90);
+
+			// Start the next activity, i.e. Real World Examples, if not already started
+			start_real_world_examples_activity($chosen_word_value);
 		}
 
 		// If all words have been clicked on, show the synonyms continue button
@@ -222,28 +237,43 @@ $(document).ready(function(){
 	});
 
 	$("#synonyms_continue_button").click(function(){
-
-		// Show and hide buttons
-		$("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
-		$("#antonyms_back_button, #antonyms_container").show();
-
-		// Update the activity name and instruction
-		display_activity_instruction("Antonyms","The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
-
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("5", 5);
 
-		// Update the progress made
-		progressBar(75);
-
-		// Boost user goodies
-		boost_goodies(150);
-		update_user_points(150);
-
-		// Start the next activity, i.e. Antonyms or RWE --> CHECK IF ANTONYMS HAS CLASS AND IF SO, SKIP TO RWE
+		// Start the next activity --> if there are synonyms, but no antonyms
 		if ($("#antonym_no_results").hasClass("please-tap-continue")) {
-			start_real_world_examples_activity($chosen_word_value);
+			// Show and hide buttons
+			$("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container").show();
+			$("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
+			$("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").hide();
+
+			// Update the activity name and instruction
+			display_activity_instruction("Checkpoint!","Is <strong>'" + $chosen_word_value + "'</strong> a synonym or antonym to:");
+
+			// Update the progress made
+			progressBar(75);
+
+			// Update the user_word_game_level's status to complete
+			update_user_word_game_level_status("6", 6);
+
+			start_syn_ant_checkpoint_activity($chosen_word_value);
+
+		// Start the next activity --> if there there are antonyms
 		} else {
+			// Show and hide buttons
+			$("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
+			$("#antonyms_back_button, #antonyms_container").show();
+
+			// Update the activity name and instruction
+			display_activity_instruction("Antonyms","The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
+
+			// Update the progress made
+			progressBar(75);
+
+			// Boost user goodies
+			boost_goodies(150);
+			update_user_points(150);
+
 			start_antonyms_activity($chosen_word_value);
 		}
 
@@ -254,7 +284,6 @@ $(document).ready(function(){
 	});
 
 	$("#antonyms_continue_button").click(function(){
-
 		// Show and hide buttons
 		$("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container").show();
 		$("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").hide();

@@ -23,7 +23,7 @@ feature "user deletes (their (duh)) account", %{
 
       visit menu_path
 
-      click_on "Edit My Profile"
+      click_on "Edit Profile"
 
       click_on "delete my account"
 
@@ -41,7 +41,7 @@ feature "user deletes (their (duh)) account", %{
 
       visit menu_path
 
-      click_on "Edit My Profile"
+      click_on "Edit Profile"
 
       click_on "delete my account"
 
@@ -64,7 +64,7 @@ feature "user deletes (their (duh)) account", %{
 
       visit menu_path
 
-      click_on "Edit My Profile"
+      click_on "Edit Profile"
 
       click_on "delete my account"
 

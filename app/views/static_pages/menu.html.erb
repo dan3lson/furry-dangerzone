@@ -30,7 +30,7 @@
   </p>
 
   <% if user_already_reviewed_latest_version? %>
-    Thanks for rating Leksi <%= version_display_name %>!
+    Thanks for rating Leksi <%= version_display_name(latest_version.number) %>!
   <% else %>
     <div class="well well-sm">
       <%= render "reviews/form" %>

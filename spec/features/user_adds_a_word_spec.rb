@@ -122,7 +122,7 @@ feature "user adds a word", %{
       expect(page).to have_content("noun")
       expect(page).to have_content("a game for two people, played on a board")
       expect(page).to have_content("/tʃes/")
-      expect(Word.count).to eq(4)
+      expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(2)
       expect(UserWordGameLevel.count).to eq(16)
     end

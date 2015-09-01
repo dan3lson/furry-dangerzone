@@ -210,4 +210,4 @@ Rails.logger.info "==============================================="
 Rails.logger.info "Creating Version"
 Rails.logger.info "==============================================="
 
-Version.create!(number: "1.1.0", description: "* Making\n * Moves")
+Version.create!(number: "0.0.1", description: "* Making\n * Moves")

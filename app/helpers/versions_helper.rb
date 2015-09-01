@@ -3,8 +3,8 @@ module VersionsHelper
     Version.first unless Version.first.nil?
   end
 
-  def version_display_name
-    "Version #{latest_version.number}"
+  def version_display_name(version_number)
+    "Version #{version_number}"
   end
 
   def latest_version_description

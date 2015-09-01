@@ -1,7 +1,7 @@
 <% provide(:title, @word.name) %>
 <% provide(:header, @word.name) %>
 
-<div class="box-shadow-border">
+<div class="box-shadow-border col-sm-6 col-sm-offset-3">
   <div class="pull-right">
     <%= render "games/display_game_start_btn", user_word: @user_word,
                                                word: @word
@@ -12,7 +12,7 @@
 
 <% if logged_in? %>
   <br>
-  <div class="box-shadow-border">
+  <div class="box-shadow-border col-sm-6 col-sm-offset-3">
     <div class="pull-right">
       <%= image_tag("tag_black_filled_25.png", alt: "myTags", class: "img-responsive") %>
     </div>

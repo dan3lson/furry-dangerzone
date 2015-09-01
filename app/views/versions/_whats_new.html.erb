@@ -5,7 +5,9 @@
     %>
       in
       <span class="basic-apple-blue-link">
-        <%= link_to version_display_name, version_path(latest_version) %>
+        <%= link_to version_display_name(latest_version.number),
+          version_path(latest_version)
+        %>
       </span>
       <small>
         released <%= time_ago_in_words(latest_version.created_at) %> ago

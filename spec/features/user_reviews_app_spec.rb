@@ -39,7 +39,6 @@ feature "user reviews app", %{
       click_on "submit"
 
       expect(page).to have_content("Thanks for rating Leksi Version")
-      expect(page).to have_content("Reviews")
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("error")
       expect(Review.count).to eq(1)
@@ -55,7 +54,6 @@ feature "user reviews app", %{
       click_on "submit"
 
       expect(page).to have_content("Thanks for rating Leksi Version")
-      expect(page).to have_content("Reviews")
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("error")
       expect(Review.count).to eq(1)
@@ -104,7 +102,6 @@ feature "user reviews app", %{
       click_on "submit"
 
       expect(page).to have_content("Thanks for rating Leksi Version")
-      expect(page).to have_content("Reviews")
       expect(page).not_to have_content("Yikes!")
       expect(page).not_to have_content("error")
       expect(Version.count).to eq(2)
