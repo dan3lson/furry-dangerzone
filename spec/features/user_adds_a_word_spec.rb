@@ -116,7 +116,7 @@ feature "user adds a word", %{
 
       click_on "add"
 
-      expect(page).to have_content("Awesome - you added \'chess\'!")
+      expect(page).to have_content("Tap the play circle to begin learning ")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content("chess")
       expect(page).to have_content("noun")
