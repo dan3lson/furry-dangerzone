@@ -16,8 +16,6 @@
   </div>
 
   <% unless word.example_sentence.length == 0 %>
-    <hr>
-
     <div class="">
       <% word.example_sentence.split(";").take(3).each do |es| %>
         <p>
@@ -28,4 +26,5 @@
       <% end %>
     </div>
   <% end %>
+  <br><br><br>
 </div>

@@ -1,13 +1,15 @@
-<div class="game-<%= user_word.current_game %>-start-circle">
-	<div class="center">
-		<span
-			class="game-circle-start-text"
-		>
-			<% if user_word.current_game == "one" %>
-				<%= link_to "play!", fundamentals_path(word_id: word) %>
-			<% else %>
-				<%= link_to "play!", jeopardy_path(word_id: word) %>
-			<% end %>
-		</span>
-	</div>
+<div class="">
+	<% if user_word.current_game == "one" %>
+		<div class="game-<%= user_word.current_game %>-start-circle">
+			<div class="center">
+					<span
+						class="game-circle-start-text"
+					>
+							<%= link_to "play!", fundamentals_path(word_id: word) %>
+					</span>
+			</div>
+		</div>
+	<% elsif user_word.fundamentals_completed? %>
+			<%= image_tag("medal_apple_blue_45.png", alt: "You\'ve earned a medal", width: 45, height: 45) %>
+	<% end %>
 </div>
