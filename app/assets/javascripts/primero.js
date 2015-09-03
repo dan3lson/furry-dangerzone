@@ -113,10 +113,6 @@ $(document).ready(function(){
 		// Update the progress made
 		progressBar(15);
 
-		// Boost user goodies
-		boost_goodies(30);
-		update_user_points(30);
-
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("1", 1);
 
@@ -150,10 +146,6 @@ $(document).ready(function(){
 
 		// Update the progress made
 		progressBar(30);
-
-		// Boost user goodies
-		boost_goodies(60);
-		update_user_points(60);
 	});
 
 	$("#pronunciation_image_button").click(function(){
@@ -176,10 +168,6 @@ $(document).ready(function(){
 		// Update the progress made
 		progressBar(45);
 
-		// Boost user goodies
-		boost_goodies(90);
-		update_user_points(90);
-
 		// Start the next activity, i.e. Meanings, if not already started
 		start_meanings_activity($chosen_word_value);
 
@@ -195,10 +183,6 @@ $(document).ready(function(){
 
 		// Update the user_word_game_level's status to complete
 		update_user_word_game_level_status("4", 4);
-
-		// Boost user goodies
-		boost_goodies(120);
-		update_user_points(120);
 
 		if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
 			// Show and hide buttons
@@ -270,10 +254,6 @@ $(document).ready(function(){
 			// Update the progress made
 			progressBar(75);
 
-			// Boost user goodies
-			boost_goodies(150);
-			update_user_points(150);
-
 			start_antonyms_activity($chosen_word_value);
 		}
 
@@ -296,10 +276,6 @@ $(document).ready(function(){
 
 		// Update the progress made
 		progressBar(75);
-
-		// Boost user goodies
-		boost_goodies(150);
-		update_user_points(150);
 
 		// Start the next activity, i.e. Syn / Ant checkpoint, if not already started
 		if ($(".current_syn_ant_checkpoint_word")[0] == undefined) {
@@ -329,10 +305,6 @@ $(document).ready(function(){
 
 		// Update the progress made
 		progressBar(90);
-
-		// Boost user goodies
-		boost_goodies(240);
-		update_user_points(240);
 
 		// Start the next activity, i.e. Real World Examples, if not already started
 		start_real_world_examples_activity($chosen_word_value);
@@ -374,7 +346,7 @@ $(document).ready(function(){
 
 		// Update user goodies
 		boost_goodies(240);
-		update_user_points(240);
+		update_user_points(25);
 
 		// Start the next activity, i.e. review level one
 		start_review_level_one_activity($chosen_word_value);

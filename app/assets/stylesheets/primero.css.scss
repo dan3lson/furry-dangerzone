@@ -1,3 +1,22 @@
+//**********
+//*
+//* MIXINS, VARIABLES, ETC.
+//*
+//**********
+
+$apple-blue: #097ff0;
+$apple-star-orange: #fd9603;
+$black: #000;
+$bootstrap-green: #5cb85c;
+$dark-gray: #8e8e93;
+$even-darker-gray: darken($dark-gray, 20);
+$game-circle-sizes: 55px;
+$leksi-green: #24d12e;
+$leksi-orange: orange;
+$leksi-red: #ff1300;
+$light-gray: #f2f2f2;
+$white: #fff;
+
 form {
 	margin-top: 25px;
 }
@@ -81,7 +100,7 @@ mark {
 }
 
 .red_circle {
-	border: #FF1300 1px solid;
+	border: $bootstrap-green 1px solid;
 	border-radius: 25px;
 	width: 25px;
 	height: 25px;
@@ -98,7 +117,7 @@ mark {
 }
 
 .red_circle_background {
-	background: #FF1300;
+	background: $bootstrap-green;
 }
 
 .meaning_pos_container, .synonym_word_container, .antonym_word_container,
@@ -145,4 +164,9 @@ mark {
 #syn_ant_checkpoint_antonym_button_div {
 	padding-left: 0px !important;
 	padding-right: 0px !important;
+}
+
+#specific_instruction {
+	font-size: 25px;
+	font-weight: 400;
 }
