@@ -345,8 +345,7 @@ $(document).ready(function(){
 		progressBar(100);
 
 		// Update user goodies
-		boost_goodies(240);
-		update_user_points(25);
+		update_user_points(10);
 
 		// Start the next activity, i.e. review level one
 		start_review_level_one_activity($chosen_word_value);
@@ -900,8 +899,6 @@ $(document).ready(function(){
 
 				// Show the continue button
 				$("#syn_ant_checkpoint_continue_button").fadeIn();
-
-				boost_goodies(240);
 			}
 
 			// If all the syn_ant_rows are visible, update the boolean to true
