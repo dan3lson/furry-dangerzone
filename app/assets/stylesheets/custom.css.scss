@@ -307,8 +307,12 @@ input {
 }
 
 .leaderboard-container {
-	text-align: center;
-	color: $white;
+  display: none;
+  text-align: center;
+}
+
+.olympic-container {
+  color: $white;
 }
 
 .leaderboard-gold {
@@ -372,11 +376,6 @@ input {
 
 .remove-line-height {
 	line-height: normal;
-}
-
-.remove-list-style ul {
-	list-style-type: none;
-	padding: 0;
 }
 
 .remove-padding-left {

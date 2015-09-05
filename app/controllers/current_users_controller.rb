@@ -9,6 +9,10 @@ class CurrentUsersController < ApplicationController
   end
 
   def progress
+    @gold_user = User.top_ten_highest_points[0]
+    @silver_user = User.top_ten_highest_points[1]
+    @bronze_user = User.top_ten_highest_points[2]
+    @seven_through_ten_users = User.top_ten_highest_points.drop(3)
   end
 
   def tags

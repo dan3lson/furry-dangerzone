@@ -10,7 +10,7 @@ Rails.logger.info "==============================================="
 )
 Rails.logger.info "Username: #{@founder.username}"
 
-2.times do
+7.times do
   user = User.create!(
     username: Faker::Internet.user_name,
     password: "password",
