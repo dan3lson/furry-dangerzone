@@ -1,0 +1,14 @@
+<% provide(:title, "#{current_user.username}\'s Progress") %>
+<% provide(:header, "Progress") %>
+
+<%= render "users/stats", user: current_user %>
+
+<br>
+
+<div class="inline-block">
+	<%= image_tag("leaderboard_black_filled_32.png", alt: "Leaderboard") %>
+</div>
+&nbsp;
+<div class="basic-apple-blue-link inline-block">
+	<%= link_to "View Leaderboard", leaderboard_path %>
+</div>

@@ -1,68 +1,80 @@
 <footer class="navbar navbar-default navbar-fixed-bottom navbar-footer" role="navigation">
-  <br/>
-  <div class="row">
-    <div class="col-xs-3" align="center">
+  <br>
+  <div class="custom-footer">
+    <div class="inline-block">
+      <% if params[:action] == "home" %>
+  			<%=
+  				link_to_unless_current image_tag("home_apple_blue_filled_32.png",
+  				alt: "myLeksi") + "<br/>Home".html_safe, home_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("home_dark_gray_32.png", alt: "myLeksi") +
+  				"<br/>Home".html_safe, home_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
+    </div>
+    <div class="inline-block">
       <% if params[:action] == "words" %>
-        <%=
-          link_to_unless_current image_tag("myLeksi_apple_blue_filled_32.png",
-          alt: "myLeksi") + "<br/>myLeksi".html_safe, myLeksi_path,
-          class: "img-responsive"
-        %>
-      <% else %>
-        <%=
-          link_to image_tag("myLeksi_dark_gray_32.png", alt: "myLeksi") +
-          "<br/>myLeksi".html_safe, myLeksi_path,
-          class: "img-responsive"
-        %>
-      <% end %>
+  			<%=
+  				link_to_unless_current image_tag("myLeksi_apple_blue_filled_32.png",
+  				alt: "myLeksi") + "<br/>myLeksi".html_safe, myLeksi_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("myLeksi_dark_gray_32.png", alt: "myLeksi") +
+  				"<br/>myLeksi".html_safe, myLeksi_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
     </div>
-
-    <div class="col-xs-3" align="center">
+    <div class="inline-block">
       <% if params[:controller] == "searches" %>
-        <%=
-          link_to_unless_current image_tag("search_apple_blue_filled_32.png", alt: "define") +
-          "<br/>define".html_safe, search_path,
-          class: "img-responsive"
-        %>
-      <% else %>
-        <%=
-          link_to image_tag("search_dark_gray_32.png", alt: "define") +
-          "<br/>define".html_safe, search_path,
-          class: "img-responsive"
-        %>
-      <% end %>
+  			<%=
+  				link_to_unless_current image_tag("search_apple_blue_filled_32.png", alt: "define") +
+  				"<br/>Define".html_safe, search_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("search_dark_gray_32.png", alt: "define") +
+  				"<br/>Define".html_safe, search_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
     </div>
-
-    <div class="col-xs-3" align="center">
-      <% if params[:action] == "tags" %>
-        <%=
-          link_to_unless_current image_tag("tag_apple_blue_filled_32.png", alt: "myTags") +
-          "<br/>myTags".html_safe, myTags_path,
-          class: "img-responsive"
-        %>
-      <% else %>
-        <%=
-          link_to image_tag("tag_dark_gray_32.png", alt: "myTags") +
-          "<br/>myTags".html_safe, myTags_path,
-          class: "img-responsive"
-        %>
-      <% end %>
+    <div class="inline-block">
+      <% if params[:action] == "progress" %>
+  			<%=
+  				link_to_unless_current image_tag("progress_apple_blue_filled_32.png", alt: "Progress") +
+  				"<br/>Progress".html_safe, progress_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("progress_dark_gray_32.png", alt: "Progress") +
+  				"<br/>Progress".html_safe, progress_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
     </div>
-
-    <div class="col-xs-3" align="center">
+    <div class="inline-block">
       <% if params[:action] == "menu" %>
-        <%=
-          link_to_unless_current image_tag("menu_apple_blue_filled_32.png", alt: "Menu") +
-          "<br/>menu".html_safe, menu_path,
-          class: "img-responsive"
-        %>
-      <% else %>
-        <%=
-          link_to image_tag("menu_dark_gray_32.png", alt: "Menu") +
-          "<br/>menu".html_safe, menu_path,
-          class: "img-responsive"
-        %>
-      <% end %>
+  			<%=
+  				link_to_unless_current image_tag("menu_apple_blue_filled_32.png", alt: "Menu") +
+  				"<br/>Menu".html_safe, menu_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("menu_dark_gray_32.png", alt: "Menu") +
+  				"<br/>Menu".html_safe, menu_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
     </div>
   </div>
 </footer>

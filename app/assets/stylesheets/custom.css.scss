@@ -76,6 +76,16 @@ p {
 //*
 //**********
 
+.custom-footer div {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 20%;
+  float: left;
+  text-align: center;
+}
+
 .game-circle {
 	border-radius: $game-circle-sizes;
 	border-style: solid;

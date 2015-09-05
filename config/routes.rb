@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
   get "menu" => "static_pages#menu"
-  get "search" => "searches#new"
+  get "home" => "current_users#home"
   get "myLeksi" => "current_users#words"
+  get "search" => "searches#new"
+  get "progress" => "current_users#progress"
   get "myTags" => "current_users#tags"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
