@@ -1,0 +1,49 @@
+<% provide(:title, "myLeksi") %>
+<% provide(:header, "myLeksi") %>
+
+<div>
+  <div class="col-sm-8 col-sm-offset-2">
+    <% if current_user.has_words? %>
+      <div class="menu-header-container">
+        <div class="menu-header">
+          <strong><%= @first_word_letter %></strong>
+        </div>
+      </div>
+      <% @current_user_user_words.each_with_index do |user_word, i| %>
+        <% word = user_word.word %>
+        <% prev_word = @current_user_user_words[i - 1].word %>
+        <% if @current_user_user_words[i + 1] %>
+          <% next_word = @current_user_user_words[i + 1].word %>
+        <% end %>
+        <div>
+          <% if word.name[0] > prev_word.name[0] %>
+            <div class="menu-header-container">
+              <div class="menu-header">
+                <strong><%= word.name[0].capitalize %></strong>
+              </div>
+            </div>
+          <% end %>
+          <div class="pull-right">
+            <%= render "games/display_game_start_btn", user_word: user_word,
+                                                       word: word
+            %>
+          </div>
+          <div class="word-partial word-partial-myLeksi">
+            <span class="basic-black-link">
+              <%= link_to word.name.capitalize, word_path(word) %>
+            </span>
+          </div>
+        </div>
+        <% if next_word %>
+          <% if word.name[0] == next_word.name[0] %>
+            <hr class="myLeksi-hr">
+          <% else %>
+            <br>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= render "current_users/no_words_guide" %>
+    <% end %>
+  </div>
+</div>

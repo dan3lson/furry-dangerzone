@@ -17,7 +17,7 @@
   		<% end %>
     </div>
     <div class="inline-block">
-      <% if params[:action] == "words" %>
+      <% if params[:action] == "myLeksi" || params[:controller] == "words" %>
   			<%=
   				link_to_unless_current image_tag("myLeksi_apple_blue_filled_32.png",
   				alt: "myLeksi") + "<br/>myLeksi".html_safe, myLeksi_path,

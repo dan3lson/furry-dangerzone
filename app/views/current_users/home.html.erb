@@ -1,4 +1,45 @@
 <% provide(:title, "Home") %>
 <% provide(:header, "Home") %>
 
-Home
+<div>
+  <% if current_user.has_incomplete_fundamentals? %>
+    <% @incomplete_games.each do |user_word| %>
+      <% word = user_word.word %>
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="pull-right">
+          <%= render "games/display_game_start_btn", user_word: user_word,
+                                                     word: word
+          %>
+        </div>
+        <div class="word-partial">
+          <h4 class="tightness">
+            <span class="basic-black-link">
+              <%= link_to word.name.capitalize, word %>
+            </span>
+          </h4>
+          <div class="word-details">
+            <p>
+              <span class="word-phonetic-spelling">
+                <%= word.phonetic_spelling %>
+              </span>
+              &nbsp; &nbsp;
+              <span class="word-part-of-speech">
+                <em><%= word.part_of_speech %></em>
+              </span>
+            </p>
+            <div>
+              <% word.definition.split(";").take(3).each do |d| %>
+                <p>
+                  <span class="word-definition">&#8605; <%= d %></span>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <hr class="home-hr">
+      </div>
+    <% end %>
+  <% else %>
+    <%= render "current_users/no_words_guide" %>
+  <% end %>
+</div>

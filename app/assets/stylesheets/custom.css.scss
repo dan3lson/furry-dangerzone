@@ -12,7 +12,7 @@ $apple-star-orange: #fd9603;
 $black: #000;
 $dark-gray: #8e8e93;
 $even-darker-gray: darken($dark-gray, 20);
-$game-circle-sizes: 55px;
+$game-circle-sizes: 35px;
 $leksi-green: #24d12e;
 $leksi-orange: orange;
 $leksi-red: #ff1300;
@@ -76,25 +76,14 @@ p {
 //*
 //**********
 
-.custom-footer div {
-  position: relative;
-  min-height: 1px;
-  padding-right: 10px;
-  padding-left: 10px;
-  width: 20%;
-  float: left;
-  text-align: center;
-}
-
 .game-circle {
 	border-radius: $game-circle-sizes;
 	border-style: solid;
 	border-width: 2px;
 	display: inline-block;
-  font-size: 17px;
+  font-size: 13px;
 	height: $game-circle-sizes;
-	line-height: 47px;
-	margin: 5px;
+	line-height: 27px;
 	width: $game-circle-sizes;
 }
 
@@ -111,20 +100,21 @@ p {
 .game-one-start-circle{
 	@extend .game-circle;
 
-	background: lighten($apple-blue, 38.5%);
-	border-color: lighten($apple-blue, 38.5%);
+	background: $leksi-red;
+	border-color: $leksi-red;
 }
 
 .game-two-start-circle{
 	@extend .game-circle;
 
-	background: lighten($apple-blue, 23%);
-	border-color: lighten($apple-blue, 23%);
+  background: $leksi-orange;
+	border-color: $leksi-orange;
 }
 
 .game-three-start-circle{
 	@extend .game-circle;
 
+  background: $leksi-green;
 	border-color: $leksi-green;
 }
 
@@ -163,26 +153,7 @@ p {
 
 //**********
 //*
-//* FORMS
-//*
-//**********
-
-input, textarea, select, .uneditable-input {
-  @include box_sizing;
-
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-input {
-  height: auto !important;
-}
-
-
-//**********
-//*
-//* MISCELLANEOUS
+//* A-Z
 //*
 //**********
 
@@ -255,16 +226,22 @@ input {
   margin-bottom: 25px;
 }
 
-.btn-group-margin {
-	margin-top: 20px;
-}
-
 .center {
 	text-align: center;
 }
 
 .clear {
 	clear: both;
+}
+
+.custom-footer div {
+  position: relative;
+  float: left;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-align: center;
+  width: 20%;
 }
 
 .dark-gray {
@@ -296,8 +273,25 @@ input {
   }
 }
 
+.home-hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .inline-block {
 	display: inline-block;
+}
+
+input, textarea, select, .uneditable-input {
+  @include box_sizing;
+
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto !important;
 }
 
 .leaderboard-bronze {
@@ -353,6 +347,11 @@ input {
 	display: none;
 }
 
+.myLeksi-hr {
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+
 .navbar-footer{
 	color: $apple-blue;
 	font-weight: normal;
@@ -390,6 +389,10 @@ table {
 	}
 }
 
+.word-partial-myLeksi {
+  padding-top: 13px;
+}
+
 .word-partial a:hover {
 	background: none;
 }
@@ -402,6 +405,6 @@ table {
 	line-height: normal;
 }
 
-h3.tightness {
+.tightness {
 	margin-top: 0;
 }

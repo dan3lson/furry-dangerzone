@@ -45,4 +45,16 @@ class User < ActiveRecord::Base
   def self.top_ten_highest_points
     order("points DESC").take(10)
   end
+
+  def incomplete_fundamentals
+    games = []
+    self.user_words.each do |uw|
+      games << uw unless uw.fundamentals_completed?
+    end
+    games
+  end
+
+  def has_incomplete_fundamentals?
+    self.incomplete_fundamentals.any?
+  end
 end

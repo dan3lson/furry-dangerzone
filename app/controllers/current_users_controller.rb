@@ -1,11 +1,14 @@
 class CurrentUsersController < ApplicationController
   def home
+    @incomplete_games = current_user.incomplete_fundamentals.shuffle.take(10).
+      sort_by { |uw| uw.word.name }
   end
 
-  def words
+  def myLeksi
     @current_user_user_words = current_user.user_words.sort_by { |uw|
       uw.word.name
     }
+    @first_word_letter = @current_user_user_words[0].word.name[0].capitalize
   end
 
   def progress

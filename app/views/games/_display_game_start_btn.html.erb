@@ -5,11 +5,11 @@
 					<span
 						class="game-circle-start-text"
 					>
-							<%= link_to "play!", fundamentals_path(word_id: word) %>
+						<%= link_to "play", fundamentals_path(word_id: word) %>
 					</span>
 			</div>
 		</div>
 	<% elsif user_word.fundamentals_completed? %>
-			<%= image_tag("medal_apple_blue_45.png", alt: "You\'ve earned a medal", width: 45, height: 45) %>
+			<%= image_tag("medal_red_35.png", alt: "You\'ve earned a medal") %>
 	<% end %>
 </div>

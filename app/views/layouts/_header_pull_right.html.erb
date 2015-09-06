@@ -1,5 +1,5 @@
 <span class="pull-right header-buttons">
-	<% if !logged_in? && params[:action] == "home" %>
+	<% if !logged_in? && params[:action] == "guest_home" %>
 		<p class="remove-line-height">
 			<%=
 				link_to "Log in", login_path,

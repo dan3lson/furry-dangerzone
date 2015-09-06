@@ -20,7 +20,7 @@
   <% end %>
 <% else %>
   <% if words_for(current_user, tag).count > 0 %>
-    <% if params[:controller] == "words" && params[:action] == "show" %>
+    <% if params[:controller] == "myLeksi" && params[:action] == "show" %>
       <%=
         link_to image_tag("remove_gray_25.png"),
         user_word_tag_word_show_page_path(word_id: word, tag_name: tag.name),
