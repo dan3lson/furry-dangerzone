@@ -1,6 +1,6 @@
 class CurrentUsersController < ApplicationController
   def home
-    @incomplete_games = current_user.incomplete_fundamentals.shuffle.take(10).
+    @incomplete_games = current_user.incomplete_fundamentals.take(4).
       sort_by { |uw| uw.word.name }
   end
 
@@ -9,6 +9,7 @@ class CurrentUsersController < ApplicationController
       uw.word.name
     }
     @first_word_letter = @current_user_user_words[0].word.name[0].capitalize
+    @current_user_words_count = current_user.words.count
   end
 
   def progress

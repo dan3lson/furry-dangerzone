@@ -9,10 +9,6 @@
     </div>
   </div>
 
-  <p>
-    Joined <%= time_ago_in_words(current_user.created_at) %> ago.
-  </p>
-
   <% if logged_in_and_current_user?(current_user) %>
     <div class="inline-block">
       <%= image_tag("edit_black_filled_25.png", alt: "Edit Profile") %>
@@ -48,7 +44,15 @@
   </div>
   &nbsp;
   <div class="basic-apple-blue-link inline-block">
-    <%= link_to "View Tags", myTags_path %>
+    <%= link_to "View All", myTags_path %>
+  </div>
+  <hr>
+  <div class="inline-block">
+    <%= image_tag("add_black_filled_32.png", alt: "Tags") %>
+  </div>
+  &nbsp;
+  <div class="basic-apple-blue-link inline-block">
+    <%= link_to "Create", new_tag_path %>
   </div>
 </div>
 

@@ -3,6 +3,11 @@
 
 <div>
   <div class="col-sm-8 col-sm-offset-2">
+    <p>
+      <strong>
+        Total words: <%= @current_user_words_count %>
+      </strong>
+    </p>
     <% if current_user.has_words? %>
       <div class="menu-header-container">
         <div class="menu-header">

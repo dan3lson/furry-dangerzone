@@ -9,7 +9,10 @@ class UserWordsController < ApplicationController
       user: current_user,
       word: @word
     )
-    if @user_word.save
+
+    current_user.points += 1
+
+    if @user_word.save && current_user.save
       @user_word_game_levels_before_count = UserWordGameLevel.count
 
       GameLevel.create_fundamentals_for(@user_word)

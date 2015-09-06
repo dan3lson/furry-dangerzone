@@ -947,12 +947,12 @@ $(document).ready(function(){
 	// Global fn
 	// Set the value for the progress bar
 	function progressBar(value) {
-		$('.progress-bar').css('width', value+'%').attr('aria-valuenow', value);
+		$('.game-progress-bar').css('width', value+'%').attr('aria-valuenow', value);
 	};
 
 	// Global fn
 	// Get a random number between y and x
-	function randomRange (x,y) {
+	function randomRange (x, y) {
 		return Math.floor(Math.random()* (x-y) + y);
 	};
 
