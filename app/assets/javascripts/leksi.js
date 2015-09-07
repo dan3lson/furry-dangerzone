@@ -25,4 +25,8 @@ $(document).ready(function(){
 		$(".leaderboard-silver, .leaderboard-bronze").fadeIn();
 		$(".leaderboard-last-seven").fadeIn();
 	});
+
+	$(".game-start").click(function() {
+		window.location.assign($(this).data("url"));
+	});
 });

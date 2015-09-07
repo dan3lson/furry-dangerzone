@@ -4,28 +4,27 @@
 <div class="col-sm-8 col-sm-offset-2 box-shadow-border">
   <%= current_user.points %> XP
   <br>
-  X many XP left to reach Level Y!
+  <%= remaining_points_to_level_up(current_user) %> many XP left to reach <%= display_level(current_user).to_i + 1 %>!
+  <br>
+  <%= current_user.points + remaining_points_to_level_up(current_user) %> = your next level points
   <div class="progress">
-    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30"
-      aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-        <span class="sr-only">30%</span>
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= current_user.points %>"
+      aria-valuemin="0" aria-valuemax="<%= current_user.points + remaining_points_to_level_up(current_user) %>" style="width: <%= current_user.points %>%">
+        <span class="sr-only"><%= current_user.points %></span>
     </div>
   </div>
 </div>
 
 <div class="col-sm-8 col-sm-offset-2 box-shadow-border">
-  <div>
+  <div class="instant-start-btns">
     <div class="col-xs-6 btn btn-custom-leksi-red">
-      Play a random word
+      Play random word
     </div>
     <div class="col-xs-6 btn btn-custom-leksi-red">
       Challenge me
     </div>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
+
   <% if current_user.has_incomplete_fundamentals? %>
     <% @incomplete_games.each do |user_word| %>
       <% word = user_word.word %>

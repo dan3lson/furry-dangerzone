@@ -75,87 +75,6 @@ p {
 
 //**********
 //*
-//* LOGGED IN
-//*
-//**********
-
-.game-circle {
-	border-radius: $game-circle-sizes;
-	border-style: solid;
-	border-width: 2px;
-	display: inline-block;
-  font-size: 13px;
-	height: $game-circle-sizes;
-	line-height: 27px;
-	width: $game-circle-sizes;
-}
-
-.game-circle-start-text {
-	font-weight: 200;
-	vertical-align: middle;
-
-	a {
-	  color: $white;
-    font-weight: bold;
-	}
-}
-
-.game-one-start-circle{
-	@extend .game-circle;
-
-	background: $leksi-red;
-	border-color: $leksi-red;
-}
-
-.game-two-start-circle{
-	@extend .game-circle;
-
-  background: $leksi-orange;
-	border-color: $leksi-orange;
-}
-
-.game-three-start-circle{
-	@extend .game-circle;
-
-  background: $leksi-green;
-	border-color: $leksi-green;
-}
-
-.game-one-in-progress-circle{
-	@extend .game-circle;
-
-	background: $leksi-red;
-	border-color: $leksi-red;
-}
-
-.game-two-in-progress-circle{
-	@extend .game-circle;
-
-	background: $leksi-orange;
-	border-color: $leksi-orange;
-}
-
-.game-three-in-progress-circle{
-	@extend .game-circle;
-
-	background: $leksi-green;
-	border-color: $leksi-green;
-}
-
-.navbar-default {
-	border-color: lighten($dark-gray, 30%);
-}
-
-.tag {
-	border: 2px solid $light-gray;
-	border-left: 3px solid lighten($dark-gray, 30%);
-	padding: 10px;
-	margin-bottom: 10px;
-}
-
-
-//**********
-//*
 //* A-Z
 //*
 //**********
@@ -292,6 +211,69 @@ p {
   }
 }
 
+.game-circle {
+	border-radius: $game-circle-sizes;
+	border-style: solid;
+	border-width: 2px;
+	display: inline-block;
+  font-size: 13px;
+	height: $game-circle-sizes;
+	line-height: 27px;
+	width: $game-circle-sizes;
+}
+
+.game-circle-start-text {
+	font-weight: 200;
+	vertical-align: middle;
+
+	a {
+	  color: $white;
+    font-weight: bold;
+	}
+}
+
+.game-one-start-circle{
+	@extend .game-circle;
+
+	background: $leksi-red;
+	border-color: $leksi-red;
+}
+
+.game-two-start-circle{
+	@extend .game-circle;
+
+  background: $leksi-orange;
+	border-color: $leksi-orange;
+}
+
+.game-three-start-circle{
+	@extend .game-circle;
+
+  background: $leksi-green;
+	border-color: $leksi-green;
+}
+
+.game-one-in-progress-circle{
+	@extend .game-circle;
+
+	background: $leksi-red;
+	border-color: $leksi-red;
+}
+
+.game-two-in-progress-circle{
+	@extend .game-circle;
+
+	background: $leksi-orange;
+	border-color: $leksi-orange;
+}
+
+.game-three-in-progress-circle{
+	@extend .game-circle;
+
+	background: $leksi-green;
+	border-color: $leksi-green;
+}
+
 .home-hr {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -313,6 +295,10 @@ input {
   height: auto !important;
 }
 
+.instant-start-btns {
+  margin-bottom: 70px;
+}
+
 .leaderboard-bronze {
 	@extend .leaderboard-container;
 
@@ -326,10 +312,6 @@ input {
 
 .light-green-bg {
   background: $light-green;
-}
-
-.olympic-container {
-  color: $white;
 }
 
 .leaderboard-gold {
@@ -375,6 +357,18 @@ input {
   margin-bottom: 6px;
 }
 
+.myLeksi-sm-in-progress-circle {
+  border: $white 3px solid;
+  border-radius: 30px;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
+
+.navbar-default {
+	border-color: lighten($dark-gray, 30%);
+}
+
 .navbar-footer{
 	color: $apple-blue;
 	font-weight: normal;
@@ -394,6 +388,10 @@ input {
 		  text-decoration: none;
 	  };
   }
+}
+
+.olympic-container {
+  color: $white;
 }
 
 .prog-circle {
@@ -416,15 +414,13 @@ input {
 .prog-in-progress-circle {
   @extend .prog-circle;
   @extend .prog-fundamentals-circle-bg;
-
-  border: 1px $white dashed;
 }
 
 .prog-not-started-circle {
   @extend .prog-circle;
+  @extend .prog-fundamentals-circle-bg;
 
-  border: 1px $leksi-red solid;
-  color: $leksi-red;
+  color: $white;
 }
 
 .prog-header {
@@ -433,6 +429,16 @@ input {
 
 .prog-header span {
   margin-left: -66px;
+}
+
+.prog-sm-in-progress-circle {
+  border: $white 5px solid;
+  border-radius: 66px;
+  height: 66px;
+  position: relative;
+  line-height: 60px;
+  top: 7px;
+  width: 66px;
 }
 
 .progress-xp-container {
@@ -458,6 +464,13 @@ table {
 	th, td {
 	  border-top: none !important;
 	}
+}
+
+.tag {
+	border: 2px solid $light-gray;
+	border-left: 3px solid lighten($dark-gray, 30%);
+	padding: 10px;
+	margin-bottom: 10px;
 }
 
 .word-partial-myLeksi {

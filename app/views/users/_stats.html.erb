@@ -2,10 +2,10 @@
 	<div class="progress-xp-container bg-success row remove-side-margins">
 		<div class="col-xs-4">
 			<div class="prog-header">
-				?
+				<%= display_level(current_user) %>
 			</div>
 			<p class="lead">
-				Current level
+				Current Level
 			</p>
 		</div>
 		<div class="col-xs-4">
@@ -18,10 +18,10 @@
 		</div>
 		<div class="col-xs-4">
 			<div class="prog-header">
-				?
+				<%= remaining_points_to_level_up(current_user) %>
 			</div>
 			<p class="lead">
-				Left to level-up
+				XP to level-up
 			</p>
 		</div>
 	</div>
@@ -76,6 +76,24 @@
 	Fundamentals Games
 	<hr>
 	<div class="progress-xp-container row remove-side-margins">
+		<div class="col-sm-4" align="center">
+			<div class="prog-header prog-not-started-circle">
+				<%= num_fundamentals_games_not_started(user) %>
+			</div>
+			<p class="lead">
+				Not started
+			</p>
+		</div>
+		<div class="col-sm-4" align="center">
+			<div class="prog-header prog-in-progress-circle">
+				<div class="prog-sm-in-progress-circle">
+					<%= num_fundamentals_games_in_progress(user) %>
+				</div>
+			</div>
+			<p class="lead">
+				In progress
+			</p>
+		</div>
 		<div class="col-sm-4">
 			<div class="prog-header">
 				<div class="inline-block">
@@ -90,22 +108,6 @@
 			</div>
 			<p class="lead">
 				Completed
-			</p>
-		</div>
-		<div class="col-sm-4" align="center">
-			<div class="prog-header prog-in-progress-circle">
-				<%= num_fundamentals_games_in_progress(user) %>
-			</div>
-			<p class="lead">
-				In progress
-			</p>
-		</div>
-		<div class="col-sm-4" align="center">
-			<div class="prog-header prog-not-started-circle">
-				<%= num_fundamentals_games_not_started(user) %>
-			</div>
-			<p class="lead">
-				Not started
 			</p>
 		</div>
 	</div>
