@@ -1,0 +1,56 @@
+<div class="olympic-container">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3 leaderboard-gold">
+			<div class="inline-block">
+				<%= image_tag("gold_white_filled_64.png", alt: "Gold Medal") %>
+			</div>
+			<div class="leaderboard-header inline-block">
+				<%= @gold_user.username %>
+				<span><%= @gold_user.points.to_s(:delimited) %></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6 leaderboard-silver">
+			<div class="inline-block">
+				<%= image_tag("silver_white_filled_64.png", alt: "Silver Medal") %>
+			</div>
+			<div class="leaderboard-header inline-block">
+				<%= @silver_user.username %>
+				<span><%= @silver_user.points.to_s(:delimited) %></span>
+			</div>
+		</div>
+		<div class="col-sm-6 leaderboard-bronze">
+			<div class="inline-block">
+				<%= image_tag("bronze_white_filled_64.png", alt: "Bronze Medal") %>
+			</div>
+			<div class="leaderboard-header inline-block">
+				<%= @bronze_user.username %>
+				<span><%= @bronze_user.points.to_s(:delimited) %></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<div class="leaderboard-last-seven lead row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<table class="table table-condensed">
+			<tbody>
+				<% @seven_through_ten_users.each.with_index(4) do |u, i| %>
+					<tr>
+						<th scope="row"><%= i %>.</th>
+						<td><%= u.username %></td>
+						<td>
+							<h4>
+								<small><%= u.points.to_s(:delimited) %></small>
+							</h4>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

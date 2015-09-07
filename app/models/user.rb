@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     self.tags.any?
   end
 
+  def has_user_word_tags?
+    self.user_word_tags.any?
+  end
+
   def already_has_tag?(tag)
     self.tags.include?(tag)
   end
@@ -56,5 +60,17 @@ class User < ActiveRecord::Base
 
   def has_incomplete_fundamentals?
     self.incomplete_fundamentals.any?
+  end
+
+  def completed_fundamentals
+    games = []
+    self.user_words.each do |uw|
+      games << uw if uw.fundamentals_completed?
+    end
+    games
+  end
+
+  def has_completed_fundamentals?
+    self.completed_fundamentals.any?
   end
 end

@@ -1,27 +1,112 @@
-# of Words: <%= user.words.count %>
-<br>
-# of Tags: <%= user.tags.count %>
+<div class="box-shadow-border">
+	<div class="progress-xp-container bg-success row remove-side-margins">
+		<div class="col-xs-4">
+			<div class="prog-header">
+				?
+			</div>
+			<p class="lead">
+				Current level
+			</p>
+		</div>
+		<div class="col-xs-4">
+			<div class="prog-header">
+				<%= user.points.to_s(:delimited) %>
+			</div>
+			<p class="lead">
+				Current XP
+			</p>
+		</div>
+		<div class="col-xs-4">
+			<div class="prog-header">
+				?
+			</div>
+			<p class="lead">
+				Left to level-up
+			</p>
+		</div>
+	</div>
 
-<p>
-	# of Experience Points: <%= user.points.to_s(:delimited) %>
-</p>
-<hr>
+	<br>
 
-<p>
-	Games:
-</p>
+	<div class="points-container">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<table class="table table-condensed">
+					<th>Activity</th>
+					<th>Reward</th>
+					<th class="light-green-bg">Points</th>
 
-# of Fundamentals completed:
-<%= num_fundamentals_games_completed(user) %>
+					<tr>
+						<td>Add a word</td>
+						<td>+ 1</td>
+						<td class="light-green-bg">+ <%= user.words.count %></td>
+					</tr>
+					<tr>
+						<td>Create a tag</td>
+						<td>+ 1</td>
+						<td class="light-green-bg">+ <%= user.tags.count %></td>
+					</tr>
+					<tr>
+						<td>Tag a word</td>
+						<td>+ 2</td>
+						<td class="light-green-bg">+ <%= user.user_word_tags.count * 2 %></td>
+					</tr>
+					<tr>
+						<td>Complete Fundamentals game</td>
+						<td>+ 10</td>
+						<td class="light-green-bg">+ <%= user.completed_fundamentals.count * 10 %></td>
+					</tr>
+					<tr>
+						<td>Complete Jeopardy game</td>
+						<td>+ 12</td>
+						<td class="light-green-bg">+ 0</td>
+					</tr>
+					<tr>
+						<td>Complete Freestyle game</td>
+						<td>+ 15</td>
+						<td class="light-green-bg">+ 0</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 
-<br>
-
-# of Fundamentals in progress:
-<%= num_fundamentals_games_in_progress(user) %>
-
-<br>
-
-# of Fundamentals not started:
-<%= num_fundamentals_games_not_started(user) %>
-
-<br>
+<div class="box-shadow-border">
+	Fundamentals Games
+	<hr>
+	<div class="progress-xp-container row remove-side-margins">
+		<div class="col-sm-4">
+			<div class="prog-header">
+				<div class="inline-block">
+					<%= image_tag("medal_red_78.png", class: "img-responsive", alt: "You\'ve earned a medal") %>
+				</div>
+				&nbsp;
+				<div class="inline-block">
+					<span class="leksi-red">
+						<%= num_fundamentals_games_completed(user) %>
+					</span>
+				</div>
+			</div>
+			<p class="lead">
+				Completed
+			</p>
+		</div>
+		<div class="col-sm-4" align="center">
+			<div class="prog-header prog-in-progress-circle">
+				<%= num_fundamentals_games_in_progress(user) %>
+			</div>
+			<p class="lead">
+				In progress
+			</p>
+		</div>
+		<div class="col-sm-4" align="center">
+			<div class="prog-header prog-not-started-circle">
+				<%= num_fundamentals_games_not_started(user) %>
+			</div>
+			<p class="lead">
+				Not started
+			</p>
+		</div>
+	</div>
+</div>

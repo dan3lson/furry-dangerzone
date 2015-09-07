@@ -21,8 +21,9 @@ class UserWordTagsController < ApplicationController
           user: current_user,
           word_tag: @word_tag
         )
+        current_user.points += 2
 
-        if @user_word_tag.save
+        if @user_word_tag.save && current_user.save
           msg = "Awesome - you tagged \'#{@tag.name}\' to \'#{@word.name}\'!"
           flash[:success] = msg
           redirect_to @word

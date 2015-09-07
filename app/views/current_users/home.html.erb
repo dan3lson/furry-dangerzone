@@ -14,9 +14,18 @@
 </div>
 
 <div class="col-sm-8 col-sm-offset-2 box-shadow-border">
-  <p>
-    Wordtastic Four:
-  </p>
+  <div>
+    <div class="col-xs-6 btn btn-custom-leksi-red">
+      Play a random word
+    </div>
+    <div class="col-xs-6 btn btn-custom-leksi-red">
+      Challenge me
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
   <% if current_user.has_incomplete_fundamentals? %>
     <% @incomplete_games.each do |user_word| %>
       <% word = user_word.word %>

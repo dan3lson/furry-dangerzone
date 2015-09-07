@@ -10,6 +10,7 @@
 $apple-blue: #097ff0;
 $apple-star-orange: #fd9603;
 $black: #000;
+$bootstrap-green: #dff0d8;
 $dark-gray: #8e8e93;
 $even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 35px;
@@ -17,6 +18,7 @@ $leksi-green: #24d12e;
 $leksi-orange: orange;
 $leksi-red: #ff1300;
 $light-gray: #f2f2f2;
+$light-green: lighten($bootstrap-green, 8);
 $white: #fff;
 
 @media (min-width: 1000px) {
@@ -44,6 +46,7 @@ html {
 body {
 	color: $even-darker-gray;
   padding: 90px 0;
+  font-size: 1.4em;
 }
 
 //**********
@@ -157,6 +160,10 @@ p {
 //*
 //**********
 
+.achievements-container {
+  display: none;
+}
+
 .apple-blue {
 	color: $apple-blue;
 }
@@ -226,6 +233,18 @@ p {
   margin-bottom: 25px;
 }
 
+.btn-custom {
+  border-radius: 20px;
+  padding: 7px;
+}
+
+.btn-custom-leksi-red {
+  @extend .btn-custom;
+
+  background: #fff;
+  border: #ff1300 1px solid;
+  color: #ff1300;
+}
 .center {
 	text-align: center;
 }
@@ -305,6 +324,10 @@ input {
   text-align: center;
 }
 
+.light-green-bg {
+  background: $light-green;
+}
+
 .olympic-container {
   color: $white;
 }
@@ -373,12 +396,60 @@ input {
   }
 }
 
+.prog-circle {
+  border-radius: 80px;
+  color: white;
+  height: 80px;
+  line-height: 83px;
+  width: 80px;
+}
+
+.prog-fundamentals-circle-bg {
+  background: $leksi-red;
+}
+
+.prog-completed-circle {
+  @extend .prog-circle;
+  @extend .prog-fundamentals-circle-bg;
+}
+
+.prog-in-progress-circle {
+  @extend .prog-circle;
+  @extend .prog-fundamentals-circle-bg;
+
+  border: 1px $white dashed;
+}
+
+.prog-not-started-circle {
+  @extend .prog-circle;
+
+  border: 1px $leksi-red solid;
+  color: $leksi-red;
+}
+
+.prog-header {
+  font-size: 41px;
+}
+
+.prog-header span {
+  margin-left: -66px;
+}
+
+.progress-xp-container {
+  text-align: center;
+}
+
 .remove-line-height {
 	line-height: normal;
 }
 
 .remove-padding-left {
 	padding-left: 0;
+}
+
+.remove-side-margins {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 table {

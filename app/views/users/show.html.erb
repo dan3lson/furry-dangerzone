@@ -1,8 +1,4 @@
 <% provide(:title, @user.username) %>
 <% provide(:header, @user.username) %>
 
-<p>
-  Joined <%= time_ago_in_words(@user.created_at) %> ago.
-</p>
-
 <%= render "users/stats", user: @user %>

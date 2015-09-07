@@ -1,6 +1,6 @@
 class CurrentUsersController < ApplicationController
   def home
-    @incomplete_games = current_user.incomplete_fundamentals.take(4).
+    @incomplete_games = current_user.incomplete_fundamentals.take(8).
       sort_by { |uw| uw.word.name }
   end
 
