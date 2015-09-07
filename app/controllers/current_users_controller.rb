@@ -8,8 +8,11 @@ class CurrentUsersController < ApplicationController
     @current_user_user_words = current_user.user_words.sort_by { |uw|
       uw.word.name
     }
-    @first_word_letter = @current_user_user_words[0].word.name[0].capitalize
     @current_user_words_count = current_user.words.count
+
+    if current_user.has_words?
+      @first_word_letter = @current_user_user_words[0].word.name[0].capitalize
+    end
   end
 
   def progress

@@ -74,7 +74,7 @@ feature "two users add the same word", %{
 
       click_on "add"
 
-      expect(page).to have_content("Tap the play circle to begin learning ")
+      expect(page).to have_content("Tap the red circle to play!")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(word.name)
       expect(page).to have_content(word.phonetic_spelling)

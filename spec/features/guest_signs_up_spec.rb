@@ -30,10 +30,10 @@ feature "guest signs up", %{
       click_on "Create my account"
 
       expect(page).to have_content("Welcome to Leksi!")
-      expect(page).to have_content("myLeksi is the place for all of your words")
-      expect(page).to have_link("define")
-      expect(page).to have_link("myTags")
-      expect(page).to have_link("menu")
+      expect(page).to have_content("get going on achieving Level 1")
+      expect(page).to have_link("Define")
+      expect(page).to have_link("Progress")
+      expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")

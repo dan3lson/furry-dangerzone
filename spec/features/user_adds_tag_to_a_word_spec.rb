@@ -70,7 +70,7 @@ feature "user adds tag to a word", %{
 
       visit myLeksi_path
 
-      click_on word.name
+      click_on word.name.capitalize
 
       select user_tag.tag.name, from: "Tags"
 
@@ -132,7 +132,7 @@ feature "user adds tag to a word", %{
 
       visit myLeksi_path
 
-      click_on word.name
+      click_on word.name.capitalize
 
       click_on "add"
 

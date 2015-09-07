@@ -1,8 +1,10 @@
 <div class="box-shadow-border">
+	<h4>Overview</h4>
+
 	<div class="progress-xp-container bg-success row remove-side-margins">
 		<div class="col-xs-4">
 			<div class="prog-header">
-				<%= display_level(current_user) %>
+				<%= current_level(current_user) %>
 			</div>
 			<p class="lead">
 				Current Level
@@ -18,7 +20,7 @@
 		</div>
 		<div class="col-xs-4">
 			<div class="prog-header">
-				<%= remaining_points_to_level_up(current_user) %>
+				<%= pts_to_level_up(current_user) %>
 			</div>
 			<p class="lead">
 				XP to level-up
@@ -73,8 +75,8 @@
 </div>
 
 <div class="box-shadow-border">
-	Fundamentals Games
-	<hr>
+	<h4>Fundamentals Games</h4>
+	
 	<div class="progress-xp-container row remove-side-margins">
 		<div class="col-sm-4" align="center">
 			<div class="prog-header prog-not-started-circle">

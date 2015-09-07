@@ -64,18 +64,17 @@ feature "user visits home page", %{
         user_word: user_word_1,
         game_level: game_level_8
       )
-      
+
       log_in_as(user)
 
       visit menu_path
 
       visit root_path
 
-      expect(page).to have_content(word.name)
+      expect(page).to have_content(word.name.capitalize)
       expect(page).to have_content(word.phonetic_spelling)
       expect(page).to have_content(word.part_of_speech)
       expect(page).to have_content(word.definition)
-      expect(page).to have_content(word.example_sentence)
     end
   end
 end

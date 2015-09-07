@@ -116,14 +116,11 @@ feature "user adds a word and sees game one start link", %{
 
       click_on "add"
 
-      visit myLeksi_path
-
-      expect(page).to have_content("chess")
+      expect(page).to have_content("Chess")
       expect(page).to have_content("noun")
       expect(page).to have_content("a game for two people, played on a board")
       expect(page).to have_content("/tʃes/")
       expect(page).to have_css(".game-one-start-circle")
-      expect(page).to have_link("play!")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(2)
       expect(UserWordGameLevel.count).to eq(16)

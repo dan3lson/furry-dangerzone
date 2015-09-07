@@ -112,7 +112,9 @@ feature "two users remove a word", %{
 
       log_in_as(user_1)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       click_on "remove"
 
@@ -215,7 +217,9 @@ feature "two users remove a word", %{
 
       log_in_as(user_1)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       within ".header-buttons" do
         click_on "remove"
@@ -324,7 +328,9 @@ feature "two users remove a word", %{
 
       log_in_as(user_1)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       within ".header-buttons" do
         click_on "remove"
@@ -433,7 +439,9 @@ feature "two users remove a word", %{
 
       log_in_as(user_1)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       within ".header-buttons" do
         click_on "remove"
@@ -445,7 +453,9 @@ feature "two users remove a word", %{
 
       log_in_as(user_2)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       within ".header-buttons" do
         click_on "remove"

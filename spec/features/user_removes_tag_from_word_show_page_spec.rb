@@ -72,7 +72,9 @@ feature "user removes tag from word show page", %{
 
       log_in_as(user)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       within(".tag-on-word-show-page") do
         click_on "remove"
@@ -142,7 +144,9 @@ feature "user removes tag from word show page", %{
 
       log_in_as(user)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       within all(".tag-on-word-show-page").last do
         click_on "remove"

@@ -5,7 +5,9 @@ class UserTagsController < ApplicationController
     @tag_has_other_users = @tag.users.count > 1
     @tag_has_other_words = @tag.words.count > 1
 
-    if @user_tag.destroy
+    current_user.points -= 1
+
+    if @user_tag.destroy && current_user.save
       flash[:success] = "\'#{@tag.name}\' has been removed."
       @tag.destroy unless @tag_has_other_users || @tag_has_other_words
       redirect_to myTags_path

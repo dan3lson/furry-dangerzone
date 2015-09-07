@@ -23,7 +23,7 @@ feature "user logs out", %{
     scenario "scenario: logs out" do
       log_in_as(user)
 
-      click_on "menu"
+      click_on "Menu"
 
       click_on "Log Out"
 

@@ -110,7 +110,7 @@ feature "two users remove same word and tag", %{
 
       log_in_as(user_1)
 
-      click_on word.name
+      click_on word.name.capitalize
 
       click_on "remove"
 
@@ -128,7 +128,7 @@ feature "two users remove same word and tag", %{
 
       log_in_as(user_2)
 
-      click_on word.name
+      click_on word.name.capitalize
 
       click_on "remove"
 
@@ -240,7 +240,7 @@ feature "two users remove same word and tag", %{
 
       visit myLeksi_path
 
-      click_on word.name
+      click_on word.name.capitalize
 
       click_on "remove"
 
@@ -256,7 +256,7 @@ feature "two users remove same word and tag", %{
 
       visit myLeksi_path
 
-      click_on word.name
+      click_on word.name.capitalize
 
       click_on "remove"
 

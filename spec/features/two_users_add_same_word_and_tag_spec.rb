@@ -110,7 +110,9 @@ feature "two users add same word and tag", %{
 
       log_in_as(user_1)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       select user_tag_2.tag.name, from: "Tags"
 
@@ -122,7 +124,9 @@ feature "two users add same word and tag", %{
 
       log_in_as(user_2)
 
-      click_on word.name
+      visit myLeksi_path
+
+      click_on word.name.capitalize
 
       select user_tag_2.tag.name, from: "Tags"
 

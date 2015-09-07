@@ -36,10 +36,6 @@ feature "user edits their profile", %{
       expect(page).to have_content("Changes successfully made.")
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
-      expect(page).to have_link("myLeksi")
-      expect(page).to have_link("define")
-      expect(page).to have_link("myTags")
-      expect(page).to have_content("menu")
     end
 
     scenario "scenario: with invalid data" do
@@ -58,9 +54,6 @@ feature "user edits their profile", %{
       expect(page).to have_content("Changes not successfully made.")
       expect(page).to have_content("errors")
       expect(page).to have_content("fix")
-      expect(page).to have_link("myLeksi")
-      expect(page).to have_link("define")
-      expect(page).to have_link("myTags")
       expect(page).to have_content("Profile")
     end
   end

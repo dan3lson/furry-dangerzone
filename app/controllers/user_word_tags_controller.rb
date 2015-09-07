@@ -55,7 +55,9 @@ class UserWordTagsController < ApplicationController
       end
     end
 
-    if @user_tag.destroy
+    current_user.points -= 2
+
+    if @user_tag.destroy && current_user.save
       flash[:success] = "You removed \'#{@tag.name}\'."
       @tag.destroy unless @tag_has_other_users
       redirect_to myTags_path

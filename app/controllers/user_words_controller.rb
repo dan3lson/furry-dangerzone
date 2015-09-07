@@ -22,9 +22,7 @@ class UserWordsController < ApplicationController
       Thesaurus.insert_words_for(@word, "ant", @word.part_of_speech)
 
       if @user_word_game_levels_before_count == UserWordGameLevel.count - 8
-        msg = "Tap the play circle to begin learning "
-        msg_2 = "\'#{@word.name}\'."
-        flash[:success] = msg << msg_2
+        flash[:success] = "Tap the red circle to play!"
 
         redirect_to @word
       else
@@ -61,7 +59,9 @@ class UserWordsController < ApplicationController
       end
     end
 
-    if @user_word.destroy
+    current_user.points -= 1
+
+    if @user_word.destroy && current_user.save
       flash[:success] = "\'#{@word.name}\' has been removed."
 
       redirect_to myLeksi_path

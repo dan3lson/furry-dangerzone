@@ -1,4 +1,4 @@
-<span class="pull-left">
+<span class="pull-left pull-left-image">
 	<% unless logged_in? %>
 		<%=
 			link_to image_tag("Leksi.png", class: "img-responsive"), root_path
@@ -12,6 +12,8 @@
 			<%= link_to image_tag("back_black_32.png"), :back %>
 		<% elsif params[:action] == "fundamentals" %>
 			<%= link_to image_tag("exit_black_32.png"), root_path %>
+		<% elsif params[:controller] == "words" && params[:action] == "show" %>
+			<%= link_to image_tag("back_black_32.png"), :back %>
 		<% end %>
 	<% end %>
 </span>
