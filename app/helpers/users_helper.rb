@@ -1,6 +1,6 @@
 module UsersHelper
   def current_level(user)
-    if user.points == 0
+    if user.points >= 0 && user.points < 40
       0
     elsif user.points >= 40 && user.points < 80
       1
@@ -72,9 +72,6 @@ module UsersHelper
   end
 
   def next_level_in_points(user)
-    puts "!!!!"
-    puts "CURRENT LEVEL FOR #{user}: #{current_level(user)}"
-    puts "!!!!"
     level_system[current_level(user) + 1]
   end
 
