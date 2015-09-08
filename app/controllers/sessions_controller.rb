@@ -7,6 +7,11 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       log_in(user)
+
+      user.last_login = DateTime.now
+
+      user.save
+
       redirect_to root_path
     else
       flash.now[:danger] = "Invalid username and / or password combination."

@@ -32,11 +32,18 @@
 
 <br>
 
-<% @users.each do |user| %>
+<% @users.each do |u| %>
   <div class="box-shadow-border">
     <h4 class="tightness basic-apple-blue-link">
-      <%= link_to user.username, user %>
-      <small>joined <%= time_ago_in_words(user.created_at) %> ago.</small>
+      <%= link_to u.username, u %>
+      <small>
+        joined <%= time_ago_in_words(u.created_at) %> ago
+
+        <% unless u.last_login_nil? %>
+          |
+          last login <%= time_ago_in_words(u.last_login) %> ago
+        <% end %>
+      </small>
     </h4>
   </div>
   <br>

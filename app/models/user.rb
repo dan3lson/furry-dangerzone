@@ -70,11 +70,15 @@ class User < ActiveRecord::Base
     self.user_words.each do |uw|
       games << uw if uw.fundamentals_completed?
     end
-    
+
     games
   end
 
   def has_completed_fundamentals?
     self.completed_fundamentals.any?
+  end
+
+  def last_login_nil?
+    self.last_login.nil?
   end
 end
