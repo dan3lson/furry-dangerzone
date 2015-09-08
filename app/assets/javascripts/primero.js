@@ -346,10 +346,14 @@ $(document).ready(function(){
 
 		// Update user goodies
 		update_user_points(10);
+		boost_goodies(10);
 
 		// Start the next activity, i.e. review level one
 		start_review_level_one_activity($chosen_word_value);
 
+		// Hide the exit btn and display the home btn
+		$("#game-exit-btn").hide();
+		$("#game-home-btn").show();
 	});
 
 	/**

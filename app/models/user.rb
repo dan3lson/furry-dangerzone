@@ -52,9 +52,11 @@ class User < ActiveRecord::Base
 
   def incomplete_fundamentals
     games = []
+
     self.user_words.each do |uw|
       games << uw unless uw.fundamentals_completed?
     end
+
     games
   end
 
@@ -64,9 +66,11 @@ class User < ActiveRecord::Base
 
   def completed_fundamentals
     games = []
+
     self.user_words.each do |uw|
       games << uw if uw.fundamentals_completed?
     end
+    
     games
   end
 

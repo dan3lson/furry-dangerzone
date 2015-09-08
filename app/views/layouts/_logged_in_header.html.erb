@@ -4,11 +4,14 @@
 			<%= render "layouts/header_pull_left" %>
 
 			<% if params[:action] == "fundamentals" %>
-				<!-- <span id="games-score">score:</span>
-				<span class="lead" id="goodies">0</span> -->
-				<span class="game-name-and-level">
-					Fundamentals: Level 1
-				</span>
+				<div class="lead" align="center" id="progress_bar_container">
+					<div class="progress">
+						<div class="game-progress-bar progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
+							aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+								<span class="sr-only">0%</span>
+						</div>
+					</div>
+				</div>
 			<% else %>
 				<%= full_header(yield(:header).truncate(23)) %>
 			<% end %>

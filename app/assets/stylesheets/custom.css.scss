@@ -10,6 +10,7 @@
 $apple-blue: #097ff0;
 $apple-star-orange: #fd9603;
 $black: #000;
+$bootstrap-blue: #5bc0de;
 $bootstrap-green: #dff0d8;
 $dark-gray: #8e8e93;
 $even-darker-gray: darken($dark-gray, 20);
@@ -153,6 +154,7 @@ p {
 }
 
 .btn-custom {
+  background: #fff;
   border-radius: 20px;
   padding: 7px;
 }
@@ -160,10 +162,17 @@ p {
 .btn-custom-leksi-red {
   @extend .btn-custom;
 
-  background: #fff;
-  border: #ff1300 1px solid;
-  color: #ff1300;
+  border: $leksi-red 1px solid;
+  color: $leksi-red;
 }
+
+.btn-custom-leksi-red {
+  @extend .btn-custom;
+
+  border: $bootstrap-blue 1px solid;
+  color: $bootstrap-blue;
+}
+
 .center {
 	text-align: center;
 }
@@ -293,10 +302,6 @@ input, textarea, select, .uneditable-input {
 
 input {
   height: auto !important;
-}
-
-.instant-start-btns {
-  margin-bottom: 70px;
 }
 
 .leaderboard-bronze {

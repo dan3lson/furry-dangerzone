@@ -29,4 +29,6 @@ $(document).ready(function(){
 	$(".game-start").click(function() {
 		window.location.assign($(this).data("url"));
 	});
+	
+	$("#rand-btn").attr("disabled", "disabled")
 });

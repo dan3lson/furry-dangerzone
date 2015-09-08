@@ -1,7 +1,14 @@
 class CurrentUsersController < ApplicationController
   def home
-    @incomplete_games = current_user.incomplete_fundamentals.take(8).
+    @incomplete_games = current_user.incomplete_fundamentals.take(10).
       sort_by { |uw| uw.word.name }
+
+    @rand_word_id =
+      if current_user.has_words? && current_user.has_incomplete_fundamentals?
+        current_user.incomplete_fundamentals.sample.word.id
+      else
+        Word.all.sample.id
+    end
   end
 
   def myLeksi

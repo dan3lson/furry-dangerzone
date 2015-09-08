@@ -88,13 +88,15 @@ module UsersHelper
       diff_btwn_curr_and_next_lvl(user).to_f) * 100
   end
 
-  def progress_snapshot_motivation(user)
+  def display_progress_snapshot_motivation(user)
     if percent_complete(user) >= 0.0 && percent_complete(user) < 25.0
-      "Hey #{user.username}, get going on achieving Level #{next_level(user)}!"
+      msg = "Hey #{user.username.capitalize}, get going"
+      "#{msg} on achieving Level #{next_level(user)}!"
     elsif percent_complete(user) >= 25.0 && percent_complete(user) < 50.0
-      "Nice job getting started. Keep playing!"
+      "#{user.username.capitalize}, nice job getting started. Keep playing!"
     elsif percent_complete(user) >= 50.0 && percent_complete(user) < 75.0
-      "Great job, you\'re more than halfway to Level #{next_level(user)}!"
+      msg = "Great job, #{user.username.capitalize} - you\'re more than"
+      "#{msg} halfway to Level #{next_level(user)}!"
     elsif percent_complete(user) >= 75.0 && percent_complete(user) <= 100.0
       "You\'re so close; Level #{next_level(user)} is in sight!"
     else
