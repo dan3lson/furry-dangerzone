@@ -68,10 +68,16 @@ module UsersHelper
   end
 
   def next_level(user)
+    puts "!!!!"
+    puts "CURRENT LEVEL FOR #{user}: #{current_level(user)}"
+    puts "!!!!"
     current_level(user) + 1
   end
 
   def next_level_in_points(user)
+    puts "!!!!"
+    puts "CURRENT LEVEL FOR #{user}: #{current_level(user)}"
+    puts "!!!!"
     level_system[current_level(user) + 1]
   end
 
