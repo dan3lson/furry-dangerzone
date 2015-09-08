@@ -18,27 +18,3 @@ UserWord.all.map { |uw| uw.fundamentals_in_progress? }.keep_if { |v| v == true }
 
 # Fundamentals Not Started
 UserWord.all.map { |uw| uw.fundamentals_not_started? }.keep_if { |v| v == true }.count
-
-def baseline_gamification
-	User.all.each do |u|
-		u.points = 0
-
-		if u.has_words?
-			u.points += u.words.count
-		end
-
-		if u.has_tags?
-			u.points += u.tags.count
-		end
-
-		if u.has_user_word_tags?
-			u.points += u.user_word_tags.count * 2
-		end
-
-		if u.has_completed_fundamentals?
-			u.points += u.completed_fundamentals.count * 10
-		end
-
-		u.save
-	end
-end

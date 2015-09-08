@@ -1,8 +1,5 @@
 module UsersHelper
   def current_level(user)
-    puts "!!!!"
-    puts "USER POINTS FOR #{user}: #{user.points}"
-    puts "!!!!"
     if user.points == 0
       0
     elsif user.points >= 40 && user.points < 80

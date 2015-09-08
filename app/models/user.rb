@@ -81,4 +81,28 @@ class User < ActiveRecord::Base
   def last_login_nil?
     self.last_login.nil?
   end
+
+  def self.baseline_gamification
+  	all.each do |u|
+  		u.points = 0
+
+  		if u.has_words?
+  			u.points += u.words.count
+  		end
+
+  		if u.has_tags?
+  			u.points += u.tags.count
+  		end
+
+  		if u.has_user_word_tags?
+  			u.points += u.user_word_tags.count * 2
+  		end
+
+  		if u.has_completed_fundamentals?
+  			u.points += u.completed_fundamentals.count * 10
+  		end
+
+  		u.save
+  	end
+  end
 end
