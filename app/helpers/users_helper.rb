@@ -1,5 +1,8 @@
 module UsersHelper
   def current_level(user)
+    puts "!!!!"
+    puts "USER POINTS FOR #{user}: #{user.points}"
+    puts "!!!!"
     if user.points == 0
       0
     elsif user.points >= 40 && user.points < 80
@@ -39,7 +42,7 @@ module UsersHelper
     elsif user.points >= 1200 && user.points < 1280
       18
     else
-      "e"
+      33333
     end
   end
 
@@ -68,9 +71,6 @@ module UsersHelper
   end
 
   def next_level(user)
-    puts "!!!!"
-    puts "CURRENT LEVEL FOR #{user}: #{current_level(user)}"
-    puts "!!!!"
     current_level(user) + 1
   end
 
