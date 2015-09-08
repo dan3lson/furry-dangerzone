@@ -165,11 +165,12 @@
 		experience points!
 	</p>
 
-	<%= link_to "start Leksi Jeopardy", jeopardy_path(word_id: @word.id),
-		class: "btn btn-default btn-block btn-lg",
-		id: "review_level_one_continue_button",
-		role: "button"
-	%>
+	<p class="lead">
+		Play the Fundamentals for another word? Tap the button below!
+	</p>
+
+	<%= render "games/insta_start_btns", word_id: @rand_word_id %>
+
 </div>
 <!-- end of start of review level one container -->
 
