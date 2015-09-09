@@ -2,9 +2,6 @@
   <br/>
 
   <div class="basic-apple-black-link">
-    <p>
-      &copy; 2015 Leksi <sup>TM</sup> Education
-    </p>
     <span>
       <%=
         link_to "Get for free", signup_path,
@@ -21,9 +18,7 @@
           target: "_blank"
         %>
         <br>
-        <div class="fb-like" data-share="true" data-width="450"
-         data-show-faces="true">
-        </div>
+
 
         <%=
           link_to "Twitter", "https://twitter.com/leksieducation",
@@ -33,7 +28,15 @@
         Email: <em>info@Leksi.education</em>
       </small>
     </p>
+
+    <div class="fb-like" data-share="true" data-width="450"
+     data-show-faces="true">
+    </div>
   </div>
 
   <%= render "layouts/mailchimp" %>
+
+  <p>
+    &copy; 2015 Leksi <sup>TM</sup> Education
+  </p>
 </footer>
