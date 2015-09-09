@@ -13,13 +13,16 @@ $black: #000;
 $bootstrap-blue: #5bc0de;
 $bootstrap-green: #dff0d8;
 $dark-gray: #8e8e93;
+$dark-green: darken($bootstrap-green, 60);
 $even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 35px;
 $leksi-green: #24d12e;
 $leksi-orange: orange;
 $leksi-red: #ff1300;
+$dark-leksi-red: darken($leksi-red, 20);
 $light-gray: #f2f2f2;
 $light-green: lighten($bootstrap-green, 8);
+$light-leksi-red: lighten($leksi-red, 47);
 $white: #fff;
 
 @media (min-width: 1000px) {
@@ -64,10 +67,6 @@ h1 {
   font-size: 2em;
   margin-bottom: 15px;
   text-align: center;
-}
-
-.full-header {
-  font-size: 1.5em;
 }
 
 p {
@@ -166,7 +165,7 @@ p {
   color: $leksi-red;
 }
 
-.btn-custom-leksi-red {
+.btn-custom-leksi-blue {
   @extend .btn-custom;
 
   border: $bootstrap-blue 1px solid;
@@ -218,6 +217,33 @@ p {
   .form-control {
     color: $state-danger-text;
   }
+}
+
+.full-header {
+  font-size: 1.5em;
+}
+
+.fundamentals-header {
+  @extend .stats-header;
+
+  background: $light-leksi-red;
+  border-left: 3px solid $dark-leksi-red;
+  color: $dark-leksi-red;
+}
+
+.overview-header {
+  @extend .stats-header;
+
+  background: $light-gray;
+  border-left: 3px solid $dark-gray;
+}
+
+.progress-meter-header {
+  @extend .stats-header;
+
+  background: $light-green;
+  border-left: 3px solid $dark-green;
+  color: $dark-green;
 }
 
 .game-circle {
@@ -461,6 +487,11 @@ input {
 .remove-side-margins {
 	margin-left: 0;
 	margin-right: 0;
+}
+
+.stats-header {
+  margin-bottom: 30px;
+  padding: 10px;
 }
 
 table {

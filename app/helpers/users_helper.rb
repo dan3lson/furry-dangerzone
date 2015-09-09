@@ -98,7 +98,8 @@ module UsersHelper
       msg = "Great job, #{user.username.capitalize} - you\'re more than"
       "#{msg} halfway to Level #{next_level(user)}!"
     elsif percent_complete(user) >= 75.0 && percent_complete(user) <= 100.0
-      "You\'re so close; Level #{next_level(user)} is in sight!"
+      msg = "You\'re so close, #{user.username.capitalize}!"
+      "#{msg} Level #{next_level(user)} is in sight!"
     else
       "Yikes! Motivations will be right back..."
     end

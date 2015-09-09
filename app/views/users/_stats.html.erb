@@ -1,7 +1,7 @@
 <div class="box-shadow-border">
-	<h4>Overview</h4>
+	<h4 class="overview-header">Overview</h4>
 
-	<div class="progress-xp-container bg-success row remove-side-margins">
+	<div class="progress-xp-container row remove-side-margins">
 		<div class="col-xs-4">
 			<div class="prog-header">
 				<%= current_level(user) %>
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	<br>
+	<hr>
 
 	<div class="points-container">
 		<div class="row">
@@ -36,37 +36,37 @@
 				<table class="table table-condensed">
 					<th>Activity</th>
 					<th>Reward</th>
-					<th class="light-green-bg">Points</th>
+					<th class="active">Points</th>
 
 					<tr>
 						<td>Add a word</td>
 						<td>+ 1</td>
-						<td class="light-green-bg">+ <%= user.words.count %></td>
+						<td class="active">+ <%= user.words.count %></td>
 					</tr>
 					<tr>
 						<td>Create a tag</td>
 						<td>+ 1</td>
-						<td class="light-green-bg">+ <%= user.tags.count %></td>
+						<td class="active">+ <%= user.tags.count %></td>
 					</tr>
 					<tr>
 						<td>Tag a word</td>
 						<td>+ 2</td>
-						<td class="light-green-bg">+ <%= user.user_word_tags.count * 2 %></td>
+						<td class="active">+ <%= user.user_word_tags.count * 2 %></td>
 					</tr>
 					<tr>
 						<td>Complete Fundamentals game</td>
 						<td>+ 10</td>
-						<td class="light-green-bg">+ <%= user.completed_fundamentals.count * 10 %></td>
+						<td class="active">+ <%= user.completed_fundamentals.count * 10 %></td>
 					</tr>
 					<tr>
 						<td>Complete Jeopardy game</td>
 						<td>+ 12</td>
-						<td class="light-green-bg">+ 0</td>
+						<td class="active">+ 0</td>
 					</tr>
 					<tr>
 						<td>Complete Freestyle game</td>
 						<td>+ 15</td>
-						<td class="light-green-bg">+ 0</td>
+						<td class="active">+ 0</td>
 					</tr>
 				</table>
 			</div>
@@ -75,7 +75,7 @@
 </div>
 
 <div class="box-shadow-border">
-	<h4>Fundamentals Games</h4>
+	<h4 class="fundamentals-header">Fundamentals Games</h4>
 
 	<div class="progress-xp-container row remove-side-margins">
 		<div class="col-sm-4" align="center">

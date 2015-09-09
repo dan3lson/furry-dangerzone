@@ -156,21 +156,30 @@
 
 <!-- start of review level one container -->
 <div id="review_level_one_container" align="center">
-	<%= image_tag("medal.png", alt: "You\'ve earned a medal") %>
+	<%= image_tag("medal_red_100.png", alt: "You\'ve earned a medal") %>
+
 	<h1>Congratulations!</h1>
+
 	<p class="lead">
-		<span id="level_congrats_text">You've completed the Basics for </span>
+		<span id="level_congrats_text">You've completed the Fundamentals for </span>
 		and earned
 		<span id="goodies_total"></span>
 		experience points!
 	</p>
+
+	<!-- make this into that red blockquote-looking-thing -->
+	<p class="lead">
+		You need <%= pts_to_level_up(current_user) %> more XP
+		before reaching Level <%= next_level(current_user) %>!
+	</p>
+
+	<hr>
 
 	<p class="lead">
 		Play the Fundamentals for another word? Tap the button below!
 	</p>
 
 	<%= render "games/insta_start_btns", word_id: @rand_word_id %>
-
 </div>
 <!-- end of start of review level one container -->
 

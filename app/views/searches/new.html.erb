@@ -13,6 +13,10 @@
   </div>
 </div>
 
+<div class="clear">
+
+</div>
+
 <% if @query %>
   <% if @search_results.class == String %>
     <p class="lead leksi-red center">
@@ -20,12 +24,13 @@
     </p>
   <% else %>
     <% @search_results.each_with_index do |word, index| %>
-      <div class="word-partial">
+      <div class="word-partial col-sm-8 col-sm-offset-2">
         <% if logged_in? %>
           <div class="pull-right">
             <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
               <%= hidden_field_tag :name, word.name %>
               <%= hidden_field_tag :definition, word.definition %>
+
               <% if Rails.env.test? %>
                 <% if current_user.already_has_word?(word) %>
                   <%=
@@ -50,9 +55,11 @@
             <% end %>
           </div>
         <% end %>
+
         <div class="box-shadow-border">
           <%= render "words/word", word: word %>
         </div>
+
         <br>
       </div>
     <% end %>

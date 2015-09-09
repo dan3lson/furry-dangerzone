@@ -1,11 +1,11 @@
 <% provide(:title, "Home") %>
 <% provide(:header, "Home") %>
 
-<div class="col-sm-8 col-sm-offset-2 box-shadow-border">
+<div class="col-sm-8 col-sm-offset-2 box-shadow-border light-green-bg">
   <div class="pull-right">
-    <%= image_tag("trophy_black_filled_32.png", alt: "Trophy") %>
+    <%= image_tag("trophy_color_75.png", alt: "Trophy") %>
   </div>
-  <div>
+  <div class="">
     <p class="lead">
       <%= display_progress_snapshot_motivation(current_user) %>
     </p>
@@ -23,24 +23,16 @@
       </span>
     </div>
   </div>
-
 </div>
 
-
-
 <div class="col-sm-8 col-sm-offset-2 box-shadow-border">
-  <div>
-    <div class="pull-right">
-      <%= render "games/insta_start_btns", word_id: @rand_word_id %>
-    </div>
-    <div>
-      <h4>Game Zone</h4>
-    </div>
-  </div>
+  <% if false %>
+    <%= render "games/insta_start_btns", word_id: @rand_word_id %>
 
-  <br>
-  <br>
-
+    <br>
+    <br>
+  <% end %>
+  
   <% if current_user.has_incomplete_fundamentals? %>
     <% @incomplete_games.each do |user_word| %>
       <% word = user_word.word %>
