@@ -17,10 +17,12 @@
       New user?
       <%= link_to "Sign up now", signup_path %>!</p>
     </small>
-    <br>
+
     <small class="basic-apple-blue-link">
-      Forgot your password? Email us at
-      <em>help@Leksi.education</em>
+      Forgot your password?
+      <%= mail_to "help@leksi.education", "Email us",
+         subject: "Password Reset" %>
+      to reset it.
     </small>
   </div>
 </div>

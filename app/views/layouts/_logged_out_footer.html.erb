@@ -13,28 +13,28 @@
       <small>
         <%= link_to "Already have an account? Log in.", login_path %>
         <br>
+        <strong>Connect with us:</strong>
+        &nbsp;
         <%=
           link_to "Facebook", "https://www.facebook.com/LeksiEducation",
           target: "_blank"
         %>
-        <br>
-
-
+        |
         <%=
           link_to "Twitter", "https://twitter.com/leksieducation",
           target: "_blank"
         %>
-        <br>
-        Email: <em>info@Leksi.education</em>
+        |
+        <%= mail_to "info@Leksi.education", "Email us" %>
       </small>
     </p>
-
-    <div class="fb-like" data-share="true" data-width="450"
-     data-show-faces="true">
-    </div>
   </div>
 
   <%= render "layouts/mailchimp" %>
+
+  <div class="clear"></div>
+
+  <br>
 
   <p>
     &copy; 2015 Leksi <sup>TM</sup> Education
