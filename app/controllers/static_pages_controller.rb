@@ -1,4 +1,7 @@
 class StaticPagesController < ApplicationController
+  def duolingo
+  end
+  
   def guest_home
     redirect_to home_path if logged_in?
     @reviews = Review.limit(5)

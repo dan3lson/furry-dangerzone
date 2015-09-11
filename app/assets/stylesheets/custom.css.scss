@@ -165,11 +165,15 @@ p {
   color: $leksi-red;
 }
 
-.btn-custom-leksi-blue {
+.btn-custom-bootstrap-blue {
   @extend .btn-custom;
 
   border: $bootstrap-blue 1px solid;
   color: $bootstrap-blue;
+}
+
+.add-category-btn:hover {
+  background: $light-green;
 }
 
 .center {

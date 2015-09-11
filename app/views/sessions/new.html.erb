@@ -3,6 +3,7 @@
 <div class="well form-signin">
   <%= form_for(:session, url: login_path) do |f| %>
     <h2 class="form-signin-heading">Please log in</h2>
+
     <%= f.label :username, class: "sr-only" %>
     <%= f.text_field :username, class: 'form-control', placeholder: "Username" %>
 
@@ -12,6 +13,7 @@
     <%= f.submit "Log in", class: "btn btn-default btn-lg" %>
   <% end %>
   <br/>
+
   <div class="center">
     <small class="basic-apple-blue-link">
       New user?

@@ -35,8 +35,8 @@
 			<div class="col-sm-6 col-sm-offset-3">
 				<table class="table table-condensed">
 					<th>Activity</th>
-					<th>Reward</th>
-					<th class="active">Points</th>
+					<th>Points</th>
+					<th class="active">Total</th>
 
 					<tr>
 						<td>Add a word</td>
@@ -55,17 +55,17 @@
 					</tr>
 					<tr>
 						<td>Complete Fundamentals game</td>
-						<td>+ 10</td>
-						<td class="active">+ <%= user.completed_fundamentals.count * 10 %></td>
+						<td>+ 3</td>
+						<td class="active">+ <%= user.completed_fundamentals.count * 3 %></td>
 					</tr>
 					<tr>
 						<td>Complete Jeopardy game</td>
-						<td>+ 12</td>
+						<td>+ 4</td>
 						<td class="active">+ 0</td>
 					</tr>
 					<tr>
 						<td>Complete Freestyle game</td>
-						<td>+ 15</td>
+						<td>+ 5</td>
 						<td class="active">+ 0</td>
 					</tr>
 				</table>

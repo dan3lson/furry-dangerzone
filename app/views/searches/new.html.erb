@@ -1,5 +1,30 @@
-<% provide(:title, "define") %>
-<% provide(:header, "define") %>
+<% provide(:title, "Add") %>
+<% provide(:header, "Add") %>
+
+<div
+  class="btn-group btn-group-justified btn-group-margin"
+  role="group"
+  aria-label="..."
+>
+  <div class="btn-group center btn-custom-bootstrap-blue" role="group">
+    <div class="inline-block">
+      <%= image_tag("search_black_32.png") %>
+    </div>
+		<div class="define-btn active inline-block">
+			Look up a word
+		</div>
+  </div>
+  <div class="btn-group center btn-custom-bootstrap-blue" role="group">
+    <div class="inline-block">
+      <%= image_tag("search_black_32.png", alt: "Categories") %>
+    </div>
+		<div class="define-btn active inline-block">
+			Categories
+		</div>
+  </div>
+</div>
+
+<br>
 
 <div class="col-sm-8 col-sm-offset-2 well">
   <%= render "searches/form" %>
@@ -13,9 +38,90 @@
   </div>
 </div>
 
-<div class="clear">
+<br>
 
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="pull-right">
+    <%= image_tag("forward_black_25.png") %>
+  </div>
+  <div class="word-partial word-partial-myLeksi">
+    <span class="basic-black-link">
+      Entrepreneurship
+    </span>
+  </div>
+
+  <hr>
 </div>
+
+<div class="col-sm-8 col-sm-offset-2 add-category-btn">
+  <div class="pull-right">
+    <%= image_tag("forward_black_25.png") %>
+  </div>
+  <div class="word-partial word-partial-myLeksi">
+    <span class="basic-black-link">
+      Entrepreneurship
+    </span>
+  </div>
+
+  <hr>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="pull-right">
+    <%= image_tag("forward_black_25.png") %>
+  </div>
+  <div class="word-partial word-partial-myLeksi">
+    <span class="basic-black-link">
+      Entrepreneurship
+    </span>
+  </div>
+
+  <hr>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="pull-right">
+    <%= image_tag("forward_black_25.png") %>
+  </div>
+  <div class="word-partial word-partial-myLeksi">
+    <span class="basic-black-link">
+      Entrepreneurship
+    </span>
+  </div>
+
+  <hr>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="pull-right">
+    <%= image_tag("forward_black_25.png") %>
+  </div>
+  <div class="word-partial word-partial-myLeksi">
+    <span class="basic-black-link">
+      Entrepreneurship
+    </span>
+  </div>
+
+  <hr>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="pull-right">
+    <%= image_tag("forward_black_25.png") %>
+  </div>
+  <div class="word-partial word-partial-myLeksi">
+    <span class="basic-black-link">
+      Entrepreneurship
+    </span>
+  </div>
+
+  <hr>
+</div>
+
+
+
+
+<div class="clear"></div>
 
 <% if @query %>
   <% if @search_results.class == String %>

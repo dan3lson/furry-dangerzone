@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#guest_home'
+  get "duolingo" => "static_pages#duolingo"
   get "menu" => "static_pages#menu"
   get "home" => "current_users#home"
   get "myLeksi" => "current_users#myLeksi"

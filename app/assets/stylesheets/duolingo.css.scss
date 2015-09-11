@@ -1,0 +1,44 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$apple-blue: #097ff0;
+$apple-star-orange: #fd9603;
+$black: #000;
+$bootstrap-blue: #5bc0de;
+$bootstrap-green: #dff0d8;
+$dark-gray: #8e8e93;
+$dark-green: darken($bootstrap-green, 60);
+$even-darker-gray: darken($dark-gray, 20);
+$game-circle-sizes: 35px;
+$leksi-green: #24d12e;
+$leksi-orange: orange;
+$leksi-red: #ff1300;
+$dark-leksi-red: darken($leksi-red, 20);
+$light-gray: #f2f2f2;
+$light-green: lighten($bootstrap-green, 8);
+$light-leksi-red: lighten($leksi-red, 47);
+$white: #fff;
+
+.top-section {
+	background: $leksi-green;
+	color: $white;
+	height: 705px;
+}
+
+.btn-custom {
+  background: #fff;
+  border-radius: 20px;
+  padding: 7px;
+}
+
+.btn-custom-get-started {
+  @extend .btn-custom;
+
+  background: $dark-green;
+  border: $dark-green 1px solid;
+}
+
+.thin-section {
+	background: $light-gray;
+	height: 300px;
+}

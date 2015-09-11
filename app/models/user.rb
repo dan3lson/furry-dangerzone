@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   		end
 
   		if u.has_completed_fundamentals?
-  			u.points += u.completed_fundamentals.count * 10
+  			u.points += u.completed_fundamentals.count * 3
   		end
 
   		u.save

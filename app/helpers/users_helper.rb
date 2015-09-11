@@ -1,4 +1,20 @@
 module UsersHelper
+  def weekly_goal(user)
+    if user.goal == 24
+      "Basic"
+    elsif user.goal == 60
+      "Casual"
+    elsif user.goal == 120
+      "Regular"
+    elsif user.goal == 168
+      "Serious"
+    elsif user.goal == 216
+      "Insane"
+    else
+      "Yikes!"
+    end
+  end
+
   def current_level(user)
     if user.points >= 0 && user.points < 40
       0
