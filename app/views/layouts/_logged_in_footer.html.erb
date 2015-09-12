@@ -34,13 +34,13 @@
     <div class="inline-block">
       <% if params[:controller] == "searches" %>
   			<%=
-  				link_to_unless_current image_tag("add_black_32.png", alt: "Add") +
+  				link_to_unless_current image_tag("add_apple_blue_filled_32", alt: "Add") +
   				"<br/>Add".html_safe, search_path,
   				class: "img-responsive"
   			%>
   		<% else %>
   			<%=
-  				link_to image_tag("add_black_32.png", alt: "Add") +
+  				link_to image_tag("add_gray_32.png", alt: "Add") +
   				"<br/>Add".html_safe, search_path,
   				class: "img-responsive"
   			%>

@@ -3,7 +3,9 @@ class SearchesController < ApplicationController
     if Word.has_records?
       @random_word_placeholder = "e.g. #{Word.random}"
     end
+
     @query = params[:search]
+
     if @query
       @search_results =
         if @query.blank?
@@ -12,5 +14,8 @@ class SearchesController < ApplicationController
           Word.define(@query)
       end
     end
+
+    @tre = User.find(3)
+    @categories = @tre.tags
   end
 end

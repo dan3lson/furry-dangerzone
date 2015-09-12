@@ -172,9 +172,19 @@ p {
   color: $bootstrap-blue;
 }
 
+.add-categories-container {
+  display: none;
+}
+
+.add-active {
+  background: $bootstrap-blue;
+  color: $white;
+}
+
 .add-category-btn:hover {
   background: $light-green;
 }
+
 
 .center {
 	text-align: center;

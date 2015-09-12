@@ -6,27 +6,27 @@
   role="group"
   aria-label="..."
 >
-  <div class="btn-group center btn-custom-bootstrap-blue" role="group">
+  <div class="btn-group center btn-custom-bootstrap-blue add-active look-up-word-btn" role="group">
     <div class="inline-block">
-      <%= image_tag("search_black_32.png") %>
+      <%= image_tag("search_white_32.png") %>
     </div>
-		<div class="define-btn active inline-block">
+		<div class="define-btn inline-block">
 			Look up a word
 		</div>
   </div>
-  <div class="btn-group center btn-custom-bootstrap-blue" role="group">
+  <div class="btn-group center btn-custom-bootstrap-blue choose-a-word-btn" role="group">
     <div class="inline-block">
-      <%= image_tag("search_black_32.png", alt: "Categories") %>
+      <%= image_tag("categories_bootstrap_blue_32.png", alt: "Categories") %>
     </div>
 		<div class="define-btn active inline-block">
-			Categories
+			Choose a word
 		</div>
   </div>
 </div>
 
 <br>
 
-<div class="col-sm-8 col-sm-offset-2 well">
+<div class="col-sm-8 col-sm-offset-2 well add-look-up-word-container">
   <%= render "searches/form" %>
   <br>
   <div class="center basic-apple-blue-link">
@@ -40,85 +40,35 @@
 
 <br>
 
-<div class="col-sm-8 col-sm-offset-2">
-  <div class="pull-right">
-    <%= image_tag("forward_black_25.png") %>
-  </div>
-  <div class="word-partial word-partial-myLeksi">
-    <span class="basic-black-link">
-      Entrepreneurship
-    </span>
+<div class="add-categories-container">
+  <div class="col-sm-8 col-sm-offset-2 add-category-btn">
+    <div class="pull-right">
+      <%= image_tag("forward_black_25.png") %>
+    </div>
+    <div class="word-partial word-partial-myLeksi">
+      <span class="basic-black-link">
+        Entrepreneurship
+      </span>
+    </div>
+    <hr>
+
+    <div class="box-shadow-border">
+      hello world
+    </div>
   </div>
 
-  <hr>
+  <div class="col-sm-8 col-sm-offset-2 add-category-btn">
+    <div class="pull-right">
+      <%= image_tag("forward_black_25.png") %>
+    </div>
+    <div class="word-partial word-partial-myLeksi">
+      <span class="basic-black-link">
+        Entrepreneurship
+      </span>
+    </div>
+    <hr>
+  </div>
 </div>
-
-<div class="col-sm-8 col-sm-offset-2 add-category-btn">
-  <div class="pull-right">
-    <%= image_tag("forward_black_25.png") %>
-  </div>
-  <div class="word-partial word-partial-myLeksi">
-    <span class="basic-black-link">
-      Entrepreneurship
-    </span>
-  </div>
-
-  <hr>
-</div>
-
-<div class="col-sm-8 col-sm-offset-2">
-  <div class="pull-right">
-    <%= image_tag("forward_black_25.png") %>
-  </div>
-  <div class="word-partial word-partial-myLeksi">
-    <span class="basic-black-link">
-      Entrepreneurship
-    </span>
-  </div>
-
-  <hr>
-</div>
-
-<div class="col-sm-8 col-sm-offset-2">
-  <div class="pull-right">
-    <%= image_tag("forward_black_25.png") %>
-  </div>
-  <div class="word-partial word-partial-myLeksi">
-    <span class="basic-black-link">
-      Entrepreneurship
-    </span>
-  </div>
-
-  <hr>
-</div>
-
-<div class="col-sm-8 col-sm-offset-2">
-  <div class="pull-right">
-    <%= image_tag("forward_black_25.png") %>
-  </div>
-  <div class="word-partial word-partial-myLeksi">
-    <span class="basic-black-link">
-      Entrepreneurship
-    </span>
-  </div>
-
-  <hr>
-</div>
-
-<div class="col-sm-8 col-sm-offset-2">
-  <div class="pull-right">
-    <%= image_tag("forward_black_25.png") %>
-  </div>
-  <div class="word-partial word-partial-myLeksi">
-    <span class="basic-black-link">
-      Entrepreneurship
-    </span>
-  </div>
-
-  <hr>
-</div>
-
-
 
 
 <div class="clear"></div>
