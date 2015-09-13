@@ -15,6 +15,8 @@
 			</span>
 		<% elsif params[:controller] == "words" && params[:action] == "show" %>
 			<%= link_to image_tag("back_black_32.png"), myLeksi_path %>
+		<% elsif params[:controller] == "tags" && params[:action] == "show" %>
+			<%= link_to image_tag("back_black_32.png"), myTags_path %>
 		<% end %>
 	<% end %>
 </span>

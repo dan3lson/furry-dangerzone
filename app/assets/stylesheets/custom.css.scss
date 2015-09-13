@@ -21,6 +21,7 @@ $leksi-orange: orange;
 $leksi-red: #ff1300;
 $dark-leksi-red: darken($leksi-red, 20);
 $light-gray: #f2f2f2;
+$light-blue: lighten($bootstrap-blue, 37);
 $light-green: lighten($bootstrap-green, 8);
 $light-leksi-red: lighten($leksi-red, 47);
 $white: #fff;
@@ -170,6 +171,7 @@ p {
 
   border: $bootstrap-blue 1px solid;
   color: $bootstrap-blue;
+  cursor: pointer;
 }
 
 .add-categories-container {
@@ -181,10 +183,13 @@ p {
   color: $white;
 }
 
-.add-category-btn:hover {
-  background: $light-green;
+.add-category-btn {
+  cursor: pointer;
 }
 
+.category-words-container {
+  display: none;
+}
 
 .center {
 	text-align: center;
@@ -193,7 +198,6 @@ p {
 .clear {
 	clear: both;
 }
-
 .custom-footer div {
   position: relative;
   float: left;
@@ -501,6 +505,11 @@ input {
 .remove-side-margins {
 	margin-left: 0;
 	margin-right: 0;
+}
+
+.right-arrow-item:hover {
+  background: $light-blue;
+  cursor: pointer;
 }
 
 .stats-header {

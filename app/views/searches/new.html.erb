@@ -41,83 +41,78 @@
 <br>
 
 <div class="add-categories-container">
-  <div class="col-sm-8 col-sm-offset-2 add-category-btn">
-    <div class="pull-right">
-      <%= image_tag("forward_black_25.png") %>
-    </div>
-    <div class="word-partial word-partial-myLeksi">
-      <span class="basic-black-link">
-        Entrepreneurship
-      </span>
-    </div>
-    <hr>
+  <% @categories.each do |c| %>
+    <div class="col-sm-8 col-sm-offset-2 add-category-btn right-arrow-item">
+      <div class="pull-right">
+        <%= image_tag("forward_black_25.png") %>
+      </div>
+      <div class="word-partial word-partial-myLeksi">
+        <span class="basic-black-link category-name">
+          <%= c.name %>
+        </span>
+      </div>
 
-    <div class="box-shadow-border">
-      hello world
+      <hr>
     </div>
-  </div>
-
-  <div class="col-sm-8 col-sm-offset-2 add-category-btn">
-    <div class="pull-right">
-      <%= image_tag("forward_black_25.png") %>
-    </div>
-    <div class="word-partial word-partial-myLeksi">
-      <span class="basic-black-link">
-        Entrepreneurship
-      </span>
-    </div>
-    <hr>
-  </div>
+  <% end %>
 </div>
-
 
 <div class="clear"></div>
 
 <% if @query %>
-  <% if @search_results.class == String %>
-    <p class="lead leksi-red center">
-      <%= @search_results %>
-    </p>
-  <% else %>
-    <% @search_results.each_with_index do |word, index| %>
-      <div class="word-partial col-sm-8 col-sm-offset-2">
-        <% if logged_in? %>
-          <div class="pull-right">
-            <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
-              <%= hidden_field_tag :name, word.name %>
-              <%= hidden_field_tag :definition, word.definition %>
+  <div class="search-results">
+    <% if @search_results.class == String %>
+      <p class="lead leksi-red center">
+        <%= @search_results %>
+      </p>
+    <% else %>
+      <% @search_results.each_with_index do |word, index| %>
+        <div class="word-partial col-sm-8 col-sm-offset-2">
+          <% if logged_in? %>
+            <div class="pull-right">
+              <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
+                <%= hidden_field_tag :id, word.id %>
 
-              <% if Rails.env.test? %>
-                <% if current_user.already_has_word?(word) %>
-                  <%=
-                    link_to "remove",
-                    user_word_path(id: UserWord.find_by(
-                      user: current_user,
-                      word: word).id),
-                    method: :delete
-                  %>
+                <% if Rails.env.test? %>
+                  <% if current_user.already_has_word?(word) %>
+                    <%=
+                      link_to "remove",
+                      user_word_path(id: UserWord.find_by(
+                        user: current_user,
+                        word: word).id),
+                      method: :delete
+                    %>
+                  <% else %>
+                    <%= f.submit "add" %>
+                  <% end %>
                 <% else %>
-                  <%= f.submit "add" %>
-                <% end %>
-              <% else %>
-                <% if current_user.already_has_word?(word) %>
-                  <%= render "words/remove_word_btn_word_show_page", word: word %>
-                <% else %>
-                  <%=
-                    image_submit_tag("add_black_32.png", class: "border-none")
-                  %>
+                  <% if current_user.already_has_word?(word) %>
+                    <%= render "words/remove_word_btn_word_show_page", word: word %>
+                  <% else %>
+                    <%=
+                      image_submit_tag("add_black_32.png", class: "border-none")
+                    %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
+            </div>
+          <% end %>
+
+          <div class="box-shadow-border">
+            <%= render "words/word", word: word %>
           </div>
-        <% end %>
 
-        <div class="box-shadow-border">
-          <%= render "words/word", word: word %>
+          <br>
         </div>
-
-        <br>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>
+
+<div class="category-words-container">
+  <% words_for(@tre, true).each do |w| %>
+    <div class="box-shadow-border">
+      <%= render "words/word", word: word %>
+    </div>
+  <% end %>
+</div>

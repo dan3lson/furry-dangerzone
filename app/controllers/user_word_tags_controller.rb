@@ -1,20 +1,15 @@
 class UserWordTagsController < ApplicationController
   def create
-    @word = Word.find_by(
-      name: params[:name],
-      definition: params[:definition]
-    )
+    @word = Word.find(params[:id])
     @tag_id = params[:user_word_tag][:tag_id]
 
     if @tag_id.blank?
       flash[:danger] = "Please select a tag before clicking \'add\'."
+
       redirect_to @word
     else
       @tag = Tag.find(@tag_id)
-      @word_tag = WordTag.where(
-        word: @word,
-        tag: @tag
-      ).first_or_initialize
+      @word_tag = WordTag.where(word: @word, tag: @tag).first_or_initialize
 
       if @word_tag.save
         @user_word_tag = UserWordTag.new(
@@ -26,16 +21,19 @@ class UserWordTagsController < ApplicationController
         if @user_word_tag.save && current_user.save
           msg = "Awesome - you tagged \'#{@tag.name}\' to \'#{@word.name}\'!"
           flash[:success] = msg
+
           redirect_to @word
         else
           msg =  "Yikes! - adding a tag didn\'t work! Please try again."
           flash[:danger] = msg
+
           redirect_to @word
         end
 
       else
         msg =  "Yikes! - adding a word tag didn\'t work! Please try again."
         flash[:danger] = msg
+
         redirect_to @word
       end
     end

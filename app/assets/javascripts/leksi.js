@@ -26,15 +26,17 @@ $(document).ready(function(){
 		$(".leaderboard-last-seven").fadeIn();
 	});
 
-	$(".game-start").click(function() {
+	$(".data-url").click(function() {
 		window.location.assign($(this).data("url"));
 	});
 
 	$(".look-up-word-btn").click(function() {
+			$(".full-header").text("Add");
 			$(this).addClass("add-active");
 			$(".choose-a-word-btn").removeClass("add-active");
 			$(".add-categories-container").hide();
-			$(".add-look-up-word-container").fadeIn();
+			$(".category-words-container").hide();
+			$(".add-look-up-word-container, .search-results").fadeIn();
 			$(this).children(":first").remove();
 			$(this).prepend("<div class='inline-block'><image src='/assets/search_white_32.png' />");
 			$(".choose-a-word-btn").children(":first").remove();
@@ -42,9 +44,11 @@ $(document).ready(function(){
 	});
 
 	$(".choose-a-word-btn").click(function() {
+			$(".full-header").text("Add");
 			$(this).addClass("add-active");
 			$(".look-up-word-btn").removeClass("add-active");
-			$(".add-look-up-word-container").hide();
+			$(".add-look-up-word-container, .search-results").hide();
+			$(".category-words-container").hide();
 			$(".add-categories-container").fadeIn();
 			$(this).children(":first").remove();
 			$(this).prepend("<div class='inline-block'><image src='/assets/categories_white_32.png' />");
@@ -53,8 +57,9 @@ $(document).ready(function(){
 	});
 
 	$(".add-category-btn").click(function() {
-		alert("Hello world");
-		$(this).addClass("pointer");
-		$(this).addClass("pointer");
+		var category_name = jQuery("span", this).text();
+		$(".add-categories-container").hide();
+		$(".full-header").html(category_name);
+		$(".category-words-container").fadeIn();
 	});
 });

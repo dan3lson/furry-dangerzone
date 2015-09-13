@@ -5,40 +5,48 @@
   <%= link_to "new tag", new_tag_path %>
 <% end %>
 
-<% unless current_user.has_tags? %>
-  <%= render "current_users/no_tags_guide" %>
-<% end %>
+<div class="col-sm-8 col-sm-offset-2">
+  <% if current_user.has_tags? %>
+    <div class="basic-black-link">
+      <% @current_user_tags.each do |tag| %>
+        <div class="right-arrow-item data-url" data-url="/tags/<%= tag.id %>">
+          <div class="pull-right">
+            <%= link_to image_tag("forward_black_25.png", alt: "Right arrow") %>
+          </div>
+          <div>
+            <h4 class="tightness">
+              <span>
+                <%= link_to tag.name, tag %>
+              </span>
+            </h4>
+          </div>
+          <hr>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <%= render "current_users/no_tags_guide" %>
+  <% end %>
 
-<% if current_user.has_tags? %>
-  <div class="basic-black-link">
-    <% @current_user_tags.each do |tag| %>
-      <div class="box-shadow-border">
-        <h4 class="tightness">
-          <span>
-            <%= link_to tag.name, tag %>
-          </span>
-        </h4>
-      </div>
-      <br>
-    <% end %>
-  </div>
-<% end %>
+  <% if current_user.has_words? %>
+    <div class="clear">
 
-<% if current_user.has_words? %>
-  <div class="box-shadow-border">
-    <h4 class="tightness">
-      <span>
-        Untagged Words
-      </span>
-    </h4>
-
-    <% Word.untagged_for(current_user).each do |word| %>
-      <div class="col-xs-4 col-sm-4 remove-padding-left">
-        <span class="basic-black-link">
-          <%= link_to word.name, word %>
+    </div>
+    <div class="box-shadow-border">
+      <h4 class="tightness">
+        <span>
+          Untagged Words
         </span>
-      </div>
-    <% end %>
-    <div class="clear"></div>
-  </div>
-<% end %>
+      </h4>
+
+      <% Word.untagged_for(current_user).each do |word| %>
+        <div class="col-xs-4 col-sm-4 remove-padding-left">
+          <span class="basic-black-link">
+            <%= link_to word.name, word %>
+          </span>
+        </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+</div>

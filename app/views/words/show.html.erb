@@ -54,8 +54,7 @@
       <%= form_for :user_word_tag, url: user_word_tag_path,
         method: :post do |f|
       %>
-        <%= hidden_field_tag :name, @word.name %>
-        <%= hidden_field_tag :definition, @word.definition %>
+        <%= hidden_field_tag :id, @word.id %>
         <%= f.label :tag_id, "Tags", class: "sr-only" %>
         <%=
           f.collection_select :tag_id,

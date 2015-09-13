@@ -28,14 +28,14 @@
       %>
     <% else %>
       <%=
-        link_to image_tag("remove_black_32.png"),
+        link_to image_tag("remove_gray_25.png"),
         user_word_tag_path(tag_name: tag.name),
         method: :delete
       %>
     <% end %>
   <% else %>
     <%=
-      link_to image_tag("remove_black_32.png"),
+      link_to image_tag("remove_gray_25.png"),
       user_word_tag_word_show_page_path(id: Usertag.find_by(
         user: current_user,
         tag: tag).id,

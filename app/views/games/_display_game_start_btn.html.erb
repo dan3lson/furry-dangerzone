@@ -1,10 +1,10 @@
 <div>
 	<% if user_word.fundamentals_not_started? %>
-		<div class="game-<%= user_word.current_game %>-start-circle pointer game-start" data-url="/fundamentals?word_id=<%= word.id %>">
+		<div class="game-<%= user_word.current_game %>-start-circle pointer data-url" data-url="/fundamentals?word_id=<%= word.id %>">
 		</div>
 	<% elsif user_word.fundamentals_in_progress? %>
 		<div class="game-<%= user_word.current_game %>-start-circle">
-			<div class="myLeksi-sm-in-progress-circle game-start" data-url="/fundamentals?word_id=<%= word.id %>">
+			<div class="myLeksi-sm-in-progress-circle data-url" data-url="/fundamentals?word_id=<%= word.id %>">
 			</div>
 		</div>
 	<% elsif user_word.fundamentals_completed? %>
