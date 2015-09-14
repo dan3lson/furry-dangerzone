@@ -57,9 +57,21 @@ $(document).ready(function(){
 	});
 
 	$(".add-category-btn").click(function() {
-		var category_name = jQuery("span", this).text();
+		var category_name = jQuery("span", this).html();
+		
 		$(".add-categories-container").hide();
 		$(".full-header").html(category_name);
+
+		$.ajax({
+			type: "GET",
+			url: "/search",
+			dataType: "json",
+			data: { "category_name": category_name }
+		})
+		.done(function(response) {
+			console.log(response.errors)
+		});
+
 		$(".category-words-container").fadeIn();
 	});
 });

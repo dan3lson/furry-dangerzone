@@ -6,7 +6,7 @@
   role="group"
   aria-label="..."
 >
-  <div class="btn-group center btn-custom-bootstrap-blue add-active look-up-word-btn" role="group">
+  <div class="btn-group btn-custom-bootstrap-blue center add-active look-up-word-btn" role="group">
     <div class="inline-block">
       <%= image_tag("search_white_32.png") %>
     </div>
@@ -31,9 +31,7 @@
   <br>
   <div class="center basic-apple-blue-link">
     <small>
-      powered by the
-      <%= link_to "Macmillan Dictionary",
-        "https://www.macmillandictionary.com", target: "_blank" %>
+      powered by the <em>Macmillan Dictionary</em>
     </small>
   </div>
 </div>
@@ -110,9 +108,12 @@
 <% end %>
 
 <div class="category-words-container">
-  <% words_for(@tre, true).each do |w| %>
+  Hello World
+  <% @category_words.each do |w| %>
     <div class="box-shadow-border">
-      <%= render "words/word", word: word %>
+      !!!
+      <%= w.name %>
+      <%= render "words/word", word: w %>
     </div>
   <% end %>
 </div>

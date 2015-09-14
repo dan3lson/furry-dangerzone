@@ -17,5 +17,13 @@ class SearchesController < ApplicationController
 
     @tre = User.find(3)
     @categories = @tre.tags
+    @category_name = params[:category_name]
+
+    if @category_name
+      @category_name.squish!
+    end
+    
+    @category = Tag.find_by(name: @category_name)
+    @category_words = words_for(@tre, @category)
   end
 end
