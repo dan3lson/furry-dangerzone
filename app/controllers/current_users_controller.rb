@@ -1,6 +1,6 @@
 class CurrentUsersController < ApplicationController
   def home
-    @incomplete_games = current_user.incomplete_fundamentals.take(10).
+    @incomplete_games = current_user.incomplete_fundamentals.take(3).
       sort_by { |uw| uw.word.name }
 
     @rand_word_id =
@@ -11,6 +11,10 @@ class CurrentUsersController < ApplicationController
     end
   end
 
+  def menu
+    @review = Review.new
+  end
+  
   def myLeksi
     @current_user_user_words = current_user.user_words.sort_by { |uw|
       uw.word.name
@@ -32,4 +36,5 @@ class CurrentUsersController < ApplicationController
   def tags
     @current_user_tags = current_user.tags
   end
+
 end

@@ -1,6 +1,8 @@
 <% provide(:title, "Reviews") %>
 <% provide(:header, "Reviews") %>
 
-<% @reviews.each do |review| %>
-  <%= render "reviews/review", review: review %>
-<% end %>
+<div class="col-sm-6 col-sm-offset-3">
+  <% @reviews.each do |review| %>
+    <%= render "reviews/review", review: review %>
+  <% end %>
+</div>

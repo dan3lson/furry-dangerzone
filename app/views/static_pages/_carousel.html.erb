@@ -1,14 +1,10 @@
-<h4>Screenshots</h4>
+<h4>Reviews</h4>
 
 <div class="gallery js-flickity"
-  data-flickity-options='{ "imagesLoaded": true, "percentPosition": false, "cellAlign": "left" }'>
-  <%= image_tag("carousel_define.jpg") %>
-  <%= image_tag("carousel_myLeksi.jpg") %>
-  <%= image_tag("carousel_myTags.jpg") %>
-  <%= image_tag("carousel_fundamentals_one.jpg") %>
-  <%= image_tag("carousel_fundamentals_two.jpg") %>
-  <%= image_tag("carousel_fundamentals_rwe.jpg") %>
-  <%= image_tag("carousel_fundamentals_complete.jpg") %>
+  data-flickity-options='{ "resize": false }'>
+  <% @reviews.each do |review| %>
+    <%= render "reviews/review", review: review %>
+  <% end %>
 </div>
 
 <br>

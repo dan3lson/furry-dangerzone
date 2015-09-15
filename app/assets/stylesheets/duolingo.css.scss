@@ -23,16 +23,21 @@ $light-green: lighten($bootstrap-green, 8);
 $light-leksi-red: lighten($leksi-red, 47);
 $white: #fff;
 
-.top-section {
-	background: $brown;
-	color: $white;
-	height: 705px;
+.body-spacing {
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 100%;
 }
 
 .btn-custom {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 100px;
   padding: 7px;
+
+	&:hover {
+		cursor: pointer;
+		opacity: .90;
+	}
 }
 
 .btn-custom-get-started {
@@ -40,17 +45,109 @@ $white: #fff;
 
   background: $amber;
   border: $amber 1px solid;
-	color: $white;
-	font-size: x-large;
-	font-weight: 600;
+	font-size: large;
+	font-weight: 500;
+
+  a {
+    color: $white;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .thin-section {
-	height: 300px;
+	padding: 32px;
 
 	h4 {
 		margin-top: 0;
 	}
+}
+
+.fat-section {
+	background: $even-lighter-gray;
+	padding: 42px;
+
+	h3 {
+		margin-top: 0;
+	}
+}
+
+.gamification-container {
+	display: table-cell;
+	padding: 40px 10px 0 10px;
+}
+
+.gamification-image {
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+}
+.gamification-spotlight {
+	display: table;
+	text-align: left;
+	position: relative;
+}
+
+.gamification-first-image {
+	@extend .gamification-image;
+
+	background-image: url(image-path("game_color_50.png"));
+}
+
+.gamification-second-image {
+	@extend .gamification-image;
+
+	background-image: url(image-path("grade_color_50.png"));
+}
+
+.gamification-third-image {
+	@extend .gamification-image;
+
+	background-image: url(image-path("level_up_color_50.png"));
+}
+
+.gamification-fourth-image {
+	@extend .gamification-image;
+
+	background-image: url(image-path("leaderboard_color_50.png"));
+}
+
+.gamificaton-text {
+	display: inline-block;
+	padding: 5px 0 0 15px;
+}
+
+.logged_out_header {
+  background: $brown;
+  border-color: $brown;
+  opacity: .90;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 9px;
+
+  h4 a {
+    color: $white;
+    font-weight: 600;
+    font-size: larger;
+  }
+
+  .btn {
+    border-radius: 100px;
+
+    a {
+      color: $brown;
+    }
+  }
+}
+
+.public-home-container {
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+	width: 100% !important;
 }
 
 .thin-gray-section {
@@ -63,13 +160,31 @@ $white: #fff;
 	@extend .thin-section;
 
 	background: $white;
+
+	a {
+		color: $amber;
+		font-size: 19px;
+	}
+
+	p {
+		margin-top: 10px;
+	}
 }
 
-.fat-section {
-	background: $even-lighter-gray;
-	height: 500px;
+.thin-footer-section {
+	@extend .thin-section;
 
-	h3 {
-		margin-top: 0;
+	background: $brown;
+	color: $white;
+  margin-bottom: -90px;
+
+	a {
+		color: $white;
 	}
+}
+
+.top-section {
+	background: $brown;
+	color: $white;
+	height: 705px;
 }

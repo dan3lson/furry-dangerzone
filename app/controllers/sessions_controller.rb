@@ -24,8 +24,6 @@ class SessionsController < ApplicationController
 
     log_out if logged_in?
 
-    flash[:success] = "See you again, #{logged_out_user.username}!"
-
     redirect_to root_path
   end
 end

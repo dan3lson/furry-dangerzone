@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
   <%= render "layouts/head" %>
-  <body>
+
+  <body class="body-spacing">
     <%= render "sessions/facebook_sdk" %>
-    <% if logged_in? %>
-      <%= render "layouts/logged_in_header" %>
-    <% else %>
-      <%= render "layouts/logged_out_header" %>
-    <% end %>
-    <div class="container">
+
+    <div>
       <%= render "shared/flash_messages" %>
       <%= yield %>
       <% if logged_in? %>
@@ -16,11 +13,8 @@
           <%= render "layouts/logged_in_footer" %>
         <% end %>
       <% end %>
-      <%= debug(params) if Rails.env.development? %>
     </div>
-    <% unless logged_in? %>
-      <%= render "layouts/logged_out_footer" %>
-    <% end %>
+
     <%= render "shared/google_analytics" %>
     <%= render "shared/script_src" %>
   </body>
