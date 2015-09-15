@@ -22,8 +22,13 @@ class SearchesController < ApplicationController
     if @category_name
       @category_name.squish!
     end
-    
+
     @category = Tag.find_by(name: @category_name)
     @category_words = words_for(@tre, @category)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @category_words }
+    end
   end
 end
