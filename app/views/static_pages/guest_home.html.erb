@@ -1,7 +1,8 @@
 <div class="top-section">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2 center">
-			<%= image_tag("leksi_icon.png", alt: "Leksi Tree") %>
+			<%#= image_tag("leksi_icon.png", alt: "Leksi Tree") %>
+			<h1>Leksi</h1>
 			<h3>
 				A fun and simple way to build vocabulary.
 			</h3>
@@ -70,7 +71,7 @@
 		</div>
 
 		<div class="center">
-			<%= link_to image_tag("leksi_icon.png") %>
+			<%#= link_to image_tag("leksi_icon.png") %>
 		</div>
 
 		<div class="row center">
@@ -107,20 +108,20 @@
 
 		Be more productive wherever you are, on the go. To use Leksi, all you need
 		is a web browser (e.g. Safari, Chrome, Firefox) and internet access.
-		This means you can use Leksi on a phone, tablet, laptop, or computer.
+		This means you can use Leksi on any phone, tablet, laptop, or computer.
 	</div>
 
 	<div class="clear"></div>
 </div>
 
-<div class="fat-section">
+<div class="fat-section center">
 	<%= render "static_pages/carousel" %>
 </div>
 
 <div class="thin-white-section">
 	<div class="col-sm-8 col-sm-offset-2">
 		<div class="center">
-			<%= image_tag("school_color_100.png", width: 230, height: 230) %>
+			<%= image_tag("school_color_100.png") %>
 			<h4>Leksi for Schools</h4>
 		</div>
 
@@ -129,7 +130,9 @@
 		areas as well.
 
 		<p>
-			<%= link_to "Bring Leksi to your classroom", "#" %>
+			<%= mail_to "help@leksi.education", "Bring Leksi to your classroom",
+				  subject: "Bring Leksi to My Classroom"
+			%>
 		</p>
 	</div>
 </div>
