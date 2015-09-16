@@ -5,15 +5,18 @@
   <body class="body-spacing">
     <%= render "sessions/facebook_sdk" %>
 
+    <%= render "layouts/logged_out_header" %>
+
     <div>
       <%= render "shared/flash_messages" %>
+
       <%= yield %>
-      <% if logged_in? %>
-        <% unless params[:controller] == "games" %>
-          <%= render "layouts/logged_in_footer" %>
-        <% end %>
-      <% end %>
+
+      <%= debug(params) if Rails.env.development? %>
     </div>
+
+    <%= render "layouts/logged_out_footer" %>
+
 
     <%= render "shared/google_analytics" %>
     <%= render "shared/script_src" %>

@@ -1,3 +1,5 @@
+<div class="clear"></div>
+
 <div class="thin-footer-section center">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2 center">
@@ -29,6 +31,8 @@
 	</div>
 
   <br>
+  <br>
+
 	<%= link_to image_tag("facebook_white_filled_35.png"),
 							"https://www.facebook.com/LeksiEducation" %>
 	&nbsp;
@@ -37,11 +41,12 @@
 	&nbsp;
 	<%= mail_to "info@Leksi.education", raw(image_tag("email_white_filled_35.png")) %>
 	&nbsp;
-	<%= link_to image_tag("newsletter_white_filled_35.png") %>
+
+	<%= render "static_pages/newsletter_modal" %>
 
 	<br>
 	<br>
-	
+
   <p>
     &copy; 2015 Leksi <sup>TM</sup> Education
   </p>

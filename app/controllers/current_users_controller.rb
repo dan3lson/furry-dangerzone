@@ -1,4 +1,6 @@
 class CurrentUsersController < ApplicationController
+  before_action :logged_in_user
+
   def home
     @incomplete_games = current_user.incomplete_fundamentals.take(3).
       sort_by { |uw| uw.word.name }
@@ -14,7 +16,7 @@ class CurrentUsersController < ApplicationController
   def menu
     @review = Review.new
   end
-  
+
   def myLeksi
     @current_user_user_words = current_user.user_words.sort_by { |uw|
       uw.word.name
@@ -37,4 +39,12 @@ class CurrentUsersController < ApplicationController
     @current_user_tags = current_user.tags
   end
 
+  private
+
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Yikes! Please log in first to do that."
+      redirect_to login_url
+    end
+  end
 end
