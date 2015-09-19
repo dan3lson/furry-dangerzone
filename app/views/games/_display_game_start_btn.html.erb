@@ -1,13 +1,25 @@
 <div>
 	<% if user_word.fundamentals_not_started? %>
-		<div class="game-<%= user_word.current_game %>-start-circle pointer data-url" data-url="/fundamentals?word_id=<%= word.id %>">
+		<div
+			class="game-<%= user_word.current_game %>-start-circle pointer data-url"
+			data-url="/fundamentals?word_id=<%= word.id %>">
 		</div>
 	<% elsif user_word.fundamentals_in_progress? %>
 		<div class="game-<%= user_word.current_game %>-start-circle">
-			<div class="myLeksi-sm-in-progress-circle data-url" data-url="/fundamentals?word_id=<%= word.id %>">
+			<div class="myLeksi-sm-in-progress-circle data-url"
+					 data-url="/fundamentals?word_id=<%= word.id %>">
 			</div>
 		</div>
-	<% elsif user_word.fundamentals_completed? %>
-			<%= image_tag("medal_red_35.png", alt: "You\'ve earned a medal") %>
+	<% elsif user_word.jeopardy_not_started? %>
+		<div
+			class="game-<%= user_word.current_game %>-start-circle pointer data-url"
+			data-url="/jeopardy?word_id=<%= word.id %>">
+		</div>
+	<% elsif user_word.jeopardy_in_progress? %>
+		<div class="game-<%= user_word.current_game %>-start-circle">
+			<div class="myLeksi-sm-in-progress-circle data-url"
+					 data-url="/jeopardy?word_id=<%= word.id %>">
+			</div>
+		</div>
 	<% end %>
 </div>

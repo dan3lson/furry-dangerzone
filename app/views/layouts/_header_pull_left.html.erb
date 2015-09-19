@@ -6,15 +6,18 @@
 	<% if logged_in? %>
 		<% if params[:controller] == "tags" && params[:action] == "new"	%>
 			<%= link_to image_tag("back_black_32.png"), :back %>
-		<% elsif params[:action] == "fundamentals" %>
+
+		<% elsif params[:action] == "fundamentals" || params[:action] == "jeopardy" %>
 			<span id="game-exit-btn">
 				<%= link_to image_tag("exit_black_32.png"), root_path %>
 			</span>
 			<span id="game-home-btn">
 				<%= link_to image_tag("home_dark_gray_32.png"), root_path %>
 			</span>
+
 		<% elsif params[:controller] == "words" && params[:action] == "show" %>
 			<%= link_to image_tag("back_black_32.png"), myLeksi_path %>
+
 		<% elsif params[:controller] == "tags" && params[:action] == "show" %>
 			<%= link_to image_tag("back_black_32.png"), myTags_path %>
 		<% end %>

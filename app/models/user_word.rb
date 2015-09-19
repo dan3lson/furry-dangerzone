@@ -1,7 +1,7 @@
 class UserWord < ActiveRecord::Base
   belongs_to :user
   belongs_to :word
-  
+
   has_many :user_word_game_levels, dependent: :destroy
   has_many :game_levels, through: :user_word_game_levels
 
@@ -46,5 +46,31 @@ class UserWord < ActiveRecord::Base
     uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "not started" }
 
     num == 8
+  end
+
+  def uwgl_jeopardy
+    self.user_word_game_levels.map do |uwgl|
+      uwgl if uwgl.game_level.game.name == "Jeopardy"
+    end.compact
+  end
+
+  def jeopardy_completed?
+    num = 0
+
+    self.uwgl_jeopardy.each { |uwgl| num += 1 if uwgl.status == "complete" }
+
+    num == 20
+  end
+
+  def jeopardy_in_progress?
+    uwgl_jeopardy.map { |uwgl| uwgl.status }.uniq.count == 2
+  end
+
+  def jeopardy_not_started?
+    num = 0
+
+    uwgl_jeopardy.each { |uwgl| num += 1 if uwgl.status == "not started" }
+
+    num == 20
   end
 end

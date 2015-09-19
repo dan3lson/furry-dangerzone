@@ -1,21 +1,267 @@
-<% provide(:title, "Pro Version") %>
-<% provide(:header, "Leksi") %>
+<% provide(:title, "Jeopardy game for #{@word.name}") %>
 
-<h1>
-	Thank you, <%= current_user.username %>, for using the Free Version of Leksi!
-</h1>
+<div id="level_2_container">
+	<div class="row">
+		<div id="chosen_word_one_div" class="col-sm-6">
+			<button type="button" class="btn btn-default btn-block btn-lg" id="chosen_word_one_btn"><%= @word.name %></button>
+			<div class="progress" id="chosen_word_one_progress_bars_div">
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_one_mini_progress_bar_one"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">200</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_one_mini_progress_bar_two"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">400</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_one_mini_progress_bar_three"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">600</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_one_mini_progress_bar_four"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">800</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_one_mini_progress_bar_five"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">1000</span>
+				</div>
+			</div>
+		</div>  <!-- end of chosen word one div -->
 
-<br>
+		<div id="chosen_word_two_div" class="col-sm-6">
+			<button type="button" class="btn btn-default btn-block btn-lg" id="chosen_word_two_btn"><%= @second_word.name %></button>
+			<div class="progress" id="chosen_word_two_progress_bars_div">
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_two_mini_progress_bar_one"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">200</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_two_mini_progress_bar_two"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">400</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_two_mini_progress_bar_three"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">600</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_two_mini_progress_bar_four"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">800</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_two_mini_progress_bar_five"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">1000</span>
+				</div>
+			</div>
+		</div>  <!-- end of chosen word two div -->
+	</div> <!-- end of level 2 container div -->
 
-<div class="lead center">
-	<p>
-		The Pro Version is coming out soon!
+	<!-- start of level 2 details -->
+	<div id="level_2_details" class="well well-sm">
+		<!-- Display the activity name, directions, and word in big letters for each respective activity -->
+		<div id="directions_container" class="lead">
+			<span id="activity_name"></span>
+			<span id="specific_instruction"></span>
+		</div>
+		<!-- end of displaying the activity name, directions, and word in big letters for each respective activity -->
+	</div>
+	<!-- end of level 2 details -->
+
+	<div class="row">
+		<div id="chosen_word_three_div" class="col-sm-6">
+			<button type="button" class="btn btn-default btn-block btn-lg" id="chosen_word_three_btn"><%= @third_word.name %></button>
+			<div class="progress" id="chosen_word_three_progress_bars_div">
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_three_mini_progress_bar_one"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">200</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_three_mini_progress_bar_two"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">400</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_three_mini_progress_bar_three"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">600</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_three_mini_progress_bar_four"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">800</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_three_mini_progress_bar_five"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">1000</span>
+				</div>
+			</div>
+		</div>  <!-- end of chosen word three div -->
+
+		<div id="chosen_word_four_div" class="col-sm-6">
+			<button type="button" class="btn btn-default btn-block btn-lg" id="chosen_word_four_btn"><%= @fourth_word.name %></button>
+			<div class="progress" id="chosen_word_four_progress_bars_div">
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_four_mini_progress_bar_one"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">200</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_four_mini_progress_bar_two"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">400</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_four_mini_progress_bar_four"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">600</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_four_mini_progress_bar_three"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">800</span>
+				</div>
+				<div class="progress-bar progress-bar-custom"
+					 id="chosen_word_four_mini_progress_bar_five"
+					 role="progressbar"
+					 aria-valuenow="20"
+					 aria-valuemin="0"
+					 aria-valuemax="200"
+					 style="width: 20%">
+					<span class="progress_text">1000</span>
+				</div>
+			</div>
+		</div>  <!-- end of chosen word four div -->
+	</div>
+</div>
+
+<div id="review_level_two_container" align="center">
+	<%= image_tag("medal_orange_100.png", alt: "You\'ve earned a medal") %>
+
+	<h1>Congratulations!</h1>
+
+	<p class="lead">
+		<span id="level_congrats_text">You've completed Jeopardy for </span>
+		and earned
+		<span id="goodies_total"></span>
+		experience points!
 	</p>
 
-	<p>
-		In the meantime, what do you think? Please
-		<span class="basic-apple-blue-link">
-			<%= link_to "give Leksi a rating", menu_path %>.
-		</span>
-	</p>
+	<hr/>
+
+	<div id="level_two_results" class="lead">
+		<div>
+			<div class="result_circle inline_block" id="level_two_results_first_circle"></div>
+			<div class="inline_block" id="level_two_results_first_word"></div>
+		</div>
+
+		<br/>
+
+		<div>
+			<div class="result_circle inline_block" id="level_two_results_second_circle"></div>
+			<div class="inline_block" id="level_two_results_second_word"></div>
+		</div>
+
+		<br/>
+
+		<div>
+			<div class="result_circle inline_block" id="level_two_results_third_circle"></div>
+			<div class="inline_block" id="level_two_results_third_word"></div>
+		</div>
+
+		<br/>
+
+		<div>
+			<div class="result_circle inline_block" id="level_two_results_fourth_circle"></div>
+			<div class="inline_block" id="level_two_results_fourth_word"></div>
+		</div>
+	</div>
+
+	<a class="btn btn-default btn-block btn-lg" href="#" id="review_level_two_continue_button" role="button">start next level</a>
 </div>

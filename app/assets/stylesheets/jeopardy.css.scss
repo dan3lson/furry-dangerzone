@@ -1,0 +1,48 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+//**********
+//*
+//* MIXINS, VARIABLES, ETC.
+//*
+//**********
+
+$apple-blue: #097ff0;
+$apple-star-orange: #fd9603;
+$black: #000;
+$bootstrap-green: #5cb85c;
+$dark-gray: #8e8e93;
+$even-darker-gray: darken($dark-gray, 20);
+$game-circle-sizes: 55px;
+$leksi-green: #24d12e;
+$leksi-orange: orange;
+$leksi-red: #ff1300;
+$light-gray: #f2f2f2;
+$white: #fff;
+
+#directions_container{
+	text-align: center;
+}
+
+#level_two_back_button, #word_jeapordy_instructions,
+#chosen_word_one_div, #chosen_word_two_div, #chosen_word_three_div,
+#chosen_word_four_div,
+#level_two_game_continue_button,
+#review_level_two_container,
+#level_two_complete_continue_button,
+#restart_back_button {
+	display: none;
+}
+
+.result_circle{
+	border: gray 1px solid;
+	border-radius: 25px;
+	width: 25px;
+	height: 25px;
+	padding: 0px 0px 6px;
+}
+
+.progress-bar-custom{
+	background: #FFF !important;
+	border: $light-gray 1px solid;
+}

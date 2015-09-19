@@ -518,6 +518,8 @@ $(document).ready(function(){
 
 	// Start Level 1 with the spelling activity
 	function spell_chosen_word() {
+		$("#spell_the_word").focus();
+
 		$("#spell_the_word").on('input', function(){
 			$word_being_spelled = $.trim($(this).val().toLowerCase());
 

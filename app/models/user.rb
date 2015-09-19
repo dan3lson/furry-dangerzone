@@ -60,8 +60,22 @@ class User < ActiveRecord::Base
     games
   end
 
+  def incomplete_jeopardys
+    games = []
+
+    self.user_words.each do |uw|
+      games << uw unless uw.jeopardy_completed?
+    end
+
+    games
+  end
+
   def has_incomplete_fundamentals?
     self.incomplete_fundamentals.any?
+  end
+
+  def has_incomplete_jeopardys?
+    self.incomplete_jeopardys.any?
   end
 
   def completed_fundamentals
@@ -74,7 +88,21 @@ class User < ActiveRecord::Base
     games
   end
 
+  def completed_jeopardys
+    games = []
+
+    self.user_words.each do |uw|
+      games << uw if uw.jeopardy_completed?
+    end
+
+    games
+  end
+
   def has_completed_fundamentals?
+    self.completed_fundamentals.any?
+  end
+
+  def has_completed_jeopardys?
     self.completed_fundamentals.any?
   end
 

@@ -8,7 +8,8 @@ $bootstrap-blue: #5bc0de;
 $bootstrap-green: #dff0d8;
 $black: #000;
 $brown: #825a2c;
-$light-brown: lighten($brown, 50);
+$light-brown: lighten($brown, 10);
+$lighter-brown: lighten($brown, 50);
 $dark-gray: #8e8e93;
 $dark-green: darken($bootstrap-green, 60);
 $even-darker-gray: darken($dark-gray, 20);
@@ -165,7 +166,9 @@ $white: #fff;
 .thin-footer-section {
 	@extend .thin-section;
 
-	background: $brown;
+	// background: $brown;
+	background: url(image-path("footer_word_tree.jpg"));
+  background-size: cover;
 	color: $white;
   margin-bottom: -90px;
 
@@ -175,7 +178,13 @@ $white: #fff;
 }
 
 .top-section {
-	background: $brown;
+	background: url(image-path("word_tree.jpg"));
+  background-size: cover;
+  // background: -webkit-gradient(linear, left top, left bottom, from($light-brown), to($brown));
+  // background: -webkit-linear-gradient(top, $light-brown, $brown);
+  // background: -moz-linear-gradient(top, $light-brown, $brown);
+  // background: -ms-linear-gradient(top, $light-brown, $brown);
+  // background: -o-linear-gradient(top, $light-brown, $brown);
 	color: $white;
 	height: 705px;
 }
