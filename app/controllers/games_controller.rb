@@ -21,7 +21,12 @@ class GamesController < ApplicationController
 
     @jeopardy_words = [chosen_word, @second_word, @third_word, @fourth_word]
     @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
-    @jeopardy_lineup = (@jeopardy_words * 5).shuffle
+    @jeopardy_lineup = (@jeopardy_words * 5)
+
+    3.times do
+      @jeopardy_lineup.shuffle!
+    end
+
     @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
 
     @attributes = (%w(definition example_sentence) * 10).shuffle

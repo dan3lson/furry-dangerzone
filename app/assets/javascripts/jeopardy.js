@@ -6,7 +6,6 @@ $(document).ready(function(){
 
 	var $chosen_word_id = $(".hidden").text();
 	var $chosen_words_array = ["#chosen_word_one_div","#chosen_word_two_div","#chosen_word_three_div","#chosen_word_four_div"];
-	var $words_array_five_each = [];
 	var $counter = 0;
 	var $correct_word_proggress_bar_without_pbc_class = "";
 
@@ -51,93 +50,87 @@ $(document).ready(function(){
 				// Update the activity name and instruction
 				display_activity_instruction($attributes_array[$counter], $attribute_values[$counter]);
 
-			//
-			// 	answer_the_question("#chosen_word_one_btn","#chosen_word_one_progress_bars_div .progress-bar-custom:first");
-			// 	answer_the_question("#chosen_word_two_btn","#chosen_word_two_progress_bars_div .progress-bar-custom:first");
-			// 	answer_the_question("#chosen_word_three_btn","#chosen_word_three_progress_bars_div .progress-bar-custom:first");
-			// 	answer_the_question("#chosen_word_four_btn","#chosen_word_four_progress_bars_div .progress-bar-custom:first");
-			//
-			// 	// Handles what happens when user answers correctly and incorrectly
-			// 	function answer_the_question(button_id_name, first_mini_progress_bar_without_pbc_class) {
-			// 		$(button_id_name).click(function(){
-			// 			// If the user's guess is correct
-			// 			if ($(this).text() == $words_array_five_each[$current_word_counter]) {
-			// 				// Update the nth mini progress bar for that word
-			// 				$(first_mini_progress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-success");
-			// 			}
-			//
-			// 			// If the user's guess is incorrect -->
-			// 			// Find the id of the correct word to update the nth progress bar as incorrect /
-			// 			if ($(this).text() != $words_array_five_each[$current_word_counter]) {
-			// 				$correct_word_proggress_bar_without_pbc_class = "#" +
-			// 						$("button:contains('"+$words_array_five_each[$current_word_counter]+"')")
-			// 						.next()
-			// 						.attr("id")
-			// 						+ " .progress-bar-custom:first"
-			// 					;
-			// 				$($correct_word_proggress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-danger");
-			// 			}
-			//
-			// 			// Total up the goodies
-			// 			get_goodies();
-			//
-			// 			// Shuffle the question types
-			// 			shuffle_array($question_type_array);
-			// 			// Increase the counter
-			// 			$current_word_counter++;
-			// 			console.log("Current word in the 20-word array (after clicked):",$words_array_five_each[$current_word_counter]);
-			// 			console.log("Randomly chosen question type (after clicked):",$question_type_array[0]);
-			// 			console.log("Question Types (after clicked):",$question_type_array[0]);
-			// 			console.log("Counter (after btn is clicked):",$current_word_counter);
-			// 			console.log("****************");
-			// 			display_activity_instruction(
-			// 				$question_type_array[0],
-			// 				$(xml).find($words_array_five_each[$current_word_counter]).children().find($question_type_array[0]+":first").text()
-			// 			);
-			//
-			// 			// When the game is over, display "complete" message
-			// 			if ($current_word_counter == 20) {
-			// 				$("#chosen_word_one_btn").prop("disabled",true);
-			// 				$("#chosen_word_two_btn").prop("disabled",true);
-			// 				$("#chosen_word_three_btn").prop("disabled",true);
-			// 				$("#chosen_word_four_btn").prop("disabled",true);
-			// 				display_activity_instruction("Ready for the results?", "3...2...1...");
-			// 				setTimeout(function(){
-			// 					$("#level_2_container").hide();
-			// 					$("#review_level_two_container").fadeIn();
-			//
-			// 					display_level_2_results(
-			// 						"#chosen_word_one_progress_bars_div",
-			// 						"#level_two_results_first_circle",
-			// 						"#level_two_results_first_word",
-			// 						$first_word
-			// 					);
-			//
-			// 					display_level_2_results(
-			// 						"#chosen_word_two_progress_bars_div",
-			// 						"#level_two_results_second_circle",
-			// 						"#level_two_results_second_word",
-			// 						$second_word
-			// 					);
-			//
-			// 					display_level_2_results(
-			// 						"#chosen_word_three_progress_bars_div",
-			// 						"#level_two_results_third_circle",
-			// 						"#level_two_results_third_word",
-			// 						$third_word
-			// 					);
-			//
-			// 					display_level_2_results(
-			// 						"#chosen_word_four_progress_bars_div",
-			// 						"#level_two_results_fourth_circle",
-			// 						"#level_two_results_fourth_word",
-			// 						$fourth_word
-			// 					);
-			//
-			// 				}, 3000);
-			// 			}
-			// 		});
-			// 	}; // end of answer the question fn
+				answer_the_question("#chosen_word_one_btn", "#chosen_word_one_progress_bars_div .progress-bar-custom:first");
+				answer_the_question("#chosen_word_two_btn", "#chosen_word_two_progress_bars_div .progress-bar-custom:first");
+				answer_the_question("#chosen_word_three_btn", "#chosen_word_three_progress_bars_div .progress-bar-custom:first");
+				answer_the_question("#chosen_word_four_btn", "#chosen_word_four_progress_bars_div .progress-bar-custom:first");
+
+				// Handles what happens when user answers correctly and incorrectly
+				function answer_the_question(button_id_name, first_mini_progress_bar_without_pbc_class) {
+					$(button_id_name).click(function(){
+						// If the user's guess is correct
+						if ($(this).text() == $jeopardy_lineup_names[$counter]) {
+							$(first_mini_progress_bar_without_pbc_class).children().first().html("&#10004;").css("color", "#fff");
+							$(first_mini_progress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-success");
+						// If the user's guess is incorrect
+						} else {
+							$correct_word_proggress_bar_without_pbc_class = "#" +
+									$("button:contains('"+$jeopardy_lineup_names[$counter]+"')")
+									.next()
+									.attr("id")
+									+ " .progress-bar-custom:first"
+								;
+							$($correct_word_proggress_bar_without_pbc_class).html("&#10006;");
+							$($correct_word_proggress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-danger");
+						}
+
+						// Total up the goodies
+						get_goodies();
+
+						// Increase the counter
+						$counter++;
+
+						console.log("Current word in the 20-word array (after clicked):", $jeopardy_lineup_names[$counter]);
+						console.log("Randomly chosen question type (after clicked):", $attributes_array[0]);
+						console.log("Question Types (after clicked):", $attribute_values[0]);
+						console.log("Counter (after btn is clicked):", $counter);
+						console.log("****************");
+
+						display_activity_instruction($attributes_array[$counter], $attribute_values[$counter]);
+
+						// When the game is over, display "complete" message
+						if ($counter == 20) {
+							$("#chosen_word_one_btn").prop("disabled",true);
+							$("#chosen_word_two_btn").prop("disabled",true);
+							$("#chosen_word_three_btn").prop("disabled",true);
+							$("#chosen_word_four_btn").prop("disabled",true);
+							display_activity_instruction("Ready for the results?", "3...2...1...");
+							setTimeout(function(){
+								$("#level_2_container").hide();
+								$("#review_level_two_container").fadeIn();
+
+								display_level_2_results(
+									"#chosen_word_one_progress_bars_div",
+									"#level_two_results_first_circle",
+									"#level_two_results_first_word",
+									$chosen_word
+								);
+
+								display_level_2_results(
+									"#chosen_word_two_progress_bars_div",
+									"#level_two_results_second_circle",
+									"#level_two_results_second_word",
+									$second_word
+								);
+
+								display_level_2_results(
+									"#chosen_word_three_progress_bars_div",
+									"#level_two_results_third_circle",
+									"#level_two_results_third_word",
+									$third_word
+								);
+
+								display_level_2_results(
+									"#chosen_word_four_progress_bars_div",
+									"#level_two_results_fourth_circle",
+									"#level_two_results_fourth_word",
+									$fourth_word
+								);
+
+							}, 3000);
+						}
+					});
+				}; // end of answer the question fn
 			} // end of the success parameter in the ajax fn
 		}); // end of the ajax function
 	}; // end of start level 2 fn
@@ -186,7 +179,7 @@ $(document).ready(function(){
 		$(chosen_word_num_btn).text(name);
 	};
 
-	// Global fn
+	// Global fns
 
 	//Change the activity name and specific directions depending on current state
 	function display_activity_instruction(activity_name, specific_instruction) {
@@ -194,19 +187,11 @@ $(document).ready(function(){
 		$("#specific_instruction").html(specific_instruction);
 	};
 
-	// Global fn
 	// Set the value for the progress bar
 	function progressBar(value) {
 		$('.progress-bar').css('width', value+'%').attr('aria-valuenow', value);
 	};
 
-	// Global fn
-	// Get a random number between y and x
-	function randomRange (x, y) {
-		return Math.floor(Math.random()* (x-y) + y);
-	};
-
-	// Global fn
 	// Shuffle an array's contents
 	function shuffle_array(array) {
 		var m = array.length, t, i;
@@ -222,7 +207,6 @@ $(document).ready(function(){
 		return array;
 	};
 
-	// Global fn
 	// Shortcut for retrieving an element's ID
 	function _(x) {
 		return document.getElementById(x);

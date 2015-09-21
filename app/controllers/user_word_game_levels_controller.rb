@@ -1,17 +1,14 @@
 class UserWordGameLevelsController < ApplicationController
   def update
     @word = if Rails.env.test?
-      Word.find(params[:word_id].gsub("=",""))
+      Word.find(params[:word_id].gsub("=", ""))
     else
       Word.find(params[:word_id])
     end
     @level = Level.find(params[:level_id])
     @game = Game.find_by(name: params[:game_name])
     @user_word = UserWord.find_by(user: current_user, word: @word)
-    @game_level = GameLevel.find_by(
-      game: @game,
-      level: @level
-    )
+    @game_level = GameLevel.find_by(game: @game, level: @level)
     @user_word_game_level = UserWordGameLevel.find_by(
       user_word: @user_word,
       game_level: @game_level
