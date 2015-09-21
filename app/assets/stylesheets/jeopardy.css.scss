@@ -25,8 +25,6 @@ $white: #fff;
 }
 
 #level_two_back_button, #word_jeapordy_instructions,
-#chosen_word_one_div, #chosen_word_two_div, #chosen_word_three_div,
-#chosen_word_four_div,
 #level_two_game_continue_button,
 #review_level_two_container,
 #level_two_complete_continue_button,
@@ -45,4 +43,8 @@ $white: #fff;
 .progress-bar-custom{
 	background: #FFF !important;
 	border: $light-gray 1px solid;
+}
+
+.progress-text{
+	color: lighten(gray, 25);
 }

@@ -1,8 +1,8 @@
-<% provide(:title, "Leksi | Fundamentals game for #{@word.name}") %>
+<% provide(:title, "Leksi | Fundamentals game for #{@chosen_word.name}") %>
 
 <div class="palabra">
-	<%= render "words/word", word: @word %>
-	<span class="palabra-id"><%= @word.id %></span>
+	<%= render "words/word", word: @chosen_word %>
+	<span class="palabra-id"><%= @chosen_word.id %></span>
 </div>
 
 <!-- start of level 1 details -->
@@ -35,7 +35,7 @@
 		<span class="pointer apple-blue" id="fill_in_the_blank_back_button">
 			Tap here
 		</span>
-		to see the spelling of the word and try again!
+		to see the spelling of the word. Then tap 'continue' to try again!
 	</div>
 </div>
 <!-- end of fill in the blank activity -->
@@ -52,7 +52,7 @@
 <!-- start of meanings container -->
 <div id="meanings_container">
 	<div class="well lead">
-		<% @word.definition.split(";").take(3).each do |d| %>
+		<% @chosen_word.definition.split(";").take(3).each do |d| %>
 			<p>
 				<span class="word-definition">&#8605; <%= d %></span>
 			</p>
@@ -63,7 +63,7 @@
 
 <!-- start of synonyms container -->
 <div id="synonyms_container">
-	<% if @word.has_synonyms? %>
+	<% if @chosen_word.has_synonyms? %>
 		<% @synonyms.each_with_index do |synonym, index| %>
 			<div class="synonym_row pointer" type="button"
 					 data-toggle="collapse" data-target="#syn<%= index %>"
@@ -90,7 +90,7 @@
 
 <!-- start of antonyms container -->
 <div id="antonyms_container">
-	<% if @word.has_antonyms? %>
+	<% if @chosen_word.has_antonyms? %>
 		<% @antonyms.each_with_index do |antonym, index| %>
 			<div class="antonym_row pointer" type="button"
 					 data-toggle="collapse" data-target="#ant<%= index %>"
@@ -118,7 +118,7 @@
 
 <!-- start of syn_ant checkpoint container -->
 <div id="syn_ant_checkpoint_container">
-	<% if @word.doesnt_have_any_syn_or_ant? %>
+	<% if @chosen_word.doesnt_have_any_syn_or_ant? %>
 		<div id="syn-ant-no-results" class="lead">
 			&#9785; We don't have any synonyms or antonyms to do a checkpoint.
 			Please tap continue.
