@@ -18,9 +18,23 @@ class GamesController < ApplicationController
     @second_word = Word.all.sample
     @third_word = Word.all.sample
     @fourth_word = Word.all.sample
-    @jeopardy_words = [chosen_word, @second_word, @third_word, @fourth_word]
 
-    render json: @jeopardy_words
+    @jeopardy_words = [chosen_word, @second_word, @third_word, @fourth_word]
+    @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
+    @jeopardy_lineup = (@jeopardy_words * 5).shuffle
+    @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
+
+    @attributes = (%w(definition example_sentence) * 10).shuffle
+    @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
+      w.send(@attributes[i])
+    end
+
+    render json: {
+      word_names: @jeopardy_words_names,
+      jeopardy_lineup_names: @jeopardy_lineup_names,
+      attributes_array: @attributes,
+      attribute_values: @attribute_values
+    }
   end
 
   private

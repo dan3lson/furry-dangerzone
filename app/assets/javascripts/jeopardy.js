@@ -7,8 +7,7 @@ $(document).ready(function(){
 	var $chosen_word_id = $(".hidden").text();
 	var $chosen_words_array = ["#chosen_word_one_div","#chosen_word_two_div","#chosen_word_three_div","#chosen_word_four_div"];
 	var $words_array_five_each = [];
-	var $question_type_array = ["example_sentence", "definition"];
-	var $current_word_counter = 0;
+	var $counter = 0;
 	var $correct_word_proggress_bar_without_pbc_class = "";
 
 	// Start the main activity
@@ -26,44 +25,32 @@ $(document).ready(function(){
 			url: "/jeopardy_game_words?word_id=" + $chosen_word_id,
 			dataType: "json",
 			success: function (response) {
-				var $chosen_word = response[0]
-				var $second_word = response[1]
-				var $third_word = response[2]
-				var $fourth_word = response[3]
+				var $chosen_word = response.word_names[0]
+				var $second_word = response.word_names[1]
+				var $third_word = response.word_names[2]
+				var $fourth_word = response.word_names[3]
+				var $jeopardy_lineup_names = response.jeopardy_lineup_names
+				var $attributes_array = response.attributes_array;
+				var $attribute_values = response.attribute_values
+
 				// Display the text for the remaining three buttons
 				update_button_text("#chosen_word_one_btn", $chosen_word);
 				update_button_text("#chosen_word_two_btn", $second_word);
 				update_button_text("#chosen_word_three_btn", $third_word);
 				update_button_text("#chosen_word_four_btn", $fourth_word);
 
-				// Create an array that holds four instances of the word/button names
-				for (var i = 0; i < 5; i++) {
-					words_array_five_each_push($chosen_word);
-					words_array_five_each_push($second_word);
-					words_array_five_each_push($third_word);
-					words_array_five_each_push($fourth_word);
-				}
-
-				// Shuffle the array so the order of word-questions is random
-				shuffle_array($words_array_five_each);
-
-				// Randomly select what question-type to display, i.e. syn, ant, sent, TBD, TBD
-				shuffle_array($question_type_array);
-
-				console.log("Current word in the 20-word array (before clicked):", $words_array_five_each[$current_word_counter].name);
-				console.log("Randomly chosen question type (before clicked):", $question_type_array[$current_word_counter]);
-				console.log("Question Types (before click):", $question_type_array);
+				console.log("****************");
+				console.log("Question Types (before click):", $attributes_array);
+				console.log("Word Order (before click):", $jeopardy_lineup_names);
+				console.log("Current word in the 20-word array (before clicked):", $jeopardy_lineup_names[$counter]);
+				console.log("Randomly chosen question type (before clicked):", $attributes_array[$counter]);
 				console.log("****************");
 
-				var $current_word = $words_array_five_each[$current_word_counter]
+				var $current_word = $jeopardy_lineup_names[$counter]
 
-				console.log("Question type:", $question_type_array[0]);
-				display_activity_instruction($question_type_array[0], $current_word.data($question_type_array[0]));
+				// Update the activity name and instruction
+				display_activity_instruction($attributes_array[$counter], $attribute_values[$counter]);
 
-				$.find($words_array_five_each[$current_word_counter]).children().find($question_type_array[0]).each(function(){
-					// Update the activity name and instruction
-					// This only displays the last item, which is OKAY for now... =D =/
-				});
 			//
 			// 	answer_the_question("#chosen_word_one_btn","#chosen_word_one_progress_bars_div .progress-bar-custom:first");
 			// 	answer_the_question("#chosen_word_two_btn","#chosen_word_two_progress_bars_div .progress-bar-custom:first");
@@ -194,14 +181,9 @@ $(document).ready(function(){
 		});
 	};
 
-	// Find the text value of an input
-	function words_array_five_each_push(word_object) {
-		$words_array_five_each.push(word_object);
-	};
-
 	// Display the button-text for the chosen words
-	function update_button_text(chosen_word_num_btn, word_object) {
-		$(chosen_word_num_btn).text(word_object.name);
+	function update_button_text(chosen_word_num_btn, name) {
+		$(chosen_word_num_btn).text(name);
 	};
 
 	// Global fn
