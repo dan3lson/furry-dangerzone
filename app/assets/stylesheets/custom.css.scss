@@ -7,6 +7,7 @@
 //*
 //**********
 
+$amber: #f0a30a;
 $apple-blue: #097ff0;
 $apple-star-orange: #fd9603;
 $black: #000;
@@ -21,9 +22,11 @@ $leksi-orange: orange;
 $leksi-red: #ff1300;
 $dark-leksi-red: darken($leksi-red, 20);
 $light-gray: #f2f2f2;
+$even-lighter-gray: lighten($light-gray, 3);
 $light-blue: lighten($bootstrap-blue, 37);
 $light-green: lighten($bootstrap-green, 8);
 $light-leksi-red: lighten($leksi-red, 47);
+$sky-blue: #5993c7;
 $white: #fff;
 
 @media (min-width: 1000px) {
@@ -47,6 +50,11 @@ $white: #fff;
 html {
 	overflow-y: scroll;
 }
+
+// html, body {
+//   width: auto;
+//   overflow-x: hidden;
+// }
 
 body {
 	color: $even-darker-gray;
@@ -81,6 +89,20 @@ p {
 //**********
 
 .achievements-container {
+  display: none;
+}
+
+.add-active {
+  background: $bootstrap-blue;
+  color: $white;
+}
+
+
+.add-category-btn {
+  cursor: pointer;
+}
+
+.add-categories-container {
   display: none;
 }
 
@@ -171,19 +193,6 @@ p {
 
   border: $bootstrap-blue 1px solid;
   color: $bootstrap-blue;
-  cursor: pointer;
-}
-
-.add-categories-container {
-  display: none;
-}
-
-.add-active {
-  background: $bootstrap-blue;
-  color: $white;
-}
-
-.add-category-btn {
   cursor: pointer;
 }
 
@@ -556,4 +565,169 @@ table {
 
 .tightness {
 	margin-top: 0;
+}
+
+
+// DUOLINGO
+
+
+.body-spacing {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.btn-custom {
+  background: #fff;
+  border-radius: 100px;
+  padding: 7px;
+
+	&:hover {
+		cursor: pointer;
+		opacity: .90;
+	}
+}
+
+.btn-custom-get-started {
+  @extend .btn-custom;
+
+  background: $amber;
+  border: $amber 1px solid;
+	font-size: large;
+	font-weight: 500;
+
+  a {
+    color: $white;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.thin-section {
+	padding: 32px;
+
+	h4 {
+		margin-top: 0;
+	}
+}
+
+.fat-section {
+	background: $even-lighter-gray;
+	padding: 42px;
+
+	h3 {
+		margin-top: 0;
+	}
+}
+
+.gamification-container {
+	display: table-cell;
+	padding: 40px 10px 0 10px;
+}
+
+.gamification-image {
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+}
+.gamification-spotlight {
+	display: table;
+	text-align: left;
+	position: relative;
+}
+
+.gamification-first-image {
+	@extend .gamification-image;
+
+	background-image: url(image-path("game_color_50.png"));
+}
+
+.gamification-second-image {
+	@extend .gamification-image;
+
+	background-image: url(image-path("grade_color_50.png"));
+}
+
+.gamification-third-image {
+	@extend .gamification-image;
+
+	background-image: url(image-path("level_up_color_50.png"));
+}
+
+.gamification-fourth-image {
+	@extend .gamification-image;
+
+	background-image: url(image-path("leaderboard_color_50.png"));
+}
+
+.gamificaton-text {
+	display: inline-block;
+	padding: 5px 0 0 15px;
+}
+
+.logged_out_header {
+	background: $sky-blue;
+  border-color: $sky-blue;
+  opacity: .90;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 9px;
+
+  h4 a {
+    color: $white;
+    font-weight: 600;
+    font-size: larger;
+  }
+
+  .btn {
+    border-radius: 100px;
+  }
+}
+
+.thin-gray-section {
+	@extend .thin-section;
+
+	background: $light-gray;
+}
+
+.thin-white-section {
+	@extend .thin-section;
+
+	background: $white;
+
+	a {
+		color: $amber;
+		font-size: 19px;
+	}
+
+	p {
+		margin-top: 10px;
+	}
+}
+
+.thin-footer-section {
+	@extend .thin-section;
+
+	background: $sky-blue;
+	// background: url(image-path("footer_word_tree.jpg"));
+  background-size: cover;
+	color: $white;
+  margin-bottom: -90px;
+
+	a {
+		color: $white;
+	}
+}
+
+.top-section {
+	background: url(image-path("home_bg.jpg"));
+  background-size: cover;
+  // background: -webkit-gradient(linear, left top, left bottom, from($light-brown), to($brown));
+  // background: -webkit-linear-gradient(top, $light-brown, $brown);
+  // background: -moz-linear-gradient(top, $light-brown, $brown);
+  // background: -ms-linear-gradient(top, $light-brown, $brown);
+  // background: -o-linear-gradient(top, $light-brown, $brown);
+	color: $white;
+	height: 705px;
 }

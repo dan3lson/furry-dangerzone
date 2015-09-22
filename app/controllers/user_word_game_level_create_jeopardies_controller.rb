@@ -1,4 +1,4 @@
-class UserWordGameLevelJeopardiesController < ApplicationController
+class UserWordGameLevelCreateJeopardiesController < ApplicationController
   def create
     @word = if Rails.env.test?
       Word.find(params[:word_id].gsub("=",""))

@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   def incomplete_fundamentals
     games = []
 
-    self.user_words.each do |uw|
+    user_words.each do |uw|
       games << uw unless uw.fundamentals_completed?
     end
 
@@ -63,25 +63,29 @@ class User < ActiveRecord::Base
   def incomplete_jeopardys
     games = []
 
-    self.user_words.each do |uw|
-      games << uw unless uw.jeopardy_completed?
+    user_words.each do |uw|
+      games << uw if uw.jeopardy_not_started?
     end
 
     games
   end
 
   def has_incomplete_fundamentals?
-    self.incomplete_fundamentals.any?
+    incomplete_fundamentals.any?
   end
 
   def has_incomplete_jeopardys?
-    self.incomplete_jeopardys.any?
+    incomplete_jeopardys.any?
+  end
+
+  def has_at_least_four_incomplete_jeopardys?
+    incomplete_jeopardys.count > 3
   end
 
   def completed_fundamentals
     games = []
 
-    self.user_words.each do |uw|
+    user_words.each do |uw|
       games << uw if uw.fundamentals_completed?
     end
 
@@ -91,7 +95,7 @@ class User < ActiveRecord::Base
   def completed_jeopardys
     games = []
 
-    self.user_words.each do |uw|
+    user_words.each do |uw|
       games << uw if uw.jeopardy_completed?
     end
 
@@ -99,15 +103,15 @@ class User < ActiveRecord::Base
   end
 
   def has_completed_fundamentals?
-    self.completed_fundamentals.any?
+    completed_fundamentals.any?
   end
 
   def has_completed_jeopardys?
-    self.completed_fundamentals.any?
+    completed_fundamentals.any?
   end
 
   def last_login_nil?
-    self.last_login.nil?
+    last_login.nil?
   end
 
   def self.baseline_gamification

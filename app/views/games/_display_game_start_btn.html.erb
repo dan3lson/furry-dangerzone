@@ -11,15 +11,21 @@
 			</div>
 		</div>
 	<% elsif user_word.jeopardy_not_started? %>
-		<div
-			class="game-<%= user_word.current_game %>-start-circle pointer data-url"
-			data-url="/jeopardy?word_id=<%= word.id %>">
-		</div>
-	<% elsif user_word.jeopardy_in_progress? %>
-		<div class="game-<%= user_word.current_game %>-start-circle">
-			<div class="myLeksi-sm-in-progress-circle data-url"
-					 data-url="/jeopardy?word_id=<%= word.id %>">
+		<% if current_user.has_at_least_four_incomplete_jeopardys? %>
+			<div
+				class="game-<%= user_word.current_game %>-start-circle pointer data-url"
+				data-url="/jeopardy?word_id=<%= word.id %>">
 			</div>
-		</div>
+		<% else %>
+			<div
+				class="game-<%= user_word.current_game %>-start-circle"
+ 				style="opacity: .3;">
+			</div>
+		<% end %>
+	<% elsif user_word.jeopardy_completed? %>
+			<div
+				class="game-<%= user_word.current_game %>-start-circle pointer data-url"
+				data-url="/jeopardy?word_id=<%= word.id %>">
+			</div>
 	<% end %>
 </div>

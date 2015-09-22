@@ -25,9 +25,13 @@ $(document).ready(function(){
 			dataType: "json",
 			success: function (response) {
 				var $chosen_word = response.word_names[0]
+				var $chosen_word_id = response.word_ids[0]
 				var $second_word = response.word_names[1]
+				var $second_word_id = response.word_ids[1]
 				var $third_word = response.word_names[2]
+				var $third_word_id = response.word_ids[2]
 				var $fourth_word = response.word_names[3]
+				var $fourth_word_id = response.word_ids[3]
 				var $jeopardy_lineup_names = response.jeopardy_lineup_names
 				var $attributes_array = response.attributes_array;
 				var $attribute_values = response.attribute_values
@@ -60,7 +64,7 @@ $(document).ready(function(){
 					$(button_id_name).click(function(){
 						// If the user's guess is correct
 						if ($(this).text() == $jeopardy_lineup_names[$counter]) {
-							$(first_mini_progress_bar_without_pbc_class).children().first().html("&#10004;").css("color", "#fff");
+							$(first_mini_progress_bar_without_pbc_class).children().first().html("&#10084;").css("color", "#fff");
 							$(first_mini_progress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-success");
 						// If the user's guess is incorrect
 						} else {
@@ -70,12 +74,9 @@ $(document).ready(function(){
 									.attr("id")
 									+ " .progress-bar-custom:first"
 								;
-							$($correct_word_proggress_bar_without_pbc_class).html("&#10006;");
+							$($correct_word_proggress_bar_without_pbc_class).html("&#10006;").css("color", "#ccc").css("background", "#fff");
 							$($correct_word_proggress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-danger");
 						}
-
-						// Total up the goodies
-						get_goodies();
 
 						// Increase the counter
 						$counter++;
@@ -94,7 +95,9 @@ $(document).ready(function(){
 							$("#chosen_word_two_btn").prop("disabled",true);
 							$("#chosen_word_three_btn").prop("disabled",true);
 							$("#chosen_word_four_btn").prop("disabled",true);
+
 							display_activity_instruction("Ready for the results?", "3...2...1...");
+
 							setTimeout(function(){
 								$("#level_2_container").hide();
 								$("#review_level_two_container").fadeIn();
@@ -103,28 +106,32 @@ $(document).ready(function(){
 									"#chosen_word_one_progress_bars_div",
 									"#level_two_results_first_circle",
 									"#level_two_results_first_word",
-									$chosen_word
+									$chosen_word,
+									$chosen_word_id
 								);
 
 								display_level_2_results(
 									"#chosen_word_two_progress_bars_div",
 									"#level_two_results_second_circle",
 									"#level_two_results_second_word",
-									$second_word
+									$second_word,
+									$second_word_id
 								);
 
 								display_level_2_results(
 									"#chosen_word_three_progress_bars_div",
 									"#level_two_results_third_circle",
 									"#level_two_results_third_word",
-									$third_word
+									$third_word,
+									$third_word_id
 								);
 
 								display_level_2_results(
 									"#chosen_word_four_progress_bars_div",
 									"#level_two_results_fourth_circle",
 									"#level_two_results_fourth_word",
-									$fourth_word
+									$fourth_word,
+									$fourth_word_id
 								);
 
 							}, 3000);
@@ -133,41 +140,94 @@ $(document).ready(function(){
 				}; // end of answer the question fn
 			} // end of the success parameter in the ajax fn
 		}); // end of the ajax function
-	}; // end of start level 2 fn
+	}; // end of start game 2 fn
 
 
 	/**
 	 * Helper Functions: Support ones that help each activity above
 	 */
 
+	// Update user_word_game_level_status
+	function update_jeopardy_user_word_game_status(word_id) {
+		var game_info = {
+			"game_name": "Jeopardy",
+			"word_id": word_id
+	 };
+
+	 $.ajax({
+		 type: "PATCH",
+		 url: "/jeopardy_user_word_game_level",
+		 dataType: "json",
+		 data: game_info,
+		 success: function(response) {
+			 console.log(response);
+		 }
+	 });
+	};
+
+	// Create the Freestyle game for this word
+	function create_freestyle_user_word_game(word_id) {
+		var game_info = {
+			"word_id": $chosen_word_id
+		};
+
+		$.ajax({
+			type: "POST",
+			url: "/user_word_game_level_create_freestyle",
+			dataType: "json",
+			data: game_info,
+			success: function(response) {
+				console.log(response);
+			}
+		});
+	};
+
+	// Update user_word_game_level_status
+	 function update_user_points(num) {
+		 $.ajax({
+			 type: "PATCH",
+			 url: "/user_points",
+			 dataType: "json",
+			 data: { "points": num }
+		 })
+		 .done(function(response) {
+			 console.log(response.errors)
+		 });
+	 };
+
 	// Display which words move up or down
 	function display_level_2_results(
 		chosen_word_num_progress_bars_div,
 		level_two_results_num_circle,
 		level_two_results_num_word,
-		word_num
+		word_name,
+		word_id
 		) {
 		if ($(chosen_word_num_progress_bars_div + " .progress-bar-success").length > 2) {
+			// ajax route to update game_levels 9-28 for this word
+			update_jeopardy_user_word_game_status(word_id);
+
+			create_freestyle_user_word_game(word_id);
+
 			$(level_two_results_num_circle).html("&#8593;");
 			$(level_two_results_num_word).html(
-																				"<strong>'" + word_num +
+																				"<strong>'" + word_name +
 																				"'</strong> " +
-																				"moves up to Level 3!"
+																				"is now ready for Freestyle!"
 																				);
 		}
 		else {
 			$(level_two_results_num_circle).html("&#8595;");
 			$(level_two_results_num_word).html(
-																				"<strong>'" + word_num +
+																				"<strong>'" + word_name +
 																				"'</strong> " +
-																				"returns to Level 1."
+																				"returns to the Fundamentals."
 																				);
 		}
 	};
 
 	// Computes the goodies
 	function get_goodies() {
-		var $all_the_goodies = 0;
 		$('.progress-bar-success').each(function(){
 			$all_the_goodies += parseInt($(this).text());
 			$("#goodies_total").html($all_the_goodies);

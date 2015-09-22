@@ -2,19 +2,11 @@ class CurrentUsersController < ApplicationController
   before_action :logged_in_user
 
   def home
-    @incomplete_fundamentals = current_user.incomplete_fundamentals.take(3)
-    @incomplete_jeopardys = current_user.incomplete_jeopardys.take(3)
+    @incomplete_fundamentals = current_user.incomplete_fundamentals.take(4)
+    @incomplete_jeopardys = current_user.incomplete_jeopardys.take(4)
     @all_incomplete_games = @incomplete_fundamentals + @incomplete_jeopardys
-
-    @shuffled_incomplete_games = @all_incomplete_games.shuffle.take(3).
+    @shuffled_incomplete_games = @all_incomplete_games.uniq.shuffle.take(4).
     sort_by { |uw| uw.word.name }
-
-    @rand_word_id =
-      if current_user.has_words? && current_user.has_incomplete_fundamentals?
-        current_user.incomplete_fundamentals.sample.word.id
-      else
-        Word.all.sample.id
-    end
   end
 
   def menu

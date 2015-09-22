@@ -332,7 +332,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "POST",
-			url: "/user_word_game_level_jeopardy",
+			url: "/user_word_game_level_create_jeopardy",
 			contentType: "application/json",
 			dataType: "json",
 			data: JSON.stringify(game_info),

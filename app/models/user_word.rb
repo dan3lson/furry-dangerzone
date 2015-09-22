@@ -23,7 +23,7 @@ class UserWord < ActiveRecord::Base
   end
 
   def uwgl_fundamentals
-    self.user_word_game_levels.map do |uwgl|
+    user_word_game_levels.map do |uwgl|
       uwgl if uwgl.game_level.game.name == "Fundamentals"
     end.compact
   end
@@ -31,7 +31,7 @@ class UserWord < ActiveRecord::Base
   def fundamentals_completed?
     num = 0
 
-    self.uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "complete" }
+    uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
     num == 8
   end
@@ -48,28 +48,23 @@ class UserWord < ActiveRecord::Base
     num == 8
   end
 
-  def uwgl_jeopardy
-    self.user_word_game_levels.map do |uwgl|
+  def uwgl_jeopardys
+    user_word_game_levels.map do |uwgl|
       uwgl if uwgl.game_level.game.name == "Jeopardy"
     end.compact
   end
 
   def jeopardy_completed?
     num = 0
-
-    self.uwgl_jeopardy.each { |uwgl| num += 1 if uwgl.status == "complete" }
+    uwgl_jeopardys.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
     num == 20
-  end
-
-  def jeopardy_in_progress?
-    uwgl_jeopardy.map { |uwgl| uwgl.status }.uniq.count == 2
   end
 
   def jeopardy_not_started?
     num = 0
 
-    uwgl_jeopardy.each { |uwgl| num += 1 if uwgl.status == "not started" }
+    uwgl_jeopardys.each { |uwgl| num += 1 if uwgl.status == "not started" }
 
     num == 20
   end

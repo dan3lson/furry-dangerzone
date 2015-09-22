@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   resources :words
   resource :user_word, only: [:create, :destroy]
   resource :user_word_game_level, only: [:update]
+  resource :jeopardy_user_word_game_level, only: [:update]
   resource :user_points, only: [:update]
-  resource :user_word_game_level_jeopardy, only: [:create]
+  resource :user_word_game_level_create_jeopardy, only: [:create]
+  resource :user_word_game_level_create_freestyle, only: [:create]
   resources :tags, except: [:destroy]
   resource :user_tag, only: [:create, :edit, :destroy]
   resource :word_tag, only: [:create, :destroy]

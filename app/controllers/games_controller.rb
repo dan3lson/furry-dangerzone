@@ -5,21 +5,28 @@ class GamesController < ApplicationController
     @synonyms = chosen_word.synonyms if chosen_word.has_synonyms?
     @antonyms = chosen_word.antonyms if chosen_word.has_antonyms?
     @real_world_examples = RealWorldExample.provide(chosen_word.name)
-
-    if current_user.has_words? && current_user.has_incomplete_fundamentals?
-      @rand_word_id = current_user.incomplete_fundamentals.sample.word.id
-    end
   end
 
   def jeopardy
   end
 
   def jeopardy_game_words
-    @second_word = Word.all.sample
-    @third_word = Word.all.sample
-    @fourth_word = Word.all.sample
+    @incomplete_jeopardys = current_user.incomplete_jeopardys.map { |uw|
+      uw.word
+    }.delete_if { |w| w == chosen_word }
+
+    @second_word = @incomplete_jeopardys.sample
+
+    @incomplete_jeopardys.delete_if { |w| w == @second_word }
+
+    @third_word = @incomplete_jeopardys.sample
+
+    @incomplete_jeopardys.delete_if { |w| w == @third_word }
+
+    @fourth_word = @incomplete_jeopardys.sample
 
     @jeopardy_words = [chosen_word, @second_word, @third_word, @fourth_word]
+    @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
     @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
     @jeopardy_lineup = (@jeopardy_words * 5)
 
@@ -35,6 +42,7 @@ class GamesController < ApplicationController
     end
 
     render json: {
+      word_ids: @jeopardy_words_ids,
       word_names: @jeopardy_words_names,
       jeopardy_lineup_names: @jeopardy_lineup_names,
       attributes_array: @attributes,

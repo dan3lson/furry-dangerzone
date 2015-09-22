@@ -17,6 +17,10 @@ class GameLevel < ActiveRecord::Base
     all.map { |gl| gl if gl.game.name == "Jeopardy" }.compact
   end
 
+  def self.freestyles
+    all.map { |gl| gl if gl.game.name == "Freestyle" }.compact
+  end
+
   def self.create_fundamentals_for(user_word)
     fundamentals.each do |f|
       UserWordGameLevel.create!(
@@ -32,6 +36,25 @@ class GameLevel < ActiveRecord::Base
         user_word: user_word,
         game_level: j
       )
+    end
+  end
+
+  def self.create_freestyles_for(user_word)
+    freestyles.each do |f|
+      UserWordGameLevel.create!(
+        user_word: user_word,
+        game_level: f
+      )
+    end
+  end
+
+  # Only for Prod. Delete after creation.
+  def self.create_freestyle_game_levels
+    freestyle = Game.find_by(name: "Freestyle")
+    freestyle_game_levels = Level.all.drop(28)
+
+    freestyle_levels.each do |l|
+      GameLevel.create!(game: freestyle, level: l)
     end
   end
 end

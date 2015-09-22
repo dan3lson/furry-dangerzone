@@ -1,34 +1,11 @@
 <% provide(:title, "Add") %>
 <% provide(:header, "Add") %>
 
-<div
-  class="btn-group btn-group-justified btn-group-margin"
-  role="group"
-  aria-label="..."
->
-  <div class="btn-group btn-custom-bootstrap-blue center add-active look-up-word-btn" role="group">
-    <div class="inline-block">
-      <%= image_tag("search_white_32.png") %>
-    </div>
-		<div class="define-btn inline-block">
-			Look up a word
-		</div>
-  </div>
-  <div class="btn-group center btn-custom-bootstrap-blue choose-a-word-btn" role="group">
-    <div class="inline-block">
-      <%= image_tag("categories_bootstrap_blue_32.png", alt: "Categories") %>
-    </div>
-		<div class="define-btn active inline-block">
-			Choose a word
-		</div>
-  </div>
-</div>
-
-<br>
-
-<div class="col-sm-8 col-sm-offset-2 well add-look-up-word-container">
+<div class="col-sm-8 col-sm-offset-2 add-look-up-word-container well">
   <%= render "searches/form" %>
+
   <br>
+
   <div class="center basic-apple-blue-link">
     <small>
       powered by the <em>Macmillan Dictionary</em>

@@ -1,12 +1,10 @@
-<div class="navbar navbar-default navbar-fixed-top logged_out_header" role="navigation">
+<div class="navbar navbar-fixed-top logged_out_header" role="navigation">
 	<div class="pull-left">
 		<h4>
 			<%= link_to "Leksi", root_path %>
 		</h4>
 	</div>
 	<div class="pull-right">
-		<div class="btn btn-default">
-			<%= link_to "Log in", login_path %>
-		</div>
+		<%= link_to "Log in", login_path, class: "btn btn-success" %>
 	</div>
 </div>

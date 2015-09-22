@@ -14,9 +14,11 @@
           <strong><%= @first_word_letter %></strong>
         </div>
       </div>
+
       <% @current_user_user_words.each_with_index do |user_word, i| %>
         <% word = user_word.word %>
         <% prev_word = @current_user_user_words[i - 1].word %>
+
         <% if @current_user_user_words[i + 1] %>
           <% next_word = @current_user_user_words[i + 1].word %>
         <% end %>
@@ -28,17 +30,20 @@
               </div>
             </div>
           <% end %>
+
           <div class="pull-right">
             <%= render "games/display_game_start_btn", user_word: user_word,
                                                        word: word
             %>
           </div>
+
           <div class="word-partial word-partial-myLeksi">
             <span class="basic-black-link">
               <%= link_to word.name.capitalize, word_path(word) %>
             </span>
           </div>
         </div>
+
         <% if next_word %>
           <% if word.name[0] == next_word.name[0] %>
             <hr class="myLeksi-hr">
