@@ -1,0 +1,30 @@
+<div class="box-shadow-border">
+	<h4 class="jeopardy-header">Jeopardy Games</h4>
+
+	<div class="progress-xp-container row remove-side-margins">
+		<div class="col-sm-6" align="center">
+			<div class="prog-header prog-not-started-circle-orange">
+				<%= num_jeopardy_games_not_started(user) %>
+			</div>
+			<p class="lead">
+				Not started
+			</p>
+		</div>
+		<div class="col-sm-6">
+			<div class="prog-header">
+				<div class="inline-block">
+					<%= image_tag("medal_orange_100.png", class: "img-responsive", alt: "You\'ve earned a medal") %>
+				</div>
+				&nbsp;
+				<div class="inline-block">
+					<span class="leksi-orange">
+						<%= num_jeopardy_games_completed(user) %>
+					</span>
+				</div>
+			</div>
+			<p class="lead">
+				Completed
+			</p>
+		</div>
+	</div>
+</div>

@@ -6,7 +6,7 @@ class UserPointsController < ApplicationController
 
     if current_user.save
       render json: {
-        errors: "No errors; points successfully modified."
+        errors: "Points successfully modified."
       }
     else
       render json: {

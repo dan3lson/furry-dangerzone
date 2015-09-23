@@ -68,4 +68,8 @@ class UserWord < ActiveRecord::Base
 
     num == 20
   end
+
+  def self.destroy_jeopardys_for(user_word)
+    user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
+  end
 end

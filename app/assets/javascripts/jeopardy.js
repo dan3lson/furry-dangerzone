@@ -4,7 +4,7 @@ $(document).ready(function(){
 	 * Initiating variables and arrays
 	 */
 
-	var $chosen_word_id = $(".hidden").text();
+	var $chosen_word_id = $(".hidden").html();
 	var $chosen_words_array = ["#chosen_word_one_div","#chosen_word_two_div","#chosen_word_three_div","#chosen_word_four_div"];
 	var $counter = 0;
 	var $correct_word_proggress_bar_without_pbc_class = "";
@@ -42,13 +42,6 @@ $(document).ready(function(){
 				update_button_text("#chosen_word_three_btn", $third_word);
 				update_button_text("#chosen_word_four_btn", $fourth_word);
 
-				console.log("****************");
-				console.log("Question Types (before click):", $attributes_array);
-				console.log("Word Order (before click):", $jeopardy_lineup_names);
-				console.log("Current word in the 20-word array (before clicked):", $jeopardy_lineup_names[$counter]);
-				console.log("Randomly chosen question type (before clicked):", $attributes_array[$counter]);
-				console.log("****************");
-
 				var $current_word = $jeopardy_lineup_names[$counter]
 
 				// Update the activity name and instruction
@@ -80,12 +73,6 @@ $(document).ready(function(){
 
 						// Increase the counter
 						$counter++;
-
-						console.log("Current word in the 20-word array (after clicked):", $jeopardy_lineup_names[$counter]);
-						console.log("Randomly chosen question type (after clicked):", $attributes_array[0]);
-						console.log("Question Types (after clicked):", $attribute_values[0]);
-						console.log("Counter (after btn is clicked):", $counter);
-						console.log("****************");
 
 						display_activity_instruction($attributes_array[$counter], $attribute_values[$counter]);
 
@@ -148,39 +135,74 @@ $(document).ready(function(){
 	 */
 
 	// Update user_word_game_level_status
-	function update_jeopardy_user_word_game_status(word_id) {
+	function update_jeopardy_status_as_complete(word_id) {
 		var game_info = {
 			"game_name": "Jeopardy",
 			"word_id": word_id
-	 };
+		};
 
-	 $.ajax({
-		 type: "PATCH",
-		 url: "/jeopardy_user_word_game_level",
-		 dataType: "json",
-		 data: game_info,
-		 success: function(response) {
+		$.ajax({
+			type: "PATCH",
+			url: "/jeopardy_game",
+			dataType: "json",
+			data: game_info,
+			success: function(response) {
 			 console.log(response);
-		 }
-	 });
+			}
+		});
+	};
+
+	// Update game_levels 1-8 as "not started" for this (user_)word
+	function reset_fundamentals_from_complete_to_not_started(word_id) {
+		var game_info = {
+			"word_id": word_id
+		};
+
+		$.ajax({
+			type: "PATCH",
+			url: "/reset_fundamentals",
+			dataType: "json",
+			data: game_info,
+			success: function(response) {
+				console.log(response.errors);
+			}
+		});
+	};
+
+	// Destroy game_levels 9-28 for this (user_)word
+	function destroy_jeopardys(word_id) {
+		var game_info = {
+			"word_id": word_id
+		};
+
+		$.ajax({
+			type: "DELETE",
+			url: "/jeopardy_game",
+			dataType: "json",
+			data: game_info,
+			success: function(response) {
+				console.log(response.errors);
+			}
+		});
 	};
 
 	// Create the Freestyle game for this word
-	function create_freestyle_user_word_game(word_id) {
+	function create_freestyles(word_id) {
 		var game_info = {
 			"word_id": $chosen_word_id
 		};
 
 		$.ajax({
 			type: "POST",
-			url: "/user_word_game_level_create_freestyle",
+			url: "/create_freestyle",
 			dataType: "json",
 			data: game_info,
 			success: function(response) {
-				console.log(response);
+				console.log(response.errors);
 			}
 		});
 	};
+
 
 	// Update user_word_game_level_status
 	 function update_user_points(num) {
@@ -204,25 +226,38 @@ $(document).ready(function(){
 		word_id
 		) {
 		if ($(chosen_word_num_progress_bars_div + " .progress-bar-success").length > 2) {
-			// ajax route to update game_levels 9-28 for this word
-			update_jeopardy_user_word_game_status(word_id);
+			// update game_levels 9-28 as complete for this (user_)word
+			update_jeopardy_status_as_complete(word_id);
 
-			create_freestyle_user_word_game(word_id);
+			// create the last game, i.e. Freestyle, for this (user_)word
+			create_freestyles(word_id);
+
+			// award goodies
+			update_user_points(4);
 
 			$(level_two_results_num_circle).html("&#8593;");
 			$(level_two_results_num_word).html(
-																				"<strong>'" + word_name +
-																				"'</strong> " +
-																				"is now ready for Freestyle!"
-																				);
+				"<strong>'" + word_name +
+				"'</strong> " +
+				"is now ready for Freestyle!"
+			);
 		}
 		else {
+			// update game_levels 1-8 as "not started" for this (user_)word
+			console.log("Word Name that should be Fundamentals reset:", word_name);
+			console.log("Word ID that should be Fundamentals reset:", word_id);
+			console.log("**************");
+
+			reset_fundamentals_from_complete_to_not_started(word_id);
+
+			destroy_jeopardys(word_id);
+
 			$(level_two_results_num_circle).html("&#8595;");
 			$(level_two_results_num_word).html(
-																				"<strong>'" + word_name +
-																				"'</strong> " +
-																				"returns to the Fundamentals."
-																				);
+				"<strong>'" + word_name +
+				"'</strong> " +
+				"returns to the Fundamentals."
+			);
 		}
 	};
 

@@ -11,6 +11,7 @@
 			Stats
 		</div>
   </div>
+  
   <div class="btn-group" role="group">
 		<div class="btn btn-default achievements-btn">
 			Achievements
@@ -21,7 +22,11 @@
 <br>
 
 <div class="my-stats-container">
-	<%= render "users/stats", user: current_user %>
+  <%= render "users/overview_stats", user: current_user %>
+
+  <%= render "users/fundamentals_game_stats", user: current_user %>
+
+  <%= render "users/jeopardy_game_stats", user: current_user %>
 </div>
 
 <div class="achievements-container">

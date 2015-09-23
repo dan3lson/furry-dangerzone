@@ -1,4 +1,4 @@
-class UserWordGameLevelCreateFreestylesController < ApplicationController
+class CreateFreestylesController < ApplicationController
   def create
     @word = if Rails.env.test?
       Word.find(params[:word_id].gsub("=", ""))
@@ -11,11 +11,11 @@ class UserWordGameLevelCreateFreestylesController < ApplicationController
 
     if @user_word.user_word_game_levels.count == 40
       render json: {
-        status: "Freestyle GLs successfully created for UW #{@user_word.id}."
+        errors: "Freestyle GLs successfully created for UW #{@user_word.id}."
       }
     else
       render json: {
-        status: "Freestyle GLs not successfully created for UW #{@user_word.id}."
+        errors: "Freestyle GLs not successfully created for UW #{@user_word.id}."
       }
     end
   end

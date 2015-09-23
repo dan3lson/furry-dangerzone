@@ -7,14 +7,18 @@
                                                word: @word
     %>
   </div>
+
   <%= render "words/word_details", word: @word %>
 </div>
 
 <% if logged_in? %>
   <br>
+
   <div class="box-shadow-border col-sm-6 col-sm-offset-3">
     <div class="pull-right">
-      <%= image_tag("tag_black_filled_25.png", alt: "myTags", class: "img-responsive") %>
+      <%= image_tag("tag_black_filled_25.png", alt: "myTags",
+                                               class: "img-responsive")
+      %>
     </div>
 
     <% if Word.untagged_for(current_user).include?(@word) %>

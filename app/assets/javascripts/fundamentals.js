@@ -195,6 +195,20 @@ $(document).ready(function(){
 			progressBar(60);
 
 			start_synonyms_activity($chosen_word_value);
+		} else if ($("#synonym_no_results").hasClass("please-tap-continue") && !$("#antonym_no_results").hasClass("please-tap-continue")) {
+			// Show and hide buttons
+			$("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
+			$("#antonyms_back_button, #antonyms_container").show();
+
+			// Update the activity name and instruction
+			display_activity_instruction("Antonyms","The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
+
+			// Update the progress made
+			progressBar(75);
+
+			update_user_word_game_level_status("5", 5);
+
+			start_antonyms_activity($chosen_word_value);
 		} else if ($("#synonym_no_results").hasClass("please-tap-continue") && $("#antonym_no_results").hasClass("please-tap-continue")) {
 			// Show and hide buttons
 			$("#real_world_examples_back_button, #real_world_examples_container").show();
@@ -332,10 +346,9 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "POST",
-			url: "/user_word_game_level_create_jeopardy",
-			contentType: "application/json",
+			url: "/jeopardy_game",
 			dataType: "json",
-			data: JSON.stringify(game_info),
+			data: game_info,
 			success: function(response) {
 				console.log(response);
 			}

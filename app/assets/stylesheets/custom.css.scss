@@ -19,14 +19,16 @@ $even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 35px;
 $leksi-green: #24d12e;
 $leksi-orange: orange;
+$dark-leksi-orange: darken($leksi-orange, 20);
 $leksi-red: #ff1300;
 $dark-leksi-red: darken($leksi-red, 20);
 $light-gray: #f2f2f2;
 $even-lighter-gray: lighten($light-gray, 3);
+$light-leksi-orange: lighten($leksi-orange, 47);
 $light-blue: lighten($bootstrap-blue, 37);
 $light-green: lighten($bootstrap-green, 8);
 $light-leksi-red: lighten($leksi-red, 47);
-$sky-blue: #5993c7;
+$sky-blue: #1677ba;
 $white: #fff;
 
 @media (min-width: 1000px) {
@@ -87,6 +89,13 @@ p {
 //* A-Z
 //*
 //**********
+
+.red-circle-word-show-page {
+  background: $leksi-red;
+  border-radius: 75px;
+  height: 75px;
+  width: 75px;
+}
 
 .achievements-container {
   display: none;
@@ -260,6 +269,14 @@ p {
   color: $dark-leksi-red;
 }
 
+.jeopardy-header {
+  @extend .stats-header;
+
+  background: $light-leksi-orange;
+  border-left: 3px solid $dark-leksi-orange;
+  color: $dark-leksi-orange;
+}
+
 .overview-header {
   @extend .stats-header;
 
@@ -395,6 +412,10 @@ input {
 	background: #c7c7cc;
 }
 
+.leksi-orange {
+	color: $leksi-orange;
+}
+
 .leksi-red {
 	color: $leksi-red;
 }
@@ -480,6 +501,13 @@ input {
   @extend .prog-circle;
   @extend .prog-fundamentals-circle-bg;
 
+  color: $white;
+}
+
+.prog-not-started-circle-orange {
+  @extend .prog-circle;
+
+  background: $leksi-orange;
   color: $white;
 }
 

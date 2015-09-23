@@ -223,7 +223,10 @@ Rails.logger.info "==============================================="
 Version.create!(number: "0.0.1", description: "* Making\n * Moves")
 
 Rails.logger.info "==============================================="
-Rails.logger.info "Define a word"
+Rails.logger.info "Define words"
 Rails.logger.info "==============================================="
 
-Word.define("reset")
+Word.define("car")
+Word.define("bar")
+Word.define("log")
+Word.define("say")
