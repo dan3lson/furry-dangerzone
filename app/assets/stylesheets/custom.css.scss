@@ -18,6 +18,8 @@ $dark-green: darken($bootstrap-green, 60);
 $even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 35px;
 $leksi-green: #24d12e;
+$light-leksi-green: lighten($leksi-green, 47);
+$dark-leksi-green: darken($leksi-green, 20);
 $leksi-orange: orange;
 $dark-leksi-orange: darken($leksi-orange, 20);
 $leksi-red: #ff1300;
@@ -277,6 +279,18 @@ p {
   color: $dark-leksi-orange;
 }
 
+.freestyle-header {
+  @extend .stats-header;
+
+  background: $light-leksi-green;
+  border-left: 3px solid $dark-leksi-green;
+  color: $dark-leksi-green;
+}
+
+.jeop-not-ready {
+  opacity: .3;
+}
+
 .overview-header {
   @extend .stats-header;
 
@@ -416,6 +430,10 @@ input {
 	color: $leksi-orange;
 }
 
+.leksi-green {
+	color: $leksi-green;
+}
+
 .leksi-red {
 	color: $leksi-red;
 }
@@ -511,12 +529,19 @@ input {
   color: $white;
 }
 
-.prog-header {
-  font-size: 41px;
+.prog-not-started-circle-green {
+  @extend .prog-circle;
+
+  background: $leksi-green;
+  color: $white;
 }
 
-.prog-header span {
-  margin-left: -66px;
+.prog-header {
+  font-size: 41px;
+
+  span {
+    margin-left: -66px;
+  }
 }
 
 .prog-sm-in-progress-circle {
@@ -757,5 +782,13 @@ table {
   // background: -ms-linear-gradient(top, $light-brown, $brown);
   // background: -o-linear-gradient(top, $light-brown, $brown);
 	color: $white;
-	height: 705px;
+	height: 755px;
+
+  h1 {
+    font-size: 71px;
+  }
+
+  h3 {
+    font-size: 40px;
+  }
 }

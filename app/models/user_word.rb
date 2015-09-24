@@ -72,4 +72,25 @@ class UserWord < ActiveRecord::Base
   def self.destroy_jeopardys_for(user_word)
     user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
   end
+
+  def uwgl_freestyles
+    user_word_game_levels.map do |uwgl|
+      uwgl if uwgl.game_level.game.name == "Freestyle"
+    end.compact
+  end
+
+  def freestyle_completed?
+    num = 0
+    uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "complete" }
+
+    num == 12
+  end
+
+  def freestyle_not_started?
+    num = 0
+
+    uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "not started" }
+
+    num == 12
+  end
 end

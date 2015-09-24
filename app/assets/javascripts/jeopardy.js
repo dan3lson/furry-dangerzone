@@ -189,7 +189,7 @@ $(document).ready(function(){
 	// Create the Freestyle game for this word
 	function create_freestyles(word_id) {
 		var game_info = {
-			"word_id": $chosen_word_id
+			"word_id": word_id
 		};
 
 		$.ajax({

@@ -70,12 +70,26 @@ class User < ActiveRecord::Base
     games
   end
 
+  def incomplete_freestyles
+    games = []
+
+    user_words.each do |uw|
+      games << uw if uw.freestyle_not_started?
+    end
+
+    games
+  end
+
   def has_incomplete_fundamentals?
     incomplete_fundamentals.any?
   end
 
   def has_incomplete_jeopardys?
     incomplete_jeopardys.any?
+  end
+
+  def has_incomplete_freestyles?
+    incomplete_freestyles.any?
   end
 
   def has_at_least_four_incomplete_jeopardys?
@@ -102,12 +116,26 @@ class User < ActiveRecord::Base
     games
   end
 
+  def completed_freestyles
+    games = []
+
+    user_words.each do |uw|
+      games << uw if uw.freestyle_completed?
+    end
+
+    games
+  end
+
   def has_completed_fundamentals?
     completed_fundamentals.any?
   end
 
   def has_completed_jeopardys?
     completed_fundamentals.any?
+  end
+
+  def has_completed_freestyles?
+    completed_freestyles.any?
   end
 
   def last_login_nil?
