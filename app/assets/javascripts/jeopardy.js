@@ -24,17 +24,17 @@ $(document).ready(function(){
 			url: "/jeopardy_game_words?word_id=" + $chosen_word_id,
 			dataType: "json",
 			success: function (response) {
-				var $chosen_word = response.word_names[0]
-				var $chosen_word_id = response.word_ids[0]
-				var $second_word = response.word_names[1]
-				var $second_word_id = response.word_ids[1]
-				var $third_word = response.word_names[2]
-				var $third_word_id = response.word_ids[2]
-				var $fourth_word = response.word_names[3]
-				var $fourth_word_id = response.word_ids[3]
-				var $jeopardy_lineup_names = response.jeopardy_lineup_names
+				var $chosen_word = response.word_names[0];
+				var $chosen_word_id = response.word_ids[0];
+				var $second_word = response.word_names[1];
+				var $second_word_id = response.word_ids[1];
+				var $third_word = response.word_names[2];
+				var $third_word_id = response.word_ids[2];
+				var $fourth_word = response.word_names[3];
+				var $fourth_word_id = response.word_ids[3];
+				var $jeopardy_lineup_names = response.jeopardy_lineup_names;
 				var $attributes_array = response.attributes_array;
-				var $attribute_values = response.attribute_values
+				var $attribute_values = response.attribute_values;
 
 				// Display the text for the remaining three buttons
 				update_button_text("#chosen_word_one_btn", $chosen_word);
@@ -42,7 +42,7 @@ $(document).ready(function(){
 				update_button_text("#chosen_word_three_btn", $third_word);
 				update_button_text("#chosen_word_four_btn", $fourth_word);
 
-				var $current_word = $jeopardy_lineup_names[$counter]
+				var $current_word = $jeopardy_lineup_names[$counter];
 
 				// Update the activity name and instruction
 				display_activity_instruction($attributes_array[$counter], $attribute_values[$counter]);
