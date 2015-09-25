@@ -28,29 +28,24 @@ class GamesController < ApplicationController
     @jeopardy_words = [@chosen_word, @second_word, @third_word, @fourth_word]
     @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
     @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
-    @jeopardy_lineup = @jeopardy_words * 5
-
-    3.times do
-      @jeopardy_lineup.shuffle!
-    end
+    @jeopardy_lineup = (@jeopardy_words * 5).shuffle
 
     @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
 
-    # each word has a definition -> 20 - 4 = 16
-    # So starting with 16 available question types, first grab all of the
-      # available synonyms and antonyms and then until the @attriutes = 20, fill
-      #in the remaining number with a random questiont ype
-    @attributes = (%w(definition example_sentence) * 10).shuffle
+    @attributes = (%w(definition example_sentence synonyms antonyms) * 5).shuffle
     @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
       @attribute = @attributes[i]
+      @attribute_value = w.send(@attribute)
 
-      if w.send(@attribute).empty?
+      if @attribute_value.empty?
         "Nice - you get a freebie! Tap <strong>#{w.name}</strong> to continue."
       else
         if @attribute == "example_sentence"
           top_three_entries_for(w, @attribute).join("; ").gsub(
             "#{w.name}", "______"
           )
+        elsif @attribute.end_with?("onyms")
+          @attribute_value.sample.name
         else
           top_three_entries_for(w, @attribute).join("; ")
         end
