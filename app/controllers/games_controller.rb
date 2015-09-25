@@ -43,11 +43,17 @@ class GamesController < ApplicationController
     @attributes = (%w(definition example_sentence) * 10).shuffle
     @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
       @attribute = @attributes[i]
-      
+
       if w.send(@attribute).empty?
         "Nice - you get a freebie! Tap <strong>#{w.name}</strong> to continue."
       else
-        top_three_entries_for(w, @attribute).join("; ")
+        if @attribute == "example_sentence"
+          top_three_entries_for(w, @attribute).join("; ").gsub(
+            "#{w.name}", "______"
+          )
+        else
+          top_three_entries_for(w, @attribute).join("; ")
+        end
       end
     end
 
