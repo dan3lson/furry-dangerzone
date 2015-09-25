@@ -16,7 +16,7 @@ class RealWorldExample
 		@source = source
 	end
 
-  def self.provide(word)
+  def self.for(word)
 		real_world_examples = []
 
 		page = Nokogiri::HTML(open("#{URL}/#{word}/"))

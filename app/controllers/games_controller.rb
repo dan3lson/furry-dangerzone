@@ -3,7 +3,7 @@ class GamesController < ApplicationController
     @chosen_word = Word.find(params[:word_id])
     @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
     @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
-    @real_world_examples = RealWorldExample.provide(@chosen_word.name)
+    @real_world_examples = RealWorldExample.for(@chosen_word.name)
   end
 
   def jeopardy
@@ -25,7 +25,6 @@ class GamesController < ApplicationController
     @incomplete_jeopardys.delete_if { |w| w == @third_word }
 
     @fourth_word = @incomplete_jeopardys.sample
-
     @jeopardy_words = [@chosen_word, @second_word, @third_word, @fourth_word]
     @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
     @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
@@ -37,9 +36,19 @@ class GamesController < ApplicationController
 
     @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
 
+    # each word has a definition -> 20 - 4 = 16
+    # So starting with 16 available question types, first grab all of the
+      # available synonyms and antonyms and then until the @attriutes = 20, fill
+      #in the remaining number with a random questiont ype
     @attributes = (%w(definition example_sentence) * 10).shuffle
     @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
-      w.send(@attributes[i])
+      @attribute = @attributes[i]
+      
+      if w.send(@attribute).empty?
+        "Nice - you get a freebie! Tap <strong>#{w.name}</strong> to continue."
+      else
+        top_three_entries_for(w, @attribute).join("; ")
+      end
     end
 
     render json: {

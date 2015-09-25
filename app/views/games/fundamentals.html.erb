@@ -52,7 +52,7 @@
 <!-- start of meanings container -->
 <div id="meanings_container">
 	<div class="well lead">
-		<% @chosen_word.definition.split(";").take(3).each do |d| %>
+		<% top_three_entries_for(@chosen_word, "definition").each do |d| %>
 			<p>
 				<span class="word-definition">&#8605; <%= d %></span>
 			</p>

@@ -8,7 +8,7 @@
   </p>
 
   <div>
-    <% word.definition.split(";").take(3).each do |d| %>
+    <% top_three_entries_for(word, "definition").each do |d| %>
       <p>
         <span class="word-definition">&#8605; <%= d %></span>
       </p>
@@ -17,7 +17,7 @@
 
   <% unless word.example_sentence.length == 0 %>
     <div class="">
-      <% word.example_sentence.split(";").take(3).each do |es| %>
+      <% top_three_entries_for(word, "example_sentence").each do |es| %>
         <p>
           <span class="word-example-sentence">
             <em>&#9997; <%= es %></em>
