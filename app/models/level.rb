@@ -5,7 +5,7 @@ class Level < ActiveRecord::Base
   validates :focus, presence: true
   validates :direction, presence: true
 
-  # Only for Prod. Delete after creation.
+  # Only for Prod. Delete after creation. # OKAY TO DELETE
   def self.create_freestyle_levels
     Level.create!(focus: "Semantic Map 1", direction: "Type a similar word.")
     Level.create!(focus: "Semantic Map 2", direction: "Type a similar word.")

@@ -48,10 +48,10 @@ class GameLevel < ActiveRecord::Base
     end
   end
 
-  # Only for Prod. Delete after creation.
+  # Only for Prod. Delete after creation. # SHOULD BE GOOD
   def self.create_freestyle_game_levels
     freestyle = Game.find_by(name: "Freestyle")
-    freestyle_game_levels = Level.all.drop(28)
+    freestyle_levels = Level.all.drop(28)
 
     freestyle_levels.each do |l|
       GameLevel.create!(game: freestyle, level: l)
