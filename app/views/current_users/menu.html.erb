@@ -1,71 +1,72 @@
 <% provide(:title, "Menu") %>
 <% provide(:header, "Menu") %>
 
-<div class="menu-header-container">
-
-  <div>
-    <div class="lead menu-header">
-      Profile (<%= current_user.username %>)
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="menu-header-container">
+    <div>
+      <div class="lead menu-header">
+        Profile (<%= current_user.username %>)
+      </div>
     </div>
+
+    <% if logged_in_and_current_user?(current_user) %>
+      <div class="inline-block">
+        <%= image_tag("edit_black_filled_25.png", alt: "Edit Profile") %>
+      </div>
+      &nbsp;
+      <div class="basic-apple-blue-link inline-block">
+        <%= link_to "Edit Profile", edit_user_path(current_user) %>
+      </div>
+    <% end %>
   </div>
 
-  <% if logged_in_and_current_user?(current_user) %>
+  <div class="menu-header-container">
+    <p class="lead menu-header">
+      Rate This App
+    </p>
+
+    <% if user_already_reviewed_latest_version? %>
+      Thanks for rating Leksi <%= version_display_name(latest_version.number) %>!
+    <% else %>
+      <div class="well well-sm">
+        <%= render "reviews/form" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="menu-header-container">
+    <p class="lead menu-header">
+      Tags
+    </p>
+
     <div class="inline-block">
-      <%= image_tag("edit_black_filled_25.png", alt: "Edit Profile") %>
+      <%= image_tag("tag_black_filled_32.png", alt: "Tags") %>
     </div>
     &nbsp;
     <div class="basic-apple-blue-link inline-block">
-      <%= link_to "Edit Profile", edit_user_path(current_user) %>
+      <%= link_to "View All", myTags_path %>
     </div>
-  <% end %>
-</div>
-
-<div class="menu-header-container">
-  <p class="lead menu-header">
-    Rate This App
-  </p>
-
-  <% if user_already_reviewed_latest_version? %>
-    Thanks for rating Leksi <%= version_display_name(latest_version.number) %>!
-  <% else %>
-    <div class="well well-sm">
-      <%= render "reviews/form" %>
+    <hr>
+    <div class="inline-block">
+      <%= image_tag("add_black_filled_32.png", alt: "Tags") %>
     </div>
-  <% end %>
-</div>
+    &nbsp;
+    <div class="basic-apple-blue-link inline-block">
+      <%= link_to "Create", new_tag_path %>
+    </div>
+  </div>
 
-<div class="menu-header-container">
-  <p class="lead menu-header">
-    Tags
-  </p>
+  <div class="menu-header-container">
+    <p class="lead menu-header">
+      Settings
+    </p>
 
-  <div class="inline-block">
-    <%= image_tag("tag_black_filled_32.png", alt: "Tags") %>
-  </div>
-  &nbsp;
-  <div class="basic-apple-blue-link inline-block">
-    <%= link_to "View All", myTags_path %>
-  </div>
-  <hr>
-  <div class="inline-block">
-    <%= image_tag("add_black_filled_32.png", alt: "Tags") %>
-  </div>
-  &nbsp;
-  <div class="basic-apple-blue-link inline-block">
-    <%= link_to "Create", new_tag_path %>
-  </div>
-</div>
-
-<div class="menu-header-container">
-  <p class="lead menu-header">
-    Settings
-  </p>
-
-  <div class="inline-block">
-    <%= image_tag("logout_black_filled_25.png", alt: "Log Out") %>
-  </div>
-  &nbsp;
-  <div class="basic-apple-blue-link inline-block">
-    <%= link_to "Log Out", logout_path, method: :delete %>
+    <div class="inline-block">
+      <%= image_tag("logout_black_filled_25.png", alt: "Log Out") %>
+    </div>
+    &nbsp;
+    <div class="basic-apple-blue-link inline-block">
+      <%= link_to "Log Out", logout_path, method: :delete %>
+    </div>
   </div>
 </div>

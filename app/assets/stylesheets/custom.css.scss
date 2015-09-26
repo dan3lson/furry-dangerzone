@@ -685,8 +685,8 @@ table {
 
 .gamification-image {
 	display: inline-block;
-	height: 50px;
-	width: 50px;
+	height: 100px;
+	width: 100px;
 }
 .gamification-spotlight {
 	display: table;
@@ -697,25 +697,25 @@ table {
 .gamification-first-image {
 	@extend .gamification-image;
 
-	background-image: url(image-path("game_color_50.png"));
+	background-image: url(image-path("game_color_100.png"));
 }
 
 .gamification-second-image {
 	@extend .gamification-image;
 
-	background-image: url(image-path("grade_color_50.png"));
+	background-image: url(image-path("grade_color_100.png"));
 }
 
 .gamification-third-image {
 	@extend .gamification-image;
 
-	background-image: url(image-path("level_up_color_50.png"));
+	background-image: url(image-path("level_up_color_100.png"));
 }
 
 .gamification-fourth-image {
 	@extend .gamification-image;
 
-	background-image: url(image-path("leaderboard_color_50.png"));
+	background-image: url(image-path("leaderboard_color_100.png"));
 }
 
 .gamificaton-text {
