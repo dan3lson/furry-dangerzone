@@ -5,8 +5,7 @@ class CurrentUsersController < ApplicationController
     @incomplete_fundamentals = current_user.incomplete_fundamentals.take(4)
     @incomplete_jeopardys = current_user.incomplete_jeopardys.take(4)
     @incomplete_freestyles = current_user.incomplete_freestyles.take(4)
-    @all_incomplete_games = @incomplete_fundamentals + @incomplete_jeopardys +
-      @incomplete_freestyles
+    @all_incomplete_games = @incomplete_fundamentals + @incomplete_jeopardys
     @shuffled_incomplete_games = @all_incomplete_games.uniq.shuffle.take(4).
     sort_by { |uw| uw.word.name }
   end

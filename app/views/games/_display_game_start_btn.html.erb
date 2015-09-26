@@ -18,14 +18,14 @@
 			</div>
 		<% else %>
 			<div
-				class="game-<%= user_word.current_game %>-start-circle jeop-not-ready"
+				class="game-<%= user_word.current_game %>-start-circle game-not-ready"
  			>
 			</div>
 		<% end %>
 	<% elsif user_word.jeopardy_completed? %>
 			<div
-				class="game-<%= user_word.current_game %>-start-circle pointer data-url"
-				data-url="/">
+				class="game-<%= user_word.current_game %>-start-circle
+							 game-not-ready">
 			</div>
 	<% end %>
 </div>
