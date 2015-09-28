@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910125259) do
+ActiveRecord::Schema.define(version: 20150928024841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "freestyle_responses", force: :cascade do |t|
+    t.string   "input",                   null: false
+    t.integer  "user_word_game_level_id", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "freestyle_responses", ["input", "user_word_game_level_id"], name: "index_freestyle_responses_on_input_and_user_word_game_level_id", unique: true, using: :btree
+  add_index "freestyle_responses", ["user_word_game_level_id"], name: "index_freestyle_responses_on_user_word_game_level_id", using: :btree
 
   create_table "game_levels", force: :cascade do |t|
     t.integer  "game_id",    null: false
