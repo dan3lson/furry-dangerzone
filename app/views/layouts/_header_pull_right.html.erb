@@ -40,8 +40,8 @@
 	<% elsif params[:controller] == "words" && params[:action] == "show" %>
 		<%= render "words/remove_word_btn_word_show_page", word: @word %>
 
-	<% elsif params[:action] == "progress" %>
-		<%= image_tag("leaderboard_black_32.png", class: "leaderboard-btn")  %>
+	<%# elsif params[:action] == "progress" && current_user.role != "fs_student" %>
+		<%#= image_tag("leaderboard_black_32.png", class: "leaderboard-btn")  %>
 
 	<% end %>
 </span>

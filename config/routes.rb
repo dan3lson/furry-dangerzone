@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   get "myTags" => "current_users#tags"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
-  get "jeopardy_game_words" => "games#jeopardy_game_words"
-  get "leaderboard" => "games#leaderboard"
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"

@@ -1,6 +1,7 @@
 <% provide(:title, "Progress") %>
 <% provide(:header, "Progress") %>
 
+<% if false %>
 <div
   class="btn-group btn-group-justified btn-group-margin"
   role="group"
@@ -20,6 +21,7 @@
 </div>
 
 <br>
+<% end %>
 
 <div class="my-stats-container">
   <%= render "users/overview_stats", user: current_user %>

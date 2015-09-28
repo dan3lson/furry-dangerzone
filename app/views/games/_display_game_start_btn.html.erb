@@ -13,8 +13,8 @@
 	<% elsif user_word.jeopardy_not_started? %>
 		<% if current_user.has_at_least_four_incomplete_jeopardys? %>
 			<div
-				class="game-<%= user_word.current_game %>-start-circle pointer data-url"
-				data-url="/jeopardy?word_id=<%= word.id %>">
+				class="game-<%= user_word.current_game %>-start-circle pointer"
+				data-word-id="<%= word.id %>">
 			</div>
 		<% else %>
 			<div

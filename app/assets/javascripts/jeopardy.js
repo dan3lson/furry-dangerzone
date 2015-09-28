@@ -4,13 +4,20 @@ $(document).ready(function(){
 	 * Initiating variables and arrays
 	 */
 
-	var $chosen_word_id = $(".hidden").html();
-	var $chosen_words_array = ["#chosen_word_one_div","#chosen_word_two_div","#chosen_word_three_div","#chosen_word_four_div"];
+	var $chosen_word_id = $(".game-two-start-circle").data("word-id");
+	var $chosen_words_array = [
+		"#chosen_word_one_div",
+		"#chosen_word_two_div",
+		"#chosen_word_three_div",
+		"#chosen_word_four_div"
+	];
 	var $counter = 0;
 	var $correct_word_proggress_bar_without_pbc_class = "";
 
 	// Start the main activity
-	start_level_2();
+	$(".game-two-start-circle").click(function(){
+		start_level_2();
+	});
 
 	/**
 	 * Starter Functions: Main ones that initiate each activity
@@ -18,12 +25,16 @@ $(document).ready(function(){
 
 	// Start level 2 activity
 	function start_level_2() {
+		window.location.assign("/jeopardy?word_id=" + $chosen_word_id);
+		console.log("Starting Level 2...");
+		console.log("Chosen word ID", $chosen_word_id);
 		// Get the details of all words
 		$.ajax({
 			type: "GET",
-			url: "/jeopardy_game_words?word_id=" + $chosen_word_id,
+			url: "/jeopardy?word_id=" + $chosen_word_id,
 			dataType: "json",
 			success: function (response) {
+				console.log("Ajax request successful");
 				var $chosen_word = response.word_names[0];
 				var $chosen_word_id = response.word_ids[0];
 				var $second_word = response.word_names[1];

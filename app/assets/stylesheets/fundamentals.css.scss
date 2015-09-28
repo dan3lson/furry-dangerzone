@@ -33,18 +33,19 @@ form {
 	padding: 7px;
 }
 
-#meanings_container, #restart_back_button, #game-home-btn,
-#spell_the_word_form, #pronunciation_container, #fill_in_the_blank_container,
+#meanings_container, #game-home-btn,
+#pronunciation_container, #fill_in_the_blank_container,
 #fill_in_the_blank_game_over_message, #synonyms_container, #antonyms_container,
-#real_world_examples_container, #syn-ant-no-results,
-#fill_in_the_blank_back_button, #pronunciation_back_button,
-#meanings_back_button, #synonyms_back_button, #antonyms_back_button,
-#syn_ant_checkpoint_back_button, #real_world_examples_back_button,
-#review_level_one_back_button, #start_level_1_button,
-#spell_the_word_continue_button, #fill_in_the_blank_continue_button,
-#pronunciation_continue_button, #meanings_continue_button,
-#synonyms_continue_button, #antonyms_continue_button,
-#syn_ant_checkpoint_continue_button, #real_world_examples_continue_button,
+#real_world_examples_container,
+#syn-ant-no-results,
+#spell_the_word_continue_button,
+#fill_in_the_blank_continue_button,
+#pronunciation_continue_button,
+#meanings_continue_button,
+#synonyms_continue_button,
+#antonyms_continue_button,
+#syn_ant_checkpoint_continue_button,
+#real_world_examples_continue_button,
 #review_level_one_container {
 	display: none;
 }
@@ -119,7 +120,7 @@ mark {
 	padding: 2px 0px 0px 6px;
 }
 
-.red_circle_background {
+.green-circle-background {
 	background: $bootstrap-green;
 }
 
@@ -169,7 +170,7 @@ mark {
 	padding-right: 0px !important;
 }
 
-#specific_instruction {
+#fdmtls-instructions {
 	font-size: 25px;
 	font-weight: 400;
 }

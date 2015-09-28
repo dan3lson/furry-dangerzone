@@ -8,10 +8,6 @@ class GamesController < ApplicationController
 
   def jeopardy
     @chosen_word = Word.find(params[:word_id])
-  end
-
-  def jeopardy_game_words
-    @chosen_word = Word.find(params[:word_id])
     @incomplete_jeopardys = current_user.incomplete_jeopardys.map { |uw|
       uw.word
     }.delete_if { |w| w == @chosen_word }
@@ -52,12 +48,17 @@ class GamesController < ApplicationController
       end
     end
 
-    render json: {
-      word_ids: @jeopardy_words_ids,
-      word_names: @jeopardy_words_names,
-      jeopardy_lineup_names: @jeopardy_lineup_names,
-      attributes_array: @attributes,
-      attribute_values: @attribute_values
-    }
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          word_ids: @jeopardy_words_ids,
+          word_names: @jeopardy_words_names,
+          jeopardy_lineup_names: @jeopardy_lineup_names,
+          attributes_array: @attributes,
+          attribute_values: @attribute_values
+        }
+      }
+    end
   end
 end
