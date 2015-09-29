@@ -47,7 +47,10 @@ $(document).ready(function(){
 				var $attributes_array = response.attributes_array;
 				var $attribute_values = response.attribute_values;
 
+				console.log("Chosen word", $chosen_word);
 				// Display the text for the remaining three buttons
+				$(".jeopardy-test-container").html("HELLO WORLD");
+
 				update_button_text("#chosen_word_one_btn", $chosen_word);
 				update_button_text("#chosen_word_two_btn", $second_word);
 				update_button_text("#chosen_word_three_btn", $third_word);

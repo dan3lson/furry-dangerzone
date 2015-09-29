@@ -11,7 +11,10 @@
 			</div>
 		</div>
 	<% elsif user_word.jeopardy_not_started? %>
-		<% if current_user.has_at_least_four_incomplete_jeopardys? %>
+		<%# if current_user.has_at_least_four_incomplete_jeopardys? %>
+		<% if false %>
+			<%#= link_to "start", jeopardy_path(word_id: word.id),
+			 		class: "game-two-start-circle", data: { word_id: word.id } %>
 			<div
 				class="game-<%= user_word.current_game %>-start-circle pointer data-url"
 				data-url="/jeopardy?word_id=<%= word.id %>"
@@ -25,8 +28,8 @@
 		<% end %>
 	<% elsif user_word.jeopardy_completed? %>
 			<div
-				class="game-<%= user_word.current_game %>-start-circle data-url pointer"
-				data-url="/freestyle?word_id=<%= word.id %>">
+				class="game-<%= user_word.current_game %>-start-circle game-not-ready"
+				>
 			</div>
 	<% end %>
 </div>
