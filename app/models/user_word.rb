@@ -60,16 +60,20 @@ class UserWord < ActiveRecord::Base
   #   [fundamentals, jeopardys, freestyles]
   # end
 
+  def uwgls
+    user_word_game_levels.sort_by { |uwgl| uwgl.game_level_id }
+  end
+
   def uwgl_fundamentals
-    user_word_game_levels.take(8)
+    uwgls.take(8)
   end
 
   def uwgl_jeopardys
-    user_word_game_levels.drop(8).take(20)
+    uwgls.drop(8).take(20)
   end
 
   def uwgl_freestyles
-    user_word_game_levels.drop(28)
+    uwgls.drop(28)
   end
 
   def fundamental_completed?
