@@ -22,7 +22,7 @@ class UserWordGameLevelsController < ApplicationController
       }
     else
       render json: {
-        status: "UWGL: #{@user_word_game_level.id} not updated successfully"
+        status: "UWGL: #{@user_word_game_level.id} NOT updated successfully"
       }
     end
   end

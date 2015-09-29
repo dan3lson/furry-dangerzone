@@ -15,6 +15,17 @@
   <br>
 
   <div class="box-shadow-border col-sm-6 col-sm-offset-3">
+    <div>
+      <% @semantic_map_responses.each do |r| %>
+        <p>
+          <%= r %>
+        </p>
+      <% end %>
+      <hr>
+    </div>
+  </div>
+
+  <div class="box-shadow-border col-sm-6 col-sm-offset-3">
     <div class="pull-right">
       <%= image_tag("tag_black_filled_25.png", alt: "myTags",
                                                class: "img-responsive")

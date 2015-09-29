@@ -6,6 +6,7 @@ $(document).ready(function(){
 	 * Initiating variables and arrays
 	 */
 	var $chosen_word_value = $("#palabra").data("word-name");
+	var $chosen_word_id = $("#palabra").data("word-id");
 	var $response;
 	var $input;
 	var $input_value;
@@ -28,12 +29,12 @@ $(document).ready(function(){
 	var $new_goodies_total = 0;
 
 	// var $regex = /^[a-zA-Z]*$/; only letters and no spaces or numbers / && $regex.test($chosen_word_value)
-	var $regex = /^[a-zA-Z .';-]+$/; // No numbers or special characters just letters and spaces
+	var $regex = /^[a-zA-Z .';,?-]+$/; // No numbers or special characters just letters and spaces
 
 	$("#level_3_details").fadeIn();
 	$("#semantic_map_form").fadeIn();
 	// Update the activity name and instruction
-	display_activity_instruction("Type three words similar to <strong>'" + $chosen_word_value + "'</strong>.");
+	display_instruction("Type three words similar to <strong>'" + $chosen_word_value + "'</strong>.");
 
 	$(".game-three-start-circle").click(function(){
 	});
@@ -59,7 +60,7 @@ $(document).ready(function(){
 
 	$("#semantic_map_continue_button").click(function(){
 		// Update the activity name and instruction
-		display_activity_instruction("What words can be formed from <strong>'" + $chosen_word_value + "'</strong>?");
+		display_instruction("What words can be formed from <strong>'" + $chosen_word_value + "'</strong>?");
 
 		// Display the next round of input fields and hide the previous one
 		$("#semantic_map_form").hide();
@@ -80,7 +81,7 @@ $(document).ready(function(){
 
 	$("#word_map_continue_button").click(function(){
 		// Update the activity name and instruction
-		display_activity_instruction("What do you think <strong>'" + $chosen_word_value + "'</strong> means?");
+		display_instruction("What do you think <strong>'" + $chosen_word_value + "'</strong> means?");
 
 		// Display the next round of input fields and hide the previous one
 		$("#word_map_form").hide();
@@ -102,7 +103,7 @@ $(document).ready(function(){
 
 	$("#definition_map_continue_button").click(function(){
 		// Update the activity name and instruction
-		display_activity_instruction("Create three sentences with <strong>'" + $chosen_word_value + "'</strong> in each one.");
+		display_instruction("Create three sentences with <strong>'" + $chosen_word_value + "'</strong> in each one.");
 
 		// Display the next round of input fields and hide the previous one
 		$("#definition_map_form").hide();
@@ -131,15 +132,7 @@ $(document).ready(function(){
 		$("#semantic_map_form input[type=text]").map(function(){
 			var $value = $(this).val();
 			$semantic_map_responses.push($value);
-			$("#semantic_map_responses").html($(this).val());
 		}).get().join();
-
-		// Print each value in the semantic map array on a separate line for review
-		for (var i = 0; i < $semantic_map_responses.length; i++) {
-			$individual_semantic_map_response_container = $("<span>");
-			$("#semantic_map_response_container").append($individual_semantic_map_response_container,"<br>");
-			$($individual_semantic_map_response_container).html((i+1) + ". " + $semantic_map_responses[i]);
-		}
 
 		//Ensure the word map array and container is empty before adding values
 		$word_map_responses = [];
@@ -149,15 +142,7 @@ $(document).ready(function(){
 		$("#word_map_form input[type=text]").map(function(){
 			var $value = $(this).val();
 			$word_map_responses.push($value);
-			$("#word_map_responses").html($(this).val());
 		}).get().join();
-
-		// Print each value in the semantic map array on a separate line for review
-		for (var i = 0; i < $word_map_responses.length; i++) {
-			$individual_word_map_response_container = $("<span>");
-			$("#word_map_response_container").append($individual_word_map_response_container,"<br>");
-			$($individual_word_map_response_container).html((i+1) + ". " + $word_map_responses[i]);
-		}
 
 		//Ensure the definition map array and container is empty before adding values
 		$definition_map_responses = [];
@@ -167,15 +152,7 @@ $(document).ready(function(){
 		$("#definition_map_form input[type=text]").map(function(){
 			var $value = $(this).val();
 			$definition_map_responses.push($value);
-			$("#definition_map_responses").html($(this).val());
 		}).get().join();
-
-		// Print each value in the semantic map array on a separate line for review
-		for (var i = 0; i < $definition_map_responses.length; i++) {
-			$individual_definition_map_response_container = $("<span>");
-			$("#definition_map_response_container").append($individual_definition_map_response_container,"<br>");
-			$($individual_definition_map_response_container).html((i+1) + ". " + $definition_map_responses[i]);
-		}
 
 		//Ensure the sentence array and container is empty before adding values
 		$sentence_responses = [];
@@ -185,65 +162,59 @@ $(document).ready(function(){
 		$("#sentence_form input[type=text]").map(function(){
 			var $value = $(this).val();
 			$sentence_responses.push($value);
-			$("#sentence_responses").html($(this).val());
 		}).get().join();
-
-		// Print each value in the semantic map array on a separate line for review
-		for (var i = 0; i < $sentence_responses.length; i++) {
-			$individual_sentence_response_container = $("<span>");
-			$("#sentence_response_container").append($individual_sentence_response_container,"<br>");
-			$($individual_sentence_response_container).html((i+1) + ". " + $sentence_responses[i]);
-		}
-
-		// Update the activity name and instruction
-		display_activity_instruction("Double-check and submit your work for <strong>'" + $chosen_word_value + "'</strong>!");
 
 		// Display the next round of input fields and hide the previous one
 		$("#sentence_form").hide();
-		$("#review_level_3_container").show();
 
 		// Display the next button and hide the previous one
 		$("#sentence_continue_button").hide();
-		$("#review_level_3_button").show();
-
-		// Hide the plus and minus buttons
-		$("#add_minus_buttons").hide();
-
-		// Display the previous button and hide the previous one
-		$("#sentence_back_button").hide();
-		$("#review_level_3_back_button").show();
-
-		// Update the progress made on learning this word
-		progressBar(80);
-	});
-
-	$("#review_level_3_button").click(function(){
 
 		$("#level_3_completed").show();
 
 		$("#level_3_details, #goodies").hide();
-		$("#review_level_3_back_button").hide();
-		$("#review_level_3_button").hide();
-		$("#review_level_3_container").hide();
 
 		$("#goodies, #progress_bar_container").css("visibility","hidden");
 		$("#all_levels_button").show();
 		$("#level_congrats_text").append("<strong>'" + $chosen_word_value + "'</strong> ");
 		$("#goodies_total").html($new_goodies_total);
 
-		// Update the progress bar value
+		// Update the progress made on learning this word
 		progressBar(100);
+
+		create_freestyle_responses_for_uwgl();
+		update_uwgl_freestyle_statuses();
 	});
 
 	/**
 	 * Functions
 	 */
 
-	// Update user_word_game_level_status
-	function update_jeopardy_status_as_complete(word_id) {
+	// Create responses tied to the user_word_game_levels
+	function create_freestyle_responses_for_uwgl() {
+		var $first_half = $.merge($semantic_map_responses, $word_map_responses)
+		var $second_half = $.merge($definition_map_responses, $sentence_responses)
+		var $all_responses = $.merge($first_half, $second_half)
+
 		var game_info = {
-			"word_id": word_id
+			"word_id": $chosen_word_id,
+			"freestyle_responses": $all_responses
 		};
+
+		$.ajax({
+			type: "POST",
+			url: "/freestyle_game",
+			dataType: "json",
+			data: game_info,
+			success: function(response) {
+				console.log(response.errors);
+			}
+		});
+	};
+
+	// Update user_word_game_level_status
+	function update_uwgl_freestyle_statuses() {
+		var game_info = { "word_id": $chosen_word_id };
 
 		$.ajax({
 			type: "PATCH",
@@ -251,53 +222,10 @@ $(document).ready(function(){
 			dataType: "json",
 			data: game_info,
 			success: function(response) {
-				console.log(response);
+				console.log(response.errors);
 			}
 		});
 	};
-
-	$(function(){
-		// Get the form
-		var form = $("#freestyle-form");
-
-		// Get the results div
-		var formMessages = $("#results");
-
-		// Set up an event listener for the contact form
-		$(form).submit(function(event){
-			// Stop the browser from submitting the form
-			event.preventDefault();
-
-			// Serialize the form data
-			var formData = $(form).serialize();
-
-			$.ajax({
-				type: 'POST',
-				url: $(form).attr('action'),
-				data: formData
-			}).done(function(response){
-				// Make sure that the formMessages div has the 'success' class
-				$(formMessages).removeClass('has-error').addClass('has-success');
-
-				// Set the message text
-				$(formMessages).text(response);
-
-				// Clear the form
-					// Not needed because it's already done elsewhere
-			}).fail(function(data){
-				// Make sure that the formMessages div has the 'error' class
-				$(formMessages).removeClass('has-success').addClass('has-error');
-
-				// Set the message text
-				if (data.responseText !== '') {
-					$(formMessages).text(data.responseText);
-				} else {
-					$(formMessages).text('Oops! An error occurred and your message could not be sent.');
-				}
-			});
-		});
-	});
-
 
 	// Global fn
 	// Increase the goodies per level
@@ -364,7 +292,7 @@ $(document).ready(function(){
 	}
 
 	//Change the activity name and specific directions depending on current state
-	function display_activity_instruction( specific_instruction) {
+	function display_instruction( specific_instruction) {
 		$(".freestyle-instructions").html(specific_instruction);
 	}
 

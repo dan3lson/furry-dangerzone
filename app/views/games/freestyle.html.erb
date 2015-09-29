@@ -1,9 +1,7 @@
-<div id="result"></div>
+<div id="palabra" data-word-name="<%= @chosen_word.name %>"
+									data-word-id="<%= @chosen_word.id %>"></div>
 
-<div id="palabra" data-word-name="<%= @chosen_word.name %>">
-
-</div>
-<form id="freestyle-form" method="POST" action="level3.php">
+<form id="freestyle-form">
 	<!-- start of level 3 details -->
 	<div id="level_3_details">
 		<div class="freestyle-instructions"></div>
@@ -65,34 +63,14 @@
 	</div>
 	<!-- end of the sentence form -->
 
-
-	<!-- start of review level three container -->
-	<div id="review_level_3_container">
-		<hr/>
-		<div id="semantic_map_response_container">
-			<h3 class="review_title">Semantic Map</h3>
-		</div>
-		<div id="word_map_response_container">
-			<h3 class="review_title">Word Map</h3>
-		</div>
-		<div id="definition_map_response_container">
-			<h3 class="review_title">Definition Map</h3>
-		</div>
-		<div id="sentence_response_container">
-			<h3 class="review_title">Example Sentences</h3>
-		</div>
-	</div>
-	<!-- end of start of review level three container -->
-
 	<br>
 	<br>
-	
+
 	<div id="continue_button_container" class="pointer">
 		<button type="button" class="btn btn-success btn-block btn-lg" id="semantic_map_continue_button">Continue</button>
 		<button type="button" class="btn btn-success btn-block btn-lg" id="word_map_continue_button">Continue</button>
 		<button type="button" class="btn btn-success btn-block btn-lg" id="definition_map_continue_button">Continue</button>
-		<button type="button" class="btn btn-success btn-block btn-lg" id="sentence_continue_button">Continue</button>
-		<input type="submit" name="submit" class="btn btn-warning btn-block btn-lg" id="review_level_3_button" value="Finish!" />
+		<button type="button" class="btn btn-warning btn-block btn-lg" id="sentence_continue_button">Finish!</button>
 	</div>
 
 </form> <!-- end of level 3 form -->

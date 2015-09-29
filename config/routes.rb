@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resource :user_word_game_level, only: [:update]
   resource :reset_fundamentals, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]
-  resource :freestyle_game, only: [:update]
+  resource :freestyle_game, only: [:create, :edit, :update]
   resource :create_freestyle, only: [:create]
   resources :tags, except: [:destroy]
   resource :user_tag, only: [:create, :edit, :destroy]
