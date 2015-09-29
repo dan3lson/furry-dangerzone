@@ -40,26 +40,6 @@ class UserWord < ActiveRecord::Base
   #   }
   # end
 
-  # def array_of_games
-  #   fundamentals = []
-  #   jeopardys = []
-  #   freestyles = []
-  #
-  #   user_word_game_levels.each do |uwgl|
-  #     game_name = uwgl.game_level.game.name
-  #
-  #     if game_name == "Fundamentals"
-  #       fundamentals << uwgl
-  #     elsif game_name == "Jeopardy"
-  #       jeopardys << uwgl
-  #     elsif game_name == "Freestyle"
-  #       freestyles << uwgl
-  #     end
-  #   end
-  #
-  #   [fundamentals, jeopardys, freestyles]
-  # end
-
   def uwgls
     user_word_game_levels.sort_by { |uwgl| uwgl.game_level_id }
   end

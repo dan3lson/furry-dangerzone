@@ -231,7 +231,6 @@ $(document).ready(function(){
 		$("#level_congrats_text").append("<strong>'" + $chosen_word_value + "'</strong> ");
 		$("#goodies_total").html($new_goodies_total);
 
-
 		// Update the progress bar value
 		progressBar(100);
 	});
@@ -239,6 +238,23 @@ $(document).ready(function(){
 	/**
 	 * Functions
 	 */
+
+	// Update user_word_game_level_status
+	function update_jeopardy_status_as_complete(word_id) {
+		var game_info = {
+			"word_id": word_id
+		};
+
+		$.ajax({
+			type: "PATCH",
+			url: "/freestyle_game",
+			dataType: "json",
+			data: game_info,
+			success: function(response) {
+				console.log(response);
+			}
+		});
+	};
 
 	$(function(){
 		// Get the form

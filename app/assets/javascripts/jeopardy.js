@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 	// Start level 2 activity
 	function start_level_2() {
-		window.location.assign("/jeopardy?word_id=" + $chosen_word_id);
+		// window.location.assign("/jeopardy?word_id=" + $chosen_word_id);
 		console.log("Starting Level 2...");
 		console.log("Chosen word ID", $chosen_word_id);
 		// Get the details of all words

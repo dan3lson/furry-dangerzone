@@ -1,4 +1,10 @@
 <% provide(:title, @user.username) %>
 <% provide(:header, @user.username) %>
 
-<%= render "users/stats", user: @user %>
+<%= render "users/overview_stats", user: @user %>
+
+<%= render "users/fundamentals_game_stats", user: @user %>
+
+<%= render "users/jeopardy_game_stats", user: @user %>
+
+<%= render "users/freestyle_game_stats", user: @user %>
