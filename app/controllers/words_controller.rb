@@ -11,6 +11,9 @@ class WordsController < ApplicationController
       @responses = @user_word.uwgl_freestyles.map { |uwgl|
         uwgl.freestyle_responses }.flatten.map { |fr| fr.input }
       @semantic_map_responses = @responses[0..2]
+      @word_map_responses = @responses[3..5]
+      @definition_map_responses = @responses[6..8]
+      @sentence_responses = @responses[9..11]
     end
   end
 end

@@ -15,26 +15,22 @@ $(document).ready(function(){
 	var $correct_word_proggress_bar_without_pbc_class = "";
 
 	// Start the main activity
-	// $(".game-two-start-circle").click(function(){
-	// 	start_level_2();
-	// });
+	$(".game-two-start-circle").click(function(){
+		load_game_info();
+	});
 
 	/**
 	 * Starter Functions: Main ones that initiate each activity
 	 */
 
-	// Start level 2 activity
-	function start_level_2() {
-		// window.location.assign("/jeopardy?word_id=" + $chosen_word_id);
-		console.log("Starting Level 2...");
-		console.log("Chosen word ID", $chosen_word_id);
-		// Get the details of all words
+	function load_game_info() {
 		$.ajax({
 			type: "GET",
 			url: "/jeopardy?word_id=" + $chosen_word_id,
 			dataType: "json",
 			success: function (response) {
 				console.log("Ajax request successful");
+
 				var $chosen_word = response.word_names[0];
 				var $chosen_word_id = response.word_ids[0];
 				var $second_word = response.word_names[1];
@@ -47,102 +43,113 @@ $(document).ready(function(){
 				var $attributes_array = response.attributes_array;
 				var $attribute_values = response.attribute_values;
 
-				console.log("Chosen word", $chosen_word);
-				// Display the text for the remaining three buttons
-				$(".jeopardy-test-container").html("HELLO WORLD");
+				console.log("Chosen word w/in Ajax request:", $chosen_word);
+				console.log("Second word w/in Ajax request:", $second_word);
+				console.log("Third word w/in Ajax request:", $third_word);
+				console.log("Fourth word w/in Ajax request:", $fourth_word);
 
-				update_button_text("#chosen_word_one_btn", $chosen_word);
-				update_button_text("#chosen_word_two_btn", $second_word);
-				update_button_text("#chosen_word_three_btn", $third_word);
-				update_button_text("#chosen_word_four_btn", $fourth_word);
-
-				var $current_word = $jeopardy_lineup_names[$counter];
-
-				// Update the activity name and instruction
-				display_activity_instruction($attributes_array[$counter], $attribute_values[$counter]);
-
-				answer_the_question("#chosen_word_one_btn", "#chosen_word_one_progress_bars_div .progress-bar-custom:first");
-				answer_the_question("#chosen_word_two_btn", "#chosen_word_two_progress_bars_div .progress-bar-custom:first");
-				answer_the_question("#chosen_word_three_btn", "#chosen_word_three_progress_bars_div .progress-bar-custom:first");
-				answer_the_question("#chosen_word_four_btn", "#chosen_word_four_progress_bars_div .progress-bar-custom:first");
-
-				// Handles what happens when user answers correctly and incorrectly
-				function answer_the_question(button_id_name, first_mini_progress_bar_without_pbc_class) {
-					$(button_id_name).click(function(){
-						// If the user's guess is correct
-						if ($(this).text() == $jeopardy_lineup_names[$counter]) {
-							$(first_mini_progress_bar_without_pbc_class).children().first().html("&#10084;").css("color", "#fff");
-							$(first_mini_progress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-success");
-						// If the user's guess is incorrect
-						} else {
-							$correct_word_proggress_bar_without_pbc_class = "#" +
-									$("button:contains('"+$jeopardy_lineup_names[$counter]+"')")
-									.next()
-									.attr("id")
-									+ " .progress-bar-custom:first"
-								;
-							$($correct_word_proggress_bar_without_pbc_class).html("&#10006;").css("color", "#ccc").css("background", "#fff");
-							$($correct_word_proggress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-danger");
-						}
-
-						// Increase the counter
-						$counter++;
-
-						display_activity_instruction($attributes_array[$counter], $attribute_values[$counter]);
-
-						// When the game is over, display "complete" message
-						if ($counter == 20) {
-							$("#chosen_word_one_btn").prop("disabled",true);
-							$("#chosen_word_two_btn").prop("disabled",true);
-							$("#chosen_word_three_btn").prop("disabled",true);
-							$("#chosen_word_four_btn").prop("disabled",true);
-
-							display_activity_instruction("Ready for the results?", "3...2...1...");
-
-							setTimeout(function(){
-								$("#level_2_container").hide();
-								$("#review_level_two_container").fadeIn();
-
-								display_level_2_results(
-									"#chosen_word_one_progress_bars_div",
-									"#level_two_results_first_circle",
-									"#level_two_results_first_word",
-									$chosen_word,
-									$chosen_word_id
-								);
-
-								display_level_2_results(
-									"#chosen_word_two_progress_bars_div",
-									"#level_two_results_second_circle",
-									"#level_two_results_second_word",
-									$second_word,
-									$second_word_id
-								);
-
-								display_level_2_results(
-									"#chosen_word_three_progress_bars_div",
-									"#level_two_results_third_circle",
-									"#level_two_results_third_word",
-									$third_word,
-									$third_word_id
-								);
-
-								display_level_2_results(
-									"#chosen_word_four_progress_bars_div",
-									"#level_two_results_fourth_circle",
-									"#level_two_results_fourth_word",
-									$fourth_word,
-									$fourth_word_id
-								);
-
-							}, 3000);
-						}
-					});
-				}; // end of answer the question fn
+				start_game_2($chosen_word, $second_word, $third_word, $fourth_word, $chosen_word_id, $second_word_id, $third_word_id, $fourth_word_id, $jeopardy_lineup_names, $attributes_array, $attribute_values)
 			} // end of the success parameter in the ajax fn
 		}); // end of the ajax function
 	}; // end of start game 2 fn
 
+	function start_game_2(w1, w2, w3, w4, w1_id, w2_id, w3_id, w4_id, lineup_names, attributes_array, attribute_values) {
+		console.log("Starting Game 2...");
+
+		$(location).attr("href", "/jeopardy?word_id=" + w1_id);
+
+		// Display the text for the remaining three buttons
+		$(".jeopardy-test-container").html("HELLO WORLD");
+
+		update_button_text("#chosen_word_one_btn", w1);
+		update_button_text("#chosen_word_two_btn", w2);
+		update_button_text("#chosen_word_three_btn", w3);
+		update_button_text("#chosen_word_four_btn", w4);
+
+		var $current_word = lineup_names[$counter];
+
+		// Update the activity name and instruction
+		display_activity_instruction(attributes_array[$counter], attribute_values[$counter]);
+
+		answer_the_question("#chosen_word_one_btn", "#chosen_word_one_progress_bars_div .progress-bar-custom:first");
+		answer_the_question("#chosen_word_two_btn", "#chosen_word_two_progress_bars_div .progress-bar-custom:first");
+		answer_the_question("#chosen_word_three_btn", "#chosen_word_three_progress_bars_div .progress-bar-custom:first");
+		answer_the_question("#chosen_word_four_btn", "#chosen_word_four_progress_bars_div .progress-bar-custom:first");
+
+		// Handles what happens when user answers correctly and incorrectly
+		function answer_the_question(button_id_name, first_mini_progress_bar_without_pbc_class) {
+			$(button_id_name).click(function(){
+				// If the user's guess is correct
+				if ($(this).text() == lineup_names[$counter]) {
+					$(first_mini_progress_bar_without_pbc_class).children().first().html("&#10084;").css("color", "#fff");
+					$(first_mini_progress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-success");
+				// If the user's guess is incorrect
+				} else {
+					$correct_word_proggress_bar_without_pbc_class = "#" +
+							$("button:contains('"+$jeopardy_lineup_names[$counter]+"')")
+							.next()
+							.attr("id")
+							+ " .progress-bar-custom:first"
+						;
+					$($correct_word_proggress_bar_without_pbc_class).html("&#10006;").css("color", "#ccc").css("background", "#fff");
+					$($correct_word_proggress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-danger");
+				}
+
+				// Increase the counter
+				$counter++;
+
+				display_activity_instruction(attributes_array[$counter], attribute_values[$counter]);
+
+				// When the game is over, display "complete" message
+				if ($counter == 20) {
+					$("#chosen_word_one_btn").prop("disabled",true);
+					$("#chosen_word_two_btn").prop("disabled",true);
+					$("#chosen_word_three_btn").prop("disabled",true);
+					$("#chosen_word_four_btn").prop("disabled",true);
+
+					display_activity_instruction("Ready for the results?", "3...2...1...");
+
+					setTimeout(function(){
+						$("#level_2_container").hide();
+						$("#review_level_two_container").fadeIn();
+
+						display_level_2_results(
+							"#chosen_word_one_progress_bars_div",
+							"#level_two_results_first_circle",
+							"#level_two_results_first_word",
+							w1,
+							w1_id
+						);
+
+						display_level_2_results(
+							"#chosen_word_two_progress_bars_div",
+							"#level_two_results_second_circle",
+							"#level_two_results_second_word",
+							w2,
+							w2_id
+						);
+
+						display_level_2_results(
+							"#chosen_word_three_progress_bars_div",
+							"#level_two_results_third_circle",
+							"#level_two_results_third_word",
+							w3,
+							w3_id
+						);
+
+						display_level_2_results(
+							"#chosen_word_four_progress_bars_div",
+							"#level_two_results_fourth_circle",
+							"#level_two_results_fourth_word",
+							w4,
+							w4_id
+						);
+
+					}, 3000);
+				}
+			});
+		}; // end of answer the question fn
+	};
 
 	/**
 	 * Helper Functions: Support ones that help each activity above

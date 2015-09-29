@@ -27,7 +27,7 @@ $(document).ready(function(){
 	});
 
 	$(".data-url").click(function() {
-		window.location.assign($(this).data("url"));
+		$(location).attr("href", $(this).data("url"));
 	});
 
 	$(".look-up-word-btn").click(function() {

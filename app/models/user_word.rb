@@ -9,10 +9,11 @@ class UserWord < ActiveRecord::Base
   validates :word, presence: true
 
   def current_game
-    # change using x_completed? methods
     game_ids = self.game_levels.pluck(:game_id).uniq
 
-    if game_ids.count == 1
+    if freestyle_completed?
+      "all-games-completed"
+    elsif game_ids.count == 1
       "one"
     elsif game_ids.count == 2
       "two"
@@ -112,9 +113,5 @@ class UserWord < ActiveRecord::Base
     uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
     num == 12
-  end
-
-  def all_games_completed?
-    fundamental_completed? && jeopardy_completed? && freestyle_completed?
   end
 end
