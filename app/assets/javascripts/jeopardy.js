@@ -15,9 +15,9 @@ $(document).ready(function(){
 	var $correct_word_proggress_bar_without_pbc_class = "";
 
 	// Start the main activity
-	$(".game-two-start-circle").click(function(){
-		start_level_2();
-	});
+	// $(".game-two-start-circle").click(function(){
+	// 	start_level_2();
+	// });
 
 	/**
 	 * Starter Functions: Main ones that initiate each activity

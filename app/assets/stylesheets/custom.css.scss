@@ -441,20 +441,8 @@ input {
 .logged-in-header {
   background: $sky-blue;
   border-color: $sky-blue;
+  // color: $white;
   opacity: .90;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 9px;
-
-  h4 a {
-    color: $white;
-    font-weight: 600;
-    font-size: larger;
-  }
-
-  .btn {
-    border-radius: 100px;
-  }
 }
 
 .margin-top {

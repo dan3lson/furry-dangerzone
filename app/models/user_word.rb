@@ -56,18 +56,6 @@ class UserWord < ActiveRecord::Base
     uwgls.drop(28)
   end
 
-  def fundamental_completed?
-    num = 0
-
-    uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "complete" }
-
-    num == 8
-  end
-
-  def fundamental_in_progress?
-    uwgl_fundamentals.map { |uwgl| uwgl.status }.uniq.count == 2
-  end
-
   def fundamental_not_started?
     num = 0
 
@@ -76,12 +64,17 @@ class UserWord < ActiveRecord::Base
     num == 8
   end
 
+  def fundamental_in_progress?
+    uwgl_fundamentals.map { |uwgl| uwgl.status }.uniq.count == 2
+  end
 
-  def jeopardy_completed?
+
+  def fundamental_completed?
     num = 0
-    uwgl_jeopardys.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
-    num == 20
+    uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "complete" }
+
+    num == 8
   end
 
   def jeopardy_not_started?
@@ -92,23 +85,30 @@ class UserWord < ActiveRecord::Base
     num == 20
   end
 
+  def jeopardy_completed?
+    num = 0
+    uwgl_jeopardys.each { |uwgl| num += 1 if uwgl.status == "complete" }
+
+    num == 20
+  end
+
   def self.destroy_jeopardys_for(user_word)
     user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
   end
 
 
-  def freestyle_completed?
-    num = 0
-
-    uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "complete" }
-
-    num == 12
-  end
-
   def freestyle_not_started?
     num = 0
 
     uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "not started" }
+
+    num == 12
+  end
+
+  def freestyle_completed?
+    num = 0
+
+    uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
     num == 12
   end

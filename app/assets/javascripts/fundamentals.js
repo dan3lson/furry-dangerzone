@@ -4,7 +4,7 @@ $(document).ready(function(){
 	 */
 
 	// General
-	var $chosen_word_value = $(".word-name").html();
+  var $chosen_word_value = $(".word-name").html();
 	var $chosen_word_id = $(".palabra-id").html();
 	var $styled_chosen_word_value = "";
 	var $each_letter_span; // letters shown in the header
@@ -92,6 +92,49 @@ $(document).ready(function(){
 		progressBar(0);
 	$(".game-one-start-circle").click(function(){
 	});
+
+
+	/**
+	 * Handle the back buttons
+	 */
+
+	 // If the user wants to return to the spell the word activity
+ 	$("#fill_in_the_blank_back_button").click(function(){
+ 		$("#spell_the_word_form").show();
+
+ 		// Show and hide buttons
+ 		hide_and_show_button("#fill_in_the_blank_container, #fill_in_the_blank_back_button, #fill_in_the_blank_continue_button, #fill_in_the_blank_game_over_message", "#spell_the_word_continue_button, #restart_back_button");
+
+ 		// Empty the different letter arrays
+ 		$alphabet_random_letters_array = [];
+ 		$merged_letters_array = [];
+
+ 		// Update the activity name and instruction
+ 		display_instruction("Type the word below:");
+
+ 		// If clicking back after losing or not doing anything
+ 		if ($fill_in_the_blank_incorrect_count == 3) {
+ 			// Reset the array values back to normal
+ 			$chosen_word_each_letter_array = [];
+ 			for (var i = 0; i < $chosen_word_value.length; i++) {
+ 				$chosen_word_each_letter_array.push($chosen_word_value[i]);
+ 			}
+
+ 			$("#chosen_word_header_container").html($chosen_word_value);
+
+ 			$alphabet_random_letters_array = [];
+ 			$merged_letters_array = [];
+
+ 			// Empty the different letter arrays
+ 			$(".fill_in_the_blank_letters").remove();
+
+ 			// Reset the incorrect count
+ 			$fill_in_the_blank_incorrect_count = 0;
+ 		}
+
+ 		// Return the progress back to 0
+ 		progressBar(0);
+ 	});
 
 	/**
 	 * Handle the continue buttons
@@ -206,6 +249,47 @@ $(document).ready(function(){
 			update_user_word_game_level_status("5", 5);
 
 			start_antonyms_activity($chosen_word_value);
+		}	else if ($("#synonym_no_results").hasClass("please-tap-continue") &&
+								 $("#antonym_no_results").hasClass("please-tap-continue") &&
+								 $("#rwe_no_results").hasClass("please-tap-continue")) {
+			// Show and hide buttons
+			$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
+			$("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
+
+			// Update the user_word_game_level's status to complete
+			update_user_word_game_level_status("5", 5);
+			update_user_word_game_level_status("6", 6);
+			update_user_word_game_level_status("7", 7);
+			update_user_word_game_level_status("8", 8);
+
+			// Create the game_level's for Jeopardy
+			var game_info = {
+				"word_id": $chosen_word_id
+			};
+
+			$.ajax({
+				type: "POST",
+				url: "/jeopardy_game",
+				dataType: "json",
+				data: game_info,
+				success: function(response) {
+					console.log(response);
+				}
+			});
+
+			// Update the progress made
+			progressBar(100);
+
+			// Update user goodies
+			update_user_points(10);
+			boost_goodies(10);
+
+			// Start the next activity, i.e. review level one
+			start_review_level_one_activity($chosen_word_value);
+
+			// Hide the exit btn and display the home btn
+			$("#game-exit-btn").hide();
+			$("#game-home-btn").show();
 		} else if ($("#synonym_no_results").hasClass("please-tap-continue") && $("#antonym_no_results").hasClass("please-tap-continue")) {
 			// Show and hide buttons
 			$("#real_world_examples_back_button, #real_world_examples_container").show();
@@ -328,7 +412,6 @@ $(document).ready(function(){
 	});
 
 	$("#real_world_examples_continue_button").click(function(){
-
 		// Show and hide buttons
 		$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
 		$("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
