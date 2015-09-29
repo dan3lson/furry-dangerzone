@@ -290,7 +290,7 @@ $(document).ready(function(){
 	//Change the activity name and specific directions depending on current state
 	function display_activity_instruction(activity_name, specific_instruction) {
 		$("#activity_name").html(activity_name);
-		$("#specific_instruction").html(specific_instruction);
+		$("#jeopardy-specific-instruction").html(specific_instruction);
 	};
 
 	// Set the value for the progress bar

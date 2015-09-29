@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "myTags" => "current_users#tags"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
+  get "freestyle" => "games#freestyle"
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   resource :user_word_game_level, only: [:update]
   resource :reset_fundamentals, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]
+  resource :freestyle_game, only: [:update]
   resource :create_freestyle, only: [:create]
   resources :tags, except: [:destroy]
   resource :user_tag, only: [:create, :edit, :destroy]

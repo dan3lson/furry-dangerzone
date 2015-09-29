@@ -1,0 +1,106 @@
+<div id="result"></div>
+
+<div id="palabra" data-word-name="<%= @chosen_word.name %>">
+
+</div>
+<form id="freestyle-form" method="POST" action="level3.php">
+	<!-- start of level 3 details -->
+	<div id="level_3_details">
+		<div class="freestyle-instructions"></div>
+	</div>
+	<!-- end of level 3 details -->
+
+	<br>
+	<br>
+	<br>
+	<!-- start of the semantic map form -->
+	<div class="form-group" id="semantic_map_form">
+		<label class="sr-only" for="first_semantic_map_input">1.</label>
+		<input class="semantic_map_input form-control input-lg" id="first_sem_map_input" name="first_semantic_map_input" type="text" placeholder="1." />
+		<br/>
+		<label class="sr-only" for="second_semantic_map_input form-control">2.</label>
+		<input class="semantic_map_input form-control input-lg" id="second_sem_map_input" name="second_semantic_map_input" type="text" placeholder="2." />
+		<br/>
+		<label class="sr-only" for="third_semantic_map_input">3.</label>
+		<input class="semantic_map_input form-control input-lg" id="third_sem_map_input" name="third_semantic_map_input" type="text" placeholder="3." />
+	</div>
+	<!-- end of the semantic map form -->
+
+	<!-- start of the word map form -->
+	<div class="form-group" id="word_map_form">
+		<label class="sr-only" for="first_word_map_input">1.</label>
+		<input class="word_map_input form-control input-lg" id="first_word_map_input" name="first_word_map_input" type="text" placeholder="1." />
+		<br/>
+		<label class="sr-only" for="second_word_map_input form-control">2.</label>
+		<input class="word_map_input form-control input-lg" id="second_word_map_input" name="second_word_map_input" type="text" placeholder="2." />
+		<br/>
+		<label class="sr-only" for="third_word_map_input">3.</label>
+		<input class="word_map_input form-control input-lg" id="third_word_map_input" name="third_word_map_input" type="text" placeholder="3." />
+	</div>
+	<!-- end of the word map form -->
+
+	<!-- start of the definition map form -->
+	<div class="form-group" id="definition_map_form">
+		<label class="sr-only" for="first_definition_map_input">1.</label>
+		<input class="definition_map_input form-control input-lg" id="first_def_map_input" name="first_definition_map_input" type="text" placeholder="1." />
+		<br/>
+		<label class="sr-only" for="second_definition_map_input form-control">2.</label>
+		<input class="definition_map_input form-control input-lg" id="second_def_map_input" name="second_definition_map_input" type="text" placeholder="2." />
+		<br/>
+		<label class="sr-only" for="third_definition_map_input">3.</label>
+		<input class="definition_map_input form-control input-lg" id="third_def_map_input" name="third_definition_map_input" type="text" placeholder="3." />
+	</div>
+	<!-- end of the definition map form -->
+
+	<!-- start of the sentence form -->
+	<div class="form-group" id="sentence_form">
+		<label class="sr-only" for="first_sentence_input">1.</label>
+		<input class="sentence_input form-control input-lg" id="first_sentence_input" name="first_sentence_input" type="text" placeholder="1." />
+		<br/>
+		<label class="sr-only" for="second_sentence_input form-control">2.</label>
+		<input class="sentence_input form-control input-lg" id="second_sentence_input"  name="second_sentence_input" type="text" placeholder="2." />
+		<br/>
+		<label class="sr-only" for="third_sentence_input">3.</label>
+		<input class="sentence_input form-control input-lg" id="third_sentence_input"  name="third_sentence_input" type="text" placeholder="3." />
+	</div>
+	<!-- end of the sentence form -->
+
+
+	<!-- start of review level three container -->
+	<div id="review_level_3_container">
+		<hr/>
+		<div id="semantic_map_response_container">
+			<h3 class="review_title">Semantic Map</h3>
+		</div>
+		<div id="word_map_response_container">
+			<h3 class="review_title">Word Map</h3>
+		</div>
+		<div id="definition_map_response_container">
+			<h3 class="review_title">Definition Map</h3>
+		</div>
+		<div id="sentence_response_container">
+			<h3 class="review_title">Example Sentences</h3>
+		</div>
+	</div>
+	<!-- end of start of review level three container -->
+
+	<div id="continue_button_container" class="pointer">
+		<button type="button" class="btn btn-success btn-block btn-lg" id="semantic_map_continue_button">Continue</button>
+		<button type="button" class="btn btn-success btn-block btn-lg" id="word_map_continue_button">Continue</button>
+		<button type="button" class="btn btn-success btn-block btn-lg" id="definition_map_continue_button">Continue</button>
+		<button type="button" class="btn btn-success btn-block btn-lg" id="sentence_continue_button">Continue</button>
+		<input type="submit" name="submit" class="btn btn-warning btn-block btn-lg" id="review_level_3_button" value="Finish!" />
+	</div>
+
+</form> <!-- end of level 3 form -->
+
+<div id="level_3_completed" align="center">
+
+	<h1>Congratulations!</h1>
+	<p class="lead">
+		<span id="level_congrats_text">You've completed Level 3 for </span>
+		and earned
+		<span id="goodies_total"></span>
+		experience points!
+	</p>
+</div>

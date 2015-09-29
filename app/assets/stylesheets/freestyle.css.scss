@@ -1,0 +1,54 @@
+#chosen_word_form{
+	margin-top: 10px;
+}
+
+form{
+	margin-top: 25px;
+}
+
+#continue_button_container{
+	margin-bottom: 20px;
+}
+
+button#word_map_continue_button, #definition_map_continue_button, #sentence_continue_button{
+	margin: 0;
+}
+
+#semantic_map_form,
+#word_map_form,
+#definition_map_form,
+#sentence_form,
+#level_3_completed,
+#semantic_map_continue_button,
+#word_map_continue_button,
+#definition_map_continue_button,
+#sentence_continue_button,
+#review_level_3_container,
+#review_level_3_button,
+#error{
+	display: none;
+}
+
+#error{
+	background: red;
+	margin-top: 25px;
+	padding: 5px;
+	color: #FFF;
+}
+
+input.invalid{
+	border: 2px solid red;
+}
+
+input.valid{
+	border: 2px solid #0BD318;
+}
+
+.form-control{
+	width: 100% !important;
+}
+
+.freestyle-instructions {
+	font-size: 25px;
+	font-weight: 400;
+}

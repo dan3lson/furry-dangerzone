@@ -61,4 +61,8 @@ class GamesController < ApplicationController
       }
     end
   end
+
+  def freestyle
+    @chosen_word = Word.find(params[:word_id])
+  end
 end

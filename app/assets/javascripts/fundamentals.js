@@ -800,7 +800,7 @@ $(document).ready(function(){
 	// Global fn
 	//Change the activity name and specific directions depending on current state
 	function display_instruction(instruction) {
-		$("#fdmtls-instructions").html(instruction);
+		$(".fundamentals-game-instructions").html(instruction);
 	};
 
 	// Global fn

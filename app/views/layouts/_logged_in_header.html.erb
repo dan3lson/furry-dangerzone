@@ -1,10 +1,11 @@
-<div class="navbar navbar-default navbar-fixed-top logged_in_header"
+<div class="navbar navbar-default navbar-fixed-top logged-in-header"
 		 role="navigation">
 	<div class="container">
 		<h1 class="center full-header">
 			<%= render "layouts/header_pull_left" %>
 
-			<% if params[:action] == "fundamentals" %>
+			<% if params[:action] == "fundamentals" ||
+						params[:action] == "freestyle" %>
 				<div class="lead" align="center" id="progress_bar_container">
 					<div class="progress">
 						<div class="game-progress-bar progress-bar progress-bar-success"

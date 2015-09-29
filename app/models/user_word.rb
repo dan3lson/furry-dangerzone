@@ -22,13 +22,57 @@ class UserWord < ActiveRecord::Base
     end
   end
 
+  # def uwgl_fundamentals
+  #   user_word_game_levels.select { |uwgl|
+  #     uwgl.game_level.game.name == "Fundamentals"
+  #   }
+  # end
+  #
+  # def uwgl_jeopardys
+  #   user_word_game_levels.select { |uwgl|
+  #     uwgl.game_level.game.name == "Jeopardy"
+  #   }
+  # end
+  #
+  # def uwgl_freestyles
+  #   user_word_game_levels.select { |uwgl|
+  #     uwgl.game_level.game.name == "Freestyle"
+  #   }
+  # end
+
+  # def array_of_games
+  #   fundamentals = []
+  #   jeopardys = []
+  #   freestyles = []
+  #
+  #   user_word_game_levels.each do |uwgl|
+  #     game_name = uwgl.game_level.game.name
+  #
+  #     if game_name == "Fundamentals"
+  #       fundamentals << uwgl
+  #     elsif game_name == "Jeopardy"
+  #       jeopardys << uwgl
+  #     elsif game_name == "Freestyle"
+  #       freestyles << uwgl
+  #     end
+  #   end
+  #
+  #   [fundamentals, jeopardys, freestyles]
+  # end
+
   def uwgl_fundamentals
-    user_word_game_levels.map do |uwgl|
-      uwgl if uwgl.game_level.game.name == "Fundamentals"
-    end.compact
+    user_word_game_levels.take(8)
   end
 
-  def fundamentals_completed?
+  def uwgl_jeopardys
+    user_word_game_levels.drop(8).take(20)
+  end
+
+  def uwgl_freestyles
+    user_word_game_levels.drop(28)
+  end
+
+  def fundamental_completed?
     num = 0
 
     uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "complete" }
@@ -36,11 +80,11 @@ class UserWord < ActiveRecord::Base
     num == 8
   end
 
-  def fundamentals_in_progress?
+  def fundamental_in_progress?
     uwgl_fundamentals.map { |uwgl| uwgl.status }.uniq.count == 2
   end
 
-  def fundamentals_not_started?
+  def fundamental_not_started?
     num = 0
 
     uwgl_fundamentals.each { |uwgl| num += 1 if uwgl.status == "not started" }
@@ -48,11 +92,6 @@ class UserWord < ActiveRecord::Base
     num == 8
   end
 
-  def uwgl_jeopardys
-    user_word_game_levels.map do |uwgl|
-      uwgl if uwgl.game_level.game.name == "Jeopardy"
-    end.compact
-  end
 
   def jeopardy_completed?
     num = 0
@@ -73,14 +112,10 @@ class UserWord < ActiveRecord::Base
     user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
   end
 
-  def uwgl_freestyles
-    user_word_game_levels.map do |uwgl|
-      uwgl if uwgl.game_level.game.name == "Freestyle"
-    end.compact
-  end
 
   def freestyle_completed?
     num = 0
+
     uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
     num == 12

@@ -438,6 +438,25 @@ input {
 	color: $leksi-red;
 }
 
+.logged-in-header {
+  background: $sky-blue;
+  border-color: $sky-blue;
+  opacity: .90;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 9px;
+
+  h4 a {
+    color: $white;
+    font-weight: 600;
+    font-size: larger;
+  }
+
+  .btn {
+    border-radius: 100px;
+  }
+}
+
 .margin-top {
   margin-top: 180px;
 }
@@ -625,7 +644,7 @@ table {
 }
 
 
-// DUOLINGO
+// LOGGED OUT HOMEPAGE
 
 
 .body-spacing {

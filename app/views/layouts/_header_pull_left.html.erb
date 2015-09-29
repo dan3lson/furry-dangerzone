@@ -7,7 +7,7 @@
 		<% if params[:controller] == "tags" && params[:action] == "new"	%>
 			<%= link_to image_tag("back_black_32.png"), :back %>
 
-		<% elsif params[:action] == "fundamentals" || params[:action] == "jeopardy" %>
+		<% elsif params[:controller] == "games" %>
 			<span id="game-exit-btn">
 				<%= link_to image_tag("exit_black_32.png"), root_path %>
 			</span>

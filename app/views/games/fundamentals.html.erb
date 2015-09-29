@@ -1,5 +1,3 @@
-<% provide(:title, "Leksi | Fundamentals game for #{@chosen_word.name}") %>
-
 <div class="palabra">
 	<%= render "words/word", word: @chosen_word %>
 	<span class="palabra-id"><%= @chosen_word.id %></span>
@@ -8,7 +6,7 @@
 <!-- start of level 1 details -->
 <div id="level_1_details">
 	<!-- Display level focus, directions, and word for each respective activity -->
-	<div id="fdmtls-instructions" class="lead"></div>
+	<div class="fundamentals-game-instructions"></div>
 	<div id="chosen-word-header-container"></div>
 	<!-- end -->
 	<br>

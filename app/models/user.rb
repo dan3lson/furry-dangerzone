@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
     games = []
 
     user_words.each do |uw|
-      games << uw unless uw.fundamentals_completed?
+      games << uw unless uw.fundamental_completed?
     end
 
     games
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
     games = []
 
     user_words.each do |uw|
-      games << uw if uw.fundamentals_completed?
+      games << uw if uw.fundamental_completed?
     end
 
     games

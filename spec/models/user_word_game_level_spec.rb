@@ -6,6 +6,7 @@ RSpec.describe UserWordGameLevel, type: :model do
   describe "associatons" do
     it { should belong_to(:user_word) }
     it { should belong_to(:game_level) }
+    it { should have_many(:freestyle_responses) }
   end
 
   describe "validations" do

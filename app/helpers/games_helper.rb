@@ -3,7 +3,7 @@ module GamesHelper
     num = 0
 
     user.user_words.each do |uw|
-      num += 1 if uw.fundamentals_not_started?
+      num += 1 if uw.fundamental_not_started?
     end
 
     num
@@ -13,7 +13,7 @@ module GamesHelper
     num = 0
 
     user.user_words.each do |uw|
-      num += 1 if uw.fundamentals_in_progress?
+      num += 1 if uw.fundamental_in_progress?
     end
 
     num
@@ -23,7 +23,7 @@ module GamesHelper
     num = 0
 
     user.user_words.each do |uw|
-      num += 1 if uw.fundamentals_completed?
+      num += 1 if uw.fundamental_completed?
     end
     num
   end

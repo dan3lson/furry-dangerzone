@@ -11,10 +11,10 @@ User.all.map { |u| u.tags.count == 0 }.keep_if { |v| v == true }.count
 User.all.map { |u| u.tags.count > 0 }.keep_if { |v| v == true }.count
 
 # Fundamentals Completed
-UserWord.all.map { |uw| uw.fundamentals_completed? }.keep_if { |v| v == true }.count
+UserWord.all.map { |uw| uw.fundamental_completed? }.keep_if { |v| v == true }.count
 
 # Fundamentals In Progress
-UserWord.all.map { |uw| uw.fundamentals_in_progress? }.keep_if { |v| v == true }.count
+UserWord.all.map { |uw| uw.fundamental_in_progress? }.keep_if { |v| v == true }.count
 
 # Fundamentals Not Started
-UserWord.all.map { |uw| uw.fundamentals_not_started? }.keep_if { |v| v == true }.count
+UserWord.all.map { |uw| uw.fundamental_not_started? }.keep_if { |v| v == true }.count
