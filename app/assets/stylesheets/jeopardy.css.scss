@@ -20,6 +20,7 @@ $leksi-red: #ff1300;
 $light-gray: #f2f2f2;
 $white: #fff;
 
+#activity_name,
 #level_two_back_button, #word_jeapordy_instructions,
 #level_two_game_continue_button,
 #review_level_two_container,
@@ -49,6 +50,11 @@ $white: #fff;
 	color: lighten(gray, 25);
 }
 
+#activity_name {
+	background: $leksi-orange;
+	color: $white;
+	padding: 5px;
+}
 
 .jeopardy-game-instructions {
 	font-size: 25px;

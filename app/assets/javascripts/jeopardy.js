@@ -4,7 +4,8 @@ $(document).ready(function(){
 	 * Initiating variables and arrays
 	 */
 
-	var $chosen_word_id = $(".game-two-start-circle").data("word-id");
+	var $chosen_word_id = $(".palabra").data("word-id");
+	console.log($chosen_word_id);
 	var $chosen_words_array = [
 		"#chosen_word_one_div",
 		"#chosen_word_two_div",
@@ -15,7 +16,9 @@ $(document).ready(function(){
 	var $correct_word_proggress_bar_without_pbc_class = "";
 
 	// Start the main activity
-	$(".game-two-start-circle").click(function(){
+	$(".jeopardy-begin-game").click(function(){
+		$(".jeopardy-pregame").hide();
+		$("#activity_name").fadeIn();
 		load_game_info();
 	});
 
@@ -56,11 +59,7 @@ $(document).ready(function(){
 	function start_game_2(w1, w2, w3, w4, w1_id, w2_id, w3_id, w4_id, lineup_names, attributes_array, attribute_values) {
 		console.log("Starting Game 2...");
 
-		$(location).attr("href", "/jeopardy?word_id=" + w1_id);
-
 		// Display the text for the remaining three buttons
-		$(".jeopardy-test-container").html("HELLO WORLD");
-
 		update_button_text("#chosen_word_one_btn", w1);
 		update_button_text("#chosen_word_two_btn", w2);
 		update_button_text("#chosen_word_three_btn", w3);
@@ -86,7 +85,7 @@ $(document).ready(function(){
 				// If the user's guess is incorrect
 				} else {
 					$correct_word_proggress_bar_without_pbc_class = "#" +
-							$("button:contains('"+$jeopardy_lineup_names[$counter]+"')")
+							$("button:contains('"+lineup_names[$counter]+"')")
 							.next()
 							.attr("id")
 							+ " .progress-bar-custom:first"
@@ -110,6 +109,10 @@ $(document).ready(function(){
 					display_activity_instruction("Ready for the results?", "3...2...1...");
 
 					setTimeout(function(){
+						// Hide the exit btn and display the home btn
+						$("#game-exit-btn").hide();
+						$("#game-home-btn").show();
+
 						$("#level_2_container").hide();
 						$("#review_level_two_container").fadeIn();
 

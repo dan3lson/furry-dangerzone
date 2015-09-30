@@ -291,21 +291,6 @@ p {
   opacity: .3;
 }
 
-.overview-header {
-  @extend .stats-header;
-
-  background: $light-gray;
-  border-left: 3px solid $dark-gray;
-}
-
-.progress-meter-header {
-  @extend .stats-header;
-
-  background: $light-green;
-  border-left: 3px solid $dark-green;
-  color: $dark-green;
-}
-
 .game-circle {
 	border-radius: $game-circle-sizes;
 	border-style: solid;
@@ -502,6 +487,21 @@ input {
 
 .olympic-container {
   color: $white;
+}
+
+.overview-header {
+  @extend .stats-header;
+
+  background: $light-gray;
+  border-left: 3px solid $dark-gray;
+}
+
+.progress-meter-header {
+  @extend .stats-header;
+
+  background: $light-green;
+  border-left: 3px solid $dark-green;
+  color: $dark-green;
 }
 
 .prog-circle {

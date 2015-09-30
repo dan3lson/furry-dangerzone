@@ -76,22 +76,20 @@ $(document).ready(function(){
 	var $rwe_container;
 	var $rwe_circle_activity_boolean = false;
 
-		// Update the instructions
-		display_instruction("Type the word below:");
+	// Update the instructions
+	display_instruction("Type the word below:");
 
-		// Dislay chosen word
-		$("#chosen-word-header-container").html($chosen_word_value);
+	// Dislay chosen word
+	$("#chosen-word-header-container").html($chosen_word_value);
 
-		// Start the first activity
-		spell_chosen_word();
+	// Start the first activity
+	spell_chosen_word();
 
-		/**
-		 * Start the progress made on learning this word
-		 */
+	/**
+	 * Start the progress made on learning this word
+	 */
 
-		progressBar(0);
-	$(".game-one-start-circle").click(function(){
-	});
+	progressBar(0);
 
 
 	/**
@@ -447,6 +445,8 @@ $(document).ready(function(){
 		// Hide the exit btn and display the home btn
 		$("#game-exit-btn").hide();
 		$("#game-home-btn").show();
+
+    $(".navbar-fixed-bottom").fadeIn();
 	});
 
 	/**

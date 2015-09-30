@@ -1,70 +1,72 @@
 <% provide(:title, "Home") %>
 <% provide(:header, "Home") %>
 
-<div class="col-sm-8 col-sm-offset-2 box-shadow-border light-green-bg">
-  <div class="pull-right">
-    <%= image_tag("trophy_color_75.png", alt: "Trophy") %>
-  </div>
-  <div class="">
-    <p class="lead">
-      <%= display_progress_snapshot_motivation(current_user) %>
-    </p>
-  </div>
+<div class="current-users-home-container">
+  <div class="col-sm-8 col-sm-offset-2 box-shadow-border light-green-bg">
+    <div class="pull-right">
+      <%= image_tag("trophy_color_75.png", alt: "Trophy") %>
+    </div>
+    <div class="">
+      <p class="lead">
+        <%= display_progress_snapshot_motivation(current_user) %>
+      </p>
+    </div>
 
-  <div class="progress">
-    <div class="progress-bar progress-bar-success"
-         role="progressbar"
-         aria-valuenow="<%= percent_complete(current_user) %>"
-         aria-valuemin="0"
-         aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
-         style="width: <%= percent_complete(current_user) %>%">
-      <span class="sr-only">
-        <%= percent_complete(current_user) %>
-      </span>
+    <div class="progress">
+      <div class="progress-bar progress-bar-success"
+           role="progressbar"
+           aria-valuenow="<%= percent_complete(current_user) %>"
+           aria-valuemin="0"
+           aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
+           style="width: <%= percent_complete(current_user) %>%">
+        <span class="sr-only">
+          <%= percent_complete(current_user) %>
+        </span>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="col-sm-8 col-sm-offset-2 box-shadow-border">
-  <% if @shuffled_incomplete_games.any? %>
-    <% @shuffled_incomplete_games.each do |user_word| %>
-      <% word = user_word.word %>
-      <div>
-        <div class="pull-right">
-          <%= render "games/display_game_start_btn", user_word: user_word,
-                                                     word: word
-          %>
-        </div>
-        <div class="word-partial">
-          <h4 class="tightness">
-            <span class="basic-black-link">
-              <%= link_to word.name.capitalize, word %>
-            </span>
-          </h4>
-          <div class="word-details">
-            <p>
-              <span class="word-phonetic-spelling">
-                <%= word.phonetic_spelling %>
+  <div class="col-sm-8 col-sm-offset-2 box-shadow-border">
+    <% if @shuffled_incomplete_games.any? %>
+      <% @shuffled_incomplete_games.each do |user_word| %>
+        <% word = user_word.word %>
+        <div>
+          <div class="pull-right">
+            <%= render "games/display_game_start_btn", user_word: user_word,
+                                                       word: word
+            %>
+          </div>
+          <div class="word-partial">
+            <h4 class="tightness">
+              <span class="basic-black-link">
+                <%= link_to word.name.capitalize, word %>
               </span>
-              &nbsp; &nbsp;
-              <span class="word-part-of-speech">
-                <em><%= word.part_of_speech %></em>
-              </span>
-            </p>
-            <div>
-              <% top_three_entries_for(word, "definition").each do |d| %>
-                <p>
-                  <span class="word-definition">&#8605; <%= d %></span>
-                </p>
-              <% end %>
+            </h4>
+            <div class="word-details">
+              <p>
+                <span class="word-phonetic-spelling">
+                  <%= word.phonetic_spelling %>
+                </span>
+                &nbsp; &nbsp;
+                <span class="word-part-of-speech">
+                  <em><%= word.part_of_speech %></em>
+                </span>
+              </p>
+              <div>
+                <% top_three_entries_for(word, "definition").each do |d| %>
+                  <p>
+                    <span class="word-definition">&#8605; <%= d %></span>
+                  </p>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
 
-        <hr class="home-hr">
-      </div>
+          <hr class="home-hr">
+        </div>
+      <% end %>
+    <% else %>
+      <%= render "current_users/no_games_to_play_guide" %>
     <% end %>
-  <% else %>
-    <%= render "current_users/no_games_to_play_guide" %>
-  <% end %>
+  </div>
 </div>

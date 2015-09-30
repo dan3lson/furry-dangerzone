@@ -76,7 +76,7 @@ $(document).ready(function(){
 		$("#word_map_back_button").show();
 
 		// Update the progress bar value
-		progressBar(20);
+		progressBar(25);
 	});
 
 	$("#word_map_continue_button").click(function(){
@@ -98,7 +98,7 @@ $(document).ready(function(){
 		$("#definition_map_back_button").show();
 
 		// Update the progress bar value
-		progressBar(40);
+		progressBar(50);
 	});
 
 	$("#definition_map_continue_button").click(function(){
@@ -120,7 +120,7 @@ $(document).ready(function(){
 		$("#sentence_back_button").show();
 
 		// Update the progress bar value
-		progressBar(60);
+		progressBar(75);
 	});
 
 	$("#sentence_continue_button").click(function(){
@@ -179,11 +179,12 @@ $(document).ready(function(){
 		$("#level_congrats_text").append("<strong>'" + $chosen_word_value + "'</strong> ");
 		$("#goodies_total").html($new_goodies_total);
 
-		// Update the progress made on learning this word
-		progressBar(100);
-
 		create_freestyle_responses_for_uwgl();
 		update_uwgl_freestyle_statuses();
+
+		// Hide the exit btn and display the home btn
+		$("#game-exit-btn").hide();
+		$("#game-home-btn").show();
 	});
 
 	/**
@@ -225,13 +226,6 @@ $(document).ready(function(){
 				console.log(response.errors);
 			}
 		});
-	};
-
-	// Global fn
-	// Increase the goodies per level
-	function boost_goodies(level_multiplier) {
-		$new_goodies_total += level_multiplier;
-		$("#goodies").html($new_goodies_total);
 	};
 
 	// Global fn

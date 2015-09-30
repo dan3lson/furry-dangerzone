@@ -1,0 +1,165 @@
+user_word.rb
+
+class UserWord < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :word
+
+  has_many :user_word_game_levels, dependent: :destroy
+  has_many :game_levels, through: :user_word_game_levels
+
+  validates :user, presence: true
+  validates :word, presence: true
+
+  def current_game
+    game_ids = self.game_levels.pluck(:game_id).uniq
+
+    if freestyle_completed?
+      "all-games-completed"
+    elsif game_ids.count == 1
+      "one"
+    elsif game_ids.count == 2
+      "two"
+    elsif game_ids.count == 3
+      "three"
+    else
+      nil
+    end
+  end
+
+  # def uwgl_fundamentals
+  #   user_word_game_levels.select { |uwgl|
+  #     uwgl.game_level.game.name == "Fundamentals"
+  #   }
+  # end
+  #
+  # def uwgl_jeopardys
+  #   user_word_game_levels.select { |uwgl|
+  #     uwgl.game_level.game.name == "Jeopardy"
+  #   }
+  # end
+  #
+  # def uwgl_freestyles
+  #   user_word_game_levels.select { |uwgl|
+  #     uwgl.game_level.game.name == "Freestyle"
+  #   }
+  # end
+
+  def uwgls
+    user_word_game_levels.sort_by { |uwgl| uwgl.game_level_id }
+  end
+
+  def uwgl_fundamentals
+    uwgls.take(8)
+  end
+
+  def uwgl_jeopardys
+    uwgls.drop(8).take(20)
+  end
+
+  def uwgl_freestyles
+    uwgls.drop(28)
+  end
+
+  def fundamental_status
+    num_not_started = 0
+    num_in_progress = 0
+    num_completed = 0
+
+    uwgl_fundamentals.each do |uwgl|
+      status = uwgl.status
+
+      if status == "not started"
+        num_not_started += 1
+      else
+        num_completed += 1
+      end
+    end
+
+    { not_started: num_not_started, completed: num_completed }
+  end
+
+  def fundamental_not_started?
+    fundamental_status[:not_started] == 8
+  end
+
+  def fundamental_in_progress?
+    fundamental_status[:not_started] > 0 && fundamental_status[:completed] > 0
+  end
+
+  def fundamental_completed?
+    fundamental_status[:completed] == 8
+  end
+
+  def jeopardy_not_started?
+    num = 0
+
+    uwgl_jeopardys.each { |uwgl| num += 1 if uwgl.status == "not started" }
+
+    num == 20
+  end
+
+  def jeopardy_completed?
+    num = 0
+    uwgl_jeopardys.each { |uwgl| num += 1 if uwgl.status == "complete" }
+
+    num == 20
+  end
+
+  def self.destroy_jeopardys_for(user_word)
+    user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
+  end
+
+
+  def freestyle_not_started?
+    num = 0
+
+    uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "not started" }
+
+    num == 12
+  end
+
+  def freestyle_completed?
+    num = 0
+
+    uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "complete" }
+
+    num == 12
+  end
+end
+
+
+---------------
+
+games_helper.rb
+
+module GamesHelper
+  def num_fundamentals_games_not_started(user)
+    user.user_words.select { |uw| uw.fundamental_not_started? }.count
+  end
+
+  def num_fundamentals_games_in_progress(user)
+    user.user_words.select { |uw| uw.fundamental_in_progress? }.count
+  end
+
+  def num_fundamentals_games_completed(user)
+    user.user_words.select { |uw| uw.fundamental_completed? }.count
+  end
+
+  def num_jeopardy_games_not_started(user)
+    user.user_words.select { |uw| uw.jeopardy_not_started? }.count
+  end
+
+  def num_jeopardy_games_completed(user)
+    user.user_words.select { |uw| uw.jeopardy_completed? }.count
+  end
+
+  def num_freestyle_games_not_started(user)
+    user.user_words.select { |uw| uw.freestyle_not_started? }.count
+  end
+
+  def num_freestyle_games_completed(user)
+    user.user_words.select { |uw| uw.freestyle_completed? }.count
+  end
+end
+
+---------------

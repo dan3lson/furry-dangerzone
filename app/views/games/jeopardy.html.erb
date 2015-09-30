@@ -1,8 +1,5 @@
 <% provide(:header, "Jeopardy") %>
 
-<div class="jeopardy-test-container">
-
-</div>
 <div id="level_2_container">
 	<div class="row">
 		<div id="chosen_word_one_div" class="col-sm-6">
@@ -115,6 +112,23 @@
 			<span id="activity_name"></span>
 			<span id="jeopardy-specific-instruction"></span>
 		</div>
+		
+		<div class="jeopardy-pregame">
+			<h3>
+				How to play
+				<small>
+					Choose the word that best matches the statement in the middle.
+					Good luck!
+				</small>
+			</h3>
+
+			<div class="jeopardy-begin-game btn btn-lg btn-block btn-warning btn-custom">
+				Start
+			</div>
+
+			<div class="palabra" data-word-id="<%= @chosen_word.id %>"></div>
+		</div>
+
 		<!-- end of displaying the activity name, directions, and word in big letters for each respective activity -->
 	</div>
 	<!-- end of level 2 details -->

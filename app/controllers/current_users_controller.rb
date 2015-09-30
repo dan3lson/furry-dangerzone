@@ -8,7 +8,7 @@ class CurrentUsersController < ApplicationController
     @all_incomplete_games = @incomplete_fundamentals + @incomplete_jeopardys +
                             @incomplete_freestyles
     @shuffled_incomplete_games = @all_incomplete_games.uniq.shuffle[0..3].
-    sort_by { |uw| uw.word.name }
+      sort_by { |uw| uw.word.name }
   end
 
   def menu

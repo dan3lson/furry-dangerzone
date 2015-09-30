@@ -10,15 +10,15 @@ class GameLevel < ActiveRecord::Base
   validates :level, presence: true
 
   def self.fundamentals
-    all.map { |gl| gl if gl.game.name == "Fundamentals" }.compact
+    GameLevel.where(game_id: 1)
   end
 
   def self.jeopardys
-    all.map { |gl| gl if gl.game.name == "Jeopardy" }.compact
+    GameLevel.where(game_id: 2)
   end
 
   def self.freestyles
-    all.map { |gl| gl if gl.game.name == "Freestyle" }.compact
+    GameLevel.where(game_id: 3)
   end
 
   def self.create_fundamentals_for(user_word)
