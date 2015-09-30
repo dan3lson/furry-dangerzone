@@ -7,16 +7,22 @@ class User < ActiveRecord::Base
   has_many :word_tags, through: :user_word_tags
   has_many :reviews
 
-  validates :username,
-    presence: true,
-    uniqueness: { case_sensitive: false },
-    length: { minimum: 3, maximum: 33 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false },
+            length: { minimum: 3, maximum: 33 }
   validates :points, presence: true
+  validates :first_name, length: { maximum: 50 }
+  validates :last_name, length: { maximum: 50 }
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
+
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   before_create { self.username = username.downcase }
+  before_create { self.email = email.downcase }
 
   def has_words?
     self.words.any?
