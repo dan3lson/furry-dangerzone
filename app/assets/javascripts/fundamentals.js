@@ -399,14 +399,46 @@ $(document).ready(function(){
 		// Update the progress made
 		progressBar(90);
 
-		// Start the next activity, i.e. Real World Examples, if not already started
-		start_real_world_examples_activity($chosen_word_value);
-
 		// If all words have been clicked on, show the real world examples container
-		if ($rwe_circle_activity_boolean) {
-			$("#real_world_examples_continue_button").show();
-		}
+		if ($("#rwe_no_results").hasClass("please-tap-continue")) {
+      // Show and hide buttons
+      $("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
+      $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
 
+      // Update the user_word_game_level's status to complete
+      update_user_word_game_level_status("8", 8);
+
+      // Create the game_level's for Jeopardy
+      var game_info = {
+        "word_id": $chosen_word_id
+      };
+
+      $.ajax({
+        type: "POST",
+        url: "/jeopardy_game",
+        dataType: "json",
+        data: game_info,
+        success: function(response) {
+          console.log(response);
+        }
+      });
+
+      // Update the progress made
+      progressBar(100);
+
+      // Update user goodies
+      update_user_points(10);
+      boost_goodies(10);
+
+      // Start the next activity, i.e. review level one
+      start_review_level_one_activity($chosen_word_value);
+
+      // Hide the exit btn and display the home btn
+      $("#game-exit-btn").hide();
+      $("#game-home-btn").show();
+		} else {
+      start_real_world_examples_activity($chosen_word_value);
+    }
 	});
 
 	$("#real_world_examples_continue_button").click(function(){
@@ -445,8 +477,6 @@ $(document).ready(function(){
 		// Hide the exit btn and display the home btn
 		$("#game-exit-btn").hide();
 		$("#game-home-btn").show();
-
-    $(".navbar-fixed-bottom").fadeIn();
 	});
 
 	/**
