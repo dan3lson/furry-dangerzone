@@ -42,10 +42,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:success] = "Changes successfully made."
-      redirect_to @user
+      flash[:success] = "You successfully updated your profile."
+      redirect_to menu_path
     else
-      flash[:danger] = "Changes not successfully made."
+      flash[:danger] = "Yikes! Profile updates not successfully made."
       render :edit
     end
   end
@@ -64,7 +64,9 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :username,
+      :email, :password, :password_confirmation
+    )
   end
 
   def logged_in_user

@@ -1,31 +1,63 @@
 <% provide(:title, "Edit Profile") %>
 <% provide(:header, "Edit Profile") %>
 
-<div class="well">
+<div class="well form--signin">
   <%= form_for(@user) do |f| %>
     <%= render 'shared/error_messages', object: @user %>
 
-    <%= f.label :username, class: "sr-only" %>
-    <%= f.text_field :username, class: "form-control", placeholder: "Username *"  %>
+    <div class="form-group">
+      <%= f.label :username, class: "sr-only" %>
+      <%= f.text_field :username, class: "form-control",
+        placeholder: "Username *"  %>
+    </div>
 
-    <%= f.label :password, class: "sr-only" %>
-    <%= f.password_field :password, class: "form-control", placeholder: "Password *" %>
+    <div class="form-group">
+      <%= f.label :password, class: "sr-only" %>
+      <%= f.password_field :password, class: "form-control",
+        placeholder: "Password *" %>
+    </div>
 
-    <%= f.label :password_confirmation, "Password Confirmation", class: "sr-only" %>
-    <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation *"  %>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "Password Confirmation", class: "sr-only" %>
+      <%= f.password_field :password_confirmation, class: "form-control",
+        placeholder: "Password Confirmation *"  %>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+      <%= f.label :first_name, class: "sr-only" %>
+      <%= f.text_field :first_name, class: "form-control", placeholder: "First Name"  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_name, class: "sr-only" %>
+      <%= f.text_field :last_name, class: "form-control",
+        placeholder: "Last Name"  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email, class: "sr-only" %>
+      <%= f.email_field :email, class: "form-control",
+        placeholder: "Email"  %>
+    </div>
 
     <%= f.submit "Save changes", class: "btn btn-default" %>
   <% end %>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+  <div class="center">
+    <p>
+      <%=
+        link_to "delete my account", user_path(current_user),
+        method: :delete, data: { confirm: @delete_account_msg },
+        class: "btn btn-danger form-control"
+      %>
+    </p>
+  </div>
 </div>
-
-<br>
-<br>
-<br>
-
-<p>
-  <%=
-    link_to "delete my account", user_path(current_user),
-    method: :delete, data: { confirm: @delete_account_msg },
-    class: "btn btn-danger form-control"
-  %>
-</p>
