@@ -28,22 +28,26 @@ class GamesController < ApplicationController
 
     @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
 
-    @attributes = (%w(definition example_sentence synonyms antonyms) * 5).shuffle
+    @attributes = (
+      %w(definition example_sentence synonyms antonyms) * 5
+    ).shuffle
     @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
       @attribute = @attributes[i]
       @attribute_value = w.send(@attribute)
 
       if @attribute_value.empty?
-        "Nice - you get a freebie! Tap <strong>#{w.name}</strong> to continue."
+        @attributes[i] = "definition"
+        @attribute_value = w.send("definition")
+        top_three_entries_for(w, "definition").join("; ").gsub(
+          "#{w.name}", "______"
+        )
       else
-        if @attribute == "example_sentence"
+        if @attribute == "example_sentence" || @attribute == "definition"
           top_three_entries_for(w, @attribute).join("; ").gsub(
             "#{w.name}", "______"
           )
         elsif @attribute.end_with?("onyms")
           @attribute_value.sample.name
-        else
-          top_three_entries_for(w, @attribute).join("; ")
         end
       end
     end

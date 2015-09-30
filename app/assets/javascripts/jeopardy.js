@@ -5,7 +5,6 @@ $(document).ready(function(){
 	 */
 
 	var $chosen_word_id = $(".palabra").data("word-id");
-	console.log($chosen_word_id);
 	var $chosen_words_array = [
 		"#chosen_word_one_div",
 		"#chosen_word_two_div",
@@ -32,8 +31,6 @@ $(document).ready(function(){
 			url: "/jeopardy?word_id=" + $chosen_word_id,
 			dataType: "json",
 			success: function (response) {
-				console.log("Ajax request successful");
-
 				var $chosen_word = response.word_names[0];
 				var $chosen_word_id = response.word_ids[0];
 				var $second_word = response.word_names[1];
@@ -46,18 +43,12 @@ $(document).ready(function(){
 				var $attributes_array = response.attributes_array;
 				var $attribute_values = response.attribute_values;
 
-				console.log("Chosen word w/in Ajax request:", $chosen_word);
-				console.log("Second word w/in Ajax request:", $second_word);
-				console.log("Third word w/in Ajax request:", $third_word);
-				console.log("Fourth word w/in Ajax request:", $fourth_word);
-
 				start_game_2($chosen_word, $second_word, $third_word, $fourth_word, $chosen_word_id, $second_word_id, $third_word_id, $fourth_word_id, $jeopardy_lineup_names, $attributes_array, $attribute_values)
 			} // end of the success parameter in the ajax fn
 		}); // end of the ajax function
 	}; // end of start game 2 fn
 
 	function start_game_2(w1, w2, w3, w4, w1_id, w2_id, w3_id, w4_id, lineup_names, attributes_array, attribute_values) {
-		console.log("Starting Game 2...");
 
 		// Display the text for the remaining three buttons
 		update_button_text("#chosen_word_one_btn", w1);

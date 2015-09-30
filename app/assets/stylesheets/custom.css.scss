@@ -33,12 +33,6 @@ $light-leksi-red: lighten($leksi-red, 47);
 $sky-blue: #1677ba;
 $white: #fff;
 
-@media (min-width: 1000px) {
-  .logged-in-container {
-    width: 375px;
-  }
-}
-
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
