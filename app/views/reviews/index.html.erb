@@ -1,5 +1,12 @@
-<% provide(:title, "Reviews") %>
+<% provide(:title, "See how users worldwide have reviewed Leksi. #{Version.total_average_rating}/5 average rating.") %>
 <% provide(:header, "Reviews") %>
+
+<div class="center">
+  <%= image_tag("reviews_color_100.png") %>
+  <h4>Reviews</h4>
+</div>
+
+<br>
 
 <div class="col-sm-6 col-sm-offset-3">
   <% @reviews.each do |review| %>
