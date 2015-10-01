@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @filter = params[:filter]
+
     if @filter
       if @filter == "latest"
         @users = User.order("created_at DESC")
@@ -11,6 +12,7 @@ class UsersController < ApplicationController
     else
       @users = User.order("username ASC")
     end
+
     @user_count = User.all.count
   end
 
@@ -26,12 +28,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     if @user.save
       log_in(@user)
       flash[:success] = "Welcome to Leksi!"
+
       redirect_to root_path
     else
       flash[:danger] = "Yikes! Something went wrong. Please try again."
+
       render :new
     end
   end
@@ -43,9 +48,11 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = "You successfully updated your profile."
+
       redirect_to menu_path
     else
       flash[:danger] = "Yikes! Profile updates not successfully made."
+
       render :edit
     end
   end
@@ -54,9 +61,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.destroy
       flash[:success] = "Account deleted; it\'s sad to see you go."
+
       redirect_to root_path
     else
       flash[:danger] = "Yikes! Something went wrong. Please try again."
+
       redirect_to menu_path
     end
   end
@@ -72,14 +81,17 @@ class UsersController < ApplicationController
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Yikes! Please log in first to do that."
+
       redirect_to login_url
     end
   end
 
   def correct_user
     @user = User.find(params[:id])
+
     unless current_user?(@user)
       flash[:danger] = "Yikes! That\'s not something you can do."
+      
       redirect_to menu_path
     end
   end
