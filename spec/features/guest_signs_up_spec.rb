@@ -21,9 +21,12 @@ feature "guest signs up", %{
     scenario "scenario: with valid data" do
       visit root_path
 
-      first(:link, "Get for free").click
+      first(:link, "Get started").click
 
       fill_in "Username", with: "FooFoo"
+      fill_in "First Name", with: "FIrstFooFoo"
+      fill_in "Last Name", with: "LastFooFoo"
+      fill_in "Email", with: "foobar@foobar.com"
       fill_in "Password", with: "foobar"
       fill_in "Password Confirmation", with: "foobar"
 
@@ -31,7 +34,7 @@ feature "guest signs up", %{
 
       expect(page).to have_content("Welcome to Leksi!")
       expect(page).to have_content("get going on achieving Level 1")
-      expect(page).to have_link("Define")
+      expect(page).to have_link("Add")
       expect(page).to have_link("Progress")
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
@@ -42,7 +45,7 @@ feature "guest signs up", %{
     scenario "scenario with invalid data" do
       visit root_path
 
-      first(:link, "Get for free").click
+      first(:link, "Get started").click
 
       fill_in "Username", with: ""
       fill_in "Password", with: ""
