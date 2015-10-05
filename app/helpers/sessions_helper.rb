@@ -23,4 +23,8 @@ module SessionsHelper
   def logged_in_and_current_user?(user)
     logged_in? && current_user?(user)
   end
+
+  def logged_in_and_is_teacher?(user)
+    logged_in? && (user.is_teacher?)
+  end
 end

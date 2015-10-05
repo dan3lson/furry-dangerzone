@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "freestyle" => "games#freestyle"
   get "signup" => "users#new"
   get "login" => "sessions#new"
+  get "classrooms" => "teachers#classrooms"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
   resources :users
