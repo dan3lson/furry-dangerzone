@@ -172,7 +172,7 @@ class User < ActiveRecord::Base
   	end
   end
 
-  def self.create_fs_users
+  def self.create_class_one
     class_one = %w(
       22annenberg
       22bloch
@@ -190,9 +190,28 @@ class User < ActiveRecord::Base
       22vail
       22watts
       22yamazaki
-      22zenker
+      22zenkerc
     )
 
+    class_one.each do |s|
+      u = User.new
+      u.username = s
+      u.email = ""
+      u.password = "fri3nds"
+      u.password_confirmation = "fri3nds"
+      u.role = "student"
+
+      if u.save
+        puts "#{u.username}\'s account is now active."
+        puts
+        puts "User count is now #{User.count}."
+      else
+        puts "#{u.errors.messages}"
+      end
+    end
+  end
+
+  def self.create_class_two
     class_two = %w(
       22ball
       22bugdaycay
@@ -209,20 +228,23 @@ class User < ActiveRecord::Base
       22ragins
       22tartj
       22weber
-      22zenker
+      22zenkerm
     )
 
-    class_one.each do |s|
+    class_two.each do |s|
       u = User.new
       u.username = s
+      u.email = ""
       u.password = "fri3nds"
       u.password_confirmation = "fri3nds"
       u.role = "student"
 
       if u.save
         puts "#{u.username}\'s account is now active."
+        puts
+        puts "User count is now #{User.count}."
       else
-        puts "#{u.error.messages}"
+        puts "#{u.errors.messages}"
       end
     end
   end
