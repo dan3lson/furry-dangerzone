@@ -27,9 +27,9 @@ feature "user logs out", %{
 
       click_on "Log Out"
 
-      expect(page).to have_content("See you again, #{user.username}!")
-      expect(page).to have_link("Get for free")
+      expect(page).to have_link("Get started")
       expect(page).to have_link("Log in")
+      expect(page).to have_content("Boost your vocabulary with Leksi.")
     end
   end
 end

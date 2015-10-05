@@ -21,7 +21,7 @@ feature "guest visits home page", %{
       visit root_path
 
       expect(page).to have_content("Leksi")
-      expect(page).to have_link("Get for free")
+      expect(page).to have_link("Get started")
       expect(page).to have_link("Log in")
       expect(page).to have_content("2015 Leksi")
     end

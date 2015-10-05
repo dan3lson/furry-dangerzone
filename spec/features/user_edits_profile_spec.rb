@@ -33,7 +33,7 @@ feature "user edits their profile", %{
 
       click_on "Save changes"
 
-      expect(page).to have_content("Changes successfully made.")
+      expect(page).to have_content("You successfully updated your profile.")
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end
@@ -51,7 +51,7 @@ feature "user edits their profile", %{
 
       click_on "Save changes"
 
-      expect(page).to have_content("Changes not successfully made.")
+      expect(page).to_not have_content("You successfully updated your profile.")
       expect(page).to have_content("errors")
       expect(page).to have_content("fix")
       expect(page).to have_content("Profile")

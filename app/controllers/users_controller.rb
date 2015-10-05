@@ -91,7 +91,7 @@ class UsersController < ApplicationController
 
     unless current_user?(@user)
       flash[:danger] = "Yikes! That\'s not something you can do."
-      
+
       redirect_to menu_path
     end
   end

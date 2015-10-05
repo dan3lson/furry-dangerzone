@@ -15,23 +15,6 @@
 
 <br>
 
-<div class="add-categories-container">
-  <% @categories.each do |c| %>
-    <div class="col-sm-8 col-sm-offset-2 add-category-btn right-arrow-item">
-      <div class="pull-right">
-        <%= image_tag("forward_black_25.png") %>
-      </div>
-      <div class="word-partial word-partial-myLeksi">
-        <span class="basic-black-link category-name">
-          <%= c.name %>
-        </span>
-      </div>
-
-      <hr>
-    </div>
-  <% end %>
-</div>
-
 <div class="clear"></div>
 
 <% if @query %>
@@ -83,14 +66,3 @@
     <% end %>
   </div>
 <% end %>
-
-<div class="category-words-container">
-  Hello World
-  <% @category_words.each do |w| %>
-    <div class="box-shadow-border">
-      !!!
-      <%= w.name %>
-      <%= render "words/word", word: w %>
-    </div>
-  <% end %>
-</div>

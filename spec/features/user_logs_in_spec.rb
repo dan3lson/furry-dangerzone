@@ -22,7 +22,7 @@ feature "user logs in", %{
 
       expect(page).to have_content("Home")
       expect(page).to have_content("myLeksi")
-      expect(page).to have_link("Define")
+      expect(page).to have_link("Add")
       expect(page).to have_link("Progress")
       expect(page).to have_link("Menu")
       expect(page).not_to have_content("Invalid username and / or password combination.")
@@ -33,12 +33,15 @@ feature "user logs in", %{
 
       fill_in "Username", with: ""
       fill_in "Password", with: ""
-      click_on "Log in"
+
+      within ".form-signin" do
+        click_on "Log in"
+      end
 
       expect(page).to have_content("Invalid username and / or password combination.")
       expect(page).not_to have_content("Home")
       expect(page).not_to have_content("myLeksi")
-      expect(page).not_to have_link("Define")
+      expect(page).not_to have_link("Add")
       expect(page).not_to have_link("Progress")
       expect(page).not_to have_link("Menu")
     end
