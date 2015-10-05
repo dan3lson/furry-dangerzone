@@ -10,7 +10,7 @@ class GameLevel < ActiveRecord::Base
   validates :level, presence: true
 
   def self.fundamentals
-    select { |gl| game.name == "Fundamentals" }
+    where(game_id: 1)
   end
 
   def self.jeopardys
