@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
     self.role == "admin"
   end
 
+  def is_teacher?
+    self.role == "teacher" || self.role == "admin"
+  end
+
   def has_reached_free_version_limit?
     self.words.count > 9
   end
@@ -172,8 +176,8 @@ class User < ActiveRecord::Base
   	end
   end
 
-  def self.create_class_one
-    class_one = %w(
+  def self.fs_class_one
+    %w(
       22annenberg
       22bloch
       22chawla
@@ -191,28 +195,11 @@ class User < ActiveRecord::Base
       22watts
       22yamazaki
       22zenkerc
-    )
-
-    class_one.each do |s|
-      u = User.new
-      u.username = s
-      u.email = ""
-      u.password = "fri3nds"
-      u.password_confirmation = "fri3nds"
-      u.role = "student"
-
-      if u.save
-        puts "#{u.username}\'s account is now active."
-        puts
-        puts "User count is now #{User.count}."
-      else
-        puts "#{u.errors.messages}"
-      end
-    end
+    ).map { |u| User.find_by(username: u) }
   end
 
-  def self.create_class_two
-    class_two = %w(
+  def self.fs_class_two
+    %w(
       22ball
       22bugdaycay
       22caiola
@@ -229,23 +216,6 @@ class User < ActiveRecord::Base
       22tartj
       22weber
       22zenkerm
-    )
-
-    class_two.each do |s|
-      u = User.new
-      u.username = s
-      u.email = ""
-      u.password = "fri3nds"
-      u.password_confirmation = "fri3nds"
-      u.role = "student"
-
-      if u.save
-        puts "#{u.username}\'s account is now active."
-        puts
-        puts "User count is now #{User.count}."
-      else
-        puts "#{u.errors.messages}"
-      end
-    end
+    ).map { |u| User.find_by(username: u) }
   end
 end

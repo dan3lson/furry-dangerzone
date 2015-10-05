@@ -21,6 +21,25 @@
   </div>
 
   <div class="menu-header-container">
+    <div>
+      <div class="lead menu-header">
+        Teacher Corner
+      </div>
+    </div>
+
+    <% if logged_in_and_is_teacher?(current_user) %>
+      <div class="inline-block">
+        <%= image_tag("classroom_black_filled_32.png",
+          alt: "Go to My Classroom") %>
+      </div>
+      &nbsp;
+      <div class="basic-apple-blue-link inline-block">
+        <%= link_to "View My Classrooms", classrooms_path %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="menu-header-container">
     <p class="lead menu-header">
       Rate This App
     </p>
@@ -46,7 +65,9 @@
     <div class="basic-apple-blue-link inline-block">
       <%= link_to "View All", myTags_path %>
     </div>
+
     <hr>
+
     <div class="inline-block">
       <%= image_tag("add_black_filled_32.png", alt: "Tags") %>
     </div>
