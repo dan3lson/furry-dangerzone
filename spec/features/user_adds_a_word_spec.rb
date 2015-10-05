@@ -14,7 +14,7 @@ feature "user adds a word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  describe "\n user adds a word -->" do
+  pending "\n user adds a word -->" do
     scenario "scenario: valid process" do
       word = FactoryGirl.create(:word)
       user = User.create!(

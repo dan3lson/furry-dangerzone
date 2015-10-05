@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates :points, presence: true
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
-  validates :email, format: { with: VALID_EMAIL_REGEX },
+  validates :email, format: { with: VALID_EMAIL_REGEX }, allow_blank: true,
             uniqueness: { case_sensitive: false }
 
 
@@ -170,5 +170,60 @@ class User < ActiveRecord::Base
 
   		u.save
   	end
+  end
+
+  def self.create_fs_users
+    class_one = %w(
+      22annenberg
+      22bloch
+      22chawla
+      22kellner
+      22musso
+      22nino
+      22parr
+      22pass
+      22riordan
+      22seldman
+      22spencer
+      22sriram
+      22tarta
+      22vail
+      22watts
+      22yamazaki
+      22zenker
+    )
+
+    class_two = %w(
+      22ball
+      22bugdaycay
+      22caiola
+      22earle
+      22friedman
+      22gott
+      22gund-morrow
+      22halverstadt
+      22juneja
+      22luard
+      22palladino
+      22pratofiorito
+      22ragins
+      22tartj
+      22weber
+      22zenker
+    )
+
+    class_one.each do |s|
+      u = User.new
+      u.username = s
+      u.password = "fri3nds"
+      u.password_confirmation = "fri3nds"
+      u.role = "student"
+
+      if u.save
+        puts "#{u.username}\'s account is now active."
+      else
+        puts "#{u.error.messages}"
+      end
+    end
   end
 end

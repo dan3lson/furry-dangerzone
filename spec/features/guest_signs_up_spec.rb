@@ -18,7 +18,7 @@ feature "guest signs up", %{
       FactoryGirl.create(:version)
     end
 
-    scenario "scenario: with valid data" do
+    scenario "scenario: with complete valid data" do
       visit root_path
 
       first(:link, "Get started").click
@@ -27,6 +27,27 @@ feature "guest signs up", %{
       fill_in "First Name", with: "FIrstFooFoo"
       fill_in "Last Name", with: "LastFooFoo"
       fill_in "Email", with: "foobar@foobar.com"
+      fill_in "Password", with: "foobar"
+      fill_in "Password Confirmation", with: "foobar"
+
+      click_on "Create my account"
+
+      expect(page).to have_content("Welcome to Leksi!")
+      expect(page).to have_content("get going on achieving Level 1")
+      expect(page).to have_link("Add")
+      expect(page).to have_link("Progress")
+      expect(page).to have_link("Menu")
+      expect(User.count).to eq(1)
+      expect(page).to_not have_content("errors")
+      expect(page).to_not have_content("fix")
+    end
+
+    scenario "scenario: with only required valid data" do
+      visit root_path
+
+      first(:link, "Get started").click
+
+      fill_in "Username", with: "FooFoo"
       fill_in "Password", with: "foobar"
       fill_in "Password Confirmation", with: "foobar"
 

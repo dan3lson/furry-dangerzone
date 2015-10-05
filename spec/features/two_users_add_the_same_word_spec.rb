@@ -14,7 +14,7 @@ feature "two users add the same word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  describe "\n two users add same word -->" do
+  pending "\n two users add same word -->" do
     let!(:user_word) { FactoryGirl.create(:user_word) }
     let!(:word) { user_word.word }
     let(:user2) { FactoryGirl.create(:user) }

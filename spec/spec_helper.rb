@@ -97,7 +97,9 @@ def log_in_as(user)
   fill_in "Username", with: user.username
   fill_in "Password", with: user.password
 
-  click_on "Log in"
+  within ".form-signin" do
+    click_on "Log in"
+  end
 end
 
 def create_levels_and_games
