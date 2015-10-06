@@ -34,7 +34,9 @@ form {
 }
 
 #meanings_container, #game-home-btn,
-#pronunciation_container, #fill_in_the_blank_container,
+.checkpoint-image,
+#pronunciation_container,
+#fill_in_the_blank_container,
 #fill_in_the_blank_game_over_message, #synonyms_container, #antonyms_container,
 #real_world_examples_container,
 #syn-ant-no-results,
@@ -158,7 +160,7 @@ mark {
 }
 
 .red {
-	color: #FF1300;
+	color: $leksi-red;
 }
 
 .current_syn_ant_checkpoint_word {
@@ -174,4 +176,19 @@ mark {
 #syn_ant_checkpoint_antonym_button_div {
 	padding-left: 0px !important;
 	padding-right: 0px !important;
+}
+
+.inline-block.checkpoint-image {
+	display: inline-block;
+}
+
+
+.new-fundamentals-game-circle {
+	background: $leksi-red;
+	border-radius: 100px;
+	color: $white;
+	font-size: large;
+	height: 100px;
+	padding-top: 38px;
+	width: 100px;
 }

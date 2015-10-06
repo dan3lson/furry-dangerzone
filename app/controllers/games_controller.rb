@@ -4,6 +4,10 @@ class GamesController < ApplicationController
     @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
     @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
     @real_world_examples = RealWorldExample.for(@chosen_word.name)
+
+    if current_user.has_incomplete_fundamentals?
+      @rand_jeopardy_word = current_user.incomplete_fundamentals.shuffle.first.word
+    end
   end
 
   def jeopardy

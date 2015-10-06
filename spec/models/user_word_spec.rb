@@ -32,7 +32,8 @@ RSpec.describe UserWord, type: :model do
       user = User.create(
         username: "fizzBuzzzzed",
         password: "password",
-        password_confirmation: "password"
+        password_confirmation: "password",
+        email: ""
       )
       user_word = UserWord.create!(word: word, user: user)
       game = Game.create!(
@@ -69,7 +70,8 @@ RSpec.describe UserWord, type: :model do
       user = User.create(
         username: "fizzBuzzzzed",
         password: "password",
-        password_confirmation: "password"
+        password_confirmation: "password",
+        email: ""
       )
       user_word = UserWord.create!(word: word, user: user)
       game_fundamentals = Game.create!(
@@ -115,7 +117,8 @@ RSpec.describe UserWord, type: :model do
       user = User.create(
         username: "fizzBuzzzzed",
         password: "password",
-        password_confirmation: "password"
+        password_confirmation: "password",
+        email: ""
       )
       user_word = UserWord.create!(word: word, user: user)
       game_fundamentals = Game.create!(
@@ -168,7 +171,8 @@ RSpec.describe UserWord, type: :model do
       user = User.create(
         username: "fizzBuzzzzed",
         password: "password",
-        password_confirmation: "password"
+        password_confirmation: "password",
+        email: ""
       )
 
       word = Word.create(

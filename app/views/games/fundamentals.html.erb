@@ -5,8 +5,14 @@
 
 <!-- start of level 1 details -->
 <div id="level_1_details">
-	<!-- Display level focus, directions, and word for each respective activity -->
-	<div class="fundamentals-game-instructions"></div>
+	<div>
+		<div class="inline-block checkpoint-image">
+			<%= image_tag("grade_color_50.png", alt: "Checkpoint!") %>
+		</div>
+
+		<div class="fundamentals-game-instructions inline-block"></div>
+	</div>
+
 	<div id="chosen-word-header-container"></div>
 	<!-- end -->
 	<br>
@@ -151,22 +157,44 @@
 
 <!-- start of review level one container -->
 <div id="review_level_one_container" align="center">
-	<%= image_tag("medal_red_100.png", alt: "Fundamental Medal") %>
+	<div align="center">
+		<%= image_tag("medal_red_100.png", alt: "Fundamental Medal") %>
 
-	<h1>Congratulations!</h1>
+		<h1>Congratulations!</h1>
 
-	<p class="lead">
-		<span id="level_congrats_text">You've completed the Fundamentals for </span>
-		and earned
-		<span id="goodies_total"></span>
-		experience points!
-	</p>
+		<p class="lead">
+			<span id="level_congrats_text">You've completed the Fundamentals for </span>
+			and earned
+			<span id="goodies_total"></span>
+			experience points!
+		</p>
+	</div>
 
-	<!-- make this into that red blockquote-looking-thing -->
-	<p class="lead">
-		You need <%= pts_to_level_up(current_user) %> more XP
-		before reaching Level <%= next_level(current_user) %>!
-	</p>
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>Experience Points (XP)</h4>
+		</div>
+		<div class="panel-body">
+				You need <%= pts_to_level_up(current_user) %> more XP
+				before reaching Level <%= next_level(current_user) %>!
+		</div>
+	</div>
+
+	<% if current_user.has_incomplete_jeopardys? %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Play the Fundamentals again?</h4>
+			</div>
+			<div class="panel-body center">
+				<div class="data-url pointer new-fundamentals-game-circle"
+						 data-url="/fundamentals?word_id=<%= @rand_jeopardy_word.id %>">
+					<%= @rand_jeopardy_word.name %>
+				</div>
+			</div>
+		</div>
+	<% end %>
 </div>
 <!-- end of start of review level one container -->
 

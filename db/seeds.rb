@@ -179,7 +179,7 @@ Game.create!(
 
 Game.create!(
   name: "Freestyle",
-  description: "It\'s time to be creative."
+  description: "Unleash your creativity."
 )
 
 Rails.logger.info "==============================================="

@@ -22,11 +22,19 @@ RSpec.describe GameLevel, type: :model do
     end
   end
 
-  describe "#self.fundamentals" do
+  pending "#self.fundamentals" do
     it "returns an array of Fundamental game levels" do
       game = Game.create!(
         name: "Fundamentals",
         description: "Learn the basics."
+      )
+      Game.create!(
+        name: "Jeopardy",
+        description: "Jeopardy like you\'ve never seen it before."
+      )
+      Game.create!(
+        name: "Freestyle",
+        description: "Unleash your creativity."
       )
 
       level = Level.create!(
@@ -76,11 +84,19 @@ RSpec.describe GameLevel, type: :model do
     end
   end
 
-  describe "#self.jeopardys" do
+  pending "#self.jeopardys" do
     it "returns an array of Jeopardy game levels" do
+      Game.create!(
+        name: "Fundamentals",
+        description: "Learn the basics."
+      )
       game = Game.create!(
         name: "Jeopardy",
-        description: "Learn the basics."
+        description: "Jeopardy like you\'ve never seen it before."
+      )
+      Game.create!(
+        name: "Freestyle",
+        description: "Unleash your creativity."
       )
 
       level = Level.create!(
@@ -190,11 +206,19 @@ RSpec.describe GameLevel, type: :model do
     end
   end
 
-  describe "#self.create_fundamentals_for" do
+  pending "#self.create_fundamentals_for" do
     it "returns an array of Fundamentals UserWordGameLevel objects" do
-      game = Game.create!(
+      Game.create!(
         name: "Fundamentals",
         description: "Learn the basics."
+      )
+      Game.create!(
+        name: "Jeopardy",
+        description: "Jeopardy like you\'ve never seen it before."
+      )
+      game = Game.create!(
+        name: "Freestyle",
+        description: "Unleash your creativity."
       )
 
       level = Level.create!(
@@ -247,7 +271,7 @@ RSpec.describe GameLevel, type: :model do
     end
   end
 
-  describe "#self.create_jeopardys_for" do
+  pending "#self.create_jeopardys_for" do
     it "returns an array of Jeopardy UserWordGameLevel objects" do
       game = Game.create!(
         name: "Jeopardy",
@@ -362,6 +386,87 @@ RSpec.describe GameLevel, type: :model do
 
       expect(GameLevel.jeopardys.count).to eq(20)
       expect(GameLevel.jeopardys.sample.game.name).to eq("Jeopardy")
+    end
+  end
+
+  pending "#self.create_freestyles_for" do
+    it "returns an array of Freestyle UserWordGameLevel objects" do
+      Game.create!(
+        name: "Fundamentals",
+        description: "Learn the basics."
+      )
+      Game.create!(
+        name: "Jeopardy",
+        description: "Jeopardy like you\'ve never seen it before."
+      )
+      game = Game.create!(
+        name: "Freestyle",
+        description: "Unleash your creativity."
+      )
+
+      level = Level.create!(
+        focus: "focus 1",
+        direction: "direction 1"
+      )
+      level_2 = Level.create!(
+        focus: "focus 2",
+        direction: "direction 2"
+      )
+      level_3 = Level.create!(
+        focus: "focus 3",
+        direction: "direction 3"
+      )
+      level_4 = Level.create!(
+        focus: "focus 4",
+        direction: "direction 4"
+      )
+      level_5 = Level.create!(
+        focus: "focus 5",
+        direction: "direction 5"
+      )
+      level_6 = Level.create!(
+        focus: "focus 6",
+        direction: "direction 6"
+      )
+      level_7 = Level.create!(
+        focus: "focus 7",
+        direction: "direction 7"
+      )
+      level_8 = Level.create!(
+        focus: "focus 8",
+        direction: "direction 8"
+      )
+      level_9 = Level.create!(
+        focus: "focus 9",
+        direction: "direction 9"
+      )
+      level_10 = Level.create!(
+        focus: "focus 10",
+        direction: "direction 10"
+      )
+      level_11 = Level.create!(
+        focus: "focus 11",
+        direction: "direction 11"
+      )
+      level_12 = Level.create!(
+        focus: "focus 12",
+        direction: "direction 12"
+      )
+
+      GameLevel.create!(game: game, level: level)
+      GameLevel.create!(game: game, level: level_2)
+      GameLevel.create!(game: game, level: level_3)
+      GameLevel.create!(game: game, level: level_4)
+      GameLevel.create!(game: game, level: level_5)
+      GameLevel.create!(game: game, level: level_6)
+      GameLevel.create!(game: game, level: level_7)
+      GameLevel.create!(game: game, level: level_8)
+
+      user_word = FactoryGirl.create(:user_word)
+
+      GameLevel.create_freestyles_for(user_word)
+
+      expect(UserWordGameLevel.count).to eq(12)
     end
   end
 end

@@ -82,6 +82,8 @@ $(document).ready(function(){
 	// Dislay chosen word
 	$("#chosen-word-header-container").html($chosen_word_value);
 
+  $(".checkpoint-image").hide();
+
 	// Start the first activity
 	spell_chosen_word();
 
@@ -99,6 +101,8 @@ $(document).ready(function(){
 	 // If the user wants to return to the spell the word activity
  	$("#fill_in_the_blank_back_button").click(function(){
  		$("#spell_the_word_form").show();
+
+    $(".checkpoint-image").hide();
 
  		// Show and hide buttons
  		hide_and_show_button("#fill_in_the_blank_container, #fill_in_the_blank_back_button, #fill_in_the_blank_continue_button, #fill_in_the_blank_game_over_message", "#spell_the_word_continue_button, #restart_back_button");
@@ -142,6 +146,8 @@ $(document).ready(function(){
 		// Hide the first activity
 		$("#spell_the_word_form").hide();
 
+    $(".checkpoint-image").show();
+
 		// Show and hide buttons
 		hide_and_show_button("#restart_back_button, #spell_the_word_continue_button", "#fill_in_the_blank_back_button");
 
@@ -171,6 +177,7 @@ $(document).ready(function(){
 	});
 
 	$("#fill_in_the_blank_continue_button").click(function(){
+    $(".checkpoint-image").hide();
 
 		// Show and hide buttons
 		hide_and_show_button("#fill_in_the_blank_back_button, #fill_in_the_blank_continue_button, #fill_in_the_blank_container", "#pronunciation_back_button, #pronunciation_container");
@@ -280,7 +287,7 @@ $(document).ready(function(){
 
 			// Update user goodies
 			update_user_points(10);
-			boost_goodies(10);
+			boost_goodies(3);
 
 			// Start the next activity, i.e. review level one
 			start_review_level_one_activity($chosen_word_value);
@@ -333,6 +340,8 @@ $(document).ready(function(){
 			// Update the user_word_game_level's status to complete
 			update_user_word_game_level_status("6", 6);
 
+      $(".checkpoint-image").show();
+
 			start_syn_ant_checkpoint_activity($chosen_word_value);
 
 		// Start the next activity --> if there there are antonyms
@@ -372,6 +381,7 @@ $(document).ready(function(){
 
 		// Start the next activity, i.e. Syn / Ant checkpoint, if not already started
 		if ($(".current_syn_ant_checkpoint_word")[0] == undefined) {
+      $(".checkpoint-image").show();
 			start_syn_ant_checkpoint_activity($chosen_word_value);
 		}
 
@@ -385,6 +395,7 @@ $(document).ready(function(){
 	});
 
 	$("#syn_ant_checkpoint_continue_button").click(function(){
+    $(".checkpoint-image").hide();
 
 		// Show and hide buttons
 		$("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container, #syn_ant_checkpoint_continue_button, #syn_ant_checkpoint_score_div").hide();
@@ -501,7 +512,7 @@ $(document).ready(function(){
 	// Start the fill in the blank activity
 	function start_fill_in_the_blank_checkpoint_activity() {
 		// Display the randomized letter container
-		$("#fill_in_the_blank_container").show();
+		$("#fill_in_the_blank_container, .checkpoint-image").show();
 
 		// Create five random letters and add them into an array
 		for (var i = 0; i < 3; i++) {
@@ -712,7 +723,7 @@ $(document).ready(function(){
 
 	// Start the real world examples activity
 	function start_real_world_examples_activity(chosen_word_value) {
-		if ($("#rwe_no_results").hasClass("please-tap-continue")) {
+    if ($("#rwe_no_results").hasClass("please-tap-continue")) {
 			$("#real_world_examples_continue_button").fadeIn();
 			$rwe_circle_activity_boolean = true;
 		} else {
