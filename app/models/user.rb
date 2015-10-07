@@ -25,23 +25,23 @@ class User < ActiveRecord::Base
   before_create { self.email = email.downcase }
 
   def has_words?
-    self.words.any?
+    words.any?
   end
 
   def already_has_word?(word)
-    self.words.include?(word)
+    words.include?(word)
   end
 
   def has_tags?
-    self.tags.any?
+    tags.any?
   end
 
   def has_user_word_tags?
-    self.user_word_tags.any?
+    user_word_tags.any?
   end
 
   def already_has_tag?(tag)
-    self.tags.include?(tag)
+    tags.include?(tag)
   end
 
   def is_admin?
@@ -50,10 +50,6 @@ class User < ActiveRecord::Base
 
   def is_teacher?
     self.role == "teacher" || self.role == "admin"
-  end
-
-  def has_reached_free_version_limit?
-    self.words.count > 9
   end
 
   def self.top_ten_highest_points
@@ -98,7 +94,7 @@ class User < ActiveRecord::Base
     has_incomplete_fundamentals? &&
     incomplete_fundamentals.count > 1
   end
-  
+
   def has_incomplete_jeopardys?
     incomplete_jeopardys.any?
   end
