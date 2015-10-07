@@ -282,7 +282,7 @@ p {
 }
 
 .game-not-ready {
-  opacity: .3;
+  opacity: .1;
 }
 
 .game-circle {
@@ -796,4 +796,28 @@ table {
   h3 {
     font-size: 40px;
   }
+}
+
+.word-show-game-circle {
+	border-radius: 70px;
+	height: 70px;
+	width: 70px;
+}
+
+.fund-show-game-circle {
+	@extend .word-show-game-circle;
+
+	background: $leksi-red;
+}
+
+.jeop-show-game-circle {
+	@extend .word-show-game-circle;
+
+	background: $leksi-orange;
+}
+
+.free-show-game-circle {
+	@extend .word-show-game-circle;
+
+	background: $leksi-green;
 }

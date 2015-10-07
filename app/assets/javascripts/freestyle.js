@@ -229,11 +229,6 @@ $(document).ready(function(){
 	};
 
 	// Global fn
-	// Revert to previous goodie amount
-	function reset_goodies(old_total) {
-		new_goodies_total = old_total;
-		$("#goodies").html(new_goodies_total);
-	};
 
 	// Strip the functionality of the "enter" key because it oddly sends the form hit in an input
 	$(window).keydown(function(event){
@@ -264,7 +259,6 @@ $(document).ready(function(){
 				// If all three inputs have the class "valid", display the continue button and vice versa if not
 				if($($input_valid).length == 3){
 					$($continue_button_name).fadeIn();
-					boost_goodies(1800);
 				} else {
 					$($continue_button_name).fadeOut();
 				}

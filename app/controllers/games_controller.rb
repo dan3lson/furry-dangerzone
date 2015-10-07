@@ -6,7 +6,12 @@ class GamesController < ApplicationController
     @real_world_examples = RealWorldExample.for(@chosen_word.name)
 
     if current_user.has_incomplete_fundamentals_and_more_than_one?
-      @three_f_words = current_user.incomplete_fundamentals.shuffle.take(3).
+      @three_fund_words = current_user.incomplete_fundamentals.shuffle.take(3).
+        map { |uw| uw.word }
+    end
+
+    if current_user.has_at_least_four_incomplete_jeopardys?
+      @three_j_words = current_user.incomplete_freestyles.shuffle.take(3).
         map { |uw| uw.word }
     end
   end
