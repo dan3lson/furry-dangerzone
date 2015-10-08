@@ -173,7 +173,7 @@
 
 	<br>
 
-	<% if current_user.has_incomplete_fundamentals_and_more_than_one? %>
+	<% if current_user.incomplete_fundamentals.count > 1 %>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4>Play another Fundamental game?</h4>
