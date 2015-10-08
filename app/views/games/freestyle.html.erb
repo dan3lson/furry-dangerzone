@@ -74,9 +74,31 @@
 
 <div id="level_3_completed" align="center">
 	<%= image_tag("medal_green_100.png", alt: "Freestyle Medal") %>
+
 	<h1>Congratulations!</h1>
+
 	<p class="lead">
 		<span id="level_congrats_text">You've completed Freestyle for </span>
 		and earned 5 experience points (XP)!
 	</p>
+
+	<% if current_user.has_incomplete_freestyles? %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Play another Freestyle game?</h4>
+			</div>
+			<div class="panel-body center">
+				<div class="row">
+					<% @four_free_words.each do |w| %>
+						<div class="col-sm-3">
+							<div class="data-url pointer new-freestyle-game-circle"
+									 data-url="/freestyle?word_id=<%= w.id %>">
+								<%= w.name %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	<% end %>
 </div>

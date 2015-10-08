@@ -90,11 +90,6 @@ class User < ActiveRecord::Base
     incomplete_fundamentals.any?
   end
 
-  def has_incomplete_fundamentals_and_more_than_one?
-    has_incomplete_fundamentals? &&
-    incomplete_fundamentals.count > 1
-  end
-
   def has_incomplete_jeopardys?
     incomplete_jeopardys.any?
   end
