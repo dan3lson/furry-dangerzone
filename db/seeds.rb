@@ -6,7 +6,8 @@ Rails.logger.info "==============================================="
   username: "dan3lson",
   password: "danelson",
   password_confirmation: "danelson",
-  role: "admin"
+  role: "admin",
+  email: ""
 )
 Rails.logger.info "Username: #{@founder.username}"
 
@@ -14,7 +15,8 @@ Rails.logger.info "Username: #{@founder.username}"
   user = User.create!(
     username: Faker::Internet.user_name,
     password: "password",
-    password_confirmation: "password"
+    password_confirmation: "password",
+    email: ""
   )
   Rails.logger.info "Username: #{user.username}"
 end

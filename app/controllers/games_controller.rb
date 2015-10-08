@@ -5,7 +5,7 @@ class GamesController < ApplicationController
     @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
     @real_world_examples = RealWorldExample.for(@chosen_word.name)
 
-    if current_user.has_incomplete_fundamentals_and_more_than_one?
+    if current_user.has_incomplete_fundamentals?
       @three_fund_words = current_user.incomplete_fundamentals.shuffle.take(3).
         map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
     end
