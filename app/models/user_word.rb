@@ -1,7 +1,6 @@
 class UserWord < ActiveRecord::Base
   belongs_to :user
   belongs_to :word
-
   has_many :user_word_game_levels, dependent: :destroy
   has_many :game_levels, through: :user_word_game_levels
 
@@ -9,7 +8,7 @@ class UserWord < ActiveRecord::Base
   validates :word, presence: true
 
   def current_game
-    game_ids = self.game_levels.pluck(:game_id).uniq
+    game_ids = game_levels.pluck(:game_id).uniq
 
     if freestyle_completed?
       "all-games-completed"
@@ -23,24 +22,6 @@ class UserWord < ActiveRecord::Base
       nil
     end
   end
-
-  # def uwgl_fundamentals
-  #   user_word_game_levels.select { |uwgl|
-  #     uwgl.game_level.game.name == "Fundamentals"
-  #   }
-  # end
-  #
-  # def uwgl_jeopardys
-  #   user_word_game_levels.select { |uwgl|
-  #     uwgl.game_level.game.name == "Jeopardy"
-  #   }
-  # end
-  #
-  # def uwgl_freestyles
-  #   user_word_game_levels.select { |uwgl|
-  #     uwgl.game_level.game.name == "Freestyle"
-  #   }
-  # end
 
   def uwgls
     user_word_game_levels.sort_by { |uwgl| uwgl.game_level_id }
@@ -93,12 +74,7 @@ class UserWord < ActiveRecord::Base
 
     num == 20
   end
-
-  def self.destroy_jeopardys_for(user_word)
-    user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
-  end
-
-
+  
   def freestyle_not_started?
     num = 0
 
@@ -113,5 +89,9 @@ class UserWord < ActiveRecord::Base
     uwgl_freestyles.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
     num == 12
+  end
+
+  def self.destroy_jeopardys_for(user_word)
+    user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
   end
 end
