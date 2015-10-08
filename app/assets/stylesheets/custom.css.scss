@@ -479,6 +479,33 @@ input {
   }
 }
 
+.new-followup-game-circle {
+	border-radius: 100px;
+	color: $white;
+	font-size: large;
+	height: 100px;
+	padding-top: 38px;
+	width: 100px;
+}
+
+.new-fundamental-game-circle {
+	@extend .new-followup-game-circle;
+
+	background: $leksi-red;
+}
+
+.new-jeopardy-game-circle {
+	@extend .new-followup-game-circle;
+
+	background: $leksi-orange;
+}
+
+.new-freestyle-game-circle {
+	@extend .new-followup-game-circle;
+
+	background: $leksi-green;
+}
+
 .olympic-container {
   color: $white;
 }

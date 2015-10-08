@@ -7,7 +7,7 @@ class GamesController < ApplicationController
 
     if current_user.has_incomplete_fundamentals_and_more_than_one?
       @three_fund_words = current_user.incomplete_fundamentals.shuffle.take(3).
-        map { |uw| uw.word }
+        map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
     end
 
     if current_user.has_at_least_four_incomplete_jeopardys?
@@ -78,5 +78,10 @@ class GamesController < ApplicationController
 
   def freestyle
     @chosen_word = Word.find(params[:word_id])
+
+    if current_user.has_incomplete_freestyles?
+      @four_free_words = current_user.incomplete_freestyles.shuffle.take(4).
+        map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
+    end
   end
 end
