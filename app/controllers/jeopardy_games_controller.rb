@@ -47,7 +47,7 @@ class JeopardyGamesController < ApplicationController
 
   def destroy
     @word = if Rails.env.test?
-      Word.find(params[:word_id].gsub("=",""))
+      Word.find(params[:word_id].gsub("=", ""))
     else
       Word.find(params[:word_id])
     end

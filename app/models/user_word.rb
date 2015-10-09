@@ -39,6 +39,24 @@ class UserWord < ActiveRecord::Base
     uwgls.drop(28)
   end
 
+  def fundamental_statuses
+    num_not_started = 0
+    num_in_progress = 0
+    num_complete = 0
+
+    uwgl_fundamentals.each do |uwgl|
+      if uwgl.status == "not started"
+        num_not_started += 1
+      elsif uwgl.status == "in progress"
+        num_in_progress += 1
+      elsif uwgl.status == "complete"
+        num_complete += 1
+      end
+    end
+
+    [num_not_started, num_in_progress, num_complete]
+  end
+
   def fundamental_not_started?
     num = 0
 
@@ -70,11 +88,12 @@ class UserWord < ActiveRecord::Base
 
   def jeopardy_completed?
     num = 0
+
     uwgl_jeopardys.each { |uwgl| num += 1 if uwgl.status == "complete" }
 
     num == 20
   end
-  
+
   def freestyle_not_started?
     num = 0
 
