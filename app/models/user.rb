@@ -45,11 +45,11 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    self.role == "admin"
+    role == "admin"
   end
 
   def is_teacher?
-    self.role == "teacher" || self.role == "admin"
+    role == "teacher" || role == "admin"
   end
 
   def self.top_ten_highest_points
