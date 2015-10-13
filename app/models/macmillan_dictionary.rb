@@ -26,7 +26,6 @@ class MacmillanDictionary
     word.gsub!(" ", "-")
     word.chop! if word.end_with?("-") || word.end_with?(" ")
 
-    binding.pry
     response = HTTParty.get(
       "#{API_URL}dictionaries/american/search/?q=#{word}#{URL_ENDING}",
       headers: { "accessKey" => ENV["MACMILLAN_DICTIONARY"] }
