@@ -23,7 +23,7 @@ class MacmillanDictionary
   end
 
   def self.define(word)
-    word.gsub!(" ", "-")
+    word.gsub!(" ", "-") if word.split.count > 1
 
     response = HTTParty.get(
       "#{API_URL}dictionaries/american/search/?q=#{word}#{URL_ENDING}",
