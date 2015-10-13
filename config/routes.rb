@@ -33,4 +33,12 @@ Rails.application.routes.draw do
     resources :reviews
   end
   resources :reviews
+  namespace :school do
+    root "schools#classrooms"
+    get "home" => "schools#home"
+    get "classrooms" => "schools#classrooms"
+    get "messages" => "schools#messages"
+    get "progress" => "schools#progress"
+    get "menu" => "schools#menu"
+  end
 end

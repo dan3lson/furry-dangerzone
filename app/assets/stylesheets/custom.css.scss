@@ -459,8 +459,9 @@ input {
 }
 
 .navbar-footer{
-	color: $apple-blue;
+	color: $sky-blue;
 	font-weight: normal;
+	font-size: smaller;
 	margin: 0;
 	margin-top: 50px;
 
@@ -468,12 +469,12 @@ input {
 	  color: $even-darker-gray;
 	  &:hover{
 		  background: none;
-			color: $apple-blue;
+			color: $sky-blue;
 		  text-decoration: none;
 	  };
 	  &:active{
 		  background: none;
-			color: $apple-blue;
+			color: $sky-blue;
 		  text-decoration: none;
 	  };
   }
@@ -847,4 +848,13 @@ table {
 	@extend .word-show-game-circle;
 
 	background: $leksi-green;
+}
+
+.school-header {
+	background: $sky-blue !important;
+	color: $white;
+}
+
+.freestyle-types {
+	margin-top: 0;
 }
