@@ -1,0 +1,84 @@
+<footer class="navbar navbar-default navbar-fixed-bottom navbar-footer" role="navigation">
+  <br>
+  <div class="custom-footer">
+    <div class="inline-block">
+      <% if params[:controller] == "school/schools" && params[:action] == "home" %>
+  			<%=
+  				link_to_unless_current image_tag("home_filled_blue_32.png",
+  				alt: "Home") + "<br/>Home".html_safe, school_home_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("home_dark_gray_32.png", alt: "Home") +
+  				"<br/>Home".html_safe, school_home_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
+    </div>
+
+    <div class="inline-block">
+      <% if params[:controller] == "school/schools" && params[:action] == "classrooms" %>
+  			<%=
+  				link_to_unless_current image_tag("classroom_filled_blue_32.png",
+  				alt: "Classes") + "<br/>Classes".html_safe, school_classrooms_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("classroom_dark_gray_32.png", alt: "Classes") +
+  				"<br/>Classes".html_safe, school_classrooms_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
+    </div>
+
+    <div class="inline-block">
+      <% if params[:controller] == "school/schools" && params[:action] == "messages" %>
+  			<%=
+  				link_to_unless_current image_tag("message_filled_blue_32.png", alt: "Review") +
+  				"<br/>Review".html_safe, school_messages_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("message_dark_gray_32.png", alt: "Review") +
+  				"<br/>Review".html_safe, school_messages_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
+    </div>
+
+    <div class="inline-block">
+      <% if params[:controller] == "school/schools" && params[:action] == "progress" %>
+  			<%=
+  				link_to_unless_current image_tag("progress_filled_blue_32.png", alt: "Progress") +
+  				"<br/>Progress".html_safe, school_progress_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("progress_dark_gray_32.png", alt: "Progress") +
+  				"<br/>Progress".html_safe, school_progress_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
+    </div>
+
+    <div class="inline-block">
+      <% if params[:controller] == "school/schools" && params[:action] == "menu" %>
+  			<%=
+  				link_to_unless_current image_tag("menu_filled_blue_32.png", alt: "Menu") +
+  				"<br/>Menu".html_safe, school_menu_path,
+  				class: "img-responsive"
+  			%>
+  		<% else %>
+  			<%=
+  				link_to image_tag("menu_dark_gray_32.png", alt: "Menu") +
+  				"<br/>Menu".html_safe, school_menu_path,
+  				class: "img-responsive"
+  			%>
+  		<% end %>
+    </div>
+  </div>
+</footer>
