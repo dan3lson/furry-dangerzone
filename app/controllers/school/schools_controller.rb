@@ -18,7 +18,7 @@ class School::SchoolsController < BaseSchoolController
     }
     @sliced_responses = @responses.each_slice(3)
     @freestyle_types = [
-      "Semantic Map", "Word Map", "Definition Map", "Sentence Examples"
+      "Sentence Examples", "Definition Map", "Word Map", "Semantic Map"
     ] * @responses.length
   end
 
