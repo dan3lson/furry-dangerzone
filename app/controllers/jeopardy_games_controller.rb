@@ -7,19 +7,27 @@ class JeopardyGamesController < ApplicationController
     end
     @user_word = UserWord.find_by(user: current_user, word: @word)
 
-    GameLevel.create_jeopardys_for(@user_word)
-
-    if @user_word.user_word_game_levels.count == 28
-      msg = "Jeop GLs created: UW #{@user_word.id} -> #{@user_word.word.name}."
-      render json: {
-        errors: msg
-      }
-    else
-      msg = "Jeop GLs NOT created: UW #{@user_word.id} -> "
+    if @user_word.uwgl_jeopardys.any?
+      msg = "Other UWGLs untouched for UW #{@user_word.id} -> "
       msg_2 = "#{@user_word.word.name}."
       render json: {
         errors: msg << msg_2
       }
+    else
+      GameLevel.create_jeopardys_for(@user_word)
+
+      if @user_word.user_word_game_levels.count == 28
+        msg = "Jeop GLs created: UW #{@user_word.id} -> #{@user_word.word.name}."
+        render json: {
+          errors: msg
+        }
+      else
+        msg = "Jeop GLs NOT created: UW #{@user_word.id} -> "
+        msg_2 = "#{@user_word.word.name}."
+        render json: {
+          errors: msg << msg_2
+        }
+      end
     end
   end
 
