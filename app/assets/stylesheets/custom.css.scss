@@ -633,6 +633,10 @@ table {
   padding-top: 10em;
 }
 
+.white {
+	color: $white;
+}
+
 .word-partial-myLeksi {
   padding-top: 13px;
 }
@@ -829,6 +833,7 @@ table {
 .word-show-game-circle {
 	border-radius: 70px;
 	height: 70px;
+	padding-top: 28px;
 	width: 70px;
 }
 

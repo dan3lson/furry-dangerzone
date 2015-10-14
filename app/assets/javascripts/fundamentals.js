@@ -277,8 +277,8 @@ $(document).ready(function(){
 				url: "/jeopardy_game",
 				dataType: "json",
 				data: game_info,
-				success: function(response) {
-					console.log(response);
+				success: function() {
+					console.log(response.errors);
 				}
 			});
 
@@ -430,7 +430,7 @@ $(document).ready(function(){
         dataType: "json",
         data: game_info,
         success: function(response) {
-          console.log(response);
+          console.log(response.errors);
         }
       });
 
@@ -471,7 +471,7 @@ $(document).ready(function(){
 			dataType: "json",
 			data: game_info,
 			success: function(response) {
-				console.log(response);
+				console.log(response.errors);
 			}
 		});
 
@@ -769,7 +769,7 @@ $(document).ready(function(){
 			dataType: "json",
 			data: JSON.stringify(game_info),
 			success: function(response) {
-				console.log(response);
+				console.log(response.errors);
 			}
 		});
 	};

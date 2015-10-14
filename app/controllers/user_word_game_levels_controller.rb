@@ -18,11 +18,11 @@ class UserWordGameLevelsController < ApplicationController
 
     if @user_word_game_level.save
       render json: {
-        status: "UWGL: #{@user_word_game_level.id} updated successfully"
+        errors: "UWGL: #{@user_word_game_level.id} updated successfully"
       }
     else
       render json: {
-        status: "UWGL: #{@user_word_game_level.id} NOT updated successfully"
+        errors: "UWGL: #{@user_word_game_level.id} NOT updated successfully"
       }
     end
   end
