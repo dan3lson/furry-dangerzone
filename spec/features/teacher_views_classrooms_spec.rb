@@ -73,9 +73,9 @@ feature "teacher views Classrooms", %{
 
       visit "/school/classrooms"
 
-      expect(page).to have_content("Classrooms")
+      expect(page).to have_content("Classes")
       expect(page).to have_link("Home")
-      expect(page).to have_link("Messages")
+      expect(page).to have_link("Review")
       expect(page).to have_link("Progress")
       expect(page).to have_link("Menu")
     end
