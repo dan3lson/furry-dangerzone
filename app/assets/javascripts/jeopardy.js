@@ -162,7 +162,7 @@ $(document).ready(function(){
 			dataType: "json",
 			data: game_info,
 			success: function(response) {
-			 console.log(response);
+			 console.log(response.errors);
 			}
 		});
 	};
@@ -259,10 +259,6 @@ $(document).ready(function(){
 		}
 		else {
 			// update game_levels 1-8 as "not started" for this (user_)word
-			console.log("Word Name that should be Fundamentals reset:", word_name);
-			console.log("Word ID that should be Fundamentals reset:", word_id);
-			console.log("**************");
-
 			reset_fundamentals_from_complete_to_not_started(word_id);
 
 			destroy_jeopardys(word_id);

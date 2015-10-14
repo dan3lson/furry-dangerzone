@@ -10,54 +10,64 @@ class GamesController < ApplicationController
         map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
     end
 
-    if current_user.has_at_least_four_incomplete_jeopardys?
+    if current_user.has_enough_jeopardy_words?
       @three_j_words = current_user.incomplete_freestyles.shuffle.take(3).
         map { |uw| uw.word }
     end
   end
 
   def jeopardy
+    # Check if there are at least three incomplete jeopardy + freestyle completed words
+      # Randomly select three to begin gameplay
+        # If it's a freestyle word that passes, it is not affected
+        # If it's a freestyle word that fails, word starts all over but keeps freestyle responses
+
     @chosen_word = Word.find(params[:word_id])
-    @incomplete_jeopardys = current_user.incomplete_jeopardys.map { |uw|
-      uw.word
-    }.delete_if { |w| w == @chosen_word }
 
-    @second_word = @incomplete_jeopardys.sample
+    if current_user.has_enough_jeopardy_words?
+      @valid_jeopardy_words = (current_user.incomplete_jeopardys +
+        current_user.completed_freestyles).map { |uw|
+          uw.word }.delete_if { |w| w == @chosen_word }
 
-    @incomplete_jeopardys.delete_if { |w| w == @second_word }
+      # @incomplete_jeopardys = current_user.incomplete_jeopardys.map { |uw|
+      #   uw.word }.delete_if { |w| w == @chosen_word }
 
-    @third_word = @incomplete_jeopardys.sample
+      @second_word = @valid_jeopardy_words.sample
+      @valid_jeopardy_words.delete_if { |w| w == @second_word }
 
-    @incomplete_jeopardys.delete_if { |w| w == @third_word }
+      @third_word = @valid_jeopardy_words.sample
+      @valid_jeopardy_words.delete_if { |w| w == @third_word }
 
-    @fourth_word = @incomplete_jeopardys.sample
-    @jeopardy_words = [@chosen_word, @second_word, @third_word, @fourth_word]
-    @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
-    @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
-    @jeopardy_lineup = (@jeopardy_words * 5).shuffle
+      @fourth_word = @valid_jeopardy_words.sample
 
-    @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
+      @jeopardy_words = [@chosen_word, @second_word, @third_word, @fourth_word]
+      @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
+      @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
+      @jeopardy_lineup = (@jeopardy_words * 5).shuffle
 
-    @attributes = (
-      %w(definition example_sentence synonyms antonyms) * 5
-    ).shuffle
-    @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
-      @attribute = @attributes[i]
-      @attribute_value = w.send(@attribute)
+      @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
 
-      if @attribute_value.empty?
-        @attributes[i] = "definition"
-        @attribute_value = w.send("definition")
-        top_three_entries_for(w, "definition").join("; ").gsub(
-          "#{w.name}", "______"
-        )
-      else
-        if @attribute == "example_sentence" || @attribute == "definition"
-          top_three_entries_for(w, @attribute).join("; ").gsub(
+      @attributes = (
+        %w(definition example_sentence synonyms antonyms) * 5
+      ).shuffle
+      @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
+        @attribute = @attributes[i]
+        @attribute_value = w.send(@attribute)
+
+        if @attribute_value.empty?
+          @attributes[i] = "definition"
+          @attribute_value = w.send("definition")
+          top_three_entries_for(w, "definition").join("; ").gsub(
             "#{w.name}", "______"
           )
-        elsif @attribute.end_with?("onyms")
-          @attribute_value.sample.name
+        else
+          if @attribute == "example_sentence" || @attribute == "definition"
+            top_three_entries_for(w, @attribute).join("; ").gsub(
+              "#{w.name}", "______"
+            )
+          elsif @attribute.end_with?("onyms")
+            @attribute_value.sample.name
+          end
         end
       end
     end
