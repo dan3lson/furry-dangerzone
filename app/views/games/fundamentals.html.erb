@@ -193,7 +193,7 @@
 		</div>
 	<% end %>
 
-	<% if current_user.has_at_least_four_incomplete_jeopardys? %>
+	<% if current_user.has_enough_jeopardy_words? %>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4>Play Jeopardy</h4>

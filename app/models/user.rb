@@ -98,8 +98,8 @@ class User < ActiveRecord::Base
     incomplete_freestyles.any?
   end
 
-  def has_at_least_four_incomplete_jeopardys?
-    incomplete_jeopardys.count > 3
+  def has_enough_jeopardy_words?
+    incomplete_jeopardys.count + completed_freestyles.count > 3
   end
 
   def completed_fundamentals

@@ -2550,7 +2550,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#has_at_least_four_incomplete_jeopardys?" do
+  describe "#has_enough_jeopardy_words?" do
     it "returns false" do
       user = User.create(
         username: "fizzBuzzzzed",
@@ -2946,7 +2946,7 @@ RSpec.describe User, type: :model do
         uwgl.save
       end
 
-      expect(user.has_at_least_four_incomplete_jeopardys?).to eq(false)
+      expect(user.has_enough_jeopardy_words?).to eq(false)
     end
 
     it "returns true" do
@@ -3267,7 +3267,7 @@ RSpec.describe User, type: :model do
         uwgl.save
       end
 
-      expect(user.has_at_least_four_incomplete_jeopardys?).to eq(true)
+      expect(user.has_enough_jeopardy_words?).to eq(true)
     end
   end
 
