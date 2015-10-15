@@ -253,18 +253,6 @@ p {
   }
 }
 
-.full-header {
-  font-size: 1.5em;
-}
-
-.fundamentals-header {
-  @extend .stats-header;
-
-  background: $light-leksi-red;
-  border-left: 3px solid $dark-leksi-red;
-  color: $dark-leksi-red;
-}
-
 .jeopardy-header {
   @extend .stats-header;
 
@@ -279,6 +267,22 @@ p {
   background: $light-leksi-green;
   border-left: 3px solid $dark-leksi-green;
   color: $dark-leksi-green;
+}
+
+.full-header {
+  font-size: 1.5em;
+}
+
+.fundamentals-header {
+  @extend .stats-header;
+
+  background: $light-leksi-red;
+  border-left: 3px solid $dark-leksi-red;
+  color: $dark-leksi-red;
+}
+
+.fund-show-game-circle-containter:hover {
+	background: $light-leksi-red;
 }
 
 .game-not-ready {

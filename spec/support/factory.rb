@@ -67,8 +67,16 @@ FactoryGirl.define do
   end
 
   factory :user_word_game_level do
+    status "not started"
+
     game_level
     user_word
-    status "not started"
+  end
+
+  factory :game_stat do
+    num_played 3
+
+    user_word
+    game
   end
 end

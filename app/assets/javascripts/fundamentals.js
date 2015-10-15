@@ -268,19 +268,7 @@ $(document).ready(function(){
 			update_user_word_game_level_status("8", 8);
 
 			// Create the game_level's for Jeopardy
-			var game_info = {
-				"word_id": $chosen_word_id
-			};
-
-			$.ajax({
-				type: "POST",
-				url: "/jeopardy_game",
-				dataType: "json",
-				data: game_info,
-				success: function() {
-					console.log(response.errors);
-				}
-			});
+      create_jeopardy_uwgls();
 
 			// Update the progress made
 			progressBar(100);
@@ -288,6 +276,9 @@ $(document).ready(function(){
 			// Update user goodies
 			update_user_points(10);
 			boost_goodies(3);
+
+      // Update num_played for this user_word
+      update_num_played();
 
 			// Start the next activity, i.e. review level one
 			start_review_level_one_activity($chosen_word_value);
@@ -386,7 +377,6 @@ $(document).ready(function(){
 		}
 
 		// If the checkpoint has been completed, show the syn_ant continue button
-		//
 		if ($syn_ant_circle_activity_boolean) {
 			$("#syn_ant_checkpoint_continue_button").show();
 			// Display the number correct out of the total number of synonyms and antonyms available
@@ -420,19 +410,10 @@ $(document).ready(function(){
       update_user_word_game_level_status("8", 8);
 
       // Create the game_level's for Jeopardy
-      var game_info = {
-        "word_id": $chosen_word_id
-      };
+      create_jeopardy_uwgls();
 
-      $.ajax({
-        type: "POST",
-        url: "/jeopardy_game",
-        dataType: "json",
-        data: game_info,
-        success: function(response) {
-          console.log(response.errors);
-        }
-      });
+      // Update num_played for this user_word
+      update_num_played();
 
       // Update the progress made
       progressBar(100);
@@ -461,19 +442,10 @@ $(document).ready(function(){
 		update_user_word_game_level_status("8", 8);
 
 		// Create the game_level's for Jeopardy
-		var game_info = {
-			"word_id": $chosen_word_id
-		};
+    create_jeopardy_uwgls();
 
-		$.ajax({
-			type: "POST",
-			url: "/jeopardy_game",
-			dataType: "json",
-			data: game_info,
-			success: function(response) {
-				console.log(response.errors);
-			}
-		});
+    // Update num played for this user_word
+    update_num_played();
 
 		// Update the progress made
 		progressBar(100);
@@ -754,6 +726,23 @@ $(document).ready(function(){
 	 * Helper Functions: Support ones that help each activity above
 	 */
 
+  // Create the game_level's for Jeopardy
+  function create_jeopardy_uwgls() {
+   var game_info = {
+     "word_id": $chosen_word_id
+   };
+
+   $.ajax({
+     type: "POST",
+     url: "/jeopardy_game",
+     dataType: "json",
+     data: game_info,
+     success: function(response) {
+       console.log(response.errors);
+     }
+   });
+  };
+
 	// Update user_word_game_level_status
 	function update_user_word_game_level_status(level_id, num) {
 		var game_info = {
@@ -773,6 +762,24 @@ $(document).ready(function(){
 			}
 		});
 	};
+
+  // Update the game_stat num_played for this word
+  function update_num_played() {
+    var game_info = {
+      "word_id": $chosen_word_id,
+      "game_name": "Fundamentals"
+    };
+
+    $.ajax({
+      type: "PATCH",
+      url: "/game_stat",
+      dataType: "json",
+      data: game_info,
+      success: function(response) {
+        console.log(response.errors);
+      }
+    });
+  };
 
 	// Update user_word_game_level_status
 	function update_user_points(num) {

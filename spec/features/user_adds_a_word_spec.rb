@@ -20,12 +20,14 @@ feature "user adds a word", %{
       user = User.create!(
         username: "fizzBuzzzzed",
         password: "password",
-        password_confirmation: "password"
+        password_confirmation: "password",
+        email: ""
       )
       user_2 = User.create!(
         username: "fizzSober",
         password: "password",
-        password_confirmation: "password"
+        password_confirmation: "password",
+        email: ""
       )
       user_word = UserWord.create!(word: word, user: user)
       game = Game.create!(
@@ -116,13 +118,12 @@ feature "user adds a word", %{
 
       click_on "add"
 
-      expect(page).to have_content("Tap the red circle to play!")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content("Chess")
       expect(page).to have_content("noun")
       expect(page).to have_content("a game for two people, played on a board")
       expect(page).to have_content("/tʃes/")
-      expect(Word.count).to eq(1)
+      expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(2)
       expect(UserWordGameLevel.count).to eq(16)
     end

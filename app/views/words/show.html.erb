@@ -4,19 +4,16 @@
 <% if logged_in? %>
   <div class="box-shadow-border">
     <div class="row" align="center">
-      <div class="col-xs-4">
+      <div class="col-xs-4 data-url pointer fund-show-game-circle-containter"
+           data-url="/fundamentals?word_id=<%= @word.id %>">
+
         <% if @user_word.current_game == "one" %>
-          <div class="data-url pointer fund-show-game-circle"
-               data-url="/fundamentals?word_id=<%= @word.id %>">
-          </div>
-          <span class="leksi-red">Fundamentals</span>
+          <div class="fund-show-game-circle"></div>
         <% else %>
-          <div class="fund-show-game-circle data-url pointer white"
-               data-url="/fundamentals?word_id=<%= @word.id %>">
-               &#10004;
-          </div>
-          <span class="leksi-red">Fundamentals</span>
+          <div class="fund-show-game-circle white">&#10004;</div>
         <% end %>
+
+        <span class="leksi-red">Fundamentals</span>
       </div>
       <div class="col-xs-4">
         <% if @user_word.current_game == "two" %>
