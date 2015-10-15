@@ -74,14 +74,13 @@ feature "two users add the same word", %{
 
       click_on "add"
 
-      expect(page).to have_content("Tap the red circle to play!")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(word.name)
       expect(page).to have_content(word.phonetic_spelling)
       expect(page).to have_content(word.part_of_speech)
       expect(page).to have_content(word.definition)
       expect(page).to have_content(word.example_sentence)
-      expect(Word.count).to eq(1)
+      expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(2)
       expect(UserTag.count).to eq(0)
       expect(WordTag.count).to eq(0)

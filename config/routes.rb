@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resource :jeopardy_game, only: [:create, :update, :destroy]
   resource :freestyle_game, only: [:create, :update]
   resource :create_freestyle, only: [:create]
+  resource :game_stat, only: [:update]
   resources :tags, except: [:destroy]
   resource :user_tag, only: [:create, :edit, :destroy]
   resource :word_tag, only: [:create, :destroy]

@@ -218,6 +218,24 @@ $(document).ready(function(){
 		});
 	};
 
+	// Update the game_stat num_played for this word
+	function update_num_played(word_id) {
+		var game_info = {
+			"word_id": word_id,
+			"game_name": "Jeopardy"
+		};
+
+		$.ajax({
+			type: "PATCH",
+			url: "/game_stat",
+			dataType: "json",
+			data: game_info,
+			success: function(response) {
+				console.log(response.errors);
+			}
+		});
+	};
+
 
 	// Update user_word_game_level_status
 	 function update_user_points(num) {

@@ -3,6 +3,7 @@ class UserWord < ActiveRecord::Base
   belongs_to :word
   has_many :user_word_game_levels, dependent: :destroy
   has_many :game_levels, through: :user_word_game_levels
+  has_many :game_stats, dependent: :destroy
 
   validates :user, presence: true
   validates :word, presence: true

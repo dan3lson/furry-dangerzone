@@ -13,20 +13,28 @@ feature "user adds a word and sees game one start link", %{
   # [x] I can see a "start" button for game
   #     one for a word just added
 
-  pending "\n user adds a word -->" do
+  describe "\n user adds a word -->" do
     scenario "scenario: valid process" do
       word = FactoryGirl.create(:word)
       user = User.create!(
         username: "fizzBuzzzzed",
         password: "password",
-        password_confirmation: "password"
+        password_confirmation: "password",
+        email: ""
       )
-      user_2 = User.create!(
-        username: "fizzSober",
-        password: "password",
-        password_confirmation: "password"
-      )
-      user_word = UserWord.create!(word: word, user: user)
+
+      log_in_as(user)
+
+      visit search_path
+
+      fill_in "Search", with: "chess"
+
+      click_on "define"
+
+      click_on "add"
+
+      user_word = UserWord.first
+      
       game = Game.create!(
         name: "Fundamentals",
         description: "Learn the basics."
@@ -106,24 +114,14 @@ feature "user adds a word and sees game one start link", %{
         game_level: game_level_8
       )
 
-      log_in_as(user_2)
-
-      visit search_path
-
-      fill_in "Search", with: "chess"
-
-      click_on "define"
-
-      click_on "add"
-
       expect(page).to have_content("Chess")
       expect(page).to have_content("noun")
       expect(page).to have_content("a game for two people, played on a board")
       expect(page).to have_content("/tʃes/")
-      expect(page).to have_css(".game-one-start-circle")
-      expect(Word.count).to eq(1)
-      expect(UserWord.count).to eq(2)
-      expect(UserWordGameLevel.count).to eq(16)
+      expect(page).to have_css(".fund-show-game-circle")
+      expect(Word.count).to eq(4)
+      expect(UserWord.count).to eq(1)
+      expect(UserWordGameLevel.count).to eq(8)
     end
   end
 end

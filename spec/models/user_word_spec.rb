@@ -7,6 +7,7 @@ RSpec.describe UserWord, type: :model do
     it { should belong_to(:word) }
     it { should have_many(:user_word_game_levels) }
     it { should have_many(:game_levels) }
+    it { should have_many(:game_stats) }
   end
 
   describe "validations" do

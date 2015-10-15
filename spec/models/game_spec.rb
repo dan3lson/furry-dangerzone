@@ -6,6 +6,7 @@ RSpec.describe Game, type: :model do
   describe "associatons" do
     it { should have_many(:game_levels) }
     it { should have_many(:levels) }
+    it { should have_many(:game_stats) }
   end
 
   describe "validations" do
