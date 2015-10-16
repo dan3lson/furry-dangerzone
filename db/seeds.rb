@@ -228,7 +228,7 @@ Rails.logger.info "==============================================="
 Rails.logger.info "Define words"
 Rails.logger.info "==============================================="
 
-Word.define("car")
-Word.define("bar")
-Word.define("log")
-Word.define("say")
+Word.define("trait")
+Word.define("bait")
+Word.define("slate")
+Word.define("wait")

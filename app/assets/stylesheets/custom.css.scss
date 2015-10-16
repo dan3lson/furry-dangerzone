@@ -269,6 +269,10 @@ p {
   color: $dark-leksi-green;
 }
 
+.free-show-game-circle-containter:hover {
+	background: $light-leksi-green;
+}
+
 .full-header {
   font-size: 1.5em;
 }
@@ -371,6 +375,10 @@ input, textarea, select, .uneditable-input {
 
 input {
   height: auto !important;
+}
+
+.jeop-show-game-circle-containter:hover {
+	background: $light-leksi-orange;
 }
 
 .leaderboard-bronze {

@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def has_enough_jeopardy_words?
-    incomplete_jeopardys.count + completed_freestyles.count > 3
+    incomplete_jeopardys.count + completed_jeopardys.count > 3
   end
 
   def completed_fundamentals

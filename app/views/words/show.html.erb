@@ -2,34 +2,49 @@
 <% provide(:header, @word.name.capitalize) %>
 
 <% if logged_in? %>
-  <div class="box-shadow-border">
+  <div>
     <div class="row" align="center">
+
       <div class="col-xs-4 data-url pointer fund-show-game-circle-containter"
            data-url="/fundamentals?word_id=<%= @word.id %>">
-
-        <% if @user_word.current_game == "one" %>
-          <div class="fund-show-game-circle"></div>
-        <% else %>
-          <div class="fund-show-game-circle white">&#10004;</div>
-        <% end %>
+        <div class="fund-show-game-circle">
+          <% if @user_word.fundamental_completed? %>
+            <span class="white">&#10004;</span>
+          <% end %>
+        </div>
 
         <span class="leksi-red">Fundamentals</span>
       </div>
-      <div class="col-xs-4">
-        <% if @user_word.current_game == "two" %>
-          <div class="data-url pointer jeop-show-game-circle"
-               data-url="/jeopardy?word_id=<%= @word.id %>">
-          </div>
+
+      <div class="col-xs-4 data-url jeop-show-game-circle-containter">
+        <% if @user_word.jeopardy_not_started? &&
+              current_user.has_enough_jeopardy_words? %>
+          <div class="jeop-show-game-circle pointer data-url"
+               data-url="/jeopardy?word_id=<%= @word.id %>"></div>
           <span class="leksi-orange">Jeopardy</span>
+
+        <% elsif @user_word.jeopardy_completed? %>
+          <% if current_user.has_enough_jeopardy_words? %>
+            <div class="jeop-show-game-circle white pointer data-url"
+                 data-url="/jeopardy?word_id=<%= @word.id %>">&#10004;</div>
+            <span class="leksi-orange">Jeopardy</span>
+          <% else %>
+            <div class="jeop-show-game-circle white game-not-ready">&#10004;</div>
+            <span class="leksi-orange game-not-ready">Jeopardy</span>
+          <% end %>
+
         <% else %>
-          <div class="jeop-show-game-circle game-not-ready"
-               data-url="/jeopardy?word_id=<%= @word.id %>">
-          </div>
+          <div class="jeop-show-game-circle game-not-ready"></div>
           <span class="leksi-orange game-not-ready">Jeopardy</span>
         <% end %>
+
       </div>
-      <div class="col-xs-4">
-        <% if @user_word.current_game == "three" %>
+
+      <div class="col-xs-4 free-show-game-circle-containter">
+        <% if @user_word.freestyle_completed?%>
+          <div class="free-show-game-circle white game-not-ready">&#10004;</div>
+          <span class="leksi-green game-not-ready">Freestyle</span>
+        <% elsif @user_word.current_game == "three" %>
           <div class="data-url pointer free-show-game-circle"
                data-url="/freestyle?word_id=<%= @word.id %>">
           </div>
@@ -44,6 +59,8 @@
     </div>
   </div>
 <% end %>
+
+<br>
 
 <div class="row">
   <div class="col-sm-7">

@@ -17,20 +17,12 @@ class GamesController < ApplicationController
   end
 
   def jeopardy
-    # Check if there are at least three incomplete jeopardy + freestyle completed words
-      # Randomly select three to begin gameplay
-        # If it's a freestyle word that passes, it is not affected
-        # If it's a freestyle word that fails, word starts all over but keeps freestyle responses
-
     @chosen_word = Word.find(params[:word_id])
 
     if current_user.has_enough_jeopardy_words?
       @valid_jeopardy_words = (current_user.incomplete_jeopardys +
-        current_user.completed_freestyles).map { |uw|
+        current_user.completed_jeopardys).map { |uw|
           uw.word }.delete_if { |w| w == @chosen_word }
-
-      # @incomplete_jeopardys = current_user.incomplete_jeopardys.map { |uw|
-      #   uw.word }.delete_if { |w| w == @chosen_word }
 
       @second_word = @valid_jeopardy_words.sample
       @valid_jeopardy_words.delete_if { |w| w == @second_word }
