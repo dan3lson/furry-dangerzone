@@ -38,6 +38,7 @@ feature "guest signs up", %{
       expect(page).to have_link("Progress")
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
+      expect(User.first.num_logins).to eq(1)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end
@@ -59,6 +60,7 @@ feature "guest signs up", %{
       expect(page).to have_link("Progress")
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
+      expect(User.first.num_logins).to eq(1)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end

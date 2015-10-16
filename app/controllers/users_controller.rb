@@ -28,9 +28,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.last_login = DateTime.now
+    @user.num_logins += 1
 
     if @user.save
       log_in(@user)
+
       flash[:success] = "Welcome to Leksi!"
 
       redirect_to root_path
