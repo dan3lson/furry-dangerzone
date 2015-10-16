@@ -1,13 +1,10 @@
 class ResetFundamentalsController < ApplicationController
   def update
-    @word = if Rails.env.test?
-              Word.find(params[:word_id].gsub("=", ""))
-            else
-              Word.find(params[:word_id])
-            end
+    @word_params = Word.find(params[:word_id])
+    @word = Rails.env.test? ? @word_params.gsub("=", "") : @word_params
     @user_word = UserWord.find_by(user: current_user, word: @word)
 
-    if @user_word.freestyle_completed?
+    if @user_word.jeopardy_completed? || @user_word.freestyle_completed?
       render json: {
         errors: "UW #{@user_word.id}\'s Fundamentals untouched."
       }
@@ -23,11 +20,11 @@ class ResetFundamentalsController < ApplicationController
 
       if @status.first == "not started"
         render json: {
-          errors: "UW #{@user_word.id}\'s Fundamentals successfully reset"
+          errors: "UW #{@user_word.id}\'s Fundamentals successfully reset."
         }
       else
         render json: {
-          errors: "UW #{@user_word.id}\'s Fundamentals NOT successfully reset"
+          errors: "UW #{@user_word.id}\'s Fundamentals NOT successfully reset."
         }
       end
     end
