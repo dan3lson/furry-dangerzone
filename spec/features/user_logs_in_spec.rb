@@ -19,13 +19,16 @@ feature "user logs in", %{
 
     scenario "scenario: input is valid" do
       log_in_as(user)
-
+      # expect(user.num_logins).to eq(2)
       expect(page).to have_content("Home")
       expect(page).to have_content("myLeksi")
       expect(page).to have_link("Add")
       expect(page).to have_link("Progress")
       expect(page).to have_link("Menu")
-      expect(page).not_to have_content("Invalid username and / or password combination.")
+
+      msg = "Yikes! That username/password combination didn\'t work. "
+      msg_2 = "Please try again."
+      expect(page).not_to have_content(msg << msg_2)
     end
 
     scenario "scenario: input is invalid" do
@@ -38,7 +41,9 @@ feature "user logs in", %{
         click_on "Log in"
       end
 
-      expect(page).to have_content("Invalid username and / or password combination.")
+      msg = "Yikes! That username/password combination didn\'t work. "
+      msg_2 = "Please try again."
+      expect(page).to have_content(msg << msg_2)
       expect(page).not_to have_content("Home")
       expect(page).not_to have_content("myLeksi")
       expect(page).not_to have_link("Add")
