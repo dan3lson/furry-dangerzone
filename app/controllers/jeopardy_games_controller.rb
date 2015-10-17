@@ -5,16 +5,16 @@ class JeopardyGamesController < ApplicationController
     @user_word = UserWord.find_by(user: current_user, word: @word)
 
     if @user_word.uwgl_jeopardys.any?
-      msg = "Jeop UWGLs already exist and skipped for UW #{@user_word.id} -> "
-      msg_2 = "#{@user_word.word.name}."
+      msg = "Okay: Jeopardy UWGLs already exist and skipped for "
+      msg_2 = "UW #{@user_word.id} -> #{@user_word.word.name}."
 
       render json: { errors: msg << msg_2 }
     else
       GameLevel.create_jeopardys_for(@user_word)
 
       if @user_word.user_word_game_levels.count == 28
-        msg = "Jeop GLs created: UW #{@user_word.id}"
-        msg_2 = " -> #{@user_word.word.name}."
+        msg = "Success: Jeopardy UWGLs created for UW #{@user_word.id} "
+        msg_2 = "-> #{@user_word.word.name}."
 
         render json: { errors: msg << msg_2 }
       else
@@ -32,7 +32,7 @@ class JeopardyGamesController < ApplicationController
     @user_word = UserWord.find_by(user: current_user, word: @word)
 
     if @user_word.jeopardy_completed? || @user_word.freestyle_completed?
-      msg = "Jeopardy updates not needed for UW #{@user_word.id} ->"
+      msg = "Okay: Jeopardy updates not needed for UW #{@user_word.id} ->"
       msg_2 = " #{@user_word.word.name}"
 
       render json: { errors: msg << msg_2 }
@@ -47,7 +47,7 @@ class JeopardyGamesController < ApplicationController
       }.uniq
 
       if @status.first == "complete"
-        msg = "Jeopardy successfully updated as complete for UW"
+        msg = "Success: Jeopardy updated as complete for UW"
         msg_2 = " #{@user_word.id} -> #{@user_word.word.name}"
 
         render json: { errors: msg << msg_2 }
@@ -66,15 +66,15 @@ class JeopardyGamesController < ApplicationController
     @user_word = UserWord.find_by(user: current_user, word: @word)
 
     if @user_word.jeopardy_completed? || @user_word.freestyle_completed?
-      msg = "Jeopardy UWGLs destruction not needed for UW #{@user_word.id}"
-      msg_2 = " -> #{@user_word.word.name}."
+      msg = "Okay: Jeopardy UWGLs destruction not needed for "
+      msg_2 = "UW #{@user_word.id} -> #{@user_word.word.name}."
 
       render json: { errors: msg << msg_2 }
     else
       UserWord.destroy_jeopardys_for(@user_word)
 
       if @user_word.user_word_game_levels.count == 8
-        msg = "Jeopardy GLs successfully destroyed for UW #{@user_word.id}"
+        msg = "Success: Jeopardy GLs destroyed for UW #{@user_word.id}"
         msg_2 = " -> #{@user_word.word.name}."
 
         render json: { errors: msg << msg_2 }

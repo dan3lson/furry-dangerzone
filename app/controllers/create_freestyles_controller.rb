@@ -5,7 +5,7 @@ class CreateFreestylesController < ApplicationController
     @user_word = UserWord.find_by(user: current_user, word: @word)
 
     if @user_word.jeopardy_completed? || @user_word.freestyle_completed?
-      msg = "Success: Freestyle UWGL creations not needed for "
+      msg = "Okay: Freestyle UWGL creations not needed for "
       msg_2 = "UW #{@user_word.id} -> #{@user_word.word.name}."
 
       render json: { errors: msg << msg_2 }

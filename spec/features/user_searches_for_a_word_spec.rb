@@ -11,10 +11,10 @@ feature "user searches for a word", %{
   # [x] I can visit search_path
   # [x] I see a form to submit my query
   # [x] I can see results
-  # [] I can see a remove button for a
+  # [x] I can see a remove button for a
   #     word I already added
 
-  skip "\n user searches for a word -->" do
+  describe "\n user searches for a word -->" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
 
