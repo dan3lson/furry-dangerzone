@@ -236,6 +236,25 @@ $(document).ready(function(){
 		});
 	};
 
+	// Update the game_stat jeop_result for this word
+	function update_jeopardy_result(word_id, result) {
+		var game_info = {
+			"word_id": word_id,
+			"game_name": "Jeopardy",
+			"result": result
+		};
+
+		$.ajax({
+			type: "PATCH",
+			url: "/jeopardy_result",
+			dataType: "json",
+			data: game_info,
+			success: function(response) {
+				console.log(response.errors);
+			}
+		});
+	};
+
 
 	// Update user_word_game_level_status
 	function update_user_points(num) {
@@ -268,6 +287,9 @@ $(document).ready(function(){
 			// update num_played
 			update_num_played(word_id);
 
+			// Update jeopardy game result
+			update_jeopardy_result(word_id, "won");
+
 			// award goodies
 			update_user_points(4);
 
@@ -284,6 +306,8 @@ $(document).ready(function(){
 
 			// update num_played
 			update_num_played(word_id);
+
+			update_jeopardy_result(word_id, "lost");
 
 			destroy_jeopardys(word_id);
 
