@@ -238,7 +238,7 @@ $(document).ready(function(){
 
 
 	// Update user_word_game_level_status
-	 function update_user_points(num) {
+	function update_user_points(num) {
 		 $.ajax({
 			 type: "PATCH",
 			 url: "/user_points",
@@ -265,6 +265,9 @@ $(document).ready(function(){
 			// create the last game, i.e. Freestyle, for this (user_)word
 			create_freestyles(word_id);
 
+			// update num_played
+			update_num_played(word_id);
+
 			// award goodies
 			update_user_points(4);
 
@@ -278,6 +281,9 @@ $(document).ready(function(){
 		else {
 			// update game_levels 1-8 as "not started" for this (user_)word
 			reset_fundamentals_from_complete_to_not_started(word_id);
+
+			// update num_played
+			update_num_played(word_id);
 
 			destroy_jeopardys(word_id);
 
