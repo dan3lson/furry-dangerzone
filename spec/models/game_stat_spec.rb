@@ -24,5 +24,11 @@ RSpec.describe GameStat, type: :model do
     it "returns a num_played" do
       expect(game_stat.num_played).to be(3)
     end
+    it "returns num_jeop_won" do
+      expect(game_stat.num_jeop_won).to be(5)
+    end
+    it "returns a num_jeop_lost" do
+      expect(game_stat.num_jeop_lost).to be(2)
+    end
   end
 end
