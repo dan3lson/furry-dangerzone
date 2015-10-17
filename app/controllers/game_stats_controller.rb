@@ -10,19 +10,15 @@ class GameStatsController < ApplicationController
 		@game_stat.num_played += 1
 
 		if @game_stat.save
-			msg = "GameStat #{@game_stat.id} successfully updated for"
-			msg_2 = " #{@user_word.id} -> #{@user_word.word.name}"
+			msg = "Success: GameStat #{@game_stat.id} num_played updated for"
+			msg_2 = " #{@user_word.id} -> #{@user_word.word.name}."
 
-			render json: {
-				errors: msg << msg_2
-			}
+			render json: { errors: msg << msg_2 }
 		else
-			msg = "ERROR: GameStat #{@game_stat.id} NOT successfully updated for"
-			msg_2 = " #{@user_word.id} -> #{@user_word.word.name}"
+			msg = "ERROR: GameStat #{@game_stat.id} num_played NOT successfully "
+			msg_2 = "updated for #{@user_word.id} -> #{@user_word.word.name}."
 
-			rener json: {
-				errors: msg << msg_2
-			}
+			rener json: {	errors: msg << msg_2 }
 		end
 	end
 end
