@@ -24,6 +24,10 @@ class UserWord < ActiveRecord::Base
     end
   end
 
+  def uwgls
+    user_word_game_levels.sort_by { |uwgl| uwgl.game_level_id }
+  end
+
   def retrieve_uwgls_for(game_name)
     UserWordGameLevel.includes(:user_word).includes(:game_level).select { |uwgl|
       uwgl.user_word == self && uwgl.game_level.game.name == game_name
@@ -31,15 +35,18 @@ class UserWord < ActiveRecord::Base
   end
 
   def uwgl_fundamentals
-    retrieve_uwgls_for("Fundamentals")
+    uwgls.take(8)
+    # retrieve_uwgls_for("Fundamentals")
   end
 
   def uwgl_jeopardys
-    retrieve_uwgls_for("Jeopardy")
+    uwgls.drop(8).take(20)
+    # retrieve_uwgls_for("Jeopardy")
   end
 
   def uwgl_freestyles
-    retrieve_uwgls_for("Freestyle")
+    uwgls.drop(28)
+    # retrieve_uwgls_for("Freestyle")
   end
 
   def fundamental_statuses
