@@ -1,27 +1,27 @@
 class CreateFreestylesController < ApplicationController
   def create
-    @word = if Rails.env.test?
-              Word.find(params[:word_id].gsub("=", ""))
-            else
-              Word.find(params[:word_id])
-            end
+    @word_params = Word.find(params[:word_id])
+    @word = Rails.env.test? ? @word_params.gsub("=", "") : @word_params
     @user_word = UserWord.find_by(user: current_user, word: @word)
 
-    if @user_word.freestyle_completed?
-      render json: {
-        errors: "Freestyle GL creations not needed for UW #{@user_word.id}."
-      }
+    if @user_word.jeopardy_completed? || @user_word.freestyle_completed?
+      msg = "Success: Freestyle UWGL creations not needed for "
+      msg_2 = "UW #{@user_word.id} -> #{@user_word.word.name}."
+
+      render json: { errors: msg << msg_2 }
     else
       GameLevel.create_freestyles_for(@user_word)
 
       if @user_word.user_word_game_levels.count == 40
-        render json: {
-          errors: "Freestyle GLs successfully created for UW #{@user_word.id}."
-        }
+        msg = "Success: Freestyle GLs created for UW #{@user_word.id} "
+        msg_2 = "-> #{@user_word.word.name}."
+
+        render json: { errors: msg << msg_2 }
       else
-        render json: {
-          errors: "Freestyle GLs not successfully created for UW #{@user_word.id}."
-        }
+        msg = "ERROR: Freestyle GLs not successfully created for "
+        msg_2 = "UW #{@user_word.id} -> #{@user_word.word.name}."
+
+        render json: { errors: msg << msg_2 }
       end
     end
   end

@@ -114,4 +114,10 @@ class UserWord < ActiveRecord::Base
   def self.destroy_jeopardys_for(user_word)
     user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
   end
+
+  def self.fix_rogue_uwgls
+    select { |uw| uw.user_word_game_levels.count > 40 }.map { |uw|
+      uw.user_word_game_levels.count
+    }
+  end
 end
