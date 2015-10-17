@@ -1,6 +1,3 @@
-// - Email the results to the teacher when user clicks 'submit to my teacher' button [done w/an error]
-// - Ensure space consistency with other levels
-
 $(document).ready(function(){
 	/**
 	 * Initiating variables and arrays
@@ -181,6 +178,7 @@ $(document).ready(function(){
 
 		create_freestyle_responses_for_uwgl();
 		update_uwgl_freestyle_statuses();
+		update_num_played();
 
 		// Hide the exit btn and display the home btn
 		$("#game-exit-btn").hide();
@@ -227,6 +225,24 @@ $(document).ready(function(){
 			}
 		});
 	};
+
+	// Update the game_stat num_played for this word
+  function update_num_played() {
+    var game_info = {
+      "word_id": $chosen_word_id,
+      "game_name": "Freestyle"
+    };
+
+    $.ajax({
+      type: "PATCH",
+      url: "/game_stat",
+      dataType: "json",
+      data: game_info,
+      success: function(response) {
+        console.log(response.errors);
+      }
+    });
+  };
 
 	// Global fn
 
