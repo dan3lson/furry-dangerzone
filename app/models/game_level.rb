@@ -9,20 +9,20 @@ class GameLevel < ActiveRecord::Base
   validates :game, presence: true
   validates :level, presence: true
 
-  def self.includes_games(game_name)
+  def self.retrieve_game_levels_for(game_name)
     includes(:game).select { |gl| gl.game.name == game_name }
   end
 
   def self.fundamentals
-    includes_games("Fundamentals")
+    retrieve_game_levels_for("Fundamentals")
   end
 
   def self.jeopardys
-    includes_games("Jeopardy")
+    retrieve_game_levels_for("Jeopardy")
   end
 
   def self.freestyles
-    includes_games("Freestyle")
+    retrieve_game_levels_for("Freestyle")
   end
 
   def self.create_fundamentals_for(user_word)
