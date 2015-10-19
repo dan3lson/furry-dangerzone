@@ -1,0 +1,56 @@
+<% provide(:title, "#{@class_name} Words") %>
+<% provide(:header, "#{@class_name} Words") %>
+
+<div>
+  <div>
+    <% if @fs_class_words.any? %>
+      <p>
+        <strong>
+          Total words: <%= @fs_class_words_count %>
+        </strong>
+      </p>
+      <div class="menu-header-container">
+        <div class="menu-header">
+          <strong><%= @first_word_letter %></strong>
+        </div>
+      </div>
+
+      <% @fs_class_words.each_with_index do |word, i| %>
+        <% prev_word = @fs_class_words[i - 1] %>
+
+        <% if @fs_class_words[i + 1] %>
+          <% next_word = @fs_class_words[i + 1] %>
+        <% end %>
+
+        <div>
+          <% if word.name[0] > prev_word.name[0] %>
+            <div class="menu-header-container">
+              <div class="menu-header">
+                <strong><%= word.name[0].capitalize %></strong>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="pull-right">
+          </div>
+
+          <div class="word-partial word-partial-myLeksi">
+            <span class="basic-black-link">
+              <%= word.name.capitalize %>
+            </span>
+          </div>
+        </div>
+
+        <% if next_word %>
+          <% if word.name[0] == next_word.name[0] %>
+            <hr class="myLeksi-hr">
+          <% else %>
+            <br>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      Students in this class haven't added any words yet.
+    <% end %>
+  </div>
+</div>

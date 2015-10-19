@@ -2,7 +2,8 @@
   <br>
   <div class="custom-footer">
     <div class="inline-block">
-      <% if params[:controller] == "school/schools" && params[:action] == "home" %>
+      <% if params[:controller] == "school/schools" &&
+            params[:action] == "home" %>
   			<%=
   				link_to_unless_current image_tag("home_filled_blue_32.png",
   				alt: "Home") + "<br/>Home".html_safe, school_home_path,
@@ -21,7 +22,8 @@
       <% if params[:controller] == "school/schools" &&
             params[:action] == "classes" ||
             params[:controller] == "school/schools" &&
-            (params[:action] == "student" || params[:action] == "students") %>
+            (params[:action] == "student" || params[:action] == "students" ||
+            params[:action] == "words") %>
   			<%=
   				link_to_unless_current image_tag("classroom_filled_blue_32.png",
   				alt: "Classes") + "<br/>Classes".html_safe, school_classes_path,

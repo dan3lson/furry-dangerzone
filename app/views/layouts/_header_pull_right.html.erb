@@ -31,17 +31,16 @@
 	<% elsif params[:controller] == "versions" &&
 					 params[:action] == "show" %>
 		<% if logged_in? && current_user.is_admin? %>
-			<%=
-				link_to image_tag("edit_black_32.png"),
-				edit_version_path(@version)
-			%>
+			<%= link_to image_tag("edit_black_32.png"), edit_version_path(@version) %>
 		<% end %>
 
 	<% elsif params[:controller] == "words" && params[:action] == "show" %>
 		<%= render "words/remove_word_btn_word_show_page", word: @word %>
 
-	<%# elsif params[:action] == "progress" && current_user.role != "fs_student" %>
-		<%#= image_tag("leaderboard_black_32.png", class: "leaderboard-btn")  %>
+	<% elsif params[:controller] == "school/schools" &&
+					 params[:action] == "students" %>
+			<%= link_to image_tag("book_white_25.png"),
+				school_words_path(filter: @class) %>
 
 	<% end %>
 </span>

@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     root "schools#classrooms"
     get "home" => "schools#home"
     get "classes" => "schools#classes"
+    get "words" => "schools#words"
     get "students" => "schools#students"
     get "student" => "schools#student"
     get "messages" => "schools#messages"
