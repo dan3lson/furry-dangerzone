@@ -2,10 +2,16 @@ class School::SchoolsController < BaseSchoolController
   def home
   end
 
-  def classrooms
-    @fs_class_one = User.fs_class_one
-    @fs_class_two = User.fs_class_two
-    @fs_students = @fs_class_one + @fs_class_two
+  def classes
+  end
+
+  def students
+    @class = params[:filter]
+    @fs_class = User.send(@class)
+  end
+
+  def student
+    @student = User.find(params[:id])
   end
 
   def messages

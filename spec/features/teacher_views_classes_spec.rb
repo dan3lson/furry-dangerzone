@@ -1,17 +1,16 @@
 require 'rails_helper'
 
-feature "teacher views Classrooms", %{
+feature "teacher views Classes", %{
 
   As a teacher,
-  I want to see my Classrooms and
-  student progress by clicking on their name.
+  I want to see my Classes.
 } do
 
   # Acceptance Criteria
   #
-  # [x] I see a Classrooms link to see my students
-  # [x] If I click on a student's name, I can see
-  #    their progress
+  # [x] I see a Classes link to see my classes
+  # [x] If I click on a Class name, I can see
+  #    students belonging to that class
 
   describe "\n visit menu page -->" do
     before :each do
@@ -71,7 +70,7 @@ feature "teacher views Classrooms", %{
 
       log_in_as(teacher)
 
-      visit "/school/classrooms"
+      visit "/school/classes"
 
       expect(page).to have_content("Classes")
       expect(page).to have_link("Home")

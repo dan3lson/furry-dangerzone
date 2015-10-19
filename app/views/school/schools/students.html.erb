@@ -1,0 +1,15 @@
+<% provide(:title, "Class One") %>
+<% provide(:header, "Class One") %>
+
+<div class="row">
+	<% @fs_class.each do |s| %>
+		<div class="col-xs-4 basic-apple-blue-link data-url pointer stu-pic-container"
+				 align="center"
+				 data-url="/school/student?id=<%= s.id %>">
+			<div class="stu-pic center"></div>
+			<p class="lead">
+				<%= s.username %>
+			</p>
+		</div>
+	<% end %>
+</div>

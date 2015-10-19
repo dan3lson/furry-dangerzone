@@ -18,16 +18,19 @@
     </div>
 
     <div class="inline-block">
-      <% if params[:controller] == "school/schools" && params[:action] == "classrooms" %>
+      <% if params[:controller] == "school/schools" &&
+            params[:action] == "classes" ||
+            params[:controller] == "school/schools" &&
+            (params[:action] == "student" || params[:action] == "students") %>
   			<%=
   				link_to_unless_current image_tag("classroom_filled_blue_32.png",
-  				alt: "Classes") + "<br/>Classes".html_safe, school_classrooms_path,
+  				alt: "Classes") + "<br/>Classes".html_safe, school_classes_path,
   				class: "img-responsive"
   			%>
   		<% else %>
   			<%=
   				link_to image_tag("classroom_dark_gray_32.png", alt: "Classes") +
-  				"<br/>Classes".html_safe, school_classrooms_path,
+  				"<br/>Classes".html_safe, school_classes_path,
   				class: "img-responsive"
   			%>
   		<% end %>
