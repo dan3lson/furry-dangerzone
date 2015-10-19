@@ -9,9 +9,9 @@ class School::SchoolsController < BaseSchoolController
     @class = params[:filter]
     @class_name = @class == "fs_class_one" ? "Class One" : "Class Two"
     @fs_class = User.send(@class)
-    @fs_class_words = @fs_class.map { |stu| stu.words  }.flatten.sort_by { |w|
+    @fs_class_words = @fs_class.map { |stu| stu.words }.flatten.uniq!.sort_by { |w|
       w.name
-    }.uniq
+    }
     @fs_class_words_count = @fs_class_words.count
     @first_word_letter = @fs_class_words.first.name[0].capitalize
   end
