@@ -8,6 +8,7 @@ class School::SchoolsController < BaseSchoolController
   def students
     @class = params[:filter]
     @fs_class = User.send(@class)
+    @class_name = @class == "fs_class_one" ? "Class One" : "Class Two"
   end
 
   def student
