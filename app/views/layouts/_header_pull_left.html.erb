@@ -20,9 +20,20 @@
 
 		<% elsif params[:controller] == "tags" && params[:action] == "show" %>
 			<%= link_to image_tag("back_black_32.png"), myTags_path %>
+
 		<% elsif params[:controller] == "users" &&
 						 params[:action] == "show" && current_user.is_teacher? %>
 			<%= link_to image_tag("back_black_32.png"), school_root_path %>
+
+		<% elsif params[:controller] == "school/schools" &&
+						 params[:action] == "students" &&
+						 current_user.is_teacher? %>
+			<%= link_to image_tag("back_white_32.png"), school_classes_path %>
+
+		<% elsif params[:controller] == "school/schools" &&
+						 params[:action] == "student" &&
+						 current_user.is_teacher? %>
+			<%= link_to image_tag("back_white_32.png"), :back %>
 		<% end %>
 	<% end %>
 </span>

@@ -31,6 +31,7 @@ $light-blue: lighten($bootstrap-blue, 37);
 $light-green: lighten($bootstrap-green, 8);
 $light-leksi-red: lighten($leksi-red, 47);
 $sky-blue: #1677ba;
+$light-sky-blue: lighten($sky-blue, 55);
 $white: #fff;
 
 @mixin box_sizing {
@@ -170,6 +171,10 @@ p {
 	}
 }
 
+.bold {
+	font-weight: bold;
+}
+
 .border-none {
 	border: none;
 }
@@ -209,6 +214,26 @@ p {
 
 .center {
 	text-align: center;
+}
+
+.class-default-image {
+	background-image: url(image-path("classes_color_100.png"));
+	height: 100px;
+	width: 100px;
+}
+
+.stu-pic {
+	background-image: url(image-path("pup2_small.png"));
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 1px solid $light-sky-blue;
+	border-radius: 70px;
+	height: 70px;
+	width: 70px;
+}
+
+.stu-pic-container:hover {
+	background: $light-sky-blue;
 }
 
 .clear {

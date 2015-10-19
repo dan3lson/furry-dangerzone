@@ -38,7 +38,9 @@ Rails.application.routes.draw do
   namespace :school do
     root "schools#classrooms"
     get "home" => "schools#home"
-    get "classrooms" => "schools#classrooms"
+    get "classes" => "schools#classes"
+    get "students" => "schools#students"
+    get "student" => "schools#student"
     get "messages" => "schools#messages"
     get "progress" => "schools#progress"
     get "menu" => "schools#menu"
