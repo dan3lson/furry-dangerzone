@@ -6,12 +6,12 @@ class UserPointsController < ApplicationController
 
     if current_user.save
       render json: {
-        errors: "Points successfully modified."
+        errors: "Success: Points updated for #{current_user.username}."
       }
     else
       render json: {
         errors: current_user.errors.full_messages,
-        status: "#{current_user.username}\'s points not successfully modified"
+        status: "ERROR: #{current_user.username}\'s points not modified."
       }
     end
   end

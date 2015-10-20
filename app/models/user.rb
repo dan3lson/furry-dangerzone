@@ -262,4 +262,39 @@ class User < ActiveRecord::Base
       s.save
     end
   end
+
+  def words_added_last_day
+    user_words.where(created_at: 1.days.ago..Time.now)
+  end
+
+  def fundamentals_completed_last_day
+    user_words.select do |uw|
+      next unless uw.fundamental_completed?
+
+      uw.fundamental_completed_last_day?
+    end
+  end
+
+  def jeopardys_completed_last_day
+    user_words.select do |uw|
+      next unless uw.jeopardy_completed?
+
+      uw.jeopardy_completed_last_day?
+    end
+  end
+
+  def freestyles_completed_last_day
+    user_words.select do |uw|
+      next unless uw.freestyle_completed?
+
+      uw.freestyle_completed_last_day?
+    end
+  end
+
+  def has_recent_activity?
+    words_added_last_day.any? ||
+    fundamentals_completed_last_day.any? ||
+    jeopardys_completed_last_day.any? ||
+    freestyles_completed_last_day.any?
+  end
 end

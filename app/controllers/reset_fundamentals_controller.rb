@@ -20,11 +20,11 @@ class ResetFundamentalsController < ApplicationController
 
       if @status.first == "not started"
         render json: {
-          errors: "UW #{@user_word.id}\'s Fundamentals successfully reset."
+          errors: "Success: UW #{@user_word.id}\'s Funds successfully reset."
         }
       else
         render json: {
-          errors: "UW #{@user_word.id}\'s Fundamentals NOT successfully reset."
+          errors: "ERROR: UW #{@user_word.id}\'s Funds NOT reset."
         }
       end
     end
