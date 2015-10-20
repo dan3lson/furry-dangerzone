@@ -137,4 +137,25 @@ class UserWord < ActiveRecord::Base
       puts "**********************************"
     end
   end
+
+  def fundamental_completed_last_day?
+    first_uwgl_fundamental = self.uwgl_fundamentals.first
+
+    first_uwgl_fundamental.updated_at >= 1.days.ago &&
+    (first_uwgl_fundamental.created_at != first_uwgl_fundamental.updated_at)
+  end
+
+  def jeopardy_completed_last_day?
+    first_uwgl_jeopardy = self.uwgl_jeopardys.first
+
+    first_uwgl_jeopardy.updated_at >= 1.days.ago &&
+    (first_uwgl_jeopardy.created_at != first_uwgl_jeopardy.updated_at)
+  end
+
+  def freestyle_completed_last_day?
+    first_uwgl_freestyle = self.uwgl_freestyles.first
+
+    first_uwgl_freestyle.updated_at >= 1.days.ago &&
+    (first_uwgl_freestyle.created_at != first_uwgl_freestyle.updated_at)
+  end
 end

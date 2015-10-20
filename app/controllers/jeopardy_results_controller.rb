@@ -15,12 +15,12 @@ class JeopardyResultsController < ApplicationController
 		end
 
 		if @game_stat.save
-			msg = "GameStat #{@game_stat.id} jeop-result successfully updated for "
-			msg_2 = "#{@user_word.id} -> #{@user_word.word.name}"
+			msg = "Success: GameStat #{@game_stat.id} jeop-result updated for "
+			msg_2 = "#{@user_word.id} -> #{@user_word.word.name}."
 
 			render json: { errors: msg << msg_2	}
 		else
-			msg = "ERROR: GameStat #{@game_stat.id} jeop-result NOT successfully "
+			msg = "ERROR: GameStat #{@game_stat.id} jeop-result not "
 			msg_2 = "updated for #{@user_word.id} -> #{@user_word.word.name}"
 
 			rener json: { errors: msg << msg_2 }

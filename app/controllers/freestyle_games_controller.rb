@@ -17,11 +17,11 @@ class FreestyleGamesController < ApplicationController
 
 		if @freestyle_responses_after - @freestyle_responses_before == 12
 			render json: {
-				errors: "12 F-Responses successfully posted -> UW #{@user_word.id}"
+				errors: "Success: 12 F-Responses created for UW #{@user_word.id}."
 			}
 		else
 			render json: {
-				errors: "12 F-Responses NOT successfully posted -> UW #{@user_word.id}"
+				errors: "ERROR: 12 F-Responses not created for #{@user_word.id}."
 			}
 		end
 	end
@@ -39,11 +39,11 @@ class FreestyleGamesController < ApplicationController
 
 		if @status == "complete"
 			render json: {
-				errors: "Uwgl_freestyles (UW #{@user_word.id}) updated successfully"
+				errors: "Success: UWGL Freestyles (UW #{@user_word.id}) updated."
 			}
 		else
 			render json: {
-				errors: "Uwgl_freestyles (UW #{@user_word.id}) NOT updated successfully"
+				errors: "ERROR: UWGL Freestyles (UW #{@user_word.id}) NOT updated."
 			}
 		end
 	end

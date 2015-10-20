@@ -1,0 +1,82 @@
+<div class="box-shadow-border">
+	<h4 class="overview-header">
+		Recent Activity
+		<small class="pull-right">last 24 hours</small>
+	</h4>
+
+	<div>
+		<% if user.has_recent_activity? %>
+
+			<% if @words_added_last_day.any? %>
+				<% @words_added_last_day.each do |uw| %>
+					<div>
+						<div class="inline-block">
+							<%= image_tag("add_black_32.png") %>
+						</div>
+						&nbsp;
+						<div class="inline-block">
+							Added the word <em><%= uw.word.name %></em>
+						</div>
+					</div>
+					<br>
+				<% end %>
+			<% end %>
+
+			<% if @funds_completed_last_day.any? %>
+				<div>
+					<% @funds_completed_last_day.each do |uw| %>
+						<div>
+							<div class="inline-block">
+								<%= image_tag("medal_red_32.png") %>
+							</div>
+							&nbsp;
+							<div class="inline-block">
+								Completed the Fundamentals for <em><%= uw.word.name %></em>
+							</div>
+						</div>
+						<br>
+					<% end %>
+				</div>
+			<% end %>
+
+			<% if @jeops_completed_last_day.any? %>
+				<div>
+					<% @jeops_completed_last_day.each do |uw| %>
+						<div>
+							<div class="inline-block">
+								<%= image_tag("medal_orange_32.png") %>
+							</div>
+							&nbsp;
+							<div class="inline-block">
+								Completed Jeopardy for <em><%= uw.word.name %></em>
+							</div>
+						</div>
+						<br>
+					<% end %>
+				</div>
+			<% end %>
+
+			<% if @frees_completed_last_day.any? %>
+				<div>
+					<% @frees_completed_last_day.each do |uw| %>
+						<div>
+							<div class="inline-block">
+								<%= image_tag("medal_green_32.png") %>
+							</div>
+							&nbsp;
+							<div class="inline-block">
+								Completed Freestyle for <em><%= uw.word.name %></em>
+							</div>
+						</div>
+						<br>
+					<% end %>
+				</div>
+			<% end %>
+
+		<% else %>
+			<small>
+				<%= user.username %> doesn't have any recent activity.
+			</small>
+		<% end %>
+	</div>
+</div>
