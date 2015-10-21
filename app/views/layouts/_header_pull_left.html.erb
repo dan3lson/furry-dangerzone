@@ -23,7 +23,7 @@
 
 		<% elsif params[:controller] == "users" &&
 						 params[:action] == "show" && current_user.is_teacher? %>
-			<%= link_to image_tag("back_black_32.png"), school_root_path %>
+			<%= link_to image_tag("back_black_32.png"), users_path %>
 
 		<% elsif params[:controller] == "school/schools" &&
 						 params[:action] == "students" &&
