@@ -177,12 +177,18 @@ p {
 
 .border-none {
 	border: none;
+	position: relative;
+	top: -24px;
 }
 
 .box-shadow-border {
 	box-shadow: 1px 1px 2px #888;
 	padding: 10px;
   margin-bottom: 25px;
+}
+
+.zero-padding > * {
+	padding: 10px;
 }
 
 .btn-custom {
@@ -675,6 +681,11 @@ table {
 	color: $white;
 }
 
+.word-partial {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
 .word-partial-myLeksi {
   padding-top: 13px;
 }
@@ -900,4 +911,8 @@ table {
 
 .freestyle-types {
 	margin-top: 0;
+}
+
+.zero-padding {
+	padding: 0;
 }
