@@ -40,21 +40,19 @@
 
       </div>
 
-      <div class="col-xs-4 free-show-game-circle-containter">
-        <% if @user_word.freestyle_completed?%>
-          <div class="free-show-game-circle white game-not-ready">&#10004;</div>
-          <span class="leksi-green game-not-ready">Freestyle</span>
-        <% elsif @user_word.current_game == "three" %>
-          <div class="data-url pointer free-show-game-circle"
-               data-url="/freestyle?word_id=<%= @word.id %>">
-          </div>
+      <% if @user_word.uwgl_freestyles.any? %>
+      <div class="col-xs-4 free-show-game-circle-containter pointer data-url"
+           data-url="/freestyle?word_id=<%= @word.id %>">
+          <div class="free-show-game-circle white">&#10004;</div>
           <span class="leksi-green">Freestyle</span>
-        <% else %>
+
+      <% else %>
+      <div class="col-xs-4 free-show-game-circle-containter">
           <div class="free-show-game-circle game-not-ready"
                data-url="/freestyle?word_id=<%= @word.id %>">
           </div>
           <span class="leksi-green game-not-ready">Freestyle</span>
-        <% end %>
+      <% end %>
       </div>
     </div>
   </div>
