@@ -6,7 +6,7 @@ class ResetFundamentalsController < ApplicationController
 
     if @user_word.jeopardy_completed? || @user_word.freestyle_completed?
       render json: {
-        errors: "UW #{@user_word.id}\'s Fundamentals untouched."
+        errors: "Okay: UW #{@user_word.id}\'s Fundamentals untouched."
       }
     else
       @user_word.uwgl_fundamentals.each do |uwgl|

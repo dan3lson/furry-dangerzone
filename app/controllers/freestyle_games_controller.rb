@@ -2,27 +2,56 @@ class FreestyleGamesController < ApplicationController
 	def create
 		@word = Word.find(params[:word_id])
 		@user_word = UserWord.find_by(user: current_user, word: @word)
-		@responses = params[:freestyle_responses]
 		@uwgl_freestyles = @user_word.uwgl_freestyles
+		@first_uwgl_freestyle_id = @uwgl_freestyles.first.id
+		@uwgl_freestyle_responses = @uwgl_freestyles.map { |uwgl|
+			FreestyleResponse.find_by(user_word_game_level_id: uwgl.id)
+		}
+		@freestyle_response_ids = FreestyleResponse.pluck(:user_word_game_level_id)
 		@freestyle_responses_before = FreestyleResponse.count
+		@responses = params[:freestyle_responses]
 
-		0.upto(11) do |i|
-			@freestyle_response = FreestyleResponse.create!(
-				input: @responses[i],
-				user_word_game_level: @uwgl_freestyles[i]
-			)
-		end
+		@updated_freestyle_responses = 0
 
-		@freestyle_responses_after = FreestyleResponse.count
+		if @freestyle_response_ids.include?(@first_uwgl_freestyle_id)
 
-		if @freestyle_responses_after - @freestyle_responses_before == 12
-			render json: {
-				errors: "Success: 12 F-Responses created for UW #{@user_word.id}."
-			}
+			@uwgl_freestyles.each_with_index do |uwgl, i|
+				@freestyle_response = FreestyleResponse.find_by(
+					user_word_game_level_id: uwgl.id
+				)
+				@freestyle_response.input = @responses[i]
+
+				@updated_freestyle_responses += 1 if @freestyle_response.save
+			end
+
+			if @updated_freestyle_responses == 12
+				render json: {
+					errors: "Success: 12 F-Responses updated for UW #{@user_word.id}."
+				}
+			else
+				render json: {
+					errors: "ERROR: 12 F-Responses not updated for #{@user_word.id}."
+				}
+			end
 		else
-			render json: {
-				errors: "ERROR: 12 F-Responses not created for #{@user_word.id}."
-			}
+			0.upto(11) do |i|
+				@freestyle_response = FreestyleResponse.create!(
+					input: @responses[i],
+					user_word_game_level: @uwgl_freestyles[i]
+				)
+			end
+
+			@freestyle_responses_after = FreestyleResponse.count
+
+			if @freestyle_responses_after - @freestyle_responses_before == 12
+				render json: {
+					errors: "Success: 12 F-Responses created for UW #{@user_word.id}."
+				}
+			else
+				render json: {
+					errors: "ERROR: 12 F-Responses not created for #{@user_word.id}."
+				}
+			end
 		end
 	end
 
