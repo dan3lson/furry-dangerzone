@@ -4,7 +4,7 @@
     <div class="inline-block">
       <% if params[:action] == "home" %>
   			<%=
-  				link_to_unless_current image_tag("home_apple_blue_filled_32.png",
+  				link_to_unless_current image_tag("home_sky_blue_filled_32.png",
   				alt: "myLeksi") + "<br/>Home".html_safe, home_path,
   				class: "img-responsive"
   			%>
@@ -19,7 +19,7 @@
     <div class="inline-block">
       <% if params[:action] == "myLeksi" || params[:controller] == "words" %>
   			<%=
-  				link_to_unless_current image_tag("myLeksi_apple_blue_filled_32.png",
+  				link_to_unless_current image_tag("myLeksi_sky_blue_filled_32.png",
   				alt: "myLeksi") + "<br/>myLeksi".html_safe, myLeksi_path,
   				class: "img-responsive"
   			%>
@@ -34,7 +34,7 @@
     <div class="inline-block">
       <% if params[:controller] == "searches" %>
   			<%=
-  				link_to_unless_current image_tag("add_apple_blue_filled_32.png", alt: "Add") +
+  				link_to_unless_current image_tag("add_sky_blue_filled_32.png", alt: "Add") +
   				"<br/>Add".html_safe, search_path,
   				class: "img-responsive"
   			%>
@@ -49,7 +49,7 @@
     <div class="inline-block">
       <% if params[:action] == "progress" %>
   			<%=
-  				link_to_unless_current image_tag("progress_apple_blue_filled_32.png", alt: "Progress") +
+  				link_to_unless_current image_tag("progress_sky_blue_filled_32.png", alt: "Progress") +
   				"<br/>Progress".html_safe, progress_path,
   				class: "img-responsive"
   			%>
@@ -64,7 +64,7 @@
     <div class="inline-block">
       <% if params[:action] == "menu" %>
   			<%=
-  				link_to_unless_current image_tag("menu_apple_blue_filled_32.png", alt: "Menu") +
+  				link_to_unless_current image_tag("menu_sky_blue_filled_32.png", alt: "Menu") +
   				"<br/>Menu".html_safe, menu_path,
   				class: "img-responsive"
   			%>
