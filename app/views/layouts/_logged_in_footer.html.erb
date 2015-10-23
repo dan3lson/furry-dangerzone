@@ -16,8 +16,10 @@
   			%>
   		<% end %>
     </div>
+
     <div class="inline-block">
-      <% if params[:action] == "myLeksi" || params[:controller] == "words" %>
+      <% if params[:action] == "myLeksi" || params[:controller] == "words" &&
+                                            params[:action] == "show" %>
   			<%=
   				link_to_unless_current image_tag("myLeksi_sky_blue_filled_32.png",
   				alt: "myLeksi") + "<br/>myLeksi".html_safe, myLeksi_path,
@@ -31,6 +33,7 @@
   			%>
   		<% end %>
     </div>
+
     <div class="inline-block">
       <% if params[:controller] == "searches" %>
   			<%=
@@ -46,6 +49,7 @@
   			%>
   		<% end %>
     </div>
+
     <div class="inline-block">
       <% if params[:action] == "progress" %>
   			<%=
@@ -61,6 +65,7 @@
   			%>
   		<% end %>
     </div>
+
     <div class="inline-block">
       <% if params[:action] == "menu" %>
   			<%=

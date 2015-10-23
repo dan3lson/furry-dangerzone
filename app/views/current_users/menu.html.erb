@@ -41,20 +41,6 @@
 
   <div class="menu-header-container">
     <p class="lead menu-header">
-      Rate This App
-    </p>
-
-    <% if user_already_reviewed_latest_version? %>
-      Thanks for rating Leksi <%= version_display_name(latest_version.number) %>!
-    <% else %>
-      <div class="well well-sm">
-        <%= render "reviews/form" %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="menu-header-container">
-    <p class="lead menu-header">
       Tags
     </p>
 
@@ -75,6 +61,20 @@
     <div class="basic-apple-blue-link inline-block">
       <%= link_to "Create", new_tag_path %>
     </div>
+  </div>
+
+  <div class="menu-header-container">
+    <p class="lead menu-header">
+      Rate This App
+    </p>
+
+    <% if user_already_reviewed_latest_version? %>
+      Thanks for rating Leksi <%= version_display_name(latest_version.number) %>!
+    <% else %>
+      <div class="well well-sm">
+        <%= render "reviews/form" %>
+      </div>
+    <% end %>
   </div>
 
   <div class="menu-header-container">

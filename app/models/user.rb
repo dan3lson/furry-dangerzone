@@ -297,4 +297,8 @@ class User < ActiveRecord::Base
     jeopardys_completed_last_day.any? ||
     freestyles_completed_last_day.any?
   end
+
+  def can_create_words?
+    is_admin? || is_teacher?
+  end
 end
