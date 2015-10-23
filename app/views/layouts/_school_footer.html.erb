@@ -5,7 +5,7 @@
       <% if params[:controller] == "school/schools" &&
             params[:action] == "home" %>
   			<%=
-  				link_to_unless_current image_tag("home_filled_blue_32.png",
+  				link_to_unless_current image_tag("home_sky_blue_filled_32.png",
   				alt: "Home") + "<br/>Home".html_safe, school_home_path,
   				class: "img-responsive"
   			%>
@@ -73,7 +73,7 @@
     <div class="inline-block">
       <% if params[:controller] == "school/schools" && params[:action] == "menu" %>
   			<%=
-  				link_to_unless_current image_tag("menu_filled_blue_32.png", alt: "Menu") +
+  				link_to_unless_current image_tag("menu_sky_blue_filled_32.png", alt: "Menu") +
   				"<br/>Menu".html_safe, school_menu_path,
   				class: "img-responsive"
   			%>
