@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
   resources :users
-  resources :words
+  resources :words, only: [:index, :show]
   resource :user_word, only: [:create, :destroy]
   resource :user_points, only: [:update]
   resource :user_word_game_level, only: [:update]
@@ -45,5 +45,6 @@ Rails.application.routes.draw do
     get "messages" => "schools#messages"
     get "progress" => "schools#progress"
     get "menu" => "schools#menu"
+    resources :words, only: [:new, :create, :edit, :update, :destroy]
   end
 end

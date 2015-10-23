@@ -118,6 +118,22 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#can_create_words?" do
+    it "returns false" do
+      expect(user.can_create_words?).to eq(false)
+    end
+
+    it "returns true" do
+      user.role = "admin"
+      expect(user.can_create_words?).to eq(true)
+    end
+
+    it "returns true" do
+      user.role = "teacher"
+      expect(user.can_create_words?).to eq(true)
+    end
+  end
+
   describe "#self.top_ten_highest_points?" do
     it "returns false" do
       user.points = 1
