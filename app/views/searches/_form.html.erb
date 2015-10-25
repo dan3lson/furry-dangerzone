@@ -4,11 +4,13 @@
       <%= label_tag :inputSuccess5, "Search", class: "control-label sr-only" %>
       <%= text_field_tag(
         :search, params[:search],
-        placeholder: @random_word_placeholder,
         class: "form-control center", id: "inputSuccess5"
       ) %>
       <span class="input-group-btn">
-        <%= submit_tag "define", name: nil, class: "btn btn-default" %>
+        <%= submit_tag "define", name: nil, class: "btn btn-info" %>
+      </span>
+      <span class="input-group-btn">
+        <%= submit_tag "surprise me!", name: nil, class: "btn btn-default" %>
       </span>
     </div>
   <% end %>

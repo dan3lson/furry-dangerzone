@@ -8,6 +8,14 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
+
+    if false
+      if incomplete_fundamentals_exist?(current_user, @tag)
+        @rand_incomp_fund_word_id = incomplete_fundamentals(
+          current_user, @tag
+        ).random.word.id
+      end
+    end
   end
 
   def new

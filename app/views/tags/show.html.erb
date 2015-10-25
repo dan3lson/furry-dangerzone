@@ -1,6 +1,42 @@
 <% provide(:title, @tag.name) %>
 <% provide(:header, @tag.name) %>
 
+<% if false %>
+<div class="box-shadow-border zero-padding">
+	<h4 class="overview-header">
+    Game Zone
+    <small>Tap to play with words belonging to this tag!</small>
+  </h4>
+
+  <div class="row" align="center">
+    <% if incomplete_fundamentals_exist?(current_user, @tag) %>
+      <div class="col-xs-4 data-url pointer fund-show-game-circle-containter"
+           data-url="/fundamentals?word_id=<%= @rand_incomp_fund_word_id %>">
+        <div class="fund-show-game-circle"></div>
+        <span class="leksi-red">Fundamentals</span>
+      </div>
+    <% else %>
+      <div class="col-xs-4 fund-show-game-circle-containter">
+        <div class="fund-show-game-circle game-not-ready"></div>
+        <span class="leksi-red game-not-ready">Fundamentals</span>
+      </div>
+    <% end %>
+
+    <div class="col-xs-4 data-url jeop-show-game-circle-containter pointer"
+         data-url="/jeopardy?word_id=<%= true %>">
+      <div class="jeop-show-game-circle"></div>
+      <span class="leksi-orange">Jeopardy</span>
+    </div>
+
+    <div class="col-xs-4 data-url free-show-game-circle-containter pointer"
+         data-url="/freestyle?word_id=<%= true %>">
+      <div class="free-show-game-circle"></div>
+      <span class="leksi-green">Freestyle</span>
+    </div>
+  </div>
+</div>
+<% end %>
+
 <div class="box-shadow-border">
   <div class="pull-right">
     <%=
