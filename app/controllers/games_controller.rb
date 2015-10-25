@@ -15,11 +15,11 @@ class GamesController < ApplicationController
         @three_j_words = current_user.incomplete_freestyles.shuffle.take(3).
           map { |uw| uw.word }
       end
-    end
-  else
-    flash[:danger] = "Yikes! Log in first and then play."
+    else
+      flash[:danger] = "Yikes! Log in first and then play."
 
-    redirect_to root_path
+      redirect_to root_path
+    end
   end
 
   def jeopardy
