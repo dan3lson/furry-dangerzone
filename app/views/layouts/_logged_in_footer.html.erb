@@ -67,7 +67,7 @@
     </div>
 
     <div class="inline-block">
-      <% if params[:action] == "menu" %>
+      <% if params[:action] == "menu" || params[:controller] == "tags" %>
   			<%=
   				link_to_unless_current image_tag("menu_sky_blue_filled_32.png", alt: "Menu") +
   				"<br/>Menu".html_safe, menu_path,
