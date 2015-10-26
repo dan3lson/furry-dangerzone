@@ -1,72 +1,100 @@
 <% provide(:title, @tag.name) %>
 <% provide(:header, @tag.name) %>
 
-<% if false %>
-<div class="box-shadow-border zero-padding">
-	<h4 class="overview-header">
-    Game Zone
-    <small>Tap to play with words belonging to this tag!</small>
-  </h4>
+<!-- Fix tag removal from word show page -->
+<!-- Make Jeopardy gameplay with words only within tag -->
 
-  <div class="row" align="center">
-    <% if incomplete_fundamentals_exist?(current_user, @tag) %>
-      <div class="col-xs-4 data-url pointer fund-show-game-circle-containter"
-           data-url="/fundamentals?word_id=<%= @rand_incomp_fund_word_id %>">
-        <div class="fund-show-game-circle"></div>
-        <span class="leksi-red">Fundamentals</span>
-      </div>
-    <% else %>
-      <div class="col-xs-4 fund-show-game-circle-containter">
-        <div class="fund-show-game-circle game-not-ready"></div>
-        <span class="leksi-red game-not-ready">Fundamentals</span>
-      </div>
-    <% end %>
+<div class="row" align="center">
+  <% if incomplete_fundamentals_exist?(current_user, @tag) %>
+    <div class="col-xs-4 data-url pointer fund-show-game-circle-containter"
+         data-url="/fundamentals?word_id=<%= @rand_incomp_fund_word_id %>">
+      <div class="fund-show-game-circle"></div>
+      <span class="leksi-red">Fundamentals</span>
+    </div>
+  <% else %>
+    <div class="col-xs-4">
+      <div class="fund-show-game-circle game-not-ready"></div>
+      <span class="leksi-red game-not-ready">Fundamentals</span>
+    </div>
+  <% end %>
 
-    <div class="col-xs-4 data-url jeop-show-game-circle-containter pointer"
-         data-url="/jeopardy?word_id=<%= true %>">
+  <% if incomplete_jeopardys_exist?(current_user, @tag) %>
+    <div class="col-xs-4 data-url pointer jeop-show-game-circle-containter"
+         data-url="/jeopardy?word_id=<%= @rand_incomp_jeop_word_id %>">
       <div class="jeop-show-game-circle"></div>
       <span class="leksi-orange">Jeopardy</span>
     </div>
+  <% else %>
+    <div class="col-xs-4">
+      <div class="jeop-show-game-circle game-not-ready"></div>
+      <span class="leksi-orange game-not-ready">Jeopardy</span>
+    </div>
+  <% end %>
 
-    <div class="col-xs-4 data-url free-show-game-circle-containter pointer"
-         data-url="/freestyle?word_id=<%= true %>">
+  <% if incomplete_freestyles_exist?(current_user, @tag) %>
+    <div class="col-xs-4 data-url pointer free-show-game-circle-containter"
+         data-url="/freestyle?word_id=<%= @rand_incomp_free_word_id %>">
       <div class="free-show-game-circle"></div>
       <span class="leksi-green">Freestyle</span>
     </div>
-  </div>
+  <% else %>
+    <div class="col-xs-4">
+      <div class="free-show-game-circle game-not-ready"></div>
+      <span class="leksi-green game-not-ready">Freestyle</span>
+    </div>
+  <% end %>
 </div>
-<% end %>
+
+<br>
 
 <div class="box-shadow-border">
   <div class="pull-right">
-    <%=
-      image_tag("myLeksi_black_filled_25.png",
+    <%= image_tag("trophy_black_filled_25.png",
         alt: "myTags", class: "img-responsive"
       )
     %>
   </div>
+
+  <div id="progress_bar_container">
+    <div class="progress">
+      <div class="progress-bar progress-bar-success"
+           role="progressbar" aria-valuenow="0"
+           aria-valuemin="<%= @tag_game_progress %>" aria-valuemax="100"
+           style="width: <%= @tag_game_progress %>%">
+          <span class="sr-only"><%= @tag_game_progress %>%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="box-shadow-border">
+  <div class="pull-right">
+    <%= image_tag("myLeksi_black_filled_25.png",
+        alt: "myTags", class: "img-responsive"
+      )
+    %>
+  </div>
+
   <% if words_for(current_user, @tag).count > 0 %>
     <% words_for(current_user, @tag).each do |word| %>
-      <div class="words-for-a-tag">
-        <div class="tag col-xs-9">
-          <div class="basic-black-link inline-block">
-            <%=
-              link_to word.name, word
-            %>
-          </div>
-          <div class="word-on-tag-show-page inline-block pull-right">
-            <%=
-              render "words/remove_word_btn_tag_show_page",
-              word: word, tag: @tag
-            %>
-          </div>
-        </div>
-      </div>
+      <span class="tag">
+        <span class="basic-black-link">
+          <%= link_to word.name, word %>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+        </span>
+        <span>
+          <%= render "words/remove_word_btn_tag_show_page",
+            word: word, tag: @tag
+          %>
+        </span>
+      </span>
     <% end %>
-    <div class="clear"></div>
   <% else %>
     <div class="alert alert-warning">
         This tag doesn't have any words.
     </div>
   <% end %>
+  <div class="clear"></div>
 </div>

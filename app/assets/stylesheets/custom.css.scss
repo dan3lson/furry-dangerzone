@@ -667,10 +667,12 @@ table {
 }
 
 .tag {
+	background: $light-gray;
 	border: 2px solid $light-gray;
-	border-left: 3px solid lighten($dark-gray, 30%);
-	padding: 10px;
-	margin-bottom: 10px;
+	border-radius: 100px;
+	float: left;
+	padding: 5px;
+	padding-left: 15px;
 }
 
 .top-section {

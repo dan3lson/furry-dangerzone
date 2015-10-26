@@ -15,6 +15,26 @@ module WordsHelper
     incomplete_fundamentals(user, tag).count > 0
   end
 
+  def incomplete_jeopardys(user, tag)
+    user_words(user, tag).select { |uw| uw.fundamental_completed? &&
+      !uw.jeopardy_completed?
+    }
+  end
+
+  def incomplete_jeopardys_exist?(user, tag)
+    incomplete_jeopardys(user, tag).count > 0
+  end
+
+  def incomplete_freestyles(user, tag)
+    user_words(user, tag).select { |uw| uw.fundamental_completed? &&
+      uw.jeopardy_completed? && !uw.freestyle_completed?
+    }
+  end
+
+  def incomplete_freestyles_exist?(user, tag)
+    incomplete_freestyles(user, tag).count > 0
+  end
+
   def top_three_entries_for(word, attribute)
     word.send(attribute).split(";").take(3)
   end

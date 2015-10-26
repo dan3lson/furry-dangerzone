@@ -8,13 +8,39 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
+    @words_count = words_for(current_user, @tag).count
+    @incomplete_funds_count = incomplete_fundamentals(
+      current_user, @tag
+    ).count
+    @incomplete_jeops_count = incomplete_jeopardys(
+      current_user, @tag
+    ).count
+    @incomplete_frees_count = incomplete_freestyles(
+      current_user, @tag
+    ).count
+    @incomplete_games_count =  @incomplete_funds_count +
+                               @incomplete_jeops_count +
+                               @incomplete_frees_count
+    @total_possible_games = @words_count * 3
+    @tag_game_progress = (@total_possible_games - @incomplete_games_count) /
+                         @total_possible_games.to_f * 100
 
-    if false
-      if incomplete_fundamentals_exist?(current_user, @tag)
-        @rand_incomp_fund_word_id = incomplete_fundamentals(
-          current_user, @tag
-        ).random.word.id
-      end
+    if incomplete_fundamentals_exist?(current_user, @tag)
+      @rand_incomp_fund_word_id = incomplete_fundamentals(
+        current_user, @tag
+      ).sample.word.id
+    end
+
+    if incomplete_jeopardys_exist?(current_user, @tag)
+      @rand_incomp_jeop_word_id = incomplete_jeopardys(
+        current_user, @tag
+      ).sample.word.id
+    end
+
+    if incomplete_freestyles_exist?(current_user, @tag)
+      @rand_incomp_free_word_id = incomplete_freestyles(
+        current_user, @tag
+      ).sample.word.id
     end
   end
 
