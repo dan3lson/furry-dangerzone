@@ -15,7 +15,7 @@ feature "user removes tag from word show page", %{
   #     but is a tag I still have in myTags
   # [x] I see a message of removal-success
 
-  describe "\n user removes a tag -->" do
+  pending "\n user removes a tag -->" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
     let!(:tag) { FactoryGirl.create(:tag) }

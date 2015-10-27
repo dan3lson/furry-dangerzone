@@ -1,70 +1,25 @@
 module GamesHelper
   def num_fundamentals_games_not_started(user)
-    num = 0
-
-    user.user_words.each do |uw|
-      num += 1 if uw.fundamental_not_started?
-    end
-
-    num
-  end
-
-  def num_fundamentals_games_in_progress(user)
-    num = 0
-
-    user.user_words.each do |uw|
-      num += 1 if uw.fundamental_in_progress?
-    end
-
-    num
+    user.incomplete_fundamentals.count
   end
 
   def num_fundamentals_games_completed(user)
-    num = 0
-
-    user.user_words.each do |uw|
-      num += 1 if uw.fundamental_completed?
-    end
-    num
+    user.completed_fundamentals.count
   end
 
   def num_jeopardy_games_not_started(user)
-    num = 0
-
-    user.user_words.each do |uw|
-      num += 1 if uw.jeopardy_not_started?
-    end
-
-    num
+    user.incomplete_jeopardys.count
   end
 
   def num_jeopardy_games_completed(user)
-    num = 0
-
-    user.user_words.each do |uw|
-      num += 1 if uw.jeopardy_completed?
-    end
-
-    num
+    user.completed_jeopardys.count
   end
 
   def num_freestyle_games_not_started(user)
-    num = 0
-
-    user.user_words.each do |uw|
-      num += 1 if uw.freestyle_not_started?
-    end
-
-    num
+    user.incomplete_freestyles.count
   end
 
   def num_freestyle_games_completed(user)
-    num = 0
-
-    user.user_words.each do |uw|
-      num += 1 if uw.freestyle_completed?
-    end
-
-    num
+    user.completed_freestyles.count
   end
 end

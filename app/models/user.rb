@@ -57,33 +57,21 @@ class User < ActiveRecord::Base
   end
 
   def incomplete_fundamentals
-    games = []
-
-    user_words.each do |uw|
-      games << uw unless uw.fundamental_completed?
-    end
-
-    games
+    UserWord.where(user: self).select { |uw|
+      uw.fundamental_not_started?
+    }
   end
 
   def incomplete_jeopardys
-    games = []
-
-    user_words.each do |uw|
-      games << uw if uw.jeopardy_not_started?
-    end
-
-    games
+    UserWord.where(user: self).select { |uw|
+      uw.jeopardy_not_started?
+    }
   end
 
   def incomplete_freestyles
-    games = []
-
-    user_words.each do |uw|
-      games << uw if uw.freestyle_not_started?
-    end
-
-    games
+    UserWord.where(user: self).select { |uw|
+      uw.freestyle_not_started?
+    }
   end
 
   def has_incomplete_fundamentals?
@@ -103,33 +91,21 @@ class User < ActiveRecord::Base
   end
 
   def completed_fundamentals
-    games = []
-
-    user_words.each do |uw|
-      games << uw if uw.fundamental_completed?
-    end
-
-    games
+    UserWord.where(user: self).select { |uw|
+      uw.fundamental_completed?
+    }
   end
 
   def completed_jeopardys
-    games = []
-
-    user_words.each do |uw|
-      games << uw if uw.jeopardy_completed?
-    end
-
-    games
+    UserWord.where(user: self).select { |uw|
+      uw.jeopardy_completed?
+    }
   end
 
   def completed_freestyles
-    games = []
-
-    user_words.each do |uw|
-      games << uw if uw.freestyle_completed?
-    end
-
-    games
+    UserWord.where(user: self).select { |uw|
+      uw.freestyle_completed?
+    }
   end
 
   def has_completed_fundamentals?

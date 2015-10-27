@@ -11,7 +11,7 @@ feature "user removes tag", %{
   # [x] I can see a "remove" button
   # [x] I see a message of success
 
-  describe "\n user removes tag -->" do
+  pending "\n user removes tag -->" do
     let!(:user_tag) { FactoryGirl.create(:user_tag) }
     let!(:tag) { user_tag.tag }
     let!(:user) { user_tag.user }

@@ -9,15 +9,9 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
     @words_count = words_for(current_user, @tag).count
-    @incomplete_funds_count = incomplete_fundamentals(
-      current_user, @tag
-    ).count
-    @incomplete_jeops_count = incomplete_jeopardys(
-      current_user, @tag
-    ).count
-    @incomplete_frees_count = incomplete_freestyles(
-      current_user, @tag
-    ).count
+    @incomplete_funds_count = incomplete_fundamentals(current_user, @tag).count
+    @incomplete_jeops_count = incomplete_jeopardys(current_user, @tag).count
+    @incomplete_frees_count = incomplete_freestyles(current_user, @tag).count
     @incomplete_games_count =  @incomplete_funds_count +
                                @incomplete_jeops_count +
                                @incomplete_frees_count

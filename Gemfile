@@ -25,6 +25,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
+group :development do
+  gem "bullet"
+  gem 'meta_request'
+end
+
 group :test do
   gem 'database_cleaner'
   # A library for setting up Ruby objects as test data. (https://github.com/thoughtbot/factory_girl)
