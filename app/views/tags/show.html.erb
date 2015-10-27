@@ -4,68 +4,71 @@
 <!-- Fix tag removal from word show page -->
 <!-- Make Jeopardy gameplay with words only within tag -->
 
-<div class="row" align="center">
-  <% if incomplete_fundamentals_exist?(current_user, @tag) %>
-    <div class="col-xs-4 data-url pointer fund-show-game-circle-containter"
-         data-url="/fundamentals?word_id=<%= @rand_incomp_fund_word_id %>">
-      <div class="fund-show-game-circle"></div>
-      <span class="leksi-red">Fundamentals</span>
-    </div>
-  <% else %>
-    <div class="col-xs-4">
-      <div class="fund-show-game-circle game-not-ready"></div>
-      <span class="leksi-red game-not-ready">Fundamentals</span>
-    </div>
-  <% end %>
+<% if false %>
+  <div class="row" align="center">
+    <% if incomplete_fundamentals_exist?(current_user, @tag) %>
+      <div class="col-xs-4 data-url pointer fund-show-game-circle-containter"
+           data-url="/fundamentals?word_id=<%= @rand_incomp_fund_word_id %>">
+        <div class="fund-show-game-circle"></div>
+        <span class="leksi-red">Fundamentals</span>
+      </div>
+    <% else %>
+      <div class="col-xs-4">
+        <div class="fund-show-game-circle game-not-ready"></div>
+        <span class="leksi-red game-not-ready">Fundamentals</span>
+      </div>
+    <% end %>
 
-  <% if incomplete_jeopardys_exist?(current_user, @tag) %>
-    <div class="col-xs-4 data-url pointer jeop-show-game-circle-containter"
-         data-url="/jeopardy?word_id=<%= @rand_incomp_jeop_word_id %>">
-      <div class="jeop-show-game-circle"></div>
-      <span class="leksi-orange">Jeopardy</span>
-    </div>
-  <% else %>
-    <div class="col-xs-4">
-      <div class="jeop-show-game-circle game-not-ready"></div>
-      <span class="leksi-orange game-not-ready">Jeopardy</span>
-    </div>
-  <% end %>
+    <% if incomplete_jeopardys_exist?(current_user, @tag) %>
+      <div class="col-xs-4 data-url pointer jeop-show-game-circle-containter"
+           data-url="/jeopardy?word_id=<%= @rand_incomp_jeop_word_id %>">
+        <div class="jeop-show-game-circle"></div>
+        <span class="leksi-orange">Jeopardy</span>
+      </div>
+    <% else %>
+      <div class="col-xs-4">
+        <div class="jeop-show-game-circle game-not-ready"></div>
+        <span class="leksi-orange game-not-ready">Jeopardy</span>
+      </div>
+    <% end %>
 
-  <% if incomplete_freestyles_exist?(current_user, @tag) %>
-    <div class="col-xs-4 data-url pointer free-show-game-circle-containter"
-         data-url="/freestyle?word_id=<%= @rand_incomp_free_word_id %>">
-      <div class="free-show-game-circle"></div>
-      <span class="leksi-green">Freestyle</span>
-    </div>
-  <% else %>
-    <div class="col-xs-4">
-      <div class="free-show-game-circle game-not-ready"></div>
-      <span class="leksi-green game-not-ready">Freestyle</span>
-    </div>
-  <% end %>
-</div>
-
-<br>
-
-<div class="box-shadow-border">
-  <div class="pull-right">
-    <%= image_tag("trophy_black_filled_25.png",
-        alt: "myTags", class: "img-responsive"
-      )
-    %>
+    <% if incomplete_freestyles_exist?(current_user, @tag) %>
+      <div class="col-xs-4 data-url pointer free-show-game-circle-containter"
+           data-url="/freestyle?word_id=<%= @rand_incomp_free_word_id %>">
+        <div class="free-show-game-circle"></div>
+        <span class="leksi-green">Freestyle</span>
+      </div>
+    <% else %>
+      <div class="col-xs-4">
+        <div class="free-show-game-circle game-not-ready"></div>
+        <span class="leksi-green game-not-ready">Freestyle</span>
+      </div>
+    <% end %>
   </div>
 
-  <div id="progress_bar_container">
-    <div class="progress">
-      <div class="progress-bar progress-bar-success"
-           role="progressbar" aria-valuenow="0"
-           aria-valuemin="<%= @tag_game_progress %>" aria-valuemax="100"
-           style="width: <%= @tag_game_progress %>%">
-          <span class="sr-only"><%= @tag_game_progress %>%</span>
+  <br>
+
+  <div class="box-shadow-border">
+    <div class="pull-right">
+      <%= image_tag("trophy_black_filled_25.png",
+          alt: "myTags", class: "img-responsive"
+        )
+      %>
+    </div>
+
+    <div id="progress_bar_container">
+      <div class="progress">
+        <div class="progress-bar progress-bar-success"
+             role="progressbar" aria-valuenow="0"
+             aria-valuemin="<%= @tag_game_progress %>" aria-valuemax="100"
+             style="width: <%= @tag_game_progress %>%">
+            <span class="sr-only"><%= @tag_game_progress %>%</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
+
 
 <div class="box-shadow-border">
   <div class="pull-right">
@@ -84,7 +87,7 @@
           &nbsp;
           &nbsp;
         </span>
-        <span>
+        <span class="word-on-tag-show-page">
           <%= render "words/remove_word_btn_tag_show_page",
             word: word, tag: @tag
           %>

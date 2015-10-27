@@ -19,8 +19,8 @@ UserWord.select { |uw| uw.fundamental_completed? }.count
 # Num Fundamentals Played
 GameStat.select { |gs| gs.game_id == 1 }.map(&:num_played).inject(0, &:+)
 
-# Fundamentals In Progress
-UserWord.select { |uw| uw.fundamental_in_progress? }.count
+# Fundamentals In Progress -> DEPRECATED
+# UserWord.select { |uw| uw.fundamental_in_progress? }.count
 
 # Fundamentals Not Started
 UserWord.select { |uw| uw.fundamental_not_started? }.count

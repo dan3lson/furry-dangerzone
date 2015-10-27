@@ -20,7 +20,7 @@ feature "two users remove a tag", %{
   # [x] That tag is no longer on any /words/:id page
   # [x] I see a message of removal-success
 
-  describe "\n two users remove the same tag -->" do
+  pending "\n two users remove the same tag -->" do
     before :each do
       FactoryGirl.create(:version)
     end
@@ -301,7 +301,6 @@ feature "two users remove a tag", %{
       game_level_6 = GameLevel.all[-3]
       game_level_7 = GameLevel.all[-2]
       game_level_8 = GameLevel.all[-1]
-
 
       UserWordGameLevel.create!(
         user_word: user_word_1,

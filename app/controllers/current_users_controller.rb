@@ -5,10 +5,11 @@ class CurrentUsersController < ApplicationController
     @incomplete_fundamentals = current_user.incomplete_fundamentals
     @incomplete_jeopardys = current_user.incomplete_jeopardys
     @incomplete_freestyles = current_user.incomplete_freestyles
-    @all_incomplete_games = @incomplete_fundamentals + @incomplete_jeopardys +
-                            @incomplete_freestyles
-    @shuffled_incomplete_games = @all_incomplete_games.uniq.shuffle[0..3].
-      sort_by { |uw| uw.word.name }
+    @shuffled_incomplete_games = UserWord.includes(:user, :word).select { |uw|
+      uw.user == current_user && (uw.fundamental_not_started? ||
+                                  uw.jeopardy_not_started? ||
+                                  uw.freestyle_not_started?)
+    }.shuffle[0..3].sort_by { |uw| uw.word.name }
   end
 
   def menu
@@ -16,9 +17,10 @@ class CurrentUsersController < ApplicationController
   end
 
   def myLeksi
-    @current_user_user_words = current_user.user_words.sort_by { |uw|
-      uw.word.name
-    }
+    @current_user_user_words = UserWord.includes(:word).where(
+      user: current_user
+    ).sort_by { |uw| uw.word.name }
+
     @current_user_words_count = current_user.words.count
 
     if current_user.has_words?

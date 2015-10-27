@@ -25,28 +25,19 @@ class UserWord < ActiveRecord::Base
   end
 
   def uwgls
-    user_word_game_levels.sort_by { |uwgl| uwgl.game_level_id }
-  end
-
-  def retrieve_uwgls_for(game_name)
-    UserWordGameLevel.includes(:user_word).includes(:game_level).select { |uwgl|
-      uwgl.user_word == self && uwgl.game_level.game.name == game_name
-    }
+    UserWordGameLevel.where(user_word: self).order(:game_level_id)
   end
 
   def uwgl_fundamentals
     uwgls.take(8)
-    # retrieve_uwgls_for("Fundamentals")
   end
 
   def uwgl_jeopardys
     uwgls.drop(8).take(20)
-    # retrieve_uwgls_for("Jeopardy")
   end
 
   def uwgl_freestyles
     uwgls.drop(28)
-    # retrieve_uwgls_for("Freestyle")
   end
 
   def fundamental_statuses
@@ -74,11 +65,6 @@ class UserWord < ActiveRecord::Base
 
     num == 8
   end
-
-  def fundamental_in_progress?
-    uwgl_fundamentals.map { |uwgl| uwgl.status }.uniq.count == 2
-  end
-
 
   def fundamental_completed?
     num = 0

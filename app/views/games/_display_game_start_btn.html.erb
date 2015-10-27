@@ -6,12 +6,6 @@
 			class="game-<%= user_word.current_game %>-start-circle pointer data-url"
 			data-url="/fundamentals?word_id=<%= word.id %>">
 		</div>
-	<% elsif user_word.fundamental_in_progress? %>
-		<div class="game-<%= user_word.current_game %>-start-circle">
-			<div class="myLeksi-sm-in-progress-circle data-url"
-					 data-url="/fundamentals?word_id=<%= word.id %>">
-			</div>
-		</div>
 	<% elsif user_word.jeopardy_not_started? %>
 		<% if current_user.has_enough_jeopardy_words? %>
 			<div
