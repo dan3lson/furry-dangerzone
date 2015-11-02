@@ -16,17 +16,25 @@ feature "teacher views the menu", %{
       FactoryGirl.create(:version)
     end
 
-    let(:teacher) { FactoryGirl.create(:user) }
+    let(:teacher) { FactoryGirl.create(:user, role: "teacher") }
 
     scenario "scenario: click menu_path" do
       log_in_as(teacher)
 
       visit menu_path
 
-      expect(page).to have_link("Create")
+      click_on "Activate Teacher\'s Edition"
+
+      within(".new-tag-container") do
+        expect(page).to have_link("Create")
+      end
+
+      within(".new-word-container") do
+        expect(page).to have_link("Create")
+      end
       expect(page).to have_link("Edit Profile")
       expect(page).to have_link("Log Out")
-      expect(page).to have_content("Rate This App")
+      expect(page).to have_content("Rate Leksi")
       expect(page).to have_button("submit")
     end
   end

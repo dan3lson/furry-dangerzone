@@ -34,6 +34,14 @@ RSpec.describe User, type: :model do
     it "returns a username string" do
       expect(user.username).to include("foobar")
     end
+    
+    it "returns a password string" do
+      expect(user.password).to eq("password")
+    end
+
+    it "returns a password string" do
+      expect(user.password_confirmation).to eq("password")
+    end
   end
 
   describe "#has_words?" do

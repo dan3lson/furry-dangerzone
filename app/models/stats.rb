@@ -1,5 +1,5 @@
 # Number of Logins
-User.all.map(&:num_logins).inject(0, &:+)
+User.sum(:num_logins)
 
 # Users Without Words
 User.select { |u| u.words.count == 0 }.count

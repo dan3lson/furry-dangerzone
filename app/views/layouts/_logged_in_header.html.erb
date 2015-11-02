@@ -1,23 +1,10 @@
-<div class="navbar navbar-default navbar-fixed-top logged-in-header"
+<div class="navbar navbar-default navbar-fixed-top logged-in-header school-header"
 		 role="navigation">
 	<div class="container">
 		<h1 class="center full-header">
 			<%= render "layouts/header_pull_left" %>
 
-			<% if params[:action] == "fundamentals" ||
-						params[:action] == "freestyle" %>
-				<div class="lead" align="center" id="progress_bar_container">
-					<div class="progress">
-						<div class="game-progress-bar progress-bar progress-bar-success"
-								 role="progressbar" aria-valuenow="0"
-							   aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-								<span class="sr-only">0%</span>
-						</div>
-					</div>
-				</div>
-			<% else %>
-				<%= full_header(yield(:header).truncate(23)) %>
-			<% end %>
+			<%= full_header(yield(:header).truncate(23)) %>
 
 			<%= render "layouts/header_pull_right" %>
 		</h1>

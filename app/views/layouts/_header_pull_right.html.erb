@@ -17,7 +17,7 @@
 
 	<% elsif params[:controller] == "tags" && params[:action] == "show" %>
 		<% if Rails.env.test? %>
-				<%= link_to "edit", edit_tag_path(@tag) %>
+				<%= link_to "edit tag", edit_tag_path(@tag) %>
 		<% end %>
 		<%= link_to image_tag("edit_black_32.png"), edit_tag_path(@tag) %>
 

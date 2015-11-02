@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "myTags" => "current_users#tags"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
+  get "jeopardy_tag" => "tag_games#jeopardy"
   get "freestyle" => "games#freestyle"
   get "signup" => "users#new"
   get "login" => "sessions#new"
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
     resources :reviews
   end
   resources :reviews
+  resources :feedbacks
   namespace :school do
     root "schools#classrooms"
     get "home" => "schools#home"

@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-feature "user adds a tag", %{
+feature "user creates a tag", %{
 
   As a user,
-  I want to add a tag to myTags.
+  I want to create a tag to myTags.
 } do
 
   # Acceptance Criteria
   #
-  # [x] I can see a form to add a tag
-  # [x] tags_path shows my newly added tag
+  # [x] I can see a form to create a tag
+  # [x] tags_path shows my newly created tag
   # [x] I see a message of success
 
-  describe "\n user adds a tag -->" do
+  describe "\n user creates a tag -->" do
     let(:user) { FactoryGirl.create(:user) }
 
     scenario "scenario: with valid data" do
@@ -26,7 +26,7 @@ feature "user adds a tag", %{
 
       click_on "Create tag"
 
-      expect(page).to have_content("Awesome - you added \'foo\'!")
+      expect(page).to have_content("Success!")
       expect(UserTag.count).to eq(1)
       expect(Tag.count).to eq(1)
       expect(page).not_to have_content("Yikes!")
@@ -50,7 +50,7 @@ feature "user adds a tag", %{
       expect(page).to have_content("fix")
       expect(UserTag.count).to eq(0)
       expect(Tag.count).to eq(0)
-      expect(page).not_to have_content("Awesome - you added \'foo\'!")
+      expect(page).not_to have_content("Success")
     end
   end
 end

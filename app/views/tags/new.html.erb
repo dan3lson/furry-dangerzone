@@ -1,11 +1,4 @@
 <% provide(:title, "New Tag") %>
 <% provide(:header, "New Tag") %>
 
-<div class="well">
-  <%= form_for(@tag) do |f| %>
-  <%= render 'shared/error_messages', object: @tag %>
-    <%= f.label :name, class: "sr-only" %>
-    <%= f.text_field :name, class: "form-control", placeholder: "Name *"  %>
-    <%= f.submit "Create tag", class: "btn btn-default" %>
-  <% end %>
-</div>
+<%= render "tags/form" %>

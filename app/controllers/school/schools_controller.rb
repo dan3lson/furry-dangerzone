@@ -49,5 +49,6 @@ class School::SchoolsController < BaseSchoolController
 
   def menu
     @review = Review.new
+    @feedback = Feedback.new
   end
 end

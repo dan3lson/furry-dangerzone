@@ -72,9 +72,6 @@ feature "user visits home page", %{
       visit root_path
 
       expect(page).to have_content(word.name.capitalize)
-      expect(page).to have_content(word.phonetic_spelling)
-      expect(page).to have_content(word.part_of_speech)
-      expect(page).to have_content(word.definition)
     end
   end
 end

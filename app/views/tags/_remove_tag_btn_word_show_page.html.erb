@@ -1,47 +1,9 @@
 <% if Rails.env.test? %>
-  <% if words_for(current_user, tag).count > 0 %>
-    <%=
-      link_to "remove",
-      user_word_tag_word_show_page_path(word_id: word, tag_name: tag.name),
-      method: :delete, class: "btn btn-default btn-sm",
-      class: "btn btn-default form-control"
-    %>
-  <% else %>
-    <%=
-      link_to "remove",
-      user_word_tag_word_show_page_path(id: Usertag.find_by(
-        user: current_user,
-        tag: tag).id,
-        tag_name: tag.name
-      ),
-      method: :delete, class: "btn btn-default btn-sm",
-      class: "btn btn-default form-control"
-    %>
-  <% end %>
+  <%= link_to "remove tag", user_word_tag_word_show_page_path(
+      word_id: word, tag_name: tag.name
+    ), method: :delete %>
 <% else %>
-  <% if words_for(current_user, tag).count > 0 %>
-    <% if params[:controller] == "myLeksi" && params[:action] == "show" %>
-      <%=
-        link_to image_tag("remove_gray_25.png"),
-        user_word_tag_word_show_page_path(word_id: word, tag_name: tag.name),
-        method: :delete
-      %>
-    <% else %>
-      <%=
-        link_to image_tag("remove_gray_25.png"),
-        user_word_tag_path(tag_name: tag.name),
-        method: :delete
-      %>
-    <% end %>
-  <% else %>
-    <%=
-      link_to image_tag("remove_gray_25.png"),
-      user_word_tag_word_show_page_path(id: Usertag.find_by(
-        user: current_user,
-        tag: tag).id,
-        tag_name: tag.name
-      ),
-      method: :delete
-    %>
-  <% end %>
+  <%= link_to image_tag("remove_gray_25.png"),
+    user_word_tag_word_show_page_path(word_id: word, tag_name: tag.name),
+    method: :delete %>
 <% end %>

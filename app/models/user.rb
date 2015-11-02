@@ -86,6 +86,12 @@ class User < ActiveRecord::Base
     incomplete_freestyles.any?
   end
 
+  # test
+  def has_games_to_play?
+    has_incomplete_fundamentals? || has_incomplete_freestyles? ||
+    has_incomplete_freestyles?
+  end
+
   def has_enough_jeopardy_words?
     incomplete_jeopardys.count + completed_jeopardys.count > 3
   end

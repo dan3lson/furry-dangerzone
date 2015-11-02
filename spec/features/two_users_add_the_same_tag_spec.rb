@@ -29,7 +29,7 @@ feature "two users add the same tag", %{
 
       click_on "Create tag"
 
-      expect(page).to have_content("Awesome - you added \'#{tag.name}\'!")
+      expect(page).to have_content("Success!")
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(tag.name)
       expect(Tag.count).to eq(1)

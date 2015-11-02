@@ -4,7 +4,7 @@ feature "two users add the same word", %{
 
   As a user,
   I want to add a word to myLeksi
-  that another use already added.
+  that another user already added.
 } do
 
   # Acceptance Criteria
@@ -14,7 +14,7 @@ feature "two users add the same word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  pending "\n two users add same word -->" do
+  describe "\n two users add same word -->" do
     let!(:user_word) { FactoryGirl.create(:user_word) }
     let!(:word) { user_word.word }
     let(:user2) { FactoryGirl.create(:user) }
@@ -70,7 +70,7 @@ feature "two users add the same word", %{
 
       fill_in "Search", with: word.name
 
-      click_on "define"
+      click_on "look up"
 
       click_on "add"
 

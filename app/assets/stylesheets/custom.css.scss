@@ -31,6 +31,7 @@ $light-blue: lighten($bootstrap-blue, 37);
 $light-green: lighten($bootstrap-green, 8);
 $light-leksi-red: lighten($leksi-red, 47);
 $sky-blue: #1677ba;
+$show-game-circle-container-hover-opac: .7;
 $light-sky-blue: lighten($sky-blue, 55);
 $white: #fff;
 
@@ -59,6 +60,10 @@ body {
 	color: $even-darker-gray;
   padding: 90px 0;
   font-size: 1.4em;
+}
+
+.games-body-padding {
+	padding: 25px 0;
 }
 
 //**********
@@ -182,6 +187,12 @@ p {
 }
 
 .box-shadow-border {
+	// box-shadow: 1px 1px 2px #888;
+	padding: 10px;
+  margin-bottom: 25px;
+}
+
+.box-shadow-border-home {
 	box-shadow: 1px 1px 2px #888;
 	padding: 10px;
   margin-bottom: 25px;
@@ -301,8 +312,8 @@ p {
   color: $dark-leksi-green;
 }
 
-.free-show-game-circle-containter:hover {
-	background: $light-leksi-green;
+.free-show-game-circle:hover {
+	opacity: $show-game-circle-container-hover-opac;
 }
 
 .full-header {
@@ -317,12 +328,8 @@ p {
   color: $dark-leksi-red;
 }
 
-.fund-show-game-circle-containter:hover {
-	background: $light-leksi-red;
-}
-
-.game-not-ready {
-  opacity: .1;
+.fund-show-game-circle:hover {
+	opacity: $show-game-circle-container-hover-opac;
 }
 
 .game-circle {
@@ -344,6 +351,10 @@ p {
 	  color: $white;
     font-weight: bold;
 	}
+}
+
+.game-not-ready {
+  opacity: .1;
 }
 
 .game-one-start-circle{
@@ -388,6 +399,10 @@ p {
 	border-color: $leksi-green;
 }
 
+.game-zone-margin {
+	margin: 12px;
+}
+
 .home-hr {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -409,8 +424,8 @@ input {
   height: auto !important;
 }
 
-.jeop-show-game-circle-containter:hover {
-	background: $light-leksi-orange;
+.jeop-show-game-circle:hover {
+	opacity: $show-game-circle-container-hover-opac;
 }
 
 .leaderboard-bronze {
@@ -904,6 +919,35 @@ table {
 	@extend .word-show-game-circle;
 
 	background: $leksi-green;
+}
+
+.default-show-game-circle {
+	@extend .word-show-game-circle;
+
+	background: $bootstrap-blue;
+}
+
+.default-show-game-circle:hover {
+	opacity: $show-game-circle-container-hover-opac;
+}
+
+.add-show-game-circle {
+	background: $light-gray;
+	border: 1px dashed $dark-gray;
+	border-radius: 70px;
+	color: $dark-gray;
+	height: 70px;
+	padding-top: 18px;
+	width: 70px;
+
+}
+
+.x-large-font {
+	font-size: x-large;
+}
+
+.add-show-game-circle:hover {
+	opacity: $show-game-circle-container-hover-opac;
 }
 
 .school-header {
