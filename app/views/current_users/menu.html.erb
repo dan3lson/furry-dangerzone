@@ -1,93 +1,109 @@
 <% provide(:title, "Menu") %>
 <% provide(:header, "Menu") %>
 
-<div class="col-sm-8 col-sm-offset-2">
-  <div class="menu-header-container">
-    <div>
-      <div class="lead menu-header">
-        Profile (<%= current_user.username %>)
-      </div>
-    </div>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3" align="center">
+    <div class="stu-pic center"></div>
 
-    <% if logged_in_and_current_user?(current_user) %>
+    <div>
+      <span class="lead">
+        <strong><%= current_user.username %></strong>
+      </span>
+      <br>
+
+      <span class="basic-apple-blue-link inline-block" align="left">
+        <%= link_to "Edit Profile", edit_user_path(current_user) %>
+
+        <% if logged_in_and_is_teacher?(current_user) %>
+          |
+          <%= link_to "Activate Teacher\'s Edition", school_menu_path %>
+        <% end %>
+
+        |
+        <%= link_to "Log Out", logout_path, method: :delete %>
+      </span>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="box-shadow-border-home">
+      <div class="pull-right">
+        <%= image_tag("tag_color_65.png", alt: "Tags") %>
+      </div>
+      <p class="lead">
+        Tags
+      </p>
+
       <div class="inline-block">
-        <%= image_tag("edit_black_filled_25.png", alt: "Edit Profile") %>
+        <%= image_tag("add_black_filled_32.png", alt: "Add") %>
+      </div>
+      &nbsp;
+      <div class="basic-apple-blue-link inline-block new-tag-container">
+        <%= link_to "Create", new_tag_path %>
+      </div>
+
+      <hr>
+
+      <div class="inline-block">
+        <%= image_tag("tag_black_filled_32.png", alt: "Tag") %>
       </div>
       &nbsp;
       <div class="basic-apple-blue-link inline-block">
-        <%= link_to "Edit Profile", edit_user_path(current_user) %>
+        <%= link_to "View All", myTags_path %>
       </div>
-    <% end %>
-  </div>
-
-  <% if logged_in_and_is_teacher?(current_user) %>
-    <div class="menu-header-container">
-      <div>
-        <div class="lead menu-header">
-          Teacher Corner
-        </div>
-      </div>
-
-        <div class="inline-block">
-          <%= image_tag("classroom_black_filled_32.png",
-            alt: "Go to My Classroom") %>
-        </div>
-        &nbsp;
-        <div class="basic-apple-blue-link inline-block">
-          <%= link_to "Activate Teacher\'s Edition", school_menu_path %>
-        </div>
-    </div>
-  <% end %>
-
-  <div class="menu-header-container">
-    <p class="lead menu-header">
-      Tags
-    </p>
-
-    <div class="inline-block">
-      <%= image_tag("tag_black_filled_32.png", alt: "Tags") %>
-    </div>
-    &nbsp;
-    <div class="basic-apple-blue-link inline-block">
-      <%= link_to "View All", myTags_path %>
-    </div>
-
-    <hr>
-
-    <div class="inline-block">
-      <%= image_tag("add_black_filled_32.png", alt: "Tags") %>
-    </div>
-    &nbsp;
-    <div class="basic-apple-blue-link inline-block">
-      <%= link_to "Create", new_tag_path %>
     </div>
   </div>
 
-  <div class="menu-header-container">
-    <p class="lead menu-header">
-      Rate This App
-    </p>
-
-    <% if user_already_reviewed_latest_version? %>
-      Thanks for rating Leksi <%= version_display_name(latest_version.number) %>!
-    <% else %>
-      <div class="well well-sm">
-        <%= render "reviews/form" %>
+  <div class="col-sm-6">
+    <div class="box-shadow-border-home">
+      <div class="pull-right">
+        <%= image_tag("bug_color_65.png", alt: "Bug") %>
       </div>
-    <% end %>
-  </div>
+      <p class="lead">
+        Report a Bug
+      </p>
 
-  <div class="menu-header-container">
-    <p class="lead menu-header">
-      Settings
-    </p>
+      Yikes, did something go wrong? Let us know and we'll squash the bug/fix
+      the problem asap. Thanks for your patience.
 
-    <div class="inline-block">
-      <%= image_tag("logout_black_filled_25.png", alt: "Log Out") %>
+      <div class="feedback-form-container-bug">
+        <%= render "feedbacks/form", kind: "bug" %>
+      </div>
     </div>
-    &nbsp;
-    <div class="basic-apple-blue-link inline-block">
-      <%= link_to "Log Out", logout_path, method: :delete %>
+
+    <div class="box-shadow-border-home">
+      <div class="pull-right">
+        <%= image_tag("wish_color_65.png", alt: "Wish") %>
+      </div>
+      <p class="lead">
+        I Wish Leksi Could...
+      </p>
+
+      <div class="feedback-form-container-wish">
+        <%= render "feedbacks/form", kind: "wish" %>
+      </div>
+    </div>
+
+    <div class="box-shadow-border-home">
+      <div class="pull-right">
+        <%= image_tag("rating_color_65.png", alt: "Rating") %>
+      </div>
+      <p class="lead">
+        Rate Leksi
+      </p>
+
+      <% if user_already_reviewed_latest_version? %>
+        Thanks for rating Leksi
+        <%= version_display_name(latest_version.number) %>!
+      <% else %>
+        <div class="review-form-container">
+          <%= render "reviews/form" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

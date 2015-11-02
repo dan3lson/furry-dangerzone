@@ -2,11 +2,17 @@
 <html>
   <%= render "layouts/head" %>
 
+<% if params[:controller] == "games" %>
+  <body class="games-body-padding">
+<% else %>
   <body>
+<% end %>
     <%= render "sessions/facebook_sdk" %>
 
     <% if logged_in? %>
-      <%= render "layouts/logged_in_header" %>
+      <% unless params[:controller] == "games" %>
+        <%= render "layouts/logged_in_header" %>
+      <% end %>
     <% else %>
       <%= render "layouts/logged_out_header" %>
     <% end %>
@@ -17,9 +23,7 @@
       <%= yield %>
 
       <% if logged_in? %>
-        <% unless params[:controller] == "games" %>
           <%= render "layouts/logged_in_footer" %>
-        <% end %>
       <% end %>
 
       <%= debug(params) if Rails.env.development? %>

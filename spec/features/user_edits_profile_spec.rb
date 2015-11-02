@@ -34,8 +34,7 @@ feature "user edits their profile", %{
       click_on "Save changes"
 
       expect(page).to have_content("You successfully updated your profile.")
-      expect(page).to_not have_content("errors")
-      expect(page).to_not have_content("fix")
+      expect(page).to_not have_content("error")
     end
 
     scenario "scenario: with invalid data" do
@@ -52,8 +51,7 @@ feature "user edits their profile", %{
       click_on "Save changes"
 
       expect(page).to_not have_content("You successfully updated your profile.")
-      expect(page).to have_content("errors")
-      expect(page).to have_content("fix")
+      expect(page).to have_content("error")
       expect(page).to have_content("Profile")
     end
   end

@@ -39,7 +39,9 @@ class GamesController < ApplicationController
 
         @fourth_word = @valid_jeopardy_words.sample
 
-        @jeopardy_words = [@chosen_word, @second_word, @third_word, @fourth_word]
+        @jeopardy_words = [
+          @chosen_word, @second_word, @third_word, @fourth_word
+        ]
         @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
         @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
         @jeopardy_lineup = (@jeopardy_words * 5).shuffle

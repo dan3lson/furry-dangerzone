@@ -110,20 +110,6 @@ class UserWord < ActiveRecord::Base
     user_word.uwgl_jeopardys.each { |uwgl| uwgl.destroy }
   end
 
-  def self.fix_rogue_uwgls
-    select { |uw| uw.user_word_game_levels.count > 40 }.map { |uw|
-      uw.user_word_game_levels.count
-    }
-
-    uw.uwgl_freestyles.each do |uwgl|
-      puts "Game: #{uwgl.game_level.game.name}"
-      puts "Status: #{uwgl.status}"
-      puts "Created at #{uwgl.created_at}"
-      puts "Updated at #{uwgl.updated_at}"
-      puts "**********************************"
-    end
-  end
-
   def fundamental_completed_last_day?
     first_uwgl_fundamental = self.uwgl_fundamentals.first
 

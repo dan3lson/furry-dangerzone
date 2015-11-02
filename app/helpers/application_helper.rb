@@ -14,10 +14,4 @@ module ApplicationHelper
       header
     end
   end
-
-  def right_header_button(value, path)
-    content_tag(:span, class: "pull-right") do
-      content_tag(:a)
-    end
-  end
 end

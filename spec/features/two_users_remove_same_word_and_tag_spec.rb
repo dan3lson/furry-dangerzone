@@ -29,86 +29,11 @@ feature "two users remove same word and tag", %{
     let!(:user_tag_1) { UserTag.create(user: user_1, tag: tag) }
     let!(:user_tag_2) { UserTag.create(user: user_2, tag: tag) }
 
-    s = "scenario: "
-    scenario s << "user_1 and user_2 remove same word (1st) and tag (2nd)" do
-      create_levels_and_games
-
-      game_level = GameLevel.all[-8]
-      game_level_2 = GameLevel.all[-7]
-      game_level_3 = GameLevel.all[-6]
-      game_level_4 = GameLevel.all[-5]
-      game_level_5 = GameLevel.all[-4]
-      game_level_6 = GameLevel.all[-3]
-      game_level_7 = GameLevel.all[-2]
-      game_level_8 = GameLevel.all[-1]
-
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_8
-      )
-
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_8
-      )
-
+    s = "scenario:"
+    scenario "#{s} user_1 and user_2 remove same word (1st) and tag (2nd)" do
       log_in_as(user_1)
+
+      visit myLeksi_path
 
       click_on word.name.capitalize
 
@@ -127,6 +52,8 @@ feature "two users remove same word and tag", %{
       click_on "Log Out"
 
       log_in_as(user_2)
+
+      visit myLeksi_path
 
       click_on word.name.capitalize
 
@@ -149,85 +76,8 @@ feature "two users remove same word and tag", %{
       expect(UserWordGameLevel.count).to eq(0)
     end
 
-    s = "scenario: "
-    scenario s << "user_1 and user_2 remove same tag (1st) and word (2nd)" do
-      create_levels_and_games
-
-      game_level = GameLevel.all[-8]
-      game_level_2 = GameLevel.all[-7]
-      game_level_3 = GameLevel.all[-6]
-      game_level_4 = GameLevel.all[-5]
-      game_level_5 = GameLevel.all[-4]
-      game_level_6 = GameLevel.all[-3]
-      game_level_7 = GameLevel.all[-2]
-      game_level_8 = GameLevel.all[-1]
-
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_8
-      )
-
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_8
-      )
-
+    s = "scenario:"
+    scenario "#{s} user_1 and user_2 remove same tag (1st) and word (2nd)" do
       log_in_as(user_1)
 
       visit myTags_path

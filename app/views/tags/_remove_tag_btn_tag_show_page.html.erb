@@ -1,22 +1,13 @@
 <% if Rails.env.test? %>
+  <!-- if tag has words attached to it -->
   <% if words_for(current_user, tag).count > 0 %>
-    <%=
-      link_to "remove",
-      user_word_tag_path(tag_name: tag.name),
-      method: :delete, class: "btn btn-default btn-sm",
-      class: "btn btn-default form-control"
-    %>
+    <%= link_to "remove tag", user_word_tag_path(tag_name: tag.name),
+      method: :delete %>
   <% else %>
-    <%=
-      link_to "remove",
-      user_tag_path(id: UserTag.find_by(
-        user: current_user,
-        tag: tag).id,
+    <%= link_to "remove tag", user_tag_path(id: UserTag.find_by(
+        user: current_user, tag: tag).id,
         tag_name: tag.name
-      ),
-      method: :delete, class: "btn btn-default btn-sm",
-      class: "btn btn-default form-control"
-    %>
+      ), method: :delete %>
   <% end %>
 <% else %>
   <% if words_for(current_user, tag).count > 0 %>
@@ -26,14 +17,10 @@
       method: :delete
     %>
   <% else %>
-    <%=
-      link_to image_tag("remove_black_32.png"),
+    <%= link_to image_tag("remove_black_32.png"),
       user_tag_path(id: UserTag.find_by(
-        user: current_user,
-        tag: tag).id,
+        user: current_user, tag: tag).id,
         tag_name: tag.name
-      ),
-      method: :delete
-    %>
+      ), method: :delete %>
   <% end %>
 <% end %>

@@ -1,0 +1,12 @@
+<%= form_for(@feedback) do |f| %>
+  <%= render "shared/error_messages", object: @feedback %>
+
+	<%= hidden_field_tag :kind, kind %>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <%= f.submit "submit", class: "form-control" %>
+<% end %>

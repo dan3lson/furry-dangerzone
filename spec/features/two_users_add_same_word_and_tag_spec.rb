@@ -16,97 +16,24 @@ feature "two users add same word and tag", %{
   # [x] That /words/:id page shows the tag
   # [x] I see a message of success
 
-  describe "\n two users remove the same tag -->" do
+  describe "\n two users add same word and tag -->" do
     before :each do
       FactoryGirl.create(:version)
     end
 
-    let!(:word) { FactoryGirl.create(:word) }
-    let!(:tag) { FactoryGirl.create(:tag) }
-    let!(:user_1) { FactoryGirl.create(:user) }
-    let!(:user_2) { FactoryGirl.create(:user) }
-    let!(:user_word_1) { UserWord.create(user: user_1, word: word) }
-    let!(:user_word_2) { UserWord.create(user: user_2, word: word) }
-    let!(:user_tag_1) { UserTag.create(user: user_1, tag: tag) }
-    let!(:user_tag_2) { UserTag.create(user: user_2, tag: tag) }
-
     scenario "scenario: user_1 and user_2 add/apply same word and tag" do
-      create_levels_and_games
+      user_1 = FactoryGirl.create(:user)
+      user_2 = FactoryGirl.create(:user)
 
-      game_level = GameLevel.all[-8]
-      game_level_2 = GameLevel.all[-7]
-      game_level_3 = GameLevel.all[-6]
-      game_level_4 = GameLevel.all[-5]
-      game_level_5 = GameLevel.all[-4]
-      game_level_6 = GameLevel.all[-3]
-      game_level_7 = GameLevel.all[-2]
-      game_level_8 = GameLevel.all[-1]
+      word = FactoryGirl.create(:word)
 
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_1,
-        game_level: game_level_8
-      )
+      UserWord.create!(user: user_1, word: word)
+      UserWord.create!(user: user_2, word: word)
 
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_8
-      )
+      tag = FactoryGirl.create(:tag)
+
+      user_tag_1 = UserTag.create!(user: user_1, tag: tag)
+      user_tag_2 = UserTag.create!(user: user_2, tag: tag)
 
       log_in_as(user_1)
 
@@ -114,7 +41,7 @@ feature "two users add same word and tag", %{
 
       click_on word.name.capitalize
 
-      select user_tag_2.tag.name, from: "Tags"
+      select user_tag_1.tag.name, from: "Tags"
 
       click_on "add"
 
@@ -138,7 +65,6 @@ feature "two users add same word and tag", %{
       expect(UserTag.count).to eq(2)
       expect(WordTag.count).to eq(1)
       expect(UserWordTag.count).to eq(2)
-      expect(UserWordGameLevel.count).to eq(16)
     end
   end
 end

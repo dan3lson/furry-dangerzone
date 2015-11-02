@@ -29,12 +29,12 @@ feature "user adds a word and sees game one start link", %{
 
       fill_in "Search", with: "chess"
 
-      click_on "define"
+      click_on "look up"
 
       click_on "add"
 
       user_word = UserWord.first
-      
+
       game = Game.create!(
         name: "Fundamentals",
         description: "Learn the basics."

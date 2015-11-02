@@ -25,7 +25,7 @@ feature "user searches for a word", %{
 
       fill_in "search", with: word.name
 
-      click_on "define"
+      click_on "look up"
 
       expect(page).to have_content(word.name)
       expect(page).to have_content(word.phonetic_spelling)
@@ -41,7 +41,7 @@ feature "user searches for a word", %{
 
       fill_in "search", with: "hacker"
 
-      click_on "define"
+      click_on "look up"
 
       expect(page).to have_content("hacker")
       expect(page).to have_content("/ˈhækər/")
@@ -56,7 +56,7 @@ feature "user searches for a word", %{
 
       fill_in "search", with: "foobar"
 
-      click_on "define"
+      click_on "look up"
 
       expect(page).to have_content("Yikes! We couldn\'t find 'foobar'.")
       expect(page).to have_content("Please search again!")
@@ -115,7 +115,7 @@ feature "user searches for a word", %{
 
       fill_in "search", with: "chess"
 
-      click_on "define"
+      click_on "look up"
 
       expect(page).to have_link("remove")
       expect(page).not_to have_content("add")

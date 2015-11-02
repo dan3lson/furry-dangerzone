@@ -1,0 +1,50 @@
+<% unless @rand_word.nil? %>
+	<% if @rand_word.current_game == "one" %>
+		<div class="inline-block game-zone-margin data-url pointer
+								default-show-game-circle"
+				 data-url="/fundamentals?word_id=<%= @rand_word.word.id %>">
+	<% elsif @rand_word.current_game == "two" %>
+		<div class="inline-block game-zone-margin data-url pointer
+								default-show-game-circle"
+				 data-url="/jeopardy?word_id=<%= @rand_word.word.id %>">
+	<% elsif @rand_word.current_game == "three" %>
+		<div class="inline-block game-zone-margin data-url pointer
+								default-show-game-circle"
+				 data-url="/freestyle?word_id=<%= @rand_word.word.id %>">
+	<% else %>
+		Yikes!
+	<% end %>
+			<div>
+				<span class="white">&#9658;</span>
+			</div>
+
+			<br>
+
+			<span class="lead">random</span>
+		</div>
+<% end %>
+
+<%= render "current_users/play_game", u_words: @first_row_rand_words %>
+
+<%= render "current_users/play_game", u_words: @second_row_rand_words %>
+
+<%= render "current_users/play_game", u_words: @third_row_rand_words %>
+
+<%= render "current_users/play_game", u_words: @fourth_row_rand_words %>
+
+<br>
+
+<div class="inline-block game-zone-margin data-url pointer
+						add-show-game-circle"
+		 data-url="/search">
+	<div class="x-large-font">
+		&#043;
+	</div>
+
+	<br>
+
+	<span class="lead">add</span>
+</div>
+
+<br>
+<br>

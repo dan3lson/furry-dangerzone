@@ -9,15 +9,11 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
     @words_count = words_for(current_user, @tag).count
-    @incomplete_funds_count = incomplete_fundamentals(current_user, @tag).count
-    @incomplete_jeops_count = incomplete_jeopardys(current_user, @tag).count
-    @incomplete_frees_count = incomplete_freestyles(current_user, @tag).count
-    @incomplete_games_count =  @incomplete_funds_count +
-                               @incomplete_jeops_count +
-                               @incomplete_frees_count
-    @total_possible_games = @words_count * 3
-    @tag_game_progress = (@total_possible_games - @incomplete_games_count) /
-                         @total_possible_games.to_f * 100
+    @completed_games_count = completed_funds(current_user, @tag).count +
+                             completed_jeops(current_user, @tag).count +
+                             completed_frees(current_user, @tag).count
+    @total_games = @words_count * 3
+    @tag_game_progress = @completed_games_count / @total_games.to_f * 100
 
     if incomplete_fundamentals_exist?(current_user, @tag)
       @rand_incomp_fund_word_id = incomplete_fundamentals(
@@ -48,17 +44,15 @@ class TagsController < ApplicationController
 
     if current_user.already_has_tag?(@tag)
       flash.now[:warning] = "Whoa there - you already have that tag!"
+
       render :new
     else
-      @user_tag = UserTag.new(
-        user: current_user,
-        tag: @tag
-      )
-      current_user.points += 1
+      @user_tag = UserTag.new(user: current_user, tag: @tag)
 
       if @tag.save && @user_tag.save && current_user.save
-        flash[:success] = "Awesome - you added \'#{@tag.name}\'!"
-        redirect_to myTags_path
+        flash[:success] = "Success!"
+
+        redirect_to root_path
       else
         render :new
       end
@@ -81,6 +75,7 @@ class TagsController < ApplicationController
 
   def destroy
     @tag = Tag.find(params[:id])
+
     if @tag.destroy
       flash[:success] = "Tag deleted."
       redirect_to myTags_path

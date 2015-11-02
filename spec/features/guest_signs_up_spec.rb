@@ -33,7 +33,7 @@ feature "guest signs up", %{
       click_on "Create my account"
 
       expect(page).to have_content("Welcome to Leksi!")
-      expect(page).to have_content("get going on achieving Level 1")
+      expect(page).to have_content("Organize words into groups by using tags.")
       expect(page).to have_link("Add")
       expect(page).to have_link("Progress")
       expect(page).to have_link("Menu")
@@ -55,7 +55,7 @@ feature "guest signs up", %{
       click_on "Create my account"
 
       expect(page).to have_content("Welcome to Leksi!")
-      expect(page).to have_content("get going on achieving Level 1")
+      expect(page).to have_content("Organize words into groups by using tags.")
       expect(page).to have_link("Add")
       expect(page).to have_link("Progress")
       expect(page).to have_link("Menu")
@@ -76,7 +76,7 @@ feature "guest signs up", %{
 
       click_on "Create my account"
 
-      expect(page).to_not have_content("Welcome to Leksi!")
+      expect(page).to_not have_content("Organize words into groups by using")
       expect(page).to have_content("errors")
       expect(page).to have_content("fix")
       expect(User.count).to eq(0)

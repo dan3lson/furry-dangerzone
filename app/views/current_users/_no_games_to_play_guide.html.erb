@@ -1,8 +1,12 @@
-<div class="alert alert-warning center">
-  <div align="center">
-    <p class="basic-black-link">
-      To play,
-      <%= link_to "add a word", search_path %> first!
-    </p>
-  </div>
+<div class="pull-right">
+  <%= image_tag("add_color_65.png", alt: "Add word") %>
+</div>
+
+<div>
+  <p class="basic-black-link lead">
+    To play any of the Leksi games, you need to add a word first.
+    Look one up and then add it to your Leksi!
+
+    <%= render "searches/form" %>
+  </p>
 </div>

@@ -1,0 +1,50 @@
+<br>
+
+<% u_words.each do |uw| %>
+	<% if uw.class == String %>
+		<div class="inline-block game-zone-margin data-url pointer
+								add-show-game-circle" data-url="/search">
+			<div class="x-large-font">
+				&#043;
+			</div>
+
+			<br>
+
+			<span class="lead">add</span>
+		</div>
+	<% else %>
+		<% word = uw.word %>
+
+		<% if uw.current_game == "one" %>
+			<div class="inline-block data-url pointer game-zone-margin
+									fund-show-game-circle-container"
+					 data-url="/fundamentals?word_id=<%= word.id %>">
+				<div class="fund-show-game-circle">
+		<% elsif uw.current_game == "two" %>
+			<% if uw.jeopardy_not_started? &&
+						current_user.has_enough_jeopardy_words? %>
+				<div class="inline-block data-url pointer game-zone-margin
+										jeop-show-game-circle-container"
+						 data-url="/jeopardy?word_id=<%= word.id %>">
+					<div class="jeop-show-game-circle">
+			<% else %>
+				<div class="inline-block game-not-ready game-zone-margin">
+					<div class="jeop-show-game-circle">
+			<% end %>
+		<% elsif uw.current_game == "three" %>
+			<div class="inline-block data-url pointer game-zone-margin
+									free-show-game-circle-container"
+					 data-url="/freestyle?word_id=<%= word.id %>">
+				<div class="free-show-game-circle">
+		<% else %>
+			Yikes
+		<% end %>
+					<span class="white">&#9658;</span>
+				</div>
+
+				<span class="lead basic-black-link">
+					<h4><%= link_to word.name.capitalize, word %></h4>
+				</span>
+			</div>
+	<% end %>
+<% end %>

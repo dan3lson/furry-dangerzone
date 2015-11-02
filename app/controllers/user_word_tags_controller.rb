@@ -16,11 +16,9 @@ class UserWordTagsController < ApplicationController
           user: current_user,
           word_tag: @word_tag
         )
-        current_user.points += 2
 
-        if @user_word_tag.save && current_user.save
-          msg = "Awesome - you tagged \'#{@tag.name}\' to \'#{@word.name}\'!"
-          flash[:success] = msg
+        if @user_word_tag.save
+          flash[:success] = "Success!"
 
           redirect_to @word
         else
@@ -49,19 +47,20 @@ class UserWordTagsController < ApplicationController
       if user_word_tag.word_tag == WordTag.find_by(
         word: user_word_tag.word_tag.word, tag: @tag
       )
-      user_word_tag.destroy
+        user_word_tag.destroy
       end
     end
 
-    current_user.points -= 2
+    if @user_tag.destroy
+      flash[:success] = "Success: \'#{@tag.name}\' removed."
 
-    if @user_tag.destroy && current_user.save
-      flash[:success] = "You removed \'#{@tag.name}\'."
       @tag.destroy unless @tag_has_other_users
+
       redirect_to myTags_path
     else
       msg = "Yikes! - removing \'#{@tag.name}\' didn\'t work. "
       flash[:danger] = msg << "Please try again."
+
       redirect_to myTags_path
     end
   end

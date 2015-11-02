@@ -14,9 +14,8 @@ feature "user adds a word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  pending "\n user adds a word -->" do
+  describe "\n user adds a word -->" do
     scenario "scenario: valid process" do
-      word = FactoryGirl.create(:word)
       user = User.create!(
         username: "fizzBuzzzzed",
         password: "password",
@@ -29,11 +28,16 @@ feature "user adds a word", %{
         password_confirmation: "password",
         email: ""
       )
+
+      word = FactoryGirl.create(:word)
+
       user_word = UserWord.create!(word: word, user: user)
+
       game = Game.create!(
         name: "Fundamentals",
         description: "Learn the basics."
       )
+
       level = Level.create!(
         focus: "focus 1",
         direction: "direction 1"
@@ -66,6 +70,7 @@ feature "user adds a word", %{
         focus: "focus 8",
         direction: "direction 8"
       )
+
       game_level = GameLevel.create!(game: game, level: level)
       game_level_2 = GameLevel.create!(game: game, level: level_2)
       game_level_3 = GameLevel.create!(game: game, level: level_3)
@@ -75,38 +80,14 @@ feature "user adds a word", %{
       game_level_7 = GameLevel.create!(game: game, level: level_7)
       game_level_8 = GameLevel.create!(game: game, level: level_8)
 
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_8
-      )
+      UserWordGameLevel.create!(user_word: user_word, game_level: game_level)
+      UserWordGameLevel.create!(user_word: user_word, game_level: game_level_2)
+      UserWordGameLevel.create!(user_word: user_word, game_level: game_level_3)
+      UserWordGameLevel.create!(user_word: user_word, game_level: game_level_4)
+      UserWordGameLevel.create!(user_word: user_word, game_level: game_level_5)
+      UserWordGameLevel.create!(user_word: user_word, game_level: game_level_6)
+      UserWordGameLevel.create!(user_word: user_word, game_level: game_level_7)
+      UserWordGameLevel.create!(user_word: user_word, game_level: game_level_8)
 
       log_in_as(user_2)
 
@@ -114,7 +95,7 @@ feature "user adds a word", %{
 
       fill_in "Search", with: "chess"
 
-      click_on "define"
+      click_on "look up"
 
       click_on "add"
 

@@ -25,7 +25,7 @@ feature "user views the menu", %{
 
       expect(page).to have_link("Edit Profile")
       expect(page).to have_link("Log Out")
-      expect(page).to have_content("Rate This App")
+      expect(page).to have_content("Rate Leksi")
       expect(page).to have_button("submit")
     end
   end
