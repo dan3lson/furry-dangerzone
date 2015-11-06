@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104143958) do
+ActiveRecord::Schema.define(version: 20151106041942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,27 +25,12 @@ ActiveRecord::Schema.define(version: 20151104143958) do
   end
 
   create_table "freestyle_responses", force: :cascade do |t|
-    t.string   "input",                   null: false
-    t.integer  "user_word_game_level_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "input",        null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "user_word_id"
     t.string   "focus"
   end
-
-  add_index "freestyle_responses", ["input", "user_word_game_level_id"], name: "index_freestyle_responses_on_input_and_user_word_game_level_id", unique: true, using: :btree
-  add_index "freestyle_responses", ["user_word_game_level_id"], name: "index_freestyle_responses_on_user_word_game_level_id", using: :btree
-
-  create_table "game_levels", force: :cascade do |t|
-    t.integer  "game_id",    null: false
-    t.integer  "level_id",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "game_levels", ["game_id", "level_id"], name: "index_game_levels_on_game_id_and_level_id", using: :btree
-  add_index "game_levels", ["game_id"], name: "index_game_levels_on_game_id", using: :btree
-  add_index "game_levels", ["level_id"], name: "index_game_levels_on_level_id", using: :btree
 
   create_table "game_stats", force: :cascade do |t|
     t.integer  "user_word_id",              null: false
@@ -66,13 +51,6 @@ ActiveRecord::Schema.define(version: 20151104143958) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "levels", force: :cascade do |t|
-    t.string   "focus",      null: false
-    t.string   "direction",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating",      null: false
     t.text     "description"
@@ -86,13 +64,6 @@ ActiveRecord::Schema.define(version: 20151104143958) do
   add_index "reviews", ["user_id", "version_id"], name: "index_reviews_on_user_id_and_version_id", unique: true, using: :btree
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
   add_index "reviews", ["version_id"], name: "index_reviews_on_version_id", using: :btree
-
-  create_table "source_lists", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "source_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "tags", force: :cascade do |t|
     t.string   "name",       null: false
@@ -112,14 +83,6 @@ ActiveRecord::Schema.define(version: 20151104143958) do
   add_index "user_tags", ["tag_id"], name: "index_user_tags_on_tag_id", using: :btree
   add_index "user_tags", ["user_id", "tag_id"], name: "index_user_tags_on_user_id_and_tag_id", unique: true, using: :btree
   add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
-
-  create_table "user_word_game_levels", force: :cascade do |t|
-    t.integer  "user_word_id",                          null: false
-    t.integer  "game_level_id",                         null: false
-    t.string   "status",        default: "not started", null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-  end
 
   create_table "user_word_tags", force: :cascade do |t|
     t.integer  "word_tag_id", null: false
@@ -180,18 +143,6 @@ ActiveRecord::Schema.define(version: 20151104143958) do
   add_index "word_antonyms", ["antonym_id"], name: "index_word_antonyms_on_antonym_id", using: :btree
   add_index "word_antonyms", ["word_id", "antonym_id"], name: "index_word_antonyms_on_word_id_and_antonym_id", unique: true, using: :btree
   add_index "word_antonyms", ["word_id"], name: "index_word_antonyms_on_word_id", using: :btree
-
-  create_table "word_lists", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "word_id"
-    t.integer  "source_id"
-  end
-
-  add_index "word_lists", ["user_id", "word_id"], name: "index_word_lists_on_user_id_and_word_id", unique: true, using: :btree
-  add_index "word_lists", ["user_id"], name: "index_word_lists_on_user_id", using: :btree
-  add_index "word_lists", ["word_id"], name: "index_word_lists_on_word_id", using: :btree
 
   create_table "word_synonyms", force: :cascade do |t|
     t.integer  "word_id",    null: false
