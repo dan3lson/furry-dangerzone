@@ -17,13 +17,11 @@ Rails.application.routes.draw do
   delete "logout" => "sessions#destroy"
   resources :users
   resources :words, only: [:index, :show]
-  resource :user_word, only: [:create, :destroy]
+  resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
-  resource :user_word_game_level, only: [:update]
   resource :reset_fundamentals, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]
   resource :freestyle_game, only: [:create, :update]
-  resource :create_freestyle, only: [:create]
   resource :game_stat, only: [:update]
   resource :jeopardy_result, only: [:update]
   resources :tags, except: [:destroy]

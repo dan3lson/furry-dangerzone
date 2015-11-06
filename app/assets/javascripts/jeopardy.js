@@ -149,7 +149,7 @@ $(document).ready(function(){
 	 * Helper Functions: Support ones that help each activity above
 	 */
 
-	// Update user_word_game_level_status
+	// Update user_word status
 	function update_jeopardy_status_as_complete(word_id) {
 		var game_info = {
 			"game_name": "Jeopardy",
@@ -167,25 +167,7 @@ $(document).ready(function(){
 		});
 	};
 
-	// Update game_levels 1-8 as "not started" for this (user_)word
-	function reset_fundamentals_from_complete_to_not_started(word_id) {
-		var game_info = {
-			"word_id": word_id
-		};
-
-		$.ajax({
-			type: "PATCH",
-			url: "/reset_fundamentals",
-			dataType: "json",
-			data: game_info,
-			success: function(response) {
-				console.log(response.errors);
-			}
-		});
-	};
-
-	// Destroy game_levels 9-28 for this (user_)word
-	function destroy_jeopardys(word_id) {
+	function reset_uw_fund_status_from_1_to_0(word_id) {
 		var game_info = {
 			"word_id": word_id
 		};
@@ -193,23 +175,6 @@ $(document).ready(function(){
 		$.ajax({
 			type: "DELETE",
 			url: "/jeopardy_game",
-			dataType: "json",
-			data: game_info,
-			success: function(response) {
-				console.log(response.errors);
-			}
-		});
-	};
-
-	// Create the Freestyle game for this word
-	function create_freestyles(word_id) {
-		var game_info = {
-			"word_id": word_id
-		};
-
-		$.ajax({
-			type: "POST",
-			url: "/create_freestyle",
 			dataType: "json",
 			data: game_info,
 			success: function(response) {
@@ -256,7 +221,7 @@ $(document).ready(function(){
 	};
 
 
-	// Update user_word_game_level_status
+	// Update user_word status
 	function update_user_points(num) {
 		 $.ajax({
 			 type: "PATCH",
@@ -281,9 +246,6 @@ $(document).ready(function(){
 			// update game_levels 9-28 as complete for this (user_)word
 			update_jeopardy_status_as_complete(word_id);
 
-			// create the last game, i.e. Freestyle, for this (user_)word
-			create_freestyles(word_id);
-
 			// update num_played
 			update_num_played(word_id);
 
@@ -301,15 +263,12 @@ $(document).ready(function(){
 			);
 		}
 		else {
-			// update game_levels 1-8 as "not started" for this (user_)word
-			reset_fundamentals_from_complete_to_not_started(word_id);
-
 			// update num_played
 			update_num_played(word_id);
 
 			update_jeopardy_result(word_id, "lost");
 
-			destroy_jeopardys(word_id);
+			reset_uw_fund_status_from_1_to_0(word_id);
 
 			$(level_two_results_num_circle).html("&#8595;");
 			$(level_two_results_num_word).html(

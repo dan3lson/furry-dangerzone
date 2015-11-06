@@ -4,8 +4,6 @@ RSpec.describe Game, type: :model do
   let!(:game) { FactoryGirl.create(:game) }
 
   describe "associatons" do
-    it { should have_many(:game_levels) }
-    it { should have_many(:levels) }
     it { should have_many(:game_stats) }
   end
 

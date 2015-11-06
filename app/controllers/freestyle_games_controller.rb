@@ -1,79 +1,78 @@
 class FreestyleGamesController < ApplicationController
-	def create
+	def create # really a create/update fusion
 		@word = Word.find(params[:word_id])
 		@user_word = UserWord.find_by(user: current_user, word: @word)
-		@uwgl_freestyles = @user_word.uwgl_freestyles
-		@first_uwgl_freestyle_id = @uwgl_freestyles.first.id
-		@uwgl_freestyle_responses = @uwgl_freestyles.map { |uwgl|
-			FreestyleResponse.find_by(user_word_game_level_id: uwgl.id)
-		}
-		@freestyle_response_ids = FreestyleResponse.pluck(:user_word_game_level_id)
-		@freestyle_responses_before = FreestyleResponse.count
 		@responses = params[:freestyle_responses]
+		@split_responses = @responses.each_slice(3).to_a
+		@sem_map_responses = @split_responses[0]
+		@word_map_responses = @split_responses[1]
+		@def_map_responses = @split_responses[2]
+		@sent_ex_responses = @split_responses[3]
 
-		@updated_freestyle_responses = 0
+		@freestyles_for_uw = FreestyleResponse.for(@user_word)
+		@freestyle_response_uw_ids = FreestyleResponse.pluck(:user_word_id)
 
-		if @freestyle_response_ids.include?(@first_uwgl_freestyle_id)
+		if @freestyle_response_uw_ids.include?(@user_word.id)
+			@updated_freestyle_responses = 0
 
-			@uwgl_freestyles.each_with_index do |uwgl, i|
-				@freestyle_response = FreestyleResponse.find_by(
-					user_word_game_level_id: uwgl.id
-				)
-				@freestyle_response.input = @responses[i]
+			@freestyles_for_uw.each_with_index do |fr, i|
+				fr.input = @responses[i]
 
-				@updated_freestyle_responses += 1 if @freestyle_response.save
+				@updated_freestyle_responses += 1 if fr.save
 			end
 
-			if @updated_freestyle_responses == 12
+			@user_word.games_completed = 3
+
+			if @updated_freestyle_responses == 12 && @user_word.save
 				render json: {
 					errors: "Success: 12 F-Responses updated for UW #{@user_word.id}."
 				}
 			else
 				render json: {
-					errors: "ERROR: 12 F-Responses not updated for #{@user_word.id}."
+					errors: "ERROR: 12 F-Responses not updated for UW #{@user_word.id}."
 				}
 			end
 		else
-			0.upto(11) do |i|
-				@freestyle_response = FreestyleResponse.create!(
-					input: @responses[i],
-					user_word_game_level: @uwgl_freestyles[i]
+			@freestyle_responses_before = FreestyleResponse.count
+
+			@sem_map_responses.each do |r|
+				FreestyleResponse.create!(input: r,	focus: "Semantic Map",
+					user_word_id: @user_word.id
+				)
+			end
+
+			@word_map_responses.each do |r|
+				FreestyleResponse.create!(input: r,	focus: "Word Map",
+					user_word_id: @user_word.id
+				)
+			end
+
+			@def_map_responses.each do |r|
+				FreestyleResponse.create!(input: r,	focus: "Definition Map",
+					user_word_id: @user_word.id
+				)
+			end
+
+			@sent_ex_responses.each do |r|
+				FreestyleResponse.create!(input: r,	focus: "Sentence Example",
+					user_word_id: @user_word.id
 				)
 			end
 
 			@freestyle_responses_after = FreestyleResponse.count
 
-			if @freestyle_responses_after - @freestyle_responses_before == 12
+			@user_word.games_completed = 3
+
+			if (@freestyle_responses_after - @freestyle_responses_before == 12) &&
+				@user_word.save
 				render json: {
 					errors: "Success: 12 F-Responses created for UW #{@user_word.id}."
 				}
 			else
 				render json: {
-					errors: "ERROR: 12 F-Responses not created for #{@user_word.id}."
+					errors: "ERROR: 12 F-Responses not created for UW #{@user_word.id}."
 				}
 			end
-		end
-	end
-
-	def update
-		@word = Word.find(params[:word_id])
-		@user_word = UserWord.find_by(user: current_user, word: @word)
-
-		@user_word.uwgl_freestyles.each do |uwgl|
-			uwgl.status = "complete"
-			uwgl.save!
-		end
-
-		@status = @user_word.uwgl_freestyles.map { |uwgl| uwgl.status }.uniq.first
-
-		if @status == "complete"
-			render json: {
-				errors: "Success: UWGL Freestyles (UW #{@user_word.id}) updated."
-			}
-		else
-			render json: {
-				errors: "ERROR: UWGL Freestyles (UW #{@user_word.id}) NOT updated."
-			}
 		end
 	end
 end

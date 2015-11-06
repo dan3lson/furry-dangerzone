@@ -921,13 +921,19 @@ table {
 	background: $leksi-green;
 }
 
-.default-show-game-circle {
+.bootstrap-blue-game-circle {
 	@extend .word-show-game-circle;
 
 	background: $bootstrap-blue;
 }
 
-.default-show-game-circle:hover {
+.bootstrap-blue-game-circle-no-hover {
+	@extend .word-show-game-circle;
+
+	background: $bootstrap-blue;
+}
+
+.bootstrap-blue-game-circle:hover {
 	opacity: $show-game-circle-container-hover-opac;
 }
 

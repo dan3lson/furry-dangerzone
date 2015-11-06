@@ -1,15 +1,20 @@
 <% unless @rand_word.nil? %>
 	<% if @rand_word.current_game == "one" %>
 		<div class="inline-block game-zone-margin data-url pointer
-								default-show-game-circle"
+								bootstrap-blue-game-circle"
 				 data-url="/fundamentals?word_id=<%= @rand_word.word.id %>">
 	<% elsif @rand_word.current_game == "two" %>
-		<div class="inline-block game-zone-margin data-url pointer
-								default-show-game-circle"
-				 data-url="/jeopardy?word_id=<%= @rand_word.word.id %>">
+		<% if ready_for_jeopardy?(current_user, @rand_word) %>
+			<div class="inline-block game-zone-margin data-url pointer
+									bootstrap-blue-game-circle"
+					 data-url="/jeopardy?word_id=<%= @rand_word.word.id %>">
+		<% else %>
+			<div class="inline-block game-zone-margin game-not-ready
+									bootstrap-blue-game-circle-no-hover">
+		<% end %>
 	<% elsif @rand_word.current_game == "three" %>
 		<div class="inline-block game-zone-margin data-url pointer
-								default-show-game-circle"
+								bootstrap-blue-game-circle"
 				 data-url="/freestyle?word_id=<%= @rand_word.word.id %>">
 	<% else %>
 		Yikes!

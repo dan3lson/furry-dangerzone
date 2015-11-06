@@ -17,7 +17,7 @@ feature "two users remove a word", %{
   #     for the word I want
   # [x] As user_2, I can also see a "remove" button
   #     for that same word user_1 has
-  # [x] myLeksi doesn't show my removed word
+  # [x] myLeksi doesn't show the removed word
   # [x] That word is no longer on myTags page
   # [x] I see a message of removal-success
 
@@ -33,83 +33,6 @@ feature "two users remove a word", %{
     let!(:user_word_2) { UserWord.create(word: word, user: user_2) }
 
     scenario "scenario: user_1 removes untagged word (not tagged for user_2)" do
-      create_levels_and_games
-
-      game_level = GameLevel.all[-8]
-      game_level_2 = GameLevel.all[-7]
-      game_level_3 = GameLevel.all[-6]
-      game_level_4 = GameLevel.all[-5]
-      game_level_5 = GameLevel.all[-4]
-      game_level_6 = GameLevel.all[-3]
-      game_level_7 = GameLevel.all[-2]
-      game_level_8 = GameLevel.all[-1]
-
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_8
-      )
-
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_8
-      )
-
       log_in_as(user_1)
 
       visit myLeksi_path
@@ -127,7 +50,6 @@ feature "two users remove a word", %{
       expect(UserWord.count).to eq(1)
       expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
-      expect(UserWordGameLevel.count).to eq(8)
     end
 
     scenario "scenario: user_1 removes tagged word (not tagged for user_2)" do
@@ -136,83 +58,6 @@ feature "two users remove a word", %{
       word_tag = WordTag.create(word: word, tag: tag)
       user_word_tag = UserWordTag.create(
         user: user_1, word_tag: word_tag
-      )
-
-      create_levels_and_games
-
-      game_level = GameLevel.all[-8]
-      game_level_2 = GameLevel.all[-7]
-      game_level_3 = GameLevel.all[-6]
-      game_level_4 = GameLevel.all[-5]
-      game_level_5 = GameLevel.all[-4]
-      game_level_6 = GameLevel.all[-3]
-      game_level_7 = GameLevel.all[-2]
-      game_level_8 = GameLevel.all[-1]
-
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_8
-      )
-
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_8
       )
 
       log_in_as(user_1)
@@ -234,7 +79,6 @@ feature "two users remove a word", %{
       expect(UserWord.count).to eq(1)
       expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
-      expect(UserWordGameLevel.count).to eq(8)
     end
 
     scenario "scenario: user_1 removes tagged word (also tagged for user_2)" do
@@ -247,83 +91,6 @@ feature "two users remove a word", %{
       )
       user_word_tag = UserWordTag.create(
         user: user_2, word_tag: word_tag
-      )
-
-      create_levels_and_games
-
-      game_level = GameLevel.all[-8]
-      game_level_2 = GameLevel.all[-7]
-      game_level_3 = GameLevel.all[-6]
-      game_level_4 = GameLevel.all[-5]
-      game_level_5 = GameLevel.all[-4]
-      game_level_6 = GameLevel.all[-3]
-      game_level_7 = GameLevel.all[-2]
-      game_level_8 = GameLevel.all[-1]
-
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_8
-      )
-
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_8
       )
 
       log_in_as(user_1)
@@ -345,7 +112,6 @@ feature "two users remove a word", %{
       expect(UserWord.count).to eq(1)
       expect(WordTag.count).to eq(1)
       expect(UserWordTag.count).to eq(1)
-      expect(UserWordGameLevel.count).to eq(8)
     end
 
     scenario "scenario: user_1 and user_2 remove the same tagged word" do
@@ -358,83 +124,6 @@ feature "two users remove a word", %{
       )
       user_word_tag = UserWordTag.create(
         user: user_2, word_tag: word_tag
-      )
-
-      create_levels_and_games
-
-      game_level = GameLevel.all[-8]
-      game_level_2 = GameLevel.all[-7]
-      game_level_3 = GameLevel.all[-6]
-      game_level_4 = GameLevel.all[-5]
-      game_level_5 = GameLevel.all[-4]
-      game_level_6 = GameLevel.all[-3]
-      game_level_7 = GameLevel.all[-2]
-      game_level_8 = GameLevel.all[-1]
-
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word,
-        game_level: game_level_8
-      )
-
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_2
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_3
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_4
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_5
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_6
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_7
-      )
-      UserWordGameLevel.create!(
-        user_word: user_word_2,
-        game_level: game_level_8
       )
 
       log_in_as(user_1)
@@ -470,7 +159,6 @@ feature "two users remove a word", %{
       expect(UserWord.count).to eq(0)
       expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
-      expect(UserWordGameLevel.count).to eq(0)
     end
   end
 end

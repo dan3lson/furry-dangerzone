@@ -23,7 +23,7 @@ GameStat.select { |gs| gs.game_id == 1 }.map(&:num_played).inject(0, &:+)
 # UserWord.select { |uw| uw.fundamental_in_progress? }.count
 
 # Fundamentals Not Started
-UserWord.select { |uw| uw.fundamental_not_started? }.count
+UserWord.select { |uw| uw.fundamental_not_completed? }.count
 
 # Jeopardys Completed
 UserWord.select { |uw| uw.jeopardy_completed? }.count
@@ -32,7 +32,7 @@ UserWord.select { |uw| uw.jeopardy_completed? }.count
 GameStat.select { |gs| gs.game_id == 2 }.map(&:num_played).inject(0, &:+)
 
 # Jeopardys Not Started
-UserWord.select { |uw| uw.jeopardy_not_started? }.count
+UserWord.select { |uw| uw.jeopardy_not_completed? }.count
 
 # Num Jeopardys Won
 GameStat.sum(:num_jeop_won)
@@ -47,4 +47,4 @@ UserWord.select { |uw| uw.freestyle_completed? }.count
 GameStat.select { |gs| gs.game_id == 3 }.map(&:num_played).inject(0, &:+)
 
 # Freestyles Not Started
-UserWord.select { |uw| uw.freestyle_not_started? }.count
+UserWord.select { |uw| uw.freestyle_not_completed? }.count
