@@ -57,23 +57,6 @@ FactoryGirl.define do
     name "Fundamentals"
   end
 
-  factory :level do
-    direction "Type the word below:"
-    focus "Spelling"
-  end
-
-  factory :game_level do
-    game
-    level
-  end
-
-  factory :user_word_game_level do
-    status "not started"
-
-    game_level
-    user_word
-  end
-
   factory :game_stat do
     num_played 3
     num_jeop_won 5
@@ -81,5 +64,12 @@ FactoryGirl.define do
 
     user_word
     game
+  end
+
+  factory :feedback do
+    description "Leksi could be a little faster."
+    kind "wish"
+
+    user
   end
 end

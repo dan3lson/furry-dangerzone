@@ -24,10 +24,13 @@ class School::SchoolsController < BaseSchoolController
 
   def student
     @student = User.find(params[:id])
-    @words_added_last_day = @student.words_added_last_day
-    @funds_completed_last_day = @student.fundamentals_completed_last_day
-    @jeops_completed_last_day = @student.jeopardys_completed_last_day
-    @frees_completed_last_day = @student.freestyles_completed_last_day
+
+    if false
+      @words_added_last_day = @student.words_added_last_day
+      @funds_completed_last_day = @student.fundamentals_completed_last_day
+      @jeops_completed_last_day = @student.jeopardys_completed_last_day
+      @frees_completed_last_day = @student.freestyles_completed_last_day
+    end
   end
 
   def messages
@@ -35,8 +38,8 @@ class School::SchoolsController < BaseSchoolController
     @user_words = UserWord.select { |uw| uw if uw.freestyle_completed? &&
       uw.user.role == "student"
     }
-    @responses = FreestyleResponse.includes(:user_word_game_level).select { |f|
-      @fs_students.include?(f.user_word_game_level.user_word.user)
+    @responses = FreestyleResponse.includes(:user_word).select { |fr|
+      @fs_students.include?(fr.user_word.user)
     }
     @sliced_responses = @responses.each_slice(3)
     @freestyle_types = [

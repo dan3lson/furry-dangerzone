@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102204033) do
+ActiveRecord::Schema.define(version: 20151104143958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,11 @@ ActiveRecord::Schema.define(version: 20151102204033) do
 
   create_table "freestyle_responses", force: :cascade do |t|
     t.string   "input",                   null: false
-    t.integer  "user_word_game_level_id", null: false
+    t.integer  "user_word_game_level_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "user_word_id"
+    t.string   "focus"
   end
 
   add_index "freestyle_responses", ["input", "user_word_game_level_id"], name: "index_freestyle_responses_on_input_and_user_word_game_level_id", unique: true, using: :btree
@@ -85,6 +87,13 @@ ActiveRecord::Schema.define(version: 20151102204033) do
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
   add_index "reviews", ["version_id"], name: "index_reviews_on_version_id", using: :btree
 
+  create_table "source_lists", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "source_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -124,10 +133,11 @@ ActiveRecord::Schema.define(version: 20151102204033) do
   add_index "user_word_tags", ["word_tag_id"], name: "index_user_word_tags_on_word_tag_id", using: :btree
 
   create_table "user_words", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "word_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",                     null: false
+    t.integer  "word_id",                     null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "games_completed", default: 0, null: false
   end
 
   add_index "user_words", ["user_id", "word_id"], name: "index_user_words_on_user_id_and_word_id", unique: true, using: :btree
@@ -170,6 +180,18 @@ ActiveRecord::Schema.define(version: 20151102204033) do
   add_index "word_antonyms", ["antonym_id"], name: "index_word_antonyms_on_antonym_id", using: :btree
   add_index "word_antonyms", ["word_id", "antonym_id"], name: "index_word_antonyms_on_word_id_and_antonym_id", unique: true, using: :btree
   add_index "word_antonyms", ["word_id"], name: "index_word_antonyms_on_word_id", using: :btree
+
+  create_table "word_lists", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "word_id"
+    t.integer  "source_id"
+  end
+
+  add_index "word_lists", ["user_id", "word_id"], name: "index_word_lists_on_user_id_and_word_id", unique: true, using: :btree
+  add_index "word_lists", ["user_id"], name: "index_word_lists_on_user_id", using: :btree
+  add_index "word_lists", ["word_id"], name: "index_word_lists_on_word_id", using: :btree
 
   create_table "word_synonyms", force: :cascade do |t|
     t.integer  "word_id",    null: false

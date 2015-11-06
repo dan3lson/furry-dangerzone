@@ -7,8 +7,9 @@ class GamesController < ApplicationController
       @real_world_examples = RealWorldExample.for(@chosen_word.name)
 
       if current_user.has_incomplete_fundamentals?
-        @three_fund_words = current_user.incomplete_fundamentals.shuffle.take(3).
-          map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
+        @three_fund_words = current_user.incomplete_fundamentals.shuffle.take(
+          3
+        ).map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
       end
 
       if current_user.has_enough_jeopardy_words?

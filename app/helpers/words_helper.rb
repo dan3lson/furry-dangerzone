@@ -28,11 +28,11 @@ module WordsHelper
   end
 
   def incomplete_jeopardys(user, tag)
-    user_words(user, tag).select { |uw| uw.jeopardy_not_started? }
+    user_words(user, tag).select { |uw| uw.jeopardy_not_completed? }
   end
 
   def incomplete_freestyles(user, tag)
-    user_words(user, tag).select { |uw| uw.freestyle_not_started? }
+    user_words(user, tag).select { |uw| uw.freestyle_not_completed? }
   end
 
   def incomplete_fundamentals_exist?(user, tag)

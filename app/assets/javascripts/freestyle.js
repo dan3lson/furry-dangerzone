@@ -176,8 +176,7 @@ $(document).ready(function(){
 		$("#level_congrats_text").append("<strong>'" + $chosen_word_value + "'</strong> ");
 		$("#goodies_total").html($new_goodies_total);
 
-		create_freestyle_responses_for_uwgl();
-		update_uwgl_freestyle_statuses();
+		create_freestyle_responses_for_uw();
 		update_num_played();
 
 		// Hide the exit btn and display the home btn
@@ -189,12 +188,11 @@ $(document).ready(function(){
 	 * Functions
 	 */
 
-	// Create responses tied to the user_word_game_levels
-	function create_freestyle_responses_for_uwgl() {
+	// Create responses tied to the user_word
+	function create_freestyle_responses_for_uw() {
 		var $first_half = $.merge($semantic_map_responses, $word_map_responses)
 		var $second_half = $.merge($definition_map_responses, $sentence_responses)
 		var $all_responses = $.merge($first_half, $second_half)
-
 		var game_info = {
 			"word_id": $chosen_word_id,
 			"freestyle_responses": $all_responses
@@ -202,21 +200,6 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "POST",
-			url: "/freestyle_game",
-			dataType: "json",
-			data: game_info,
-			success: function(response) {
-				console.log(response.errors);
-			}
-		});
-	};
-
-	// Update user_word_game_level_status
-	function update_uwgl_freestyle_statuses() {
-		var game_info = { "word_id": $chosen_word_id };
-
-		$.ajax({
-			type: "PATCH",
 			url: "/freestyle_game",
 			dataType: "json",
 			data: game_info,

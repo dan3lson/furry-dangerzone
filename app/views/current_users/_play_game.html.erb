@@ -4,9 +4,7 @@
 	<% if uw.class == String %>
 		<div class="inline-block game-zone-margin data-url pointer
 								add-show-game-circle" data-url="/search">
-			<div class="x-large-font">
-				&#043;
-			</div>
+			<div class="x-large-font">&#043;</div>
 
 			<br>
 
@@ -21,8 +19,7 @@
 					 data-url="/fundamentals?word_id=<%= word.id %>">
 				<div class="fund-show-game-circle">
 		<% elsif uw.current_game == "two" %>
-			<% if uw.jeopardy_not_started? &&
-						current_user.has_enough_jeopardy_words? %>
+			<% if ready_for_jeopardy?(current_user, uw) %>
 				<div class="inline-block data-url pointer game-zone-margin
 										jeop-show-game-circle-container"
 						 data-url="/jeopardy?word_id=<%= word.id %>">

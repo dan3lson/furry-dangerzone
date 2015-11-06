@@ -1,4 +1,5 @@
 class ResetFundamentalsController < ApplicationController
+  # DELETE THIS FILE
   def update
     @word_params = Word.find(params[:word_id])
     @word = Rails.env.test? ? @word_params.gsub("=", "") : @word_params
@@ -9,22 +10,15 @@ class ResetFundamentalsController < ApplicationController
         errors: "Okay: UW #{@user_word.id}\'s Fundamentals untouched."
       }
     else
-      @user_word.uwgl_fundamentals.each do |uwgl|
-        uwgl.status = "not started"
-        uwgl.save
-      end
+      @user_word.games_completed == 0
 
-      @status = @user_word.uwgl_fundamentals.map { |uwgl|
-        uwgl.status
-      }.uniq
-
-      if @status.first == "not started"
+      if @user_word.save
         render json: {
-          errors: "Success: UW #{@user_word.id}\'s Funds successfully reset."
+          errors: "Success: UW #{@user_word.id}\'s games_completed reset to 0."
         }
       else
         render json: {
-          errors: "ERROR: UW #{@user_word.id}\'s Funds NOT reset."
+          errors: "ERROR: UW #{@user_word.id}\'s games_completed not reset."
         }
       end
     end

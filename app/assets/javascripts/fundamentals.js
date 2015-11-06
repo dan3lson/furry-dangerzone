@@ -157,9 +157,6 @@ $(document).ready(function(){
 		// Update the progress made
 		progressBar(15);
 
-		// Update the user_word_game_level's status to complete
-		update_user_word_game_level_status("1", 1);
-
 		// Check if Fill in the blank activity was already won
 		if ($fill_in_the_blank_game_won) {
 			$alphabet_random_letters_array = [];
@@ -186,9 +183,6 @@ $(document).ready(function(){
 		// Update the activity name and instruction
 		display_instruction("Say <strong>'" + $chosen_word_value + "'</strong> aloud and then tap the mic.");
 
-		// Update the user_word_game_level's status to complete
-		update_user_word_game_level_status("2", 2);
-
 		// Update the progress made
 		progressBar(30);
 	});
@@ -207,9 +201,6 @@ $(document).ready(function(){
 		$part_of_speech = $(".word-part-of-speech").html();
 		display_instruction("As a(n) " + $part_of_speech + ", read the meaning(s) for <strong>'" + $chosen_word_value + "'</strong>.")
 
-		// Update the user_word_game_level's status to complete
-		update_user_word_game_level_status("3", 3);
-
 		// Update the progress made
 		progressBar(45);
 
@@ -225,9 +216,6 @@ $(document).ready(function(){
 	$("#meanings_continue_button").click(function(){
 		// Show and hide buttons
 		$("#meanings_back_button, #meanings_container, #meanings_continue_button").hide();
-
-		// Update the user_word_game_level's status to complete
-		update_user_word_game_level_status("4", 4);
 
 		if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
 			// Show and hide buttons
@@ -251,8 +239,6 @@ $(document).ready(function(){
 			// Update the progress made
 			progressBar(75);
 
-			update_user_word_game_level_status("5", 5);
-
 			start_antonyms_activity($chosen_word_value);
 		}	else if ($("#synonym_no_results").hasClass("please-tap-continue") &&
 								 $("#antonym_no_results").hasClass("please-tap-continue") &&
@@ -261,14 +247,8 @@ $(document).ready(function(){
 			$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
 			$("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
 
-			// Update the user_word_game_level's status to complete
-			update_user_word_game_level_status("5", 5);
-			update_user_word_game_level_status("6", 6);
-			update_user_word_game_level_status("7", 7);
-			update_user_word_game_level_status("8", 8);
-
-			// Create the game_level's for Jeopardy
-      create_jeopardy_uwgls();
+			// Update the user_word's status to complete
+			update_user_word_games_completed();
 
 			// Update the progress made
 			progressBar(100);
@@ -293,11 +273,6 @@ $(document).ready(function(){
 			// Update the activity name and instruction
 			display_instruction("Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
 
-			// Update the user_word_game_level's status to complete
-			update_user_word_game_level_status("5", 5);
-			update_user_word_game_level_status("6", 6);
-			update_user_word_game_level_status("7", 7);
-
 			// Update the progress made
 			progressBar(90);
 
@@ -312,9 +287,6 @@ $(document).ready(function(){
 	});
 
 	$("#synonyms_continue_button").click(function(){
-		// Update the user_word_game_level's status to complete
-		update_user_word_game_level_status("5", 5);
-
 		// Start the next activity --> if there are synonyms, but no antonyms
 		if ($("#antonym_no_results").hasClass("please-tap-continue")) {
 			// Show and hide buttons
@@ -327,9 +299,6 @@ $(document).ready(function(){
 
 			// Update the progress made
 			progressBar(75);
-
-			// Update the user_word_game_level's status to complete
-			update_user_word_game_level_status("6", 6);
 
       $(".checkpoint-image").show();
 
@@ -364,9 +333,6 @@ $(document).ready(function(){
 		// Update the activity name and instruction
 		display_instruction("Is <strong>'" + $chosen_word_value + "'</strong> a synonym or antonym to:");
 
-		// Update the user_word_game_level's status to complete
-		update_user_word_game_level_status("6", 6);
-
 		// Update the progress made
 		progressBar(75);
 
@@ -394,9 +360,6 @@ $(document).ready(function(){
 		// Update the activity name and instruction
 		display_instruction("Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
 
-		// Update the user_word_game_level's status to complete
-		update_user_word_game_level_status("7", 7);
-
 		// Update the progress made
 		progressBar(90);
 
@@ -406,11 +369,8 @@ $(document).ready(function(){
       $("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
       $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
 
-      // Update the user_word_game_level's status to complete
-      update_user_word_game_level_status("8", 8);
-
-      // Create the game_level's for Jeopardy
-      create_jeopardy_uwgls();
+      // Update the user_word's status to complete
+      update_user_word_games_completed();
 
       // Update num_played for this user_word
       update_num_played();
@@ -438,11 +398,8 @@ $(document).ready(function(){
 		$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
 		$("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
 
-		// Update the user_word_game_level's status to complete
-		update_user_word_game_level_status("8", 8);
-
-		// Create the game_level's for Jeopardy
-    create_jeopardy_uwgls();
+		// Update the user_word's status to complete
+		update_user_word_games_completed();
 
     // Update num played for this user_word
     update_num_played();
@@ -726,37 +683,15 @@ $(document).ready(function(){
 	 * Helper Functions: Support ones that help each activity above
 	 */
 
-  // Create the game_level's for Jeopardy
-  function create_jeopardy_uwgls() {
-   var game_info = {
-     "word_id": $chosen_word_id
-   };
-
-   $.ajax({
-     type: "POST",
-     url: "/jeopardy_game",
-     dataType: "json",
-     data: game_info,
-     success: function(response) {
-       console.log(response.errors);
-     }
-   });
-  };
-
-	// Update user_word_game_level_status
-	function update_user_word_game_level_status(level_id, num) {
-		var game_info = {
-			"game_name": "Fundamentals",
-			"level_id": level_id,
-			"word_id": $chosen_word_id
-		};
+	// Update user_word_status
+	function update_user_word_games_completed() {
+		var game_info = { "word_id": $chosen_word_id };
 
 		$.ajax({
 			type: "PATCH",
-			url: "/user_word_game_level",
-			contentType: "application/json",
+			url: "/user_word",
 			dataType: "json",
-			data: JSON.stringify(game_info),
+			data: game_info,
 			success: function(response) {
 				console.log(response.errors);
 			}
@@ -781,7 +716,7 @@ $(document).ready(function(){
     });
   };
 
-	// Update user_word_game_level_status
+	// Update user_word_status
 	function update_user_points(num) {
 		$.ajax({
 			type: "PATCH",

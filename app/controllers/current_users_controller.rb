@@ -5,11 +5,22 @@ class CurrentUsersController < ApplicationController
     @incomplete_fundamentals = current_user.incomplete_fundamentals
     @incomplete_jeopardys = current_user.incomplete_jeopardys
     @incomplete_freestyles = current_user.incomplete_freestyles
-    @incomplete_games = UserWord.includes(:user).select { |uw|
-      uw.user == current_user && (uw.fundamental_not_started? ||
-                                  uw.jeopardy_not_started? ||
-                                  uw.freestyle_not_started?)
-    }
+
+    if current_user.has_words?
+      @incomplete_games = UserWord.includes(:user, :word).select { |uw|
+        uw.user == current_user && (uw.fundamental_not_completed? ||
+                                    uw.jeopardy_not_completed? ||
+                                    uw.freestyle_not_completed?)
+      }
+    else
+      @incomplete_games = UserWord.includes(:user).select { |uw|
+        uw.user == current_user && (uw.fundamental_not_completed? ||
+                                    uw.jeopardy_not_completed? ||
+                                    uw.freestyle_not_completed?)
+      }
+    end
+    
+    @rand_word = @incomplete_games.sample
     @incomplete_games_num = @incomplete_games.count
     @nudges_needed = 10 - @incomplete_games_num if @incomplete_games_num < 10
 
@@ -71,8 +82,6 @@ class CurrentUsersController < ApplicationController
       @fourth_row_rand_words = ["nudge user to add new word"] * 2
     end
 
-    @rand_word = @incomplete_games.sample
-
     @three_rand_tags = Tag.includes(:users).select do |t|
       t.users.include?(current_user)
     end.shuffle.take(3)
@@ -114,6 +123,7 @@ class CurrentUsersController < ApplicationController
 
   def tags
     @current_user_tags = current_user.tags
+    @tag = Tag.new
   end
 
   private

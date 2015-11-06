@@ -57,21 +57,19 @@ class User < ActiveRecord::Base
   end
 
   def incomplete_fundamentals
-    UserWord.where(user: self).select { |uw|
-      uw.fundamental_not_started?
-    }
+    UserWord.where(user: self).select { |uw| uw.fundamental_not_completed? }
   end
 
   def incomplete_jeopardys
-    UserWord.where(user: self).select { |uw|
-      uw.jeopardy_not_started?
-    }
+    UserWord.where(user: self).select do |uw|
+      uw.jeopardy_not_completed?
+    end.keep_if { |uw| uw.games_completed == 1 }
   end
 
   def incomplete_freestyles
-    UserWord.where(user: self).select { |uw|
-      uw.freestyle_not_started?
-    }
+    UserWord.where(user: self).select do |uw|
+      uw.freestyle_not_completed?
+    end.keep_if { |uw| uw.games_completed == 2 }
   end
 
   def has_incomplete_fundamentals?
@@ -86,9 +84,8 @@ class User < ActiveRecord::Base
     incomplete_freestyles.any?
   end
 
-  # test
   def has_games_to_play?
-    has_incomplete_fundamentals? || has_incomplete_freestyles? ||
+    has_incomplete_fundamentals? || has_incomplete_jeopardys? ||
     has_incomplete_freestyles?
   end
 
@@ -97,21 +94,15 @@ class User < ActiveRecord::Base
   end
 
   def completed_fundamentals
-    UserWord.where(user: self).select { |uw|
-      uw.fundamental_completed?
-    }
+    UserWord.where(user: self).select { |uw| uw.fundamental_completed? }
   end
 
   def completed_jeopardys
-    UserWord.where(user: self).select { |uw|
-      uw.jeopardy_completed?
-    }
+    UserWord.where(user: self).select { |uw| uw.jeopardy_completed? }
   end
 
   def completed_freestyles
-    UserWord.where(user: self).select { |uw|
-      uw.freestyle_completed?
-    }
+    UserWord.where(user: self).select { |uw| uw.freestyle_completed? }
   end
 
   def has_completed_fundamentals?
@@ -153,6 +144,47 @@ class User < ActiveRecord::Base
   		u.save
   	end
   end
+
+  def words_added_last_day
+    user_words.where(created_at: 1.days.ago..Time.now)
+  end
+
+  def fundamentals_completed_last_day
+    user_words.select do |uw|
+      next unless uw.fundamental_completed?
+
+      uw.fundamental_completed_last_day?
+    end
+  end
+
+  def jeopardys_completed_last_day
+    user_words.select do |uw|
+      next unless uw.jeopardy_completed?
+
+      uw.jeopardy_completed_last_day?
+    end
+  end
+
+  def freestyles_completed_last_day
+    user_words.select do |uw|
+      next unless uw.freestyle_completed?
+
+      uw.freestyle_completed_last_day?
+    end
+  end
+
+  def has_recent_activity?
+    words_added_last_day.any? ||
+    fundamentals_completed_last_day.any? ||
+    jeopardys_completed_last_day.any? ||
+    freestyles_completed_last_day.any?
+  end
+
+  def can_create_words?
+    is_admin? || is_teacher?
+  end
+
+  # METHODS BELOW ONLY SUPPORT CURRENT SCHOOL PILOT
 
   def self.fs_class_one
     %w(
@@ -243,44 +275,5 @@ class User < ActiveRecord::Base
       s.email = ""
       s.save
     end
-  end
-
-  def words_added_last_day
-    user_words.where(created_at: 1.days.ago..Time.now)
-  end
-
-  def fundamentals_completed_last_day
-    user_words.select do |uw|
-      next unless uw.fundamental_completed?
-
-      uw.fundamental_completed_last_day?
-    end
-  end
-
-  def jeopardys_completed_last_day
-    user_words.select do |uw|
-      next unless uw.jeopardy_completed?
-
-      uw.jeopardy_completed_last_day?
-    end
-  end
-
-  def freestyles_completed_last_day
-    user_words.select do |uw|
-      next unless uw.freestyle_completed?
-
-      uw.freestyle_completed_last_day?
-    end
-  end
-
-  def has_recent_activity?
-    words_added_last_day.any? ||
-    fundamentals_completed_last_day.any? ||
-    jeopardys_completed_last_day.any? ||
-    freestyles_completed_last_day.any?
-  end
-
-  def can_create_words?
-    is_admin? || is_teacher?
   end
 end

@@ -1,12 +1,12 @@
 <div>
 	<% if user_word.freestyle_completed? %>
 		<div><%= image_tag("medal_all_games_completed_35.png") %></div>
-	<% elsif !user_word.fundamental_completed? %>
+	<% elsif user_word.fundamental_not_completed? %>
 		<div
 			class="game-<%= user_word.current_game %>-start-circle pointer data-url"
 			data-url="/fundamentals?word_id=<%= word.id %>">
 		</div>
-	<% elsif user_word.jeopardy_not_started? %>
+	<% elsif user_word.jeopardy_not_completed? %>
 		<% if current_user.has_enough_jeopardy_words? %>
 			<div
 				class="game-<%= user_word.current_game %>-start-circle data-url pointer"

@@ -4,8 +4,9 @@
       <%= image_tag("tag_black_filled_32.png", alt: "Tag", class: "img-responsive") %>
     </div>
     <p class="basic-black-link">
-      Tags allow you to organize your words.
-      <%= link_to "Create your first tag", new_tag_path %> now.
+      Tags allow you to organize your words. Create your first tag now.
+
+      <%= render "tags/form" %>
     </p>
   </div>
 </div>
