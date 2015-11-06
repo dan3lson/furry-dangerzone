@@ -1,33 +1,37 @@
 <% provide(:title, "Review") %>
 <% provide(:header, "Review") %>
 
-<% if @responses.any? %>
-	<% @sliced_responses.each_with_index do |batch, i| %>
-		<div class="box-shadow-border">
-			<div class="row">
-				<div class="col-xs-5 col-sm-3">
-					<h3 class="freestyle-types">
-						<%= batch.first.user_word_game_level.user_word.user.username %>
-						<br>
-						<small><%= time_ago_in_words(batch.first.updated_at) %> ago</small>
-					</h3>
-				</div>
-				<div class="col-xs-7 col-sm-9">
-					<h5 class="freestyle-types"><%= @freestyle_types[i] %></h5>
+Be back soon!
 
-					<p class="lead apple-blue">
-						<%= batch.first.user_word_game_level.user_word.word.name%>
-					</p>
+<% if false %>
+	<% if @responses.any? %>
+		<% @sliced_responses.each_with_index do |batch, i| %>
+			<div class="box-shadow-border">
+				<div class="row">
+					<div class="col-xs-5 col-sm-3">
+						<h3 class="freestyle-types">
+							<%= batch.first.user_word_game_level.user_word.user.username %>
+							<br>
+							<small><%= time_ago_in_words(batch.first.updated_at) %> ago</small>
+						</h3>
+					</div>
+					<div class="col-xs-7 col-sm-9">
+						<h5 class="freestyle-types"><%= @freestyle_types[i] %></h5>
 
-					<% batch.each_with_index do |fr, i| %>
-						<p>
-							<%= i + 1 %>. <%= fr.input %>
+						<p class="lead apple-blue">
+							<%= batch.first.user_word_game_level.user_word.word.name%>
 						</p>
-					<% end %>
+
+						<% batch.each_with_index do |fr, i| %>
+							<p>
+								<%= i + 1 %>. <%= fr.input %>
+							</p>
+						<% end %>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<hr>
+			<hr>
+		<% end %>
 	<% end %>
 <% end %>
