@@ -198,6 +198,13 @@ p {
   margin-bottom: 25px;
 }
 
+.box-shadow-border-subtle {
+	border: 1px $light-gray solid;
+	border-radius: 5px;
+	padding: 10px;
+  margin-bottom: 25px;
+}
+
 .zero-padding > * {
 	padding: 10px;
 }

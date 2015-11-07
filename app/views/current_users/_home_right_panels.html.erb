@@ -50,3 +50,16 @@
 		</p>
 	<% end %>
 </div>
+
+<% unless current_user.is_student? %>
+	<div class="box-shadow-border-subtle center">
+		<p class="lead">
+			Follow Leksi
+		</p>
+
+			<%= link_to image_tag("facebook_color_50.png", alt: "Facebook"),
+				"http://www.facebook.com/leksieducation", target: "_blank" %>
+			<%= link_to image_tag("twitter_color_50.png", alt: "Twitter"),
+			 	"http://www.twitter.com/leksieducation", target: "_blank" %>
+	</div>
+<% end %>

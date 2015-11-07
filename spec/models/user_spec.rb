@@ -133,6 +133,30 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#is_student?" do
+    it "returns false" do
+      expect(user.is_student?).to eq(false)
+    end
+
+    it "returns true" do
+      user.role = "admin"
+
+      expect(user.is_student?).to eq(false)
+    end
+
+    it "returns true" do
+      user.role = "teacher"
+
+      expect(user.is_student?).to eq(false)
+    end
+
+    it "returns true" do
+      user.role = "student"
+
+      expect(user.is_student?).to eq(true)
+    end
+  end
+
   describe "#can_create_words?" do
     it "returns false" do
       expect(user.can_create_words?).to eq(false)

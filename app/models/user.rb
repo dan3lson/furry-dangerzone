@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     role == "teacher" || role == "admin"
   end
 
+  def is_student?
+    role == "student"
+  end
+
   def self.top_ten_highest_points
     order("points DESC").take(10)
   end
