@@ -92,7 +92,11 @@
 		and earned 5 experience points (XP)!
 	</p>
 
-	<% if current_user.has_incomplete_freestyles? %>
+	<% unless current_user.is_student? %>
+		<%= render "games/share_accomplishment" %>
+	<% end %>
+
+	<% if current_user.incomplete_freestyles.count > 1 %>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4>Play another Freestyle game?</h4>
