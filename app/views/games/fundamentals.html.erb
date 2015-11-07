@@ -177,8 +177,12 @@
 			and earned
 			<span id="goodies_total"></span>
 			experience points! You need <%= pts_to_level_up(current_user) %> more XP
-			before reaching Level <%= next_level(current_user) %>!
+			before reaching Level <%= next_level(current_user) %>.
 		</p>
+
+		<% unless current_user.is_student? %>
+			<%= render "games/share_accomplishment" %>
+		<% end %>
 	</div>
 
 	<br>

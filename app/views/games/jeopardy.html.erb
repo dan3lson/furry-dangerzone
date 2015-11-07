@@ -243,12 +243,12 @@
 
 	<p class="lead">
 		<span id="level_congrats_text">
-			You've completed Jeopardy for the words below
-		</span>
-		and earned
-		<span id="goodies_total"></span>
-		experience points!
+			You've completed Jeopardy for the words below!
 	</p>
+
+	<% unless current_user.is_student? %>
+		<%= render "games/share_accomplishment" %>
+	<% end %>
 
 	<hr/>
 
