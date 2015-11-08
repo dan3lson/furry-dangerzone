@@ -36,7 +36,7 @@ class School::SchoolsController < BaseSchoolController
   def messages
     @fs_students = User.fs_class_one + User.fs_class_two
     @user_words = UserWord.select { |uw| uw if uw.freestyle_completed? &&
-      uw.user.role == "student"
+      uw.user.is_student?
     }
     @responses = FreestyleResponse.includes(:user_word).select { |fr|
       @fs_students.include?(fr.user_word.user)

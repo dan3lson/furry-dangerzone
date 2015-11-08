@@ -7,40 +7,34 @@
 
       <div class="col-xs-4 data-url pointer fund-show-game-circle-container"
            data-url="/fundamentals?word_id=<%= @word.id %>">
-        <div class="fund-show-game-circle">
+        <div class="fund-show-game-circle white">
           <% if @user_word.fundamental_completed? %>
-            <span class="white">&#10004;</span>
+            &#10004;
+          <% else %>
+            &#9658;
           <% end %>
         </div>
-
-        <span class="leksi-red">Fundamentals</span>
       </div>
 
       <div class="col-xs-4 data-url jeop-show-game-circle-container">
         <% if ready_for_jeopardy?(current_user, @user_word) %>
 
-          <div class="jeop-show-game-circle pointer data-url"
-               data-url="/jeopardy?word_id=<%= @word.id %>"></div>
-          <span class="leksi-orange">Jeopardy</span>
+          <div class="jeop-show-game-circle pointer data-url white"
+               data-url="/jeopardy?word_id=<%= @word.id %>">&#9658;</div>
 
         <% elsif @user_word.jeopardy_completed? %>
 
           <% if current_user.has_enough_jeopardy_words? %>
             <div class="jeop-show-game-circle white pointer data-url"
                  data-url="/jeopardy?word_id=<%= @word.id %>">&#10004;</div>
-            <span class="leksi-orange">Jeopardy</span>
           <% else %>
             <div class="jeop-show-game-circle white game-not-ready">
               &#10004;
             </div>
-            <span class="leksi-orange game-not-ready">Jeopardy</span>
           <% end %>
 
         <% else %>
-
-          <div class="jeop-show-game-circle game-not-ready"></div>
-          <span class="leksi-orange game-not-ready">Jeopardy</span>
-
+          <div class="jeop-show-game-circle game-not-ready white">&#9658;</div>
         <% end %>
       </div>
 
@@ -48,123 +42,99 @@
         <div class="col-xs-4 free-show-game-circle-container pointer data-url"
              data-url="/freestyle?word_id=<%= @word.id %>">
             <div class="free-show-game-circle white">&#10004;</div>
-            <span class="leksi-green">Freestyle</span>
 
       <% elsif @user_word.current_game == "three" %>
         <div class="col-xs-4 free-show-game-circle-container pointer data-url"
              data-url="/freestyle?word_id=<%= @word.id %>">
-            <div class="free-show-game-circle"></div>
-            <span class="leksi-green">Freestyle</span>
+            <div class="free-show-game-circle white">&#9658;</div>
 
       <% else %>
         <div class="col-xs-4 free-show-game-circle-container">
-            <div class="free-show-game-circle game-not-ready"
-                 data-url="/freestyle?word_id=<%= @word.id %>">
-            </div>
-            <span class="leksi-green game-not-ready">Freestyle</span>
+          <div class="free-show-game-circle game-not-ready white">&#9658;</div>
       <% end %>
         </div>
-        </div>
+      </div>
   </div>
+
+  <br>
 <% end %>
 
-<hr>
-
-<div class="row">
-  <div class="col-sm-7">
-    <div>
-      <div class="pull-right">
-        <%= image_tag("myLeksi_black_filled_25.png", alt: "Word Details",
-                                                     class: "img-responsive") %>
-      </div>
-      <div>
-        <%= render "words/word_details", word: @word %>
-      </div>
-    </div>
-  </div>
-
-  <% if logged_in? %>
-    <div class="col-sm-5">
-      <div>
-        <div class="pull-right">
-          <%= image_tag("tag_black_filled_25.png", alt: "myTags",
-                                                   class: "img-responsive") %>
-        </div>
-
-        <% if Word.untagged_for(current_user).include?(@word) %>
-          <div>
-            <% unless current_user.has_tags? %>
-              <p>
-                Tags help you organize your words by grouping them.
-                <span class="basic-apple-blue-link">
-                  <%= link_to "Create your first tag", new_tag_path %> now.
-                </span>
-              </p>
-
-              <%= render "tags/form" %>
-
-              <hr>
-            <% end %>
-
-          </div>
-
-        <% else %>
-          <br>
-
-          <% tags_for(current_user, @word).each do |tag| %>
-
-            <div class="tags-for-a-word">
-              <div class="tag">
-                <div class="basic-black-link inline-block">
-                  <%= link_to tag.name, tag %>
-                </div>
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                <div class="tag-on-word-show-page inline-block pull-right">
-                    <%=
-                      render "tags/remove_tag_btn_word_show_page",
-                      word: @word, tag: tag
-                    %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-
-        <div class="clear"></div>
-
-        <% unless unused_tags(current_user, @word).first.nil? %>
-          <% if tags_exist?(current_user, @word) %>
-            <br>
-          <% end %>
-
-          <div class="well">
-            <h4>
-              Add Tags
-              <small>Choose one of your Tags to group this word.</small>
-            </h4>
-
-            <%= form_for :user_word_tag, url: user_word_tag_path,
-              method: :post do |f|
-            %>
-              <%= hidden_field_tag :id, @word.id %>
-              <%= f.label :tag_id, "Tags", class: "sr-only" %>
-              <%=
-                f.collection_select :tag_id,
-                unused_tags(current_user, @word), :id, :name,
-                prompt: true
-              %>
-              <%= f.submit class: "btn btn-default btn-sm", value: "add" %>
-            <% end %>
-          </div>
-
-          <hr>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+<div>
+  <%= render "words/word_details", word: @word %>
 </div>
+
+<% if logged_in? %>
+  <% if Word.untagged_for(current_user).include?(@word) %>
+    <div>
+      <% unless current_user.has_tags? %>
+        <p>
+          Tags help you organize your words by grouping them.
+          <span class="basic-apple-blue-link">
+            <%= link_to "Create your first tag", new_tag_path %> now.
+          </span>
+        </p>
+
+        <%= render "tags/form" %>
+
+        <hr>
+      <% end %>
+
+    </div>
+
+  <% else %>
+    <br>
+
+    <% tags_for(current_user, @word).each do |tag| %>
+
+      <div class="tags-for-a-word">
+        <div class="tag">
+          <div class="basic-black-link inline-block">
+            <%= link_to tag.name.truncate(30), tag %>
+          </div>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <div class="tag-on-word-show-page inline-block pull-right">
+              <%=
+                render "tags/remove_tag_btn_word_show_page",
+                word: @word, tag: tag
+              %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="clear"></div>
+
+  <% unless unused_tags(current_user, @word).first.nil? %>
+    <% if tags_exist?(current_user, @word) %>
+      <br>
+    <% end %>
+
+    <div class="well">
+      <h4>
+        Add Tags
+        <small>Choose one of your Tags to group this word.</small>
+      </h4>
+
+      <%= form_for :user_word_tag, url: user_word_tag_path,
+        method: :post do |f|
+      %>
+        <%= hidden_field_tag :id, @word.id %>
+        <%= f.label :tag_id, "Tags", class: "sr-only" %>
+        <%=
+          f.collection_select :tag_id,
+          unused_tags(current_user, @word), :id, :name,
+          prompt: true
+        %>
+        <%= f.submit class: "btn btn-default btn-sm", value: "add" %>
+      <% end %>
+    </div>
+
+    <hr>
+  <% end %>
+<% end %>
 
 <% if logged_in? %>
   <% if @user_word.freestyle_completed? %>

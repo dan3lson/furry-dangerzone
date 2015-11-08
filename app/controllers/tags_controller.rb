@@ -9,28 +9,31 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
     @words_count = words_for(current_user, @tag).count
-    @completed_games_count = completed_funds(current_user, @tag).count +
-                             completed_jeops(current_user, @tag).count +
-                             completed_frees(current_user, @tag).count
-    @total_games = @words_count * 3
-    @tag_game_progress = @completed_games_count / @total_games.to_f * 100
 
-    if incomplete_fundamentals_exist?(current_user, @tag)
-      @rand_incomp_fund_word_id = incomplete_fundamentals(
-        current_user, @tag
-      ).sample.word.id
-    end
+    if @words_count > 0
+      @completed_games = completed_funds(current_user, @tag).count +
+                               completed_jeops(current_user, @tag).count +
+                               completed_frees(current_user, @tag).count
+      @total_games = @words_count * 3
+      @tag_game_progress = (@completed_games / @total_games.to_f * 100).round
 
-    if incomplete_jeopardys_exist?(current_user, @tag)
-      @rand_incomp_jeop_word_id = incomplete_jeopardys(
-        current_user, @tag
-      ).sample.word.id
-    end
+      if incomplete_fundamentals_exist?(current_user, @tag)
+        @rand_incomp_fund_word_id = incomplete_fundamentals(
+          current_user, @tag
+        ).sample.word.id
+      end
 
-    if incomplete_freestyles_exist?(current_user, @tag)
-      @rand_incomp_free_word_id = incomplete_freestyles(
-        current_user, @tag
-      ).sample.word.id
+      if incomplete_jeopardys_exist?(current_user, @tag)
+        @rand_incomp_jeop_word_id = incomplete_jeopardys(
+          current_user, @tag
+        ).sample.word.id
+      end
+
+      if incomplete_freestyles_exist?(current_user, @tag)
+        @rand_incomp_free_word_id = incomplete_freestyles(
+          current_user, @tag
+        ).sample.word.id
+      end
     end
   end
 

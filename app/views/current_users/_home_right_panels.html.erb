@@ -1,25 +1,27 @@
-<div class="box-shadow-border-home">
-	<div class="pull-right">
-		<%= image_tag("trophy_color_65.png", alt: "Trophy") %>
-	</div>
+<% if false %>
+	<div class="box-shadow-border-home">
+		<div class="pull-right">
+			<%= image_tag("trophy_color_65.png", alt: "Trophy") %>
+		</div>
 
-	<div>
-		<p>
-			<%= display_progress_snapshot_motivation(current_user) %>
-		</p>
-	</div>
+		<div>
+			<p>
+				<%= display_progress_snapshot_motivation(current_user) %>
+			</p>
+		</div>
 
-	<div class="progress">
-		<div class="progress-bar progress-bar-success"
-				 role="progressbar"
-				 aria-valuenow="<%= percent_complete(current_user) %>"
-				 aria-valuemin="0"
-				 aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
-				 style="width: <%= percent_complete(current_user) %>%">
-			<span class="sr-only"><%= percent_complete(current_user) %></span>
+		<div class="progress">
+			<div class="progress-bar progress-bar-success"
+					 role="progressbar"
+					 aria-valuenow="<%= percent_complete(current_user) %>"
+					 aria-valuemin="0"
+					 aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
+					 style="width: <%= percent_complete(current_user) %>%">
+				<span class="sr-only"><%= percent_complete(current_user) %></span>
+			</div>
 		</div>
 	</div>
-</div>
+<% end %>
 
 <div class="box-shadow-border-home">
 	<div class="pull-right">
@@ -31,13 +33,13 @@
 			<h4 class="basic-black-link"><%= link_to t.name, t %></h4>
 
 			<div class="progress">
-				<div class="progress-bar progress-bar-success"
+				<div class="progress-bar progress-bar-info"
 						 role="progressbar"
 						 aria-valuenow="<%= @tag_game_progress_pcts[i] %>"
 						 aria-valuemin="0"
-						 aria-valuemax="<%= 100 %>"
+						 aria-valuemax="100"
 						 style="width: <%= @tag_game_progress_pcts[i] %>%">
-					<span class="sr-only"><%= @tag_game_progress_pcts[i] %></span>
+					<span><%= @tag_game_progress_pcts[i] %>%</span>
 				</div>
 			</div>
 		<% end %>
@@ -53,13 +55,13 @@
 
 <% unless current_user.is_student? %>
 	<div class="box-shadow-border-subtle center">
-		<p class="lead">
+		<p class="lead gray">
 			Follow Leksi
 		</p>
 
-			<%= link_to image_tag("facebook_color_50.png", alt: "Facebook"),
+			<%= link_to image_tag("facebook_light_gray_filled_50.png", alt: "Facebook"),
 				"http://www.facebook.com/leksieducation", target: "_blank" %>
-			<%= link_to image_tag("twitter_color_50.png", alt: "Twitter"),
+			<%= link_to image_tag("twitter_light_gray_filled_50.png", alt: "Twitter"),
 			 	"http://www.twitter.com/leksieducation", target: "_blank" %>
 	</div>
 <% end %>

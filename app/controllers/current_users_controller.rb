@@ -19,7 +19,7 @@ class CurrentUsersController < ApplicationController
                                     uw.freestyle_not_completed?)
       }
     end
-    
+
     @rand_word = @incomplete_games.sample
     @incomplete_games_num = @incomplete_games.count
     @nudges_needed = 10 - @incomplete_games_num if @incomplete_games_num < 10
@@ -85,15 +85,20 @@ class CurrentUsersController < ApplicationController
     @three_rand_tags = Tag.includes(:users).select do |t|
       t.users.include?(current_user)
     end.shuffle.take(3)
+
     @tag_game_progress_pcts = @three_rand_tags.map do |t|
       words_count = words_for(current_user, t).count
-      completed_games_count = completed_funds(current_user, t).count +
-                               completed_jeops(current_user, t).count +
-                               completed_frees(current_user, t).count
-      total_games = words_count * 3
 
-      completed_games_count / total_games.to_f * 100
+      if words_count > 0
+        completed_games_count = completed_funds(current_user, t).count +
+                                 completed_jeops(current_user, t).count +
+                                 completed_frees(current_user, t).count
+        total_games = words_count * 3
+
+        (completed_games_count / total_games.to_f * 100).round
+      end
     end
+    
     @tag = Tag.new
   end
 

@@ -14,6 +14,7 @@ $black: #000;
 $bootstrap-blue: #5bc0de;
 $bootstrap-green: #dff0d8;
 $dark-gray: #8e8e93;
+$medium-gray: lighten($dark-gray, 30);
 $dark-green: darken($bootstrap-green, 60);
 $even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 35px;
@@ -199,7 +200,7 @@ p {
 }
 
 .box-shadow-border-subtle {
-	border: 1px $light-gray solid;
+	border: 1px $medium-gray solid;
 	border-radius: 5px;
 	padding: 10px;
   margin-bottom: 25px;
@@ -264,6 +265,7 @@ p {
 .clear {
 	clear: both;
 }
+
 .custom-footer div {
   position: relative;
   float: left;
@@ -829,6 +831,10 @@ table {
 	padding: 5px 0 0 15px;
 }
 
+.gray {
+	color: gray;
+}
+
 .logged_out_header {
 	background: $sky-blue;
   border-color: $sky-blue;
@@ -928,19 +934,19 @@ table {
 	background: $leksi-green;
 }
 
-.bootstrap-blue-game-circle {
+.medium-gray-game-circle {
 	@extend .word-show-game-circle;
 
-	background: $bootstrap-blue;
+	background: $medium-gray;
 }
 
-.bootstrap-blue-game-circle-no-hover {
+.medium-gray-game-circle-no-hover {
 	@extend .word-show-game-circle;
 
-	background: $bootstrap-blue;
+	background: $medium-gray;
 }
 
-.bootstrap-blue-game-circle:hover {
+.medium-gray-game-circle:hover {
 	opacity: $show-game-circle-container-hover-opac;
 }
 
