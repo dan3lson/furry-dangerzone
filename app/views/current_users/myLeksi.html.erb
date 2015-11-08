@@ -8,6 +8,7 @@
         Total words: <%= @current_user_words_count %>
       </strong>
     </p>
+    
     <% if current_user.has_words? %>
       <div class="menu-header-container">
         <div class="menu-header">
@@ -33,8 +34,7 @@
 
           <div class="pull-right">
             <%= render "games/display_game_start_btn", user_word: user_word,
-                                                       word: word
-            %>
+                                                       word: word %>
           </div>
 
           <div class="word-partial word-partial-myLeksi">
