@@ -345,20 +345,16 @@ p {
 	border-radius: $game-circle-sizes;
 	border-style: solid;
 	border-width: 2px;
+	color: $white;
 	display: inline-block;
   font-size: 13px;
 	height: $game-circle-sizes;
 	line-height: 27px;
+	text-align: center;
 	width: $game-circle-sizes;
-}
 
-.game-circle-start-text {
-	font-weight: 200;
-	vertical-align: middle;
-
-	a {
-	  color: $white;
-    font-weight: bold;
+	&:hover {
+		opacity: $show-game-circle-container-hover-opac;
 	}
 }
 
