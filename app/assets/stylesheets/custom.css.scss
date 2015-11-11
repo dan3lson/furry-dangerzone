@@ -672,6 +672,42 @@ input {
 	margin-right: 0;
 }
 
+.research-first-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("myLeksi_color_100.png"));
+}
+
+.research-second-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("focus_color_100.png"));
+}
+
+.research-third-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("multiple_color_100.png"));
+}
+
+.research-fourth-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("exposure_color_100.png"));
+}
+
+.research-fifth-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("recycle_color_100.png"));
+}
+
+.research-sixth-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("more_color_100.png"));
+}
+
 .right-arrow-item:hover {
   background: $light-blue;
   cursor: pointer;
@@ -786,12 +822,11 @@ table {
 	}
 }
 
-.gamification-container {
-	display: table-cell;
+.guest-homepage-images-container {
 	padding: 40px 10px 0 10px;
 }
 
-.gamification-image {
+.guest-homepage-image {
 	display: inline-block;
 	height: 100px;
 	width: 100px;
@@ -803,25 +838,25 @@ table {
 }
 
 .gamification-first-image {
-	@extend .gamification-image;
+	@extend .guest-homepage-image;
 
 	background-image: url(image-path("game_color_100.png"));
 }
 
 .gamification-second-image {
-	@extend .gamification-image;
+	@extend .guest-homepage-image;
 
 	background-image: url(image-path("grade_color_100.png"));
 }
 
 .gamification-third-image {
-	@extend .gamification-image;
+	@extend .guest-homepage-image;
 
 	background-image: url(image-path("level_up_color_100.png"));
 }
 
 .gamification-fourth-image {
-	@extend .gamification-image;
+	@extend .guest-homepage-image;
 
 	background-image: url(image-path("leaderboard_color_100.png"));
 }
