@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user
+  before_action :correct_user
 
   def index
     @tags = Tag.all
@@ -104,9 +104,10 @@ class TagsController < ApplicationController
   def correct_user
     @tag = Tag.find(params[:id])
     @user_tag = UserTag.find_by(user: current_user, tag: @tag)
-    @user = @user_tag.user
-    unless current_user?(@user)
+
+    unless current_user.tags.include?(@tag)
       flash[:danger] = "Yikes! That\'s not something you can do."
+
       redirect_to myTags_path
     end
   end
