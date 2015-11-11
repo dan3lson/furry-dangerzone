@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :user_word_tags, dependent: :destroy
   has_many :word_tags, through: :user_word_tags
   has_many :reviews
+  has_many :feedbacks
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -56,6 +57,10 @@ class User < ActiveRecord::Base
     role == "student"
   end
 
+  def can_create_words?
+    is_admin? || is_teacher?
+  end
+
   def self.top_ten_highest_points
     order("points DESC").take(10)
   end
@@ -88,15 +93,6 @@ class User < ActiveRecord::Base
     incomplete_freestyles.any?
   end
 
-  def has_games_to_play?
-    has_incomplete_fundamentals? || has_incomplete_jeopardys? ||
-    has_incomplete_freestyles?
-  end
-
-  def has_enough_jeopardy_words?
-    incomplete_jeopardys.count + completed_jeopardys.count > 3
-  end
-
   def completed_fundamentals
     UserWord.where(user: self).select { |uw| uw.fundamental_completed? }
   end
@@ -114,39 +110,24 @@ class User < ActiveRecord::Base
   end
 
   def has_completed_jeopardys?
-    completed_fundamentals.any?
+    completed_jeopardys.any?
   end
 
   def has_completed_freestyles?
     completed_freestyles.any?
   end
 
-  def last_login_nil?
-    last_login.nil?
+  def has_games_to_play?
+    has_incomplete_fundamentals? || has_incomplete_jeopardys? ||
+    has_incomplete_freestyles?
   end
 
-  def self.baseline_gamification
-  	all.each do |u|
-  		u.points = 0
+  def has_enough_jeopardy_words?
+    incomplete_jeopardys.count + completed_jeopardys.count > 3
+  end
 
-  		if u.has_words?
-  			u.points += u.words.count
-  		end
-
-  		if u.has_tags?
-  			u.points += u.tags.count
-  		end
-
-  		if u.has_user_word_tags?
-  			u.points += u.user_word_tags.count * 2
-  		end
-
-  		if u.has_completed_fundamentals?
-  			u.points += u.completed_fundamentals.count * 3
-  		end
-
-  		u.save
-  	end
+  def last_login_nil?
+    last_login.nil?
   end
 
   def words_added_last_day
@@ -184,8 +165,30 @@ class User < ActiveRecord::Base
     freestyles_completed_last_day.any?
   end
 
-  def can_create_words?
-    is_admin? || is_teacher?
+  # Eventually will be deleted
+
+  def self.baseline_gamification
+    all.each do |u|
+      u.points = 0
+
+      if u.has_words?
+        u.points += u.words.count
+      end
+
+      if u.has_tags?
+        u.points += u.tags.count
+      end
+
+      if u.has_user_word_tags?
+        u.points += u.user_word_tags.count * 2
+      end
+
+      if u.has_completed_fundamentals?
+        u.points += u.completed_fundamentals.count * 3
+      end
+
+      u.save
+    end
   end
 
   # METHODS BELOW ONLY SUPPORT CURRENT SCHOOL PILOT

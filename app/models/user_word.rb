@@ -1,9 +1,8 @@
 class UserWord < ActiveRecord::Base
   belongs_to :user
   belongs_to :word
-
-  has_many :freestyle_responses, dependent: :destroy
   has_many :game_stats, dependent: :destroy
+  has_many :freestyle_responses, dependent: :destroy
 
   validates :games_completed, presence: true
   validates :user, presence: true
@@ -46,6 +45,8 @@ class UserWord < ActiveRecord::Base
   def freestyle_not_completed?
     current_game == "three" && !freestyle_completed?
   end
+
+  # Use GameStat objects to determine these:
 
   # def fundamental_completed_last_day?
   #   first_uwgl_fundamental = self.uwgl_fundamentals.first

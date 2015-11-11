@@ -15,6 +15,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:user_word_tags) }
     it { should have_many(:word_tags) }
     it { should have_many(:reviews) }
+    it { should have_many(:feedbacks) }
   end
 
   describe "validations" do
@@ -51,6 +52,7 @@ RSpec.describe User, type: :model do
 
     it "returns true" do
       user.words << word
+
       expect(user.has_words?).to eq(true)
     end
   end
@@ -370,6 +372,227 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#completed_fundamentals" do
+    let (:user) { FactoryGirl.create(:user) }
+
+    it "returns 3 completed Fundamental UW objects" do
+      word = Word.create(name: "foobar", definition: "foo+bar=foobar")
+      word_2 = Word.create(name: "foobar_2", definition: "foo+bar=foobar 2")
+      word_3 = Word.create(name: "foobar_3", definition: "foo+bar=foobar 3")
+
+      UserWord.create!(word: word, user: user, games_completed: 1)
+      UserWord.create!(word: word_2, user: user, games_completed: 1)
+      UserWord.create!(word: word_3, user: user, games_completed: 1)
+
+      expect(user.completed_fundamentals.count).to eq(3)
+    end
+
+    it "returns 3 completed Fundamental UW objects" do
+      word = Word.create(name: "foobar", definition: "foo+bar=foobar")
+      word_2 = Word.create(name: "foobar_2", definition: "foo+bar=foobar 2")
+      word_3 = Word.create(name: "foobar_3", definition: "foo+bar=foobar 3")
+
+      UserWord.create!(word: word, user: user, games_completed: 2)
+      UserWord.create!(word: word_2, user: user, games_completed: 2)
+      UserWord.create!(word: word_3, user: user, games_completed: 2)
+
+      expect(user.completed_fundamentals.count).to eq(3)
+    end
+
+    it "returns 3 completed Fundamental UW objects" do
+      word = Word.create(name: "foobar", definition: "foo+bar=foobar")
+      word_2 = Word.create(name: "foobar_2", definition: "foo+bar=foobar 2")
+      word_3 = Word.create(name: "foobar_3", definition: "foo+bar=foobar 3")
+
+      UserWord.create!(word: word, user: user, games_completed: 3)
+      UserWord.create!(word: word_2, user: user, games_completed: 3)
+      UserWord.create!(word: word_3, user: user, games_completed: 3)
+
+      expect(user.completed_fundamentals.count).to eq(3)
+    end
+
+    it "returns 3 completed Fundamental UW objects" do
+      word = Word.create(name: "foobar", definition: "foo+bar=foobar")
+      word_2 = Word.create(name: "foobar_2", definition: "foo+bar=foobar 2")
+      word_3 = Word.create(name: "foobar_3", definition: "foo+bar=foobar 3")
+
+      UserWord.create!(word: word, user: user, games_completed: 1)
+      UserWord.create!(word: word_2, user: user, games_completed: 2)
+      UserWord.create!(word: word_3, user: user, games_completed: 3)
+
+      expect(user.completed_fundamentals.count).to eq(3)
+    end
+  end
+
+  describe "#completed_jeopardys" do
+    let (:user) { FactoryGirl.create(:user) }
+    let(:word) { Word.create(name: "foobar", definition: "foobar def") }
+    let(:word_2) { Word.create(name: "foobar_2", definition: "foobar def_2") }
+    let(:word_3) { Word.create(name: "foobar_3", definition: "foobar def_3") }
+
+    it "returns 3 completed Jeopardy UW objects" do
+      user_word = UserWord.create!(word: word, user: user,
+        games_completed: 2
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+        games_completed: 2
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+        games_completed: 2
+      )
+
+      expect(user.completed_jeopardys.count).to eq(3)
+    end
+
+    it "returns 3 completed Jeopardy UW objects" do
+      user_word = UserWord.create!(word: word, user: user,
+        games_completed: 2
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+        games_completed: 3
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+        games_completed: 3
+      )
+
+      expect(user.completed_jeopardys.count).to eq(3)
+    end
+  end
+
+  describe "#completed_freestyles" do
+    let (:user) { FactoryGirl.create(:user) }
+    let(:word) { Word.create(name: "foobar", definition: "foobar def") }
+    let(:word_2) { Word.create(name: "foobar_2", definition: "foobar def_2") }
+    let(:word_3) { Word.create(name: "foobar_3", definition: "foobar def_3") }
+
+    it "returns 3 completed Freestyle UW objects" do
+      user_word = UserWord.create!(word: word, user: user,
+       games_completed: 3
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+       games_completed: 3
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+       games_completed: 3
+      )
+
+      expect(user.completed_freestyles.count).to eq(3)
+    end
+  end
+
+  describe "#has_completed_fundamentals?" do
+    let (:user) { FactoryGirl.create(:user) }
+    let(:word) { Word.create(name: "foobar", definition: "foobar def") }
+    let(:word_2) { Word.create(name: "foobar_2", definition: "foobar def_2") }
+    let(:word_3) { Word.create(name: "foobar_3", definition: "foobar def_3") }
+
+    it "returns true" do
+      user_word = UserWord.create!(word: word, user: user,
+       games_completed: 1
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+       games_completed: 1
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+       games_completed: 1
+      )
+
+      expect(user.has_completed_fundamentals?).to eq(true)
+    end
+
+    it "returns false" do
+      user_word = UserWord.create!(word: word, user: user)
+      user_word_2 = UserWord.create!(word: word_2, user: user)
+      user_word_3 = UserWord.create!(word: word_3, user: user)
+
+      expect(user.has_completed_fundamentals?).to eq(false)
+    end
+  end
+
+  describe "#has_completed_jeopardys?" do
+    let (:user) { FactoryGirl.create(:user) }
+    let(:word) { Word.create(name: "foobar", definition: "foobar def") }
+    let(:word_2) { Word.create(name: "foobar_2", definition: "foobar def_2") }
+    let(:word_3) { Word.create(name: "foobar_3", definition: "foobar def_3") }
+
+    it "returns true" do
+      user_word = UserWord.create!(word: word, user: user,
+        games_completed: 2
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+        games_completed: 2
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+        games_completed: 2
+      )
+
+      expect(user.has_completed_jeopardys?).to eq(true)
+    end
+
+    it "returns true" do
+      user_word = UserWord.create!(word: word, user: user,
+        games_completed: 3
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+        games_completed: 3
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+        games_completed: 3
+      )
+
+      expect(user.has_completed_jeopardys?).to eq(true)
+    end
+
+    it "returns false" do
+      user_word = UserWord.create!(word: word, user: user,
+        games_completed: 1
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+        games_completed: 1
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+        games_completed: 1
+      )
+
+      expect(user.has_completed_jeopardys?).to eq(false)
+    end
+  end
+
+  describe "#has_completed_freestyles?" do
+    let (:user) { FactoryGirl.create(:user) }
+    let(:word) { Word.create(name: "foobar", definition: "foobar def") }
+    let(:word_2) { Word.create(name: "foobar_2", definition: "foobar def_2") }
+    let(:word_3) { Word.create(name: "foobar_3", definition: "foobar def_3") }
+
+    it "returns true" do
+      user_word = UserWord.create!(word: word, user: user,
+        games_completed: 3
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+        games_completed: 3
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+        games_completed: 3
+      )
+
+      expect(user.has_completed_freestyles?).to eq(true)
+    end
+
+    it "returns false" do
+      user_word = UserWord.create!(word: word, user: user,
+        games_completed: 2
+      )
+      user_word_2 = UserWord.create!(word: word_2, user: user,
+        games_completed: 1
+      )
+      user_word_3 = UserWord.create!(word: word_3, user: user,
+        games_completed: 2
+      )
+
+      expect(user.has_completed_freestyles?).to eq(false)
+    end
+  end
+
   describe "#has_games_to_play?" do
     let(:word_2) { Word.create(name: "foobar_2", definition: "foobar def_2") }
     let(:word_3) { Word.create(name: "foobar_3", definition: "foobar def_3") }
@@ -470,6 +693,102 @@ RSpec.describe User, type: :model do
       UserWord.create!(word: word_4, user: user, games_completed: 3)
 
       expect(user.has_enough_jeopardy_words?).to eq(true)
+    end
+  end
+
+  describe "#last_login_nil?" do
+    let (:user) { FactoryGirl.create(:user) }
+
+    it "returns true" do
+      expect(user.last_login_nil?).to eq(true)
+    end
+
+    it "returns false" do
+      user.last_login = DateTime.now
+
+      expect(user.last_login_nil?).to eq(false)
+    end
+  end
+
+  skip "#words_added_last_day" do
+    it "returns 0 UW objects" do
+      expect(user.words_added_last_day).to eq(0)
+    end
+
+    it "returns 1 UW object" do
+      expect(user.words_added_last_day).to eq(1)
+    end
+
+    it "returns 2 UW objects" do
+      expect(user.words_added_last_day).to eq(2)
+    end
+
+    it "returns 3 UW objects" do
+      expect(user.words_added_last_day).to eq(3)
+    end
+  end
+
+  skip "#fundamentals_completed_last_day" do
+    it "returns 0 UW objects" do
+      expect(user.fundamentals_completed_last_day).to eq(0)
+    end
+
+    it "returns 1 UW object" do
+      expect(user.fundamentals_completed_last_day).to eq(1)
+    end
+
+    it "returns 2 UW objects" do
+      expect(user.fundamentals_completed_last_day).to eq(2)
+    end
+
+    it "returns 3 UW objects" do
+      expect(user.fundamentals_completed_last_day).to eq(3)
+    end
+  end
+
+  skip "#jeopardys_completed_last_day" do
+    it "returns 0 UW objects" do
+      expect(user.jeopardys_completed_last_day).to eq(0)
+    end
+
+    it "returns 1 UW object" do
+      expect(user.jeopardys_completed_last_day).to eq(1)
+    end
+
+    it "returns 2 UW objects" do
+      expect(user.jeopardys_completed_last_day).to eq(2)
+    end
+
+    it "returns 3 UW objects" do
+      expect(user.jeopardys_completed_last_day).to eq(3)
+    end
+  end
+
+  skip "#freestyles_completed_last_day" do
+    it "returns 0 UW objects" do
+      expect(user.freestyles_completed_last_day).to eq(0)
+    end
+
+    it "returns 1 UW object" do
+      expect(user.freestyles_completed_last_day).to eq(1)
+    end
+
+    it "returns 2 UW objects" do
+      expect(user.freestyles_completed_last_day).to eq(2)
+    end
+
+    it "returns 3 UW objects" do
+      expect(user.freestyles_completed_last_day).to eq(3)
+    end
+  end
+
+  skip "#has_recent_activity?" do
+    it "returns true" do
+      expect(user.has_recent_activity?).to eq(true)
+    end
+
+    it "returns 1 UW object" do
+      expect(user.has_recent_activity?).to eq(false)
     end
   end
 end

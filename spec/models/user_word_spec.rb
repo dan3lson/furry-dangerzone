@@ -9,6 +9,7 @@ RSpec.describe UserWord, type: :model do
     it { should belong_to(:user) }
     it { should belong_to(:word) }
     it { should have_many(:game_stats) }
+    it { should have_many(:freestyle_responses) }
   end
 
   describe "validations" do
@@ -57,30 +58,6 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
-  describe "#fundamental_not_completed?" do
-    it "returns true, i.e. Fundamental game hasn\'t been started for UW" do
-      expect(user_word.fundamental_not_completed?).to eq(true)
-    end
-
-    it "returns false, i.e. Fundamental game has been started for UW" do
-      user_word.games_completed = 1
-
-      expect(user_word.fundamental_not_completed?).to eq(false)
-    end
-
-    it "returns false, i.e. Fundamental game has been started for UW" do
-      user_word.games_completed = 2
-
-      expect(user_word.fundamental_not_completed?).to eq(false)
-    end
-
-    it "returns false, i.e. Fundamental game has been started for UW" do
-      user_word.games_completed = 3
-
-      expect(user_word.fundamental_not_completed?).to eq(false)
-    end
-  end
-
   describe "#fundamental_completed?" do
     it "returns true, i.e. Fundamental game is completed for UW" do
       user_word.games_completed = 1
@@ -105,23 +82,27 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
-  describe "#jeopardy_not_completed?" do
-    it "returns true, i.e. Jeopardy game has been started for UW" do
+  describe "#fundamental_not_completed?" do
+    it "returns true, i.e. Fundamental game hasn\'t been started for UW" do
+      expect(user_word.fundamental_not_completed?).to eq(true)
+    end
+
+    it "returns false, i.e. Fundamental game has been started for UW" do
       user_word.games_completed = 1
 
-      expect(user_word.jeopardy_not_completed?).to eq(true)
+      expect(user_word.fundamental_not_completed?).to eq(false)
     end
 
-    it "returns false, i.e. Jeopardy game has been started for UW" do
+    it "returns false, i.e. Fundamental game has been started for UW" do
       user_word.games_completed = 2
 
-      expect(user_word.jeopardy_not_completed?).to eq(false)
+      expect(user_word.fundamental_not_completed?).to eq(false)
     end
 
-    it "returns false, i.e. Jeopardy game has been started for UW" do
+    it "returns false, i.e. Fundamental game has been started for UW" do
       user_word.games_completed = 3
 
-      expect(user_word.jeopardy_not_completed?).to eq(false)
+      expect(user_word.fundamental_not_completed?).to eq(false)
     end
   end
 
@@ -151,6 +132,50 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
+  describe "#jeopardy_not_completed?" do
+    it "returns true, i.e. Jeopardy game has been started for UW" do
+      user_word.games_completed = 1
+
+      expect(user_word.jeopardy_not_completed?).to eq(true)
+    end
+
+    it "returns false, i.e. Jeopardy game has been started for UW" do
+      user_word.games_completed = 2
+
+      expect(user_word.jeopardy_not_completed?).to eq(false)
+    end
+
+    it "returns false, i.e. Jeopardy game has been started for UW" do
+      user_word.games_completed = 3
+
+      expect(user_word.jeopardy_not_completed?).to eq(false)
+    end
+  end
+
+  describe "#freestyle_completed?" do
+    it "returns true, i.e. Freestyle game has been completed for UW" do
+      user_word.games_completed = 3
+
+      expect(user_word.freestyle_completed?).to eq(true)
+    end
+
+    it "returns false, i.e. Freestyle game has not been completed for UW" do
+      expect(user_word.freestyle_completed?).to eq(false)
+    end
+
+    it "returns false, i.e. Freestyle game has not been completed for UW" do
+      user_word.games_completed = 1
+
+      expect(user_word.freestyle_completed?).to eq(false)
+    end
+
+    it "returns false, i.e. Freestyle game has not been completed for UW" do
+      user_word.games_completed = 2
+
+      expect(user_word.freestyle_completed?).to eq(false)
+    end
+  end
+
   describe "#freestyle_not_completed?" do
     it "returns true" do
       user_word.games_completed = 2
@@ -177,27 +202,27 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
-  describe "#freestyle_completed?" do
-    it "returns true, i.e. Freestyle game has been completed for UW" do
-      user_word.games_completed = 3
-
-      expect(user_word.freestyle_completed?).to eq(true)
+  skip "#fundamental_completed_last_day?" do
+    it "returns true" do
     end
 
-    it "returns false, i.e. Freestyle game has not been completed for UW" do
-      expect(user_word.freestyle_completed?).to eq(false)
+    it "returns false" do
+    end
+  end
+
+  skip "#jeopardy_completed_last_day?" do
+    it "returns true" do
     end
 
-    it "returns false, i.e. Freestyle game has not been completed for UW" do
-      user_word.games_completed = 1
+    it "returns false" do
+    end
+  end
 
-      expect(user_word.freestyle_completed?).to eq(false)
+  skip "#freestyle_completed_last_day?" do
+    it "returns true" do
     end
 
-    it "returns false, i.e. Freestyle game has not been completed for UW" do
-      user_word.games_completed = 2
-
-      expect(user_word.freestyle_completed?).to eq(false)
+    it "returns false" do
     end
   end
 end
