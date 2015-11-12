@@ -1,14 +1,14 @@
 module UsersHelper
   def weekly_goal(user)
-    if user.goal == 24
+    if user.goal == 1
       "Basic"
-    elsif user.goal == 60
+    elsif user.goal == 5
       "Casual"
-    elsif user.goal == 120
+    elsif user.goal == 10
       "Regular"
-    elsif user.goal == 168
+    elsif user.goal == 20
       "Serious"
-    elsif user.goal == 216
+    elsif user.goal == 30
       "Insane"
     else
       "Yikes!"
@@ -100,8 +100,8 @@ module UsersHelper
   end
 
   def percent_complete(user)
-    ((diff_btwn_curr_and_next_lvl(user) - pts_to_level_up(user)).to_f /
-      diff_btwn_curr_and_next_lvl(user).to_f) * 100
+    (((diff_btwn_curr_and_next_lvl(user) - pts_to_level_up(user)).to_f /
+      diff_btwn_curr_and_next_lvl(user).to_f) * 100).round
   end
 
   def display_progress_snapshot_motivation(user)

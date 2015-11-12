@@ -9,7 +9,7 @@
   <% if current_user.has_tags? %>
     <div class="basic-black-link">
       <% @current_user_tags.each do |tag| %>
-        <div class="right-arrow-item data-url" data-url="/tags/<%= tag.id %>">
+        <div class="light-blue-hover data-url" data-url="/tags/<%= tag.id %>">
           <div class="pull-right">
             <%= link_to image_tag("forward_black_25.png", alt: "Right arrow") %>
           </div>
