@@ -22,7 +22,7 @@ feature "user edits a tag", %{
     scenario "scenario: with valid data" do
       log_in_as(user)
 
-      visit tags_path
+      visit myTags_path
 
       click_on tag.name
 
@@ -43,7 +43,7 @@ feature "user edits a tag", %{
     scenario "scenario: with invalid data" do
       log_in_as(user)
 
-      visit tags_path
+      visit myTags_path
 
       click_on tag.name
 

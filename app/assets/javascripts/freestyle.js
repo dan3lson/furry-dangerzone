@@ -24,9 +24,7 @@ $(document).ready(function(){
 	var $sentence_input_value = "";
 	var $valid_chosen_word = false;
 	var $new_goodies_total = 0;
-
-	// var $regex = /^[a-zA-Z]*$/; only letters and no spaces or numbers / && $regex.test($chosen_word_value)
-	var $regex = /^[a-zA-Z .';,?-]+$/; // No numbers or special characters just letters and spaces
+	var $regex = /^[a-zA-Z0-9 .';,?-]+$/;
 
 	$("#level_3_details").fadeIn();
 	$("#semantic_map_form").fadeIn();

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "search" => "searches#new"
   get "progress" => "current_users#progress"
   get "myTags" => "current_users#tags"
+  get "myGoal" => "current_users#weekly_goal"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
   get "jeopardy_tag" => "tag_games#jeopardy"
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
   resource :user_word_tag, only: [:create, :edit, :destroy]
   resource :user_word_tag_word_show_page, only: [:destroy]
   resource :user_word_tag_tag_show_page, only: [:destroy]
+  resource :weekly_goal, only: [:update]
   resources :versions do
     resources :reviews
   end

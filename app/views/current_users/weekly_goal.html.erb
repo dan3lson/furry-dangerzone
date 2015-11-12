@@ -1,0 +1,23 @@
+<% provide(:title, "Weekly Goal Settings") %>
+<% provide(:header, "Weekly Goal Settings") %>
+
+Coming soon!
+
+<% if false %>
+
+<p>
+	Selecting a weekly goal will help you stay motivated while mastering new words.
+	You can change your goal at any time.
+</p>
+
+<div class="row">
+	<div class="col-xs-5 col-sm-2">
+		<%= image_tag("pup2.png", alt: "Leksi Mascot", class: "img-responsive") %>
+	</div>
+	<div class="col-xs-7 col-sm-8">
+		<%= form_tag(weekly_goal_path, method: "put") do %>
+		<% end %>
+	</div>
+</div>
+
+<% end %>
