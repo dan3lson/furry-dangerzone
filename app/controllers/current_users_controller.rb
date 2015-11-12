@@ -98,7 +98,7 @@ class CurrentUsersController < ApplicationController
         (completed_games_count / total_games.to_f * 100).round
       end
     end
-    
+
     @tag = Tag.new
   end
 
@@ -129,6 +129,9 @@ class CurrentUsersController < ApplicationController
   def tags
     @current_user_tags = current_user.tags
     @tag = Tag.new
+  end
+
+  def weekly_goal
   end
 
   private

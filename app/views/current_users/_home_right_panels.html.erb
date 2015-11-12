@@ -1,8 +1,17 @@
 <% if false %>
 	<div class="box-shadow-border-home">
 		<div class="pull-right">
-			<%= image_tag("trophy_color_65.png", alt: "Trophy") %>
+			<% if Rails.env.test? %>
+				<%= link_to "edit weekly goal", myGoal_path %>
+			<% else %>
+				<%= link_to image_tag("settings_gray_filled_25.png", alt: "Settings"),
+				 myGoal_path %>
+			<% end %>
 		</div>
+
+		<p class="lead">
+			Weekly Goal
+		</p>
 
 		<div>
 			<p>
@@ -11,7 +20,7 @@
 		</div>
 
 		<div class="progress">
-			<div class="progress-bar progress-bar-success"
+			<div class="progress-bar progress-bar-info"
 					 role="progressbar"
 					 aria-valuenow="<%= percent_complete(current_user) %>"
 					 aria-valuemin="0"
@@ -25,12 +34,16 @@
 
 <div class="box-shadow-border-home">
 	<div class="pull-right">
-		<%= link_to image_tag("tag_color_65.png", alt: "Tag"), myTags_path %>
+		<%= link_to image_tag("tag_color_65.png", alt: "Trophy"), myTags_path %>
 	</div>
+
+	<p class="lead">
+		Tags
+	</p>
 
 	<% if @three_rand_tags.any? %>
 		<% @three_rand_tags.each_with_index do |t, i| %>
-			<h4 class="basic-black-link"><%= link_to t.name, t %></h4>
+			<h4 class="basic-black-link"><%= link_to t.name.truncate(35), t %></h4>
 
 			<div class="progress">
 				<div class="progress-bar progress-bar-info"

@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_user
+  before_action :correct_user, except: [:new, :create, :edit]
 
   def index
     @tags = Tag.all
@@ -69,9 +69,11 @@ class TagsController < ApplicationController
   def update
     if @tag.update(tag_params)
       flash[:success] = "Changes successfully made."
+
       redirect_to @tag
     else
       flash[:danger] = "Changes not successfully made."
+
       render :edit
     end
   end
@@ -81,9 +83,11 @@ class TagsController < ApplicationController
 
     if @tag.destroy
       flash[:success] = "Tag deleted."
+
       redirect_to myTags_path
     else
       flash[:danger] = "Yikes! Something went wrong. Please try again."
+
       redirect_to myTags_path
     end
   end
@@ -97,13 +101,13 @@ class TagsController < ApplicationController
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Yikes! Please log in first to do that."
+
       redirect_to login_url
     end
   end
 
   def correct_user
     @tag = Tag.find(params[:id])
-    @user_tag = UserTag.find_by(user: current_user, tag: @tag)
 
     unless current_user.tags.include?(@tag)
       flash[:danger] = "Yikes! That\'s not something you can do."
