@@ -11,11 +11,55 @@ Coming soon!
 </p>
 
 <div class="row">
-	<div class="col-xs-5 col-sm-2">
+	<div class="col-sm-2 hidden-xs">
 		<%= image_tag("pup2.png", alt: "Leksi Mascot", class: "img-responsive") %>
 	</div>
-	<div class="col-xs-7 col-sm-8">
-		<%= form_tag(weekly_goal_path, method: "put") do %>
+	<div class="col-xs-6 col-xs-offset-3 visible-xs-block">
+		<%= image_tag("pup2.png", alt: "Leksi Mascot", class: "img-responsive") %>
+	</div>
+
+	<div class="col-xs-12 col-sm-5">
+		<%= form_tag(
+			weekly_goal_path, method: "PUT", class: "weekly-goal-form"
+		) do %>
+			<div class="radio light-blue-hover">
+				<div class="pull-right">
+					<small class="gray">master 1 word per week</small>
+				</div>
+				<%= radio_button_tag(:weekly_goal, "basic") %>
+				<%= label_tag(:weekly_goal_basic, "Basic") %>
+			</div>
+			<div class="radio light-blue-hover">
+				<div class="pull-right">
+					<small class="gray">master 5 words per week</small>
+				</div>
+				<%= radio_button_tag(:weekly_goal, "casual") %>
+				<%= label_tag(:weekly_goal_casual, "Casual") %>
+			</div>
+			<div class="radio light-blue-hover">
+				<div class="pull-right">
+					<small class="gray">master 10 words per week</small>
+				</div>
+				<%= radio_button_tag(:weekly_goal, "regular") %>
+				<%= label_tag(:weekly_goal_regular, "Regular") %>
+			</div>
+			<div class="radio light-blue-hover">
+				<div class="pull-right">
+					<small class="gray">master 20 words per week</small>
+				</div>
+				<%= radio_button_tag(:weekly_goal, "serious") %>
+				<%= label_tag(:weekly_goal_serious, "Serious") %>
+			</div>
+			<div class="radio light-blue-hover">
+				<div class="pull-right">
+					<small class="gray">master 30 words per week</small>
+				</div>
+				<%= radio_button_tag(:weekly_goal, "insane") %>
+				<%= label_tag(:weekly_goal_insane, "Insane") %>
+			</div>
+
+			<%= submit_tag "Save changes", name: "weekly_goal_submit_btn",
+				class: "btn btn-default" %>
 		<% end %>
 	</div>
 </div>
