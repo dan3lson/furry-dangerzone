@@ -15,7 +15,7 @@ feature "user views weekly goal options", %{
   # [x] I can see radio button options
   # [x] I can see a submit button
 
-  describe "\n views weekly goal option -->" do
+  pending "\n views weekly goal option -->" do
     before :each do
       FactoryGirl.create(:version)
     end

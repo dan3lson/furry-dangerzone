@@ -13,12 +13,14 @@ $(document).ready(function(){
 	];
 	var $counter = 0;
 	var $correct_word_proggress_bar_without_pbc_class = "";
+	var $time_game_started;
 
 	// Start the main activity
 	$(".jeopardy-begin-game").click(function(){
 		$(".jeopardy-pregame").hide();
 		$("#activity_name").fadeIn();
 		load_game_info();
+		$time_game_started = new Date();
 	});
 
 	/**
@@ -187,7 +189,8 @@ $(document).ready(function(){
 	function update_num_played(word_id) {
 		var game_info = {
 			"word_id": word_id,
-			"game_name": "Jeopardy"
+			"game_name": "Jeopardy",
+			"time_spent_in_min": ((new Date() - $time_game_started) / 1000 ) / 60
 		};
 
 		$.ajax({

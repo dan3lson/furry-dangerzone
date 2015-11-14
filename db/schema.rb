@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106041942) do
+ActiveRecord::Schema.define(version: 20151112231003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,13 +33,14 @@ ActiveRecord::Schema.define(version: 20151106041942) do
   end
 
   create_table "game_stats", force: :cascade do |t|
-    t.integer  "user_word_id",              null: false
-    t.integer  "game_id",                   null: false
-    t.integer  "num_played",    default: 0, null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "num_jeop_won",  default: 0, null: false
-    t.integer  "num_jeop_lost", default: 0, null: false
+    t.integer  "user_word_id",                                        null: false
+    t.integer  "game_id",                                             null: false
+    t.integer  "num_played",                            default: 0,   null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "num_jeop_won",                          default: 0,   null: false
+    t.integer  "num_jeop_lost",                         default: 0,   null: false
+    t.decimal  "time_spent",    precision: 5, scale: 2, default: 0.0, null: false
   end
 
   add_index "game_stats", ["user_word_id", "game_id"], name: "index_game_stats_on_user_word_id_and_game_id", unique: true, using: :btree
