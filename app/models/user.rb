@@ -7,6 +7,13 @@ class User < ActiveRecord::Base
   has_many :word_tags, through: :user_word_tags
   has_many :reviews
   has_many :feedbacks
+  # Leksi tracks time spent completing any game for a word
+    # Play game -> Complete game
+    # GameStat -> add_column_elapsed_time_game_stats
+    # "Tell me how much time student spent playing all games for this word"
+    # "Tell me how much time student spent playing game one"
+    # "Tell me how much time student spent playing game two"
+    # "Tell me how much time student spent playing game three"
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

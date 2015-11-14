@@ -1,3 +1,7 @@
+#****************************
+# Aggregate Stats for Leksi
+#****************************
+
 # Number of Logins
 User.sum(:num_logins)
 
@@ -16,22 +20,25 @@ User.select { |u| u.tags.count > 0 }.count
 # Fundamentals Completed
 UserWord.select { |uw| uw.fundamental_completed? }.count
 
+# Time Spent Completing Fundamentals
+GameStat.where(game_id: 1).sum(:time_spent).to_s
+
 # Num Fundamentals Played
-GameStat.select { |gs| gs.game_id == 1 }.map(&:num_played).inject(0, &:+)
+GameStat.where(game_id: 1).sum(:num_played)
 
-# Fundamentals In Progress -> DEPRECATED
-# UserWord.select { |uw| uw.fundamental_in_progress? }.count
-
-# Fundamentals Not Started
+# Fundamentals Not Completed
 UserWord.select { |uw| uw.fundamental_not_completed? }.count
 
 # Jeopardys Completed
 UserWord.select { |uw| uw.jeopardy_completed? }.count
 
-# Num Jeopardys Played
-GameStat.select { |gs| gs.game_id == 2 }.map(&:num_played).inject(0, &:+)
+# Time Spent Completing Jeopardys
+GameStat.where(game_id: 2).sum(:time_spent).to_s
 
-# Jeopardys Not Started
+# Num Jeopardys Played
+GameStat.where(game_id: 2).sum(:num_played)
+
+# Jeopardys Not Completed
 UserWord.select { |uw| uw.jeopardy_not_completed? }.count
 
 # Num Jeopardys Won
@@ -43,8 +50,11 @@ GameStat.sum(:num_jeop_lost)
 # Freestyles Completed
 UserWord.select { |uw| uw.freestyle_completed? }.count
 
-# Num Freestyles Played
-GameStat.select { |gs| gs.game_id == 3 }.map(&:num_played).inject(0, &:+)
+# Time Spent Completing Freestyles
+GameStat.where(game_id: 3).sum(:time_spent).to_s
 
-# Freestyles Not Started
+# Num Freestyles Played
+GameStat.where(game_id: 3).sum(:num_played)
+
+# Freestyles Not Completed
 UserWord.select { |uw| uw.freestyle_not_completed? }.count

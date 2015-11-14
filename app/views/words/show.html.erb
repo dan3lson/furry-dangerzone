@@ -67,6 +67,8 @@
   <% if Word.untagged_for(current_user).include?(@word) %>
     <div>
       <% unless current_user.has_tags? %>
+        <hr>
+
         <p>
           Tags help you organize your words by grouping them.
           <span class="basic-apple-blue-link">
@@ -138,8 +140,6 @@
 
 <% if logged_in? %>
   <% if @user_word.freestyle_completed? %>
-    <hr>
-
     <div class="box-shadow-border">
       <h4>Freestyle Game Responses</h4>
 

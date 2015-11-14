@@ -5,6 +5,7 @@ class GamesController < ApplicationController
       @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
       @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
       @real_world_examples = RealWorldExample.for(@chosen_word.name)
+      @game_started = true
 
       if current_user.has_incomplete_fundamentals?
         @three_fund_words = current_user.incomplete_fundamentals.shuffle.take(
@@ -96,6 +97,8 @@ class GamesController < ApplicationController
   def freestyle
     if logged_in?
       @chosen_word = Word.find(params[:word_id])
+
+      @game_started = true
 
       if current_user.has_incomplete_freestyles?
         @four_free_words = current_user.incomplete_freestyles.shuffle.take(4).

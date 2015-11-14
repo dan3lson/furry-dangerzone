@@ -10,6 +10,7 @@ $(document).ready(function(){
 	var $each_letter_span; // letters shown in the header
 	var $regex = /^[a-zA-Z. ]+$/; // No numbers or special characters just letters and spaces; /^[a-zA-Z]*$/; is only letters and no spaces or numbers
 	var $new_goodies_total = 0;
+  var $time_game_started;
 	// Spell the word
 	var $word_being_spelled;
 	var $chosen_word_substring;
@@ -86,6 +87,10 @@ $(document).ready(function(){
 
 	// Start the first activity
 	spell_chosen_word();
+
+  if ($("#game-started-bool").hasClass("begin-timer")) {
+    $time_game_started = new Date();
+  }
 
 	/**
 	 * Start the progress made on learning this word
@@ -702,7 +707,8 @@ $(document).ready(function(){
   function update_num_played() {
     var game_info = {
       "word_id": $chosen_word_id,
-      "game_name": "Fundamentals"
+      "game_name": "Fundamentals",
+      "time_spent_in_min": ((new Date() - $time_game_started) / 1000 ) / 60
     };
 
     $.ajax({

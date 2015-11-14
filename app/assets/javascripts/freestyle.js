@@ -25,6 +25,7 @@ $(document).ready(function(){
 	var $valid_chosen_word = false;
 	var $new_goodies_total = 0;
 	var $regex = /^[a-zA-Z0-9 .';,?-]+$/;
+	var $time_game_started;
 
 	$("#level_3_details").fadeIn();
 	$("#semantic_map_form").fadeIn();
@@ -40,9 +41,9 @@ $(document).ready(function(){
 
 	progressBar(0);
 
-	/**
-	 * Handle the form validations, i.e. alphabetic, non-numeric, no spaces, for each Level 3 form, i.e. activity
-	 */
+	if ($("#game-started-bool").hasClass("begin-timer")) {
+		$time_game_started = new Date();
+	}
 
 	validate_input_values("semantic_map_form", "semantic_map_continue_button");
 	validate_input_values("word_map_form", "word_map_continue_button");
@@ -211,9 +212,9 @@ $(document).ready(function(){
   function update_num_played() {
     var game_info = {
       "word_id": $chosen_word_id,
-      "game_name": "Freestyle"
+      "game_name": "Freestyle",
+			"time_spent_in_min": ((new Date() - $time_game_started) / 1000 ) / 60
     };
-
     $.ajax({
       type: "PATCH",
       url: "/game_stat",
@@ -242,8 +243,6 @@ $(document).ready(function(){
 		var $input_valid = "#" + form_name + " input.valid";
 
 		$($form_name).filter(':input').each(function(){
-
-
 			$(this).on('input',function(){
 				$input_value = $.trim($(this).val());
 				// If the input is longer than two characters and does not contain a number or space, make the input green to show it's valid
