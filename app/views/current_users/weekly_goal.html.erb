@@ -5,63 +5,83 @@ Coming soon!
 
 <% if false %>
 
-<p>
-	Selecting a weekly goal will help you stay motivated while mastering new words.
-	You can change your goal at any time.
-</p>
+	<p>
+		Selecting a weekly goal will help you stay motivated while mastering new words.
+		You can change your goal at any time.
+	</p>
 
-<div class="row">
-	<div class="col-sm-2 hidden-xs">
-		<%= image_tag("pup2.png", alt: "Leksi Mascot", class: "img-responsive") %>
-	</div>
-	<div class="col-xs-6 col-xs-offset-3 visible-xs-block">
-		<%= image_tag("pup2.png", alt: "Leksi Mascot", class: "img-responsive") %>
-	</div>
+	<div class="row">
+		<div class="col-sm-2 hidden-xs">
+			<%= image_tag("pup2.png", alt: "Leksi Mascot", class: "img-responsive") %>
+		</div>
+		<div class="col-xs-6 col-xs-offset-3 visible-xs-block">
+			<%= image_tag("pup2.png", alt: "Leksi Mascot", class: "img-responsive") %>
+		</div>
 
-	<div class="col-xs-12 col-sm-5">
-		<%= form_tag(
-			weekly_goal_path, method: "PUT", class: "weekly-goal-form"
-		) do %>
-			<div class="radio light-blue-hover">
-				<div class="pull-right">
-					<small class="gray">master 1 word per week</small>
+		<div class="col-xs-12 col-sm-5">
+			<%= form_tag(weekly_goal_path, method: "put",
+			class: "weekly-goal-form") do %>
+				<%= label_tag :weekly_goal_id, "Weekly Goal Options", class: "sr-only" %>
+				<div class="radio light-blue-hover">
+					<div class="pull-right">
+						<small class="gray">master 1 word per week</small>
+					</div>
+					<% if current_user.goal == 1 %>
+						<%= radio_button_tag(:weekly_goal, 1, true) %>
+					<% else %>
+						<%= radio_button_tag(:weekly_goal, 1) %>
+					<% end %>
+					<%= label_tag(:weekly_goal_1, "Basic") %>
 				</div>
-				<%= radio_button_tag(:weekly_goal, "basic") %>
-				<%= label_tag(:weekly_goal_basic, "Basic") %>
-			</div>
-			<div class="radio light-blue-hover">
-				<div class="pull-right">
-					<small class="gray">master 5 words per week</small>
+				<div class="radio light-blue-hover">
+					<div class="pull-right">
+						<small class="gray">master 5 words per week</small>
+					</div>
+					<% if current_user.goal == 5 %>
+						<%= radio_button_tag(:weekly_goal, 5, true) %>
+					<% else %>
+						<%= radio_button_tag(:weekly_goal, 5) %>
+					<% end %>
+					<%= label_tag(:weekly_goal_5, "Casual") %>
 				</div>
-				<%= radio_button_tag(:weekly_goal, "casual") %>
-				<%= label_tag(:weekly_goal_casual, "Casual") %>
-			</div>
-			<div class="radio light-blue-hover">
-				<div class="pull-right">
-					<small class="gray">master 10 words per week</small>
+				<div class="radio light-blue-hover">
+					<div class="pull-right">
+						<small class="gray">master 10 words per week</small>
+					</div>
+					<% if current_user.goal == 10 %>
+						<%= radio_button_tag(:weekly_goal, 10, true) %>
+					<% else %>
+						<%= radio_button_tag(:weekly_goal, 10) %>
+					<% end %>
+					<%= label_tag(:weekly_goal_10, "Regular") %>
 				</div>
-				<%= radio_button_tag(:weekly_goal, "regular") %>
-				<%= label_tag(:weekly_goal_regular, "Regular") %>
-			</div>
-			<div class="radio light-blue-hover">
-				<div class="pull-right">
-					<small class="gray">master 20 words per week</small>
+				<div class="radio light-blue-hover">
+					<div class="pull-right">
+						<small class="gray">master 20 words per week</small>
+					</div>
+					<% if current_user.goal == 20 %>
+						<%= radio_button_tag(:weekly_goal, 20, true) %>
+					<% else %>
+						<%= radio_button_tag(:weekly_goal, 20) %>
+					<% end %>
+					<%= label_tag(:weekly_goal_20, "Serious") %>
 				</div>
-				<%= radio_button_tag(:weekly_goal, "serious") %>
-				<%= label_tag(:weekly_goal_serious, "Serious") %>
-			</div>
-			<div class="radio light-blue-hover">
-				<div class="pull-right">
-					<small class="gray">master 30 words per week</small>
+				<div class="radio light-blue-hover">
+					<div class="pull-right">
+						<small class="gray">master 30 words per week</small>
+					</div>
+					<% if current_user.goal == 30 %>
+						<%= radio_button_tag(:weekly_goal, 30, true) %>
+					<% else %>
+						<%= radio_button_tag(:weekly_goal, 30) %>
+					<% end %>
+					<%= label_tag(:weekly_goal_30, "Insane") %>
 				</div>
-				<%= radio_button_tag(:weekly_goal, "insane") %>
-				<%= label_tag(:weekly_goal_insane, "Insane") %>
-			</div>
 
-			<%= submit_tag "Save changes", name: "weekly_goal_submit_btn",
-				class: "btn btn-default" %>
-		<% end %>
+				<%= submit_tag "Save changes", name: "weekly_goal_submit_btn",
+					class: "btn btn-default" %>
+			<% end %>
+		</div>
 	</div>
-</div>
 
 <% end %>

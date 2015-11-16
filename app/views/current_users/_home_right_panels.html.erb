@@ -1,47 +1,49 @@
 <% if false %>
 
-<div class="box-shadow-border-home">
-	<div class="pull-right">
-		<% if Rails.env.test? %>
-			<%= link_to "edit weekly goal", weekly_goal_path %>
-		<% else %>
-			<%= link_to image_tag("settings_gray_filled_25.png", alt: "Settings"),
-			 weekly_goal_path %>
-		<% end %>
-	</div>
+	<div class="box-shadow-border-home">
+		<div class="pull-right">
+			<% if Rails.env.test? %>
+				<%= link_to "edit weekly goal", weekly_goal_path %>
+			<% else %>
+				<%= link_to image_tag("settings_gray_filled_25.png", alt: "Settings"),
+				 weekly_goal_path %>
+			<% end %>
+		</div>
 
-	<p class="lead">
-		Weekly Goal
-		<small class="medium-gray">10 words</small>
-	</p>
-
-	<div>
-		<p>
-			<%= display_progress_snapshot_motivation(current_user) %>
+		<p class="lead">
+			Weekly Goal
+			<small class="medium-gray">
+				<%= pluralize(current_user.goal, "word") %>
+			</small>
 		</p>
-	</div>
 
-	<div class="row">
-		<div class="col-xs-5">
-			<%= image_tag("calendar_color_50.png", alt: "Calendar",
-				class: "img-responsive") %>
+		<div>
+			<p>
+				<%= display_progress_snapshot_motivation(current_user) %>
+			</p>
 		</div>
-		<div class="col-xs-7">
-			X words mastered
-		</div>
-	</div>
 
-	<div class="progress">
-		<div class="progress-bar progress-bar-info"
-				 role="progressbar"
-				 aria-valuenow="<%= percent_complete(current_user) %>"
-				 aria-valuemin="0"
-				 aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
-				 style="width: <%= percent_complete(current_user) %>%">
-			<span><%= percent_complete(current_user) %>%</span>
+		<div class="row">
+			<div class="col-xs-5">
+				<%= image_tag("calendar_color_50.png", alt: "Calendar",
+					class: "img-responsive") %>
+			</div>
+			<div class="col-xs-7">
+				X words mastered
+			</div>
+		</div>
+
+		<div class="progress">
+			<div class="progress-bar progress-bar-info"
+					 role="progressbar"
+					 aria-valuenow="<%= percent_complete(current_user) %>"
+					 aria-valuemin="0"
+					 aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
+					 style="width: <%= percent_complete(current_user) %>%">
+				<span><%= percent_complete(current_user) %>%</span>
+			</div>
 		</div>
 	</div>
-</div>
 
 <% end %>
 
