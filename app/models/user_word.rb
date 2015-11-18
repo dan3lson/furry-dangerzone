@@ -46,26 +46,21 @@ class UserWord < ActiveRecord::Base
     current_game == "three" && !freestyle_completed?
   end
 
-  # Use GameStat objects to determine these:
+  def fundamental_completed_last_day?
+    gs = GameStat.find_by(user_word_id: self.id)
 
-  # def fundamental_completed_last_day?
-  #   first_uwgl_fundamental = self.uwgl_fundamentals.first
-  #
-  #   first_uwgl_fundamental.updated_at >= 1.days.ago &&
-  #   (first_uwgl_fundamental.created_at != first_uwgl_fundamental.updated_at)
-  # end
-  #
-  # def jeopardy_completed_last_day?
-  #   first_uwgl_jeopardy = self.uwgl_jeopardys.first
-  #
-  #   first_uwgl_jeopardy.updated_at >= 1.days.ago &&
-  #   (first_uwgl_jeopardy.created_at != first_uwgl_jeopardy.updated_at)
-  # end
-  #
-  # def freestyle_completed_last_day?
-  #   first_uwgl_freestyle = self.uwgl_freestyles.first
-  #
-  #   first_uwgl_freestyle.updated_at >= 1.days.ago &&
-  #   (first_uwgl_freestyle.created_at != first_uwgl_freestyle.updated_at)
-  # end
+    gs.updated_at >= 1.day.ago && gs.game_id == 1
+  end
+
+  def jeopardy_completed_last_day?
+    gs = GameStat.find_by(user_word_id: self.id)
+
+    gs.updated_at >= 1.day.ago && gs.game_id == 2
+  end
+
+  def freestyle_completed_last_day?
+    gs = GameStat.find_by(user_word_id: self.id)
+
+    gs.updated_at >= 1.day.ago && gs.game_id == 3
+  end
 end

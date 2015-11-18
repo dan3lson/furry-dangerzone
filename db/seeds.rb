@@ -4,8 +4,8 @@ Rails.logger.info "==============================================="
 
 @founder = User.create!(
   username: "dan3lson",
-  password: "danelson",
-  password_confirmation: "danelson",
+  password: "password",
+  password_confirmation: "password",
   role: "admin",
   email: ""
 )
