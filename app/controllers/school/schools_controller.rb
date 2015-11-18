@@ -25,12 +25,10 @@ class School::SchoolsController < BaseSchoolController
   def student
     @student = User.find(params[:id])
 
-    if false
-      @words_added_last_day = @student.words_added_last_day
-      @funds_completed_last_day = @student.fundamentals_completed_last_day
-      @jeops_completed_last_day = @student.jeopardys_completed_last_day
-      @frees_completed_last_day = @student.freestyles_completed_last_day
-    end
+    @words_added_last_day = @student.words_added_last_day
+    @funds_completed_last_day = @student.fundamentals_completed_last_day
+    @jeops_completed_last_day = @student.jeopardys_completed_last_day
+    @frees_completed_last_day = @student.freestyles_completed_last_day
   end
 
   def messages
