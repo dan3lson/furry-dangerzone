@@ -7,7 +7,9 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:session][:username])
 
     if user && user.authenticate(params[:session][:password])
-      user.last_login = DateTime.now
+      @datetime_now = DateTime.now
+      user.last_login = @datetime_now
+      user.login_history << @datetime_now.to_s << "|"
       user.num_logins += 1
 
       if user.save
