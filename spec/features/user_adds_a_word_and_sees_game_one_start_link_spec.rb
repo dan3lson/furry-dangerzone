@@ -16,12 +16,7 @@ feature "user adds a word and sees game one start link", %{
   describe "\n user adds a word -->" do
     scenario "scenario: valid process" do
       word = FactoryGirl.create(:word)
-      user = User.create!(
-        username: "fizzBuzzzzed",
-        password: "password",
-        password_confirmation: "password",
-        email: ""
-      )
+      user = FactoryGirl.create(:user)
 
       log_in_as(user)
 

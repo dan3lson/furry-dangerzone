@@ -16,13 +16,7 @@ feature "user adds a word", %{
 
   describe "\n user adds a word -->" do
     scenario "scenario: valid process" do
-      user = User.create!(
-        username: "fizzBuzzzzed",
-        password: "password",
-        password_confirmation: "password",
-        email: ""
-      )
-
+      user = FactoryGirl.create(:user)
       word = FactoryGirl.create(:word)
 
       log_in_as(user)

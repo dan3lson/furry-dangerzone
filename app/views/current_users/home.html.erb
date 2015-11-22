@@ -3,7 +3,7 @@
 
 <div class="current-users-home-container">
   <div class="row">
-    <div class="col-sm-8 center">
+    <div class="col-sm-7 center">
       <% unless current_user.has_games_to_play? %>
         <div class="inline-block game-zone-margin data-url pointer
         						add-show-game-circle"
@@ -20,7 +20,7 @@
 
       <%= render "current_users/game_zone" %>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-5">
       <%= render "current_users/home_right_panels" %>
     </div>
   </div>

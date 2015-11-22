@@ -7,7 +7,7 @@ class WeeklyGoalsController < ApplicationController
 		if current_user.save
 			flash[:success] = "Success!"
 
-			redirect_to weekly_goal_path
+			redirect_to root_path
 		else
 			msg = "Yikes! Your Weekly Goal was not changed successfully. "
 			msg_2 = "Please try again."
