@@ -26,8 +26,6 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(6) }
     it { should validate_presence_of(:points) }
-    it { should validate_presence_of(:login_history) }
-    it { should validate_presence_of(:streak) }
     it { should validate_length_of(:first_name).is_at_most(50) }
     it { should validate_length_of(:last_name).is_at_most(50) }
     xit { should validate_uniqueness_of(:email).case_insensitive.allow_blank }
@@ -44,10 +42,6 @@ RSpec.describe User, type: :model do
 
     it "returns a password string" do
       expect(user.password_confirmation).to eq("password")
-    end
-
-    it "returns a streak integer" do
-      expect(user.streak).to eq(0)
     end
   end
 
