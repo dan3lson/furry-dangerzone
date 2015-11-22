@@ -26,6 +26,8 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(6) }
     it { should validate_presence_of(:points) }
+    it { should validate_presence_of(:login_history) }
+    it { should validate_presence_of(:streak) }
     it { should validate_length_of(:first_name).is_at_most(50) }
     it { should validate_length_of(:last_name).is_at_most(50) }
     xit { should validate_uniqueness_of(:email).case_insensitive.allow_blank }
@@ -42,6 +44,10 @@ RSpec.describe User, type: :model do
 
     it "returns a password string" do
       expect(user.password_confirmation).to eq("password")
+    end
+
+    it "returns a streak integer" do
+      expect(user.streak).to eq(0)
     end
   end
 
@@ -710,7 +716,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  skip "#words_added_last_day" do
+  pending "#words_added_last_day" do
     it "returns 0 UW objects" do
       expect(user.words_added_last_day).to eq(0)
     end
@@ -728,67 +734,105 @@ RSpec.describe User, type: :model do
     end
   end
 
-  skip "#fundamentals_completed_last_day" do
+  pending "#fundamentals_completed_yesterday" do
     it "returns 0 UW objects" do
-      expect(user.fundamentals_completed_last_day).to eq(0)
+      expect(user.fundamentals_completed_yesterday).to eq(0)
     end
 
     it "returns 1 UW object" do
-      expect(user.fundamentals_completed_last_day).to eq(1)
+      expect(user.fundamentals_completed_yesterday).to eq(1)
     end
 
     it "returns 2 UW objects" do
-      expect(user.fundamentals_completed_last_day).to eq(2)
+      expect(user.fundamentals_completed_yesterday).to eq(2)
     end
 
     it "returns 3 UW objects" do
-      expect(user.fundamentals_completed_last_day).to eq(3)
+      expect(user.fundamentals_completed_yesterday).to eq(3)
     end
   end
 
-  skip "#jeopardys_completed_last_day" do
+  pending "#jeopardys_completed_yesterday" do
     it "returns 0 UW objects" do
-      expect(user.jeopardys_completed_last_day).to eq(0)
+      expect(user.jeopardys_completed_yesterday).to eq(0)
     end
 
     it "returns 1 UW object" do
-      expect(user.jeopardys_completed_last_day).to eq(1)
+      expect(user.jeopardys_completed_yesterday).to eq(1)
     end
 
     it "returns 2 UW objects" do
-      expect(user.jeopardys_completed_last_day).to eq(2)
+      expect(user.jeopardys_completed_yesterday).to eq(2)
     end
 
     it "returns 3 UW objects" do
-      expect(user.jeopardys_completed_last_day).to eq(3)
+      expect(user.jeopardys_completed_yesterday).to eq(3)
     end
   end
 
-  skip "#freestyles_completed_last_day" do
+  pending "#freestyles_completed_yesterday" do
     it "returns 0 UW objects" do
-      expect(user.freestyles_completed_last_day).to eq(0)
+      expect(user.freestyles_completed_yesterday).to eq(0)
     end
 
     it "returns 1 UW object" do
-      expect(user.freestyles_completed_last_day).to eq(1)
+      expect(user.freestyles_completed_yesterday).to eq(1)
     end
 
     it "returns 2 UW objects" do
-      expect(user.freestyles_completed_last_day).to eq(2)
+      expect(user.freestyles_completed_yesterday).to eq(2)
     end
 
     it "returns 3 UW objects" do
-      expect(user.freestyles_completed_last_day).to eq(3)
+      expect(user.freestyles_completed_yesterday).to eq(3)
     end
   end
 
-  skip "#has_recent_activity?" do
+  pending "#freestyles_completed_today" do
+    it "returns 0 UW objects" do
+      expect(user.freestyles_completed_today).to eq(0)
+    end
+
+    it "returns 1 UW object" do
+      expect(user.freestyles_completed_today).to eq(1)
+    end
+
+    it "returns 2 UW objects" do
+      expect(user.freestyles_completed_today).to eq(2)
+    end
+
+    it "returns 3 UW objects" do
+      expect(user.freestyles_completed_today).to eq(3)
+    end
+  end
+
+  pending "#has_recent_activity?" do
     it "returns true" do
       expect(user.has_recent_activity?).to eq(true)
     end
 
-    it "returns 1 UW object" do
+    it "returns false" do
       expect(user.has_recent_activity?).to eq(false)
+    end
+  end
+
+  pending "#has_completed_freestyle_yesterday_or_today?" do
+    it "returns true" do
+      expect(user.has_completed_freestyle_yesterday_or_today?).to eq(true)
+    end
+
+    it "returns false" do
+      expect(user.has_completed_freestyle_yesterday_or_today?).to eq(false)
+    end
+  end
+
+  pending "#completed_freestyle_on?" do
+    it "returns true" do
+      expect(user.completed_freestyle_on?(date)).to eq(true)
+    end
+
+    it "returns false" do
+      expect(user.completed_freestyle_on?(date)).to eq(false)
     end
   end
 end

@@ -7,13 +7,6 @@ class User < ActiveRecord::Base
   has_many :word_tags, through: :user_word_tags
   has_many :reviews
   has_many :feedbacks
-  # Leksi tracks time spent completing any game for a word
-    # Play game -> Complete game
-    # GameStat -> add_column_elapsed_time_game_stats
-    # "Tell me how much time student spent playing all games for this word"
-    # "Tell me how much time student spent playing game one"
-    # "Tell me how much time student spent playing game two"
-    # "Tell me how much time student spent playing game three"
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -22,6 +15,8 @@ class User < ActiveRecord::Base
   validates :points, presence: true
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
+  validates :login_history, presence: true
+  validates :streak, presence: true
   validates :email, format: { with: VALID_EMAIL_REGEX }, allow_blank: true,
             uniqueness: { case_sensitive: false }
 
@@ -141,35 +136,54 @@ class User < ActiveRecord::Base
     user_words.where(created_at: 1.days.ago..Time.now)
   end
 
-  def fundamentals_completed_last_day
+  def fundamentals_completed_yesterday
     user_words.select do |uw|
       next unless uw.fundamental_completed?
 
-      uw.fundamental_completed_last_day?
+      uw.fundamental_completed_yesterday?
     end
   end
 
-  def jeopardys_completed_last_day
+  def jeopardys_completed_yesterday
     user_words.select do |uw|
       next unless uw.jeopardy_completed?
 
-      uw.jeopardy_completed_last_day?
+      uw.jeopardy_completed_yesterday?
     end
   end
 
-  def freestyles_completed_last_day
+  def freestyles_completed_yesterday
     user_words.select do |uw|
       next unless uw.freestyle_completed?
 
-      uw.freestyle_completed_last_day?
+      uw.freestyle_completed_yesterday?
+    end
+  end
+
+  def freestyles_completed_today
+    user_words.select do |uw|
+      next unless uw.freestyle_completed?
+
+      uw.freestyle_completed_today?
     end
   end
 
   def has_recent_activity?
     words_added_last_day.any? ||
-    fundamentals_completed_last_day.any? ||
-    jeopardys_completed_last_day.any? ||
-    freestyles_completed_last_day.any?
+    fundamentals_completed_yesterday.any? ||
+    jeopardys_completed_yesterday.any? ||
+    freestyles_completed_yesterday.any?
+  end
+
+  def has_completed_freestyle_yesterday_or_today?
+    freestyles_completed_yesterday.count > 0 ||
+    freestyles_completed_today.count > 0 
+  end
+
+  def completed_freestyle_on?(date)
+    UserWord.where(user: self, games_completed: 3).select { |uw|
+      uw.updated_at.to_date == date
+    }.any?
   end
 
   # Eventually will be deleted
@@ -241,6 +255,18 @@ class User < ActiveRecord::Base
       22weber
       22zenkerm
     ).map { |u| User.find_by(username: u) }
+  end
+
+  def fs_classes
+    User.fs_class_one + User.fs_class_two
+  end
+
+  def self.reset_rails_c_pwds
+    User.all.each { |u| u.update_attributes(
+        password: "password",
+        password_confirmation: "password"
+      )
+    }
   end
 
   def self.create_fs_usernames

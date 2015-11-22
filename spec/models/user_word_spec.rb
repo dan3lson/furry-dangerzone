@@ -202,7 +202,7 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
-  skip "#fundamental_completed_last_day?" do
+  skip "#fundamental_completed_yesterday?" do
     it "returns true" do
     end
 
@@ -210,7 +210,7 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
-  skip "#jeopardy_completed_last_day?" do
+  skip "#jeopardy_completed_yesterday?" do
     it "returns true" do
     end
 
@@ -218,7 +218,7 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
-  skip "#freestyle_completed_last_day?" do
+  skip "#freestyle_completed_yesterday?" do
     it "returns true" do
     end
 

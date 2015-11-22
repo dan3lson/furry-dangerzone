@@ -1,55 +1,85 @@
-<% if false %>
-
-	<div class="box-shadow-border-home">
-		<div class="pull-right">
-			<% if Rails.env.test? %>
-				<%= link_to "edit weekly goal", weekly_goal_path %>
-			<% else %>
-				<%= link_to image_tag("settings_gray_filled_25.png", alt: "Settings"),
-				 weekly_goal_path %>
-			<% end %>
-		</div>
-
-		<p class="lead">
-			Weekly Goal
-			<small class="medium-gray">
-				<%= pluralize(current_user.goal, "word") %>
-			</small>
-		</p>
-
-		<div>
-			<p>
-				<%= display_progress_snapshot_motivation(current_user) %>
-			</p>
-		</div>
-
-		<div class="row">
-			<div class="col-xs-5">
-				<%= image_tag("calendar_color_50.png", alt: "Calendar",
-					class: "img-responsive") %>
-			</div>
-			<div class="col-xs-7">
-				X words mastered
-			</div>
-		</div>
-
-		<div class="progress">
-			<div class="progress-bar progress-bar-info"
-					 role="progressbar"
-					 aria-valuenow="<%= percent_complete(current_user) %>"
-					 aria-valuemin="0"
-					 aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
-					 style="width: <%= percent_complete(current_user) %>%">
-				<span><%= percent_complete(current_user) %>%</span>
-			</div>
-		</div>
+<div class="box-shadow-border-home">
+	<div class="pull-right">
+		<% if Rails.env.test? %>
+			<%= link_to "edit weekly goal", weekly_goal_path %>
+		<% else %>
+			<%= link_to image_tag("settings_gray_filled_25.png",
+				alt: "Settings"), weekly_goal_path %>
+		<% end %>
 	</div>
 
-<% end %>
+	<p class="lead">
+		Weekly Goal
+		<small class="medium-gray">
+			<%= weekly_goal(current_user) %>
+			(<%= pluralize(current_user.goal, "word") %>)
+		</small>
+	</p>
+
+	<div>
+		<% if current_user.goal.blank? %>
+			Choose how many words you want to master every week.
+
+			<%= render "current_users/weekly_goal_form" %>
+		<% else %>
+			<div class="bg-warning">
+				<div class="weekly-goal-container">
+					<div align="center">
+						<% if weekly_goal_completed?(current_user) %>
+							<%= image_tag("trophy_color_65.png", alt: "Trophy") %>
+						<% else %>
+							<%= image_tag("pup2_medium.png", alt: "Leksi Mascot") %>
+						<% end %>
+
+						<p class="weekly-goal-text">
+							<%= motivate(current_user) %>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row center">
+				<div class="col-xs-6">
+					<div class="prog-header">
+						<%= calculate_streak(current_user) %>
+					</div>
+
+					<p>
+						 Day Streak
+					</p>
+				</div>
+
+				<div class="col-xs-6">
+					<div class="prog-header">
+					<%= num_words_mastered_in_a_week(current_user) %>
+					</div>
+
+					<p>
+						 Words Mastered
+					</p>
+				</div>
+			</div>
+
+			<div class="progress">
+				<div class="progress-bar progress-bar-info"
+				role="progressbar"
+				aria-valuenow="<%= goal_percentage_completion(current_user) %>"
+				aria-valuemin="0"
+				aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
+				style="width: <%= goal_percentage_completion(current_user) %>%">
+					<span><%= goal_percentage_completion(current_user) %>%</span>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
 
 <div class="box-shadow-border-home">
 	<div class="pull-right">
-		<%= link_to image_tag("tag_color_65.png", alt: "Trophy"), myTags_path %>
+		<%= link_to image_tag("tag_gray_filled_25.png", alt: "Tags"),
+			myTags_path %>
+		<%= link_to image_tag("add_gray_filled_25.png", alt: "Create"),
+			new_tag_path %>
 	</div>
 
 	<p class="lead">

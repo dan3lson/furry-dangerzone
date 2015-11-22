@@ -46,21 +46,19 @@ class UserWord < ActiveRecord::Base
     current_game == "three" && !freestyle_completed?
   end
 
-  def fundamental_completed_last_day?
-    gs = GameStat.find_by(user_word_id: self.id)
-
-    gs.updated_at >= 1.day.ago && gs.game_id == 1
+  def fundamental_completed_yesterday?
+    updated_at.to_date == Date.yesterday && games_completed == 1
   end
 
-  def jeopardy_completed_last_day?
-    gs = GameStat.find_by(user_word_id: self.id)
-
-    gs.updated_at >= 1.day.ago && gs.game_id == 2
+  def jeopardy_completed_yesterday?
+    updated_at.to_date == Date.yesterday && games_completed == 2
   end
 
-  def freestyle_completed_last_day?
-    gs = GameStat.find_by(user_word_id: self.id)
+  def freestyle_completed_yesterday?
+    updated_at.to_date == Date.yesterday && games_completed == 3
+  end
 
-    gs.updated_at >= 1.day.ago && gs.game_id == 3
+  def freestyle_completed_today?
+    updated_at.to_date == Date.today && games_completed == 3
   end
 end

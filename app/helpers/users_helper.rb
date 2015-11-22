@@ -11,9 +11,63 @@ module UsersHelper
     elsif user.goal == 30
       "Insane"
     else
-      "Yikes!"
+      "No goal set"
     end
   end
+
+  def words_mastered_in_a_week(user)
+    beginning_of_week = Date.today.beginning_of_week
+    end_of_week = Date.today.end_of_week
+    week = beginning_of_week..end_of_week
+
+    user.completed_freestyles.select do |uw|
+      week.include?(uw.updated_at.to_date)
+    end
+  end
+
+  def num_words_mastered_in_a_week(user)
+    words_mastered_in_a_week(user).count
+  end
+
+  def weekly_goal_completed?(user)
+    num_words_mastered_in_a_week(user) >= user.goal
+  end
+
+  def goal_percentage_completion(user)
+    num_words_mastered_in_a_week = num_words_mastered_in_a_week(user)
+
+    if num_words_mastered_in_a_week == 0
+      0
+    elsif weekly_goal_completed?(user)
+      100
+    else
+      (num_words_mastered_in_a_week / user.goal.to_f * 100).round
+    end
+  end
+
+  def calculate_streak(user)
+    streak = 0
+    num_freestyles_completed = user.completed_freestyles.count
+    today = Date.today
+    yesterday = Date.yesterday
+
+    date = user.completed_freestyle_on?(today) ? today : yesterday
+
+    num_freestyles_completed.times do
+      user_has_completed_freestyle_on_date = user.completed_freestyle_on?(date)
+
+      if user_has_completed_freestyle_on_date
+        streak += 1
+        date -= 1
+      else
+        streak > 0 ? streak : 0
+      end
+    end
+
+    streak
+  end
+
+  # Need to reevaluate system and test
 
   def current_level(user)
     if user.points >= 0 && user.points < 40
@@ -99,23 +153,25 @@ module UsersHelper
     next_level_in_points(user) - level_system[current_level(user)]
   end
 
-  def percent_complete(user)
-    (((diff_btwn_curr_and_next_lvl(user) - pts_to_level_up(user)).to_f /
-      diff_btwn_curr_and_next_lvl(user).to_f) * 100).round
-  end
-
-  def display_progress_snapshot_motivation(user)
-    if percent_complete(user) >= 0.0 && percent_complete(user) < 25.0
-      msg = "Hey #{user.username.capitalize}, get going"
-      "#{msg} on achieving Level #{next_level(user)}!"
-    elsif percent_complete(user) >= 25.0 && percent_complete(user) < 50.0
+  def motivate(user)
+    if goal_percentage_completion(user) >= 0 &&
+       goal_percentage_completion(user) < 25
+      msg = "Hey #{user.username.capitalize}, get going on achieving your goal"
+      "#{msg} by mastering one word at a time."
+    elsif goal_percentage_completion(user) >= 25 &&
+          goal_percentage_completion(user) < 50
       "#{user.username.capitalize}, nice job getting started. Keep playing!"
-    elsif percent_complete(user) >= 50.0 && percent_complete(user) < 75.0
+    elsif goal_percentage_completion(user) >= 50 &&
+          goal_percentage_completion(user) < 75
       msg = "Great job, #{user.username.capitalize} - you\'re more than"
-      "#{msg} halfway to Level #{next_level(user)}!"
-    elsif percent_complete(user) >= 75.0 && percent_complete(user) <= 100.0
+      "#{msg} halfway to your goal!"
+    elsif goal_percentage_completion(user) >= 75 &&
+          goal_percentage_completion(user) <= 99
       msg = "You\'re so close, #{user.username.capitalize}!"
-      "#{msg} Level #{next_level(user)} is in sight!"
+      "#{msg}"
+    elsif goal_percentage_completion(user) == 100
+      msg = "Awesome job completing this week\'s goal of "
+      "#{msg} #{pluralize(current_user.goal, "word")}!!"
     else
       "Yikes! Motivations will be right back..."
     end

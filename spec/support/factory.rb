@@ -4,6 +4,7 @@ FactoryGirl.define do
     password "password"
     password_confirmation "password"
     email ""
+    login_history "Sat, 06 Aug 1988 00:00:00 +0000"
     num_logins 1
   end
 
@@ -61,6 +62,7 @@ FactoryGirl.define do
     num_played 3
     num_jeop_won 5
     num_jeop_lost 2
+    time_spent 3
 
     user_word
     game

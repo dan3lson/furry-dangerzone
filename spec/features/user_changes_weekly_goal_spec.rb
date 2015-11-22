@@ -17,7 +17,7 @@ feature "user changes weekly goal", %{
   # [x] I can see success message and
   #     the update reflected on Home
 
-  pending "\n changes weekly goal option -->" do
+  describe "\n changes weekly goal option -->" do
     before :each do
       FactoryGirl.create(:version)
     end
@@ -33,7 +33,7 @@ feature "user changes weekly goal", %{
 
       click_on "Save changes"
 
-      expect(page).to have_content("Weekly Goal Settings")
+      expect(page).to have_content("Weekly Goal")
       expect(page).to have_content("Success!")
     end
 
@@ -60,7 +60,7 @@ feature "user changes weekly goal", %{
 
       click_on "Save changes"
 
-      expect(page).to have_content("Weekly Goal Settings")
+      expect(page).to have_content("Weekly Goal")
       expect(page).to have_content("Success!")
     end
 
@@ -87,7 +87,7 @@ feature "user changes weekly goal", %{
 
       click_on "Save changes"
 
-      expect(page).to have_content("Weekly Goal Settings")
+      expect(page).to have_content("Weekly Goal")
       expect(page).to have_content("Success!")
     end
 
@@ -114,7 +114,7 @@ feature "user changes weekly goal", %{
 
       click_on "Save changes"
 
-      expect(page).to have_content("Weekly Goal Settings")
+      expect(page).to have_content("Weekly Goal")
       expect(page).to have_content("Success!")
     end
 
@@ -141,7 +141,7 @@ feature "user changes weekly goal", %{
 
       click_on "Save changes"
 
-      expect(page).to have_content("Weekly Goal Settings")
+      expect(page).to have_content("Weekly Goal")
       expect(page).to have_content("Success!")
     end
 
