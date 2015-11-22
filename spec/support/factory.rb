@@ -4,8 +4,8 @@ FactoryGirl.define do
     password "password"
     password_confirmation "password"
     email ""
-    login_history "Sat, 06 Aug 1988 00:00:00 +0000"
     num_logins 1
+    login_history "Sat, 06 Aug 1988 00:00:00 +0000"
   end
 
   factory :word do

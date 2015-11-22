@@ -15,11 +15,8 @@ class User < ActiveRecord::Base
   validates :points, presence: true
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
-  validates :login_history, presence: true
-  validates :streak, presence: true
   validates :email, format: { with: VALID_EMAIL_REGEX }, allow_blank: true,
             uniqueness: { case_sensitive: false }
-
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
@@ -177,7 +174,7 @@ class User < ActiveRecord::Base
 
   def has_completed_freestyle_yesterday_or_today?
     freestyles_completed_yesterday.count > 0 ||
-    freestyles_completed_today.count > 0 
+    freestyles_completed_today.count > 0
   end
 
   def completed_freestyle_on?(date)
