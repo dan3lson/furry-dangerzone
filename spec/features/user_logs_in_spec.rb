@@ -23,7 +23,7 @@ feature "user logs in", %{
       expect(page).to have_content("Home")
       expect(page).to have_content("myLeksi")
       expect(page).to have_link("Add")
-      expect(page).to have_link("Progress")
+      expect(page).to have_link("Stats")
       expect(page).to have_link("Menu")
 
       msg = "Yikes! That username/password combination didn\'t work. "
@@ -47,7 +47,7 @@ feature "user logs in", %{
       expect(page).not_to have_content("Home")
       expect(page).not_to have_content("myLeksi")
       expect(page).not_to have_link("Add")
-      expect(page).not_to have_link("Progress")
+      expect(page).not_to have_link("Stats")
       expect(page).not_to have_link("Menu")
     end
   end
