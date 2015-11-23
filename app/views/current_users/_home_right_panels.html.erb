@@ -88,7 +88,9 @@
 
 	<% if @three_rand_tags.any? %>
 		<% @three_rand_tags.each_with_index do |t, i| %>
-			<h4 class="basic-black-link"><%= link_to t.name.truncate(35), t %></h4>
+			<span class="basic-black-link">
+				<%= link_to t.name.truncate(35), t %>
+			</span>
 
 			<div class="progress">
 				<div class="progress-bar progress-bar-info"
