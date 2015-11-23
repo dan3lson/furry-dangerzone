@@ -67,6 +67,12 @@ module UsersHelper
     streak
   end
 
+  def time_spent_playing(user)
+    user_words = UserWord.where(user: user)
+    
+    user_words.map { |uw| uw.game_stats.sum(:time_spent) }.inject(&:+).to_s
+  end
+
   # Need to reevaluate system and test
 
   def current_level(user)
