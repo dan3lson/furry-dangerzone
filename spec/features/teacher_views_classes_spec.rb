@@ -75,7 +75,7 @@ feature "teacher views Classes", %{
       expect(page).to have_content("Classes")
       expect(page).to have_link("Home")
       expect(page).to have_link("Review")
-      expect(page).to have_link("Progress")
+      expect(page).to have_link("Stats")
       expect(page).to have_link("Menu")
     end
   end
