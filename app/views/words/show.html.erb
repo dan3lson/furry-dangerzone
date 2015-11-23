@@ -34,7 +34,11 @@
           <% end %>
 
         <% else %>
-          <div class="jeop-show-game-circle game-not-ready white">&#9658;</div>
+          <div class="jeop-show-game-circle game-not-ready white pointer"
+            data-toggle="popover" title="How can I play?"
+            data-content="To play this next game, you need to play the Fundamentals
+            game for at least 4 words first."
+            data-placement="bottom">&#9658;</div>
         <% end %>
       </div>
 

@@ -74,4 +74,8 @@ $(document).ready(function(){
 
 		$(".category-words-container").fadeIn();
 	});
+
+	$(function () {
+  	$('[data-toggle="popover"]').popover()
+	});
 });

@@ -16,7 +16,12 @@
 			</div>
 		<% else %>
 			<div
-				class="game-<%= user_word.current_game %>-start-circle game-not-ready"
+				class="game-<%= user_word.current_game %>-start-circle game-not-ready
+				pointer"
+				data-toggle="popover" title="How can I play?"
+				data-content="To play this next game, you need to play the Fundamentals
+				game for at least 4 words first."
+				data-placement="left"
  			>
 			</div>
 		<% end %>

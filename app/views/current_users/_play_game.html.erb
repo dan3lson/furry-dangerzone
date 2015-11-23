@@ -25,7 +25,11 @@
 						 data-url="/jeopardy?word_id=<%= word.id %>">
 					<div class="jeop-show-game-circle">
 			<% else %>
-				<div class="inline-block game-not-ready game-zone-margin">
+				<div class="inline-block game-not-ready game-zone-margin pointer"
+				data-toggle="popover" title="How can I play?"
+				data-content="To play this next game, you need to play the Fundamentals
+				game for at least 4 words first."
+				data-placement="top">
 					<div class="jeop-show-game-circle">
 			<% end %>
 		<% elsif uw.current_game == "three" %>
@@ -40,7 +44,7 @@
 				</div>
 
 				<span class="lead basic-black-link">
-					<h4><%= link_to word.name.capitalize, word %></h4>
+					<%= link_to word.name.capitalize, word %>
 				</span>
 			</div>
 	<% end %>
