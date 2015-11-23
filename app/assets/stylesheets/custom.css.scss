@@ -447,6 +447,10 @@ input {
   background: $light-green;
 }
 
+.light-red-bg {
+  background: $light-leksi-red;
+}
+
 .leaderboard-gold {
 	@extend .leaderboard-container;
 

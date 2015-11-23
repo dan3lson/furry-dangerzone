@@ -31,11 +31,6 @@
 			<%= link_to image_tag("back_white_25.png"), school_classes_path %>
 
 		<% elsif params[:controller] == "school/schools" &&
-						 params[:action] == "student" &&
-						 current_user.is_teacher? %>
-			<%= link_to image_tag("back_white_25.png"), :back %>
-
-		<% elsif params[:controller] == "school/schools" &&
 						 params[:action] == "words" &&
 						 current_user.is_teacher? %>
 			<%= link_to image_tag("back_white_25.png"), :back %>

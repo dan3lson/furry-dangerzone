@@ -4,7 +4,7 @@
 	<div class="progress-xp-container row remove-side-margins">
 		<div class="col-xs-4">
 			<div class="prog-header">
-				<%= percentage_of_myLeksi_mastered(user) %>%
+				<%= user.myLeksi_mastery %>%
 			</div>
 			<p class="lead">
 				myLeksi Mastered
@@ -12,7 +12,7 @@
 		</div>
 		<div class="col-xs-4">
 			<div class="prog-header">
-				<%= time_spent_playing(user) %>
+				<%= user.time_spent_playing %>
 			</div>
 			<p class="lead">
 				Time Spent Playing
