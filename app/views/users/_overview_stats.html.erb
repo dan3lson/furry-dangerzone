@@ -4,26 +4,27 @@
 	<div class="progress-xp-container row remove-side-margins">
 		<div class="col-xs-4">
 			<div class="prog-header">
-				<%= current_level(user) %>
+				<%= num_freestyle_games_completed(user) %>
 			</div>
 			<p class="lead">
-				Current Level
+				Words Mastered
 			</p>
 		</div>
 		<div class="col-xs-4">
 			<div class="prog-header">
-				<%= user.points.to_s(:delimited) %>
+				<%= time_spent_playing(user) %>
 			</div>
 			<p class="lead">
-				Current XP
+				Time Spent Playing
+				<small>(minutes)</small>
 			</p>
 		</div>
 		<div class="col-xs-4">
 			<div class="prog-header">
-				<%= pts_to_level_up(user) %>
+				<%= user.num_logins %>
 			</div>
 			<p class="lead">
-				XP to level-up
+				Time(s) Logged In
 			</p>
 		</div>
 	</div>

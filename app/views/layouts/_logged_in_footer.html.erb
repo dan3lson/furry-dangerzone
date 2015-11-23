@@ -53,14 +53,14 @@
     <div class="inline-block">
       <% if params[:action] == "progress" %>
   			<%=
-  				link_to_unless_current image_tag("progress_sky_blue_filled_32.png", alt: "Progress") +
-  				"<br/>Progress".html_safe, progress_path,
+  				link_to_unless_current image_tag("stats_sky_blue_filled_32.png",
+            alt: "Stats") + "<br/>Stats".html_safe, progress_path,
   				class: "img-responsive"
   			%>
   		<% else %>
   			<%=
-  				link_to image_tag("progress_dark_gray_32.png", alt: "Progress") +
-  				"<br/>Progress".html_safe, progress_path,
+  				link_to image_tag("stats_dark_gray_32.png", alt: "Stats") +
+  				"<br/>Stats".html_safe, progress_path,
   				class: "img-responsive"
   			%>
   		<% end %>
@@ -69,8 +69,8 @@
     <div class="inline-block">
       <% if params[:action] == "menu" || params[:controller] == "tags" %>
   			<%=
-  				link_to_unless_current image_tag("menu_sky_blue_filled_32.png", alt: "Menu") +
-  				"<br/>Menu".html_safe, menu_path,
+  				link_to_unless_current image_tag("menu_sky_blue_filled_32.png",
+            alt: "Menu") + "<br/>Menu".html_safe, menu_path,
   				class: "img-responsive"
   			%>
   		<% else %>
