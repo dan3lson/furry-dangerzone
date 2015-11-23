@@ -183,6 +183,16 @@ class User < ActiveRecord::Base
     }.any?
   end
 
+  def myLeksi_mastery
+    (completed_freestyles.count / self.words.count.to_f * 100).round
+  end
+
+  def time_spent_playing
+    user_words = UserWord.where(user: self)
+
+    user_words.map { |uw| uw.game_stats.sum(:time_spent) }.inject(&:+)
+  end
+
   # Eventually will be deleted
 
   def self.baseline_gamification
@@ -209,7 +219,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  # METHODS BELOW ONLY SUPPORT CURRENT SCHOOL PILOT
+  # Methods below support school pilot and may
+  # be ported longterm
 
   def self.fs_class_one
     %w(

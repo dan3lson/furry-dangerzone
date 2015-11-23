@@ -4,17 +4,13 @@
     <div class="inline-block">
       <% if params[:controller] == "school/schools" &&
             params[:action] == "home" %>
-  			<%=
-  				link_to_unless_current image_tag("home_sky_blue_filled_32.png",
+  			<%= link_to_unless_current image_tag("home_sky_blue_filled_32.png",
   				alt: "Home") + "<br/>Home".html_safe, school_home_path,
-  				class: "img-responsive"
-  			%>
+  				class: "img-responsive" %>
   		<% else %>
-  			<%=
-  				link_to image_tag("home_dark_gray_32.png", alt: "Home") +
+  			<%= link_to image_tag("home_dark_gray_32.png", alt: "Home") +
   				"<br/>Home".html_safe, school_home_path,
-  				class: "img-responsive"
-  			%>
+  				class: "img-responsive" %>
   		<% end %>
     </div>
 
@@ -24,65 +20,53 @@
             params[:controller] == "school/schools" &&
             (params[:action] == "student" || params[:action] == "students" ||
             params[:action] == "words") %>
-  			<%=
-  				link_to_unless_current image_tag("classroom_filled_blue_32.png",
+  			<%= link_to_unless_current image_tag("classroom_filled_blue_32.png",
   				alt: "Classes") + "<br/>Classes".html_safe, school_classes_path,
-  				class: "img-responsive"
-  			%>
+  				class: "img-responsive" %>
   		<% else %>
   			<%=
   				link_to image_tag("classroom_dark_gray_32.png", alt: "Classes") +
   				"<br/>Classes".html_safe, school_classes_path,
-  				class: "img-responsive"
-  			%>
+  				class: "img-responsive" %>
   		<% end %>
     </div>
 
     <div class="inline-block">
       <% if params[:controller] == "school/schools" && params[:action] == "messages" %>
-  			<%=
-  				link_to_unless_current image_tag("message_filled_blue_32.png", alt: "Review") +
-  				"<br/>Review".html_safe, school_messages_path,
-  				class: "img-responsive"
-  			%>
+  			<%= link_to_unless_current image_tag("message_filled_blue_32.png",
+          alt: "Review") + "<br/>Review".html_safe, school_messages_path,
+  				class: "img-responsive" %>
   		<% else %>
   			<%=
   				link_to image_tag("message_dark_gray_32.png", alt: "Review") +
   				"<br/>Review".html_safe, school_messages_path,
-  				class: "img-responsive"
-  			%>
+  				class: "img-responsive" %>
   		<% end %>
     </div>
 
     <div class="inline-block">
-      <% if params[:controller] == "school/schools" && params[:action] == "progress" %>
-  			<%=
-  				link_to_unless_current image_tag("progress_filled_blue_32.png", alt: "Progress") +
-  				"<br/>Progress".html_safe, school_progress_path,
-  				class: "img-responsive"
-  			%>
+      <% if params[:controller] == "school/schools" &&
+            params[:action] == "progress" %>
+  			<%= link_to_unless_current image_tag("stats_sky_blue_filled_32.png",
+            alt: "Stats") +	"<br/>Stats".html_safe, school_progress_path,
+  				class: "img-responsive" %>
   		<% else %>
-  			<%=
-  				link_to image_tag("progress_dark_gray_32.png", alt: "Progress") +
-  				"<br/>Progress".html_safe, school_progress_path,
-  				class: "img-responsive"
-  			%>
+  			<%= link_to image_tag("stats_dark_gray_32.png", alt: "Stats") +
+  				"<br/>Stats".html_safe, school_progress_path,
+  				class: "img-responsive" %>
   		<% end %>
     </div>
 
     <div class="inline-block">
-      <% if params[:controller] == "school/schools" && params[:action] == "menu" %>
-  			<%=
-  				link_to_unless_current image_tag("menu_sky_blue_filled_32.png", alt: "Menu") +
-  				"<br/>Menu".html_safe, school_menu_path,
-  				class: "img-responsive"
-  			%>
+      <% if params[:controller] == "school/schools" &&
+            params[:action] == "menu" %>
+  			<%= link_to_unless_current image_tag("menu_sky_blue_filled_32.png",
+            alt: "Menu") + "<br/>Menu".html_safe, school_menu_path,
+  				class: "img-responsive" %>
   		<% else %>
-  			<%=
-  				link_to image_tag("menu_dark_gray_32.png", alt: "Menu") +
+  			<%= link_to image_tag("menu_dark_gray_32.png", alt: "Menu") +
   				"<br/>Menu".html_safe, school_menu_path,
-  				class: "img-responsive"
-  			%>
+  				class: "img-responsive" %>
   		<% end %>
     </div>
   </div>
