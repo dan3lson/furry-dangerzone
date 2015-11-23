@@ -22,4 +22,8 @@ module GamesHelper
   def num_freestyle_games_completed(user)
     user.completed_freestyles.count
   end
+
+  def percentage_of_myLeksi_mastered(user)
+    (num_freestyle_games_completed(user) / user.words.count.to_f * 100).round
+  end
 end
