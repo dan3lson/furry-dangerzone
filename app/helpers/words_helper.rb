@@ -48,7 +48,7 @@ module WordsHelper
   end
 
   def enough_jeopardy_words_exist?(user, tag)
-    incomplete_jeopardys_exist?(user, tag) &&
+    # incomplete_jeopardys_exist?(user, tag) &&
     incomplete_jeopardys(user, tag).count + completed_jeops(user, tag).count > 3
   end
 

@@ -1,8 +1,8 @@
 class TagGamesController < ApplicationController
   def jeopardy
     if logged_in?
-      @chosen_word = Word.find(params[:word_id])
       @tag = Tag.find(params[:tag_id])
+      @chosen_word = words_for(current_user, @tag).sample
 
       if enough_jeopardy_words_exist?(current_user, @tag)
         @valid_jeopardy_words = (incomplete_jeopardys(current_user, @tag) +

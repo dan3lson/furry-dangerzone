@@ -19,7 +19,16 @@ $(document).ready(function(){
 	$(".jeopardy-begin-game").click(function(){
 		$(".jeopardy-pregame").hide();
 		$("#activity_name").fadeIn();
-		load_game_info();
+
+		var $controller_url = ""
+		if ($("#jeop-controller").data("controller") == "tag_games") {
+			$controller_url = "/jeopardy_tag?tag_id=" + $("#jeop-controller").data("tag-id");
+		} else {
+			$controller_url = "/jeopardy?word_id=" + $chosen_word_id;
+		};
+
+		load_game_info($controller_url);
+
 		$time_game_started = new Date();
 	});
 
@@ -27,10 +36,10 @@ $(document).ready(function(){
 	 * Starter Functions: Main ones that initiate each activity
 	 */
 
-	function load_game_info() {
+	function load_game_info(controller_url) {
 		$.ajax({
 			type: "GET",
-			url: "/jeopardy?word_id=" + $chosen_word_id,
+			url: controller_url,
 			dataType: "json",
 			success: function (response) {
 				var $chosen_word = response.word_names[0];
