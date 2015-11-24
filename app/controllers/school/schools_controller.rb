@@ -1,5 +1,6 @@
 class School::SchoolsController < BaseSchoolController
   def home
+    @freestyle_responses = FreestyleResponse.paginate(:page => params[:page])
   end
 
   def classes
@@ -33,16 +34,14 @@ class School::SchoolsController < BaseSchoolController
 
   def messages
     @fs_students = User.fs_class_one + User.fs_class_two
-    @user_words = UserWord.select { |uw| uw if uw.freestyle_completed? &&
-      uw.user.is_student?
-    }
-    @responses = FreestyleResponse.includes(:user_word).select { |fr|
-      @fs_students.include?(fr.user_word.user)
-    }
-    @sliced_responses = @responses.each_slice(3)
-    @freestyle_types = [
-      "Sentence Examples", "Definition Map", "Word Map", "Semantic Map"
-    ] * @responses.length
+    @user_words = @fs_students.map { |s| s.user_words }.flatten
+    @mastered_words = @user_words.keep_if { |uw| uw.freestyle_completed? }
+    @responses = @mastered_words.map { |uw|
+      uw.freestyle_responses
+    }.flatten.sort_by { |fr| fr.updated_at }.reverse
+    @sliced_responses = @responses.each_slice(3).to_a.paginate(
+      :page => params[:page]
+    )
   end
 
   def progress
