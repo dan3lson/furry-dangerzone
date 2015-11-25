@@ -25,6 +25,48 @@
 <div class="teacher-edition-stats-container">
 	<div class="row">
 		<div class="inline-block">
+			<%= image_tag("log_in_color_50.png", alt: "Number of Logins") %>
+		</div>
+
+		<h4 class="inline-block">
+			Number of Logins
+			<small>
+				Overall, this class has logged in
+				<%= display_average_values(@class, "num_logins") %>	times.
+			</small>
+		</h4>
+
+		<div class="clear"></div>
+
+		<br>
+
+		<div class="col-xs-6 light-red-bg">
+			<ol>
+				<% @lowest_num_logins.each do |u| %>
+					<li class="basic-apple-blue-link">
+						<%= link_to u.username, "student?id=#{u.id}" %>
+						<small>(<%= u.num_logins %>)</small>
+					</li>
+				<% end %>
+			</ol>
+		</div>
+
+		<div class="col-xs-6 light-green-bg">
+			<ol>
+				<% @highest_num_logins.each do |u| %>
+					<li class="basic-apple-blue-link">
+						<%= link_to u.username, "student?id=#{u.id}" %>
+						<small>(<%= u.num_logins %>)</small>
+					</li>
+				<% end %>
+			</ol>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="row">
+		<div class="inline-block">
 			<%= image_tag("level_up_color_50.png", alt: "myLeksi Mastery %") %>
 		</div>
 
@@ -153,7 +195,7 @@
 
 	<div class="row">
 		<div class="inline-block">
-			<%= image_tag("level_up_color_50.png", alt: "Fundamentals Played") %>
+			<%= image_tag("game_color_50.png", alt: "Fundamentals Played") %>
 		</div>
 
 		<h4 class="inline-block">
@@ -204,7 +246,7 @@
 
 	<div class="row">
 		<div class="inline-block">
-			<%= image_tag("level_up_color_50.png", alt: "Jeopardys Played") %>
+			<%= image_tag("game_color_50.png", alt: "Jeopardys Played") %>
 		</div>
 
 		<h4 class="inline-block">
@@ -255,7 +297,7 @@
 
 	<div class="row">
 		<div class="inline-block">
-			<%= image_tag("level_up_color_50.png", alt: "Jeopardys Played") %>
+			<%= image_tag("game_color_50.png", alt: "Jeopardys Played") %>
 		</div>
 
 		<h4 class="inline-block">

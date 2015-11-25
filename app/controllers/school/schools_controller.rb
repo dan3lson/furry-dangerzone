@@ -1,9 +1,10 @@
 class School::SchoolsController < BaseSchoolController
   def home
-    @freestyle_responses = FreestyleResponse.paginate(:page => params[:page])
   end
 
   def classes
+    @fs_class_one = User.fs_class_one
+    @fs_class_two = User.fs_class_two
   end
 
   def words
@@ -51,6 +52,10 @@ class School::SchoolsController < BaseSchoolController
     else
       "Class One"
     end
+
+    @sorted_num_logins = @class.sort_by { |u| u.num_logins }
+    @lowest_num_logins = @sorted_num_logins.take(5)
+    @highest_num_logins = @sorted_num_logins.reverse.take(5)
 
     @sorted_myLeksi_mastery = @class.sort_by { |u| u.myLeksi_mastery }
     @lowest_myLeksi_mastery = @sorted_myLeksi_mastery.take(5)
