@@ -5,23 +5,33 @@
   <%= link_to "new tag", new_tag_path %>
 <% end %>
 
-<div class="col-sm-8 col-sm-offset-2">
+<div class="row">
+</div>
+
+<div>
   <% if current_user.has_tags? %>
     <div class="basic-black-link">
       <% @current_user_tags.each do |tag| %>
-        <div class="light-blue-hover data-url" data-url="/tags/<%= tag.id %>">
-          <div class="pull-right">
-            <%= link_to image_tag("forward_black_25.png", alt: "Right arrow") %>
-          </div>
-          <div>
-            <h4 class="tightness">
-              <span>
-                <%= link_to tag.name, tag %>
-              </span>
-            </h4>
-          </div>
-          <hr>
-        </div>
+      	<div class="col-sm-4">
+      		<div class="panel panel-default">
+      		  <div class="panel-body tag-pic-container">
+      				<div class="pointer data-url"
+      						 data-url="/tags/<%= tag.id %>"
+      						 align="center">
+      					<div class="tags-bg-image"></div>
+      					<div>
+      						<h4><%= tag.name.truncate(20) %></h4>
+      						<%= link_to tag.name, tag if Rails.env.test? %>
+      					</div>
+      				</div>
+      		  </div>
+      			<div class="panel-footer center">
+      				<span class="gray">
+      					<%= pluralize(words_for(current_user, tag).count, "word") %>
+      				</span>
+      			</div>
+      		</div>
+      	</div>
       <% end %>
     </div>
   <% else %>
