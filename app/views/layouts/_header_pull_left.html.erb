@@ -4,10 +4,7 @@
 	<% end %>
 
 	<% if logged_in? %>
-		<% if params[:controller] == "tags" && params[:action] == "new"	%>
-			<%= link_to image_tag("back_black_32.png"), :back %>
-
-		<% elsif params[:controller] == "games" %>
+		<% if params[:controller] == "games" %>
 			<span id="game-exit-btn">
 				<%= link_to image_tag("exit_black_32.png"), :back %>
 			</span>
@@ -16,14 +13,17 @@
 			</span>
 
 		<% elsif params[:controller] == "words" && params[:action] == "show" %>
-			<%= link_to image_tag("back_black_32.png"), myLeksi_path %>
+			<span class="data-url glyphicon glyphicon-chevron-left"
+						aria-hidden="true" data-url="/myLeksi"></span>
 
-		<% elsif params[:controller] == "tags" && params[:action] == "show" %>
-			<%= link_to image_tag("back_black_32.png"), myTags_path %>
+		<% elsif params[:controller] == "tags" && (params[:action] == "show" ||
+		 				 params[:action] == "new") %>
+			<span class="data-url glyphicon glyphicon-chevron-left"
+						aria-hidden="true" data-url="/myTags"></span>
 
-		<% elsif params[:controller] == "users" &&
-						 params[:action] == "show" && current_user.is_teacher? %>
-			<%= link_to image_tag("back_black_32.png"), users_path %>
+		<% elsif params[:controller] == "users" && params[:action] == "show" %>
+			<span class="data-url glyphicon glyphicon-chevron-left"
+						aria-hidden="true" data-url="/users"></span>
 
 		<% elsif params[:controller] == "school/schools" &&
 						 params[:action] == "students" &&

@@ -11,16 +11,15 @@
   <% end %>
 <% else %>
   <% if words_for(current_user, tag).count > 0 %>
-    <%=
-      link_to image_tag("remove_black_32.png"),
-      user_word_tag_path(tag_name: tag.name),
-      method: :delete
-    %>
+    <%= link_to user_word_tag_path(tag_name: tag.name), method: :delete do %>
+      <span class="glyphicon glyphicon-remove-sign white"></span>
+    <% end %>
   <% else %>
-    <%= link_to image_tag("remove_black_32.png"),
-      user_tag_path(id: UserTag.find_by(
-        user: current_user, tag: tag).id,
-        tag_name: tag.name
-      ), method: :delete %>
+    <% ut_id = UserTag.find_by(user: current_user, tag: tag).id %>
+
+    <%= link_to user_tag_path(id: ut_id, tag_name: tag.name),
+      method: :delete do %>
+      <span class="glyphicon glyphicon-remove-sign white"></span>
+    <% end %>
   <% end %>
 <% end %>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
   get "jeopardy_tag" => "tag_games#jeopardy"
+  get "flashcards" => "flashcards#study"
   get "freestyle" => "games#freestyle"
   get "signup" => "users#new"
   get "login" => "sessions#new"

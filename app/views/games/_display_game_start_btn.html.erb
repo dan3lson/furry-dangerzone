@@ -21,15 +21,13 @@
 				data-toggle="popover" title="How can I play?"
 				data-content="To play this next game, you need to play the Fundamentals
 				game for at least 4 words first."
-				data-placement="left"
- 			>
+				data-placement="left">
 			</div>
 		<% end %>
 	<% elsif user_word.jeopardy_completed? %>
 			<div
 				class="game-<%= user_word.current_game %>-start-circle pointer data-url"
-				data-url="/freestyle?word_id=<%= word.id %>"
-				>
+				data-url="/freestyle?word_id=<%= word.id %>">
 				&#9658;
 			</div>
 	<% end %>

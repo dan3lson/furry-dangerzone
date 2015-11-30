@@ -7,11 +7,9 @@
     method: :delete
   %>
 <% else %>
-  <%=
-    link_to image_tag("remove_black_45.png"),
-    user_word_path(id: UserWord.find_by(
-      user: current_user,
-      word: word).id),
-    method: :delete
-  %>
+  <% uw_id = UserWord.find_by(user: current_user, word: word).id %>
+
+  <%= link_to user_word_path(id: uw_id), method: :delete do %>
+    <span class="glyphicon glyphicon-remove-sign white"></span>
+  <% end %>
 <% end %>

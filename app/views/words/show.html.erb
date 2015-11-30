@@ -7,7 +7,7 @@
 
       <div class="col-xs-4 data-url pointer fund-show-game-circle-container"
            data-url="/fundamentals?word_id=<%= @word.id %>">
-        <div class="fund-show-game-circle white">
+        <div class="fund-show-game-circle white hover">
           <% if @user_word.fundamental_completed? %>
             &#10004;
           <% else %>
@@ -19,13 +19,13 @@
       <div class="col-xs-4 data-url jeop-show-game-circle-container">
         <% if ready_for_jeopardy?(current_user, @user_word) %>
 
-          <div class="jeop-show-game-circle pointer data-url white"
+          <div class="jeop-show-game-circle pointer data-url white hover"
                data-url="/jeopardy?word_id=<%= @word.id %>">&#9658;</div>
 
         <% elsif @user_word.jeopardy_completed? %>
 
           <% if current_user.has_enough_jeopardy_words? %>
-            <div class="jeop-show-game-circle white pointer data-url"
+            <div class="jeop-show-game-circle white pointer data-url hover"
                  data-url="/jeopardy?word_id=<%= @word.id %>">&#10004;</div>
           <% else %>
             <div class="jeop-show-game-circle white game-not-ready">
@@ -34,7 +34,7 @@
           <% end %>
 
         <% else %>
-          <div class="jeop-show-game-circle game-not-ready white pointer"
+          <div class="jeop-show-game-circle game-not-ready white"
             data-toggle="popover" title="How can I play?"
             data-content="To play this next game, you need to play the Fundamentals
             game for at least 4 words first."
@@ -45,12 +45,12 @@
       <% if @user_word.freestyle_completed? %>
         <div class="col-xs-4 free-show-game-circle-container pointer data-url"
              data-url="/freestyle?word_id=<%= @word.id %>">
-            <div class="free-show-game-circle white">&#10004;</div>
+            <div class="free-show-game-circle white hover">&#10004;</div>
 
       <% elsif @user_word.current_game == "three" %>
         <div class="col-xs-4 free-show-game-circle-container pointer data-url"
              data-url="/freestyle?word_id=<%= @word.id %>">
-            <div class="free-show-game-circle white">&#9658;</div>
+            <div class="free-show-game-circle white hover">&#9658;</div>
 
       <% else %>
         <div class="col-xs-4 free-show-game-circle-container">
@@ -95,16 +95,14 @@
       <div class="tags-for-a-word">
         <div class="tag">
           <div class="basic-black-link inline-block">
+            <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+            &nbsp;
             <%= link_to tag.name.truncate(30), tag %>
           </div>
           &nbsp;
-          &nbsp;
-          &nbsp;
           <div class="tag-on-word-show-page inline-block pull-right">
-              <%=
-                render "tags/remove_tag_btn_word_show_page",
-                word: @word, tag: tag
-              %>
+            <%= render "tags/remove_tag_btn_word_show_page",
+              word: @word, tag: tag %>
           </div>
         </div>
       </div>
