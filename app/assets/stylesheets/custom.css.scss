@@ -205,10 +205,6 @@ p {
   margin-bottom: 25px;
 }
 
-.zero-padding > * {
-	padding: 10px;
-}
-
 .btn-custom {
   background: #fff;
   border-radius: 20px;
@@ -228,6 +224,20 @@ p {
   border: $bootstrap-blue 1px solid;
   color: $bootstrap-blue;
   cursor: pointer;
+}
+
+#card {
+	cursor: pointer;
+}
+
+.red-border {
+	border-bottom: $leksi-red 1px solid;
+	padding: 10px 0;
+}
+
+.blue-border {
+	border-bottom: lightblue 1px solid;
+	padding: 10px 0;
 }
 
 .category-words-container {
@@ -285,6 +295,10 @@ p {
 	color: $dark-gray;
 }
 
+.data-url {
+	cursor: pointer;
+}
+
 .debug_dump {
   @include box_sizing;
 
@@ -310,6 +324,18 @@ p {
   }
 }
 
+.flashcard {
+	min-height: 11em;
+}
+
+.flashcard-container {
+	background: lightyellow;
+}
+
+#flashcard-front {
+	padding-top: 50px;
+}
+
 .jeopardy-header {
   @extend .stats-header;
 
@@ -326,10 +352,6 @@ p {
   color: $dark-leksi-green;
 }
 
-.free-show-game-circle:hover {
-	opacity: $show-game-circle-container-hover-opac;
-}
-
 .full-header {
   font-size: 1.5em;
 }
@@ -342,7 +364,7 @@ p {
   color: $dark-leksi-red;
 }
 
-.fund-show-game-circle:hover {
+.hover:hover {
 	opacity: $show-game-circle-container-hover-opac;
 }
 
@@ -434,10 +456,6 @@ input {
   height: auto !important;
 }
 
-.jeop-show-game-circle:hover {
-	opacity: $show-game-circle-container-hover-opac;
-}
-
 .leaderboard-bronze {
 	@extend .leaderboard-container;
 
@@ -490,10 +508,14 @@ input {
 	color: $leksi-red;
 }
 
+.light-blue-hover:hover {
+  background: $light-blue;
+  cursor: pointer;
+}
+
 .logged-in-header {
   background: $sky-blue;
   border-color: $sky-blue;
-  // color: $white;
   opacity: .90;
 }
 
@@ -732,9 +754,8 @@ input {
 	background-image: url(image-path("more_color_100.png"));
 }
 
-.light-blue-hover:hover {
-  background: $light-blue;
-  cursor: pointer;
+.right {
+	text-align: right;
 }
 
 .stats-header {
@@ -989,6 +1010,22 @@ table {
 	background: $leksi-red;
 }
 
+#flashcard-game {
+	display: none;
+}
+.flashcard-show-game-circle {
+	@extend .word-show-game-circle;
+
+	background: linear-gradient(
+	  to bottom,
+	  #ffffe0,
+	  #ffffe0 94%,
+	  lightblue 94%,
+	  lightblue
+	);
+	background-size: 100% 20px;
+}
+
 .jeop-show-game-circle {
 	@extend .word-show-game-circle;
 
@@ -1047,4 +1084,8 @@ table {
 
 .zero-padding {
 	padding: 0;
+}
+
+.zero-padding > * {
+	padding: 10px;
 }

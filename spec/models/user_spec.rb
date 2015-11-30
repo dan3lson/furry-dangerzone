@@ -26,6 +26,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(6) }
     it { should validate_presence_of(:points) }
+    it { should validate_presence_of(:num_flashcards_played) }
     it { should validate_length_of(:first_name).is_at_most(50) }
     it { should validate_length_of(:last_name).is_at_most(50) }
     xit { should validate_uniqueness_of(:email).case_insensitive.allow_blank }

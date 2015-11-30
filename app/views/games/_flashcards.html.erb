@@ -1,0 +1,48 @@
+<div id="flashcard-game">
+	<div class="row">
+		<div class="col-xs-4">
+			<button type="button" class="btn btn-default btn-lg" id="flashcard-prev-btn">
+			  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+			</button>
+		</div>
+		<div class="col-xs-4 center">
+			<button type="button" class="btn btn-default" id="finish-studying-flashcards">
+			  <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+				&nbsp;
+				<span id="current-flashcard-num"></span>
+				/	<%= num_words %>
+			</button>
+		</div>
+		<div class="col-xs-4 right">
+			<button type="button" class="btn btn-default btn-lg" id="flashcard-next-btn">
+			  <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+			</button>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div id="card">
+			  <div class="front">
+			    <div class="box-shadow-border-home flashcard-container">
+			      <div class="flashcard center">
+			          <h1 id="flashcard-front"></h1>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="back">
+			    <div class="box-shadow-border-home flashcard-container">
+			      <div class="red-border"></div>
+			      <div class="blue-border"></div>
+			      <div class="blue-border"></div>
+			      <h4 id="flashcard-back" class="center"></h4>
+			      <div class="blue-border"></div>
+			      <div class="blue-border"></div>
+			      <div class="blue-border"></div>
+			      <div class="blue-border"></div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>

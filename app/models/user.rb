@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: { case_sensitive: false },
             length: { minimum: 3, maximum: 33 }
   validates :points, presence: true
+  validates :num_flashcards_played, presence: true
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
   validates :email, format: { with: VALID_EMAIL_REGEX }, allow_blank: true,

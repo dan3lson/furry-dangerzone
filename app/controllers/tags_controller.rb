@@ -8,13 +8,13 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @words_count = words_for(current_user, @tag).count
+    @num_words_for_this_tag = words_for(current_user, @tag).count
 
-    if @words_count > 0
+    if @num_words_for_this_tag > 0
       @completed_games = completed_funds(current_user, @tag).count +
                                completed_jeops(current_user, @tag).count +
                                completed_frees(current_user, @tag).count
-      @total_games = @words_count * 3
+      @total_games = @num_words_for_this_tag * 3
       @tag_game_progress = (@completed_games / @total_games.to_f * 100).round
 
       if incomplete_fundamentals_exist?(current_user, @tag)

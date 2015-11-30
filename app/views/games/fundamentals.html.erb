@@ -58,9 +58,7 @@
 <!-- start of pronunciation activity -->
 <div id="pronunciation_container" align="center">
 	<%= image_tag("pronunciation.png", alt: "Pronounce the word below.",
-		class: "img-responsive pointer",
-		id: "pronunciation_image_button")
-	%>
+		class: "img-responsive pointer", id: "pronunciation_image_button") %>
 </div>
 <!-- end of pronunciation activity -->
 
@@ -69,7 +67,7 @@
 	<div class="well lead">
 		<% top_three_entries_for(@chosen_word, "definition").each do |d| %>
 			<p>
-				<span class="word-definition">&#8605; <%= d %></span>
+				<span>&#8605; <%= d %></span>
 			</p>
 		<% end %>
 	</div>
