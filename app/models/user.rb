@@ -185,13 +185,17 @@ class User < ActiveRecord::Base
   end
 
   def myLeksi_mastery
-    (completed_freestyles.count / self.words.count.to_f * 100).round
+    words = self.words.count
+
+    return 0 if words == 0
+
+    (completed_freestyles.count / words.to_f * 100).round
   end
 
   def time_spent_playing
     user_words = UserWord.where(user: self)
 
-    user_words.map { |uw| uw.game_stats.sum(:time_spent) }.inject(&:+)
+    user_words.map { |uw| uw.game_stats.sum(:time_spent) }.inject(&:+) || 0
   end
 
   # Eventually will be deleted

@@ -58,3 +58,6 @@ GameStat.where(game_id: 3).sum(:num_played)
 
 # Freestyles Not Completed
 UserWord.select { |uw| uw.freestyle_not_completed? }.count
+
+# Num Flashcards Played
+User.sum(:num_flashcards_played)

@@ -27,6 +27,8 @@ gem 'uglifier', '>= 1.3.0'
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
+# Remove the .3 second delay mobile browsers have
+gem 'fastclick-rails'
 
 group :development do
   gem "bullet"

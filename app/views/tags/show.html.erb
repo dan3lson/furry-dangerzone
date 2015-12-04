@@ -23,7 +23,14 @@
       </div>
     <% else %>
       <div class="col-xs-3">
-        <div class="jeop-show-game-circle game-not-ready white">&#9658;</div>
+        <div class="jeop-show-game-circle pointer"
+          data-toggle="popover" title="Why is this game locked?"
+          data-content="To activate this Jeoapardy game, this tag has to have
+          at least four words either ready for Jeopardy or that has completed
+          Jeopardy."
+          data-placement="bottom">
+          <span class="glyphicon glyphicon-lock"></span>
+        </div>
       </div>
     <% end %>
 

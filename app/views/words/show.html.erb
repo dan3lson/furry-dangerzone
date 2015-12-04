@@ -28,17 +28,25 @@
             <div class="jeop-show-game-circle white pointer data-url hover"
                  data-url="/jeopardy?word_id=<%= @word.id %>">&#10004;</div>
           <% else %>
-            <div class="jeop-show-game-circle white game-not-ready">
-              &#10004;
+            <div class="jeop-show-game-circle"
+              data-toggle="popover" title="Why is this game locked?"
+              data-content="To activate this Jeoapardy game, you need to
+              (1) complete the Fundamentals for this word and (2) play
+              the Fundamentals game for at least 4 words."
+              data-placement="bottom">
+              <span class="glyphicon glyphicon-lock"></span>
             </div>
           <% end %>
 
         <% else %>
-          <div class="jeop-show-game-circle game-not-ready white"
-            data-toggle="popover" title="How can I play?"
-            data-content="To play this next game, you need to play the Fundamentals
-            game for at least 4 words first."
-            data-placement="bottom">&#9658;</div>
+          <div class="jeop-show-game-circle"
+            data-toggle="popover" title="Why is this game locked?"
+            data-content="To activate this Jeoapardy game, you need to
+            (1) complete the Fundamentals for this word and (2) play
+            the Fundamentals game for at least 4 words."
+            data-placement="bottom">
+            <span class="glyphicon glyphicon-lock"></span>
+          </div>
         <% end %>
       </div>
 
@@ -54,7 +62,13 @@
 
       <% else %>
         <div class="col-xs-4 free-show-game-circle-container">
-          <div class="free-show-game-circle game-not-ready white">&#9658;</div>
+          <div class="free-show-game-circle pointer"
+            data-toggle="popover" title="Why is this game locked?"
+            data-content="To activate this Freestyle game, play Jeopardy for
+            this word first!"
+            data-placement="bottom">
+            <span class="glyphicon glyphicon-lock"></span>
+          </div>
       <% end %>
         </div>
       </div>
