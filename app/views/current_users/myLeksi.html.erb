@@ -1,14 +1,14 @@
 <% provide(:title, "myLeksi") %>
 <% provide(:header, "myLeksi") %>
 
-<div>
-  <div class="col-sm-8 col-sm-offset-2">
+<div class="row">
+  <div class="col-sm-8">
     <p>
       <strong>
         Total words: <%= @current_user_words_count %>
       </strong>
     </p>
-    
+
     <% if current_user.has_words? %>
       <div class="menu-header-container">
         <div class="menu-header">
@@ -55,5 +55,68 @@
     <% else %>
       <%= render "current_users/no_words_guide" %>
     <% end %>
+
+    <br>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="lead">
+          Key
+        </p>
+        <!-- To master your words, you must complete three games for each one.
+        Play the first game called Fundamentals. After you do that, you will unlock
+        the second game, Jeopardy. After you complete Jeopardy, you unlock
+        the third game, Freestyle. -->
+
+        <div>
+          <div class="game-one-start-circle pointer">
+            &#9658;
+          </div>
+          <div class="inline-block">
+            Fundamentals
+          </div>
+        </div>
+
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+
+        <div>
+          <div class="game-two-start-circle pointer">
+            &#9658;
+          </div>
+          <div class="inline-block">
+            Jeopardy
+          </div>
+        </div>
+
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+
+        <div>
+          <div class="game-three-start-circle pointer">
+            &#9658;
+          </div>
+          <div class="inline-block">
+            Freestyle
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
