@@ -131,9 +131,6 @@ class CurrentUsersController < ApplicationController
     @tag = Tag.new
   end
 
-  def weekly_goal
-  end
-
   private
 
   def logged_in_user

@@ -27,16 +27,16 @@
           <div class="box-shadow-border">
             <% if logged_in? %>
               <div class="pull-right">
-                <%= form_for :user_word, url: user_word_path, method: :post do |f| %>
+                <%= form_for :user_word, url: user_word_path,
+                  method: :post do |f| %>
                   <%= hidden_field_tag :id, word.id %>
 
                   <% if Rails.env.test? %>
                     <% if current_user.already_has_word?(word) %>
-                      <%=
-                        link_to "remove",
-                        user_word_path(id: UserWord.find_by(
+                      <%= link_to "remove", user_word_path(id: UserWord.find_by(
                           user: current_user,
-                          word: word).id),
+                          word: word
+                        ).id),
                         method: :delete
                       %>
                     <% else %>
@@ -44,11 +44,11 @@
                     <% end %>
                   <% else %>
                     <% if current_user.already_has_word?(word) %>
-                      <%= render "words/remove_word_btn_word_show_page", word: word %>
+                      <%= render "words/remove_word_btn_word_show_page",
+                        word: word %>
                     <% else %>
-                      <%=
-                        image_submit_tag("add_black_45.png", class: "border-none")
-                      %>
+                      <%= image_submit_tag("add_black_45.png",
+                        class: "border-none") %>
                     <% end %>
                   <% end %>
                 <% end %>

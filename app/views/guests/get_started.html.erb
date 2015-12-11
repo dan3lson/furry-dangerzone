@@ -1,0 +1,15 @@
+<% provide(:title, "Get Started") %>
+<% provide(:header, "Get Started") %>
+
+<div class="alert alert-warning" role="alert">
+	Welcome, Guest! Don't lose your work -
+	<span class="basic-apple-blue-link">
+		<%= link_to "save your progress", signup_path %>
+	</span>
+	for free now!
+</div>
+
+<div id="guest-weekly-goal-container">
+	<h2>First, how many words do you want to master every week?</h2>
+	<%= render "weekly_goals/weekly_goal", user: @guest %>
+</div>

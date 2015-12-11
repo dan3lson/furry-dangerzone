@@ -3,8 +3,9 @@
 		<% if Rails.env.test? %>
 			<%= link_to "edit weekly goal", weekly_goal_path %>
 		<% else %>
-			<%= link_to image_tag("settings_gray_filled_25.png",
-				alt: "Settings"), weekly_goal_path %>
+			<%= link_to weekly_goal_path do %>
+				<span class="glyphicon glyphicon-cog gray"></span>
+			<% end %>
 		<% end %>
 	</div>
 
@@ -20,7 +21,7 @@
 		<% if current_user.goal.blank? %>
 			Choose how many words you want to master every week.
 
-			<%= render "current_users/weekly_goal_form" %>
+			<%= render "weekly_goals/weekly_goal_form", user: current_user %>
 		<% else %>
 			<div class="bg-warning">
 				<div class="weekly-goal-container">
@@ -76,10 +77,13 @@
 
 <div class="box-shadow-border-home">
 	<div class="pull-right">
-		<%= link_to image_tag("tag_gray_filled_25.png", alt: "Tags"),
-			myTags_path %>
-		<%= link_to image_tag("add_gray_filled_25.png", alt: "Create"),
-			new_tag_path %>
+		<%= link_to myTags_path do %>
+			<span class="glyphicon glyphicon-th-list gray"></span>
+		<% end %>
+		&nbsp;
+		<%= link_to new_tag_path do %>
+			<span class="glyphicon glyphicon-plus gray"></span>
+		<% end %>
 	</div>
 
 	<p class="lead">
@@ -88,8 +92,12 @@
 
 	<% if @three_rand_tags.any? %>
 		<% @three_rand_tags.each_with_index do |t, i| %>
+
 			<span class="basic-black-link">
-				<%= link_to t.name.truncate(35), t %>
+				<%= link_to t do %>
+					<span class="glyphicon glyphicon-tag"></span>
+					<%= t.name.truncate(35) %>
+				<% end %>
 			</span>
 
 			<div class="progress">
@@ -113,15 +121,13 @@
 	<% end %>
 </div>
 
-<% unless current_user.is_student? %>
-	<div class="box-shadow-border-subtle center">
-		<p class="lead gray">
-			Follow Leksi
-		</p>
+<div class="box-shadow-border-subtle center">
+	<p class="lead gray">
+		Follow Leksi
+	</p>
 
-			<%= link_to image_tag("facebook_light_gray_filled_50.png", alt: "Facebook"),
-				"http://www.facebook.com/leksieducation", target: "_blank" %>
-			<%= link_to image_tag("twitter_light_gray_filled_50.png", alt: "Twitter"),
-			 	"http://www.twitter.com/leksieducation", target: "_blank" %>
-	</div>
-<% end %>
+		<%= link_to image_tag("facebook_light_gray_filled_50.png", alt: "Facebook"),
+			"http://www.facebook.com/leksieducation", target: "_blank" %>
+		<%= link_to image_tag("twitter_light_gray_filled_50.png", alt: "Twitter"),
+		 	"http://www.twitter.com/leksieducation", target: "_blank" %>
+</div>

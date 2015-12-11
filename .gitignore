@@ -13,8 +13,4 @@
 /tmp
 .DS_store
 .env
-maintenance.txt
-issues.txt
-features.txt
-stats.txt
 /certs

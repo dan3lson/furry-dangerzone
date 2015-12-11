@@ -3,7 +3,8 @@ class StaticPagesController < ApplicationController
 
   def guest_home
     redirect_to home_path if logged_in?
+  end
 
-    @reviews = Review.limit(5)
+  def about_us
   end
 end
