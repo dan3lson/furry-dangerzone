@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   root 'static_pages#guest_home'
+  get "about_us" => "static_pages#about_us"
   get "menu" => "current_users#menu"
   get "home" => "current_users#home"
   get "myLeksi" => "current_users#myLeksi"
   get "search" => "searches#new"
   get "progress" => "current_users#progress"
   get "myTags" => "current_users#tags"
-  get "weekly_goal" => "current_users#weekly_goal"
+  get "weekly_goal" => "weekly_goals#weekly_goal"
+  get "get_started" => "guests#get_started"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
   get "jeopardy_tag" => "tag_games#jeopardy"

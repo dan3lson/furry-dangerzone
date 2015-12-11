@@ -1,4 +1,7 @@
 class WeeklyGoalsController < ApplicationController
+	def weekly_goal
+	end
+	
 	def update
 		@new_weekly_goal = params[:weekly_goal]
 

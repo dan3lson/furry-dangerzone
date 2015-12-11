@@ -14,26 +14,26 @@
 		<% word = uw.word %>
 
 		<% if uw.current_game == "one" %>
-			<div class="inline-block data-url pointer game-zone-margin
+			<div class="inline-block data-url pointer game-zone-margin hover
 									fund-show-game-circle-container"
 					 data-url="/fundamentals?word_id=<%= word.id %>">
 				<div class="fund-show-game-circle">
 		<% elsif uw.current_game == "two" %>
 			<% if ready_for_jeopardy?(current_user, uw) %>
-				<div class="inline-block data-url pointer game-zone-margin
+				<div class="inline-block data-url pointer game-zone-margin hover
 										jeop-show-game-circle-container"
 						 data-url="/jeopardy?word_id=<%= word.id %>">
 					<div class="jeop-show-game-circle">
 			<% else %>
 				<div class="inline-block game-not-ready game-zone-margin pointer"
-				data-toggle="popover" title="How can I play?"
-				data-content="To play this next game, you need to play the Fundamentals
-				game for at least 4 words first."
-				data-placement="top">
+					data-toggle="popover" title="How can I play?"
+					data-content="To play this next game, you need to play the
+					Fundamentals game for at least 4 words first."
+					data-placement="top">
 					<div class="jeop-show-game-circle">
 			<% end %>
 		<% elsif uw.current_game == "three" %>
-			<div class="inline-block data-url pointer game-zone-margin
+			<div class="inline-block data-url pointer game-zone-margin hover
 									free-show-game-circle-container"
 					 data-url="/freestyle?word_id=<%= word.id %>">
 				<div class="free-show-game-circle">

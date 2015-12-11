@@ -1,14 +1,10 @@
 <span class="pull-right header-buttons">
 	<% if !logged_in? && params[:action] == "guest_home" %>
 		<p class="remove-line-height">
-			<%=
-				link_to "Log in", login_path,
-				class: "btn btn-default btn-sm apple-blue-button-unfilled"
-			%>
-			<%=
-				link_to "Get for free", signup_path,
-				class: "btn btn-default btn-sm apple-blue-button-filled"
-			%>
+			<%= link_to "Log in", login_path,
+				class: "btn btn-default btn-sm apple-blue-button-unfilled" %>
+			<%= link_to "Get for free", signup_path,
+				class: "btn btn-default btn-sm apple-blue-button-filled" %>
 		</p>
 	<% end %>
 
