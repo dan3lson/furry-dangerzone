@@ -1,101 +1,12 @@
 <% provide(:title, "Menu") %>
 <% provide(:header, "Menu") %>
 
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3" align="center">
-    <div class="stu-pic center"></div>
+<div class="list-group row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <%= render "current_users/profile" %>
 
-    <div>
-      <span class="lead">
-        <strong><%= current_user.username %></strong>
-      </span>
-      <br>
+    <%= render "current_users/tags" %>
 
-      <span class="basic-apple-blue-link inline-block" align="left">
-        <%= link_to "Edit Profile", edit_user_path(current_user) %>
-
-        <% if logged_in_and_is_teacher?(current_user) %>
-          |
-          <%= link_to "Activate Teacher\'s Edition", school_menu_path %>
-        <% end %>
-
-        |
-        <%= link_to "Log Out", logout_path, method: :delete %>
-      </span>
-    </div>
-  </div>
-</div>
-
-<br>
-
-<div class="row">
-  <div class="col-sm-6">
-    <div class="box-shadow-border-home">
-      <div class="pull-right">
-        <%= image_tag("tag_color_65.png", alt: "Tags") %>
-      </div>
-      <p class="lead">
-        Tags
-      </p>
-
-      <div class="basic-apple-blue-link inline-block new-tag-container">
-        <%= link_to "Create", new_tag_path %>
-      </div>
-
-      <hr>
-
-      <div class="basic-apple-blue-link inline-block">
-        <%= link_to "View All", myTags_path %>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-6">
-    <div class="box-shadow-border-home">
-      <div class="pull-right">
-        <%= image_tag("bug_color_65.png", alt: "Bug") %>
-      </div>
-      <p class="lead">
-        Report a Problem
-      </p>
-
-      Yikes, let us know what happened and we'll squash the bug asap.
-      Thanks for your patience.
-
-      <div class="feedback-form-container-bug">
-        <%= render "feedbacks/form", kind: "bug" %>
-      </div>
-    </div>
-
-    <div class="box-shadow-border-home">
-      <div class="pull-right">
-        <%= image_tag("wish_color_65.png", alt: "Wish") %>
-      </div>
-      <p class="lead">
-        I Wish Leksi Could...
-      </p>
-
-      <div class="feedback-form-container-wish">
-        <%= render "feedbacks/form", kind: "wish" %>
-      </div>
-    </div>
-
-    <div class="box-shadow-border-home">
-      <div class="pull-right">
-        <%= image_tag("rating_color_65.png", alt: "Rating") %>
-      </div>
-      <p class="lead">
-        Rate Leksi
-      </p>
-
-      <% if user_already_reviewed_latest_version? %>
-        Thanks for rating Leksi
-        <%= version_display_name(latest_version.number) %>!
-      <% else %>
-        <div class="review-form-container">
-          <%= render "reviews/form" %>
-        </div>
-      <% end %>
-    </div>
+    <%= render "current_users/settings" %>
   </div>
 </div>

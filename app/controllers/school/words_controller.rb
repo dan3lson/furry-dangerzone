@@ -20,6 +20,21 @@ class School::WordsController < BaseSchoolController
     end
   end
 
+  def student_words
+    @fs_class_one = User.fs_class_one
+    @fs_class_two = User.fs_class_two
+
+    @selection = params[:selection]
+    @class = @selection == "Class One" ? "fs_class_one" : "fs_class_two"
+    @class_name = @class == "fs_class_one" ? "Class One" : "Class Two"
+    @student_usernames = User.send(@class).map { |s| s.username }
+
+    respond_to do |format|
+      format.html
+      format.json { render json: { student_usernames: @student_usernames } }
+    end
+  end
+
   private
 
   def word_params

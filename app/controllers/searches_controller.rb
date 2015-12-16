@@ -1,17 +1,19 @@
 class SearchesController < ApplicationController
-  def new
-    if Word.has_records?
+  def search
+    if params[:rand]
       @random_word = Word.random
+      @results = Word.define(@random_word)
+    else
+      @results = Word.define(params[:search]) if params[:search]
     end
 
-    @query = params[:search]
-
-    if @query
-      @search_results = if @query.blank?
-                          Word.define(@random_word)
-                        else
-                          Word.define(@query)
-      end
+    respond_to do |format|
+      format.html
+      format.js
     end
+
+  end
+
+  def student_words
   end
 end

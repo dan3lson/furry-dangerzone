@@ -1,15 +1,9 @@
-<% if Rails.env.test? %>
-  <%=
-    link_to "remove",
-    user_word_path(id: UserWord.find_by(
-      user: current_user,
-      word: word).id),
-    method: :delete
-  %>
-<% else %>
-  <% uw_id = UserWord.find_by(user: current_user, word: word).id %>
+<% uw_id = UserWord.find_by(user: current_user, word: word).id %>
 
+<% if Rails.env.test? %>
+  <%= link_to "remove", user_word_path(id: uw_id), method: :delete %>
+<% else %>
   <%= link_to user_word_path(id: uw_id), method: :delete do %>
-    <span class="glyphicon glyphicon-remove-sign white"></span>
+    <i class="fa fa-remove white"></i>
   <% end %>
 <% end %>

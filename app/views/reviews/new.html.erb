@@ -2,7 +2,17 @@
 <% provide(:header, "New Review") %>
 
 <% if logged_in? %>
-  <div class="well">
-    <%= render "form" %>
-  </div>
+  <% if user_already_reviewed_latest_version? %>
+    Thanks for rating Leksi
+    <%= version_display_name(latest_version.number) %>!
+
+    <p>
+      You can only rate once per version so stay tuned for new exciting
+      features!
+    </p>
+  <% else %>
+    <div class="well">
+      <%= render "form" %>
+    </div>
+  <% end %>
 <% end %>

@@ -1,0 +1,161 @@
+<% provide(:title, "Add Word(s) for Students") %>
+<% provide(:header, "Add Word(s) for Students") %>
+
+<div id="add-words-for-students-container">
+	<h4>Step 1. Select Class</h4>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+			  <div class="panel-body stu-pic-container add-words-stu-class-cntnr">
+					<div class="pointer"
+							 align="center">
+						<div class="class-default-image"></div>
+						<div>
+							<h4>Class One</h4>
+						</div>
+					</div>
+			  </div>
+				<div class="panel-footer center">
+					<span class="gray">
+						<%= pluralize(@fs_class_one.count, "student") %>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+			  <div class="panel-body stu-pic-container add-words-stu-class-cntnr">
+					<div class="pointer"
+							 align="center">
+						<div class="class-default-image"></div>
+						<div>
+							<h4>Class Two</h4>
+						</div>
+					</div>
+			  </div>
+				<div class="panel-footer center">
+					<span class="gray">
+						<%= pluralize(@fs_class_two.count, "students") %>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="select-stu-container">
+	<div class="pull-right">
+		<%= button_tag class: "btn btn-success ", id: "select-stu-cont-btn" do %>
+			<span class="valign-middle">Continue</span>
+			<i class="fa fa-arrow-right fa-2x pull-right"></i>
+		<% end %>
+	</div>
+
+	<h4>Step 2. Select Student(s)</h4>
+
+	<br>
+	<br>
+
+	<div class="panel panel-info lead" id="teacher-students">
+		<div class="panel-heading">Total students selected:
+			<div class="pull-right pointer hover">
+				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+				<span id="select-all">Select all</span>
+			</div>
+			<span id="num-students-added">0</span>
+		</div>
+		<div class="panel-body" id="selected-students"></div>
+	</div>
+
+	<div id="available-students"></div>
+</div>
+
+<div id="add-words-stu-words-cntnr">
+	<div class="pull-right">
+		<%= button_tag class: "btn btn-success ",
+			id: "select-words-finish-btn" do %>
+			<span class="valign-middle">Finish</span>
+			<i class="fa fa-flag fa-2x pull-right"></i>
+		<% end %>
+	</div>
+
+	<h4>Step 3. Select Word(s)</h4>
+
+	<br>
+	<br>
+
+	<div class="panel panel-info lead" id="teacher-words">
+
+		<div class="panel-heading">Total words to add:
+			<span id="num-words-selected">0</span>
+		</div>
+		<div class="panel-body" id="selected-words"></div>
+		<span class="hidden" id="selected-words-ids"></span>
+	</div>
+
+	<div id="search-bar-container" class="well">
+		<%= render "searches/form" %>
+
+		<br>
+
+		<div class="center gray">
+			<small>powered by the Macmillan Dictionary</small>
+		</div>
+	</div>
+
+	<div id="search-results-container"></div>
+</div>
+
+<div id="add-words-for-students-review">
+	<div class="pull-right">
+		<%= button_tag class: "btn btn-info reload-page" do %>
+			<i class="fa fa-refresh fa-2x pull-left"></i>
+			<span class="valign-middle">Add more</span>
+		<% end %>
+	</div>
+
+	<h4>Review</h4>
+
+	<div class="clear"><br></div>
+	
+	<%= render "shared/spinner" %>
+
+	<div class="panel panel-success lead" id="successes-container">
+		<div class="panel-heading pointer" data-toggle="collapse"
+			data-target="#success-result" aria-expanded="false"
+			aria-controls="success-result">
+			<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+			Successes
+			<div class="pull-right">
+				<span id="num-successes">0</span>/<span class="total">0</span>
+			</div>
+		</div>
+		<div class="panel-body collapse" id="success-result"></div>
+	</div>
+
+	<div class="panel panel-warning lead" id="warnings-container">
+		<div class="panel-heading pointer" data-toggle="collapse"
+			data-target="#warning-result" aria-expanded="false"
+			aria-controls="warning-result">
+			<span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+			Alerts
+			<div class="pull-right">
+				<span id="num-warnings">0</span>/<span class="total">0</span>
+			</div>
+		</div>
+		<div class="panel-body collapse" id="warning-result"></div>
+	</div>
+
+	<div class="panel panel-danger lead" id="errors-container">
+		<div class="panel-heading pointer" data-toggle="collapse"
+			data-target="#error-result" aria-expanded="false"
+			aria-controls="error-result">
+			<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+			Errors
+			<div class="pull-right">
+				<span id="num-errors">0</span>/<span class="total">0</span>
+			</div>
+		</div>
+		<div class="panel-body collapse" id="error-result"></div>
+	</div>
+</div>

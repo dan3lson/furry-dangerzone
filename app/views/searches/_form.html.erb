@@ -1,14 +1,17 @@
 <div id="search-bar-container">
-  <%= form_tag(search_path, method: "get") do %>
+  <%= form_tag(search_path, method: "get", id: "search-form",
+    remote: true) do %>
     <div class="input-group">
       <%= label_tag :inputSuccess5, "Search", class: "control-label sr-only" %>
       <%= text_field_tag(:search, params[:search], class: "form-control center",
         id: "inputSuccess5") %>
       <span class="input-group-btn">
-        <%= submit_tag "look up", name: nil, class: "btn btn-info" %>
+        <%= submit_tag "look up", name: nil, class: "btn btn-success",
+          id: "search-btn" %>
       </span>
       <span class="input-group-btn">
-        <%= submit_tag "surprise me!", name: nil, class: "btn btn-default" %>
+        <%= submit_tag "surprise me!", name: "rand", class: "btn btn-default",
+          id: "random-search-btn"%>
       </span>
     </div>
   <% end %>
