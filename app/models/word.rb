@@ -16,7 +16,7 @@ class Word < ActiveRecord::Base
   before_create { self.name = name.downcase }
 
   def self.search(word)
-    where(name: word)
+    where(name: word).limit(3)
   end
 
   def self.words_are_found?(word)
@@ -28,11 +28,15 @@ class Word < ActiveRecord::Base
       if words_are_found?(name)
         search(name)
       else
+        return "You\'re so silly; type in a word first." if name.blank?
+
         macmillan_search = MacmillanDictionary.define(name)
+
         if macmillan_search.nil?
-          "Yikes! We couldn\'t find '#{name}'. Please search again!"
+          "Yikes, we couldn\'t find '#{name}'. Please search again."
         else
           words = []
+
           macmillan_search.each do |entry|
             word = Word.new(
               name: name,
@@ -41,12 +45,14 @@ class Word < ActiveRecord::Base
               definition: entry.definition,
               example_sentence: entry.example_sentence
               )
+
             if word.save
               words << word
             else
-              "Yikes! Something went wrong :'( Please search again!"
+              "Yikes, something went wrong :'(. Please search again."
             end
           end
+
           words
         end
       end

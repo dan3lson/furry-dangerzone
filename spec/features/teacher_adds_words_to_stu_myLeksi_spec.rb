@@ -18,7 +18,7 @@ feature "teacher adds words to student(s) myLeksi", %{
   # [] I can see a "select all"
   #    option
 
-  pending "\n teacher adds words to student(s) myLeksi -->" do
+  describe "\n teacher adds words to student(s) myLeksi -->" do
     before :each do
       FactoryGirl.create(:version)
     end
@@ -32,7 +32,7 @@ feature "teacher adds words to student(s) myLeksi", %{
 
       click_on "Activate Teacher\'s Edition"
 
-      expect(page).to have_link("Add to Student(s) myLeksi")
+      expect(page).to have_link("Add to Student(s)")
     end
 
     scenario "scenario: view checkboxes for each student" do
@@ -41,9 +41,11 @@ feature "teacher adds words to student(s) myLeksi", %{
       visit menu_path
 
       click_on "Activate Teacher\'s Edition"
-      click_on "Add to Student(s) myLeksi"
+      click_on "Add to Student(s)"
 
-      expect(page).to have_link("Add to Student(s) myLeksi")
+      # click_on class
+
+      expect(page).to have_css("checkbox", count: 17)
     end
   end
 end

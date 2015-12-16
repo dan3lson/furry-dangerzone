@@ -1,0 +1,20 @@
+<div class="menu-header">
+	<span class="lead">Settings</span>
+</div>
+
+<%= link_to new_feedback_path, class: "list-group-item" do %>
+	<i class="fa fa-bug fa-fw"></i>&nbsp; Report a problem
+<% end %>
+
+<%= link_to new_feedback_path, class: "list-group-item" do %>
+	<i class="fa fa-magic fa-fw"></i>&nbsp; I wish Leksi could...
+<% end %>
+
+<%= link_to new_version_review_path(latest_version),
+	class: "list-group-item" do %>
+	<i class="fa fa-star fa-fw"></i>&nbsp; Rate this app
+<% end %>
+
+<%= link_to logout_path, class: "list-group-item", method: :delete do %>
+	<i class="fa fa-sign-out fa-fw"></i>&nbsp; Log out
+<% end %>

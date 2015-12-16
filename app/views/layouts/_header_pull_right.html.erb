@@ -39,8 +39,9 @@
 
 	<% elsif params[:controller] == "school/schools" &&
 					 params[:action] == "students" %>
-			<%= link_to image_tag("book_white_25.png"),
-				school_words_path(filter: @class) %>
+				<%= link_to school_words_path(filter: @class) do %>
+					<span class="glyphicon glyphicon-book white"></span>
+				<% end %>
 
 	<% end %>
 </span>

@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   root 'static_pages#guest_home'
+  get "get_started" => "guests#get_started"
   get "about_us" => "static_pages#about_us"
+  get "search" => "searches#search"
   get "menu" => "current_users#menu"
   get "home" => "current_users#home"
   get "myLeksi" => "current_users#myLeksi"
-  get "search" => "searches#new"
+  get "search_words_for_students" => "searches#student_words"
   get "progress" => "current_users#progress"
   get "myTags" => "current_users#tags"
   get "weekly_goal" => "weekly_goals#weekly_goal"
-  get "get_started" => "guests#get_started"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
   get "jeopardy_tag" => "tag_games#jeopardy"
@@ -45,11 +46,13 @@ Rails.application.routes.draw do
     get "home" => "schools#home"
     get "classes" => "schools#classes"
     get "words" => "schools#words"
+    get "student_words" => "words#student_words"
     get "students" => "schools#students"
     get "student" => "schools#student"
     get "messages" => "schools#messages"
     get "progress" => "schools#progress"
     get "menu" => "schools#menu"
     resources :words, only: [:new, :create, :edit, :update, :destroy]
+    resource :add_words_for_student, only: [:update]
   end
 end

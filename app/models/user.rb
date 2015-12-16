@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
   before_create { self.username = username.downcase }
   before_create { self.email = email.downcase }
 
+  def has_word?(word)
+    words.include?(word)
+  end
+
   def has_words?
     words.any?
   end

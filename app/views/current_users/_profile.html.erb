@@ -1,0 +1,19 @@
+<div class="menu-header">
+	<span class="lead">Profile</span>
+</div>
+
+<a class="list-group-item" href="<%= edit_user_path(current_user) %>">
+	<i class="fa fa-edit fa-fw"></i>&nbsp; Edit
+</a>
+
+<% if current_user.is_teacher? %>
+	<% if params[:controller] == "current_users" %>
+		<%= link_to school_menu_path, class: "list-group-item" do %>
+			<i class="fa fa-university fa-fw"></i>&nbsp; Activate Teacher Edition
+		<% end %>
+	<% else %>
+		<%= link_to menu_path, class: "list-group-item" do %>
+			<i class="fa fa-gamepad fa-fw"></i>&nbsp; Activate Brainiac Edition
+		<% end %>
+	<% end %>
+<% end %>

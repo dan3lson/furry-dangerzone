@@ -29,6 +29,8 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
 # Remove the .3 second delay mobile browsers have
 gem 'fastclick-rails'
+# Adds cool, scalable fonts (mainly to replace glyphicons)
+gem "font-awesome-rails"
 
 group :development do
   gem "bullet"

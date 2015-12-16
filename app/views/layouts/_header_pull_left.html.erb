@@ -28,12 +28,14 @@
 		<% elsif params[:controller] == "school/schools" &&
 						 params[:action] == "students" &&
 						 current_user.is_teacher? %>
-			<%= link_to image_tag("back_white_25.png"), school_classes_path %>
+			<span class="data-url glyphicon glyphicon-chevron-left"
+						aria-hidden="true" data-url="/school/classes"></span>
 
 		<% elsif params[:controller] == "school/schools" &&
 						 params[:action] == "words" &&
 						 current_user.is_teacher? %>
 			<%= link_to image_tag("back_white_25.png"), :back %>
+
 		<% end %>
 	<% end %>
 </span>

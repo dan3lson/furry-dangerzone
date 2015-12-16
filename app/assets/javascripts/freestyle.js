@@ -222,21 +222,21 @@ $(document).ready(function(){
       data: game_info,
       success: function(response) {
         console.log(response.errors);
+				// Remove "enter" key because it oddly sends the form hit on an input
+				$(window).keydown(function(event){
+					if(event.keyCode == 13) {
+						event.preventDefault();
+						return false;
+					}
+				});
       }
     });
   };
 
 	// Global fn
 
-	// Strip the functionality of the "enter" key because it oddly sends the form hit in an input
-	$(window).keydown(function(event){
-		if(event.keyCode == 13) {
-			event.preventDefault();
-			return false;
-		}
-	});
-
-	// For each individual input field, validate what's being typed in and if all are completed correctly, enable the user to proceed
+	// For each individual input field, validate what's being typed in and if all
+	// are completed correctly, enable the user to proceed
 	function validate_input_values(form_name, continue_button_name) {
 		var $form_name = "#"+form_name + "" + " *";
 		var $continue_button_name = "#"+continue_button_name;
@@ -245,14 +245,16 @@ $(document).ready(function(){
 		$($form_name).filter(':input').each(function(){
 			$(this).on('input',function(){
 				$input_value = $.trim($(this).val());
-				// If the input is longer than two characters and does not contain a number or space, make the input green to show it's valid
+				// If the input is longer than two characters and does not contain a
+				// number or space, make the input green to show it's valid
 				if($input_value.length > 2 && $regex.test($input_value)){
 					$(this).removeClass("invalid").addClass("valid");
 				} else {
 					$(this).removeClass("valid").addClass("invalid");
 				}
 
-				// If all three inputs have the class "valid", display the continue button and vice versa if not
+				// If all three inputs have the class "valid", display the continue
+				// button and vice versa if not
 				if($($input_valid).length == 3){
 					$($continue_button_name).fadeIn();
 				} else {
@@ -262,12 +264,14 @@ $(document).ready(function(){
 		});
 	}
 
-	// Display the next activity's continue button only if the values were previously completed, i.e. the user hit the back-button
+	// Display the next activity's continue button only if the values were
+	// previously completed, i.e. the user hit the back-button
 	function show_continue_button_if_activity_completed(form_name, continue_button_name) {
 		var $continue_button_name = "#"+continue_button_name;
 		var $input_valid = "#" + form_name + " input.valid";
 
-		// If all three inputs have the class "valid", display the continue button and vice versa if not
+		// If all three inputs have the class "valid", display the continue button
+		// and vice versa if not
 		if($($input_valid).length == 3){
 			$($continue_button_name).fadeIn();
 		} else {

@@ -93,6 +93,14 @@ p {
 //*
 //**********
 
+#select-stu-container,
+#add-words-stu-words-cntnr,
+#add-words-for-students-review,
+#select-stu-cont-btn,
+#select-words-finish-btn {
+	display: none;
+}
+
 .red-circle-word-show-page {
   background: $leksi-red;
   border-radius: 75px;
@@ -784,6 +792,10 @@ table {
   padding-top: 10em;
 }
 
+.valign-middle {
+	vertical-align: -webkit-baseline-middle;
+}
+
 .weekly-goal-container {
 	padding: 10px;
 }
@@ -803,10 +815,6 @@ table {
 
 .word-partial-myLeksi {
   padding-top: 13px;
-}
-
-.word-partial a:hover {
-	background: none;
 }
 
 .word-partial .tightness{

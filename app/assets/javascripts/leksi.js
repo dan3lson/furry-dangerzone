@@ -34,6 +34,10 @@ $(document).ready(function(){
 		$(location).attr("href", $(this).data("url"));
 	});
 
+	$(".reload-page").click(function(){
+		location.reload();
+	});
+
 	$(".look-up-word-btn").click(function() {
 		$(".full-header").text("Add");
 		$(this).addClass("add-active");
@@ -82,4 +86,18 @@ $(document).ready(function(){
 	$(function () {
   	$('[data-toggle="popover"]').popover()
 	});
+
+	spinner();
+
+	function spinner() {
+		$(".spinner").hide();
+
+		$(document).ajaxStart(function(){
+			$(".spinner").fadeIn();
+		});
+
+		$(document).ajaxStop(function(){
+			$(".spinner").fadeOut();
+		});
+	};
 });
