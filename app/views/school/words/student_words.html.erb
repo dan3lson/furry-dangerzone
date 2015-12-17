@@ -2,11 +2,11 @@
 <% provide(:header, "Add Word(s) for Students") %>
 
 <div id="add-words-for-students-container">
-	<h4>Step 1. Select Class</h4>
+	<h4>Step 1. Select class</h4>
 	<div class="row">
 		<div class="col-sm-6">
-			<div class="panel panel-default">
-			  <div class="panel-body stu-pic-container add-words-stu-class-cntnr">
+			<div class="panel panel-default select-class-container" id="class-1">
+			  <div class="panel-body stu-pic-container">
 					<div class="pointer"
 							 align="center">
 						<div class="class-default-image"></div>
@@ -23,8 +23,8 @@
 			</div>
 		</div>
 		<div class="col-sm-6">
-			<div class="panel panel-default">
-			  <div class="panel-body stu-pic-container add-words-stu-class-cntnr">
+			<div class="panel panel-default select-class-container" id="class-2">
+			  <div class="panel-body stu-pic-container">
 					<div class="pointer"
 							 align="center">
 						<div class="class-default-image"></div>
@@ -51,18 +51,19 @@
 		<% end %>
 	</div>
 
-	<h4>Step 2. Select Student(s)</h4>
+	<h4>Step 2. Select student(s)</h4>
 
 	<br>
 	<br>
 
 	<div class="panel panel-info lead" id="teacher-students">
-		<div class="panel-heading">Total students selected:
+		<div class="panel-heading">
+			Number selected: <span id="num-students-added">0</span>
+
 			<div class="pull-right pointer hover">
 				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 				<span id="select-all">Select all</span>
 			</div>
-			<span id="num-students-added">0</span>
 		</div>
 		<div class="panel-body" id="selected-students"></div>
 	</div>
@@ -79,15 +80,14 @@
 		<% end %>
 	</div>
 
-	<h4>Step 3. Select Word(s)</h4>
+	<h4>Step 3. Select word(s)</h4>
 
 	<br>
 	<br>
 
 	<div class="panel panel-info lead" id="teacher-words">
-
-		<div class="panel-heading">Total words to add:
-			<span id="num-words-selected">0</span>
+		<div class="panel-heading">
+			Number of words to add: <span id="num-words-selected">0</span>
 		</div>
 		<div class="panel-body" id="selected-words"></div>
 		<span class="hidden" id="selected-words-ids"></span>
@@ -117,7 +117,7 @@
 	<h4>Review</h4>
 
 	<div class="clear"><br></div>
-	
+
 	<%= render "shared/spinner" %>
 
 	<div class="panel panel-success lead" id="successes-container">
