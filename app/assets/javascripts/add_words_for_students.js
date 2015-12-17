@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$(".add-words-stu-class-cntnr").click(function() {
+	$(".select-class-container").click(function() {
 		$("#add-words-for-students-container").hide();
 		$("#select-stu-container").show();
 
@@ -12,7 +12,8 @@ $(document).ready(function() {
 
 		$username_request.done(function(data) {
 		  data["student_usernames"].forEach(function(username) {
-				var $student = add_bubble("stu-bubble", username, "user", "plus-sign");
+				var $student = add_bubble("stu-bubble", username, "user", "plus-sign",
+					username);
 
 				$("#available-students").append($student);
 		  })
@@ -66,6 +67,7 @@ $(document).ready(function() {
 	$("#search-results-container").on("click", ".select-word-stu-btn", function(){
 		$("#search-results-container").hide();
 
+		var $index = 0;
 		var $word_id = $(this).data('word-id');
 		var $word_name = $(this).data('word-name');
 
@@ -73,7 +75,7 @@ $(document).ready(function() {
 		$("#num-words-selected").html($current_num);
 
 		var $word = add_bubble("teacher-selected-word", $word_name, "book",
-			"remove-circle"
+			"remove-circle", $word_id
 		);
 
 		$("#selected-words").append($word);
@@ -100,8 +102,9 @@ $(document).ready(function() {
 		send_to_rails();
 	});
 
-	function add_bubble(container_class, display_name, glyph_1, glyph_2) {
-		return "<span class='tag lead pointer hover " + container_class + "'>" +
+	function add_bubble(container_class, display_name, glyph_1, glyph_2, id) {
+		return "<span class='tag lead pointer hover " + container_class + "' id='" +
+			container_class + "-" + id + "'>" +
 			"<span class='glyphicon glyphicon-" + glyph_1 + "'" +
 			"aria-hidden='true'" + "data-username='" + display_name + "'></span>" +
 			"\xa0" + "\xa0" + display_name + "\xa0" + "\xa0" +	"\xa0" +
