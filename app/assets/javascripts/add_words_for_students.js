@@ -1,16 +1,16 @@
 $(document).ready(function() {
 	$(".select-class-container").click(function() {
-		$("#add-words-for-students-container").hide();
-		$("#select-stu-container").show();
+		$("#awfs-step-1-container").hide();
+		$("#awfs-step-2-container").show();
 
 		var $class_name = $(this).find("h4").text();
 
-		var $username_request = $.ajax({
+		var $usernames_request = $.ajax({
 		  method: "GET",
 		  url: "/school/student_words.json?selection=" + $class_name
 		});
 
-		$username_request.done(function(data) {
+		$usernames_request.done(function(data) {
 		  data["student_usernames"].forEach(function(username) {
 				var $student = add_bubble("stu-bubble", username, "user", "plus-sign",
 					username);
@@ -21,7 +21,7 @@ $(document).ready(function() {
 	});
 
 	$("#available-students").on("click", ".stu-bubble", function(){
-		$("#num-students-added").html(num_classes(".glyphicon-remove-circle"));
+		$("#num-students-added").html(num_classes(".glyphicon-remove-circle") + 1);
 
 		$("#selected-students").append($(this));
 
@@ -34,6 +34,7 @@ $(document).ready(function() {
 	});
 
 	$("#select-all").click(function() {
+		$(this).fadeOut("fast");
 		$(".stu-bubble").each(function(index) {
 			$("#selected-students").append($(this));
 
@@ -42,13 +43,13 @@ $(document).ready(function() {
 			$(this.lastChild).addClass("glyphicon-remove-circle hover");
 		});
 
-		var $current_num = num_classes(".glyphicon-remove-circle") - 1
+		var $current_num = num_classes(".glyphicon-remove-circle") 
 		$("#num-students-added").html($current_num );
 
 		display_next_btn("#select-stu-cont-btn", $current_num);
 	});
 
-	$("#teacher-students").on("click", ".selected-stu", function() {
+	$("#step-2-selected-container").on("click", ".selected-stu", function() {
 		$current_num = $("#num-students-added").html();
 		$("#num-students-added").html($current_num - 1);
 
@@ -60,11 +61,11 @@ $(document).ready(function() {
 	});
 
 	$("#select-stu-cont-btn").click(function() {
-		$("#select-stu-container").hide();
-		$("#add-words-stu-words-cntnr").show();
+		$("#awfs-step-2-container").hide();
+		$("#awfs-step-3-container").show();
 	});
 
-	$("#search-results-container").on("click", ".select-word-stu-btn", function(){
+	$("#search-results-container").on("click", ".awfs-select-word-btn", function(){
 		$("#search-results-container").hide();
 
 		var $index = 0;
@@ -96,9 +97,9 @@ $(document).ready(function() {
 	});
 
 	$("#select-words-finish-btn").click(function() {
-		$("#select-stu-container").hide();
-		$("#add-words-stu-words-cntnr").hide();
-		$("#add-words-for-students-review").show("fade");
+		$("#awfs-step-2-container").hide();
+		$("#awfs-step-3-container").hide();
+		$("#awfs-review-container").show("fade");
 		send_to_rails();
 	});
 
@@ -160,7 +161,7 @@ $(document).ready(function() {
 	function display_results(num_words, num_stu, num_warnings, num_successes,
 		num_errors, warnings, successes, errors
 	) {
-		$("#add-words-for-students-review h4").append(
+		$("#awfs-review-container h4").append(
 			"<small> Students (" + num_stu + ") " + "Words (" + num_words +
 			")</small>"
 		);

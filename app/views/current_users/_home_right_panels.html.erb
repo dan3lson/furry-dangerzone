@@ -4,7 +4,7 @@
 			<%= link_to "edit weekly goal", weekly_goal_path %>
 		<% else %>
 			<%= link_to weekly_goal_path do %>
-				<span class="glyphicon glyphicon-cog gray"></span>
+				<i class="fa fa-cog fa-2x medium-gray"></i>
 			<% end %>
 		<% end %>
 	</div>
@@ -78,11 +78,11 @@
 <div class="box-shadow-border-home">
 	<div class="pull-right">
 		<%= link_to myTags_path do %>
-			<span class="glyphicon glyphicon-th-list gray"></span>
+			<i class="fa fa-list fa-2x medium-gray"></i>
 		<% end %>
 		&nbsp;
 		<%= link_to new_tag_path do %>
-			<span class="glyphicon glyphicon-plus gray"></span>
+			<i class="fa fa-plus-circle fa-2x medium-gray"></i>
 		<% end %>
 	</div>
 
@@ -95,7 +95,7 @@
 
 			<span class="basic-black-link">
 				<%= link_to t do %>
-					<span class="glyphicon glyphicon-tag"></span>
+					<i class="fa fa-tag"></i>
 					<%= t.name.truncate(35) %>
 				<% end %>
 			</span>

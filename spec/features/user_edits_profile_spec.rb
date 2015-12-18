@@ -25,7 +25,7 @@ feature "user edits their profile", %{
 
       visit menu_path
 
-      click_on "Edit Profile"
+      click_on "Edit"
 
       fill_in "Username", with: "FoooFooo"
       fill_in "Password", with: "fooobar"
@@ -42,7 +42,7 @@ feature "user edits their profile", %{
 
       visit menu_path
 
-      click_on "Edit Profile"
+      click_on "Edit"
 
       fill_in "Username", with: ""
       fill_in "Password", with: ""
@@ -52,7 +52,6 @@ feature "user edits their profile", %{
 
       expect(page).to_not have_content("You successfully updated your profile.")
       expect(page).to have_content("error")
-      expect(page).to have_content("Profile")
     end
   end
 end

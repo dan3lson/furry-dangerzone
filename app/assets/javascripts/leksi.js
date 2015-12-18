@@ -94,10 +94,12 @@ $(document).ready(function(){
 
 		$(document).ajaxStart(function(){
 			$(".spinner").fadeIn();
+			$("#awfs-suc-war-err-container").hide();
 		});
 
 		$(document).ajaxStop(function(){
 			$(".spinner").fadeOut();
+			$("#awfs-suc-war-err-container").fadeIn();
 		});
 	};
 });

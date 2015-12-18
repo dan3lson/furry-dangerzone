@@ -32,15 +32,13 @@ feature "user reviews app", %{
 
       visit menu_path
 
+      click_on "Rate this app"
+
       select "5", from: "Rating"
 
-      within(".review-form-container") do
-        fill_in "Description", with: "Dope app!"
-      end
+      fill_in "Description", with: "Dope app!"
 
-      within(".review-form-container") do
-        click_on "submit"
-      end
+      click_on "submit"
 
       expect(page).to have_content("Thanks for rating Leksi Version")
       expect(page).not_to have_content("Yikes!")
@@ -53,11 +51,11 @@ feature "user reviews app", %{
 
       visit menu_path
 
+      click_on "Rate this app"
+
       select "5", from: "Rating"
 
-      within(".review-form-container") do
-        click_on "submit"
-      end
+      click_on "submit"
 
       expect(page).to have_content("Thanks for rating Leksi Version")
       expect(page).not_to have_content("Yikes!")
@@ -70,9 +68,9 @@ feature "user reviews app", %{
 
       visit menu_path
 
-      within(".review-form-container") do
-        click_on "submit"
-      end
+      click_on "Rate this app"
+
+      click_on "submit"
 
       expect(page).to have_content(
         "Please select a rating before clicking \'submit\'."
@@ -89,8 +87,9 @@ feature "user reviews app", %{
 
       visit menu_path
 
+      click_on "Rate this app"
+
       expect(page).to have_content("Thanks for rating Leksi Version")
-      expect(page).not_to have_content("New Review")
       expect(page).not_to have_link("submit")
       expect(Review.count).to eq(1)
     end
@@ -104,11 +103,11 @@ feature "user reviews app", %{
 
       visit menu_path
 
+      click_on "Rate this app"
+
       select "5", from: "Rating"
 
-      within(".review-form-container") do
-        click_on "submit"
-      end
+      click_on "submit"
 
       expect(page).to have_content("Thanks for rating Leksi Version")
       expect(page).not_to have_content("Yikes!")

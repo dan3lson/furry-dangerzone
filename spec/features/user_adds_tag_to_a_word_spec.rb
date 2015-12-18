@@ -14,7 +14,7 @@ feature "user adds tag to a word", %{
   # [x] I can select and add a tag for that word
   # [x] I see a message of success
 
-  describe "\n user adds a tag to a word -->" do
+  pending "\n user adds a tag to a word -->" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
     let!(:tag) { FactoryGirl.create(:tag) }
@@ -30,7 +30,7 @@ feature "user adds tag to a word", %{
 
       select user_tag.tag.name, from: "Tags"
 
-      click_on "add"
+      click_on "Learn"
 
       expect(page).to have_content("Success!")
       expect(page).not_to have_content("Yikes!")
@@ -45,7 +45,7 @@ feature "user adds tag to a word", %{
 
       click_on word.name.capitalize
 
-      click_on "add"
+      click_on "Learn"
 
       expect(page).not_to have_content("Success!")
       expect(page).to have_content(

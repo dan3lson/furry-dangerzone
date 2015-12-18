@@ -1,7 +1,7 @@
 <% provide(:title, "myLeksi") %>
 <% provide(:header, "myLeksi") %>
 
-<div class="row">
+<div class="row lead">
   <div class="col-sm-8">
     <p>
       <strong>
@@ -16,13 +16,13 @@
         </div>
       </div>
 
-      <% @current_user_user_words.each_with_index do |user_word, i| %>
-        <% word = user_word.word %>
-        <% prev_word = @current_user_user_words[i - 1].word %>
+      <% @current_user_words.each_with_index do |word, i| %>
+        <% prev_word = @current_user_words[i - 1] %>
 
-        <% if @current_user_user_words[i + 1] %>
-          <% next_word = @current_user_user_words[i + 1].word %>
+        <% if @current_user_words[i + 1] %>
+          <% next_word = @current_user_words[i + 1] %>
         <% end %>
+
         <div>
           <% if word.name[0] > prev_word.name[0] %>
             <div class="menu-header-container">
@@ -33,8 +33,9 @@
           <% end %>
 
           <div class="pull-right">
-            <%= render "games/display_game_start_btn", user_word: user_word,
-                                                       word: word %>
+            <%= render "games/display_game_start_btn",
+              user_word: UserWord.object(current_user, word),
+              word: word %>
           </div>
 
           <div class="word-partial word-partial-myLeksi">
@@ -65,10 +66,6 @@
         <p class="lead">
           Key
         </p>
-        <!-- To master your words, you must complete three games for each one.
-        Play the first game called Fundamentals. After you do that, you will unlock
-        the second game, Jeopardy. After you complete Jeopardy, you unlock
-        the third game, Freestyle. -->
 
         <div>
           <div class="game-one-start-circle pointer">

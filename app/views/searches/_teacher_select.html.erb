@@ -1,0 +1,7 @@
+<% if current_user.is_teacher? %>
+	<button type="button" class="btn btn-warning awfs-select-word-btn"
+		data-word-id="<%= word.id %>" data-word-name="<%= word.name %>">
+		<i class="fa fa-user fa-2x pull-left"></i>
+		<span class="valign-middle">Select</span>
+	</button>
+<% end %>

@@ -1,0 +1,15 @@
+<% if current_user.already_has_word?(word) %>
+	<% uw_id = UserWord.find_by(user: current_user,
+		word: word).id %>
+
+	<%= link_to user_word_path(id: uw_id), method: :delete,
+		role: "button", class: "btn btn-danger" do %>
+		<i class="fa fa-remove fa-2x pull-left"></i>
+		<span class="valign-middle">Remove</span>
+	<% end %>
+<% else %>
+	<%= button_tag class: "btn btn-info" do %>
+		<i class="fa fa-gamepad fa-2x pull-left"></i>
+		<span class="valign-middle">Learn</span>
+	<% end %>
+<% end %>

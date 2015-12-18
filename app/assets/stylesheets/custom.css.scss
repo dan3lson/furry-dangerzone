@@ -93,9 +93,9 @@ p {
 //*
 //**********
 
-#select-stu-container,
-#add-words-stu-words-cntnr,
-#add-words-for-students-review,
+#awfs-step-2-container,
+#awfs-step-3-container,
+#awfs-review-container,
 #select-stu-cont-btn,
 #select-words-finish-btn {
 	display: none;
@@ -573,7 +573,8 @@ input {
 	margin-top: 50px;
 
   a:not(.footer-cta){
-	  color: $even-darker-gray;
+	  color: $dark-gray;
+
 	  &:hover{
 		  background: none;
 			color: $sky-blue;

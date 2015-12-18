@@ -1,52 +1,25 @@
 <% if results.class == String %>
-	<p class="lead leksi-red center">
-		<%= results %>
-	</p>
+	<p class="lead leksi-red center"><%= results %></p>
 <% else %>
 	<% results.each_with_index do |word, index| %>
 		<div class="word-partial col-sm-8 col-sm-offset-2">
-			<% if logged_in? %>
-				<div class="pull-right">
-					<%= form_for :user_word, url: user_word_path, method: :post do |f| %>
-						<%= hidden_field_tag :id, word.id %>
+			<div class="pull-right">
+				<%= form_for :user_word, url: user_word_path, method: :post do |f| %>
+					<%= hidden_field_tag :id, word.id %>
 
-						<% if Rails.env.test? %>
-							<% if current_user.already_has_word?(word) %>
-								<%= link_to "remove", user_word_path(id: UserWord.find_by(
-										user: current_user,
-										word: word
-									).id),
-									method: :delete %>
-							<% else %>
-								<%= f.submit "add" %>
-							<% end %>
-						<% else %>
-							<% if current_user.already_has_word?(word) %>
-								<% uw_id = UserWord.find_by(user: current_user, word: word).id %>
-
-								<%= link_to user_word_path(id: uw_id), method: :delete,
-									role: "button", class: "btn btn-danger" do %>
-									<i class="fa fa-remove fa-2x pull-left"></i>
-									<span class="valign-middle">Remove</span>
-								<% end %>
-							<% else %>
-								<%= button_tag class: "btn btn-info" do %>
-									<i class="fa fa-gamepad fa-2x pull-left"></i>
-									<span class="valign-middle">Learn</span>
-								<% end %>
-							<% end %>
+					<% if display_button == "guest" %>
+						=)
+					<% elsif display_button == "user" %>
+						<% if logged_in? %>
+							<%= render "searches/user_add", word: word %>
+						<% end %>
+					<% elsif display_button == "teacher" %>
+						<% if logged_in? %>
+							<%= render "searches/teacher_select", word: word %>
 						<% end %>
 					<% end %>
-
-					<% if current_user.is_teacher? %>
-						<button type="button" class="btn btn-default select-word-stu-btn"
-						  data-word-id="<%= word.id %>" data-word-name="<%= word.name %>">
-							<i class="fa fa-user fa-2x pull-left"></i>
-							<span class="valign-middle">Select</span>
-						</button>
-					<% end %>
-				</div>
-			<% end %>
+				<% end %>
+			</div>
 
 			<div>
 				<%= render "words/word", word: word %>

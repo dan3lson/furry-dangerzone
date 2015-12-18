@@ -2,25 +2,14 @@ class CurrentUsersController < ApplicationController
   before_action :logged_in_user
 
   def home
-    @incomplete_fundamentals = current_user.incomplete_fundamentals
-    @incomplete_jeopardys = current_user.incomplete_jeopardys
-    @incomplete_freestyles = current_user.incomplete_freestyles
+    @incomplete_games = UserWord.where(user: current_user).
+    where.not(games_completed: 3)
 
-    if current_user.has_words?
-      @incomplete_games = UserWord.includes(:user, :word).select { |uw|
-        uw.user == current_user && (uw.fundamental_not_completed? ||
-                                    uw.jeopardy_not_completed? ||
-                                    uw.freestyle_not_completed?)
-      }
-    else
-      @incomplete_games = UserWord.includes(:user).select { |uw|
-        uw.user == current_user && (uw.fundamental_not_completed? ||
-                                    uw.jeopardy_not_completed? ||
-                                    uw.freestyle_not_completed?)
-      }
+    if current_user.has_games_to_play?
+      @rand_word = @incomplete_games.sample.word
+      @rand_word_uw = UserWord.object(current_user, @rand_word)
     end
 
-    @rand_word = @incomplete_games.sample
     @incomplete_games_num = @incomplete_games.count
     @nudges_needed = 10 - @incomplete_games_num if @incomplete_games_num < 10
 
@@ -82,17 +71,18 @@ class CurrentUsersController < ApplicationController
       @fourth_row_rand_words = ["nudge user to add new word"] * 2
     end
 
-    @three_rand_tags = Tag.includes(:users).select do |t|
-      t.users.include?(current_user)
-    end.shuffle.take(3)
+    @three_rand_tags = Tag.joins(:users).where(users: {
+        username: current_user.username
+      }
+    ).limit(3).order("RANDOM()")
 
     @tag_game_progress_pcts = @three_rand_tags.map do |t|
       words_count = words_for(current_user, t).count
 
       if words_count > 0
         completed_games_count = completed_funds(current_user, t).count +
-                                 completed_jeops(current_user, t).count +
-                                 completed_frees(current_user, t).count
+                                completed_jeops(current_user, t).count +
+                                completed_frees(current_user, t).count
         total_games = words_count * 3
 
         (completed_games_count / total_games.to_f * 100).round
@@ -108,14 +98,13 @@ class CurrentUsersController < ApplicationController
   end
 
   def myLeksi
-    @current_user_user_words = UserWord.includes(:word).where(
-      user: current_user
-    ).sort_by { |uw| uw.word.name }
+    @current_user_words = Word.joins(:users).
+                               where(users: { id: current_user.id })
 
-    @current_user_words_count = current_user.words.count
+    @current_user_words_count = @current_user_words.count
 
     if current_user.has_words?
-      @first_word_letter = @current_user_user_words[0].word.name[0].capitalize
+      @first_word_letter = @current_user_words[0].name[0].capitalize
     end
   end
 
@@ -126,8 +115,8 @@ class CurrentUsersController < ApplicationController
     @seven_through_ten_users = User.top_ten_highest_points.drop(3)
   end
 
-  def tags
-    @current_user_tags = current_user.tags
+  def myTags
+    @current_user_tags = current_user.tags.alphabetical
     @tag = Tag.new
   end
 
