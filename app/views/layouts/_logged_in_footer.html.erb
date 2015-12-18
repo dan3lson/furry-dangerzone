@@ -3,82 +3,72 @@
   <div class="custom-footer">
     <div class="inline-block">
       <% if params[:action] == "home" %>
-  			<%=
-  				link_to_unless_current image_tag("home_sky_blue_filled_32.png",
-  				alt: "myLeksi") + "<br/>Home".html_safe, home_path,
-  				class: "img-responsive"
-  			%>
+        <i class="fa fa-home fa-3x"></i>
+        <br>
+        Home
   		<% else %>
-  			<%=
-  				link_to image_tag("home_dark_gray_32.png", alt: "myLeksi") +
-  				"<br/>Home".html_safe, home_path,
-  				class: "img-responsive"
-  			%>
+        <%= link_to home_path do %>
+          <i class="fa fa-home fa-3x"></i>
+          <br>
+          Home
+        <% end %>
   		<% end %>
     </div>
 
     <div class="inline-block">
       <% if params[:action] == "myLeksi" || params[:controller] == "words" &&
                                             params[:action] == "show" %>
-  			<%=
-  				link_to_unless_current image_tag("myLeksi_sky_blue_filled_32.png",
-  				alt: "myLeksi") + "<br/>myLeksi".html_safe, myLeksi_path,
-  				class: "img-responsive"
-  			%>
+        <i class="fa fa-book fa-3x"></i>
+        <br>
+        myLeksi
   		<% else %>
-  			<%=
-  				link_to image_tag("myLeksi_dark_gray_32.png", alt: "myLeksi") +
-  				"<br/>myLeksi".html_safe, myLeksi_path,
-  				class: "img-responsive"
-  			%>
+        <%= link_to myLeksi_path do %>
+          <i class="fa fa-book fa-3x"></i>
+          <br>
+          myLeksi
+        <% end %>
   		<% end %>
     </div>
 
     <div class="inline-block">
       <% if params[:controller] == "searches" %>
-  			<%=
-  				link_to_unless_current image_tag("add_sky_blue_filled_32.png", alt: "Add") +
-  				"<br/>Add".html_safe, search_path,
-  				class: "img-responsive"
-  			%>
+        <i class="fa fa-search-plus fa-3x"></i>
+        <br>
+        Add
   		<% else %>
-  			<%=
-  				link_to image_tag("add_gray_32.png", alt: "Add") +
-  				"<br/>Add".html_safe, search_path,
-  				class: "img-responsive"
-  			%>
+  			<%= link_to search_path do %>
+          <i class="fa fa-search-plus fa-3x"></i>
+          <br>
+          Add
+  			<% end %>
   		<% end %>
     </div>
 
     <div class="inline-block">
       <% if params[:action] == "progress" %>
-  			<%=
-  				link_to_unless_current image_tag("stats_sky_blue_filled_32.png",
-            alt: "Stats") + "<br/>Stats".html_safe, progress_path,
-  				class: "img-responsive"
-  			%>
+        <i class="fa fa-line-chart fa-3x"></i>
+        <br>
+        Stats
   		<% else %>
-  			<%=
-  				link_to image_tag("stats_dark_gray_32.png", alt: "Stats") +
-  				"<br/>Stats".html_safe, progress_path,
-  				class: "img-responsive"
-  			%>
+        <%= link_to progress_path do %>
+          <i class="fa fa-line-chart fa-3x"></i>
+          <br>
+          Stats
+        <% end %>
   		<% end %>
     </div>
 
     <div class="inline-block">
       <% if params[:action] == "menu" || params[:controller] == "tags" %>
-  			<%=
-  				link_to_unless_current image_tag("menu_sky_blue_filled_32.png",
-            alt: "Menu") + "<br/>Menu".html_safe, menu_path,
-  				class: "img-responsive"
-  			%>
+  			<i class="fa fa-bars fa-3x"></i>
+        <br>
+        Menu
   		<% else %>
-  			<%=
-  				link_to image_tag("menu_dark_gray_32.png", alt: "Menu") +
-  				"<br/>Menu".html_safe, menu_path,
-  				class: "img-responsive"
-  			%>
+        <%= link_to menu_path do %>
+          <i class="fa fa-bars fa-3x"></i>
+          <br>
+          Menu
+        <% end %>
   		<% end %>
     </div>
   </div>

@@ -9,10 +9,10 @@ feature "user creates feedback", %{
 
   # Acceptance Criteria
   #
-  # [] I can visit the menu page
-  #     and see two forms: one
-	#     for Wish and Bugs
-  # [] I can see a success-message
+  # [x] I can visit the menu page,
+  #     then to the feedbacks page,
+	#     and see a form to submit
+  # [x] I can see a success-message
 
   describe "\n user gives app feedback -->" do
     let!(:user) { FactoryGirl.create(:user) }
@@ -32,13 +32,11 @@ feature "user creates feedback", %{
 
       visit menu_path
 
-			within(".feedback-form-container-bug") do
-	      fill_in "Description", with: "I wish once upon a star..."
-			end
+      click_on "Report a problem"
 
-			within(".feedback-form-container-bug") do
-      	click_on "submit"
-			end
+      fill_in "Description", with: "Ewww...I saw a bug!"
+
+    	click_on "submit"
 
       expect(page).to have_content("Thanks for giving feedback!")
       expect(page).not_to have_content("Yikes!")
@@ -51,43 +49,16 @@ feature "user creates feedback", %{
 
       visit menu_path
 
-			within(".feedback-form-container-wish") do
-	      fill_in "Description", with: ""
-			end
+      click_on "I wish Leksi could..."
 
-			within(".feedback-form-container-wish") do
-      	click_on "submit"
-			end
+      fill_in "Description", with: ""
+
+    	click_on "submit"
 
       expect(page).to have_content("Yikes!")
       expect(page).to have_content("error")
 			expect(page).not_to have_content("Thanks for giving feedback!")
       expect(Feedback.count).to eq(0)
-    end
-
-    scenario "scenario: user gives multiple feedback" do
-      log_in_as(user)
-
-      visit menu_path
-
-			within(".feedback-form-container-wish") do
-	      fill_in "Description", with: "Feedback uno"
-			end
-
-			within(".feedback-form-container-wish") do
-      	click_on "submit"
-			end
-
-			within(".feedback-form-container-wish") do
-	      fill_in "Description", with: "Feedback dos"
-			end
-
-			within(".feedback-form-container-wish") do
-      	click_on "submit"
-			end
-
-      expect(page).to have_content("Thanks for giving feedback!")
-      expect(Feedback.count).to eq(2)
     end
   end
 end

@@ -19,7 +19,7 @@ feature "two users add the same word", %{
     let!(:word) { user_word.word }
     let(:user2) { FactoryGirl.create(:user) }
 
-    scenario "scenario: add word" do
+    pending "scenario: add word" do
       log_in_as(user2)
 
       visit search_path
@@ -28,7 +28,7 @@ feature "two users add the same word", %{
 
       click_on "look up"
 
-      click_on "add"
+      click_on "Learn"
 
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content(word.name)

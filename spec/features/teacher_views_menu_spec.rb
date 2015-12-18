@@ -23,19 +23,21 @@ feature "teacher views the menu", %{
 
       visit menu_path
 
-      click_on "Activate Teacher\'s Edition"
+      click_on "Activate Teacher Edition"
 
-      within(".new-tag-container") do
+      within("#menu-tag-container") do
+        expect(page).to have_link("View all")
         expect(page).to have_link("Create")
       end
 
-      within(".new-word-container") do
-        expect(page).to have_link("Create")
-      end
-      expect(page).to have_link("Edit Profile")
-      expect(page).to have_link("Log Out")
-      expect(page).to have_content("Rate Leksi")
-      expect(page).to have_button("submit")
+      expect(page).to have_link("Activate Brainiac Edition")
+      expect(page).to have_link("Create a word")
+      expect(page).to have_link("Add words for students")
+      expect(page).to have_link("Edit")
+      expect(page).to have_link("Report a problem")
+      expect(page).to have_link("I wish Leksi could...")
+      expect(page).to have_link("Log out")
+      expect(page).to have_content("Rate this app")
     end
   end
 end

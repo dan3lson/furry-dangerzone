@@ -1,13 +1,13 @@
 <div class="alert alert-warning center">
   <div align="center">
-    <div>
-      <%= image_tag("myLeksi_black_filled_32.png", alt: "Define", class: "img-responsive") %>
-    </div>
     <p class="basic-black-link">
       <em>myLeksi</em> is the place for all of your words.
       Look up and add one now!
 
-      <%= render "searches/form" %>
+      <%= render "searches/form", display_button_for: "user" %>
     </p>
   </div>
+
 </div>
+
+<div id="search-results-container"></div>

@@ -13,7 +13,7 @@ feature "user adds a word and sees game one start link", %{
   # [x] I can see a "start" button for game
   #     one for a word just added
 
-  describe "\n user adds a word -->" do
+  pending "\n user adds a word -->" do
     scenario "scenario: valid process" do
       word = FactoryGirl.create(:word)
       user = FactoryGirl.create(:user)
@@ -26,7 +26,7 @@ feature "user adds a word and sees game one start link", %{
 
       click_on "look up"
 
-      click_on "add"
+      click_on "Learn"
 
       user_word = UserWord.first
 

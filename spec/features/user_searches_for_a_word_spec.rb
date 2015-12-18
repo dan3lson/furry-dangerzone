@@ -14,7 +14,7 @@ feature "user searches for a word", %{
   # [x] I can see a remove button for a
   #     word I already added
 
-  describe "\n user searches for a word -->" do
+  pending "\n user searches for a word -->" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
 

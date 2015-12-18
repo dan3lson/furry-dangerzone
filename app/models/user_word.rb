@@ -8,6 +8,13 @@ class UserWord < ActiveRecord::Base
   validates :user, presence: true
   validates :word, presence: true
 
+  scope :alphabetical, -> { joins(:word).order("words.name") }
+
+  # not tested
+  def self.object(user, word)
+    find_by(user: user, word: word)
+  end
+
   def current_game
     if games_completed == 0
       "one"

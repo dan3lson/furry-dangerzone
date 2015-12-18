@@ -1,7 +1,7 @@
 <% provide(:title, "Add Word(s) for Students") %>
 <% provide(:header, "Add Word(s) for Students") %>
 
-<div id="add-words-for-students-container">
+<div id="awfs-step-1-container">
 	<h4>Step 1. Select class</h4>
 	<div class="row">
 		<div class="col-sm-6">
@@ -43,7 +43,7 @@
 	</div>
 </div>
 
-<div id="select-stu-container">
+<div id="awfs-step-2-container">
 	<div class="pull-right">
 		<%= button_tag class: "btn btn-success ", id: "select-stu-cont-btn" do %>
 			<span class="valign-middle">Continue</span>
@@ -56,13 +56,13 @@
 	<br>
 	<br>
 
-	<div class="panel panel-info lead" id="teacher-students">
+	<div class="panel panel-info lead" id="step-2-selected-container">
 		<div class="panel-heading">
 			Number selected: <span id="num-students-added">0</span>
 
-			<div class="pull-right pointer hover">
-				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-				<span id="select-all">Select all</span>
+			<div class="pull-right pointer hover" id="select-all">
+				<i class="fa fa-list" aria-hidden="true"></i>
+				<span>Select all</span>
 			</div>
 		</div>
 		<div class="panel-body" id="selected-students"></div>
@@ -71,7 +71,7 @@
 	<div id="available-students"></div>
 </div>
 
-<div id="add-words-stu-words-cntnr">
+<div id="awfs-step-3-container">
 	<div class="pull-right">
 		<%= button_tag class: "btn btn-success ",
 			id: "select-words-finish-btn" do %>
@@ -87,14 +87,14 @@
 
 	<div class="panel panel-info lead" id="teacher-words">
 		<div class="panel-heading">
-			Number of words to add: <span id="num-words-selected">0</span>
+			Number selected: <span id="num-words-selected">0</span>
 		</div>
 		<div class="panel-body" id="selected-words"></div>
 		<span class="hidden" id="selected-words-ids"></span>
 	</div>
 
-	<div id="search-bar-container" class="well">
-		<%= render "searches/form" %>
+	<div id="search-form-container" class="well col-sm-8 col-sm-offset-2">
+		<%= render "searches/form", display_button_for: "teacher" %>
 
 		<br>
 
@@ -106,7 +106,8 @@
 	<div id="search-results-container"></div>
 </div>
 
-<div id="add-words-for-students-review">
+
+<div id="awfs-review-container">
 	<div class="pull-right">
 		<%= button_tag class: "btn btn-info reload-page" do %>
 			<i class="fa fa-refresh fa-2x pull-left"></i>
@@ -118,44 +119,49 @@
 
 	<div class="clear"><br></div>
 
-	<%= render "shared/spinner" %>
-
-	<div class="panel panel-success lead" id="successes-container">
-		<div class="panel-heading pointer" data-toggle="collapse"
+	<div id="awfs-suc-war-err-container">
+		<div class="panel panel-success lead" id="successes-container">
+			<div class="panel-heading pointer" data-toggle="collapse"
 			data-target="#success-result" aria-expanded="false"
 			aria-controls="success-result">
-			<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-			Successes
-			<div class="pull-right">
-				<span id="num-successes">0</span>/<span class="total">0</span>
+				<i class="fa fa-check-circle"></i>
+				Successes
+				<div class="pull-right">
+					<span id="num-successes">0</span>/<span class="total">0</span>
+				</div>
 			</div>
-		</div>
-		<div class="panel-body collapse" id="success-result"></div>
-	</div>
 
-	<div class="panel panel-warning lead" id="warnings-container">
-		<div class="panel-heading pointer" data-toggle="collapse"
+			<div class="panel-body collapse" id="success-result"></div>
+		</div>
+
+		<div class="panel panel-warning lead" id="warnings-container">
+			<div class="panel-heading pointer" data-toggle="collapse"
 			data-target="#warning-result" aria-expanded="false"
 			aria-controls="warning-result">
-			<span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
-			Alerts
-			<div class="pull-right">
-				<span id="num-warnings">0</span>/<span class="total">0</span>
+				<i class="fa fa-warning"></i>
+				Alerts
+				<div class="pull-right">
+					<span id="num-warnings">0</span>/<span class="total">0</span>
+				</div>
 			</div>
-		</div>
-		<div class="panel-body collapse" id="warning-result"></div>
-	</div>
 
-	<div class="panel panel-danger lead" id="errors-container">
-		<div class="panel-heading pointer" data-toggle="collapse"
+			<div class="panel-body collapse" id="warning-result"></div>
+		</div>
+
+		<div class="panel panel-danger lead" id="errors-container">
+			<div class="panel-heading pointer" data-toggle="collapse"
 			data-target="#error-result" aria-expanded="false"
 			aria-controls="error-result">
-			<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-			Errors
-			<div class="pull-right">
-				<span id="num-errors">0</span>/<span class="total">0</span>
+				<i class="fa fa-minus-circle"></i>
+				Errors
+				<div class="pull-right">
+					<span id="num-errors">0</span>/<span class="total">0</span>
+				</div>
 			</div>
+
+			<div class="panel-body collapse" id="error-result"></div>
 		</div>
-		<div class="panel-body collapse" id="error-result"></div>
 	</div>
+
+	<%= render "shared/spinner" %>
 </div>
