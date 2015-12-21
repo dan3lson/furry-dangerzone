@@ -1,33 +1,24 @@
 <div>
 	<% if user_word.freestyle_completed? %>
-		<div><%= image_tag("medal_all_games_completed_35.png") %></div>
+		<%= image_tag("100_small.png", alt: "100% Mastered") %>
 	<% elsif user_word.fundamental_not_completed? %>
-		<div class="game-<%= user_word.current_game %>-start-circle pointer
-								data-url"
-			data-url="/fundamentals?word_id=<%= word.id %>">
-		</div>
+		<%= link_to fund_game_link(word.id), class: "hover" do %>
+			<%= image_tag("0_small.png", alt: "0% Mastered") %>
+		<% end %>
 	<% elsif user_word.jeopardy_not_completed? %>
 		<% if current_user.has_enough_jeopardy_words? %>
-			<div
-				class="game-<%= user_word.current_game %>-start-circle data-url pointer"
-				data-url="/jeopardy?word_id=<%= word.id %>">
-				&#9658;
-			</div>
+			<%= link_to jeop_game_link(word.id), class: "hover" do %>
+				<%= image_tag("33_small.png", alt: "33% Mastered") %>
+			<% end %>
 		<% else %>
-			<div
-				class="game-<%= user_word.current_game %>-start-circle game-not-ready
-				pointer"
-				data-toggle="popover" title="How can I play?"
-				data-content="To play this next game, you need to play the Fundamentals
-				game for at least 4 words first."
-				data-placement="left">
-			</div>
+			<%= image_tag("33_small_locked.png", alt: "33% Mastered Locked", data: {
+				toggle: "popover", title: "How can I play?", placement: "left",
+				content: "To play this next game, you need to play the Fundamentals
+				game for at least 4 words first." }) %>
 		<% end %>
 	<% elsif user_word.jeopardy_completed? %>
-			<div
-				class="game-<%= user_word.current_game %>-start-circle pointer data-url"
-				data-url="/freestyle?word_id=<%= word.id %>">
-				&#9658;
-			</div>
+		<%= link_to free_game_link(word.id), class: "hover" do %>
+			<%= image_tag("66_small.png", alt: "66% Mastered") %>
+		<% end %>
 	<% end %>
 </div>

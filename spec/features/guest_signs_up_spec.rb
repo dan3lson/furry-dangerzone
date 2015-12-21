@@ -33,9 +33,8 @@ feature "guest signs up", %{
       click_on "Create my account"
 
       expect(page).to have_content("Welcome to Leksi!")
-      expect(page).to have_content("Organize words into groups by using tags.")
       expect(page).to have_link("Add")
-      expect(page).to have_link("Stats")
+      expect(page).to have_link("Tags")
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
       expect(User.first.num_logins).to eq(1)
@@ -55,9 +54,8 @@ feature "guest signs up", %{
       click_on "Create my account"
 
       expect(page).to have_content("Welcome to Leksi!")
-      expect(page).to have_content("Organize words into groups by using tags.")
       expect(page).to have_link("Add")
-      expect(page).to have_link("Stats")
+      expect(page).to have_link("Tags")
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
       expect(User.first.num_logins).to eq(1)
@@ -76,7 +74,6 @@ feature "guest signs up", %{
 
       click_on "Create my account"
 
-      expect(page).to_not have_content("Organize words into groups by using")
       expect(page).to have_content("errors")
       expect(page).to have_content("fix")
       expect(User.count).to eq(0)

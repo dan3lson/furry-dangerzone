@@ -18,8 +18,9 @@ $medium-gray: lighten($dark-gray, 30);
 $dark-green: darken($bootstrap-green, 60);
 $even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 35px;
-$leksi-green: #24d12e;
-$light-leksi-green: lighten($leksi-green, 47);
+$home-game-circle-size: 100px;
+$leksi-green: #81CE97;
+$light-leksi-green: lighten($leksi-green, 17);
 $dark-leksi-green: darken($leksi-green, 20);
 $leksi-orange: orange;
 $dark-leksi-orange: darken($leksi-orange, 20);
@@ -202,13 +203,6 @@ p {
 
 .box-shadow-border-home {
 	box-shadow: 1px 1px 2px #888;
-	padding: 10px;
-  margin-bottom: 25px;
-}
-
-.box-shadow-border-subtle {
-	border: 1px $medium-gray solid;
-	border-radius: 5px;
 	padding: 10px;
   margin-bottom: 25px;
 }
@@ -1007,10 +1001,11 @@ table {
 }
 
 .word-show-game-circle {
-	border-radius: 70px;
-	height: 70px;
+	border-radius: $home-game-circle-size;
+	font-size: xx-large;
+	height: $home-game-circle-size;
 	padding-top: 28px;
-	width: 70px;
+	width: $home-game-circle-size;
 }
 
 .fund-show-game-circle {

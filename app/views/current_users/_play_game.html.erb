@@ -14,33 +14,35 @@
 		<% word = uw.word %>
 
 		<% if uw.current_game == "one" %>
-			<div class="inline-block data-url pointer game-zone-margin hover
-									fund-show-game-circle-container"
-					 data-url="/fundamentals?word_id=<%= word.id %>">
-				<div class="fund-show-game-circle">
+			<div class="inline-block data-url pointer game-zone-margin hover">
+				<div>
+					<%= link_to fund_game_link(word.id) do %>
+						<%= image_tag("0_big.png", alt: "0% Mastered") %>
+					<% end %>
 		<% elsif uw.current_game == "two" %>
 			<% if ready_for_jeopardy?(current_user, uw) %>
-				<div class="inline-block data-url pointer game-zone-margin hover
-										jeop-show-game-circle-container"
-						 data-url="/jeopardy?word_id=<%= word.id %>">
-					<div class="jeop-show-game-circle">
+				<div class="inline-block data-url pointer game-zone-margin hover">
+					<div>
+						<%= link_to jeop_game_link(word.id) do %>
+							<%= image_tag("33_big.png", alt: "33% Mastered") %>
+						<% end %>
 			<% else %>
-				<div class="inline-block game-not-ready game-zone-margin pointer"
-					data-toggle="popover" title="How can I play?"
-					data-content="To play this next game, you need to play the
-					Fundamentals game for at least 4 words first."
-					data-placement="top">
-					<div class="jeop-show-game-circle">
+				<div class="inline-block pointer game-zone-margin hover">
+					<div>
+						<%= image_tag("33_small_locked.png", alt: "33% Mastered Locked",
+							data: { toggle: "popover", title: "How can I play?",
+								placement: "left", content: "To play this next game, you need
+							to play the Fundamentals game for at least 4 words first." }) %>
 			<% end %>
 		<% elsif uw.current_game == "three" %>
-			<div class="inline-block data-url pointer game-zone-margin hover
-									free-show-game-circle-container"
-					 data-url="/freestyle?word_id=<%= word.id %>">
-				<div class="free-show-game-circle">
+			<div class="inline-block pointer game-zone-margin hover">
+				<div>
+					<%= link_to free_game_link(word.id) do %>
+						<%= image_tag("66_big.png", alt: "66% Mastered") %>
+					<% end %>
 		<% else %>
 			Yikes
 		<% end %>
-					<span class="white">&#9658;</span>
 				</div>
 
 				<span class="lead basic-black-link">

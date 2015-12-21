@@ -2,79 +2,87 @@
 <% provide(:header, @word.name.capitalize) %>
 
 <% if logged_in? %>
-  <div>
-    <div class="row" align="center">
+  <div class="row">
+    <div class="center">
+      <%= mastery_circle(@word, @user_word) %>
 
-      <div class="col-xs-4 data-url pointer fund-show-game-circle-container"
-           data-url="/fundamentals?word_id=<%= @word.id %>">
-        <div class="fund-show-game-circle white hover">
-          <% if @user_word.fundamental_completed? %>
-            &#10004;
-          <% else %>
-            &#9658;
-          <% end %>
-        </div>
-      </div>
+      <br>
 
-      <div class="col-xs-4 data-url jeop-show-game-circle-container">
-        <% if ready_for_jeopardy?(current_user, @user_word) %>
+      <% if @user_word.fundamental_completed? %>
+        <span class="data-url pointer leksi-green hover"
+              data-url="<%= fund_game_link(@word.id) %>">
+          Fundamentals
+        </span>
+      <% else %>
+        <span class="data-url pointer hover"
+              data-url="<%= fund_game_link(@word.id) %>">
+          Fundamentals
+        </span>
+      <% end %>
 
-          <div class="jeop-show-game-circle pointer data-url white hover"
-               data-url="/jeopardy?word_id=<%= @word.id %>">&#9658;</div>
+      |
 
-        <% elsif @user_word.jeopardy_completed? %>
-
-          <% if current_user.has_enough_jeopardy_words? %>
-            <div class="jeop-show-game-circle white pointer data-url hover"
-                 data-url="/jeopardy?word_id=<%= @word.id %>">&#10004;</div>
-          <% else %>
-            <div class="jeop-show-game-circle"
-              data-toggle="popover" title="Why is this game locked?"
-              data-content="To activate this Jeoapardy game, you need to
-              (1) complete the Fundamentals for this word and (2) play
-              the Fundamentals game for at least 4 words."
-              data-placement="bottom">
-              <span class="glyphicon glyphicon-lock"></span>
-            </div>
-          <% end %>
-
+      <% if ready_for_jeopardy?(current_user, @user_word) %>
+        <span class="data-url pointer hover"
+          data-url="<%= jeop_game_link(@word.id) %>">
+          Jeopardy
+        </span>
+      <% elsif @user_word.jeopardy_completed? %>
+        <% if current_user.has_enough_jeopardy_words? %>
+          <span class="data-url pointer leksi-green hover"
+            data-url="<%= jeop_game_link(@word.id) %>">
+            Jeopardy
+          </span>
         <% else %>
-          <div class="jeop-show-game-circle"
-            data-toggle="popover" title="Why is this game locked?"
-            data-content="To activate this Jeoapardy game, you need to
-            (1) complete the Fundamentals for this word and (2) play
-            the Fundamentals game for at least 4 words."
-            data-placement="bottom">
-            <span class="glyphicon glyphicon-lock"></span>
-          </div>
+          <span class="data-url pointer leksi-green hover"
+                data-toggle="popover"
+                title="Why is this game locked?"
+                data-content="To activate this Jeoapardy game, you need to
+                play the Fundamentals game for at least 3 other words."
+                data-placement="bottom">
+            Jeopardy
+          </span>
+          <i class="fa fa-lock"></i>
         <% end %>
-      </div>
+      <% else %>
+        <span class="data-url pointer hover"
+        data-toggle="popover"
+        title="Why is this game locked?"
+        data-content="To activate this Jeoapardy game, you need to
+        play the Fundamentals for this word first."
+        data-placement="bottom">
+          Jeopardy
+        </span>
+        <i class="fa fa-lock"></i>
+      <% end %>
+
+      |
 
       <% if @user_word.freestyle_completed? %>
-        <div class="col-xs-4 free-show-game-circle-container pointer data-url"
-             data-url="/freestyle?word_id=<%= @word.id %>">
-            <div class="free-show-game-circle white hover">&#10004;</div>
-
+        <span class="data-url pointer leksi-green hover"
+          data-url="<%= free_game_link(@word.id) %>">
+          Freestyle
+        </span>
       <% elsif @user_word.current_game == "three" %>
-        <div class="col-xs-4 free-show-game-circle-container pointer data-url"
-             data-url="/freestyle?word_id=<%= @word.id %>">
-            <div class="free-show-game-circle white hover">&#9658;</div>
-
+        <span class="data-url pointer hover"
+        data-url="<%= free_game_link(@word.id) %>">
+          Freestyle
+        </span>
       <% else %>
-        <div class="col-xs-4 free-show-game-circle-container">
-          <div class="free-show-game-circle pointer"
-            data-toggle="popover" title="Why is this game locked?"
-            data-content="To activate this Freestyle game, play Jeopardy for
-            this word first!"
-            data-placement="bottom">
-            <span class="glyphicon glyphicon-lock"></span>
-          </div>
+        <span class="data-url pointer hover"
+              data-toggle="popover"
+              title="Why is this game locked?"
+              data-content="To activate this Freestyle game, you need to
+              play Jeopardy for this word."
+              data-placement="bottom">
+          Freestyle
+        </span>
+        <i class="fa fa-lock"></i>
       <% end %>
-        </div>
-      </div>
+    </div>
   </div>
 
-  <br>
+  <hr>
 <% end %>
 
 <div>

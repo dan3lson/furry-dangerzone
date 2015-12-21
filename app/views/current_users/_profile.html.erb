@@ -6,6 +6,10 @@
 	<i class="fa fa-edit fa-fw"></i>&nbsp; Edit
 </a>
 
+<a class="list-group-item" href="<%= progress_path %>">
+	<i class="fa fa-line-chart fa-fw"></i>&nbsp; Stats
+</a>
+
 <% if current_user.is_teacher? %>
 	<% if params[:controller] == "current_users" %>
 		<%= link_to school_menu_path, class: "list-group-item" do %>

@@ -9,15 +9,8 @@
 
 			<% if @words_added_last_day.any? %>
 				<% @words_added_last_day.each do |uw| %>
-					<div>
-						<div class="inline-block">
-							<%= image_tag("add_black_32.png") %>
-						</div>
-						&nbsp;
-						<div class="inline-block">
-							Added the word <em><%= uw.word.name %></em>
-						</div>
-					</div>
+					<i class="fa fa-plus-circle fa-2x"></i>
+					Added the word <em><%= uw.word.name %></em>
 					<br>
 				<% end %>
 			<% end %>

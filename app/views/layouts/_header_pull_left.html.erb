@@ -4,15 +4,7 @@
 	<% end %>
 
 	<% if logged_in? %>
-		<% if params[:controller] == "games" %>
-			<span id="game-exit-btn">
-				<%= link_to image_tag("exit_black_32.png"), :back %>
-			</span>
-			<span id="game-home-btn">
-				<%= link_to image_tag("home_dark_gray_32.png"), root_path %>
-			</span>
-
-		<% elsif params[:controller] == "words" && params[:action] == "show" %>
+		<% if params[:controller] == "words" && params[:action] == "show" %>
 			<span class="data-url glyphicon glyphicon-chevron-left"
 						aria-hidden="true" data-url="/myLeksi"></span>
 

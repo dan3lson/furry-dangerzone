@@ -31,7 +31,6 @@ feature "two users add the same tag", %{
 
       expect(page).to have_content("Success!")
       expect(page).not_to have_content("Yikes!")
-      expect(page).to have_content(tag.name)
       expect(Tag.count).to eq(1)
       expect(UserTag.count).to eq(2)
       expect(Word.count).to eq(0)
