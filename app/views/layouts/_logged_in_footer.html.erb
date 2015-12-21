@@ -45,15 +45,15 @@
     </div>
 
     <div class="inline-block">
-      <% if params[:action] == "progress" %>
-        <i class="fa fa-line-chart fa-3x"></i>
+      <% if params[:action] == "myTags" %>
+        <i class="fa fa-tags fa-3x"></i>
         <br>
-        Stats
+        Tags
   		<% else %>
-        <%= link_to progress_path do %>
-          <i class="fa fa-line-chart fa-3x"></i>
+        <%= link_to myTags_path do %>
+          <i class="fa fa-tags fa-3x"></i>
           <br>
-          Stats
+          Tags
         <% end %>
   		<% end %>
     </div>

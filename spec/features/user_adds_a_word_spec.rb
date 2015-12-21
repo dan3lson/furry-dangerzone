@@ -15,7 +15,7 @@ feature "user adds a word", %{
   # [x] I see a message of success
 
   pending "\n user adds a word -->" do
-    scenario "scenario: valid process" do
+    scenario "scenario: valid process", js: true do
       user = FactoryGirl.create(:user)
       FactoryGirl.create(:word)
 

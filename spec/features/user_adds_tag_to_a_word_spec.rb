@@ -21,7 +21,7 @@ feature "user adds tag to a word", %{
     let!(:user_word) { UserWord.create(user: user, word: word) }
     let!(:user_tag) { UserTag.create(user: user, tag: tag) }
 
-    scenario "scenario: valid process" do
+    scenario "scenario: valid process", js: true do
       log_in_as(user)
 
       visit myLeksi_path
@@ -38,7 +38,7 @@ feature "user adds tag to a word", %{
       expect(UserWordTag.count).to eq(1)
     end
 
-    scenario "scenario: invalid process" do
+    scenario "scenario: invalid process", js: true do
       log_in_as(user)
 
       visit myLeksi_path
