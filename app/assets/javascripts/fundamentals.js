@@ -448,9 +448,6 @@ $(document).ready(function(){
 		// Display the randomized letter container
 		$("#fill_in_the_blank_container, .checkpoint-image").show();
 
-    $( "#fill_in_the_blank_container" ).bind( "tap", function( e ){
-    });
-
 		// Create five random letters and add them into an array
 		for (var i = 0; i < 3; i++) {
 			$alphabet_random_letter = $alphabet_array[randomRange(26,0)];
