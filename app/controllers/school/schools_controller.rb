@@ -53,11 +53,11 @@ class School::SchoolsController < BaseSchoolController
       "Class One"
     end
 
-    @sorted_num_logins = @class.sort_by { |u| u.num_logins }
+    @sorted_num_logins = @class.order(:num_logins)
     @lowest_num_logins = @sorted_num_logins.take(5)
     @highest_num_logins = @sorted_num_logins.reverse.take(5)
 
-    @sorted_myLeksi_mastery = @class.sort_by { |u| u.myLeksi_mastery }
+    @sorted_myLeksi_mastery = @class.sort_by(&:myLeksi_mastery)
     @lowest_myLeksi_mastery = @sorted_myLeksi_mastery.take(5)
     @highest_myLeksi_mastery = @sorted_myLeksi_mastery.reverse.take(5)
 

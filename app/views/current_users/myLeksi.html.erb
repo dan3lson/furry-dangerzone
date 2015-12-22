@@ -2,14 +2,14 @@
 <% provide(:header, "myLeksi") %>
 
 <div class="row lead">
-  <div class="col-sm-6 col-sm-offset-3">
-    <p>
-      <strong>
-        Total words: <%= @current_user_words_count %>
-      </strong>
-    </p>
-
+  <div class="col-sm-8 col-sm-offset-2">
     <% if current_user.has_words? %>
+      <p>
+        <strong>
+          Total words: <%= @current_user_words_count %>
+        </strong>
+      </p>
+
       <div class="menu-header-container">
         <div class="menu-header">
           <strong><%= @first_word_letter %></strong>

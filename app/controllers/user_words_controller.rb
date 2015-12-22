@@ -2,13 +2,20 @@ class UserWordsController < ApplicationController
   def create
     @word = Word.find(params[:id])
     @user_word = UserWord.new(user: current_user, word: @word)
+    @play = params[:search_btn]
 
     if @user_word.save
       Thesaurus.insert_words_for(@word, "syn", @word.part_of_speech)
 
       Thesaurus.insert_words_for(@word, "ant", @word.part_of_speech)
 
-      redirect_to @word
+      if @play
+        redirect_to "/fundamentals?word_id=#{@word.id}"
+      else
+        flash[:success] = "Success! You now have \'#{@word.name}\'."
+
+        redirect_to search_path
+      end
     else
       msg = "Yikes! Adding that word to your Leksi didn\'t work. "
       msg_2 = "Please try again."

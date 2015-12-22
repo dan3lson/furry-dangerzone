@@ -1,16 +1,7 @@
-<br>
+<% unless u_words.nil? %>
+	<br>
 
-<% u_words.each do |uw| %>
-	<% if uw.class == String %>
-		<div class="inline-block game-zone-margin data-url pointer
-								add-show-game-circle" data-url="/search">
-			<div class="x-large-font">&#043;</div>
-
-			<br>
-
-			<span class="lead">add</span>
-		</div>
-	<% else %>
+	<% u_words.each do |uw| %>
 		<% word = uw.word %>
 
 		<% if uw.current_game == "one" %>
@@ -29,9 +20,9 @@
 			<% else %>
 				<div class="inline-block pointer game-zone-margin hover">
 					<div>
-						<%= image_tag("33_small_locked.png", alt: "33% Mastered Locked",
+						<%= image_tag("big_locked.png", alt: "33% Mastered Locked",
 							data: { toggle: "popover", title: "How can I play?",
-								placement: "left", content: "To play this next game, you need
+								placement: "top", content: "To play this next game, you need
 							to play the Fundamentals game for at least 4 words first." }) %>
 			<% end %>
 		<% elsif uw.current_game == "three" %>

@@ -2,73 +2,19 @@ class CurrentUsersController < ApplicationController
   before_action :logged_in_user
 
   def home
-    @incomplete_games = UserWord.where(user: current_user).
-    where.not(games_completed: 3)
-
     if current_user.has_games_to_play?
+      @incomplete_games = UserWord.where(user: current_user).
+                                   where.not(games_completed: 3)
+
       @rand_word = @incomplete_games.sample.word
       @rand_word_uw = UserWord.object(current_user, @rand_word)
-    end
 
-    @incomplete_games_num = @incomplete_games.count
-    @nudges_needed = 10 - @incomplete_games_num if @incomplete_games_num < 10
+      @game_zone_user_words = @incomplete_games.shuffle[0..9]
 
-    @game_zone_user_words = @incomplete_games.shuffle[0..9]
-
-    if @incomplete_games_num > 0
       @first_row_rand_words = @game_zone_user_words[0..1]
-
-      if @first_row_rand_words.count == 2
-        @first_row_rand_words
-      else
-        (2 - @first_row_rand_words.count).times do
-          @first_row_rand_words << "nudge user to add new word"
-        end
-      end
-    else
-      @first_row_rand_words = ["nudge user to add new word"] * 2
-    end
-
-    if @incomplete_games_num > 2
       @second_row_rand_words = @game_zone_user_words[2..4]
-
-      if @second_row_rand_words.count == 3
-        @second_row_rand_words
-      else
-        (3 - @second_row_rand_words.count).times do
-          @second_row_rand_words << "nudge user to add new word"
-        end
-      end
-    else
-      @second_row_rand_words = ["nudge user to add new word"] * 3
-    end
-
-    if @incomplete_games_num > 5
       @third_row_rand_words = @game_zone_user_words[5..7]
-
-      if @third_row_rand_words.count == 3
-        @third_row_rand_words
-      else
-        (3 - @third_row_rand_words.count).times do
-          @third_row_rand_words << "nudge user to add new word"
-        end
-      end
-    else
-      @third_row_rand_words = ["nudge user to add new word"] * 3
-    end
-
-    if @incomplete_games_num > 8
       @fourth_row_rand_words = @game_zone_user_words[8..9]
-
-      if @fourth_row_rand_words.count == 2
-        @fourth_row_rand_words
-      else
-        (2 - @fourth_row_rand_words.count).times do
-          @fourth_row_rand_words << "nudge user to add new word"
-        end
-      end
-    else
-      @fourth_row_rand_words = ["nudge user to add new word"] * 2
     end
 
     @three_rand_tags = Tag.joins(:users).where(users: {
@@ -88,8 +34,6 @@ class CurrentUsersController < ApplicationController
         (completed_games_count / total_games.to_f * 100).round
       end
     end
-
-    @tag = Tag.new
   end
 
   def menu
