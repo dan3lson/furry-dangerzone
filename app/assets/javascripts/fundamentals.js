@@ -449,7 +449,6 @@ $(document).ready(function(){
 		$("#fill_in_the_blank_container, .checkpoint-image").show();
 
     $( "#fill_in_the_blank_container" ).bind( "tap", function( e ){
-      alert( "tap!" );
     });
 
 		// Create five random letters and add them into an array
