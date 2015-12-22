@@ -43,7 +43,7 @@ $(document).ready(function() {
 			$(this.lastChild).addClass("glyphicon-remove-circle hover");
 		});
 
-		var $current_num = num_classes(".glyphicon-remove-circle") 
+		var $current_num = num_classes(".glyphicon-remove-circle")
 		$("#num-students-added").html($current_num );
 
 		display_next_btn("#select-stu-cont-btn", $current_num);
@@ -65,8 +65,8 @@ $(document).ready(function() {
 		$("#awfs-step-3-container").show();
 	});
 
-	$("#search-results-container").on("click", ".awfs-select-word-btn", function(){
-		$("#search-results-container").hide();
+	$(".search-results-container").on("click", ".awfs-select-word-btn", function(){
+		$(".search-results-container").hide();
 
 		var $index = 0;
 		var $word_id = $(this).data('word-id');
