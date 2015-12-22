@@ -64,4 +64,4 @@ UserWord.select { |uw| uw.freestyle_not_completed? }.count
 User.sum(:num_flashcards_played)
 
 # Display latest feedback
-Feedback.all.map { |f| "#{f.user.username} submitted \'#{f.description}\' #{helper.time_ago_in_words(f.created_at)} ago." }.each { |i| puts i }
+#Feedback.all.map { |f| "#{f.user.username} submitted \'#{f.description}\' #{helper.time_ago_in_words(f.created_at)} ago." }.each { |i| puts i }
