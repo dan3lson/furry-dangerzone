@@ -20,7 +20,8 @@
       <% end %>
     </div>
     <div class="col-xs-3">
-      <% if params[:controller] == "school/schools" && params[:action] == "messages" %>
+      <% if params[:controller] == "school/schools" &&
+            params[:action] == "messages" %>
         <i class="fa fa-archive fa-3x"></i>
         <br>
         Review
@@ -39,7 +40,7 @@
         <br>
         Stats
       <% else %>
-        <%= link_to school_menu_path do %>
+        <%= link_to school_progress_path do %>
           <i class="fa fa-line-chart fa-3x"></i>
           <br>
           Stats

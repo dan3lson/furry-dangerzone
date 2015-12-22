@@ -232,7 +232,7 @@ class User < ActiveRecord::Base
   # be ported longterm
 
   def self.fs_class_one
-    %w(
+    usernames = %w(
       22annenberg
       22bloch
       22chawla
@@ -250,11 +250,13 @@ class User < ActiveRecord::Base
       22watts
       22yamazaki
       22zenkerc
-    ).map { |u| User.find_by(username: u) }
+    )
+
+    where(username: usernames)
   end
 
   def self.fs_class_two
-    %w(
+    usernames = %w(
       22ball
       22bugdaycay
       22caiola
@@ -271,7 +273,9 @@ class User < ActiveRecord::Base
       22tartj
       22weber
       22zenkerm
-    ).map { |u| User.find_by(username: u) }
+    )
+
+    where(username: usernames)
   end
 
   def fs_classes

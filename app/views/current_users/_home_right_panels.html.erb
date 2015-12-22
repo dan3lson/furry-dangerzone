@@ -23,7 +23,7 @@
 
 			<%= render "weekly_goals/weekly_goal_form", user: current_user %>
 		<% else %>
-			<div class="bg-warning">
+			<div class="alert alert-warning">
 				<div class="weekly-goal-container">
 					<div align="center">
 						<% if weekly_goal_completed?(current_user) %>
@@ -32,7 +32,7 @@
 							<%= image_tag("pup2_medium.png", alt: "Leksi Mascot") %>
 						<% end %>
 
-						<p class="weekly-goal-text">
+						<p>
 							<%= motivate(current_user) %>
 						</p>
 					</div>
@@ -76,14 +76,15 @@
 </div>
 
 <div class="panel panel-default center">
-	<div class="panel-body">
-		<p class="lead gray">
+	<div class="panel-body gray">
+		<p class="lead">
 			Follow Leksi
 		</p>
 
-		<%= link_to image_tag("facebook_light_gray_filled_50.png", alt: "Facebook"),
-		"http://www.facebook.com/leksieducation", target: "_blank" %>
-		<%= link_to image_tag("twitter_light_gray_filled_50.png", alt: "Twitter"),
-		"http://www.twitter.com/leksieducation", target: "_blank" %>
+		<i class="fa fa-facebook fa-2x data-url hover"
+			 data-url="http://www.facebook.com/leksieducation"></i>
+
+		<i class="fa fa-twitter fa-2x data-url hover"
+			 data-url="http://www.twitter.com/leksieducation"></i>
 	</div>
 </div>

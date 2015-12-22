@@ -20,12 +20,10 @@
 		Yikes!
 	<% end %>
 			<div>
-				<span>&#9658;</span>
+				<i class="fa fa-gamepad fa-2x"></i>
+				<br>
+				random
 			</div>
-
-			<br>
-
-			<span class="lead">random</span>
 		</div>
 <% end %>
 
@@ -37,19 +35,18 @@
 
 <%= render "current_users/play_game", u_words: @fourth_row_rand_words %>
 
-<br>
+<% unless current_user.has_games_to_play? %>
+	<div class="alert alert-warning lead">
+		<i class="fa fa-gamepad fa-4x"></i>
 
-<div class="inline-block game-zone-margin data-url pointer
-						add-show-game-circle"
-		 data-url="/search">
-	<div class="x-large-font">
-		&#043;
+		<br>
+
+		Your Game Zone is empty!
+		<span class="basic-apple-blue-link">
+			<%= link_to "Add words", "/search" %> to learn and play.
+		</span>
 	</div>
-
-	<br>
-
-	<span class="lead">add</span>
-</div>
+<% end %>
 
 <br>
 <br>

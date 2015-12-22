@@ -1046,6 +1046,7 @@ table {
 	@extend .word-show-game-circle;
 
 	background: $medium-gray;
+	font-size: 1.4em;
 }
 
 .medium-gray-game-circle-no-hover {
@@ -1061,16 +1062,11 @@ table {
 .add-show-game-circle {
 	background: $light-gray;
 	border: 1px dashed $dark-gray;
-	border-radius: 70px;
+	border-radius: $home-game-circle-size;
 	color: $dark-gray;
-	height: 70px;
-	padding-top: 18px;
-	width: 70px;
-
-}
-
-.x-large-font {
-	font-size: x-large;
+	height: $home-game-circle-size;
+	padding-top: 38px;
+	width: $home-game-circle-size;
 }
 
 .add-show-game-circle:hover {
