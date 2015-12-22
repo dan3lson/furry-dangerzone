@@ -1,5 +1,5 @@
 <div id="search-bar-container">
-  <%= form_tag(search_path(display_button_for: display_button_for),
+  <%= form_tag(search_results_path(display_button_for: display_button_for),
     method: "get", id: "search-form", remote: true) do %>
     <div class="input-group">
       <%= label_tag :inputSuccess5, "Search", class: "control-label sr-only" %>

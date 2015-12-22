@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "get_started" => "guests#get_started"
   get "about_us" => "static_pages#about_us"
   get "search" => "searches#search"
+  get "search_results" => "searches#search_results"
   get "menu" => "current_users#menu"
   get "home" => "current_users#home"
   get "myLeksi" => "current_users#myLeksi"
