@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	$(function() {
+    FastClick.attach(document.body);
+	});
+
 	$(".my-stats-btn").click(function() {
 		$(".achievements-btn").removeClass("active");
 		$(this).addClass("active");
