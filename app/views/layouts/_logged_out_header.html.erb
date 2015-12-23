@@ -6,6 +6,9 @@
 		</h4>
 	</div>
 	<div class="pull-right">
-		<%= link_to "Log in", login_path, class: "btn btn-success" %>
+		<%= link_to login_path, class: "btn btn-success" do %>
+			<i class="fa fa-sign-in"></i>
+			Log in
+		<% end %>
 	</div>
 </div>
