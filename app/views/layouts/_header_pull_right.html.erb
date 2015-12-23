@@ -1,13 +1,4 @@
 <span class="pull-right header-buttons">
-	<% if !logged_in? && params[:action] == "guest_home" %>
-		<p class="remove-line-height">
-			<%= link_to "Log in", login_path,
-				class: "btn btn-default btn-sm apple-blue-button-unfilled" %>
-			<%= link_to "Get for free", signup_path,
-				class: "btn btn-default btn-sm apple-blue-button-filled" %>
-		</p>
-	<% end %>
-
 	<% if params[:action] == "myTags" %>
 		<%= link_to new_tag_path do %>
 			<i class="fa fa-plus-circle white"></i>

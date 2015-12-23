@@ -130,23 +130,6 @@ p {
 	color: $apple-blue;
 }
 
-.apple-blue-button {
-	border: 1px solid $apple-blue;
-}
-
-.apple-blue-button-filled {
-	@extend .apple-blue-button;
-
-	background: $apple-blue;
-	color: $white;
-}
-
-.apple-blue-button-unfilled {
-	@extend .apple-blue-button;
-
-	color: $apple-blue;
-}
-
 .apple-star-orange {
 	color: $apple-star-orange;
 }
@@ -896,7 +879,7 @@ table {
 .gamification-first-image {
 	@extend .guest-homepage-image;
 
-	background-image: url(image-path("game_color_100.png"));
+	background-image: url(image-path("100_big.png"));
 }
 
 .gamification-second-image {
