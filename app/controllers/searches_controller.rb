@@ -8,7 +8,6 @@ class SearchesController < ApplicationController
                else
                  Word.define(params[:search]) if params[:search]
                end
-
     @display_button_for = params[:display_button_for]
 
     respond_to do |format|
