@@ -35,9 +35,15 @@ class UsersController < ApplicationController
     @user.num_logins += 1
 
     if @user.save
-      log_in(@user)
+      @words_successfully_added = UserWord.add_first_four_words(@user)
 
-      flash[:success] = "Welcome to Leksi!"
+      if @words_successfully_added == 4
+        flash[:success] = "Welcome to Leksi!"
+      else
+        logger.error { "#{@user.username} adding four words didn't work."}
+      end
+
+      log_in(@user)
 
       redirect_to root_path
     else

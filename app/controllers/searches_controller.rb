@@ -4,7 +4,7 @@ class SearchesController < ApplicationController
 
   def search_results
     @results = if params[:rand]
-                 Word.define(Word.random)
+                 Word.define(Word.random(1).first.name)
                else
                  Word.define(params[:search]) if params[:search]
                end

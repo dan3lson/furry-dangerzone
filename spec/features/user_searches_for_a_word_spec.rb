@@ -14,7 +14,7 @@ feature "user searches for a word", %{
   # [x] I can see a remove button for a
   #     word I already added
 
-  pending "\n user searches for a word -->" do
+  describe "\n user searches for a word -->", js: true do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word) { FactoryGirl.create(:word) }
 
@@ -42,6 +42,7 @@ feature "user searches for a word", %{
       fill_in "search", with: "hacker"
 
       click_on "look up"
+      sleep(1)
 
       expect(page).to have_content("hacker")
       expect(page).to have_content("/ˈhækər/")
@@ -58,8 +59,8 @@ feature "user searches for a word", %{
 
       click_on "look up"
 
-      expect(page).to have_content("Yikes! We couldn\'t find 'foobar'.")
-      expect(page).to have_content("Please search again!")
+      expect(page).to have_content("Yikes, we couldn\'t find 'foobar'.")
+      expect(page).to have_content("Please search again.")
     end
 
     scenario "scenario: query should be found and is already added" do
@@ -72,8 +73,9 @@ feature "user searches for a word", %{
       fill_in "search", with: "chess"
 
       click_on "look up"
+      sleep(1)
 
-      expect(page).to have_link("remove")
+      expect(page).to have_link("Remove")
       expect(user_word.games_completed).to eq(0)
       expect(page).not_to have_content("add")
     end

@@ -16,8 +16,7 @@
     </div>
 
     <div class="inline-block">
-      <% if params[:action] == "myLeksi" || params[:controller] == "words" &&
-                                            params[:action] == "show" %>
+      <% if params[:action] == "myLeksi" %>
         <i class="fa fa-book fa-3x"></i>
         <br>
         myLeksi
@@ -59,7 +58,7 @@
     </div>
 
     <div class="inline-block">
-      <% if params[:action] == "menu" || params[:controller] == "tags" %>
+      <% if params[:action] == "menu" %>
   			<i class="fa fa-bars fa-3x"></i>
         <br>
         Menu
