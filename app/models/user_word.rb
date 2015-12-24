@@ -68,4 +68,20 @@ class UserWord < ActiveRecord::Base
   def freestyle_completed_today?
     updated_at.to_date == Date.today && games_completed == 3
   end
+
+  # not tested
+  def self.add_first_four_words(user)
+    words = Word.random(4)
+    words_successfully_added = 0
+
+    words.each do |w|
+      user_word = UserWord.new
+      user_word.user = user
+      user_word.word = w
+
+      words_successfully_added += 1 if user_word.save
+    end
+
+    words_successfully_added
+  end
 end

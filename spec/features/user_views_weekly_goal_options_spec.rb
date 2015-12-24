@@ -15,7 +15,7 @@ feature "user views weekly goal options", %{
   # [x] I can see radio button options
   # [x] I can see a submit button
 
-  pending "\n views weekly goal option -->" do
+  describe "\n views weekly goal option -->" do
     before :each do
       FactoryGirl.create(:version)
     end
@@ -54,7 +54,7 @@ feature "user views weekly goal options", %{
       expect(page).to have_button("Save changes")
     end
 
-    scenario "scenario: guest tries to access weekly_goal" do
+    skip "scenario: guest tries to access weekly_goal" do
       visit "/weekly_goal"
 
       expect(page).not_to have_css(".weekly-goal-form")
@@ -69,7 +69,7 @@ feature "user views weekly goal options", %{
       expect(page).to have_content("Yikes! Please log in first to do that.")
     end
 
-    scenario "scenario: guest tries to access weekly_goal" do
+    skip "scenario: guest tries to access weekly_goal" do
       visit weekly_goal_path
 
       expect(page).not_to have_css(".weekly-goal-form")

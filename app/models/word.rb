@@ -63,8 +63,9 @@ class Word < ActiveRecord::Base
     count > 0
   end
 
-  def self.random
-    all.sample.name
+  def self.random(num)
+    num -= 1
+    find(Word.pluck(:id).shuffle[0..num])
   end
 
   def has_synonyms?

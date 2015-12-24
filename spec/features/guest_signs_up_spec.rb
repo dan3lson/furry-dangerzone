@@ -16,6 +16,10 @@ feature "guest signs up", %{
   describe "\n guest signs up -->" do
     before :each do
       FactoryGirl.create(:version)
+      FactoryGirl.create(:word)
+      FactoryGirl.create(:word, name: "chess_2")
+      FactoryGirl.create(:word, name: "chess_3")
+      FactoryGirl.create(:word, name: "chess_4")
     end
 
     scenario "scenario: with complete valid data" do
@@ -24,7 +28,7 @@ feature "guest signs up", %{
       first(:link, "Get started").click
 
       fill_in "Username", with: "FooFoo"
-      fill_in "First Name", with: "FIrstFooFoo"
+      fill_in "First Name", with: "FirstFooFoo"
       fill_in "Last Name", with: "LastFooFoo"
       fill_in "Email", with: "foobar@foobar.com"
       fill_in "Password", with: "foobar"
@@ -38,6 +42,7 @@ feature "guest signs up", %{
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
       expect(User.first.num_logins).to eq(1)
+      expect(UserWord.count).to eq(4)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end
@@ -59,6 +64,7 @@ feature "guest signs up", %{
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
       expect(User.first.num_logins).to eq(1)
+      expect(UserWord.count).to eq(4)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end
@@ -77,6 +83,7 @@ feature "guest signs up", %{
       expect(page).to have_content("errors")
       expect(page).to have_content("fix")
       expect(User.count).to eq(0)
+      expect(UserWord.count).to eq(0)
     end
   end
 end

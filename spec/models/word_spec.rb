@@ -48,8 +48,8 @@ RSpec.describe Word, type: :model do
   end
 
   describe "#random" do
-    it "returns a random word" do
-      expect(Word.random.class).to be(String)
+    it "returns a random Word object" do
+      expect(Word.random(1).first.class).to be(Word)
     end
   end
 end

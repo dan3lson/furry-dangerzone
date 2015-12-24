@@ -14,12 +14,12 @@ feature "two users add the same word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  describe "\n two users add same word -->" do
+  describe "\n two users add same word -->", js: true do
     let!(:user_word) { FactoryGirl.create(:user_word) }
     let!(:word) { user_word.word }
     let(:user2) { FactoryGirl.create(:user) }
 
-    pending "scenario: add word" do
+    scenario "scenario: add word" do
       log_in_as(user2)
 
       visit search_path
@@ -28,14 +28,11 @@ feature "two users add the same word", %{
 
       click_on "look up"
 
-      click_on "Learn"
+      click_on "Add"
+      sleep(1)
 
       expect(page).not_to have_content("Yikes!")
-      expect(page).to have_content(word.name)
-      expect(page).to have_content(word.phonetic_spelling)
-      expect(page).to have_content(word.part_of_speech)
-      expect(page).to have_content(word.definition)
-      expect(page).to have_content(word.example_sentence)
+      expect(page).to have_content("Success! You now have")
       expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(2)
       expect(UserTag.count).to eq(0)

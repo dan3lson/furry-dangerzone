@@ -193,7 +193,7 @@ feature "teacher adds words to student(s) myLeksi", %{
       expect(page).not_to have_button("Finish")
     end
 
-    pending "scenario: step 3 -> select 1 word: can finish", js: true do
+    skip "scenario: step 3 -> select 1 word: can finish", js: true do
       FactoryGirl.create(:word)
 
       log_in_as(teacher)
@@ -216,7 +216,7 @@ feature "teacher adds words to student(s) myLeksi", %{
       expect(page).to have_button("Finish")
     end
 
-    pending "scenario: review process completion", js: true do
+    skip "scenario: review process completion", js: true do
       FactoryGirl.create(:word)
 
       log_in_as(teacher)
