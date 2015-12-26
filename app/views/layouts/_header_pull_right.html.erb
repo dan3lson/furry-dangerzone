@@ -1,19 +1,8 @@
 <span class="pull-right header-buttons">
-	<% if params[:action] == "myTags" %>
+	<% if params[:controller] == "my_tags" %>
 		<%= link_to new_tag_path do %>
 			<i class="fa fa-plus-circle white"></i>
 		<% end %>
-
-	<% elsif params[:controller] == "tags" && params[:action] == "show" %>
-		<% if Rails.env.test? %>
-				<%= link_to "edit tag", edit_tag_path(@tag) %>
-		<% end %>
-			<%= link_to edit_tag_path(@tag) do %>
-				<i class="fa fa-cog white"></i>
-			<% end %>
-
-	<% elsif params[:controller] == "tags" && params[:action] == "edit" %>
-		<%= render "tags/remove_tag_btn_tag_show_page", tag: @tag %>
 
 	<% elsif params[:controller] == "versions" &&
 					 params[:action] == "index" %>
@@ -31,7 +20,7 @@
 	<% elsif params[:controller] == "school/schools" &&
 					 params[:action] == "students" %>
 				<%= link_to school_words_path(filter: @class) do %>
-					<span class="glyphicon glyphicon-book white"></span>
+					<i class="fa fa-book white"></i>
 				<% end %>
 
 	<% end %>

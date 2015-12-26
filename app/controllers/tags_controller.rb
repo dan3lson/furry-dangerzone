@@ -8,33 +8,6 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @num_words_for_this_tag = words_for(current_user, @tag).count
-
-    if @num_words_for_this_tag > 0
-      @completed_games = completed_funds(current_user, @tag).count +
-                               completed_jeops(current_user, @tag).count +
-                               completed_frees(current_user, @tag).count
-      @total_games = @num_words_for_this_tag * 3
-      @tag_game_progress = (@completed_games / @total_games.to_f * 100).round
-
-      if incomplete_fundamentals_exist?(current_user, @tag)
-        @rand_incomp_fund_word_id = incomplete_fundamentals(
-          current_user, @tag
-        ).sample.word.id
-      end
-
-      if incomplete_jeopardys_exist?(current_user, @tag)
-        @rand_incomp_jeop_word_id = incomplete_jeopardys(
-          current_user, @tag
-        ).sample.word.id
-      end
-
-      if incomplete_freestyles_exist?(current_user, @tag)
-        @rand_incomp_free_word_id = incomplete_freestyles(
-          current_user, @tag
-        ).sample.word.id
-      end
-    end
   end
 
   def new
@@ -55,7 +28,7 @@ class TagsController < ApplicationController
       if @tag.save && @user_tag.save && current_user.save
         flash[:success] = "Success!"
 
-        redirect_to root_path
+        redirect_to myTags_path
       else
         render :new
       end

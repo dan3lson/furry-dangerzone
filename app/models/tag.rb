@@ -6,5 +6,5 @@ class Tag < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  scope :alphabetical, -> { order("name ASC") }
+  scope :alphabetical, -> { order("LOWER(name)") }
 end

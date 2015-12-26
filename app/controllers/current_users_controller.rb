@@ -59,11 +59,6 @@ class CurrentUsersController < ApplicationController
     @seven_through_ten_users = User.top_ten_highest_points.drop(3)
   end
 
-  def myTags
-    @current_user_tags = current_user.tags.alphabetical
-    @tag = Tag.new
-  end
-
   private
 
   def logged_in_user
