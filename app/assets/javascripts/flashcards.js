@@ -1,64 +1,75 @@
-$(document).ready(function(){
+$(document).ready(function() {
 	$("#card").flip();
 
-	$("#flashcards-play-btn").click(function(){
-		$tag_id = $("#tag-info").data("tag-id");
+	$(".flashcards-btn").click(function() {
+		var $tag_id = $(this).parent().parent().parent().find(
+			".panel-body"
+		).data("tag-id");
 
-		$.ajax({
+		var $flashcard_info_request = $.ajax({
 			type: "GET",
 			url: "/flashcards?tag_id=" + $tag_id,
-			dataType: "json",
-			success: function (response) {
-				var $word_names = response.word_names;
-				var $word_defs = response.word_defs;
-				var $max = $word_names.length - 1;
-				var $i = 0;
+			dataType: "json"
+		});
 
-				$("#current-flashcard-num").html(1);
-				$("#flashcard-game").show();
-				$("#tags-show-page-container").hide("fadeOut");
-				$("#flashcard-front").html($word_names[$i]);
-				$("#flashcard-back").html($word_defs[$i]);
-				activate_controls($word_names, $word_defs, $max, $i);
-				$("#flashcard-prev-btn").attr('disabled', true);
-				$("#flashcard-next-btn").attr('disabled', false);
-			}
+		$flashcard_info_request.done(function(response) {
+			var $words = response.words;
+			var $num_words = $words.length;
+			var $limit = $num_words - 1;
+
+			initalize_header($words, $num_words);
+			activate_controls($words, $limit);
 		});
 	});
 
-	function activate_controls(word_names, word_defs, max, i) {
-		$("#flashcard-next-btn").click(function(){
-			if (i < max ) {
-				i++;
-				$("#flashcard-front").html(word_names[i]);
-				$("#flashcard-back").html(word_defs[i]);
+	function initalize_header(words, num_words) {
+		$("#myTags-container").hide();
+		$("#flashcard-game").fadeIn();
+		$("#current-flashcard-num").html(1);
+		$("#total-flashcard-num").html(num_words);
+		$("#flashcard-front").html(words[0].name);
+		$("#flashcard-back").html(words[0].definition);
+		$("#flashcard-prev-btn").attr('disabled', true);
+		$("#flashcard-next-btn").attr('disabled', false);
+	}
+
+	function activate_controls(words, limit) {
+		var $i = 0;
+
+		$("#flashcard-next-btn").click(function() {
+			if ($i < limit) {
+				$i++;
+				$("#current-flashcard-num").html($i + 1);
+				$("#flashcard-front").html(words[$i].name);
+				$("#flashcard-back").html(words[$i].definition);
 				$("#flashcard-prev-btn").attr('disabled', false);
-				$("#current-flashcard-num").html(i + 1);
 			}
 
-			if (i == max) {
+			if ($("#current-flashcard-num").html() == $("#total-flashcard-num").html()) {
 				$("#flashcard-next-btn").attr('disabled', true);
 				$("#flashcard-prev-btn").attr('disabled', false);
 			}
 		});
 
-		$("#flashcard-prev-btn").click(function(){
-			if (i >= 1) {
-				$("#current-flashcard-num").html(i);
-				i--;
-				$("#flashcard-front").html(word_names[i]);
-				$("#flashcard-back").html(word_defs[i]);
+		$("#flashcard-prev-btn").click(function() {
+			if ($i >= 1) {
+				$("#current-flashcard-num").html($i);
+				$i--;
+
+				$("#flashcard-front").html(words[$i].name);
+				$("#flashcard-back").html(words[$i].definition);
 				$("#flashcard-next-btn").attr('disabled', false);
 			}
 
-			if (i == 0) {
+			if ($("#current-flashcard-num").html() == "1") {
 				$("#flashcard-next-btn").attr('disabled', false);
 				$("#flashcard-prev-btn").attr('disabled', true);
 			}
 		});
 	};
 
-	$("#finish-studying-flashcards").click(function(){
-		location.reload();
+	$("#finish-studying-flashcards").click(function() {
+		$("#flashcard-game").hide();
+		$("#myTags-container").fadeIn();
 	});
 });

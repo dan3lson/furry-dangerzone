@@ -1,0 +1,141 @@
+<% provide(:title, "myTags") %>
+<% provide(:header, "myTags") %>
+
+<div id="myTags-container">
+  <% if current_user.has_tags? %>
+    <div>
+      <% @current_user_tags.each do |tag| %>
+      	<div class="col-sm-8 col-sm-offset-2">
+      		<div class="panel panel-default">
+      		  <div class="panel-body tag-container center"
+                 data-tag-id="<%= tag.id %>"
+                 data-tag-name="<%= tag.name %>">
+              <div class="pull-right">
+                <%= render "tags/remove_tag_btn_tag_show_page", tag: tag %>
+              </div>
+
+              <h3>
+                <%= tag.name.truncate(20) %>
+                <br>
+                <small>
+                  <%= pluralize(words_for(current_user, tag).count, "word") %>,
+                  <%= progress_for(current_user, tag) %>% mastered
+                </small>
+              </h3>
+
+              <hr>
+
+              <div>
+              	<% if tag_has_words?(current_user, tag) %>
+              		<% words_for(current_user, tag).each do |word| %>
+              			<span class="tag">
+              				<span class="basic-black-link">
+              					<i class="fa fa-book"></i>
+              					<%= link_to word.name, word %>
+              					&nbsp;
+              				</span>
+              				<span class="word-on-tag-show-page">
+              					<%= render "words/remove_word_btn_tag_show_page",
+              						word: word, tag: tag %>
+              				</span>
+              			</span>
+              		<% end %>
+              	<% else %>
+              		<div class="alert alert-warning">
+              				This tag doesn't have any words.
+              		</div>
+              	<% end %>
+
+              	<div class="clear"></div>
+              </div>
+
+              <br>
+      		  </div>
+
+      			<div class="panel-footer center">
+              <div class="row">
+                <% if incomplete_fundamentals_exist?(current_user, tag) %>
+                  <div class="col-xs-6 col-sm-3 data-url hover leksi-green
+                              tag-rand-fund"
+                       data-activity="fund">
+                    <i class="fa fa-gamepad fa-2x"></i>
+                    <br>
+                    Fundamentals
+                  </div>
+                <% else %>
+                  <div class="col-xs-6 col-sm-3 gray pointer">
+                    <%= render "shared/popover",
+                      title: "Why is this locked?",
+                      content: "This tag doesn't have words that are 0%
+                      mastered.",
+                      display_text: "Fundamentals" %>
+                  </div>
+                <% end %>
+
+                <% if enough_jeopardy_words_exist?(current_user, tag) %>
+                  <div class="col-xs-6 col-sm-3 data-url hover leksi-green
+                              tag-rand-jeop"
+                       data-activity="jeop">
+                    <i class="fa fa-gamepad fa-2x"></i>
+                    <br>
+                    Jeopardy
+                  </div>
+                <% else %>
+                  <div class="col-xs-6 col-sm-3 gray pointer">
+                    <%= render "shared/popover",
+                      title: "Why is this locked?",
+                      content: "This tag needs at least four words that are
+                      33% mastered.",
+                      display_text: "Jeopardy" %>
+                  </div>
+                <% end %>
+
+                <% if incomplete_freestyles_exist?(current_user, tag) %>
+                  <div class="col-xs-6 col-sm-3 data-url hover leksi-green
+                              tag-rand-free"
+                       data-activity="free">
+                    <i class="fa fa-gamepad fa-2x"></i>
+                    <br>
+                    Freestyle
+                  </div>
+                <% else %>
+                  <div class="col-xs-6 col-sm-3 gray pointer">
+                    <%= render "shared/popover",
+                      title: "Why is this locked?",
+                      content: "This tag doesn't have words at least
+                      66% mastered.",
+                      display_text: "Freestyle" %>
+                  </div>
+                <% end %>
+
+                <% if tag_has_words?(current_user, tag) %>
+                  <div class="col-xs-6 col-sm-3 hover leksi-green flashcards-btn
+                  pointer">
+                    <i class="fa fa-bolt fa-2x"></i>
+                    <br>
+                    Flashcards
+                  </div>
+                <% else %>
+                  <div class="col-xs-6 col-sm-3 gray pointer">
+                    <%= render "shared/popover",
+                      title: "Why is this locked?",
+                      content: "This tag needs at least one word.",
+                      display_text: "Flashcards" %>
+                  </div>
+                <% end %>
+              </div>
+      			</div>
+      		</div>
+      	</div>
+      <% end %>
+    </div>
+  <% else %>
+    <%= render "current_users/no_tags_guide" %>
+  <% end %>
+
+  <div class="clear"></div>
+
+  <%= render "my_tags/untagged_words" %>
+</div>
+
+<%= render "games/flashcards" %>

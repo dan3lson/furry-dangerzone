@@ -5,6 +5,16 @@ module WordsHelper
     }
   end
 
+  # not tested
+  def num_words_for(user, tag)
+    words_for(user, tag).count
+  end
+
+  # not tested
+  def tag_has_words?(user, tag)
+    num_words_for(user, tag) > 0
+  end
+
   def user_words(user, tag)
     words_for(user, tag).map { |w| UserWord.find_by(user: user, word: w) }
   end

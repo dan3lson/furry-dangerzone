@@ -15,11 +15,11 @@ class UserWordTagTagShowPagesController < ApplicationController
     if @user_word_tag.destroy
       @word_tag.destroy unless @word_tag_used_by_other_users
       flash[:success] = "You removed \'#{@word.name}\'."
-      redirect_to @tag
+      redirect_to myTags_path
     else
       msg = "Yikes! - removing \'#{@word.name}\' didn\'t work. "
       flash[:danger] = msg << "Please try again."
-      redirect_to @tag
+      redirect_to myTags_path
     end
   end
 end

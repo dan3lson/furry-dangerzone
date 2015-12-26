@@ -241,12 +241,6 @@ p {
 	width: 100px;
 }
 
-.tags-bg-image {
-	background-image: url(image-path("tag_color_100.png"));
-	height: 100px;
-	width: 100px;
-}
-
 .stu-pic {
 	background-image: url(image-path("pup2_small.png"));
 	background-position: center;
@@ -257,7 +251,7 @@ p {
 	width: 70px;
 }
 
-.stu-pic-container:hover, .tag-pic-container:hover {
+.stu-pic-container:hover {
 	background: $light-sky-blue;
 	color: $sky-blue;
 }
@@ -742,6 +736,10 @@ input {
 
 .right {
 	text-align: right;
+}
+
+.sky-blue {
+	color: $sky-blue;
 }
 
 .stats-header {
