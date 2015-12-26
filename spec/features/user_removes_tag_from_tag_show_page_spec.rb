@@ -23,11 +23,7 @@ feature "user removes tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      click_on "remove tag"
+      find(".my_tags-remove-btn").click
 
       expect(page).to have_content("Success: \'#{tag.name}\' removed.")
       expect(page).not_to have_content("Yikes! Something went wrong.")
@@ -47,13 +43,7 @@ feature "user removes tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      within ".header-buttons" do
-        click_on "remove tag"
-      end
+      find(".my_tags-remove-btn").click
 
       expect(page).to have_content("Success: \'#{tag.name}\' removed.")
       expect(page).not_to have_content("Yikes! Something went wrong.")
@@ -80,13 +70,7 @@ feature "user removes tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      within ".header-buttons" do
-        click_on "remove tag"
-      end
+      find(".my_tags-remove-btn").click
 
       expect(page).to have_content("Success: \'#{tag.name}\' removed.")
       expect(page).not_to have_content("Yikes! Something went wrong.")

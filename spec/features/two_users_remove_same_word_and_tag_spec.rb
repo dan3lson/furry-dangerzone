@@ -41,11 +41,7 @@ feature "two users remove same word and tag", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit"
-
-      click_on "remove"
+      find(".my_tags-remove-btn").click
 
       visit menu_path
 
@@ -61,11 +57,7 @@ feature "two users remove same word and tag", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit"
-
-      click_on "remove"
+      find(".my_tags-remove-btn").click
 
       expect(Word.count).to eq(1)
       expect(Tag.count).to eq(0)
@@ -81,11 +73,7 @@ feature "two users remove same word and tag", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit"
-
-      click_on "remove"
+      find(".my_tags-remove-btn").click
 
       visit myLeksi_path
 
@@ -97,11 +85,7 @@ feature "two users remove same word and tag", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit"
-
-      click_on "remove"
+      find(".my_tags-remove-btn").click
 
       visit myLeksi_path
 

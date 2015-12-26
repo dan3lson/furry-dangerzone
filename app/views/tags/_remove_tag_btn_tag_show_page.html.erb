@@ -1,25 +1,13 @@
-<% if Rails.env.test? %>
-  <!-- if tag has words attached to it -->
-  <% if words_for(current_user, tag).count > 0 %>
-    <%= link_to "remove tag", user_word_tag_path(tag_name: tag.name),
-      method: :delete %>
-  <% else %>
-    <%= link_to "remove tag", user_tag_path(id: UserTag.find_by(
-        user: current_user, tag: tag).id,
-        tag_name: tag.name
-      ), method: :delete %>
+<% if tag_has_words?(current_user, tag) %>
+  <%= link_to user_word_tag_path(tag_name: tag.name),
+    class: "my_tags-remove-btn", method: :delete do %>
+    <i class="fa fa-remove gray"></i>
   <% end %>
 <% else %>
-  <% if words_for(current_user, tag).count > 0 %>
-    <%= link_to user_word_tag_path(tag_name: tag.name), method: :delete do %>
-      <i class="fa fa-remove gray"></i>
-    <% end %>
-  <% else %>
-    <% ut_id = UserTag.find_by(user: current_user, tag: tag).id %>
+  <% ut_id = UserTag.find_by(user: current_user, tag: tag).id %>
 
-    <%= link_to user_tag_path(id: ut_id, tag_name: tag.name),
-      method: :delete do %>
-      <i class="fa fa-remove gray"></i>
-    <% end %>
+  <%= link_to user_tag_path(id: ut_id, tag_name: tag.name),
+    class: "my_tags-remove-btn", method: :delete do %>
+    <i class="fa fa-remove gray"></i>
   <% end %>
 <% end %>

@@ -1,13 +1,13 @@
 $(document).ready(function() {
-	$(".tag-rand-fund").click(function() {
-		play_random_word($(this), "/fundamentals?word_id=");
-	});
-	$(".tag-rand-jeop").click(function() {
-		play_random_word($(this), "/jeopardy_tag?tag_id=");
-	});
-	$(".tag-rand-free").click(function() {
-		play_random_word($(this), "/freestyle?word_id=");
-	});
+	play_activity(".tag-rand-fund", "/fundamentals?word_id=");
+	play_activity(".tag-rand-jeop", "/jeopardy_tag?tag_id=");
+	play_activity(".tag-rand-free", "/freestyle?word_id=");
+
+	function play_activity(selector, url) {
+		$(selector).click(function() {
+			play_random_word($(this), url);
+		});
+	}
 
 	function play_random_word(this_, url) {
 		$tag_id = this_.parent().parent().prev().data("tag-id");

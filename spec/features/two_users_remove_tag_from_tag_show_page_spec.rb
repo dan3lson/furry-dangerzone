@@ -40,11 +40,7 @@ feature "two users remove tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      click_on "remove tag"
+      find(".my_tags-remove-btn").click
 
       visit menu_path
 
@@ -54,11 +50,7 @@ feature "two users remove tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      click_on "remove tag"
+      find(".my_tags-remove-btn").click
 
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(2)
@@ -76,13 +68,7 @@ feature "two users remove tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      within ".header-buttons" do
-        click_on "remove tag"
-      end
+      find(".my_tags-remove-btn").click
 
       visit menu_path
 
@@ -92,13 +78,7 @@ feature "two users remove tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      within ".header-buttons" do
-        click_on "remove tag"
-      end
+      find(".my_tags-remove-btn").click
 
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(2)
@@ -125,13 +105,7 @@ feature "two users remove tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      within ".header-buttons" do
-        click_on "remove tag"
-      end
+      find(".my_tags-remove-btn").click
 
       visit menu_path
 
@@ -141,13 +115,7 @@ feature "two users remove tag from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
-
-      within ".header-buttons" do
-        click_on "remove tag"
-      end
+      find(".my_tags-remove-btn").click
 
       expect(Word.count).to eq(2)
       expect(UserWord.count).to eq(4)

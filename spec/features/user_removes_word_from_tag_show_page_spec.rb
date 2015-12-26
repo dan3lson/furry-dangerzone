@@ -3,9 +3,9 @@ require 'rails_helper'
 feature "user removes word from tag show page", %{
 
   As a user,
-  I want to remove a word for
-  one of my tag from that
-  tag's show page.
+  I want to remove a word
+  from the tag's index
+  container.
 } do
 
   # Acceptance Criteria
@@ -15,7 +15,7 @@ feature "user removes word from tag show page", %{
   #     but still is a word I have in myLeksi
   # [x] I see a message of removal-success
 
-  describe "\n user removes a tag -->" do
+  describe "\n user removes word from tag -->" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:word_1) { FactoryGirl.create(:word) }
     let!(:tag) { FactoryGirl.create(:tag) }
@@ -31,13 +31,9 @@ feature "user removes word from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
+      find(".word-on-tag-show-page-remove-btn").click
 
-      within ".word-on-tag-show-page" do
-        click_on "remove"
-      end
-
-      expect(page).to have_content("You removed \'")
+      expect(page).to have_content("Success")
       expect(page).not_to have_content("Yikes!")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
@@ -49,9 +45,9 @@ feature "user removes word from tag show page", %{
 
     scenario "scenario: remove one of two words from tag show page" do
       word_2 = FactoryGirl.create(:word, name: "chess_2")
-      user_word_2 = UserWord.create(user: user, word: word_2)
+      UserWord.create(user: user, word: word_2)
       word_tag_2 = WordTag.create(word: word_2, tag: tag)
-      user_word_tag_2 = UserWordTag.create(
+      UserWordTag.create(
         user: user, word_tag: word_tag_2
       )
 
@@ -59,13 +55,9 @@ feature "user removes word from tag show page", %{
 
       visit myTags_path
 
-      click_on tag.name
+      first(".word-on-tag-show-page-remove-btn").click
 
-      within all(".word-on-tag-show-page").last do
-        click_on "remove"
-      end
-
-      expect(page).to have_content("You removed \'")
+      expect(page).to have_content("Success")
       expect(page).not_to have_content("Yikes!")
       expect(Word.count).to eq(2)
       expect(UserWord.count).to eq(2)
