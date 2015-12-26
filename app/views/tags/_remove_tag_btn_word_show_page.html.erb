@@ -3,7 +3,8 @@
       word_id: word, tag_name: tag.name
     ), method: :delete %>
 <% else %>
-  <%= link_to image_tag("remove_gray_25.png"),
-    user_word_tag_word_show_page_path(word_id: word, tag_name: tag.name),
-    method: :delete %>
+  <%= link_to user_word_tag_word_show_page_path(
+    word_id: word, tag_name: tag.name), method: :delete do %>
+    <i class="fa fa-remove gray"></i>
+  <% end %>
 <% end %>

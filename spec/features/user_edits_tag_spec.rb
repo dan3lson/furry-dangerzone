@@ -24,9 +24,7 @@ feature "user edits a tag", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
+      find(".my_tags-edit-btn").click
 
       fill_in "Name", with: "FoooFooo"
 
@@ -45,9 +43,7 @@ feature "user edits a tag", %{
 
       visit myTags_path
 
-      click_on tag.name
-
-      click_on "edit tag"
+      find(".my_tags-edit-btn").click
 
       fill_in "Name", with: ""
 
