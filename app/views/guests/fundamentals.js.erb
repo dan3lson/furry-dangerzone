@@ -1,0 +1,11 @@
+$('#gs-setup-container').hide();
+$('#gs-fundamentals-container').hide().append(
+	`<%= j render(partial: 'games/fund_game_container', locals: {
+		word: @word,
+		synonyms: @synonyms,
+		antonyms: @antonyms,
+		record: @record,
+		rwe: @real_world_examples
+	}) %>`,
+	`<%= j render(partial: 'games/fund_buttons') %>`
+).fadeIn();

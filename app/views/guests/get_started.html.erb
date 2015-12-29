@@ -1,15 +1,64 @@
 <% provide(:title, "Get Started") %>
 <% provide(:header, "Get Started") %>
 
-<div class="alert alert-warning" role="alert">
-	Welcome, Guest! Don't lose your work -
-	<span class="basic-apple-blue-link">
-		<%= link_to "save your progress", signup_path %>
+<div class="alert alert-warning lead" role="alert">
+	<i class="fa fa-user"></i>
+	<span id="gs-take-action-words">
+		Welcome, Guest! If you want to skip this setup,
+		<span class="basic-apple-blue-link">
+			<%= link_to "sign up now", signup_path %>.
+		</span>
 	</span>
-	for free now!
 </div>
 
-<div id="guest-weekly-goal-container">
-	<h2>First, how many words do you want to master every week?</h2>
-	<%= render "weekly_goals/weekly_goal", user: @guest %>
+<div id="gs-setup-container">
+	<div id="guest-weekly-goal-container" class="lead">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					<i class="fa fa-clock-o"></i>
+					How many words do you want to master every week?
+				</h4>
+			</div>
+			<div class="panel-body">
+				<%= render "weekly_goals/weekly_goal", user: @guest %>
+			</div>
+		</div>
+	</div>
+
+	<div id="guest-select-words-container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>
+					We selected five words for you
+					<i class="fa fa-hand-o-down"></i>!
+				</h4>
+			</div>
+			<div class="panel-body">
+				<span class="lead">
+					To master and reach 100%, complete the games for each word.
+				</span>
+				<div id="gs-rand-words-container">
+					<div class="row">
+						<div class="col-sm-7 center">
+							<%= render "guests/select_new_words" %>
+							<div id="gs-game-zone-container">
+								<%= render "guests/game_zone", words: @first_row_rand_words %>
+								<%= render "guests/game_zone", words: @second_row_rand_words %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="round-the-buttons">
+			<button type="button" class="btn btn-success btn-block"
+							id="gs-finish-btn">
+				Create my account
+			</button>
+		</div>
+	</div>
 </div>
+
+<div id="gs-fundamentals-container"></div>

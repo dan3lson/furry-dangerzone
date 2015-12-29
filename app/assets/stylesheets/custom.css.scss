@@ -68,6 +68,10 @@ body {
 	padding: 25px 0;
 }
 
+.no-underline a {
+	text-decoration: none;
+}
+
 //**********
 //*
 //* TYPOGRAPHY
@@ -98,7 +102,9 @@ p {
 #awfs-step-3-container,
 #awfs-review-container,
 #select-stu-cont-btn,
-#select-words-finish-btn {
+#select-words-finish-btn,
+#guest-select-words-container,
+#gs-finish-btn {
 	display: none;
 }
 
@@ -107,6 +113,11 @@ p {
   border-radius: 75px;
   height: 75px;
   width: 75px;
+}
+
+.round-the-buttons .btn {
+	border-radius: 20px;
+	padding: 7px;
 }
 
 .achievements-container {
@@ -987,7 +998,6 @@ a {
 
 .word-show-game-circle {
 	border-radius: $home-game-circle-size;
-	font-size: xx-large;
 	height: $home-game-circle-size;
 	padding-top: 28px;
 	width: $home-game-circle-size;

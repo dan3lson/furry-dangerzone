@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'static_pages#guest_home'
   get "get_started" => "guests#get_started"
+  get "get_started_game_zone" => "guests#game_zone"
+  get "get_started_fundamentals" => "guests#fundamentals"
   get "about_us" => "static_pages#about_us"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
@@ -45,7 +47,6 @@ Rails.application.routes.draw do
   resources :feedbacks
   namespace :school do
     root "schools#classrooms"
-    get "home" => "schools#home"
     get "classes" => "schools#classes"
     get "words" => "schools#words"
     get "student_words" => "words#student_words"

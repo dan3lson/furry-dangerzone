@@ -51,6 +51,22 @@ class TagGamesController < ApplicationController
         end
       end
 
+      @attributes = @attributes.map do |a|
+        if a == "definition"
+          "<i class='fa fa-list-ol'></i> ".html_safe <<
+          "What word matches the definition below?"
+        elsif a == "example_sentence"
+          "<i class='fa fa-newspaper-o'></i> ".html_safe <<
+          "What word best fills in the blank(s) below?"
+        elsif a == "synonyms"
+          "<i class='fa fa-object-group'></i> ".html_safe <<
+          "What word is most similar to the one below?"
+        elsif a == "antonyms"
+          "<i class='fa fa-object-ungroup'></i> ".html_safe <<
+          "What word is the opposite of the one below?"
+        end
+      end
+
       respond_to do |format|
         format.html {
           render template: "games/jeopardy.html.erb"

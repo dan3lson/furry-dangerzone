@@ -1,10 +1,6 @@
 <h4 class="tightness">
-  <span class="basic-black-link">
-    <% if params[:controller] == "searches" || params[:controller] == "games" %>
-      <span class="word-name"><%= word.name %></span>
-    <% else %>
-      <%= link_to word.name, word %>
-    <% end %>
+  <span class="basic-black-link word-name">
+    <%= word.name %>
   </span>
 </h4>
 

@@ -1,12 +1,12 @@
 class GamesController < ApplicationController
   def fundamentals
-    if logged_in?
-      @chosen_word = Word.find(params[:word_id])
-      @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
-      @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
-      @real_world_examples = RealWorldExample.for(@chosen_word.name)
-      @game_started = true
+    @chosen_word = Word.find(params[:word_id])
+    @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
+    @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
+    @real_world_examples = RealWorldExample.for(@chosen_word.name)
+    @record = true
 
+    if logged_in?
       if current_user.has_incomplete_fundamentals?
         @three_fund_words = current_user.incomplete_fundamentals.shuffle.take(
           3
@@ -17,10 +17,6 @@ class GamesController < ApplicationController
         @three_j_words = current_user.incomplete_freestyles.shuffle.take(3).
           map { |uw| uw.word }
       end
-    else
-      flash[:danger] = "Yikes! Log in first and then play."
-
-      redirect_to root_path
     end
   end
 
@@ -72,6 +68,22 @@ class GamesController < ApplicationController
               @attribute_value.sample.name
             end
           end
+        end
+      end
+
+      @attributes = @attributes.map do |a|
+        if a == "definition"
+          "<i class='fa fa-list-ol'></i> ".html_safe <<
+          "What word matches the definition below?"
+        elsif a == "example_sentence"
+          "<i class='fa fa-newspaper-o'></i> ".html_safe <<
+          "What word best fills in the blank(s) below?"
+        elsif a == "synonyms"
+          "<i class='fa fa-object-group'></i> ".html_safe <<
+          "What word is most similar to the one below?"
+        elsif a == "antonyms"
+          "<i class='fa fa-object-ungroup'></i> ".html_safe <<
+          "What word is the opposite of the one below?"
         end
       end
 

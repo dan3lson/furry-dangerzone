@@ -14,13 +14,13 @@ $bootstrap-green: #5cb85c;
 $dark-gray: #8e8e93;
 $even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 55px;
-$leksi-green: #24d12e;
+$leksi-green: #81CE97;
+$light-leksi-green: lighten($leksi-green, 17);
 $leksi-orange: orange;
 $leksi-red: #ff1300;
 $light-gray: #f2f2f2;
 $white: #fff;
 
-#activity_name,
 #level_two_back_button, #word_jeapordy_instructions,
 #level_two_game_continue_button,
 #review_level_two_container,
@@ -46,14 +46,13 @@ $white: #fff;
 	border: $light-gray 1px solid;
 }
 
-.progress-text{
-	color: lighten(gray, 25);
+.jeop-success {
+	border: $light-gray 1px solid;
+	color: $leksi-green;
 }
 
-#activity_name {
-	background: $leksi-orange;
-	color: $white;
-	padding: 5px;
+.progress-text{
+	color: lighten(gray, 25);
 }
 
 .jeopardy-game-instructions {

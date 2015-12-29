@@ -17,7 +17,7 @@ $(document).ready(function(){
 
 	// Start the main activity
 	$(".jeopardy-begin-game").click(function(){
-		$(".jeopardy-pregame").hide();
+		$("#jeopardy-pregame").hide();
 		$("#activity_name").fadeIn();
 
 		var $controller_url = ""
@@ -83,7 +83,7 @@ $(document).ready(function(){
 				// If the user's guess is correct
 				if ($(this).text() == lineup_names[$counter]) {
 					$(first_mini_progress_bar_without_pbc_class).children().first().html("&#10084;").css("color", "#fff");
-					$(first_mini_progress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-success");
+					$(first_mini_progress_bar_without_pbc_class).removeClass("progress-bar-custom").addClass("progress-bar-default");
 				// If the user's guess is incorrect
 				} else {
 					$correct_word_proggress_bar_without_pbc_class = "#" +
@@ -103,10 +103,10 @@ $(document).ready(function(){
 
 				// When the game is over, display "complete" message
 				if ($counter == 20) {
-					$("#chosen_word_one_btn").prop("disabled",true);
-					$("#chosen_word_two_btn").prop("disabled",true);
-					$("#chosen_word_three_btn").prop("disabled",true);
-					$("#chosen_word_four_btn").prop("disabled",true);
+					$("#chosen_word_one_btn").prop("disabled", true);
+					$("#chosen_word_two_btn").prop("disabled", true);
+					$("#chosen_word_three_btn").prop("disabled", true);
+					$("#chosen_word_four_btn").prop("disabled", true);
 
 					display_activity_instruction("Ready for the results?", "3...2...1...");
 
@@ -254,7 +254,7 @@ $(document).ready(function(){
 		word_name,
 		word_id
 		) {
-		if ($(chosen_word_num_progress_bars_div + " .progress-bar-success").length > 2) {
+		if ($(chosen_word_num_progress_bars_div + " .progress-bar-default").length > 2) {
 			// update game_levels 9-28 as complete for this (user_)word
 			update_jeopardy_status_as_complete(word_id);
 

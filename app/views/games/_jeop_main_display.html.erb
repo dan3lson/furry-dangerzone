@@ -1,0 +1,34 @@
+<div class="row lead">
+	<div class="col-sm-6 col-sm-offset-3">
+		<div id="level_2_details" class="panel panel-default center">
+			<div class="panel-heading">
+				<h4 id="activity_name">Welcome to Jeopardy</h4>
+			</div>
+			<div class="panel-body">
+				<div id="jeopardy-pregame">
+					<div id="jeop-controller"
+					data-controller="<%= params[:controller] %>"
+					data-tag-id="<%= params[:tag_id] %>"></div>
+					Earn <i class="fa fa-heart gray"></i>s
+					for every question you answer correctly.
+					<br>
+					Collect at least three <i class="fa fa-heart gray"></i>s
+					for each word to advance it.
+
+					<br>
+					<br>
+					<span class="jeopardy-begin-game pointer hover leksi-green">
+						<i class="fa fa-play-circle"></i>
+						<strong>Play</strong>
+					</span>
+
+					<div class="palabra" data-word-id="<%= @chosen_word.id %>"></div>
+				</div>
+
+				<div id="jeopardy-directions-container" class="lead">
+					<span id="jeopardy-specific-instruction"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

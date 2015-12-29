@@ -20,7 +20,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$("#available-students").on("click", ".stu-bubble", function(){
+	$("#available-students").on("click", ".stu-bubble", function() {
 		$("#num-students-added").html(num_classes(".glyphicon-remove-circle") + 1);
 
 		$("#selected-students").append($(this));

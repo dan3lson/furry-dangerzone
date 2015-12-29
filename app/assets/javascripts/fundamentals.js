@@ -1,14 +1,9 @@
 $(document).ready(function(){
-	/**
-	 * Initiating variables and arrays
-	 */
-
 	// General
-  var $chosen_word_value = $(".word-name").html();
+  var $chosen_word_value = $.trim($(".word-name").html());
 	var $chosen_word_id = $(".palabra-id").html();
 	var $styled_chosen_word_value = "";
-	var $each_letter_span; // letters shown in the header
-	var $regex = /^[a-zA-Z. ]+$/; // No numbers or special characters just letters and spaces; /^[a-zA-Z]*$/; is only letters and no spaces or numbers
+	var $regex = /^[a-zA-Z. ]+$/;
 	var $new_goodies_total = 0;
   var $time_game_started;
 	// Spell the word
@@ -20,8 +15,8 @@ $(document).ready(function(){
 	}
 	// Fill in the blank
 	var $each_life_span;
-	var	$each_letter_fill_in_the_blank_div; // letters shown in the fill in the blanks activity
-	var	$each_random_letter_fill_in_the_blank_array; // random letters shown in the fill in the blanks activity
+	var	$each_letter_fill_in_the_blank_div;
+	var	$each_random_letter_fill_in_the_blank_array;
 	var $alphabet_array = "abcdefghijklmnopqrstuvwxyz".split('');
 	var	$alphabet_random_letter;
 	var $alphabet_random_letters_array = [];
@@ -77,299 +72,350 @@ $(document).ready(function(){
 	var $rwe_container;
 	var $rwe_circle_activity_boolean = false;
 
-	// Update the instructions
-	display_instruction("Type the word below:");
+  learn_the_fundamentals();
 
-	// Dislay chosen word
-	$("#chosen-word-header-container").html($chosen_word_value);
+  function learn_the_fundamentals() {
+    start_game();
 
-  $(".checkpoint-image").hide();
+    fill_in_the_blank_back_button();
 
-	// Start the first activity
-	spell_chosen_word();
+    spell_the_word_continue_button();
 
-  if ($("#game-started-bool").hasClass("begin-timer")) {
-    $time_game_started = new Date();
+    fill_in_the_blank_continue_button();
+
+    pronunciation_image_button();
+
+    pronunciation_continue_button();
+
+    meanings_continue_button();
+
+    synonyms_continue_button();
+
+    antonyms_continue_button();
+
+    syn_ant_checkpoint_continue_button();
+
+    real_world_examples_continue_button();
   }
 
-	/**
-	 * Start the progress made on learning this word
-	 */
+  function start_game() {
+    if ($("#game-started-bool").hasClass("begin-timer")) {
+      display_instruction("Type the word below:");
 
-	progressBar(0);
+      $("#chosen-word-header-container").html($chosen_word_value);
+
+      $(".checkpoint-image").hide();
+
+      spell_chosen_word();
+
+      progressBar(0);
+
+      $time_game_started = new Date();
+    }
+  }
+
+  function fill_in_the_blank_back_button() {
+    $("#fill_in_the_blank_back_button").click(function(){
+      $("#spell_the_word_form").show();
+
+      $(".checkpoint-image").hide();
+
+      // Show and hide buttons
+      hide_and_show_button("#fill_in_the_blank_container, #fill_in_the_blank_back_button, #fill_in_the_blank_continue_button, #fill_in_the_blank_game_over_message", "#spell_the_word_continue_button, #restart_back_button");
+
+      // Empty the different letter arrays
+      $alphabet_random_letters_array = [];
+      $merged_letters_array = [];
+
+      // Update the activity name and instruction
+      display_instruction("Type the word below:");
+
+      // If clicking back after losing or not doing anything
+      if ($fill_in_the_blank_incorrect_count == 3) {
+        // Reset the array values back to normal
+        $chosen_word_each_letter_array = [];
+        for (var i = 0; i < $chosen_word_value.length; i++) {
+          $chosen_word_each_letter_array.push($chosen_word_value[i]);
+       }
+
+       $("#chosen_word_header_container").html($chosen_word_value);
+
+       $alphabet_random_letters_array = [];
+       $merged_letters_array = [];
+
+       $(".fill_in_the_blank_letters").remove();
+       $fill_in_the_blank_incorrect_count = 0;
+      }
+      progressBar(0);
+   });
+  }
 
 
-	/**
-	 * Handle the back buttons
-	 */
-
-	 // If the user wants to return to the spell the word activity
- 	$("#fill_in_the_blank_back_button").click(function(){
- 		$("#spell_the_word_form").show();
-
-    $(".checkpoint-image").hide();
-
- 		// Show and hide buttons
- 		hide_and_show_button("#fill_in_the_blank_container, #fill_in_the_blank_back_button, #fill_in_the_blank_continue_button, #fill_in_the_blank_game_over_message", "#spell_the_word_continue_button, #restart_back_button");
-
- 		// Empty the different letter arrays
- 		$alphabet_random_letters_array = [];
- 		$merged_letters_array = [];
-
- 		// Update the activity name and instruction
- 		display_instruction("Type the word below:");
-
- 		// If clicking back after losing or not doing anything
- 		if ($fill_in_the_blank_incorrect_count == 3) {
- 			// Reset the array values back to normal
- 			$chosen_word_each_letter_array = [];
- 			for (var i = 0; i < $chosen_word_value.length; i++) {
- 				$chosen_word_each_letter_array.push($chosen_word_value[i]);
- 			}
-
- 			$("#chosen_word_header_container").html($chosen_word_value);
-
- 			$alphabet_random_letters_array = [];
- 			$merged_letters_array = [];
-
- 			// Empty the different letter arrays
- 			$(".fill_in_the_blank_letters").remove();
-
- 			// Reset the incorrect count
- 			$fill_in_the_blank_incorrect_count = 0;
- 		}
-
- 		// Return the progress back to 0
- 		progressBar(0);
- 	});
-
-	/**
+  /**
 	 * Handle the continue buttons
 	 */
 
-	$("#spell_the_word_continue_button").click(function(event){
-		// Hide the first activity
-		$("#spell_the_word_form").hide();
-
-    $(".checkpoint-image").show();
-
-		// Show and hide buttons
-		hide_and_show_button("#restart_back_button, #spell_the_word_continue_button", "#fill_in_the_blank_back_button");
-
-		// Update the activity name and instruction
-		display_instruction("Tap the letters to spell the word correctly.");
-
-		// Update the progress made
-		progressBar(15);
-
-		// Check if Fill in the blank activity was already won
-		if ($fill_in_the_blank_game_won) {
-			$alphabet_random_letters_array = [];
-			$merged_letters_array = [];
-			$("#fill_in_the_blank_container, #fill_in_the_blank_continue_button").show();
-		} else {
-			$alphabet_random_letters_array = [];
-			$merged_letters_array = [];
-			// Make sure the string containing the letters the user guesses to spell the word is empty before displaying what's typed
-			$fill_in_the_blank_correctly_spelled_word = "";
-
-			// Load the next activity
-			start_fill_in_the_blank_checkpoint_activity();
-		}
-	});
-
-	$("#fill_in_the_blank_continue_button").click(function(){
-    $(".checkpoint-image").hide();
-
-		// Show and hide buttons
-		hide_and_show_button("#fill_in_the_blank_back_button, #fill_in_the_blank_continue_button, #fill_in_the_blank_container", "#pronunciation_back_button, #pronunciation_container");
-		$("#chosen-word-header-container").hide();
-
-		// Update the activity name and instruction
-		display_instruction("Say <strong>'" + $chosen_word_value + "'</strong> aloud and then tap the mic.");
-
-		// Update the progress made
-		progressBar(30);
-	});
-
-	$("#pronunciation_image_button").click(function(){
-		$("#pronunciation_continue_button").fadeIn();
-	});
-
-	$("#pronunciation_continue_button").click(function(){
-
-		// Show and hide buttons
-		$("#pronunciation_back_button, #pronunciation_container, #pronunciation_continue_button").hide();
-		$("#meanings_back_button, #meanings_container").show();
-
-		// Update the activity name and instruction
-		$part_of_speech = $(".word-part-of-speech").html();
-		display_instruction("As a(n) " + $part_of_speech + ", read the meaning(s) for <strong>'" + $chosen_word_value + "'</strong>.")
-
-		// Update the progress made
-		progressBar(45);
-
-		// Start the next activity, i.e. Meanings, if not already started
-		start_meanings_activity($chosen_word_value);
-
-		// If all words have been clicked on, show the meanings continue button
-		if ($meaning_circle_activity_boolean) {
-			$("#meanings_continue_button").show();
-		};
-	});
-
-	$("#meanings_continue_button").click(function(){
-		// Show and hide buttons
-		$("#meanings_back_button, #meanings_container, #meanings_continue_button").hide();
-
-		if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
-			// Show and hide buttons
-			$("#synonyms_back_button, #synonyms_container").show();
-
-			// Update the activity name and instruction
-			display_instruction("The words below are similar to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
-
-			// Update the progress made
-			progressBar(60);
-
-			start_synonyms_activity($chosen_word_value);
-		} else if ($("#synonym_no_results").hasClass("please-tap-continue") && !$("#antonym_no_results").hasClass("please-tap-continue")) {
-			// Show and hide buttons
-			$("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
-			$("#antonyms_back_button, #antonyms_container").show();
-
-			// Update the activity name and instruction
-			display_instruction("The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
-
-			// Update the progress made
-			progressBar(75);
-
-			start_antonyms_activity($chosen_word_value);
-		}	else if ($("#synonym_no_results").hasClass("please-tap-continue") &&
-								 $("#antonym_no_results").hasClass("please-tap-continue") &&
-								 $("#rwe_no_results").hasClass("please-tap-continue")) {
-			// Show and hide buttons
-			$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
-			$("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
-
-			// Update the user_word's status to complete
-			update_user_word_games_completed();
-
-			// Update the progress made
-			progressBar(100);
-
-			// Update user goodies
-			update_user_points(10);
-			boost_goodies(3);
-
-      // Update num_played for this user_word
-      update_num_played();
-
-			// Start the next activity, i.e. review level one
-			start_review_level_one_activity($chosen_word_value);
-
-			// Hide the exit btn and display the home btn
-			$("#game-exit-btn").hide();
-			$("#game-home-btn").show();
-		} else if ($("#synonym_no_results").hasClass("please-tap-continue") && $("#antonym_no_results").hasClass("please-tap-continue")) {
-			// Show and hide buttons
-			$("#real_world_examples_back_button, #real_world_examples_container").show();
-
-			// Update the activity name and instruction
-			display_instruction("Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
-
-			// Update the progress made
-			progressBar(90);
-
-			// Start the next activity, i.e. Real World Examples, if not already started
-			start_real_world_examples_activity($chosen_word_value);
-		}
-
-		// If all words have been clicked on, show the synonyms continue button
-		if ($synonym_circle_activity_boolean) {
-			$("#synonyms_continue_button").show();
-		};
-	});
-
-	$("#synonyms_continue_button").click(function(){
-		// Start the next activity --> if there are synonyms, but no antonyms
-		if ($("#antonym_no_results").hasClass("please-tap-continue")) {
-			// Show and hide buttons
-			$("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container").show();
-			$("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
-			$("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").hide();
-
-			// Update the activity name and instruction
-			display_instruction("Is <strong>'" + $chosen_word_value + "'</strong> a synonym or antonym to:");
-
-			// Update the progress made
-			progressBar(75);
+  function spell_the_word_continue_button() {
+    $("#spell_the_word_continue_button").click(function(event){
+      // Hide the first activity
+      $("#spell_the_word_form").hide();
 
       $(".checkpoint-image").show();
 
-			start_syn_ant_checkpoint_activity($chosen_word_value);
+      // Show and hide buttons
+      hide_and_show_button("#restart_back_button, #spell_the_word_continue_button", "#fill_in_the_blank_back_button");
 
-		// Start the next activity --> if there there are antonyms
-		} else {
-			// Show and hide buttons
-			$("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
-			$("#antonyms_back_button, #antonyms_container").show();
+      // Update the activity name and instruction
+      display_instruction("Tap the letters to spell the word correctly.");
 
-			// Update the activity name and instruction
-			display_instruction("The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
+      // Update the progress made
+      progressBar(15);
 
-			// Update the progress made
-			progressBar(75);
+      // Check if Fill in the blank activity was already won
+      if ($fill_in_the_blank_game_won) {
+        $alphabet_random_letters_array = [];
+        $merged_letters_array = [];
+        $("#fill_in_the_blank_container").show();
+        $("#fill_in_the_blank_continue_button").show();
+      } else {
+        $alphabet_random_letters_array = [];
+        $merged_letters_array = [];
+        // Make sure the string containing the letters the user guesses to spell the word is empty before displaying what's typed
+        $fill_in_the_blank_correctly_spelled_word = "";
 
-			start_antonyms_activity($chosen_word_value);
-		}
+        // Load the next activity
+        start_fill_in_the_blank_checkpoint_activity();
+      }
+    });
+  }
 
-		// If all words have been clicked on, show the antonyms continue button
-		if ($antonym_circle_activity_boolean) {
-			$("#antonyms_continue_button").show();
-		};
-	});
+  function fill_in_the_blank_continue_button() {
+    $("#fill_in_the_blank_continue_button").click(function() {
+      $(".checkpoint-image").hide();
 
-	$("#antonyms_continue_button").click(function(){
-		// Show and hide buttons
-		$("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container").show();
-		$("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").hide();
+      hide_and_show_button("#fill_in_the_blank_back_button, #fill_in_the_blank_continue_button, #fill_in_the_blank_container", "#pronunciation_back_button, #pronunciation_container");
+      $("#chosen-word-header-container").hide();
 
-		// Update the activity name and instruction
-		display_instruction("Is <strong>'" + $chosen_word_value + "'</strong> a synonym or antonym to:");
+      display_instruction("Say <strong>'" + $chosen_word_value + "'</strong> aloud and then tap the mic.");
 
-		// Update the progress made
-		progressBar(75);
+      progressBar(30);
+    });
+  }
 
-		// Start the next activity, i.e. Syn / Ant checkpoint, if not already started
-		if ($(".current_syn_ant_checkpoint_word")[0] == undefined) {
-      $(".checkpoint-image").show();
-			start_syn_ant_checkpoint_activity($chosen_word_value);
-		}
+  function pronunciation_image_button() {
+    $("#pronunciation_image_button").click(function() {
+      $("#pronunciation_continue_button").fadeIn();
+    });
+  }
 
-		// If the checkpoint has been completed, show the syn_ant continue button
-		if ($syn_ant_circle_activity_boolean) {
-			$("#syn_ant_checkpoint_continue_button").show();
-			// Display the number correct out of the total number of synonyms and antonyms available
-			$("#syn_ant_checkpoint_score_div").html($syn_ant_checkpoint_correct_score + " / " + $shuffled_syn_ant_array.length).show();
-		}
-	});
+  function pronunciation_continue_button() {
+    $("#pronunciation_continue_button").click(function(){
+      $("#pronunciation_back_button, #pronunciation_container, #pronunciation_continue_button").hide();
+      $("#meanings_back_button, #meanings_container").show();
 
-	$("#syn_ant_checkpoint_continue_button").click(function(){
-    $(".checkpoint-image").hide();
+      $part_of_speech = $(".word-part-of-speech").html();
+      display_instruction("As a(n) " + $part_of_speech + ", read the meaning(s) for <strong>'" + $chosen_word_value + "'</strong>.")
 
-		// Show and hide buttons
-		$("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container, #syn_ant_checkpoint_continue_button, #syn_ant_checkpoint_score_div").hide();
-		$("#real_world_examples_back_button, #real_world_examples_container").show();
+      progressBar(45);
 
-		// Update the activity name and instruction
-		display_instruction("Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
+      start_meanings_activity($chosen_word_value);
 
-		// Update the progress made
-		progressBar(90);
+      if ($meaning_circle_activity_boolean) {
+        $("#meanings_continue_button").show();
+      };
+    });
+  }
 
-		// If all words have been clicked on, show the real world examples container
-		if ($("#rwe_no_results").hasClass("please-tap-continue")) {
+  function meanings_continue_button() {
+    $("#meanings_continue_button").click(function(){
+      $("#meanings_back_button").hide();
+      $("#meanings_container").hide();
+      $("#meanings_continue_button").hide();
+
+      if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
+        // Show and hide buttons
+        $("#synonyms_back_button, #synonyms_container").show();
+
+        // Update the activity name and instruction
+        display_instruction("The words below are similar to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
+
+        // Update the progress made
+        progressBar(60);
+
+        start_synonyms_activity($chosen_word_value);
+      } else if ($("#synonym_no_results").hasClass("please-tap-continue") && !$("#antonym_no_results").hasClass("please-tap-continue")) {
+        // Show and hide buttons
+        $("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
+        $("#antonyms_back_button, #antonyms_container").show();
+
+        // Update the activity name and instruction
+        display_instruction("The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
+
+        // Update the progress made
+        progressBar(75);
+
+        start_antonyms_activity($chosen_word_value);
+      }	else if ($("#synonym_no_results").hasClass("please-tap-continue") &&
+      $("#antonym_no_results").hasClass("please-tap-continue") &&
+      $("#rwe_no_results").hasClass("please-tap-continue")) {
+        // Show and hide buttons
+        $("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
+        $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
+
+        // Update the user_word's status to complete
+        update_user_word_games_completed();
+
+        // Update the progress made
+        progressBar(100);
+
+        // Update user goodies
+        update_user_points(10);
+        boost_goodies(3);
+
+        // Update num_played for this user_word
+        update_num_played();
+
+        // Start the next activity, i.e. review level one
+        start_review_level_one_activity($chosen_word_value);
+
+        // Hide the exit btn and display the home btn
+        $("#game-exit-btn").hide();
+        $("#game-home-btn").show();
+      } else if ($("#synonym_no_results").hasClass("please-tap-continue") && $("#antonym_no_results").hasClass("please-tap-continue")) {
+        // Show and hide buttons
+        $("#real_world_examples_back_button, #real_world_examples_container").show();
+
+        // Update the activity name and instruction
+        display_instruction("Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
+
+        // Update the progress made
+        progressBar(90);
+
+        // Start the next activity, i.e. Real World Examples, if not already started
+        start_real_world_examples_activity($chosen_word_value);
+      }
+
+      if ($synonym_circle_activity_boolean) {
+        $("#synonyms_continue_button").show();
+      };
+    });
+  }
+
+  function synonyms_continue_button() {
+    $("#synonyms_continue_button").click(function(){
+      // Start the next activity --> if there are synonyms, but no antonyms
+      if ($("#antonym_no_results").hasClass("please-tap-continue")) {
+        // Show and hide buttons
+        $("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container").show();
+        $("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
+        $("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").hide();
+
+        // Update the activity name and instruction
+        display_instruction("Is <strong>'" + $chosen_word_value + "'</strong> a synonym or antonym to:");
+
+        // Update the progress made
+        progressBar(75);
+
+        $(".checkpoint-image").show();
+
+        start_syn_ant_checkpoint_activity($chosen_word_value);
+
+        // Start the next activity --> if there there are antonyms
+      } else {
+        // Show and hide buttons
+        $("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
+        $("#antonyms_back_button, #antonyms_container").show();
+
+        // Update the activity name and instruction
+        display_instruction("The words below are opposite to " + "<strong>'" + $chosen_word_value + "'</strong>. Tap and view each one.");
+
+        // Update the progress made
+        progressBar(75);
+
+        start_antonyms_activity($chosen_word_value);
+      }
+
+      // If all words have been clicked on, show the antonyms continue button
+      if ($antonym_circle_activity_boolean) {
+        $("#antonyms_continue_button").show();
+      };
+    });
+  }
+
+  function antonyms_continue_button() {
+    $("#antonyms_continue_button").click(function(){
+      // Show and hide buttons
+      $("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container").show();
+      $("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").hide();
+
+      // Update the activity name and instruction
+      display_instruction("Is <strong>'" + $chosen_word_value + "'</strong> a synonym or antonym to:");
+
+      // Update the progress made
+      progressBar(75);
+
+      // Start the next activity, i.e. Syn / Ant checkpoint, if not already started
+      if ($(".current_syn_ant_checkpoint_word")[0] == undefined) {
+        $(".checkpoint-image").show();
+        start_syn_ant_checkpoint_activity($chosen_word_value);
+      }
+
+      // If the checkpoint has been completed, show the syn_ant continue button
+      if ($syn_ant_circle_activity_boolean) {
+        $("#syn_ant_checkpoint_continue_button").show();
+        // Display the number correct out of the total number of synonyms and antonyms available
+        $("#syn_ant_checkpoint_score_div").html($syn_ant_checkpoint_correct_score + " / " + $shuffled_syn_ant_array.length).show();
+      }
+    });
+  }
+
+  function syn_ant_checkpoint_continue_button() {
+    $("#syn_ant_checkpoint_continue_button").click(function(){
+      $(".checkpoint-image").hide();
+
+      // Show and hide buttons
+      $("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container, #syn_ant_checkpoint_continue_button, #syn_ant_checkpoint_score_div").hide();
+      $("#real_world_examples_back_button, #real_world_examples_container").show();
+
+      // Update the activity name and instruction
+      display_instruction("Tap each source to see how <strong>'" + $chosen_word_value + "'</strong> has been used in everyday life.");
+
+      // Update the progress made
+      progressBar(90);
+
+      // If all words have been clicked on, show the real world examples container
+      if ($("#rwe_no_results").hasClass("please-tap-continue")) {
+        // Show and hide buttons
+        $("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
+        $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
+
+        // Update the user_word's status to complete
+        update_user_word_games_completed();
+
+        // Update num_played for this user_word
+        update_num_played();
+
+        // Update the progress made
+        progressBar(100);
+
+        // Update user goodies
+        update_user_points(10);
+        boost_goodies(10);
+
+        // Start the next activity, i.e. review level one
+        start_review_level_one_activity($chosen_word_value);
+
+        // Hide the exit btn and display the home btn
+        $("#game-exit-btn").hide();
+        $("#game-home-btn").show();
+      } else {
+        start_real_world_examples_activity($chosen_word_value);
+      }
+    });
+  }
+
+  function real_world_examples_continue_button() {
+    $("#real_world_examples_continue_button").click(function(){
       // Show and hide buttons
       $("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
       $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
@@ -377,7 +423,7 @@ $(document).ready(function(){
       // Update the user_word's status to complete
       update_user_word_games_completed();
 
-      // Update num_played for this user_word
+      // Update num played for this user_word
       update_num_played();
 
       // Update the progress made
@@ -393,45 +439,12 @@ $(document).ready(function(){
       // Hide the exit btn and display the home btn
       $("#game-exit-btn").hide();
       $("#game-home-btn").show();
-		} else {
-      start_real_world_examples_activity($chosen_word_value);
-    }
-	});
-
-	$("#real_world_examples_continue_button").click(function(){
-		// Show and hide buttons
-		$("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
-		$("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
-
-		// Update the user_word's status to complete
-		update_user_word_games_completed();
-
-    // Update num played for this user_word
-    update_num_played();
-
-		// Update the progress made
-		progressBar(100);
-
-		// Update user goodies
-		update_user_points(10);
-		boost_goodies(10);
-
-		// Start the next activity, i.e. review level one
-		start_review_level_one_activity($chosen_word_value);
-
-		// Hide the exit btn and display the home btn
-		$("#game-exit-btn").hide();
-		$("#game-home-btn").show();
-	});
-
-	/**
-	 * Starter Functions: Main ones that initiate each activity
-	 */
+    });
+  }
 
 	// Start Level 1 with the spelling activity
 	function spell_chosen_word() {
 		$("#spell_the_word").focus();
-
 		$("#spell_the_word").on('input', function(){
 			$word_being_spelled = $.trim($(this).val().toLowerCase());
 

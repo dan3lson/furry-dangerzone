@@ -1,0 +1,18 @@
+<% unless words.nil? %>
+	<br>
+
+	<% words.each do |word| %>
+		<div class="inline-block pointer game-zone-margin hover">
+			<div>
+				<%= link_to get_started_fundamentals_path(word_id: word), remote: true,
+					method: :get do %>
+					<%= image_tag("0_big.png", alt: "0% Mastered") %>
+				<% end %>
+			</div>
+
+			<span class="lead">
+				<%= word.name %>
+			</span>
+		</div>
+	<% end %>
+<% end %>
