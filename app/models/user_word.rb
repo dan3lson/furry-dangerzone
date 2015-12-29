@@ -70,8 +70,8 @@ class UserWord < ActiveRecord::Base
   end
 
   # not tested
-  def self.add_first_four_words(user)
-    words = Word.random(4)
+  def self.add_first_five_words(user)
+    words = Word.random(5)
     words_successfully_added = 0
 
     words.each do |w|

@@ -1,173 +1,6 @@
-<% if @game_started %>
-	<div id="game-started-bool" class="begin-timer"></div>
-<% end %>
+<%= render "games/fund_game_container", word: @chosen_word, record: @record,
+	synonyms: @synonyms, antonyms: @antonyms, rwe: @real_world_examples %>
 
-<div id="progress_bar_container">
-	<div class="progress">
-		<div class="game-progress-bar progress-bar progress-bar-success"
-				 role="progressbar" aria-valuenow="0"
-				 aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-				<span class="sr-only">0%</span>
-		</div>
-	</div>
-</div>
-
-<div class="palabra">
-	<%= render "words/word", word: @chosen_word %>
-	<span class="palabra-id"><%= @chosen_word.id %></span>
-</div>
-
-<!-- start of level 1 details -->
-<div id="level_1_details">
-	<div>
-		<div class="inline-block checkpoint-image">
-			<%= image_tag("grade_color_50.png", alt: "Checkpoint!") %>
-		</div>
-
-		<div class="fundamentals-game-instructions inline-block"></div>
-	</div>
-
-	<div id="chosen-word-header-container"></div>
-	<!-- end -->
-	<br>
-</div>
-<!-- end of level 1 details -->
-
-<!-- start of level 1 form -->
-<div>
-	<!-- start of spell the word section -->
-	<div class="form-group" id="spell_the_word_form">
-		<label for="spell_the_word" class="sr-only" ></label>
-		<input id="spell_the_word" class="form-control input-lg" type="text" placeholder=""></input>
-	</div>
-	<!-- end of spell the word section -->
-</div> <!-- end of level 1 form -->
-
-<!-- start of fill in the blank activity -->
-<div class="row" id="fill_in_the_blank_container">
-	<div class="text-default lead" id="fill_in_the_blank_game_over_message">
-		Hey, are you having trouble?
-		<span class="pointer apple-blue" id="fill_in_the_blank_back_button">
-			Tap here
-		</span>
-		to see the spelling of the word. Then tap 'continue' to try again!
-	</div>
-</div>
-<!-- end of fill in the blank activity -->
-
-<!-- start of pronunciation activity -->
-<div id="pronunciation_container" align="center">
-	<%= image_tag("pronunciation.png", alt: "Pronounce the word below.",
-		class: "img-responsive pointer", id: "pronunciation_image_button") %>
-</div>
-<!-- end of pronunciation activity -->
-
-<!-- start of meanings container -->
-<div id="meanings_container">
-	<div class="well lead">
-		<% top_three_entries_for(@chosen_word, "definition").each do |d| %>
-			<p>
-				<span>&#8605; <%= d %></span>
-			</p>
-		<% end %>
-	</div>
-</div>
-<!-- end of meanings container -->
-
-<!-- start of synonyms container -->
-<div id="synonyms_container">
-	<% if @chosen_word.has_synonyms? %>
-		<% @synonyms.each_with_index do |synonym, index| %>
-			<div class="synonym_row pointer" type="button"
-					 data-toggle="collapse" data-target="#syn<%= index %>"
-					 aria-expanded="false" aria-controls= "<%= index %>"
-			>
-				<div class="red_circle inline-block"></div>
-				<div class="synonym_word_container lead pointer inline-block">
-					<%= synonym.name %>
-				</div>
-			</div>
-			<div class="word_details_container well lead collapse"
-					 id="syn<%= index %>"
-			>
-				<%= render "words/word_details", word: synonym %>
-			</div>
-		<% end %>
-	<% else %>
-		<p id="synonym_no_results" class="lead please-tap-continue">
-			&#9785; There aren't any synonyms to show. Please tap continue.
-		</p>
-	<% end %>
-</div>
-<!-- end of synonyms container -->
-
-<!-- start of antonyms container -->
-<div id="antonyms_container">
-	<% if @chosen_word.has_antonyms? %>
-		<% @antonyms.each_with_index do |antonym, index| %>
-			<div class="antonym_row pointer" type="button"
-					 data-toggle="collapse" data-target="#ant<%= index %>"
-					 aria-expanded="false" aria-controls= "<%= index %>"
-			>
-				<div class="red_circle inline-block"></div>
-				<div class="antonym_word_container lead pointer inline-block">
-					<%= antonym.name %>
-				</div>
-			</div>
-			<div class="word_details_container well lead collapse"
-					 id="ant<%= index %>"
-			>
-				<%= render "words/word_details", word: antonym %>
-			</div>
-		<% end %>
-	<% else %>
-	<!-- Check what's accessible at this point  -->
-		<p id="antonym_no_results" class="lead please-tap-continue">
-			&#9785; There aren't any antonyms to show. Please tap continue.
-		</p>
-	<% end %>
-</div>
-<!-- end of antonyms container -->
-
-<!-- start of syn_ant checkpoint container -->
-<div id="syn_ant_checkpoint_container">
-	<% if @chosen_word.doesnt_have_any_syn_or_ant? %>
-		<div id="syn-ant-no-results" class="lead">
-			&#9785; We don't have any synonyms or antonyms to do a checkpoint.
-			Please tap continue.
-		</div>
-	<% end %>
-</div>
-<!-- end of syn_ant checkpoint container -->
-
-<!-- start of real world examples checkpoint container -->
-<div id="real_world_examples_container">
-	<% if @real_world_examples.nil? %>
-		<div id="rwe_no_results" class="lead please-tap-continue">
-			&#9785; There aren't any real world examples to show. Please tap continue.
-		</div>
-	<% else %>
-		<% @real_world_examples.each_with_index do |rwe, index| %>
-			<div class="rwe_row rwe_row_<%= index %> pointer" type="button"
-					 data-toggle="collapse" data-target="#rwe<%= index %>"
-					 aria-expanded="false" aria-controls="<%= index %>"
-			>
-				<div class="red_circle inline-block"></div>
-				<div class="rwe_source_container lead pointer inline-block">
-					<%= rwe.source %>
-				</div>
-			</div>
-			<div class="rwe_container well lead collapse" id="rwe<%= index %>">
-				<div class="rwe_content_container">
-					&#9997; <%= rwe.example %>
-				</div>
-			</div>
-		<% end %>
-	<% end %>
-</div>
-<!-- end of real world examples checkpoint container -->
-
-<!-- start of review level one container -->
 <div id="review_level_one_container" align="center">
 	<div align="center">
 		<%= image_tag("medal_red_100.png", alt: "Fundamental Medal") %>
@@ -175,7 +8,9 @@
 		<h1>Congratulations!</h1>
 
 		<p class="lead">
-			<span id="level_congrats_text">You've completed the Fundamentals for </span>
+			<span id="level_congrats_text">
+				You've completed the Fundamentals for
+			</span>
 			and earned
 			<span id="goodies_total"></span>
 			experience points! You need <%= pts_to_level_up(current_user) %> more XP
@@ -237,14 +72,4 @@
 </div>
 <!-- end of start of review level one container -->
 
-<div id="continue_button_container" class="pointer">
-	<br>
-	<button type="button" class="btn btn-success btn-block" id="spell_the_word_continue_button">Continue</button>
-	<button type="button" class="btn btn-success btn-block" id="fill_in_the_blank_continue_button">Continue</button>
-	<button type="button" class="btn btn-success btn-block" id="pronunciation_continue_button">Continue</button>
-	<button type="button" class="btn btn-success btn-block" id="meanings_continue_button">Continue</button>
-	<button type="button" class="btn btn-success btn-block" id="synonyms_continue_button">Continue</button>
-	<button type="button" class="btn btn-success btn-block" id="antonyms_continue_button">Continue</button>
-	<button type="button" class="btn btn-success btn-block" id="syn_ant_checkpoint_continue_button">Continue</button>
-	<button type="button" class="btn btn-warning btn-block" id="real_world_examples_continue_button">Finish!</button>
-</div>
+<%= render "games/fund_buttons" %>

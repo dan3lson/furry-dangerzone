@@ -4,11 +4,13 @@
 		<div class="pull-right">
 			<small class="gray">master 1 word per week</small>
 		</div>
+
 		<% if logged_in? && user.goal == 1 %>
 			<%= radio_button_tag(:weekly_goal, 1, true) %>
 		<% else %>
 			<%= radio_button_tag(:weekly_goal, 1) %>
 		<% end %>
+
 		<%= label_tag(:weekly_goal_1, "Basic") %>
 	</div>
 
@@ -16,11 +18,13 @@
 		<div class="pull-right">
 			<small class="gray">master 5 words per week</small>
 		</div>
+
 		<% if logged_in? && user.goal == 5 %>
 			<%= radio_button_tag(:weekly_goal, 5, true) %>
 		<% else %>
 			<%= radio_button_tag(:weekly_goal, 5) %>
 		<% end %>
+
 		<%= label_tag(:weekly_goal_5, "Casual") %>
 	</div>
 
@@ -28,11 +32,13 @@
 		<div class="pull-right">
 			<small class="gray">master 10 words per week</small>
 		</div>
+
 		<% if logged_in? && user.goal == 10 %>
 			<%= radio_button_tag(:weekly_goal, 10, true) %>
 		<% else %>
 			<%= radio_button_tag(:weekly_goal, 10) %>
 		<% end %>
+
 		<%= label_tag(:weekly_goal_10, "Regular") %>
 	</div>
 
@@ -40,11 +46,13 @@
 		<div class="pull-right">
 			<small class="gray">master 20 words per week</small>
 		</div>
+
 		<% if logged_in? && user.goal == 20 %>
 			<%= radio_button_tag(:weekly_goal, 20, true) %>
 		<% else %>
 			<%= radio_button_tag(:weekly_goal, 20) %>
 		<% end %>
+
 		<%= label_tag(:weekly_goal_20, "Serious") %>
 	</div>
 
@@ -52,11 +60,13 @@
 		<div class="pull-right">
 			<small class="gray">master 30 words per week</small>
 		</div>
+
 		<% if logged_in? && user.goal == 30 %>
 			<%= radio_button_tag(:weekly_goal, 30, true) %>
 		<% else %>
 			<%= radio_button_tag(:weekly_goal, 30) %>
 		<% end %>
+
 		<%= label_tag(:weekly_goal_30, "Insane") %>
 	</div>
 
@@ -64,6 +74,15 @@
 		<%= submit_tag "Save changes", name: "weekly_goal_submit_btn",
 			class: "btn btn-default" %>
 	<% else %>
-		CONTINUE BUTTON GOES HERE
+		<div class="round-the-buttons">
+			<button type="button" class="btn btn-success btn-block"
+							id="gs-goal-cont-btn">
+				Continue
+			</button>
+			<button type="button" class="btn btn-default btn-block"
+							id="gs-goal-skip-btn">
+				Skip
+			</button>
+		</div>
 	<% end %>
 <% end %>

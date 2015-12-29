@@ -35,9 +35,9 @@ class UsersController < ApplicationController
     @user.num_logins += 1
 
     if @user.save
-      @words_successfully_added = UserWord.add_first_four_words(@user)
+      @words_successfully_added = UserWord.add_first_five_words(@user)
 
-      if @words_successfully_added == 4
+      if @words_successfully_added == 5
         flash[:success] = "Welcome to Leksi!"
       else
         logger.error { "#{@user.username} adding four words didn't work."}
