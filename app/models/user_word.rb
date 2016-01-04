@@ -15,6 +15,18 @@ class UserWord < ActiveRecord::Base
     find_by(user: user, word: word)
   end
 
+  # not tested
+  def self.mark_fundamentals_completed(user, word)
+    user_word = UserWord.find_by(user: user, word: Word.find(word))
+    user_word.games_completed = 1
+
+    if user_word.save
+      "Success: UW #{user_word.id}\'s games_completed now at 1."
+    else
+      "ERROR: UW #{user_word.id}\'s Fundamentals stat not updated."
+    end
+  end
+
   def current_game
     if games_completed == 0
       "one"
@@ -70,8 +82,7 @@ class UserWord < ActiveRecord::Base
   end
 
   # not tested
-  def self.add_first_five_words(user)
-    words = Word.random(5)
+  def self.add_words(user, words)
     words_successfully_added = 0
 
     words.each do |w|

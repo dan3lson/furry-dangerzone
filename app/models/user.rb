@@ -25,6 +25,15 @@ class User < ActiveRecord::Base
   before_create { self.username = username.downcase }
   before_create { self.email = email.downcase }
 
+  # not tested
+  def self.set_up_login_data(user)
+    datetime_now = DateTime.now
+    user.last_login = datetime_now
+    user.login_history = ""
+    user.login_history += datetime_now.to_s << "|"
+    user.num_logins += 1
+  end
+
   def has_word?(word)
     words.include?(word)
   end

@@ -27,19 +27,10 @@ class UserWordsController < ApplicationController
 
   def update
     @word = Word.find(params[:word_id])
-    @user_word = UserWord.find_by(user: current_user, word: @word)
 
-    @user_word.games_completed = 1
+    @results = UserWord.mark_fundamentals_completed(current_user, @word)
 
-    if @user_word.save
-      render json: {
-        errors: "Success: UW #{@user_word.id}\'s games_completed now at 1."
-      }
-    else
-      render json: {
-        errors: "ERROR: UW #{@user_word.id}\'s games_completed not at 1."
-      }
-    end
+    render json: { errors: @results }
   end
 
   def destroy

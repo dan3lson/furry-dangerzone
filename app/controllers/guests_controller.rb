@@ -1,6 +1,7 @@
 class GuestsController < ApplicationController
 	def get_started
 		@words = Word.random(5)
+		@word_ids = @words.map { |w| w.id }
 		@first_row_rand_words = @words[0..1]
 		@second_row_rand_words = @words[2..4]
 		@user = User.new
@@ -8,6 +9,7 @@ class GuestsController < ApplicationController
 
 	def game_zone
 		@words = Word.random(5)
+		@word_ids = @words.map { |w| w.id }
 		@first_row_rand_words = @words[0..1]
 		@second_row_rand_words = @words[2..4]
 
@@ -26,5 +28,11 @@ class GuestsController < ApplicationController
 		respond_to do |format|
 			format.js
 		end
+	end
+
+	def save_progress
+		@goal = params[:weekly_goal]
+		@words = params[:word_ids]
+		@completed_fund = params[:completed_fund]
 	end
 end

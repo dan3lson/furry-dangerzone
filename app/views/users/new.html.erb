@@ -2,45 +2,55 @@
 
 <div class="well form-signin">
   <%= form_for(@user) do |f| %>
-    <h2 class="form-signin-heading">Sign up</h2>
+    <h2>New to Leksi? Sign up.</h2>
 
     <%= render 'shared/error_messages', object: @user %>
+
+    <%= hidden_field_tag :word_ids, params[:word_ids] %>
+    <%= hidden_field_tag :completed_fund, params[:completed_fund] %>
+    <%= hidden_field_tag :weekly_goal, params[:weekly_goal] %>
+    <%= hidden_field_tag :game_name, params[:game_name] %>
+    <%= hidden_field_tag :time_spent, params[:time_spent_in_min] %>
 
     <div class="form-group">
       <%= f.label :username, class: "sr-only" %>
       <%= f.text_field :username, class: "form-control",
-        placeholder: "Username *"  %>
+      placeholder: "Username *"  %>
     </div>
 
     <div class="form-group">
       <%= f.label :password, class: "sr-only" %>
       <%= f.password_field :password, class: "form-control",
-        placeholder: "Password *" %>
+      placeholder: "Password *" %>
     </div>
 
     <div class="form-group">
-      <%= f.label :password_confirmation, "Password Confirmation", class: "sr-only" %>
+      <%= f.label :password_confirmation, "Password Confirmation",
+        class: "sr-only" %>
       <%= f.password_field :password_confirmation, class: "form-control",
-        placeholder: "Password Confirmation *"  %>
+      placeholder: "Password Confirmation *"  %>
     </div>
 
-    <hr>
+    <p class="lead gray">
+      Optional
+    </p>
 
     <div class="form-group">
       <%= f.label :first_name, class: "sr-only" %>
-      <%= f.text_field :first_name, class: "form-control", placeholder: "First Name"  %>
+      <%= f.text_field :first_name, class: "form-control",
+        placeholder: "First Name"  %>
     </div>
 
     <div class="form-group">
       <%= f.label :last_name, class: "sr-only" %>
       <%= f.text_field :last_name, class: "form-control",
-        placeholder: "Last Name"  %>
+      placeholder: "Last Name"  %>
     </div>
 
     <div class="form-group">
       <%= f.label :email, class: "sr-only" %>
       <%= f.email_field :email, class: "form-control",
-        placeholder: "Email"  %>
+      placeholder: "Email"  %>
     </div>
 
     <%= f.submit "Create my account", class: "btn btn-default" %>

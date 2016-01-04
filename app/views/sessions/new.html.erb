@@ -5,10 +5,12 @@
     <h2 class="form-signin-heading">Log in</h2>
 
     <%= f.label :username, class: "sr-only" %>
-    <%= f.text_field :username, class: 'form-control', placeholder: "Username" %>
+    <%= f.text_field :username, class: 'form-control',
+      placeholder: "Username" %>
 
     <%= f.label :password, class: "sr-only" %>
-    <%= f.password_field :password, class: 'form-control', placeholder: "Password" %>
+    <%= f.password_field :password, class: 'form-control',
+      placeholder: "Password" %>
 
     <%= f.submit "Log in", class: "btn btn-default btn-lg" %>
   <% end %>
@@ -23,8 +25,7 @@
     <small class="basic-apple-blue-link">
       Forgot your password?
       <%= mail_to "help@leksi.education", "Email us",
-          subject: "Password Reset"
-      %>
+        subject: "Password Reset" %>
       to reset it.
     </small>
   </div>

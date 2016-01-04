@@ -28,33 +28,55 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @datetime_now = DateTime.now
-    @user.last_login = @datetime_now
-    @user.login_history = ""
-    @user.login_history += @datetime_now.to_s << "|"
-    @user.num_logins += 1
+    @goal = params[:weekly_goal]
+    @user.goal = @goal if @goal
+    binding.pry
+    User.set_up_login_data(@user)
 
     if @user.save
-      @words_successfully_added = UserWord.add_first_five_words(@user)
+      @param_words = params[:word_ids]
+
+      if @param_words
+        @words = Word.find(@param_words.chop.reverse.chop.reverse.split)
+        @words_successfully_added = UserWord.add_words(@user, @words)
+      else
+        @words_successfully_added = UserWord.add_words(@user, Word.random(5))
+      end
 
       if @words_successfully_added == 5
+        @completed_fund = Word.find(params[:completed_fund])
+
+        if @completed_fund
+          @time_spent = params[:time_spent]
+          @game_name = params[:game_name]
+
+          @results = UserWord.mark_fundamentals_completed(
+            @user, @completed_fund
+          )
+
+          @gs_results = GameStat.update_user_word_game_stats(
+            @user, @completed_fund, @game_name, @time_spent
+          )
+
+          logger.info(@results)
+          logger.info(@gs_results)
+        end
+
         flash[:success] = "Welcome to Leksi!"
       else
-        logger.error { "#{@user.username} adding four words didn't work."}
+        logger.error { "#{@user.username} adding five words didn't work."}
       end
 
       log_in(@user)
 
       redirect_to root_path
     else
-      flash[:danger] = "Yikes! Something went wrong. Please try again."
-
       render :new
     end
   end
 
   def edit
-    @delete_account_msg = "Are you sure? All of your Leksi data will be lost."
+    @del_account_msg = "Are you sure? All of your Leksi progress will be lost."
   end
 
   def update

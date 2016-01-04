@@ -97,7 +97,7 @@ $(document).ready(function(){
 
         syn_ant_checkpoint_continue_button();
 
-        real_world_examples_continue_button();
+        finish_btn();
       }
 
       function start_game() {
@@ -261,24 +261,14 @@ $(document).ready(function(){
           $("#antonym_no_results").hasClass("please-tap-continue") &&
           $("#rwe_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
-            $("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
+            $("#real_world_examples_back_button, #gs-finish-btn, #real_world_examples_container, #level_1_details").hide();
             $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
-
-            // Update the user_word's status to complete
-            update_user_word_games_completed();
 
             // Update the progress made
             progressBar(100);
 
-            // Update user goodies
-            update_user_points(10);
-            boost_goodies(3);
-
-            // Update num_played for this user_word
-            update_num_played();
-
             // Start the next activity, i.e. review level one
-            start_review_level_one_activity($chosen_word_value);
+            $("#gs-finish-btn").fadeIn();
 
             // Hide the exit btn and display the home btn
             $("#game-exit-btn").hide();
@@ -388,59 +378,29 @@ $(document).ready(function(){
           // If all words have been clicked on, show the real world examples container
           if ($("#rwe_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
-            $("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
+            $("#real_world_examples_back_button, #gs-finish-btn, #real_world_examples_container, #level_1_details").hide();
             $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
-
-            // Update the user_word's status to complete
-            update_user_word_games_completed();
-
-            // Update num_played for this user_word
-            update_num_played();
 
             // Update the progress made
             progressBar(100);
 
-            // Update user goodies
-            update_user_points(10);
-            boost_goodies(10);
-
             // Start the next activity, i.e. review level one
-            start_review_level_one_activity($chosen_word_value);
-
-            // Hide the exit btn and display the home btn
-            $("#game-exit-btn").hide();
-            $("#game-home-btn").show();
+            $("#gs-finish-btn, #gs-save-progress-container").fadeIn();
           } else {
-            start_real_world_examples_activity($chosen_word_value);
+            start_real_world_examples_activity();
           }
         });
       }
 
-      function real_world_examples_continue_button() {
-        $("#real_world_examples_continue_button").click(function(){
+      function finish_btn() {
+        $("#gs-finish-btn").click(function(){
           // Show and hide buttons
-          $("#real_world_examples_back_button, #real_world_examples_continue_button, #real_world_examples_container, #level_1_details").hide();
-          $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
+          $(this).hide();
+          $("#gs-fundamentals-container").hide();
+          $("#gs-save-progress-container, #gs-save-progress-btn").fadeIn();
 
-          // Update the user_word's status to complete
-          update_user_word_games_completed();
-
-          // Update num played for this user_word
-          update_num_played();
-
-          // Update the progress made
-          progressBar(100);
-
-          // Update user goodies
-          update_user_points(10);
-          boost_goodies(10);
-
-          // Start the next activity, i.e. review level one
-          start_review_level_one_activity($chosen_word_value);
-
-          // Hide the exit btn and display the home btn
-          $("#game-exit-btn").hide();
-          $("#game-home-btn").show();
+          var $elapsed_time = ((new Date() - $time_game_started) / 1000 ) / 60
+          $("#gs-time-spent").html($elapsed_time)
         });
       }
 
@@ -673,7 +633,7 @@ $(document).ready(function(){
       // Start the real world examples activity
       function start_real_world_examples_activity(chosen_word_value) {
         if ($("#rwe_no_results").hasClass("please-tap-continue")) {
-          $("#real_world_examples_continue_button").fadeIn();
+          $("#gs-finish-btn").fadeIn();
           $rwe_circle_activity_boolean = true;
         } else {
           // Click anywhere (row, circle, or word) to change element features
@@ -683,72 +643,16 @@ $(document).ready(function(){
 
             // If all words have been clicked on, show the continue button
             if ($("#real_world_examples_container .green-circle-background").length == $(".rwe_row").length) {
-              $("#real_world_examples_continue_button").fadeIn();
+              $("#gs-finish-btn").fadeIn();
               $rwe_circle_activity_boolean = true;
             };
           }); // end of the $rwe_row .click fn
         }
       };
 
-      // Start the review level one activity
-      function start_review_level_one_activity(chosen_word_value) {
-        $("#review_level_one_back_button").hide();
-        $("#goodies, #games-score, #progress_bar_container").css("visibility","hidden");
-        $("#all_levels_button").show();
-        $("#level_congrats_text").append("<strong>'" + $chosen_word_value + "'</strong> ");
-        $("#goodies_total").html($new_goodies_total);
-      };
-
       /**
        * Helper Functions: Support ones that help each activity above
        */
-
-      // Update user_word_status
-      function update_user_word_games_completed() {
-        var game_info = { "word_id": $chosen_word_id };
-
-        $.ajax({
-          type: "PATCH",
-          url: "/user_word",
-          dataType: "json",
-          data: game_info,
-          success: function(response) {
-            console.log(response.errors);
-          }
-        });
-      };
-
-      // Update the game_stat num_played for this word
-      function update_num_played() {
-        var game_info = {
-          "word_id": $chosen_word_id,
-          "game_name": "Fundamentals",
-          "time_spent_in_min": ((new Date() - $time_game_started) / 1000 ) / 60
-        };
-
-        $.ajax({
-          type: "PATCH",
-          url: "/game_stat",
-          dataType: "json",
-          data: game_info,
-          success: function(response) {
-            console.log(response.errors);
-          }
-        });
-      };
-
-      // Update user_word_status
-      function update_user_points(num) {
-        $.ajax({
-          type: "PATCH",
-          url: "/user_points",
-          dataType: "json",
-          data: { "points": num }
-        })
-        .done(function(response) {
-          console.log(response.errors)
-        });
-      };
 
       // Synonym, Antonym, Sentence Examples fn
       // If there isn't any info for the clicked word, display a sorry message
@@ -854,20 +758,6 @@ $(document).ready(function(){
           }
         }); // end of the syn_ant_checkpoint buttton fn
       }; // end of the click fn
-
-      // Global fn
-      // Increase the goodies per level
-      function boost_goodies(level_multiplier) {
-        $new_goodies_total += level_multiplier;
-        $("#goodies").html($new_goodies_total);
-      };
-
-      // Global fn
-      // Revert to previous goodie amount
-      function reset_goodies(old_total) {
-        new_goodies_total = old_total;
-        $("#goodies").html(new_goodies_total);
-      };
 
       // Global fn
       // Reset individual input values
