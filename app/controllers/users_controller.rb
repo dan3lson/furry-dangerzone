@@ -30,44 +30,43 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @goal = params[:weekly_goal]
     @user.goal = @goal if @goal
-    binding.pry
+
     User.set_up_login_data(@user)
 
     if @user.save
       @param_words = params[:word_ids]
+      @param_completed_fund = params[:completed_fund]
 
-      if @param_words
+      if @param_words.blank?
+        @words_successfully_added = UserWord.add_words(@user, Word.random(5))
+      else
         @words = Word.find(@param_words.chop.reverse.chop.reverse.split)
         @words_successfully_added = UserWord.add_words(@user, @words)
-      else
-        @words_successfully_added = UserWord.add_words(@user, Word.random(5))
       end
 
-      if @words_successfully_added == 5
-        @completed_fund = Word.find(params[:completed_fund])
+      if @words_successfully_added == 5 && !@param_completed_fund.blank?
+        @completed_fund = Word.find(@param_completed_fund)
 
-        if @completed_fund
-          @time_spent = params[:time_spent]
-          @game_name = params[:game_name]
+        @time_spent = params[:time_spent]
+        @game_name = params[:game_name]
 
-          @results = UserWord.mark_fundamentals_completed(
-            @user, @completed_fund
-          )
+        @results = UserWord.mark_fundamentals_completed(
+        @user, @completed_fund
+        )
 
-          @gs_results = GameStat.update_user_word_game_stats(
-            @user, @completed_fund, @game_name, @time_spent
-          )
+        @gs_results = GameStat.update_user_word_game_stats(
+        @user, @completed_fund, @game_name, @time_spent
+        )
 
-          logger.info(@results)
-          logger.info(@gs_results)
-        end
-
-        flash[:success] = "Welcome to Leksi!"
+        logger.info(@results)
+        logger.info(@gs_results)
       else
         logger.error { "#{@user.username} adding five words didn't work."}
       end
 
       log_in(@user)
+
+      flash[:success] = "Welcome to Leksi!"
 
       redirect_to root_path
     else

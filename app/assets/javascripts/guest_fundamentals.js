@@ -436,7 +436,7 @@ $(document).ready(function(){
         $merged_letters_array = shuffle_array($merged_letters_array);
 
         $.each($merged_letters_array, function(index, value){
-          $each_letter_fill_in_the_blank_div = $("<div>", { class: "col-xs-4 col-sm-3 text-center fill_in_the_blank_letters pointer letter_" + value } );
+          $each_letter_fill_in_the_blank_div = $("<div>", { class: "col-xs-4 col-sm-3 text-center hvr-pulse-shrink fill_in_the_blank_letters pointer letter_" + value } );
           $("#fill_in_the_blank_container").append($each_letter_fill_in_the_blank_div);
           $($each_letter_fill_in_the_blank_div).append(value).html();
         });

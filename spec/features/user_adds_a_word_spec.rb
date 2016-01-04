@@ -32,7 +32,6 @@ feature "user adds a word", %{
 
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content("Success! You now have")
-      expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(1)
       expect(UserWord.first.games_completed).to eq(0)
     end
