@@ -30,15 +30,16 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4>
-					We selected five words for you
-					<i class="fa fa-hand-o-down"></i>!
+					To get you started, we selected five words for you
+					<i class="fa fa-hand-o-down"></i>.
 				</h4>
 			</div>
 			<div class="panel-body">
 				<span class="lead">
-					To master and reach 100%, complete the games for each word.
+					Tap any word to begin mastering it.
 				</span>
 				<div id="gs-rand-words-container">
+					<div id="gs-rand-word-ids"><%= @word_ids %></div>
 					<div class="row">
 						<div class="col-sm-7 center">
 							<%= render "guests/select_new_words" %>
@@ -51,14 +52,33 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="round-the-buttons">
-			<button type="button" class="btn btn-success btn-block"
-							id="gs-finish-btn">
-				Create my account
-			</button>
-		</div>
 	</div>
 </div>
 
+<%= render "shared/spinner" %>
+
 <div id="gs-fundamentals-container"></div>
+
+<div id="gs-save-progress-container" class="lead">
+	<span id="gs-time-spent"></span>
+	<p>
+		Good job learning the Fundamentals for
+		'<span id="completed-fund-word-name"></span>'.
+		You're on your way towards mastering this word!
+	</p>
+	To learn the Fundamentals for any other word, play the other games,
+	save your progress, and so much more, sign up for free!
+</div>
+
+<div class="round-the-buttons">
+	<button type="button" class="btn btn-success btn-lg btn-block"
+		id="gs-finish-btn">
+		<i class="fa fa-flag"></i>
+		Finish
+	</button>
+	<button type="button" class="btn btn-success btn-lg btn-block"
+		id="gs-save-progress-btn">
+		<i class="fa fa-save"></i>
+		Save my progress
+	</button>
+</div>
