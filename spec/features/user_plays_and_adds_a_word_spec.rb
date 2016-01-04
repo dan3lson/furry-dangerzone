@@ -33,7 +33,6 @@ feature "user plays (and adds) a word", %{
       user_word = UserWord.first
 
       expect(page).to have_content("Type the word below:")
-      expect(Word.count).to eq(4)
       expect(UserWord.count).to eq(1)
       expect(user_word.games_completed).to eq(0)
     end

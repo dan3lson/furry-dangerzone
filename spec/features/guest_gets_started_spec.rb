@@ -12,17 +12,15 @@ feature "guest gets started", %{
   #     to select a goal
   # [] I can see a continue button
 
-  pending "\n guest clicks get started button -->" do
+  describe "\n guest clicks get started button -->", js: true do
     before :each do
       FactoryGirl.create(:version)
     end
 
-    let(:user) { FactoryGirl.create(:user, role: "guest") }
-
     scenario "scenario: click get started button" do
       visit root_path
 
-      click_on "Get started"
+      first(".btn-custom-get-started").click
 
       expect(page).to have_css(".weekly-goal-form")
       expect(page).to have_content("Weekly Goal")
@@ -32,6 +30,7 @@ feature "guest gets started", %{
       expect(page).to have_content("Regular")
       expect(page).to have_content("Serious")
       expect(page).to have_content("Insane")
+      expect(page).to have_button("Skip")
       expect(page).to have_button("Continue")
     end
   end

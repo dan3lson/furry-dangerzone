@@ -20,12 +20,11 @@ feature "guest signs up", %{
       FactoryGirl.create(:word, name: "chess_2")
       FactoryGirl.create(:word, name: "chess_3")
       FactoryGirl.create(:word, name: "chess_4")
+      FactoryGirl.create(:word, name: "chess_5")
     end
 
-    scenario "scenario: with complete valid data" do
-      visit root_path
-
-      first(:link, "Get started").click
+    scenario "scenario: from get_started with complete valid data" do
+      visit signup_path
 
       fill_in "Username", with: "FooFoo"
       fill_in "First Name", with: "FirstFooFoo"
@@ -42,15 +41,13 @@ feature "guest signs up", %{
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
       expect(User.first.num_logins).to eq(1)
-      expect(UserWord.count).to eq(4)
+      expect(UserWord.count).to eq(5)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end
 
     scenario "scenario: with only required valid data" do
-      visit root_path
-
-      first(:link, "Get started").click
+      visit signup_path
 
       fill_in "Username", with: "FooFoo"
       fill_in "Password", with: "foobar"
@@ -64,15 +61,13 @@ feature "guest signs up", %{
       expect(page).to have_link("Menu")
       expect(User.count).to eq(1)
       expect(User.first.num_logins).to eq(1)
-      expect(UserWord.count).to eq(4)
+      expect(UserWord.count).to eq(5)
       expect(page).to_not have_content("errors")
       expect(page).to_not have_content("fix")
     end
 
     scenario "scenario with invalid data" do
-      visit root_path
-
-      first(:link, "Get started").click
+      visit signup_path
 
       fill_in "Username", with: ""
       fill_in "Password", with: ""

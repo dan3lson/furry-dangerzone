@@ -18,20 +18,17 @@ feature "user views the menu", %{
 
     let(:user) { FactoryGirl.create(:user) }
 
-    scenario "scenario: click menu_path" do
+    scenario "scenario: view standard links" do
       log_in_as(user)
 
       visit menu_path
 
-      within("#menu-tag-container") do
-        expect(page).to have_link("View all")
-        expect(page).to have_link("Create")
-      end
-
+      expect(page).to have_link("Edit")
+      expect(page).to have_link("Stats")
       expect(page).to have_link("Report a problem")
       expect(page).to have_link("I wish Leksi could...")
       expect(page).to have_link("Log out")
-      expect(page).to have_content("Rate this app")
+      expect(page).to have_link("Rate this app")
     end
   end
 end

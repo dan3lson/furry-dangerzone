@@ -27,7 +27,7 @@ feature "user logs out", %{
 
       click_on "Log out"
 
-      expect(page).to have_link("Get started")
+      expect(page).to have_content("Get started")
       expect(page).to have_link("Log in")
       expect(page).to have_content("Boost your vocabulary with Leksi.")
     end
