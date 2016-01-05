@@ -261,14 +261,14 @@ $(document).ready(function(){
           $("#antonym_no_results").hasClass("please-tap-continue") &&
           $("#rwe_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
-            $("#real_world_examples_back_button, #gs-finish-btn, #real_world_examples_container, #level_1_details").hide();
+            $("#real_world_examples_back_button, #get-started-finish-btn, #real_world_examples_container, #level_1_details").hide();
             $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
 
             // Update the progress made
             progressBar(100);
 
             // Start the next activity, i.e. review level one
-            $("#gs-finish-btn").fadeIn();
+            $("#get-started-finish-btn").fadeIn();
 
             // Hide the exit btn and display the home btn
             $("#game-exit-btn").hide();
@@ -378,14 +378,14 @@ $(document).ready(function(){
           // If all words have been clicked on, show the real world examples container
           if ($("#rwe_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
-            $("#real_world_examples_back_button, #gs-finish-btn, #real_world_examples_container, #level_1_details").hide();
+            $("#real_world_examples_back_button, #get-started-finish-btn, #real_world_examples_container, #level_1_details").hide();
             $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
 
             // Update the progress made
             progressBar(100);
 
             // Start the next activity, i.e. review level one
-            $("#gs-finish-btn, #gs-save-progress-container").fadeIn();
+            $("#get-started-finish-btn, #gs-save-progress-container").fadeIn();
           } else {
             start_real_world_examples_activity();
           }
@@ -393,11 +393,11 @@ $(document).ready(function(){
       }
 
       function finish_btn() {
-        $("#gs-finish-btn").click(function(){
+        $("#get-started-finish-btn").click(function(){
           // Show and hide buttons
           $(this).hide();
           $("#gs-fundamentals-container").hide();
-          $("#gs-save-progress-container, #gs-save-progress-btn").fadeIn();
+          $("#gs-save-progress-container, #get-started-save-my-progress-btn").fadeIn();
 
           var $elapsed_time = ((new Date() - $time_game_started) / 1000 ) / 60
           $("#gs-time-spent").html($elapsed_time)
@@ -633,7 +633,7 @@ $(document).ready(function(){
       // Start the real world examples activity
       function start_real_world_examples_activity(chosen_word_value) {
         if ($("#rwe_no_results").hasClass("please-tap-continue")) {
-          $("#gs-finish-btn").fadeIn();
+          $("#get-started-finish-btn").fadeIn();
           $rwe_circle_activity_boolean = true;
         } else {
           // Click anywhere (row, circle, or word) to change element features
@@ -643,7 +643,7 @@ $(document).ready(function(){
 
             // If all words have been clicked on, show the continue button
             if ($("#real_world_examples_container .green-circle-background").length == $(".rwe_row").length) {
-              $("#gs-finish-btn").fadeIn();
+              $("#get-started-finish-btn").fadeIn();
               $rwe_circle_activity_boolean = true;
             };
           }); // end of the $rwe_row .click fn

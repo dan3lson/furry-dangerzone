@@ -12,7 +12,8 @@
 
 		<div class="row">
 			<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 center
-									data-url btn-custom-get-started"
+									data-url btn-custom-get-started gs-tracker"
+					 id="get-started-btm-btn"
 					 data-url="/get_started">
 				Get started
 			</div>
@@ -34,13 +35,17 @@
   <br>
   <br>
 
-	<%= link_to image_tag("facebook_white_filled_35.png"),
-							"https://www.facebook.com/LeksiEducation" %>
+	<%= link_to "https://www.facebook.com/LeksiEducation" do %>
+		<i class="fa fa-facebook fa-3x"></i>
+	<% end %>
 	&nbsp;
-	<%= link_to image_tag("twitter_white_filled_35.png"),
-							"https://twitter.com/leksieducation" %>
+	<%= link_to "https://twitter.com/leksieducation" do %>
+		<i class="fa fa-twitter fa-3x"></i>
+	<% end %>
 	&nbsp;
-	<%= mail_to "info@Leksi.education", raw(image_tag("email_white_filled_35.png")) %>
+	<%= mail_to "info@Leksi.education" do %>
+		<i class="fa fa-envelope fa-3x"></i>
+	<% end %>
 	&nbsp;
 
 	<%= render "static_pages/newsletter_modal" %>

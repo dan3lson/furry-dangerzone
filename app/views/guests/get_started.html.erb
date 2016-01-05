@@ -6,7 +6,8 @@
 	<span id="gs-take-action-words">
 		Welcome, Guest! If you want to skip this setup,
 		<span class="basic-apple-blue-link">
-			<%= link_to "sign up now", signup_path %>.
+			<%= link_to "sign up now", signup_path, class: "gs-tracker",
+				id: "get-started-skip-btn" %>.
 		</span>
 	</span>
 </div>
@@ -71,13 +72,13 @@
 </div>
 
 <div class="round-the-buttons">
-	<button type="button" class="btn btn-success btn-lg btn-block"
-		id="gs-finish-btn">
+	<button type="button" class="btn btn-success btn-lg btn-block gs-tracker"
+		id="get-started-finish-btn">
 		<i class="fa fa-flag"></i>
 		Finish
 	</button>
-	<button type="button" class="btn btn-success btn-lg btn-block"
-		id="gs-save-progress-btn">
+	<button type="button" class="btn btn-success btn-lg btn-block gs-tracker"
+		id="get-started-save-my-progress-btn">
 		<i class="fa fa-save"></i>
 		Save my progress
 	</button>

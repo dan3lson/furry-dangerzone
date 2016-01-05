@@ -35,4 +35,21 @@ class GuestsController < ApplicationController
 		@words = params[:word_ids]
 		@completed_fund = params[:completed_fund]
 	end
+
+	def update
+		@attribute = params[:attribute].gsub("-", "_")
+		@get_started_record = GetStartedStat.first || GetStartedStat.new
+		@num = @get_started_record.send(@attribute) + 1
+		@result = @get_started_record.update_attributes(@attribute.to_sym => @num)
+
+		if @result
+			render json: {
+				errors: "Success: get started stat #{@attribute} updated."
+			}
+		else
+			render json: {
+				errors: "ERROR: get started stat #{@attribute} not updated."
+			}
+		end
+	end
 end

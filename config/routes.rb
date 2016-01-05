@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "get_started" => "guests#get_started"
   get "get_started_game_zone" => "guests#game_zone"
   get "get_started_fundamentals" => "guests#fundamentals"
-  # post "get_started_save_progress" => "guests#save_progress"
+  put "get_started_stats" => "guests#update"
   get "about_us" => "static_pages#about_us"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
