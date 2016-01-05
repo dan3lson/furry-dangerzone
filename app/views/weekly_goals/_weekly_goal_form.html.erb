@@ -1,6 +1,6 @@
 <%= form_tag(weekly_goal_path, method: "put", class: "weekly-goal-form") do %>
 	<%= label_tag :weekly_goal_id, "Weekly Goal Options", class: "sr-only" %>
-	<div class="radio light-blue-hover">
+	<div class="radio">
 		<div class="pull-right">
 			<small class="gray">master 1 word per week</small>
 		</div>
@@ -14,7 +14,7 @@
 		<%= label_tag(:weekly_goal_1, "Basic") %>
 	</div>
 
-	<div class="radio light-blue-hover">
+	<div class="radio">
 		<div class="pull-right">
 			<small class="gray">master 5 words per week</small>
 		</div>
@@ -28,7 +28,7 @@
 		<%= label_tag(:weekly_goal_5, "Casual") %>
 	</div>
 
-	<div class="radio light-blue-hover">
+	<div class="radio">
 		<div class="pull-right">
 			<small class="gray">master 10 words per week</small>
 		</div>
@@ -42,7 +42,7 @@
 		<%= label_tag(:weekly_goal_10, "Regular") %>
 	</div>
 
-	<div class="radio light-blue-hover">
+	<div class="radio">
 		<div class="pull-right">
 			<small class="gray">master 20 words per week</small>
 		</div>
@@ -56,7 +56,7 @@
 		<%= label_tag(:weekly_goal_20, "Serious") %>
 	</div>
 
-	<div class="radio light-blue-hover">
+	<div class="radio">
 		<div class="pull-right">
 			<small class="gray">master 30 words per week</small>
 		</div>
@@ -75,12 +75,12 @@
 			class: "btn btn-default" %>
 	<% else %>
 		<div class="round-the-buttons">
-			<button type="button" class="btn btn-success btn-block"
-							id="gs-goal-cont-btn">
+			<button type="button" class="btn btn-success btn-block gs-tracker"
+							id="get-started-goal-cont-btn">
 				Continue
 			</button>
-			<button type="button" class="btn btn-default btn-block"
-							id="gs-goal-skip-btn">
+			<button type="button" class="btn btn-default btn-block gs-tracker"
+							id="get-started-goal-skip-btn">
 				Skip
 			</button>
 		</div>

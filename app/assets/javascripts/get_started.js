@@ -1,18 +1,24 @@
 $(document).ready(function() {
-	$("#gs-goal-cont-btn, #gs-goal-skip-btn").click(function() {
+	$("#get-started-goal-cont-btn").attr('disabled', true);
+
+	$(".weekly-goal-form").click(function() {
+		$("#get-started-goal-cont-btn").attr('disabled', false);
+	});
+
+	$("#get-started-goal-cont-btn, #get-started-goal-skip-btn").click(function() {
 		$("#guest-weekly-goal-container").hide();
 		$("#guest-select-words-container").fadeIn();
 		scroll_to_top();
 	});
 
-	$("#gs-finish-btn").click(function() {
+	$("#get-started-finish-btn").click(function() {
 		var $word_ids = $("#gs-rand-word-ids").html();
 		$("#completed-fund-word-name").html($.trim($(
 			"#chosen-word-header-container"
 		).html()));
 	});
 
-	$("#gs-save-progress-btn").click(function() {
+	$("#get-started-save-my-progress-btn").click(function() {
 		var $word_ids = $("#gs-rand-word-ids").html();
 		var $completed_fund = $(".palabra-id").html();
 		var $weekly_goal = $("input[name=weekly_goal]:checked").val()
