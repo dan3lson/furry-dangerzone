@@ -11,13 +11,6 @@ $(document).ready(function() {
 		scroll_to_top();
 	});
 
-	$("#get-started-finish-btn").click(function() {
-		var $word_ids = $("#gs-rand-word-ids").html();
-		$("#completed-fund-word-name").html($.trim($(
-			"#chosen-word-header-container"
-		).html()));
-	});
-
 	$("#get-started-save-my-progress-btn").click(function() {
 		var $word_ids = $("#gs-rand-word-ids").html();
 		var $completed_fund = $(".palabra-id").html();
