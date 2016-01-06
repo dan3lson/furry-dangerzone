@@ -96,11 +96,15 @@ $(document).ready(function(){
         antonyms_continue_button();
 
         syn_ant_checkpoint_continue_button();
-
-        finish_btn();
       }
 
+      $("#get-started-finish-btn").click(function(){
+        hopefully_sign_up_user();
+      });
+
       function start_game() {
+        $("#gs-take-action-words").parent().hide();
+
         if ($("#game-started-bool").hasClass("begin-timer")) {
           display_instruction("Type the word below:");
 
@@ -234,6 +238,7 @@ $(document).ready(function(){
           $("#meanings_container").hide();
           $("#meanings_continue_button").hide();
 
+          // if synonyms exist
           if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
             $("#synonyms_back_button, #synonyms_container").show();
@@ -245,7 +250,9 @@ $(document).ready(function(){
             progressBar(60);
 
             start_synonyms_activity($chosen_word_value);
-          } else if ($("#synonym_no_results").hasClass("please-tap-continue") && !$("#antonym_no_results").hasClass("please-tap-continue")) {
+          // if synonyms don't exist, but antonyms do
+          } else if ($("#synonym_no_results").hasClass("please-tap-continue") &&
+                    !$("#antonym_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
             $("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
             $("#antonyms_back_button, #antonyms_container").show();
@@ -257,22 +264,25 @@ $(document).ready(function(){
             progressBar(75);
 
             start_antonyms_activity($chosen_word_value);
+          // if synonyms, antonyms, and RWEs don't exist
           }	else if ($("#synonym_no_results").hasClass("please-tap-continue") &&
           $("#antonym_no_results").hasClass("please-tap-continue") &&
           $("#rwe_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
-            $("#real_world_examples_back_button, #get-started-finish-btn, #real_world_examples_container, #level_1_details").hide();
-            $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
+            $("#real_world_examples_back_button").hide();
+            $("#get-started-finish-btn").hide();
+            $("#real_world_examples_container").hide();
+            $("#level_1_details").hide();
+            $("#review_level_one_back_button").fadeIn();
+            $("#review_level_one_continue_button").fadeIn();
+            $("#review_level_one_container").fadeIn();
 
             // Update the progress made
             progressBar(100);
 
-            // Start the next activity, i.e. review level one
-            $("#get-started-finish-btn").fadeIn();
-
-            // Hide the exit btn and display the home btn
-            $("#game-exit-btn").hide();
-            $("#game-home-btn").show();
+            // take user to last step
+            hopefully_sign_up_user();
+          // if synonyms and antonyms don't exist, but RWEs do
           } else if ($("#synonym_no_results").hasClass("please-tap-continue") && $("#antonym_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
             $("#real_world_examples_back_button, #real_world_examples_container").show();
@@ -295,7 +305,6 @@ $(document).ready(function(){
 
       function synonyms_continue_button() {
         $("#synonyms_continue_button").click(function(){
-          // Start the next activity --> if there are synonyms, but no antonyms
           if ($("#antonym_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
             $("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container").show();
@@ -311,8 +320,6 @@ $(document).ready(function(){
             $(".checkpoint-image").show();
 
             start_syn_ant_checkpoint_activity($chosen_word_value);
-
-            // Start the next activity --> if there there are antonyms
           } else {
             // Show and hide buttons
             $("#synonyms_back_button, #synonyms_continue_button, #synonyms_container").hide();
@@ -337,8 +344,11 @@ $(document).ready(function(){
       function antonyms_continue_button() {
         $("#antonyms_continue_button").click(function(){
           // Show and hide buttons
-          $("#syn_ant_checkpoint_back_button, #syn_ant_checkpoint_container").show();
-          $("#antonyms_back_button, #antonyms_continue_button, #antonyms_container").hide();
+          $("#syn_ant_checkpoint_back_button").show();
+          $("#syn_ant_checkpoint_container").show();
+          $("#antonyms_back_button").hide();
+          $("#antonyms_continue_button").hide();
+          $("#antonyms_container").hide();
 
           // Update the activity name and instruction
           display_instruction("Is <strong>'" + $chosen_word_value + "'</strong> a synonym or antonym to:");
@@ -375,33 +385,43 @@ $(document).ready(function(){
           // Update the progress made
           progressBar(90);
 
-          // If all words have been clicked on, show the real world examples container
+          // If RWEs don't exist
           if ($("#rwe_no_results").hasClass("please-tap-continue")) {
             // Show and hide buttons
-            $("#real_world_examples_back_button, #get-started-finish-btn, #real_world_examples_container, #level_1_details").hide();
-            $("#review_level_one_back_button, #review_level_one_continue_button, #review_level_one_container").fadeIn();
+            $("#real_world_examples_back_button").hide();
+            $("#get-started-finish-btn").hide();
+            $("#real_world_examples_container").hide();
+            $("#level_1_details").hide();
 
             // Update the progress made
             progressBar(100);
 
-            // Start the next activity, i.e. review level one
-            $("#get-started-finish-btn, #gs-save-progress-container").fadeIn();
+            // Finish the get started process
+            hopefully_sign_up_user();
           } else {
             start_real_world_examples_activity();
           }
         });
       }
 
-      function finish_btn() {
-        $("#get-started-finish-btn").click(function(){
-          // Show and hide buttons
-          $(this).hide();
-          $("#gs-fundamentals-container").hide();
-          $("#gs-save-progress-container, #get-started-save-my-progress-btn").fadeIn();
+      function display_final_step() {
+        $("#get-started-finish-btn").hide();
+        $("#gs-fundamentals-container").hide();
+        $("#gs-save-progress-container").fadeIn();
+        $("#get-started-save-my-progress-btn").fadeIn();
+        $("#completed-fund-word-name").html($.trim($(
+          "#chosen-word-header-container"
+        ).html()));
+      }
 
-          var $elapsed_time = ((new Date() - $time_game_started) / 1000 ) / 60
-          $("#gs-time-spent").html($elapsed_time)
-        });
+      function record_elapsed_time() {
+        var $elapsed_time = ((new Date() - $time_game_started) / 1000 ) / 60
+        $("#gs-time-spent").html($elapsed_time)
+      }
+
+      function hopefully_sign_up_user() {
+        display_final_step();
+        record_elapsed_time();
       }
 
       // Start Level 1 with the spelling activity
@@ -621,10 +641,6 @@ $(document).ready(function(){
         $(".no_word_info").remove();
         if ($shuffled_syn_ant_array.length == 0) {
           $(".syn_ant_checkpoint_btns").hide();
-          // var $no_word_info_container = $("<span>", {class: "no_word_info lead"} );
-          // var $message = "&#9785; We don't have any synonyms or antonyms to do a checkpoint. Please tap continue.";
-          // $("#syn_ant_checkpoint_container").append($no_word_info_container);
-          // $($no_word_info_container).append($message);
           $("#syn-ant-no-results").fadeIn();
           $("#syn_ant_checkpoint_continue_button").fadeIn();
         }
