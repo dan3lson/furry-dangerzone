@@ -31,7 +31,7 @@ feature "guest gets started", %{
       expect(page).to have_content("Serious")
       expect(page).to have_content("Insane")
       expect(page).to have_button("Skip")
-      expect(page).to have_button("Continue")
+      expect(page).to have_button("Continue", disabled: true)
     end
   end
 end

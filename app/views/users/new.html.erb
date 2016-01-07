@@ -1,5 +1,20 @@
 <% provide(:title, "Sign Up") %>
 
+<% title "New to Leksi? Sign up." %>
+<% description "Give us a try with no need to create a (free) account." %>
+<% set_meta_tags keywords: %w[login signup account tablet desktop signin app vocabulary words preview literacy learning games education vocab fun goal master] %>
+
+<% set_meta_tags og: {
+  title:    "Sign up.",
+	description: "See what the buzz is about with this new vocab app."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun, and based on research.",
+  title: "New to Leksi? Sign up.",
+  description: "See what the buzz is about with this new vocab app."
+} %>
+
 <div class="well form-signin">
   <%= form_for(@user) do |f| %>
     <h2>New to Leksi? Sign up.</h2>

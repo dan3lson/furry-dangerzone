@@ -1,5 +1,19 @@
-<% provide(:title, "Versions") %>
 <% provide(:header, "Versions") %>
+
+<% title "Versions" %>
+<% description "View all Leksi development versions and how we\'ve grown." %>
+<% set_meta_tags keywords: %w[versions releases reviews tablet desktop app vocabulary words literacy learning games education vocab fun goal master] %>
+
+<% set_meta_tags og: {
+  title:    "Versions",
+	description: "View all Leksi development versions and how we\'ve grown."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "View all Leksi development versions and how we\'ve grown.",
+  title: "Versions",
+  description: "View all Leksi development versions and how we\'ve grown."
+} %>
 
 <div class="basic-black-link">
   <% @versions.each do |version| %>

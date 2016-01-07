@@ -1,5 +1,19 @@
-<% provide(:title, "About Us") %>
 <% provide(:header, "About Us") %>
+
+<% title "About Us" %>
+<% description "Learn who we are and why we love helping you boost your vocab." %>
+<% set_meta_tags keywords: %w[login signup account tablet desktop signin app vocabulary words preview literacy learning games education vocab fun goal master] %>
+
+<% set_meta_tags og: {
+  title:    "About Us",
+	description: "Learn who we are and why we love helping you boost your vocab."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Learn who we are and why we love helping you boost your vocab.",
+  title: "About Us",
+  description: "Learn who we are and why we love helping you boost your vocab."
+} %>
 
 <div class="top-section" style="height: 300px;">
 	<div class="row">
