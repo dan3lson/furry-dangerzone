@@ -1,8 +1,7 @@
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+    minimum-scale=1, maximum-scale=1">
   <%= display_meta_tags site: "Leksi" %>
-
   <meta name="author" content="Danelson Rosa">
   <meta name="google-site-verification" content="UA-55816562-1">
   <meta property="og:site_name" content="Leksi" />
@@ -13,6 +12,12 @@
   <meta name="twitter:site" content="Leksi" />
   <meta name="twitter:url" content="https://www.leksi.education/" />
   <meta name="twitter:image" content="https://www.leksi.education/assets/pup2-8928c81e06050f48bf7a0e71a3245545b64407b55eea3001c2e37c49ed906907.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <%= render "layouts/iOS_icons" %>
+  <%= render "layouts/iOS_splash_screens" %>
+
   <%= favicon_link_tag 'favicon.ico' %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/flickity/1.1.0/flickity.min.css' %>

@@ -8,9 +8,9 @@ feature "guest gets started", %{
 
   # Acceptance Criteria
   #
-  # [] I can see a form
+  # [x] I can see a form
   #     to select a goal
-  # [] I can see a continue button
+  # [x] I can see a continue button
 
   describe "\n guest clicks get started button -->", js: true do
     before :each do
