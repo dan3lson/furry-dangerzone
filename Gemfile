@@ -31,6 +31,8 @@ gem 'will_paginate-bootstrap'
 gem "font-awesome-rails"
 # Removes the 300ms delay on mobile devices
 gem 'fastclick-rails'
+# Improves meta tagging
+gem 'meta-tags'
 
 group :development do
   gem "bullet"

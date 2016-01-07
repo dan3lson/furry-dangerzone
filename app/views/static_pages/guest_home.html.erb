@@ -1,5 +1,17 @@
-<% provide(:title, "Boost your vocabulary in a fun and simple way.") %>
-<% provide(:header, "Boost your vocabulary in a fun and simple way.") %>
+<% title "Boost your vocabulary in a fun and simple way." %>
+<% description "Designed with vocabulary academic research and gamification, Leksi helps you master new words." %>
+<% set_meta_tags keywords: %w[learn education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
+
+<% set_meta_tags og: {
+  title:    "Boost your vocabulary in a fun and simple way.",
+	description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun, and based on evidence.",
+  title: "Boost your vocabulary in a fun and simple way.",
+  description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
 
 <%= render "shared/flash_messages" %>
 
