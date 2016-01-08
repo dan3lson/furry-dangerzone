@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   get "freestyle" => "games#freestyle"
   get "signup" => "users#new"
   get "login" => "sessions#new"
-  get "classrooms" => "teachers#classrooms"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
   resources :users
@@ -58,5 +57,10 @@ Rails.application.routes.draw do
     get "menu" => "schools#menu"
     resources :words, only: [:new, :create, :edit, :update, :destroy]
     resource :add_words_for_student, only: [:update]
+  end
+  namespace :admin do
+    root "admins#home"
+    get "home" => "admins#home"
+    get "menu" => "admins#menu"
   end
 end

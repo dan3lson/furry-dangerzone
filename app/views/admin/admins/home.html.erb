@@ -1,0 +1,252 @@
+<% provide(:header, "Home") %>
+
+<h1>Weekly Stats</h1>
+
+<div class="row">
+	<div class="col-sm-6 col-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">General</div>
+			<table class="table table-responsive table-bordered">
+				<th></th>
+				<th>Previous Week</th>
+				<th>Today</th>
+				<tr>
+					<td># Users</td>
+					<td>tbd</td>
+					<td><%= User.count %></td>
+				</tr>
+				<tr>
+					<td>Num Logins</td>
+					<td>tbd</td>
+					<td><%= User.sum(:num_logins) %></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Words</div>
+			<table class="table table-responsive table-bordered">
+				<th></th>
+				<th>Previous Week</th>
+				<th>Today</th>
+				<tr>
+					<td>Users w/o Words</td>
+					<td>tbd</td>
+					<td><%= User.select { |u| u.words.count == 0 }.count %></td>
+				</tr>
+				<tr>
+					<td>Users w/ Words</td>
+					<td>tbd</td>
+					<td><%= User.select { |u| u.words.count > 0 }.count %></td>
+				</tr>
+				<tr>
+					<td># UserWords</td>
+					<td>tbd</td>
+					<td><%= UserWord.count %></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Tags</div>
+			<table class="table table-responsive table-bordered">
+				<th></th>
+				<th>Previous Week</th>
+				<th>Today</th>
+				<tr>
+					<td>Users w/o Tags</td>
+					<td>tbd</td>
+					<td><%= User.select { |u| u.tags.count == 0 }.count %></td>
+				</tr>
+				<tr>
+					<td>Users w/Tags</td>
+					<td>tbd</td>
+					<td><%= User.select { |u| u.tags.count > 0 }.count %></td>
+				</tr>
+				<tr>
+					<td>UserTags</td>
+					<td>tbd</td>
+					<td><%= UserTag.count %></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Fundamental Games</div>
+			<table class="table table-responsive table-bordered">
+				<th></th>
+				<th>Previous Week</th>
+				<th>Today</th>
+				<tr>
+					<td>Fundamentals Completed</td>
+					<td>tbd</td>
+					<td><%= UserWord.where.not(games_completed: 0).count %></td>
+				</tr>
+				<tr>
+					<td>Time Spent Completing Fundamentals</td>
+					<td>tbd</td>
+					<td><%= GameStat.where(game_id: 1).sum(:time_spent).to_s %></td>
+				</tr>
+				<tr>
+					<td>Num Fundamentals Played</td>
+					<td>tbd</td>
+					<td><%= GameStat.where(game_id: 1).sum(:num_played) %></td>
+				</tr>
+				<tr>
+					<td>Fundamentals Not Completed</td>
+					<td>tbd</td>
+					<td><%= UserWord.where(games_completed: 0).count %></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Jeopardy Games</div>
+			<table class="table table-responsive table-bordered">
+				<th></th>
+				<th>Previous Week</th>
+				<th>Today</th>
+				<tr>
+					<td>Jeopardys Completed</td>
+					<td>tbd</td>
+					<td>
+						<%= UserWord.where(games_completed: 2).count +
+								UserWord.where(games_completed: 3).count %>
+					</td>
+				</tr>
+				<tr>
+					<td>Time Spent Completing Jeopardys</td>
+					<td>tbd</td>
+					<td><%= GameStat.where(game_id: 2).sum(:time_spent).to_s %></td>
+				</tr>
+				<tr>
+					<td>Num Jeopardys Played</td>
+					<td>tbd</td>
+					<td><%= GameStat.where(game_id: 2).sum(:num_played) %></td>
+				</tr>
+				<tr>
+					<td>Jeopardys Not Completed</td>
+					<td>tbd</td>
+					<td><%= UserWord.select { |uw| uw.jeopardy_not_completed? }.count %></td>
+				</tr>
+				<tr>
+					<td>Num Jeopardys Won</td>
+					<td>tbd</td>
+					<td><%= GameStat.sum(:num_jeop_won) %></td>
+				</tr>
+				<tr>
+					<td>Num Jeopardys Lost</td>
+					<td>tbd</td>
+					<td><%= GameStat.sum(:num_jeop_lost) %></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Freestyle Games</div>
+			<table class="table table-responsive table-bordered">
+				<th></th>
+				<th>Previous Week</th>
+				<th>Today</th>
+				<tr>
+					<td>Freestyles Completed</td>
+					<td>tbd</td>
+					<td><%= UserWord.where(games_completed: 3).count %></td>
+				</tr>
+				<tr>
+					<td>Time Spent Completing Freestyles</td>
+					<td>tbd</td>
+					<td><%= GameStat.where(game_id: 3).sum(:time_spent).to_s %></td>
+				</tr>
+				<tr>
+					<td>Num Freestyles Played</td>
+					<td>tbd</td>
+					<td><%= GameStat.where(game_id: 3).sum(:num_played) %></td>
+				</tr>
+				<tr>
+					<td>Freestyles Not Completed</td>
+					<td>tbd</td>
+					<td><%= UserWord.select { |uw| uw.freestyle_not_completed? }.count %></td>
+				</tr>
+				<tr>
+					<td>Num Flashcards Played</td>
+					<td>tbd</td>
+					<td><%= User.sum(:num_flashcards_played) %></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Testimonials</div>
+			<table class="table table-responsive table-bordered">
+				<th></th>
+				<th>Previous Week</th>
+				<th>Today</th>
+				<tr>
+					<td>Reviews</td>
+					<td>tbd</td>
+					<td><%= Review.count %></td>
+				</tr>
+				<tr>
+					<td>Feedbacks</td>
+					<td>tbd</td>
+					<td><%= Feedback.count %></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Get Started</div>
+			<table class="table table-responsive table-bordered">
+				<th></th>
+				<th>Previous Week</th>
+				<th>Today</th>
+				<tr>
+					<td>Get Started Top Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_top_btn %></td>
+				</tr>
+				<tr>
+					<td>Get Started Bottom Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_btm_btn %></td>
+				</tr>
+				<tr>
+					<td>Get Started Skip Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_skip_btn %></td>
+				</tr>
+				<tr>
+					<td>Get Started Goal Continue Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_goal_cont_btn %></td>
+				</tr>
+				<tr>
+					<td>Get Started Goal Skip Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_goal_skip_btn %></td>
+				</tr>
+				<tr>
+					<td>Get Started Mastery Circle Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_mastery_circle_btn %></td>
+				</tr>
+				<tr>
+					<td>Get Started Finish Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_finish_btn %></td>
+				</tr>
+				<tr>
+					<td>Get Started Save My Progress Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_save_my_progress_btn %></td>
+				</tr>
+				<tr>
+					<td>Get Started Create My Account Button</td>
+					<td>tbd</td>
+					<td><%= @gs.get_started_create_my_acct_btn %></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
