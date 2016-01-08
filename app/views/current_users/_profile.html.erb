@@ -21,3 +21,11 @@
 		<% end %>
 	<% end %>
 <% end %>
+
+<% if current_user.is_admin? %>
+	<% if params[:controller] == "current_users" %>
+		<%= link_to admin_menu_path, class: "list-group-item" do %>
+			<i class="fa fa-user-secret fa-fw"></i>&nbsp; Activate Admin Portal
+		<% end %>
+	<% end %>
+<% end %>
