@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get "get_started_fundamentals" => "guests#fundamentals"
   put "get_started_stats" => "guests#update"
   get "about_us" => "static_pages#about_us"
+  get "blog" => "blogs#index"
+  get "blog/:title" => "blogs#show"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
   get "menu" => "current_users#menu"

@@ -1,5 +1,3 @@
-<% provide(:header, "About Us") %>
-
 <% title "About Us" %>
 <% description "Learn who we are and why we love helping you boost your vocab." %>
 <% set_meta_tags keywords: %w[login signup account tablet desktop signin app vocabulary words preview literacy learning games education vocab fun goal master] %>
@@ -15,33 +13,28 @@
   description: "Learn who we are and why we love helping you boost your vocab."
 } %>
 
-<div class="top-section" style="height: 300px;">
-	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 center">
-			<h1>About Us</h1>
-		</div>
-	</div>
-</div>
+<%= render "static_pages/header", header: "About Us" %>
 
 <div class="thin-gray-section center">
 	<h3>
-		We believe you should be able to #defineYourFuture.
+		We believe students should be able to define their future.
 	</h3>
 
 	<div class="lead guest-homepage-images-container col-sm-8 col-sm-offset-2">
 		<p>
-			Leksi is an application that helps students boost their literacy and meet
-			their respective grade-level standards. The way we do this is through
-			vocabulary development. We specifically focus on vocabulary because it’s the
-			biggest indicator of a student’s success in and outside of school. Leksi is
-			research-driven and delivers its lessons through game-like activities
-			making the learning experience more fun and effective.
+      Leksi is an application that boosts student's vocabulary, a major
+      indicator of student's success, in a fun and exciting way.
 		</p>
 
 		<p>
-			It was created by Danelson Rosa, a former technology-banker turned software
-			developer/entrepreneur who wanted a way to solve his own vocabulary-related
-			frustrations.
+      Leksi was created by Danelson Rosa
+      <%= link_to "http://www.linkedin.com/in/dan3lson" do %>
+        <i class="fa fa-linkedin-square"></i>
+      <% end %>
+      who previously worked on Wall Street
+      in various technology roles. Danelson wanted a way to solve his own
+      vocabulary-related frustrations and just wasn't satisfied with
+      any existing vocabulary apps.
 		</p>
 
 		<p>

@@ -1,0 +1,38 @@
+<% title "Blog | All About Leksi Part 1" %>
+<% description "We spill the beans on the name \'Leksi\'." %>
+<% set_meta_tags keywords: %w[blog research announcements vocabulary words literacy learning education vocab fun name] %>
+
+<% set_meta_tags og: {
+  title:    "Blog | All About Leksi Part 1",
+	description: "We spill the beans on the name \'Leksi\'."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "We spill the beans on the name \'Leksi\'.",
+  title: "Blog | All About Leksi Part 1",
+  description: "The Leksi Blog is the place for announcements, articles, advice, research, and so much more about language and words."
+} %>
+
+<%= render "static_pages/header",
+	header: "Leksi Blog" %>
+
+<div class="thin-gray-section">
+	<ol class="breadcrumb basic-apple-blue-link">
+		<li><%= link_to "Home", root_path %></li>
+		<li><%= link_to "Blog", blog_path %></li>
+		<li class="active">All About Leksi, Part I: What's in a Name?</li>
+	</ol>
+
+	<h2>
+		All About Leksi, Part I: What's in a Name?
+		<br>
+		<small>January 8, 2016</small>
+	</h2>
+
+	<p class="lead">
+		Take a second and look at the snapshot below. Does anything catch your eye?
+	</p>
+
+	<%= image_tag("lexicon_pronunciation_first_five_letters.png",
+		alt: "Lexicon pronunciation first five letters", class: "img-responsive") %>
+</div>

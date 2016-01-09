@@ -1,0 +1,54 @@
+<% title "Blog" %>
+<% description "The Leksi Blog is the place for announcements, articles, advice, research, and so much more about language and words. " %>
+<% set_meta_tags keywords: %w[blog research announcements vocabulary words literacy learning education vocab fun] %>
+
+<% set_meta_tags og: {
+  title:    "Blog",
+	description: "The Leksi Blog is the place for announcements, articles, advice, research, and so much more about language and words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "The Leksi Blog is the place for announcements, articles, advice, research, and so much more about language and words.",
+  title: "Blog",
+  description: "The Leksi Blog is the place for announcements, articles, advice, research, and so much more about language and words."
+} %>
+
+<%= render "static_pages/header", header: "Leksi Blog" %>
+
+<div class="thin-gray-section">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="game-not-ready">
+				<%= render "blogs/preview",
+				title: "X Quotes Showing How Important Vocabulary Really Is",
+				date: "Coming Soon!",
+				description: "Words are pretty powerful indeed; researches tell how.",
+				url_title: "#" %>
+			</div>
+
+			<div class="game-not-ready">
+				<%= render "blogs/preview",
+				title: "All About Leksi, Part 2: The Founder\'s Frustrations",
+				date: "Coming Soon!",
+				description: "Our Founder further describes why he started Leksi.",
+				url_title: "#" %>
+			</div>
+
+			<div class="game-not-ready">
+				<%= render "blogs/preview",
+				title: "6 Words That Don\'t Mean What You Think",
+				date: "Coming Soon!",
+				description: "Have you used any of these words incorrectly before?",
+				url_title: "#" %>
+			</div>
+
+			<%= render "blogs/preview",
+			title: "All About Leksi, Part I: What\'s in a Name?",
+			date: "January 8, 2016",
+			description: "We spill the beans on the name \'Leksi\'.",
+			url_title: "all_about_leksi_part_1" %>
+
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
