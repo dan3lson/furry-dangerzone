@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    render layout: "public_application"
+    render layout: "application_guest"
   end
 
   def create

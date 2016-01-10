@@ -1,23 +1,21 @@
 <% if review.has_description? %>
-	<div class="box-shadow-border">
-		<blockquote>
-			<%= review.description %>
-		</blockquote>
+	<%= render "reviews/stars", rating: review.rating %>
 
-		<div class="pull-right">
-			<small>
-				<%= render "reviews/stars", rating: review.rating %>
-				by <%= review.user.username %>
-				<%= time_ago_in_words(review.created_at) %> ago
-				for
-				<span class="basic-black-link">
-					<%=
-						link_to "Version #{review.version.number}",
-						version_path(review.version)
-					%>
-				</span>
-			</small>
-		</div>
-		<div class="clear"></div>
-	</div>
+	<br>
+
+	<i class="fa fa-comment-o"></i>&nbsp;
+	<%= review.description %>
+
+	<br>
+
+	<i class="fa fa-user"></i>&nbsp;<%= review.user.username %>
+
+	<br>
+
+	<i class="fa fa-calendar"></i>&nbsp;
+	<%= time_ago_in_words(review.created_at) %> ago
+
+	<div class="clear"></div>
+
+	<hr>
 <% end %>

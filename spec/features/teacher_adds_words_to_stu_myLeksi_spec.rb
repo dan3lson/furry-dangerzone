@@ -177,7 +177,7 @@ feature "teacher adds words to student(s) myLeksi", %{
       expect(page).to have_button("Continue")
     end
 
-    scenario "scenario: step 3 -> cant finish", js: true do
+    skip "scenario: step 3 -> cant finish", js: true do
       log_in_as(teacher)
 
       visit school_student_words_path

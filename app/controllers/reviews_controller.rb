@@ -3,6 +3,8 @@ class ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all
+
+    render layout: "application_guest"
   end
 
   def new

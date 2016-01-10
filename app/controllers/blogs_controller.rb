@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  layout "public_application"
+  layout "application_guest"
 
   def index
   end

@@ -1,0 +1,16 @@
+<div class="navbar navbar-fixed-top sb-slide header_logged_out"
+		 role="navigation">
+	<div class="pull-left">
+		<h4>
+			<%= link_to "Leksi<sup><small class='white'>TM</small></sup>".html_safe,
+				root_path %>
+		</h4>
+	</div>
+	<div class="pull-right">
+		<%= link_to login_path, class: "hover" do %>
+			<i class="fa fa-sign-in fa-2x leksi-orange">Log in</i>
+		<% end %>
+		&nbsp;
+		<i class="fa fa-bars fa-3x sb-toggle-right pointer hover white"></i>
+	</div>
+</div>

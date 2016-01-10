@@ -1,20 +1,21 @@
-<% title "Blog | All About Leksi Part 1" %>
+<% title "Blog | All About Leksi, Part 1" %>
 <% description "We spill the beans on the name \'Leksi\'." %>
-<% set_meta_tags keywords: %w[blog research announcements vocabulary words literacy learning education vocab fun name] %>
+<% set_meta_tags keywords: %w[blog research announcements vocabulary words
+  literacy learning education vocab fun name] %>
 
 <% set_meta_tags og: {
-  title:    "Blog | All About Leksi Part 1",
+  title:    "Blog | All About Leksi, Part 1",
 	description: "We spill the beans on the name \'Leksi\'."
 } %>
 
 <% set_meta_tags twitter: {
   card: "We spill the beans on the name \'Leksi\'.",
-  title: "Blog | All About Leksi Part 1",
-  description: "The Leksi Blog is the place for announcements, articles, advice, research, and so much more about language and words."
+  title: "Blog | All About Leksi, Part 1",
+  description: "The Leksi Blog is the place for announcements, articles, advice,
+    research, and so much more about language and words."
 } %>
 
-<%= render "static_pages/header",
-	header: "Leksi Blog" %>
+<%= render "static_pages/header", icon: "newspaper-o", header: "Leksi Blog" %>
 
 <div class="thin-gray-section">
 	<ol class="breadcrumb basic-apple-blue-link">
@@ -24,15 +25,49 @@
 	</ol>
 
 	<h2>
+    <i class="fa fa-map-o"></i>
 		All About Leksi, Part I: What's in a Name?
 		<br>
 		<small>January 8, 2016</small>
 	</h2>
 
-	<p class="lead">
-		Take a second and look at the snapshot below. Does anything catch your eye?
+	<p>
+    We chose the name <em>Leksi</em> because we think it sounds catchy and
+    it relates to what the app is all about: words, but not just any words,
+    your words.
 	</p>
 
-	<%= image_tag("lexicon_pronunciation_first_five_letters.png",
-		alt: "Lexicon pronunciation first five letters", class: "img-responsive") %>
+	<p>
+    So take a second and look at the snapshot below. Does anything catch your
+     eye? If not, no worries - click the snapshot for the big reveal.
+	</p>
+
+  <p id="blog-leksi-name-snapshot" class="pointer">
+    <%= image_tag("leksi_name.png",
+      alt: "Lexicon pronunciation first five letters",
+      class: "img-responsive") %>
+  </p>
+
+  <p>
+    For Part 2 of this series, here it is:
+    <span class="basic-apple-blue-link">
+      <%= link_to "All About Leksi, Part II: Our Founder\'s Aha! Moment",
+        "all_about_leksi_part_2" %>
+    </span>
+  </p>
+
+  <% if false %>
+    <div>
+      Share this post:
+      <i class="fa fa-facebook"></i>
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-linkedin"></i>
+    </div>
+  <% end %>
 </div>
+
+<% if false %>
+  <div class="thin-white-section">
+    Leave your comments below!
+  </div>
+<% end %>
