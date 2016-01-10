@@ -23,7 +23,7 @@ feature "guest visits home page", %{
       expect(page).to have_content("Leksi")
       expect(page).to have_content("Get started")
       expect(page).to have_link("Log in")
-      expect(page).to have_content("2015 Leksi")
+      expect(page).to have_content("2016 Leksi")
     end
   end
 end

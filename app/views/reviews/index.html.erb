@@ -1,6 +1,4 @@
-<% provide(:header, "Reviews") %>
-
-<% title "Users worldwide have rated Leksi a #{Version.total_average_rating}/5." %>
+<% title "Reviews (#{Version.total_average_rating}/5 stars)" %>
 <% description "Read their reviews and why Leksi is their go-to vocab app." %>
 <% set_meta_tags keywords: %w[versions releases reviews rating feedback app vocabulary words literacy learning games education vocab fun goal master] %>
 
@@ -15,30 +13,27 @@
   description: "Read their reviews and why Leksi is their go-to vocab app."
 } %>
 
-<div class="center">
-  <%= image_tag("reviews_color_100.png") %>
-  <h4>Reviews</h4>
-</div>
-
-<br>
-
-<div class="well lead center">
-  Current Version:
-  <span class="apple-star-orange">
-    <%= display_stars(latest_version.average_rating) %>
-  </span>
-  <%= pluralize(latest_version.number_of_reviews, "review") %>
-  <br>
-  All Versions:
-  <span class="apple-star-orange">
-    <%= display_stars(Version.total_average_rating) %>
-  </span>
-  <%= pluralize(Review.count, "review") %>
-</div>
-
-<br>
+<%= render "static_pages/header", icon: "star", header: "Reviews" %>
 
 <div class="col-sm-6 col-sm-offset-3">
+  <br>
+
+  <div class="lead">
+    Current Version:
+    <span class="apple-star-orange">
+      <%= display_stars(latest_version.average_rating) %>
+    </span>
+    <%= pluralize(latest_version.number_of_reviews, "review") %>
+    <br>
+    All Versions:
+    <span class="apple-star-orange">
+      <%= display_stars(Version.total_average_rating) %>
+    </span>
+    <%= pluralize(Review.count, "review") %>
+  </div>
+
+  <hr>
+
   <% @reviews.each do |review| %>
     <%= render "reviews/review", review: review %>
   <% end %>

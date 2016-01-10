@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    render layout: "public_application"
+    render layout: "application_guest"
   end
 
   def create

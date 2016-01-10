@@ -5,16 +5,16 @@
 <% if params[:controller] == "games" %>
   <body class="games-body-padding">
 <% else %>
-  <body>
+  <body class="padding-top">
 <% end %>
     <%= render "sessions/facebook_sdk" %>
 
     <% if logged_in? %>
       <% unless params[:controller] == "games" %>
-        <%= render "layouts/logged_in_header" %>
+        <%= render "layouts/header_logged_in" %>
       <% end %>
     <% else %>
-      <%= render "layouts/logged_out_header" %>
+      <%= render "layouts/header_logged_out" %>
     <% end %>
 
     <div class="container">

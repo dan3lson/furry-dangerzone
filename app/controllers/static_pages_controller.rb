@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  layout "public_application"
+  layout "application_guest"
 
   def guest_home
     redirect_to home_path if logged_in?

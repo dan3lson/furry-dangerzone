@@ -257,6 +257,10 @@ p {
 	width: 100px;
 }
 
+.sb-slidebar .list-group-item {
+	color: $sky-blue;
+}
+
 .static-page-header-height {
 	height: 300px !important;
 }
@@ -455,6 +459,10 @@ input {
   height: auto !important;
 }
 
+.italics {
+	font-style: italic;
+}
+
 .leaderboard-bronze {
 	@extend .leaderboard-container;
 
@@ -615,6 +623,10 @@ input {
 
   background: $light-gray;
   border-left: 3px solid $dark-gray;
+}
+
+.padding-top {
+	padding-top: 6em;
 }
 
 .progress-meter-header {
@@ -784,10 +796,6 @@ table {
 	padding-left: 15px;
 }
 
-.top-section {
-  padding-top: 10em;
-}
-
 .valign-middle {
 	vertical-align: -webkit-baseline-middle;
 }
@@ -931,7 +939,7 @@ a {
 	color: gray;
 }
 
-.logged_out_header {
+.header_logged_out {
 	background: $sky-blue;
   border-color: $sky-blue;
   opacity: .90;
@@ -988,16 +996,12 @@ a {
 .top-section {
 	background: url(image-path("home_bg.jpg"));
   background-size: cover;
-  // background: -webkit-gradient(linear, left top, left bottom, from($light-brown), to($brown));
-  // background: -webkit-linear-gradient(top, $light-brown, $brown);
-  // background: -moz-linear-gradient(top, $light-brown, $brown);
-  // background: -ms-linear-gradient(top, $light-brown, $brown);
-  // background: -o-linear-gradient(top, $light-brown, $brown);
 	color: $white;
 	height: 755px;
+	padding-top: 10em;
 
   h1 {
-    font-size: 71px;
+    font-size: 60px;
   }
 
   h3 {
