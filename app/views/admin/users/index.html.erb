@@ -45,16 +45,16 @@
   <th>Joined</th>
 
   <% @users.each do |u| %>
-  <tr>
-    <td><%= u.id %></td>
-    <td><%= link_to u.username, u %></td>
-    <td><%= u.first_name || "-" %></td>
-    <td><%= u.last_name || "-" %></td>
-    <td><%= u.email || "-" %></td>
-    <td><%= u.num_logins %></td>
-    <td><%= u.last_login || "-" %></td>
-    <td><%= time_ago_in_words(u.created_at) %> ago</td>
-  </tr>
+    <tr>
+      <td><%= u.id %></td>
+      <td><%= link_to u.username, u %></td>
+      <td><%= u.first_name || "-" %></td>
+      <td><%= u.last_name || "-" %></td>
+      <td><%= u.email || "-" %></td>
+      <td><%= u.num_logins %></td>
+      <td><%= u.last_login || "-" %></td>
+      <td><%= time_ago_in_words(u.created_at) %> ago</td>
+    </tr>
   <% end %>
 </table>
 

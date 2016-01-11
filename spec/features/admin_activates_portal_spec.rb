@@ -38,7 +38,7 @@ feature "admin activates admin portal", %{
     end
 
     scenario "scenario: deny guests access to the admin portal" do
-      visit admin_home_path
+      visit admin_root_path
 
       expect(page).to have_content("Yikes!")
     end
@@ -54,7 +54,7 @@ feature "admin activates admin portal", %{
     scenario "scenario: regular users cannot access the admin portal" do
       log_in_as(user)
 
-      visit admin_home_path
+      visit admin_root_path
 
       expect(page).to have_content("Yikes! That\'s not something you can do.")
     end
@@ -70,7 +70,7 @@ feature "admin activates admin portal", %{
     scenario "scenario: teachers cannot access the admin portal" do
       log_in_as(teacher)
 
-      visit admin_home_path
+      visit admin_root_path
 
       expect(page).to have_content("Yikes! That\'s not something you can do.")
     end
