@@ -94,7 +94,7 @@ end
 def log_in_as(user)
   visit login_path
 
-  fill_in "Username", with: user.username
+  fill_in "Email or Username", with: user.username
   fill_in "Password", with: user.password
 
   within ".form-signin" do

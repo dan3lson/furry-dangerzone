@@ -11,13 +11,13 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :username, presence: true, uniqueness: { case_sensitive: false },
-            length: { minimum: 3, maximum: 33 }
+                       length: { minimum: 3, maximum: 33 }
+  validates :email, format: { with: VALID_EMAIL_REGEX }, allow_nil: true,
+                    uniqueness: { case_sensitive: false }
   validates :points, presence: true
   validates :num_flashcards_played, presence: true
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
-  validates :email, format: { with: VALID_EMAIL_REGEX }, allow_blank: true,
-            uniqueness: { case_sensitive: false }
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
@@ -291,7 +291,7 @@ class User < ActiveRecord::Base
     User.fs_class_one + User.fs_class_two
   end
 
-  def self.reset_rails_c_pwds
+  def self.reset_dev_pwds
     User.all.each { |u| u.update_attributes(
         password: "password",
         password_confirmation: "password"

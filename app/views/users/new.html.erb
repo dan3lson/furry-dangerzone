@@ -2,7 +2,7 @@
 
 <% title "New to Leksi? Sign up." %>
 <% description "Give us a try with no need to create a (free) account." %>
-<% set_meta_tags keywords: %w[login signup account tablet desktop signin app vocabulary words preview literacy learning games education vocab fun goal master] %>
+<% set_meta_tags keywords: %w[login signup account signin] %>
 
 <% set_meta_tags og: {
   title:    "Sign up.",
@@ -10,7 +10,8 @@
 } %>
 
 <% set_meta_tags twitter: {
-  card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun, and based on research.",
+  card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun,
+    and based on research.",
   title: "New to Leksi? Sign up.",
   description: "See what the buzz is about with this new vocab app."
 } %>
@@ -28,56 +29,39 @@
     <%= hidden_field_tag :time_spent, params[:time_spent_in_min] %>
 
     <div class="form-group">
+      <%= f.label :email, class: "sr-only" %>
+      <%= f.email_field :email, class: "form-control",
+      placeholder: "Email"  %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :username, class: "sr-only" %>
       <%= f.text_field :username, class: "form-control",
-      placeholder: "Username *"  %>
+        placeholder: "Username"  %>
     </div>
 
     <div class="form-group">
       <%= f.label :password, class: "sr-only" %>
       <%= f.password_field :password, class: "form-control",
-      placeholder: "Password *" %>
+        placeholder: "Password" %>
     </div>
 
     <div class="form-group">
       <%= f.label :password_confirmation, "Password Confirmation",
         class: "sr-only" %>
       <%= f.password_field :password_confirmation, class: "form-control",
-      placeholder: "Password Confirmation *"  %>
+        placeholder: "Password Confirmation"  %>
     </div>
 
-    <p class="lead gray">
-      Optional
-    </p>
 
-    <div class="form-group">
-      <%= f.label :first_name, class: "sr-only" %>
-      <%= f.text_field :first_name, class: "form-control",
-        placeholder: "First Name"  %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :last_name, class: "sr-only" %>
-      <%= f.text_field :last_name, class: "form-control",
-      placeholder: "Last Name"  %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :email, class: "sr-only" %>
-      <%= f.email_field :email, class: "form-control",
-      placeholder: "Email"  %>
-    </div>
-
-    <%= f.submit "Create my account", class: "btn btn-success gs-tracker",
+    <%= f.submit "Sign Up", class: "btn btn-success gs-tracker",
       id: "get-started-create-my-acct-btn" %>
   <% end %>
 
   <br/>
 
-  <div class="center">
-    <small class="basic-apple-blue-link">
-      Already have an account?
-      <%= link_to "Log in", login_path %>.
-    </small>
+  <div class="center basic-apple-blue-link">
+    Already have an account?
+    <%= link_to "Log in", login_path %>.
   </div>
 </div>
