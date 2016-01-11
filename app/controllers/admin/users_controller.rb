@@ -1,8 +1,20 @@
-class BaseAdminController < ApplicationController
+class Admin::UsersController < BaseAdminController
 	before_action :logged_in_user
   before_action :correct_user
 
-	layout "application_admin"
+	def index
+    @filter = params[:filter]
+
+    if @filter
+      if @filter == "latest"
+        @users = User.order("created_at DESC").paginate(:page => params[:page])
+      end
+    else
+      @users = User.order("username ASC").paginate(:page => params[:page])
+    end
+
+    @user_count = User.count
+  end
 
 	private
 

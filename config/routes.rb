@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
-  resources :users
+  resources :users, except: [:index]
   resources :words, only: [:index, :show]
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
@@ -61,8 +61,9 @@ Rails.application.routes.draw do
     resource :add_words_for_student, only: [:update]
   end
   namespace :admin do
-    root "admins#home"
-    get "home" => "admins#home"
+    root "admins#menu"
+    get "stats" => "admins#stats"
     get "menu" => "admins#menu"
+    resources :users, only: [:index]
   end
 end

@@ -1,20 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :edit, :update]
+  before_action :logged_in_user, only: [:show, :edit, :update]
   before_action :correct_user, only: [:edit, :update]
-
-  def index
-    @filter = params[:filter]
-
-    if @filter
-      if @filter == "latest"
-        @users = User.order("created_at DESC")
-      end
-    else
-      @users = User.order("username ASC")
-    end
-
-    @user_count = User.all.count
-  end
 
   def show
     @user = User.find(params[:id])

@@ -2,7 +2,7 @@ class Admin::AdminsController < BaseAdminController
 	before_action :logged_in_user
   before_action :correct_user
 
-	def home
+	def stats
 		@gs = GetStartedStat.find(1)
 	end
 

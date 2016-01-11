@@ -2,21 +2,35 @@
   role="navigation">
   <br>
   <div class="row center">
-    <div class="col-xs-6">
+    <div class="col-xs-4">
       <% if params[:controller] == "admin/admins" &&
-        params[:action] == "home" %>
-        <i class="fa fa-home fa-3x"></i>
+        params[:action] == "stats" %>
+        <i class="fa fa-line-chart fa-3x"></i>
         <br>
-        Home
+        Stats
       <% else %>
-        <%= link_to admin_home_path do %>
-          <i class="fa fa-home fa-3x"></i>
+        <%= link_to admin_stats_path do %>
+          <i class="fa fa-line-chart fa-3x"></i>
           <br>
-          Home
+          Stats
         <% end %>
       <% end %>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-4">
+      <% if params[:controller] == "admin/users" &&
+        params[:action] == "index" %>
+        <i class="fa fa-users fa-3x"></i>
+        <br>
+        Users
+      <% else %>
+        <%= link_to admin_users_path do %>
+          <i class="fa fa-users fa-3x"></i>
+          <br>
+          Users
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-xs-4">
       <% if params[:controller] == "admin/admins" &&
         params[:action] == "menu" %>
         <i class="fa fa-bars fa-3x"></i>
