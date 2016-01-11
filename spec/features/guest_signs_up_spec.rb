@@ -24,16 +24,18 @@ feature "guest signs up", %{
     end
 
     scenario "scenario: from get_started with complete valid data" do
+      visit root_path
+
+      first(".btn-custom-get-started").click
+
       visit signup_path
 
-      fill_in "Username", with: "FooFoo"
-      fill_in "First Name", with: "FirstFooFoo"
-      fill_in "Last Name", with: "LastFooFoo"
       fill_in "Email", with: "foobar@foobar.com"
+      fill_in "Username", with: "FooFoo"
       fill_in "Password", with: "foobar"
       fill_in "Password Confirmation", with: "foobar"
 
-      click_on "Create my account"
+      click_on "Sign Up"
 
       expect(page).to have_content("Welcome to Leksi!")
       expect(page).to have_link("Add")
@@ -46,14 +48,19 @@ feature "guest signs up", %{
       expect(page).to_not have_content("fix")
     end
 
-    scenario "scenario: with only required valid data" do
+    scenario "scenario: with only required data" do
+      visit root_path
+
+      first(".btn-custom-get-started").click
+
       visit signup_path
 
+      fill_in "Email", with: "foobar@foobar.com"
       fill_in "Username", with: "FooFoo"
       fill_in "Password", with: "foobar"
       fill_in "Password Confirmation", with: "foobar"
 
-      click_on "Create my account"
+      click_on "Sign Up"
 
       expect(page).to have_content("Welcome to Leksi!")
       expect(page).to have_link("Add")
@@ -69,11 +76,12 @@ feature "guest signs up", %{
     scenario "scenario with invalid data" do
       visit signup_path
 
+      fill_in "Email", with: ""
       fill_in "Username", with: ""
       fill_in "Password", with: ""
       fill_in "Password Confirmation", with: ""
 
-      click_on "Create my account"
+      click_on "Sign Up"
 
       expect(page).to have_content("errors")
       expect(page).to have_content("fix")

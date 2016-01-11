@@ -66,7 +66,7 @@ feature "teacher adds words to student(s) myLeksi", %{
           password: "password",
           password_confirmation: "password",
           role: "student",
-          email: ""
+          email: "#{u}@gmail.com"
         )
       end
     end

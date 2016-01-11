@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:username) { |n| "foobar#{n}" }
     password "password"
     password_confirmation "password"
-    email ""
+    sequence(:email) { |n| "foo#{n}@bar.com" }
     num_logins 1
     login_history "Sat, 06 Aug 1988 00:00:00 +0000"
   end
