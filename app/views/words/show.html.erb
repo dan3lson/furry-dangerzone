@@ -11,11 +11,13 @@
       <% if @user_word.fundamental_completed? %>
         <span class="data-url pointer leksi-green hover"
               data-url="<%= fund_game_link(@word.id) %>">
+          <i class="fa fa-gamepad"></i>
           Fundamentals
         </span>
       <% else %>
         <span class="data-url pointer hover"
               data-url="<%= fund_game_link(@word.id) %>">
+          <i class="fa fa-gamepad"></i>
           Fundamentals
         </span>
       <% end %>
@@ -25,12 +27,14 @@
       <% if ready_for_jeopardy?(current_user, @user_word) %>
         <span class="data-url pointer hover"
           data-url="<%= jeop_game_link(@word.id) %>">
+          <i class="fa fa-gamepad"></i>
           Jeopardy
         </span>
       <% elsif @user_word.jeopardy_completed? %>
         <% if current_user.has_enough_jeopardy_words? %>
           <span class="data-url pointer leksi-green hover"
             data-url="<%= jeop_game_link(@word.id) %>">
+            <i class="fa fa-gamepad"></i>
             Jeopardy
           </span>
         <% else %>
@@ -61,11 +65,13 @@
       <% if @user_word.freestyle_completed? %>
         <span class="data-url pointer leksi-green hover"
           data-url="<%= free_game_link(@word.id) %>">
+          <i class="fa fa-gamepad"></i>
           Freestyle
         </span>
       <% elsif @user_word.current_game == "three" %>
         <span class="data-url pointer hover"
         data-url="<%= free_game_link(@word.id) %>">
+          <i class="fa fa-gamepad"></i>
           Freestyle
         </span>
       <% else %>

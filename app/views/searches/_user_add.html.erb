@@ -1,15 +1,14 @@
-<% if current_user.already_has_word?(word) %>
-	<% uw_id = UserWord.find_by(user: current_user,
-		word: word).id %>
+<span class="hover">
+	<% if current_user.already_has_word?(word) %>
+		<% uw_id = UserWord.find_by(user: current_user,
+			word: word).id %>
 
-	<%= link_to user_word_path(id: uw_id), method: :delete,
-		role: "button", class: "btn btn-danger" do %>
-		<i class="fa fa-remove fa-2x pull-left"></i>
-		<span class="valign-middle">Remove</span>
+		<%= link_to user_word_path(id: uw_id), method: :delete do %>
+			<i class="fa fa-remove fa-3x leksi-red"></i>
+		<% end %>
+	<% else %>
+		<%= link_to user_word_path(id: word.id), method: :post do %>
+			<i class="fa fa-book fa-3x leksi-green"></i>
+		<% end %>
 	<% end %>
-<% else %>
-	<%= button_tag class: "btn btn-info" do %>
-		<i class="fa fa-book fa-2x pull-left"></i>
-		<span class="valign-middle">Add</span>
-	<% end %>
-<% end %>
+</span>

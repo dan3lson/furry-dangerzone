@@ -1,0 +1,69 @@
+<% provide(:header, "Knowledge Scale") %>
+
+<div id="vks-main-container">
+
+	<div class="well col-sm-8 col-sm-offset-2">
+		<p class="lead center">
+			The Knowledge Scale helps to track your progress over time when learning
+			new words. Find one of your words and then tap
+			<i class="fa fa-balance-scale"></i>
+			to get started.
+		</p>
+		<div id="search-form-container">
+			<span id="vks-chosen-word-id"></span>
+			<%= form_tag(find_words_to_assess_path,
+				method: "get", id: "search-form", remote: true) do %>
+				<div class="input-group">
+					<%= label_tag :inputSuccess5, "Search",
+						class: "control-label sr-only" %>
+					<%= text_field_tag(:search, params[:search],
+						class: "form-control center", id: "inputSuccess5") %>
+					<span class="input-group-btn">
+						<%= submit_tag "find", name: nil, class: "btn btn-default",
+																							id: "search-btn" %>
+					</span>
+				</div>
+			<% end %>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="clear"></div>
+
+	<div class="search-results-container col-sm-6 col-sm-offset-3"></div>
+</div>
+
+<div id="vks-identify-knowledge">
+	<h4>
+		Step 2. Identify your knowledge of the word
+		<span id="vks-chosen-word-name"></span>
+		by selecting a number below.
+	</h4>
+
+	<div class="vks-emojis">
+		<div>
+			<%= image_tag("hushed_face.png", class: "img-responsive") %>
+		</div>
+		<div>
+			<%= image_tag("confused_face.png", class: "img-responsive") %>
+		</div>
+		<div>
+			<%= image_tag("thinking_face.png", class: "img-responsive") %>
+		</div>
+		<div>
+			<%= image_tag("grinning_face.png", class: "img-responsive") %>
+		</div>
+		<div>
+			<%= image_tag("nerd_face.png", class: "img-responsive") %>
+		</div>
+	</div>
+
+	<div id="vks-categories" class="lead well">
+		<p>I don't remember having seen this word before</p>
+		<p>I have seen this word before, but I don't think I know what it means</p>
+		<p>I have seen this word before, and I think it means _____</p>
+		<p>I know this word. It means _____</p>
+		<p>I can use this word in a sentence: _____</p>
+	</div>
+</div>

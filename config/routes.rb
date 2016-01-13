@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
+  get "knowledge_scale" => "assessments#knowledge_scale"
+  get "find_words_to_assess" => "assessments#search_results"
   resources :users, except: [:index]
   resources :words, only: [:index, :show]
   resource :user_word, only: [:create, :update, :destroy]

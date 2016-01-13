@@ -15,6 +15,12 @@ class Word < ActiveRecord::Base
 
   before_create { self.name = name.downcase }
 
+  # not tested
+  def blank_search_msg
+    "You\'re so silly; type in a word first."
+  end
+
+  # not tested
   def self.search(word)
     where(name: word).limit(3)
   end
@@ -28,7 +34,7 @@ class Word < ActiveRecord::Base
       if words_are_found?(name)
         search(name)
       else
-        return "You\'re so silly; type in a word first." if name.blank?
+        return blank_search_msg if name.blank?
 
         macmillan_search = MacmillanDictionary.define(name)
 

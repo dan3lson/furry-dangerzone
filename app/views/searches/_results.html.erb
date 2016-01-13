@@ -2,35 +2,34 @@
 	<p class="lead leksi-red center"><%= results %></p>
 <% else %>
 	<% results.each_with_index do |word, index| %>
-		<div class="word-partial">
-			<div class="pull-right">
-				<%= form_for :user_word, url: user_word_path, method: :post do |f| %>
-					<%= hidden_field_tag :id, word.id %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="pull-right">
+					<%= form_for :user_word, url: user_word_path, html: {
+						id: "search-results" }, method: :post do |f| %>
+						<%= hidden_field_tag :id, word.id %>
 
-					<% if display_button == "guest" %>
-						=)
-					<% elsif display_button == "user" %>
-						<% if logged_in? %>
-							<%= render "searches/user_add", word: word %>
-							<br>
-							<br>
-							<%= render "searches/user_play", word: word %>
-						<% end %>
-					<% elsif display_button == "teacher" %>
-						<% if logged_in? %>
-							<%= render "searches/teacher_select", word: word %>
+						<% if display_button == "guest" %>
+							=)
+						<% elsif display_button == "user" %>
+							<% if logged_in? %>
+								<%= render "searches/user_add", word: word %>
+								&nbsp;
+								&nbsp;
+								<%= render "searches/user_play", word: word %>
+							<% end %>
+						<% elsif display_button == "teacher" %>
+							<% if logged_in? %>
+								<%= render "searches/teacher_select", word: word %>
+							<% end %>
 						<% end %>
 					<% end %>
-				<% end %>
+				</div>
+				<h4><%= word.name %></h4>
 			</div>
-
-			<div>
-				<%= render "words/word", word: word %>
+			<div class="panel-body">
+				<%= render "words/word_details", word: word %>
 			</div>
-
-			<div class="clear"></div>
-
-			<hr>
 		</div>
 	<% end %>
 <% end %>
