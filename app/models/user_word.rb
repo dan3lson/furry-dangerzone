@@ -17,11 +17,12 @@ class UserWord < ActiveRecord::Base
         "You\'re so silly; type in a word first."
       else
         words = Word.where(name: name)
+        user_words = UserWord.where(user: user, word: words) unless words.empty?
 
-        if words.empty?
-          "You don\'t have that word in your myLeksi."
+        if user_words
+          user_words.map { |uw| uw.word }
         else
-          where(user: user, word: words).map { |uw| uw.word }
+          "You don\'t have that word."
         end
       end
     end

@@ -36,34 +36,59 @@
 
 <div id="vks-identify-knowledge">
 	<h4>
-		Step 2. Identify your knowledge of the word
-		<span id="vks-chosen-word-name"></span>
-		by selecting a number below.
+		Step 2. Select an emoji to identify your knowledge of the word:
 	</h4>
 
-	<div class="vks-emojis">
-		<div>
-			<%= image_tag("hushed_face.png", class: "img-responsive") %>
+	<div class="panel panel-default">
+		<div class="panel panel-heading">
+			<h1 class="vks-chosen-word-name bootstrap-blue"></h1>
 		</div>
-		<div>
-			<%= image_tag("confused_face.png", class: "img-responsive") %>
-		</div>
-		<div>
-			<%= image_tag("thinking_face.png", class: "img-responsive") %>
-		</div>
-		<div>
-			<%= image_tag("grinning_face.png", class: "img-responsive") %>
-		</div>
-		<div>
-			<%= image_tag("nerd_face.png", class: "img-responsive") %>
-		</div>
-	</div>
+		<div class="panel panel-body">
+			<div class="vks-emojis">
+				<div>
+					<%= image_tag("hushed_face.png", class: "img-responsive") %>
+				</div>
+				<div>
+					<%= image_tag("confused_face.png", class: "img-responsive") %>
+				</div>
+				<div>
+					<%= image_tag("thinking_face.png", class: "img-responsive") %>
+				</div>
+				<div>
+					<%= image_tag("grinning_face.png", class: "img-responsive") %>
+				</div>
+				<div>
+					<%= image_tag("nerd_face.png", class: "img-responsive") %>
+				</div>
+			</div>
 
-	<div id="vks-categories" class="lead well">
-		<p>I don't remember having seen this word before</p>
-		<p>I have seen this word before, but I don't think I know what it means</p>
-		<p>I have seen this word before, and I think it means _____</p>
-		<p>I know this word. It means _____</p>
-		<p>I can use this word in a sentence: _____</p>
+			<div class="clear"></div>
+
+			<br>
+
+			<div id="vks-categories" class="lead center">
+				<p>I don't remember seeing this word before</p>
+				<p>I've seen this word before, but I don't know what it means</p>
+				<p>
+					I've seen this word before, and I think it means:
+				</p>
+				<p>
+					I know the meaning(s) and/or synonym(s) for this word
+				</p>
+				<p>
+					- I know the meaning(s) and/or synonym(s)
+					<br>
+					- I can use it in a sentence
+				</p>
+				<div id="vks-defs-or-syns-container">
+					<%= text_field(nil, :vks_defs_or_syns, size: 20, class: "input-focus",
+						placeholder: "Meaning(s) and/or synonyms(s)") %>
+				</div>
+				<div id="vks-example-sentence">
+					<%= text_field(nil, :vks_sentence, size: 20, class: "input-focus",
+						placeholder: "Example Sentence") %>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
