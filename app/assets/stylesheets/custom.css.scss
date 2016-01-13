@@ -111,7 +111,9 @@ p {
 #gs-save-progress-container,
 #gs-time-spent,
 #vks-chosen-word,
-#vks-category-one {
+#vks-identify-knowledge,
+#vks-categories,
+#vks-input-container {
 	display: none;
 }
 
@@ -232,11 +234,6 @@ p {
 	cursor: pointer;
 }
 
-.red-border {
-	border-bottom: $leksi-red 1px solid;
-	padding: 10px 0;
-}
-
 .blue-border {
 	border-bottom: lightblue 1px solid;
 	padding: 10px 0;
@@ -298,11 +295,7 @@ p {
 .vks-emojis {
 	@extend .five-columns;
 
-	margin-bottom: 10em;
-
-	img {
-
-	}
+	margin-bottom: 3em;
 }
 
 .vks-emojis div:hover {
@@ -741,6 +734,11 @@ input {
 	margin-left: 0 !important;
 }
 
+.red-border {
+	border-bottom: $leksi-red 1px solid;
+	padding: 10px 0;
+}
+
 .remove-line-height {
 	line-height: normal;
 }
@@ -826,6 +824,37 @@ table {
 
 #vks-categories > * {
 	display: none;
+	font-size: 23px;
+}
+
+.vks-emoji-first-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("hushed_face.png"));
+}
+
+.vks-emoji-second-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("confused_face.png"));
+}
+
+.vks-emoji-third-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("thinking_face.png"));
+}
+
+.vks-emoji-fourth-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("grinning_face.png"));
+}
+
+.vks-emoji-fifth-image {
+	@extend .guest-homepage-image;
+
+	background-image: url(image-path("nerd_face.png"));
 }
 
 .weekly-goal-container {
@@ -868,6 +897,10 @@ table {
 .body-spacing {
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.bootstrap-blue {
+	color: $bootstrap-blue;
 }
 
 .btn-custom {
