@@ -109,7 +109,9 @@ p {
 #get-started-finish-btn,
 #get-started-save-my-progress-btn,
 #gs-save-progress-container,
-#gs-time-spent {
+#gs-time-spent,
+#vks-chosen-word,
+#vks-category-one {
 	display: none;
 }
 
@@ -184,8 +186,8 @@ p {
 	}
 }
 
-.bold {
-	font-weight: bold;
+.bootstrap-blue-bg {
+	background: $bootstrap-blue;
 }
 
 .border-none {
@@ -195,7 +197,6 @@ p {
 }
 
 .box-shadow-border {
-	// box-shadow: 1px 1px 2px #888;
 	padding: 10px;
   margin-bottom: 25px;
 }
@@ -284,14 +285,28 @@ p {
 	clear: both;
 }
 
-.custom-footer div {
+.five-columns div {
+	float: left;
+	min-height: 1px;
+	padding-right: 10px;
+	padding-left: 10px;
   position: relative;
-  float: left;
-  min-height: 1px;
-  padding-right: 10px;
-  padding-left: 10px;
   text-align: center;
   width: 20%;
+}
+
+.vks-emojis {
+	@extend .five-columns;
+
+	margin-bottom: 10em;
+
+	img {
+
+	}
+}
+
+.vks-emojis div:hover {
+	cursor: pointer;
 }
 
 .dark-gray {
@@ -474,6 +489,10 @@ input {
   text-align: center;
 }
 
+.light-blue-bg {
+  background: $light-blue;
+}
+
 .light-green-bg {
   background: $light-green;
 }
@@ -509,6 +528,10 @@ input {
 
 .leksi-green {
 	color: $leksi-green;
+}
+
+.leksi-purple {
+	color: darkorchid;
 }
 
 .leksi-red {
@@ -799,6 +822,10 @@ table {
 
 .valign-middle {
 	vertical-align: -webkit-baseline-middle;
+}
+
+#vks-categories > * {
+	display: none;
 }
 
 .weekly-goal-container {

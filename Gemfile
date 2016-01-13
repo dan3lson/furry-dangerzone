@@ -24,8 +24,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Pagination
+# Pagination part one
 gem 'will_paginate', '~> 3.0.6'
+# Pagination part two
 gem 'will_paginate-bootstrap'
 # Adds cool, scalable fonts (mainly to replace glyphicons)
 gem "font-awesome-rails"
@@ -40,10 +41,10 @@ group :development do
 end
 
 group :test do
-  gem 'database_cleaner'
   # A library for setting up Ruby objects as test data. (https://github.com/thoughtbot/factory_girl)
+  gem 'database_cleaner'
+  # Headless driver for capybara testing based on PhantomJS
   gem 'poltergeist'
-  # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
 end
 
 group :development, :test do
@@ -55,7 +56,7 @@ group :development, :test do
   gem 'faker'
   # Saves and opens a page for when debugging tests
   gem 'launchy'
-  # Headless driver for capybara testing based on PhantomJS
+  # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry-rails'
   # Rspec is used for Bheavior Driven Development (http://rspec.info, https://github.com/rspec/rspec)
   gem 'rspec-rails', '~> 3.0'

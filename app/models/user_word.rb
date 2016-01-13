@@ -10,6 +10,23 @@ class UserWord < ActiveRecord::Base
 
   scope :alphabetical, -> { joins(:word).order("words.name") }
 
+  # updated -> not tested
+  def self.search(user, name)
+    if name
+      if name.blank?
+        "You\'re so silly; type in a word first."
+      else
+        words = Word.where(name: name)
+
+        if words.empty?
+          "You don\'t have that word in your myLeksi."
+        else
+          where(user: user, word: words).map { |uw| uw.word }
+        end
+      end
+    end
+  end
+
   # not tested
   def self.object(user, word)
     find_by(user: user, word: word)

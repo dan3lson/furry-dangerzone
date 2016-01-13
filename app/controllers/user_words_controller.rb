@@ -6,7 +6,6 @@ class UserWordsController < ApplicationController
 
     if @user_word.save
       Thesaurus.insert_words_for(@word, "syn", @word.part_of_speech)
-
       Thesaurus.insert_words_for(@word, "ant", @word.part_of_speech)
 
       if @play
