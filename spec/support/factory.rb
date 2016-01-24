@@ -74,4 +74,14 @@ FactoryGirl.define do
 
     user
   end
+
+  factory :blog do
+    title "All About Leksi Part 1"
+  end
+
+  factory :comment do
+    description "Wow that\'s so clever. I really like it!"
+
+    blog
+  end
 end
