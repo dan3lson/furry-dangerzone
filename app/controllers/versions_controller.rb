@@ -58,6 +58,7 @@ class VersionsController < ApplicationController
   def admin_only
     unless logged_in? && current_user.is_admin?
       flash[:danger] = "Yikes! Admins only ;)"
+
       redirect_to root_path
     end
   end

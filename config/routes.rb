@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   get "get_started_fundamentals" => "guests#fundamentals"
   put "get_started_stats" => "guests#update"
   get "about_us" => "static_pages#about_us"
-  get "blog" => "blogs#index"
-  get "blog/:title" => "blogs#show"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
   get "menu" => "current_users#menu"
@@ -28,6 +26,8 @@ Rails.application.routes.draw do
   delete "logout" => "sessions#destroy"
   get "knowledge_scale" => "assessments#knowledge_scale"
   get "find_words_to_assess" => "assessments#search_results"
+  get "blog" => "blog_posts#index"
+  resources :blog_posts
   resources :users, except: [:index]
   resources :words, only: [:index, :show]
   resource :user_word, only: [:create, :update, :destroy]

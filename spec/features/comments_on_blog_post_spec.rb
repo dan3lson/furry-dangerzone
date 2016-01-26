@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-feature "user comments on blog post", %{
+feature "comments on blog post", %{
 
-  As a user,
+  As a visitor (guest or user),
   I want to comment on a
   blog post.
 } do

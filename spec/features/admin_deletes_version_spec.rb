@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "admin deletes version", %{
 
-  As a admin,
+  As an admin,
   I want to delete a version.
 } do
 
