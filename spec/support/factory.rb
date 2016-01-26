@@ -75,13 +75,16 @@ FactoryGirl.define do
     user
   end
 
-  factory :blog do
+  factory :blog_post do
     title "All About Leksi Part 1"
+    content "Blog content for post numero uno."
+    icon "gamepad"
+    slug "all_about_leksi_part_1"
   end
 
   factory :comment do
-    description "Wow that\'s so clever. I really like it!"
+    description "Wow, so clever. I really like it!"
 
-    blog
+    blog_post
   end
 end

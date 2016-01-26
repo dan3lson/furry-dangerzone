@@ -16,6 +16,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:word_tags) }
     it { should have_many(:reviews) }
     it { should have_many(:feedbacks) }
+    it { should have_many(:comments) }
   end
 
   describe "validations" do

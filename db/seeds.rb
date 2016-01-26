@@ -7,7 +7,7 @@ Rails.logger.info "==============================================="
   password: "password",
   password_confirmation: "password",
   role: "admin",
-  email: ""
+  email: "danelson@leksi.education"
 )
 Rails.logger.info "Username: #{@founder.username}"
 
@@ -16,7 +16,7 @@ Rails.logger.info "Username: #{@founder.username}"
     username: Faker::Internet.user_name,
     password: "password",
     password_confirmation: "password",
-    email: ""
+    email: Faker::Internet.email
   )
   Rails.logger.info "Username: #{user.username}"
 end
@@ -54,3 +54,20 @@ Word.define("trait")
 Word.define("bait")
 Word.define("slate")
 Word.define("wait")
+
+Rails.logger.info "==============================================="
+Rails.logger.info "Creating Blog Posts"
+Rails.logger.info "==============================================="
+
+BlogPost.create!(
+  title: "All About Leksi, Part 1: What\'s in a Name?",
+  content: "Content for All About Leksi Part 1",
+  icon: "map-o",
+  slug: "all_about_leksi_part_1"
+)
+BlogPost.create!(
+  title: "All About Leksi, Part 2: Our Founder\'s Aha Moment",
+  content: "Content for All About Leksi Part 2",
+  icon: "lightbulb-o",
+  slug: "all_about_leksi_part_2"
+)
