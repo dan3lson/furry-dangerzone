@@ -89,8 +89,6 @@ $(document).ready(function(){
 
 	spinner();
 
-	make_flash_alerts_disappear();
-
 	function spinner() {
 		$(".spinner").hide();
 
@@ -104,10 +102,4 @@ $(document).ready(function(){
 			$("#awfs-suc-war-err-container").fadeIn();
 		});
 	};
-
-	function make_flash_alerts_disappear() {
-		setTimeout(function(){
-    	$('.alert-success').fadeOut();
-	  }, 1300);
-	}
 });

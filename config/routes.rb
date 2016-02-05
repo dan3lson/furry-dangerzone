@@ -27,7 +27,10 @@ Rails.application.routes.draw do
   get "knowledge_scale" => "assessments#knowledge_scale"
   get "find_words_to_assess" => "assessments#search_results"
   get "blog" => "blog_posts#index"
-  resources :blog_posts
+  resources :blog_posts do
+    resources :comments
+  end
+  resources :comments
   resources :users, except: [:index]
   resources :words, only: [:index, :show]
   resource :user_word, only: [:create, :update, :destroy]

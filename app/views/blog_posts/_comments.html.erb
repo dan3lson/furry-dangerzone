@@ -1,11 +1,19 @@
 <div class="thin-white-section">
-	<div class="panel panel-default">
-		<div class="panel-heading">Comments</div>
-		<div class="panel-body">
-			Leave your comments below!
-			<hr>
+	<h3>
+		Comments
+	</h3>
 
-			<%#= render "comments/form" %>
-		</div>
-	</div>
+	<% if @blog_post_comments %>
+		<ol reversed>
+			<% @blog_post_comments.each do |c| %>
+				<li><%= c.description %></li>
+			<% end %>
+		</ol>
+	<% end %>
+
+	<hr>
+
+	<p class="lead">Join the conversation!</p>
+
+	<%= render "comments/form", blog_post: blog_post, comment: comment %>
 </div>

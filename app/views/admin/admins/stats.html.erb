@@ -248,3 +248,14 @@
 		</div>
 	</div>
 </div>
+
+<hr>
+
+<ol reversed>
+	<% @feedbacks.each do |f| %>
+			<li>
+				<%= f.user.username %> submitted
+				'<%= f.description %>' <%= time_ago_in_words(f.created_at) %> ago.
+			</li>
+	<% end %>
+</ol>
