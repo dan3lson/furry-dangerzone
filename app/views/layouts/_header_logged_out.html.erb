@@ -7,8 +7,14 @@
 		</h4>
 	</div>
 	<div class="pull-right">
-		<%= link_to login_path, class: "hover" do %>
-			<i class="fa fa-sign-in fa-2x leksi-orange">Log in</i>
+		<% if logged_in? %>
+			<%= link_to root_path, class: "hover" do %>
+				<i class="fa fa-sign-in fa-2x leksi-orange">Go to myLeksi</i>
+			<% end %>
+		<% else %>
+			<%= link_to login_path, class: "hover" do %>
+				<i class="fa fa-sign-in fa-2x leksi-orange">Log in</i>
+			<% end %>
 		<% end %>
 		&nbsp;
 		<i class="fa fa-bars fa-2x sb-toggle-right pointer hover white"></i>

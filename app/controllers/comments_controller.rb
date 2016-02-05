@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
+  layout "application_guest"
+  
   def index
     @comments = Comment.all
-
-    render layout: "application_guest" unless logged_in?
   end
 
   def new

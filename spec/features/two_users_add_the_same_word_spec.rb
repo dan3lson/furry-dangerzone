@@ -27,7 +27,7 @@ feature "two users add the same word", %{
       fill_in "Search", with: word.name
 
       click_on "look up"
-      save_and_open_page
+
       click_on "Add"
       sleep(1)
 
