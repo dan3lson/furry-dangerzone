@@ -15,6 +15,7 @@ class VersionsController < ApplicationController
 
   def create
     @version = Version.new(version_params)
+
     if @version.save
       flash[:success] = "Version \'#{@version.number}\' successfully created."
       redirect_to versions_path
@@ -29,6 +30,7 @@ class VersionsController < ApplicationController
 
   def update
     @version = Version.find(params[:id])
+
     if @version.update(version_params)
       flash[:success] = "Changes successfully made."
       redirect_to @version
@@ -40,6 +42,7 @@ class VersionsController < ApplicationController
 
   def destroy
     @version = Version.find(params[:id])
+    
     if @version.destroy
       flash[:success] = "Version deleted."
       redirect_to versions_path

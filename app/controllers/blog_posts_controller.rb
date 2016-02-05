@@ -9,6 +9,8 @@ class BlogPostsController < ApplicationController
 
   def show
     @blog_post = BlogPost.find_by_slug(params[:id])
+    @blog_post_comments = @blog_post.comments if @blog_post.comments.any?
+    @comment = Comment.new
   end
 
   def new
