@@ -14,7 +14,7 @@ feature "user plays game one", %{
   # [] I can complete 8 levels or go back
   #    to /words/:id
 
-  skip "\n user plays game one -->" do
+  describe "\n user plays game one -->" do
     scenario "scenario: plays game one without stopping", js: true do
       word = Word.create(
         name: "time",
@@ -23,10 +23,11 @@ feature "user plays game one", %{
       )
       user = FactoryGirl.create(:user)
       user_word = UserWord.create(user: user, word: word)
+      FactoryGirl.create(:game)
 
       log_in_as(user)
 
-      page.find(".fund-show-game-circle-container").click
+      page.find(".hvr-float-shadow").click
 
       # Level 1
       fill_in "spell_the_word", with: "time"
