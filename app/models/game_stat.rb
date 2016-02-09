@@ -9,12 +9,10 @@ class GameStat < ActiveRecord::Base
   validates :num_jeop_lost, presence: true
 
   # not tested
-  def self.update_user_word_game_stats(user, word, game_name, time_spent)
+  def self.update_user_word_game_stats(user, word, game, time_spent)
     user_word = UserWord.find_by(user: user, word: word)
-    game = Game.find_by(name: game_name)
     gs = GameStat.where(game: game, user_word: user_word).first_or_initialize
     time_spent = time_spent.to_f.round(2)
-
     gs.num_played += 1
     gs.time_spent += time_spent
 

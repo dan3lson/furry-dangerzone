@@ -2,7 +2,7 @@ $(document).ready(function(){
   $(document).ajaxComplete(function(e,request, settings) {
     if (settings.url.indexOf("get_started_fundamentals") >= 0) {
       // General
-      var $chosen_word_value = $.trim($(".word-name").html());
+      var $chosen_word_value = $.trim($("#word-name").html());
       var $chosen_word_id = $(".palabra-id").html();
       var $styled_chosen_word_value = "";
       var $regex = /^[a-zA-Z. ]+$/;
