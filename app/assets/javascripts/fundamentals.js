@@ -1,8 +1,7 @@
 $(document).ready(function(){
 	// General
-  var $chosen_word_value = $.trim($(".word-name").html());
+  var $chosen_word_value = $.trim($("#word-name").html());
 	var $chosen_word_id = $(".palabra-id").html();
-	var $styled_chosen_word_value = "";
 	var $regex = /^[a-zA-Z. ]+$/;
 	var $new_goodies_total = 0;
   var $time_game_started;
@@ -75,7 +74,7 @@ $(document).ready(function(){
   learn_the_fundamentals();
 
   function learn_the_fundamentals() {
-    start_game();
+    start_activity();
 
     fill_in_the_blank_back_button();
 
@@ -98,7 +97,7 @@ $(document).ready(function(){
     real_world_examples_continue_button();
   }
 
-  function start_game() {
+  function start_activity() {
     if ($("#game-started-bool").hasClass("begin-timer")) {
       display_instruction("Type the word below:");
 
