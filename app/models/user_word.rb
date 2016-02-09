@@ -35,7 +35,7 @@ class UserWord < ActiveRecord::Base
 
   # not tested
   def self.mark_fundamentals_completed(user, word)
-    user_word = UserWord.find_by(user: user, word: Word.find(word))
+    user_word = UserWord.find_by(user: user, word: word)
     user_word.games_completed = 1
 
     if user_word.save

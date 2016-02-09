@@ -34,14 +34,14 @@ class UsersController < ApplicationController
         @completed_fund = Word.find(@param_completed_fund)
 
         @time_spent = params[:time_spent]
-        @game_name = params[:game_name]
+        @game = Game.find_by(name: params[:game_name])
 
         @results = UserWord.mark_fundamentals_completed(
-        @user, @completed_fund
+          @user, @completed_fund
         )
 
         @gs_results = GameStat.update_user_word_game_stats(
-        @user, @completed_fund, @game_name, @time_spent
+          @user, @completed_fund, @game_name, @time_spent
         )
 
         logger.info(@results)
