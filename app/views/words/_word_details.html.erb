@@ -1,12 +1,4 @@
 <div class="word-details">
-  <p>
-    <span class="word-phonetic-spelling"><%= word.phonetic_spelling %></span>
-    &nbsp; &nbsp;
-    <span class="word-part-of-speech">
-      <em><%= word.part_of_speech %></em>
-    </span>
-  </p>
-
   <div>
     <% top_three_entries_for(word, "definition").each do |d| %>
       <p>
@@ -15,7 +7,7 @@
     <% end %>
   </div>
 
-  <% unless word.example_sentence.length == 0 %>
+  <% unless word.example_sentence.nil? || word.example_sentence.empty? %>
     <div>
       <% top_three_entries_for(word, "example_sentence").each do |es| %>
         <p>

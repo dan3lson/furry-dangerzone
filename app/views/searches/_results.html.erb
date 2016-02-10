@@ -25,7 +25,26 @@
 						<% end %>
 					<% end %>
 				</div>
-				<h4><%= word.name %></h4>
+				<h4>
+					<%= word.name %>
+
+					<br>
+
+					<small>
+						<% if word.phonetic_spelling %>
+							<span class="word-phonetic-spelling">
+								<%= word.phonetic_spelling %>
+							</span>
+							&nbsp; &nbsp;
+						<% end %>
+
+						<% if word.part_of_speech %>
+							<span class="word-part-of-speech">
+								<em><%= word.part_of_speech %></em>
+							</span>
+						<% end %>
+					</small>
+				</h4>
 			</div>
 			<div class="panel-body">
 				<%= render "words/word_details", word: word %>
