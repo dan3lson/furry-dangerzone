@@ -7,7 +7,7 @@
     <% end %>
   </div>
 
-  <% unless word.example_sentence.nil? || word.example_sentence.empty? %>
+  <% unless word.example_sentence.nil? %>
     <div>
       <% top_three_entries_for(word, "example_sentence").each do |es| %>
         <p>
