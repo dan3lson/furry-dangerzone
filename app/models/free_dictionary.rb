@@ -1,6 +1,7 @@
 class FreeDictionary
   include HTTParty
   include Nokogiri
+  # require 'open-uri'
 
   attr_accessor :phonetic_spelling
   attr_accessor :definition
@@ -25,18 +26,16 @@ class FreeDictionary
     word.gsub!(" ", "-")
     word.chop! if word.end_with?("-") || word.end_with?(" ")
 
-    page = Nokogiri::HTML(open("#{URL}/#{word}"))
+    page = open_page(URL, word)
 
-    definitions_exist = page.css(".ds-list").count > 0
+    definitions_exist = page.css(".ds-list").count > 0 unless page == "404"
 
-    if page && definitions_exist
+    if definitions_exist
       words = []
 
       good_divs = page.xpath(
         '//*[@id="Definition"]/section[2]'
-      ).children.select { |elem|
-        elem.attributes.count == 0 && elem.name == "div"
-      }
+      ).children.select { |e| e.attributes.count == 0 && e.name == "div" }
 
       good_divs.each do |div|
         phonetic_spellings = page.css("h2").select { |e| e.text.include?("•") }
@@ -48,7 +47,7 @@ class FreeDictionary
         definition = div.css(".ds-list").map { |div| div.text }.join("***")
 
         unless div.children.at_css("i").nil?
-          part_of_speech = FreeDictionary.update_pos(
+          part_of_speech = FreeDictionary.update_part_of_speech(
             div.children.at_css("i").text
           )
         end
@@ -65,19 +64,33 @@ class FreeDictionary
         )
       end
 
-      words
+      words if words.any?
     else
       nil
     end
   end
 
-  def self.update_pos(string)
+  def self.update_part_of_speech(string)
     if string.start_with?("n")
       "noun"
     elsif string.start_with?("adj")
       "adjective"
     elsif string.start_with?("v")
       "verb"
+    elsif string.start_with?("adv")
+      "adverb"
+    else
+      nil
+    end
+  end
+
+  private
+
+  def self.open_page(url, word)
+    begin
+      Nokogiri::HTML(open("#{url}/#{word}"))
+    rescue OpenURI::HTTPError => error
+      "404"
     end
   end
 end
