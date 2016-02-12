@@ -1,7 +1,6 @@
 class FreeDictionary
-  include HTTParty
   include Nokogiri
-  # require 'open-uri'
+  require 'open-uri'
 
   attr_accessor :phonetic_spelling
   attr_accessor :definition

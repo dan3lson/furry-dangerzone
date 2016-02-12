@@ -53,20 +53,20 @@ class GamesController < ApplicationController
           @attribute = @attributes[i]
           @attribute_value = w.send(@attribute)
 
-          if @attribute_value.empty?
+          if word_has_attribute_value?(@attribute_value)
+            if attribute_is_example_sentence_or_definition?(@attribute)
+              top_three_entries_for(w, @attribute).join("; ").gsub(
+              "#{w.name}", "______"
+              )
+            elsif attribute_is_synonym_or_antonym?(@attribute)
+              @attribute_value.sample.name
+            end
+          else
             @attributes[i] = "definition"
             @attribute_value = w.send("definition")
             top_three_entries_for(w, "definition").join("; ").gsub(
-              "#{w.name}", "______"
+            "#{w.name}", "______"
             )
-          else
-            if @attribute == "example_sentence" || @attribute == "definition"
-              top_three_entries_for(w, @attribute).join("; ").gsub(
-                "#{w.name}", "______"
-              )
-            elsif @attribute.end_with?("onyms")
-              @attribute_value.sample.name
-            end
           end
         end
       end
