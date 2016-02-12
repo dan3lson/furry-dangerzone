@@ -38,13 +38,13 @@ class Word < ActiveRecord::Base
         else
           words = []
 
-          free_dictionary_search.each do |entry|
+          free_dictionary_search.each do |w|
             word = Word.new(
-              name: name,
-              phonetic_spelling: entry.phonetic_spelling,
-              part_of_speech: entry.part_of_speech,
-              definition: entry.definition,
-              example_sentence: entry.example_sentence
+                name: name,
+                phonetic_spelling: w.phonetic_spelling,
+                part_of_speech: w.part_of_speech,
+                definition: w.definition,
+                example_sentence: w.example_sentence
               )
 
             if word.save
