@@ -92,6 +92,13 @@
 <% end %>
 
 <div>
+  <p>
+    <%= @word.phonetic_spelling %>
+    &nbsp;
+    &nbsp;
+    <%= @word.part_of_speech %>
+  </p>
+  
   <%= render "words/word_details", word: @word %>
 </div>
 

@@ -3,21 +3,21 @@ class FreeDictionary
   require 'open-uri'
 
   attr_accessor :phonetic_spelling
-  attr_accessor :definition
   attr_accessor :part_of_speech
+  attr_accessor :definition
   attr_accessor :example_sentence
 
   URL = "http://www.thefreedictionary.com"
 
   def initialize(
     phonetic_spelling,
-    definition,
     part_of_speech,
+    definition,
     example_sentence
   )
     @phonetic_spelling = phonetic_spelling
-    @definition = definition
     @part_of_speech = part_of_speech
+    @definition = definition
     @example_sentence = example_sentence
   end
 
@@ -32,18 +32,20 @@ class FreeDictionary
     if definitions_exist
       words = []
 
-      good_divs = page.xpath(
-        '//*[@id="Definition"]/section[2]'
-      ).children.select { |e| e.attributes.count == 0 && e.name == "div" }
+      definition_divs = page.xpath(
+        '//*[@id="Definition"]/section[1]'
+      ).children.select do |e|
+        if e.css(".ds-list").count > 0 || e.css(".ds-single").count > 0
+          e.attributes["class"].value == "pseg"
+        end
+      end
 
-      good_divs.each do |div|
-        phonetic_spellings = page.css("h2").select { |e| e.text.include?("•") }
+      definition_divs.each do |div|
+        phonetic_spellings = page.xpath("//*[@id='Definition']/section[3]/h2")
 
         if phonetic_spellings.any?
-          phonetic_spelling = phonetic_spellings.first.text
+          phonetic_spelling = phonetic_spellings.text
         end
-
-        definition = div.css(".ds-list").map { |div| div.text }.join("***")
 
         unless div.children.at_css("i").nil?
           part_of_speech = FreeDictionary.update_part_of_speech(
@@ -51,14 +53,23 @@ class FreeDictionary
           )
         end
 
-        example_sentence = div.css(".illustration").map { |div|
-          div.text
-        }.join("***") if div.css(".illustration").count > 0
+        definition = if div.css(".ds-list").count > 0
+          div.css(".ds-list").map { |div| div.text }.join("***")
+        else
+          div.css(".ds-single").map { |div| div.text }.join("***")
+        end
+
+       if div.css(".illustration").count > 0
+         example_sentence = div.css(".illustration").map { |div|
+           next if div.text.start_with?("(") && div.text[-2] == ")"
+           div.text
+         }.join("***")
+       end
 
         words << self.new(
           phonetic_spelling,
-          definition,
           part_of_speech,
+          definition,
           example_sentence
         )
       end
@@ -74,7 +85,7 @@ class FreeDictionary
       "noun"
     elsif string.start_with?("adj")
       "adjective"
-    elsif string.start_with?("v")
+    elsif string.start_with?("v") || string.start_with?("tr.v")
       "verb"
     elsif string.start_with?("adv")
       "adverb"

@@ -219,7 +219,7 @@ $(document).ready(function(){
           $("#pronunciation_back_button, #pronunciation_container, #pronunciation_continue_button").hide();
           $("#meanings_back_button, #meanings_container").show();
 
-          $part_of_speech = $(".word-part-of-speech").html();
+          $part_of_speech = $("#word-part-of-speech").html();
           display_instruction("As a(n) " + $part_of_speech + ", read the meaning(s) for <strong>'" + $chosen_word_value + "'</strong>.")
 
           progressBar(45);
