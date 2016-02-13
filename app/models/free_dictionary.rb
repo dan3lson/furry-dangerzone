@@ -41,10 +41,16 @@ class FreeDictionary
       end
 
       definition_divs.each do |div|
-        phonetic_spellings = page.xpath("//*[@id='Definition']/section[3]/h2")
+        phonetic_spellings = page.xpath(
+          "//*[@id='Definition']/section[3]/h2"
+        )
 
         if phonetic_spellings.any?
-          phonetic_spelling = phonetic_spellings.text
+          phonetic_spelling = phonetic_spellings.first.text
+
+          if string_has_digits?(phonetic_spelling)
+            phonetic_spelling = keep_one_phonetic_spelling(phonetic_spelling)
+          end
         end
 
         unless div.children.at_css("i").nil?
@@ -58,13 +64,14 @@ class FreeDictionary
         else
           div.css(".ds-single").map { |div| div.text }.join("***")
         end
+        remove_ordered_list(definition)
 
-       if div.css(".illustration").count > 0
-         example_sentence = div.css(".illustration").map { |div|
-           next if div.text.start_with?("(") && div.text[-2] == ")"
-           div.text
-         }.join("***")
-       end
+        if div.css(".illustration").count > 0
+          example_sentence = div.css(".illustration").map { |div|
+            next if div.text.start_with?("(") && div.text[-2] == ")"
+            div.text
+          }.join("***")
+        end
 
         words << self.new(
           phonetic_spelling,
@@ -94,12 +101,24 @@ class FreeDictionary
     end
   end
 
+  def self.remove_ordered_list(string)
+    string.gsub!(/\d+./, "")
+  end
+
+  def self.keep_one_phonetic_spelling(string)
+    string.gsub(/\d/, ";").split(";").first
+  end
+
+  def self.string_has_digits?(string)
+    string =~ /\d/
+  end
+
   private
 
   def self.open_page(url, word)
     begin
       Nokogiri::HTML(open("#{url}/#{word}"))
-    rescue OpenURI::HTTPError => error
+    rescue OpenURI::HTTPError
       "404"
     end
   end
