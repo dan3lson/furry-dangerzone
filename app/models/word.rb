@@ -1,4 +1,7 @@
 class Word < ActiveRecord::Base
+  include Nokogiri
+  require 'open-uri'
+
   default_scope -> { order('words.name ASC') }
 
   has_many :user_words, dependent: :destroy
@@ -138,4 +141,32 @@ class Word < ActiveRecord::Base
   def self.any_blanks?(attribute)
     where("#{attribute} = ?", "").count > 0 ? "yes" : "no"
   end
+
+  # Update phonetic spellings for all words
+  # def self.update_phonetic_spelling_from_free_dictionary
+  #   url = "http://wwww.thefreedictionary.com"
+  #
+  #   all.each do |word|
+  #     page = Nokogiri::HTML(open("#{url}/#{word.name}"))
+  #     phonetic_spellings = page.xpath(
+  #       "//*[@id='Definition']/section[3]/h2"
+  #     )
+  #
+  #     next unless phonetic_spellings.any?
+  #
+  #     phonetic_spelling = phonetic_spellings.first.text
+  #
+  #     if phonetic_spelling =~ /\d/
+  #       phonetic_spelling = phonetic_spelling.gsub(/\d/, ";").split(";").first
+  #     end
+  #
+  #     word.phonetic_spelling = phonetic_spelling
+  #
+  #     if word.save
+  #       puts "#{word.name} succesfully updated"
+  #     else
+  #       puts "ERROR with #{word.name}"
+  #     end
+  #   end
+  # end
 end
