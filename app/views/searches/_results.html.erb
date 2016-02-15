@@ -35,8 +35,9 @@
 							<span class="word-phonetic-spelling">
 								<%= word.phonetic_spelling %>
 							</span>
-							|
 						<% end %>
+
+						<%= "|" if word.phonetic_spelling && word.part_of_speech %>
 
 						<% if word.part_of_speech %>
 							<span class="word-part-of-speech">

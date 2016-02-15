@@ -31,11 +31,11 @@ class FreeDictionary
 
     if definitions_exist
       words = []
-
       definition_divs = page.xpath(
         '//*[@id="Definition"]/section[1]'
       ).children.select do |e|
         if e.css(".ds-list").count > 0 || e.css(".ds-single").count > 0
+          return nil if e.attributes["class"].nil?
           e.attributes["class"].value == "pseg"
         end
       end
@@ -65,13 +65,16 @@ class FreeDictionary
           div.css(".ds-single").map { |div| div.text }.join("***")
         end
         remove_ordered_list(definition)
+        remove_string_in_parens(definition) if string_in_parens?(definition)
 
         if div.css(".illustration").count > 0
           example_sentence = div.css(".illustration").map { |div|
-            next if div.text.start_with?("(") && div.text[-2] == ")"
+            next if string_in_parens?(div.text)
             div.text
           }.join("***")
         end
+
+        strip_def_of_ex_sents(definition, example_sentence) if example_sentence
 
         words << self.new(
           phonetic_spelling,
@@ -110,7 +113,28 @@ class FreeDictionary
   end
 
   def self.string_has_digits?(string)
-    string =~ /\d/
+    string =~ /\d/ ? true : false
+  end
+
+  def self.string_in_parens?(string)
+    (string.start_with?("(") && string.end_with?(").")) ||
+    string.end_with?(").")
+  end
+
+  def self.remove_string_in_parens(string)
+    string.gsub!(" #{string.slice(string.index("("), string.length)}", "")
+  end
+
+  def self.strip_def_of_ex_sents(definitions, example_sentences)
+    example_sentences = example_sentences.split("***")
+
+    example_sentences.each do |es|
+      if definitions.include?(es)
+        definitions.gsub!(": #{es}", " ")
+      end
+    end
+
+    definitions
   end
 
   private

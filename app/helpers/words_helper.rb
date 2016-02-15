@@ -74,7 +74,7 @@ module WordsHelper
 
   # not tested
   def top_three_entries_for(word, attribute)
-    word.send(attribute).split("***").take(3)
+    word.send(attribute).split("***")
   end
 
   def word_has_attribute_value?(result)
