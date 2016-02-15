@@ -1,5 +1,20 @@
-<% provide(:title, "Add") %>
 <% provide(:header, "Add") %>
+
+<% title "Dictionary" %>
+<% description "Look up words you don\'t know or select ones from a specific list" %>
+<% set_meta_tags keywords: %w[learn education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
+
+<% set_meta_tags og: {
+  title:    "Dictionary",
+	description: "Look up words you don\'t know or select ones from a specific list"
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun, and works.",
+  title: "Dictionary",
+  description: "Look up words you don\'t know or select ones from a specific list"
+} %>
+
 
 <div class="col-sm-8 col-sm-offset-2 add-look-up-word-container well">
   <%= render "searches/form", display_button_for: "user" %>
