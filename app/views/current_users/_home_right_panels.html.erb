@@ -60,17 +60,6 @@
 					</p>
 				</div>
 			</div>
-
-			<div class="progress">
-				<div class="progress-bar progress-bar-info"
-				role="progressbar"
-				aria-valuenow="<%= goal_percentage_completion(current_user) %>"
-				aria-valuemin="0"
-				aria-valuemax="<%= diff_btwn_curr_and_next_lvl(current_user) %>"
-				style="width: <%= goal_percentage_completion(current_user) %>%">
-					<span><%= goal_percentage_completion(current_user) %>%</span>
-				</div>
-			</div>
 		<% end %>
 	</div>
 </div>

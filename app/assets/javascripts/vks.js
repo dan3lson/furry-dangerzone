@@ -23,6 +23,9 @@ $(document).ready(function() {
 
 		if ([0, 1].indexOf($category_num) != -1) {
 			$(".input-focus").val("");
+			$("#vks-finish-btn").fadeIn();
+		} else {
+			$("#vks-finish-btn").fadeOut();
 		}
 
 		if ([2, 3, 4].indexOf($category_num) != -1) {
@@ -36,6 +39,16 @@ $(document).ready(function() {
 			$("#vks-example-sentence").show();
 		} else {
 			$("#vks-example-sentence").hide();
+		}
+
+		if ([2, 3].indexOf($category_num) != -1) {
+			// need to check as user types
+			$input_value = $.trim($("#vks-meaning-input").val());
+ 			if ($input_value.length > 0 ) {
+				$("#vks-finish-btn").fadeIn();
+			} else {
+				$("#vks-finish-btn").fadeIn();
+			}
 		}
 	});
 });
