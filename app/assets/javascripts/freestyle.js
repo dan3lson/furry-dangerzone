@@ -235,26 +235,21 @@ $(document).ready(function(){
 
 	// Global fn
 
-	// For each individual input field, validate what's being typed in and if all
-	// are completed correctly, enable the user to proceed
 	function validate_input_values(form_name, continue_button_name) {
-		var $form_name = "#"+form_name + "" + " *";
-		var $continue_button_name = "#"+continue_button_name;
+		var $form_name = "#" + form_name + "" + " *";
+		var $continue_button_name = "#" + continue_button_name;
 		var $input_valid = "#" + form_name + " input.valid";
 
 		$($form_name).filter(':input').each(function(){
 			$(this).on('input',function(){
 				$input_value = $.trim($(this).val());
-				// If the input is longer than two characters and does not contain a
-				// number or space, make the input green to show it's valid
+
 				if($input_value.length > 2 && $regex.test($input_value)){
 					$(this).removeClass("invalid").addClass("valid");
 				} else {
 					$(this).removeClass("valid").addClass("invalid");
 				}
 
-				// If all three inputs have the class "valid", display the continue
-				// button and vice versa if not
 				if($($input_valid).length == 3){
 					$($continue_button_name).fadeIn();
 				} else {
@@ -264,14 +259,10 @@ $(document).ready(function(){
 		});
 	}
 
-	// Display the next activity's continue button only if the values were
-	// previously completed, i.e. the user hit the back-button
 	function show_continue_button_if_activity_completed(form_name, continue_button_name) {
 		var $continue_button_name = "#"+continue_button_name;
 		var $input_valid = "#" + form_name + " input.valid";
 
-		// If all three inputs have the class "valid", display the continue button
-		// and vice versa if not
 		if($($input_valid).length == 3){
 			$($continue_button_name).fadeIn();
 		} else {
@@ -279,19 +270,16 @@ $(document).ready(function(){
 		}
 	}
 
-	//Change the activity name and specific directions depending on current state
 	function display_instruction( specific_instruction) {
 		$(".freestyle-instructions").html(specific_instruction);
 	}
 
-	// Reset individual input values
 	function reset_input_value(id_name) {
 		$("#"+id_name).val(function (){
 			return this.defaultValue;
 		});
 	};
 
-	// Set the value for the progress bar
 	function progressBar(value) {
 		$('.game-progress-bar').css('width', value+'%').attr('aria-valuenow', value);
 	}

@@ -15,12 +15,6 @@
 			<span id="level_congrats_text">
 				You've completed the Fundamentals for
 			</span>
-			<% if logged_in? %>
-				and earned
-				<span id="goodies_total"></span>
-				experience points! You need <%= pts_to_level_up(current_user) %> more XP
-				before reaching Level <%= next_level(current_user) %>.
-			<% end %>
 		</p>
 
 

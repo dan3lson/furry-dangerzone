@@ -2,12 +2,6 @@
 
 <div id="vks-main-container">
 	<div class="well col-sm-8 col-sm-offset-2">
-		<div>
-			<%= button_tag class: "btn btn-success ", id: "" do %>
-				<i class="fa fa-flag fa-2x pull-right"></i>
-				<span class="valign-middle">Finish</span>
-			<% end %>
-		</div>
 		<p class="lead center">
 			The Knowledge Scale helps to track your progress over time when learning
 			new words. Find one of your words and then tap
@@ -48,6 +42,7 @@
 		<div class="panel panel-heading">
 			<h1 class="vks-chosen-word-name bootstrap-blue"></h1>
 		</div>
+
 		<div class="panel panel-body">
 			<div class="vks-emojis">
 				<div>
@@ -87,12 +82,21 @@
 				</p>
 				<div id="vks-defs-or-syns-container">
 					<%= text_field(nil, :vks_defs_or_syns, size: 20, class: "input-focus",
+						id: "vks-meaning-input",
 						placeholder: "Meaning(s) and/or synonyms(s)") %>
 				</div>
 				<div id="vks-example-sentence">
 					<%= text_field(nil, :vks_sentence, size: 20, class: "input-focus",
+					id: "vks-example-sentence-input", 
 						placeholder: "Example Sentence") %>
 				</div>
+			</div>
+
+			<div>
+				<%= button_tag class: "btn btn-success btn-block",
+					id: "vks-finish-btn" do %>
+					<span class="valign-middle">Finish</span>
+				<% end %>
 			</div>
 		</div>
 	</div>
