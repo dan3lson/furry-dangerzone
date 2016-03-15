@@ -7,25 +7,38 @@
 //*
 //**********
 
-$apple-blue: #097ff0;
+$amber: #F0A30A;
+$apple-blue: #097FF0;
 $apple-star-orange: #fd9603;
 $black: #000;
-$bootstrap-green: #5cb85c;
-$dark-gray: #8e8e93;
+$bootstrap-blue: #5BC0DE;
+$bootstrap-green: #DFF0D8;
+$dark-gray: #8E8E93;
+$medium-gray: lighten($dark-gray, 30);
+$dark-green: darken($bootstrap-green, 60);
 $even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 55px;
-$leksi-green: #24d12e;
+$home-game-circle-size: 100px;
+$leksi-green: #81CE97;
+$light-leksi-green: lighten($leksi-green, 17);
+$dark-leksi-green: darken($leksi-green, 20);
 $leksi-orange: orange;
-$leksi-red: #ff1300;
-$light-gray: #f2f2f2;
-$white: #fff;
+$dark-leksi-orange: darken($leksi-orange, 20);
+$leksi-red: #FF1300;
+$dark-leksi-red: darken($leksi-red, 20);
+$light-gray: #F2F2F2;
+$even-lighter-gray: lighten($light-gray, 3);
+$light-leksi-orange: lighten($leksi-orange, 47);
+$light-blue: lighten($bootstrap-blue, 37);
+$light-green: lighten($bootstrap-green, 8);
+$light-leksi-red: lighten($leksi-red, 47);
+$sky-blue: #1677BA;
+$show-game-circle-container-hover-opac: .7;
+$light-sky-blue: lighten($sky-blue, 55);
+$white: #FFF;
 
-#continue_button_container {
-	margin-bottom: 50px;
-}
-
+#spell_the_word_form, #progress_bar_container,
 #meanings_container, #game-home-btn,
-.checkpoint-image,
 #pronunciation_container,
 #fill_in_the_blank_container,
 #fill_in_the_blank_game_over_message, #synonyms_container, #antonyms_container,
@@ -48,40 +61,54 @@ $white: #fff;
 }
 
 mark {
-	background:gray;
+	background: gray;
 }
 
-.change_text_to_red {
-	color: red;
+#continue_button_container {
+	margin-bottom: 50px;
+
+	& button {
+		font-size: 23px;
+	}
 }
 
 #fill_in_the_blank_container {
 	margin: 0px;
 }
 
-.fill_in_the_blank_letters {
+.fitb-letter {
 	border: 2px solid gray;
 	border-radius: 5px;
-	width: 22% !important;
 	font-size: 40px;
 	margin-bottom: 20px;
 	margin-right: 10px;
 	padding: 0px !important;
+	width: 22% !important;
 }
 
-.fill_in_the_blank_letters_hover {
-	background: #F7F7F7;
+.fitb-letter-correct {
+	background: $leksi-green;
+	border: 2px solid $leksi-green;
+	color: #FFF;
+}
+
+.fitb-letter-done {
+	background: $light-gray;
+	border: 2px solid $light-gray;
+	color: $dark-gray;
 }
 
 #fill_in_the_blank_game_over_message {
 	font-size: xx-large;
 }
 
-
 .fundamentals-game-instructions {
 	font-size: 25px;
 	font-weight: 400;
 }
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
 
 .incorrect_fill_in_the_blank_letter {
 	color: red;
@@ -167,8 +194,4 @@ mark {
 #syn_ant_checkpoint_antonym_button_div {
 	padding-left: 0px !important;
 	padding-right: 0px !important;
-}
-
-.inline-block.checkpoint-image {
-	display: inline-block;
 }

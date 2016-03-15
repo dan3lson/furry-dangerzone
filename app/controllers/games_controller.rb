@@ -5,6 +5,7 @@ class GamesController < ApplicationController
     @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
     @real_world_examples = RealWorldExample.for(@chosen_word.name)
     @record = true
+    @words = [@chosen_word, Word.random(2)].flatten
 
     if logged_in?
       if current_user.has_incomplete_fundamentals?
@@ -18,6 +19,19 @@ class GamesController < ApplicationController
           map { |uw| uw.word }
       end
     end
+
+    # show timer of 5 seconds
+    # show results
+    # if not correct, keep track of score for overall Fundamentals score
+      # to show if passed or not
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          words: @words,
+        }
+      }
+    end
   end
 
   def jeopardy
@@ -27,7 +41,8 @@ class GamesController < ApplicationController
       if current_user.has_enough_jeopardy_words?
         @valid_jeopardy_words = (current_user.incomplete_jeopardys +
           current_user.completed_jeopardys).map { |uw|
-            uw.word }.delete_if { |w| w == @chosen_word }
+            uw.word }.delete_if { |w| w == @chosen_word
+          }
 
         @second_word = @valid_jeopardy_words.sample
         @valid_jeopardy_words.delete_if { |w| w == @second_word }
