@@ -19,34 +19,24 @@
 	<span class="palabra-id"><%= word.id %></span>
 </div>
 
-<!-- start of level 1 details -->
 <div id="level_1_details">
 	<div>
-		<div class="inline-block checkpoint-image">
-			<%= image_tag("grade_color_50.png", alt: "Checkpoint!") %>
-		</div>
-
-		<div class="fundamentals-game-instructions inline-block"></div>
+		<span class="fundamentals-game-instructions"></span>
 	</div>
 
 	<div id="chosen-word-header-container"></div>
-	<!-- end -->
+
 	<br>
 </div>
-<!-- end of level 1 details -->
 
-<!-- start of level 1 form -->
 <div>
-	<!-- start of spell the word section -->
 	<div class="form-group" id="spell_the_word_form">
 		<label for="spell_the_word" class="sr-only" ></label>
 		<input id="spell_the_word" class="form-control input-lg" type="text"
-			placeholder=""></input>
+					 placeholder=""></input>
 	</div>
-	<!-- end of spell the word section -->
-</div> <!-- end of level 1 form -->
+</div>
 
-<!-- start of fill in the blank activity -->
 <div class="row" id="fill_in_the_blank_container">
 	<div class="text-default lead" id="fill_in_the_blank_game_over_message">
 		Hey, are you having trouble?
@@ -56,28 +46,19 @@
 		to see the spelling of the word. Then tap 'continue' to try again!
 	</div>
 </div>
-<!-- end of fill in the blank activity -->
 
-<!-- start of pronunciation activity -->
-<div id="pronunciation_container" align="center">
-	<%= image_tag("pronunciation.png", alt: "Pronounce the word below.",
-		class: "img-responsive pointer", id: "pronunciation_image_button") %>
-</div>
-<!-- end of pronunciation activity -->
-
-<!-- start of meanings container -->
 <div id="meanings_container">
 	<div class="well lead">
-		<% top_three_entries_for(word, "definition").each do |d| %>
-			<p>
-				<span>&#8605; <%= d %></span>
+		<% top_three_entries_for(word, "definition").each_with_index do |d, i| %>
+			<p class="<%= word.name %>-def" id="<%= word.name %>-def-<%= i %>">
+				&#8605; <%= d %>
 			</p>
 		<% end %>
 	</div>
 </div>
-<!-- end of meanings container -->
 
-<!-- start of synonyms container -->
+<div id="meanings-checkpoint-container"></div>
+
 <div id="synonyms_container">
 	<% if word.has_synonyms? %>
 		<% synonyms.each_with_index do |synonym, index| %>
@@ -102,9 +83,7 @@
 		</p>
 	<% end %>
 </div>
-<!-- end of synonyms container -->
 
-<!-- start of antonyms container -->
 <div id="antonyms_container">
 	<% if word.has_antonyms? %>
 		<% antonyms.each_with_index do |antonym, index| %>
@@ -124,15 +103,12 @@
 			</div>
 		<% end %>
 	<% else %>
-	<!-- Check what's accessible at this point  -->
 		<p id="antonym_no_results" class="lead please-tap-continue">
 			&#9785; There aren't any antonyms to show. Please tap continue.
 		</p>
 	<% end %>
 </div>
-<!-- end of antonyms container -->
 
-<!-- start of syn_ant checkpoint container -->
 <div id="syn_ant_checkpoint_container">
 	<% if word.doesnt_have_any_syn_or_ant? %>
 		<div id="syn-ant-no-results" class="lead">
@@ -141,9 +117,7 @@
 		</div>
 	<% end %>
 </div>
-<!-- end of syn_ant checkpoint container -->
 
-<!-- start of real world examples checkpoint container -->
 <div id="real_world_examples_container">
 	<% if rwe.nil? %>
 		<div id="rwe_no_results" class="lead please-tap-continue">
@@ -168,4 +142,3 @@
 		<% end %>
 	<% end %>
 </div>
-<!-- end of real world examples checkpoint container -->
