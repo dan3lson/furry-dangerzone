@@ -292,7 +292,7 @@ class User < ActiveRecord::Base
     User.fs_class_one + User.fs_class_two
   end
 
-  def self.reset_dev_pwds
+  def self.reset_pwds_in_dev_env
     User.all.each { |u| u.update_attributes(
         password: "password",
         password_confirmation: "password"
