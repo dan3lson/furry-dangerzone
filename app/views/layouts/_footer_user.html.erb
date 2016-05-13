@@ -1,21 +1,8 @@
-<footer class="navbar navbar-default navbar-fixed-bottom navbar-footer" role="navigation">
-  <br>
-  <div class="five-columns">
-    <div class="inline-block">
-      <% if params[:action] == "home" %>
-        <i class="fa fa-home fa-3x"></i>
-        <br>
-        Home
-  		<% else %>
-        <%= link_to home_path do %>
-          <i class="fa fa-home fa-3x"></i>
-          <br>
-          Home
-        <% end %>
-  		<% end %>
-    </div>
-
-    <div class="inline-block">
+<footer class="navbar navbar-default navbar-fixed-bottom navbar-footer"
+        role="navigation">
+  <div class="row center">
+    <br>
+    <div class="col-xs-3">
       <% if params[:action] == "myLeksi" %>
         <i class="fa fa-book fa-3x"></i>
         <br>
@@ -29,7 +16,7 @@
   		<% end %>
     </div>
 
-    <div class="inline-block">
+    <div class="col-xs-3">
       <% if params[:controller] == "searches" %>
         <i class="fa fa-search-plus fa-3x"></i>
         <br>
@@ -43,7 +30,7 @@
   		<% end %>
     </div>
 
-    <div class="inline-block">
+    <div class="col-xs-3">
       <% if params[:controller] == "my_tags" && params[:action] == "index" %>
         <i class="fa fa-tags fa-3x"></i>
         <br>
@@ -57,7 +44,7 @@
   		<% end %>
     </div>
 
-    <div class="inline-block">
+    <div class="col-xs-3">
       <% if params[:action] == "menu" %>
   			<i class="fa fa-bars fa-3x"></i>
         <br>
