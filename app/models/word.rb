@@ -92,56 +92,6 @@ class Word < ActiveRecord::Base
 
   # HEROKU UPDATES
 
-  # * Example Sentence *
-
-  # STEP 1
-  def self.update_example_sentence_blank_to_nil
-    where(example_sentence: "").each do |word|
-      word.update_attributes(example_sentence: nil)
-    end
-  end
-
-  # Step 2
-  def self.update_example_sentence_semicolon_to_stars
-    where.not(example_sentence: nil).each do |word|
-      word.example_sentence = word.example_sentence.gsub(";", "***")
-      word.save
-    end
-  end
-
-  # * Definition *
-
-  # Step 1
-  def self.update_definition_semicolon_to_stars
-    all.each do |word|
-      word.definition = word.definition.gsub(";", "***")
-      word.save
-    end
-  end
-
-  # * Phonetic Spelling *
-
-  # Step 1
-  def self.update_phonetic_spelling_blank_to_nil
-    where(phonetic_spelling: "").each do |word|
-      word.update_attributes(phonetic_spelling: nil)
-    end
-  end
-
-  # * Part of Speech *
-
-  # Step 1
-  def self.update_part_of_speech_blank_to_nil
-    where(part_of_speech: "").each do |word|
-      word.update_attributes(part_of_speech: nil)
-    end
-  end
-
-  # Check if any word attribute is blank
-  def self.any_blanks?(attribute)
-    where("#{attribute} = ?", "").count > 0 ? "yes" : "no"
-  end
-
   # Update phonetic spellings for all words
   # def self.update_phonetic_spelling_from_free_dictionary
   #   url = "http://wwww.thefreedictionary.com"
