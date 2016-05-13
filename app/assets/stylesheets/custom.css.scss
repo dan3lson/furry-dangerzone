@@ -65,6 +65,10 @@ body {
   font-size: 1.4em;
 }
 
+.body-brainiac {
+	background: #F8F8F8;
+}
+
 .games-body-padding {
 	padding: 25px 0;
 }
@@ -240,6 +244,9 @@ p {
 	padding: 10px 0;
 }
 
+.card-word-name-size {
+	font-size: 23px;	
+}
 .category-words-container {
   color: $black;
   display: none;
@@ -566,6 +573,10 @@ input {
 
 #more-description {
 	display: none;
+}
+
+#myLeksi-filter-container {
+	margin-bottom: 20px;
 }
 
 .myLeksi-hr {
@@ -946,6 +957,10 @@ table {
 
 a {
 	text-decoration: none;
+}
+
+.fa-eye {
+	color: $dark-gray;
 }
 
 .fat-section {

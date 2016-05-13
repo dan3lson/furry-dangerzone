@@ -44,12 +44,7 @@ class CurrentUsersController < ApplicationController
   def myLeksi
     @current_user_words = Word.joins(:users).
                                where(users: { id: current_user.id })
-
     @current_user_words_count = @current_user_words.count
-
-    if current_user.has_words?
-      @first_word_letter = @current_user_words[0].name[0].capitalize
-    end
   end
 
   def progress

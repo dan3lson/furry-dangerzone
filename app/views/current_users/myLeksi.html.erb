@@ -2,62 +2,30 @@
 <% provide(:header, "myLeksi") %>
 
 <div class="row lead">
-  <div class="col-sm-8 col-sm-offset-2">
-    <progress value="33" max="100">70 %</progress>
+  <div class="col-sm-6 col-sm-offset-3">
     <% if current_user.has_words? %>
-      <p>
-        <strong>
+      <div id="myLeksi-filter-container">
+        <div class="pull-right">
+          <i class="fa fa-search"></i>
+          <i class="fa fa-search"></i>
+          <i class="fa fa-search"></i>
+          <i class="fa fa-search"></i>
+        </div>
+        <div>
           Total words: <%= @current_user_words_count %>
-        </strong>
-      </p>
-
-      <div class="menu-header-container">
-        <div class="menu-header">
-          <strong><%= @first_word_letter %></strong>
         </div>
       </div>
+      <div class="clear"></div>
 
       <% @current_user_words.each_with_index do |word, i| %>
-        <% prev_word = @current_user_words[i - 1] %>
-
-        <% if @current_user_words[i + 1] %>
-          <% next_word = @current_user_words[i + 1] %>
-        <% end %>
-
-        <div>
-          <% if word.name[0] > prev_word.name[0] %>
-            <div class="menu-header-container">
-              <div class="menu-header">
-                <strong><%= word.name[0].capitalize %></strong>
-              </div>
-            </div>
-          <% end %>
-
-          <div class="pull-right">
-            <%= render "games/display_game_start_btn",
-              user_word: UserWord.object(current_user, word),
-              word: word %>
-          </div>
-
-          <div class="word-partial word-partial-myLeksi">
-            <span class="basic-black-link">
-              <%= link_to word.name.capitalize, word_path(word) %>
-            </span>
-          </div>
-        </div>
-
-        <% if next_word %>
-          <% if word.name[0] == next_word.name[0] %>
-            <hr class="myLeksi-hr">
-          <% else %>
-            <br>
-          <% end %>
-        <% end %>
+        <%= render "current_users/word_card",
+          word: word,
+          user_word: UserWord.object(current_user, word)
+        %>
       <% end %>
     <% else %>
       <%= render "current_users/no_words_guide" %>
     <% end %>
-
     <br>
   </div>
 </div>
