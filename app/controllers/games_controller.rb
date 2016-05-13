@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  # This is hit twice because of the respond_to -__-
   def fundamentals
     @chosen_word = Word.find(params[:word_id])
     @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
@@ -15,15 +16,16 @@ class GamesController < ApplicationController
       end
 
       if current_user.has_enough_jeopardy_words?
-        @three_j_words = current_user.incomplete_freestyles.shuffle.take(3).
-          map { |uw| uw.word }
+        @three_j_words = current_user.incomplete_freestyles.shuffle.take(
+          3
+        ).map { |uw| uw.word }
       end
     end
 
-    # show timer of 5 seconds
-    # show results
+    # show details?, i.e. results or how many questions there are?
     # if not correct, keep track of score for overall Fundamentals score
       # to show if passed or not
+    # when all questions answered, display continue btn
     respond_to do |format|
       format.html
       format.json {

@@ -14,7 +14,7 @@ feature "user plays (and adds) a word", %{
   # [x] I can see first level for
   #     the Fundamentals
 
-  describe "\n user plays (and adds) a word -->", js: true do
+  pending "\n user plays (and adds) a word -->", js: true do
     scenario "scenario: valid process" do
       word = FactoryGirl.create(:word)
       user = FactoryGirl.create(:user)
@@ -26,7 +26,9 @@ feature "user plays (and adds) a word", %{
       fill_in "Search", with: "chess"
 
       click_on "look up"
+      sleep(1)
 
+      save_and_open_page
       click_on "Play"
       sleep(1)
 

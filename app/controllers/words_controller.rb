@@ -8,10 +8,11 @@ class WordsController < ApplicationController
 
     if logged_in?
       @user_word = UserWord.find_by(user: current_user, word: @word)
-      if @user_word.freestyle_completed?
 
+      if @user_word.freestyle_completed?
         @responses = FreestyleResponse.for(@user_word).sort_by { |fr|
-          fr.id }.map { |fr| fr.input }
+          fr.id
+        }.map { |fr| fr.input }
 
         @semantic_map_responses = @responses[0..2]
         @word_map_responses = @responses[3..5]

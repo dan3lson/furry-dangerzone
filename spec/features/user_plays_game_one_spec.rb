@@ -14,7 +14,7 @@ feature "user plays game one", %{
   # [] I can complete 8 levels or go back
   #    to /words/:id
 
-  describe "\n user plays game one -->" do
+  pending "\n user plays game one -->" do
     scenario "scenario: plays game one without stopping", js: true do
       word = Word.create(
         name: "time",
@@ -40,13 +40,6 @@ feature "user plays game one", %{
       page.find(".letter_i").click
       page.find(".letter_m").click
       page.find(".letter_e").click
-      click_on "Continue"
-
-      # Level 3
-      page.find("#pronunciation_image_button").click
-      click_on "Continue"
-
-      # Level 4
       click_on "Continue"
 
       # Level 5-7 -> No syn, ant, or checkpoint needed

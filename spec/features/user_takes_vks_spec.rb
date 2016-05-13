@@ -13,7 +13,7 @@ feature "user takes vocabulary knowledge scale (vks)", %{
   #     VKS page
   # [x] I can see a continue button
 
-  describe "\n user visits vks page -->", js: true do
+  skip "\n user visits vks page -->", js: true do
     before :each do
       FactoryGirl.create(:version)
     end

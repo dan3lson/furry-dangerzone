@@ -14,19 +14,20 @@ feature "two users add the same word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  describe "\n two users add same word -->", js: true do
+  pending "\n two users add same word -->", js: true do
     let!(:user_word) { FactoryGirl.create(:user_word) }
     let!(:word) { user_word.word }
-    let(:user2) { FactoryGirl.create(:user) }
+    let(:user_2) { FactoryGirl.create(:user) }
 
     scenario "scenario: add word" do
-      log_in_as(user2)
+      log_in_as(user_2)
 
       visit search_path
 
       fill_in "Search", with: word.name
 
       click_on "look up"
+      sleep(1)
 
       click_on "Add"
       sleep(1)
