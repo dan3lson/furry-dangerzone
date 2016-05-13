@@ -26,7 +26,7 @@
 
       <% if ready_for_jeopardy?(current_user, @user_word) %>
         <span class="data-url pointer hover"
-          data-url="<%= jeop_game_link(@word.id) %>">
+              data-url="<%= jeop_game_link(@word.id) %>">
           <i class="fa fa-gamepad"></i>
           Jeopardy
         </span>
@@ -50,11 +50,11 @@
         <% end %>
       <% else %>
         <span class="data-url pointer hover"
-        data-toggle="popover"
-        title="Why is this game locked?"
-        data-content="To activate this Jeoapardy game, you need to
-        play the Fundamentals for this word first."
-        data-placement="bottom">
+              data-toggle="popover"
+              title="Why is this game locked?"
+              data-content="To activate this Jeoapardy game, you need to
+              play the Fundamentals for this word first."
+              data-placement="bottom">
           Jeopardy
         </span>
         <i class="fa fa-lock"></i>
@@ -64,13 +64,13 @@
 
       <% if @user_word.freestyle_completed? %>
         <span class="data-url pointer leksi-green hover"
-          data-url="<%= free_game_link(@word.id) %>">
+              data-url="<%= free_game_link(@word.id) %>">
           <i class="fa fa-gamepad"></i>
           Freestyle
         </span>
       <% elsif @user_word.current_game == "three" %>
         <span class="data-url pointer hover"
-        data-url="<%= free_game_link(@word.id) %>">
+              data-url="<%= free_game_link(@word.id) %>">
           <i class="fa fa-gamepad"></i>
           Freestyle
         </span>
@@ -98,7 +98,7 @@
     &nbsp;
     <%= @word.part_of_speech %>
   </p>
-  
+
   <%= render "words/word_details", word: @word %>
 </div>
 

@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   let(:comment) { FactoryGirl.create(:comment) }
 
-  describe "associatons" do
+  pending "associatons" do
     it { should belong_to(:blog_post) }
   end
 
-  describe "validations" do
+  pending "validations" do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:blog_post) }
   end

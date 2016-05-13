@@ -64,16 +64,14 @@
 		<% synonyms.each_with_index do |synonym, index| %>
 			<div class="synonym_row pointer" type="button"
 					 data-toggle="collapse" data-target="#syn<%= index %>"
-					 aria-expanded="false" aria-controls= "<%= index %>"
-			>
+					 aria-expanded="false" aria-controls= "<%= index %>">
 				<div class="red_circle inline-block"></div>
 				<div class="synonym_word_container lead pointer inline-block">
 					<%= synonym.name %>
 				</div>
 			</div>
 			<div class="word_details_container well lead collapse"
-					 id="syn<%= index %>"
-			>
+					 id="syn<%= index %>">
 				<%= render "words/word_details", word: synonym %>
 			</div>
 		<% end %>

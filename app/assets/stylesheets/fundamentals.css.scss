@@ -48,6 +48,7 @@ $white: #FFF;
 #fill_in_the_blank_continue_button,
 #pronunciation_continue_button,
 #meanings_continue_button,
+#meanings_checkpoint_continue_button,
 #synonyms_continue_button,
 #antonyms_continue_button,
 #syn_ant_checkpoint_continue_button,
@@ -95,7 +96,7 @@ mark {
 .fitb-letter-done {
 	background: $light-gray;
 	border: 2px solid $light-gray;
-	color: $dark-gray;
+	color: #E0E0E0;
 }
 
 #fill_in_the_blank_game_over_message {
@@ -106,9 +107,6 @@ mark {
 	font-size: 25px;
 	font-weight: 400;
 }
-
-.grow { transition: all .2s ease-in-out; }
-.grow:hover { transform: scale(1.1); }
 
 .incorrect_fill_in_the_blank_letter {
 	color: red;

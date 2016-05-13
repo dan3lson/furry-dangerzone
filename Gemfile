@@ -36,8 +36,11 @@ gem 'fastclick-rails'
 gem 'meta-tags'
 
 group :development do
+  # Helps to kill N+1 queries and unused eager loading
   gem "bullet"
   gem 'meta_request'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
@@ -64,8 +67,6 @@ group :development, :test do
   gem "shoulda-matchers"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
 end
 
 group :production do

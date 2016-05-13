@@ -27,7 +27,6 @@ class RealWorldExample
 			if no_results.empty?
 				page.css("h3.search-result-title").each do |title|
 					rwe_mapped_examples = real_world_examples.map { |r| r.example }
-
 					title_text = title.text
 
 					unless title_text.split(" ").count < 5
@@ -36,6 +35,7 @@ class RealWorldExample
 
 						if word_included_in_string?(word, title_text)
 							rwe.example = title_text
+
 							unless rwe_mapped_examples.include?(rwe.example)
 								real_world_examples << rwe
 							end
@@ -47,11 +47,13 @@ class RealWorldExample
 					if word_included_in_string?(word, caption)
 						rwe = RealWorldExample.new
 						rwe.type = "caption"
+
 						if caption.include?("\n")
 							rwe.example = caption.split("\n").take(1).first
 						else
 							rwe.example = caption
 						end
+
 						unless rwe_mapped_examples.include?(rwe.example)
 							real_world_examples << rwe
 						end
@@ -66,10 +68,10 @@ class RealWorldExample
   end
 
 	private
-
+	# page = Nokogiri::HTML(open("http://www.usatoday.com/search/race"))
 	def self.open_page(url, word)
 		begin
-			Nokogiri::HTML(open("#{url}/#{word}"))
+			Nokogiri::HTML(open("#{url}/#{word}/"))
 		rescue SocketError
 			nil
 		end

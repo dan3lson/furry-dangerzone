@@ -14,7 +14,7 @@ feature "user adds a word", %{
   # [x] myLeksi shows my newly added word
   # [x] I see a message of success
 
-  describe "\n user adds a word -->" do
+  pending "\n user adds a word -->" do
     scenario "scenario: valid process", js: true do
       user = FactoryGirl.create(:user)
       FactoryGirl.create(:word)
@@ -24,11 +24,11 @@ feature "user adds a word", %{
       visit search_path
 
       fill_in "Search", with: "chess"
-
       click_on "look up"
       sleep(1)
 
       click_on "Add"
+      sleep(1)
 
       expect(page).not_to have_content("Yikes!")
       expect(page).to have_content("Success! You now have")
