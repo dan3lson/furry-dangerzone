@@ -1,13 +1,13 @@
-<div>
+<div class="center">
 	<% if user_word.freestyle_completed? %>
 		<%= image_tag("100_small.png", alt: "100% Mastered") %>
 	<% elsif user_word.fundamental_not_completed? %>
-		<%= link_to fund_game_link(word.id), class: "hover" do %>
+		<%= link_to fund_game_link(word.id) do %>
 			<%= image_tag("0_small.png", alt: "0% Mastered") %>
 		<% end %>
 	<% elsif user_word.jeopardy_not_completed? %>
 		<% if current_user.has_enough_jeopardy_words? %>
-			<%= link_to jeop_game_link(word.id), class: "hover" do %>
+			<%= link_to jeop_game_link(word.id) do %>
 				<%= image_tag("33_small.png", alt: "33% Mastered") %>
 			<% end %>
 		<% else %>
@@ -17,7 +17,7 @@
 				game for at least 4 words first." }) %>
 		<% end %>
 	<% elsif user_word.jeopardy_completed? %>
-		<%= link_to free_game_link(word.id), class: "hover" do %>
+		<%= link_to free_game_link(word.id) do %>
 			<%= image_tag("66_small.png", alt: "66% Mastered") %>
 		<% end %>
 	<% end %>

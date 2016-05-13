@@ -1,7 +1,8 @@
 module TagsHelper
+  # In desperate of refactor
   def tags_for(user, word)
     Tag.includes(:words).select { |t| t.words.include?(word) &&
-      user.words.include?(word)
+                                        user.words.include?(word)
     }.keep_if { |t| user.tags.include?(t) && UserWordTag.find_by(
         user: user,
         word_tag: WordTag.find_by(word: word, tag: t)

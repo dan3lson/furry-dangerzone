@@ -1,21 +1,27 @@
 <div class="word-details">
-  <div>
-    <% top_three_entries_for(word, "definition").each do |d| %>
-      <p>
-        <span>&#8605; <%= d %></span>
-      </p>
-    <% end %>
+  <div class="panel panel-info">
+    <div class="panel-heading">Meanings</div>
+    <div class="panel-body">
+      <% top_three_entries_for(word, "definition").each do |d| %>
+        <p><span>&#8605; <%= d %></span></p>
+      <% end %>
+    </div>
   </div>
 
   <% unless word.example_sentence.nil? %>
     <div>
-      <% top_three_entries_for(word, "example_sentence").each do |es| %>
-        <p>
-          <span class="word-example-sentence">
-            <em>&#9997; <%= es %></em>
-          </span>
-        </p>
-      <% end %>
+      <div class="panel panel-info">
+        <div class="panel-heading">Examples</div>
+        <div class="panel-body">
+          <% top_three_entries_for(word, "example_sentence").each do |es| %>
+            <p>
+              <span class="word-example-sentence">
+                <em>&#9997; <%= es %></em>
+              </span>
+            </p>
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
