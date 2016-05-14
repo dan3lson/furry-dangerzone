@@ -19,12 +19,33 @@ class Word < ActiveRecord::Base
   before_create { self.name = name.downcase }
 
   # not tested
-  def self.search(word)
-    where(name: word).limit(3)
+  def self.search(name)
+    where(name: name).limit(3)
   end
 
   def self.words_are_found?(word)
     !search(word).empty?
+  end
+
+  # not tested
+  def self.myLeksi_words(user, name)
+    user.words.where(name: name)
+  end
+
+  # not tested
+  def self.search_myLeksi(user, name)
+    blank_msg = "Type a word and then we'll try to find it."
+
+    return blank_msg if name.blank?
+
+    not_found_msg = "You don\'t have '#{name}'."
+
+    found_in_myLeksi?(user, name) ? myLeksi_words(user, name) : not_found_msg
+  end
+
+  # not tested
+  def self.found_in_myLeksi?(user, name)
+    myLeksi_words(user, name).any?
   end
 
   def self.define(name)
@@ -32,7 +53,9 @@ class Word < ActiveRecord::Base
       if words_are_found?(name)
         search(name)
       else
-        return "You\'re so silly; type in a word first." if name.blank?
+        blank_msg = "Type a word and then we'll try to find it."
+
+        return blank_msg if name.blank?
 
         free_dictionary_search = FreeDictionary.define(name)
 

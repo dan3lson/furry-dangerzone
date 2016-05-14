@@ -1,5 +1,5 @@
 <% if results.class == String %>
-	<p class="lead leksi-red center"><%= results %></p>
+	<div class="alert alert-danger center"><%= results %></div>
 <% else %>
 	<% results.each_with_index do |word, index| %>
 		<div class="panel panel-default">

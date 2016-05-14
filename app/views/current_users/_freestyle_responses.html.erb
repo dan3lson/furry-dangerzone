@@ -1,0 +1,45 @@
+<% if logged_in? %>
+  <% if @user_word.freestyle_completed? %>
+    <div class="box-shadow-border">
+      <h4>Freestyle Game Responses</h4>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <h5>Semantic Map</h5>
+          <% @semantic_map_responses.each_with_index do |r, i| %>
+            <p>
+              <%= i + 1 %>. <%= r %>
+            </p>
+          <% end %>
+        </div>
+
+        <div class="col-sm-3">
+          <h5>Word Map</h5>
+          <% @word_map_responses.each_with_index do |r, i| %>
+            <p>
+              <%= i + 1 %>. <%= r %>
+            </p>
+          <% end %>
+        </div>
+
+        <div class="col-sm-3">
+          <h5>Definition Map</h5>
+          <% @definition_map_responses.each_with_index do |r, i| %>
+            <p>
+              <%= i + 1 %>. <%= r %>
+            </p>
+          <% end %>
+        </div>
+
+        <div class="col-sm-3">
+          <h5>Sentence Examples</h5>
+          <% @sentence_responses.each_with_index do |r, i| %>
+            <p>
+              <%= i + 1 %>. <%= r %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

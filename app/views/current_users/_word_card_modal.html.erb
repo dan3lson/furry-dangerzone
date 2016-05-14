@@ -1,14 +1,16 @@
+<% user_word = UserWord.object(current_user, word) %>
+
 <div class="modal fade" id="word-<%= word.id %>" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
-	  <div class="modal-content">
+	  <div class="modal-content word-card-modal-content">
 			<div class="modal-header">
-				<button type="button"
-								class="close"
-								data-dismiss="modal"
-								aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title"><%= word.name %></h4>
+				<div class="pull-right">
+					<%= render "current_users/word_mastery_percentage",
+						user_word: user_word,
+						word: word
+					%>
+				</div>
+				<h4 class="modal-title word-name-size"><%= word.name %></h4>
 				<div>
 					<%= word.phonetic_spelling %>
 					&nbsp;
@@ -17,18 +19,19 @@
 				</div>
 			</div>
 	    <div class="modal-body">
-				<div>
-				  <%= render "words/word_details", word: word %>
-				</div>
-				<div class="panel panel-info">
-					<div class="panel-heading">Tags</div>
-					<div class="panel-body">
-						<%#= render "tags/user_tags", user: current_user, word: word %>
-					</div>
-				</div>
+				<%= render "current_users/word_card_game_zone",
+					user_word: user_word,
+					word: word
+				%>
+				<%= render "words/word_details", word: word %>
+				<%#= render "current_users/tags", user: current_user, word: word %>
+				<%= render "current_users/remove_myLeksi_word", word: word %>
+				<%#= render "current_users/freelance_responses" %>
 	    </div>
 	    <div class="modal-footer">
-	      <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
+	      <button type="button"
+								class="btn btn-default btn-block"
+								data-dismiss="modal">
 					Close
 				</button>
 	    </div>

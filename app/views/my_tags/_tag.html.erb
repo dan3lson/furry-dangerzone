@@ -27,11 +27,7 @@
 					<% words_for(current_user, tag).each do |word| %>
 						<span class="tag">
 							<span class="basic-black-link">
-								<%= link_to word do %>
-									<i class="fa fa-book"></i>
-									<%= word.name %>
-								<% end %>
-								&nbsp;
+								<%= link_to word.name, word %>
 								&nbsp;
 							</span>
 							<span>

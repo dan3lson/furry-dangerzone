@@ -5,23 +5,30 @@
 		<% end %>
 
 	<% elsif params[:controller] == "versions" &&
-					 params[:action] == "index" %>
+					 params[:action] == "index"
+	%>
 		<%= link_to image_tag("add_black_32.png"), new_version_path %>
 
 	<% elsif params[:controller] == "versions" &&
-					 params[:action] == "show" %>
+					 params[:action] == "show"
+	%>
 		<% if logged_in? && current_user.is_admin? %>
 			<%= link_to image_tag("edit_black_32.png"), edit_version_path(@version) %>
 		<% end %>
 
-	<% elsif params[:controller] == "words" && params[:action] == "show" %>
-		<%= render "words/remove_word_btn_word_show_page", word: @word %>
-
 	<% elsif params[:controller] == "school/schools" &&
-					 params[:action] == "students" %>
-				<%= link_to school_words_path(filter: @class) do %>
-					<i class="fa fa-book white"></i>
-				<% end %>
+					 params[:action] == "students"
+	%>
+		<%= link_to school_words_path(filter: @class) do %>
+			<i class="fa fa-book white"></i>
+		<% end %>
 
+	<% elsif params[:controller] == "current_users" &&
+					 params[:action] == "myLeksi"
+	%>
+		<i class="fa fa-search pointer"
+			 id="current-user-words-search"
+			 data-toggle="modal"
+			 data-target="#myLeksi-modal"></i>
 	<% end %>
 </span>

@@ -18,26 +18,26 @@
 
     <div class="col-xs-3">
       <% if params[:controller] == "searches" %>
-        <i class="fa fa-search-plus fa-3x"></i>
+        <i class="fa fa-search fa-3x"></i>
         <br>
-        Add
+        Look Up
   		<% else %>
   			<%= link_to search_path do %>
-          <i class="fa fa-search-plus fa-3x"></i>
+          <i class="fa fa-search fa-3x"></i>
           <br>
-          Add
+          Look Up
   			<% end %>
   		<% end %>
     </div>
 
     <div class="col-xs-3">
       <% if params[:controller] == "my_tags" && params[:action] == "index" %>
-        <i class="fa fa-tags fa-3x"></i>
+        <i class="fa fa-tag fa-3x"></i>
         <br>
         Tags
   		<% else %>
         <%= link_to myTags_path do %>
-          <i class="fa fa-tags fa-3x"></i>
+          <i class="fa fa-tag fa-3x"></i>
           <br>
           Tags
         <% end %>
