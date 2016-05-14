@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "about_us" => "static_pages#about_us"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
+  get "search_current_user_words" => "searches#search_current_user_words"
   get "menu" => "current_users#menu"
   get "home" => "current_users#home"
   get "myLeksi" => "current_users#myLeksi"

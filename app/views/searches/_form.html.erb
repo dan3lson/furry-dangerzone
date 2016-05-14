@@ -6,12 +6,12 @@
       <%= text_field_tag(:search, params[:search], class: "form-control center",
         id: "inputSuccess5") %>
       <span class="input-group-btn">
-        <%= submit_tag "look up", name: nil, class: "btn btn-default",
-          id: "search-btn" %>
-      </span>
-      <span class="input-group-btn">
-        <%= submit_tag "surprise me!", name: "rand", class: "btn btn-default",
-          id: "random-search-btn"%>
+        <%= button_tag type: "submit",
+                       class: "btn btn-info",
+                       id: "search-btn" do
+        %>
+          <i class="fa fa-search "></i>
+        <% end %>
       </span>
     </div>
   <% end %>

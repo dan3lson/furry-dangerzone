@@ -4,10 +4,7 @@
 	<% end %>
 
 	<% if logged_in? %>
-		<% if params[:controller] == "words" && params[:action] == "show" %>
-			<i class="data-url fa fa-chevron-left" data-url="/myLeksi"></i>
-
-		<% elsif params[:controller] == "tags" && (params[:action] == "show" ||
+		<% if params[:controller] == "tags" && (params[:action] == "show" ||
 		 				 params[:action] == "new") %>
 			<i class="data-url fa fa-chevron-left" data-url="/myTags"></i>
 

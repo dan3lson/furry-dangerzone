@@ -458,7 +458,7 @@ $(document).ready(function() {
 		$.each($merged_letters_array, function(index, value){
 			$each_letter_div = $("<div>", { class:
 				"col-xs-4 col-sm-3 text-center " +
-				"animated fitb-letter pointer letter_" +
+				"fitb-letter pointer letter_" +
 				value
 			});
 			$("#fill_in_the_blank_container").append($each_letter_div);

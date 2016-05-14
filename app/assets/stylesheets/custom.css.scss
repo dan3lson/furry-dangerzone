@@ -36,6 +36,7 @@ $sky-blue: #1677BA;
 $show-game-circle-container-hover-opac: .7;
 $light-sky-blue: lighten($sky-blue, 55);
 $white: #FFF;
+$card-bg: #F8F8F8;
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
@@ -66,7 +67,7 @@ body {
 }
 
 .body-brainiac {
-	background: #F8F8F8;
+	background: $card-bg !important;
 }
 
 .games-body-padding {
@@ -244,9 +245,6 @@ p {
 	padding: 10px 0;
 }
 
-.card-word-name-size {
-	font-size: 23px;	
-}
 .category-words-container {
   color: $black;
   display: none;
@@ -261,29 +259,6 @@ p {
 	background-image: url(image-path("classes_color_100.png"));
 	height: 100px;
 	width: 100px;
-}
-
-.sb-slidebar .list-group-item {
-	color: $sky-blue;
-}
-
-.static-page-header-height {
-	height: 300px !important;
-}
-
-.stu-pic {
-	background-image: url(image-path("pup2_small.png"));
-	background-position: center;
-	background-repeat: no-repeat;
-	border: 1px solid $light-sky-blue;
-	border-radius: 70px;
-	height: 70px;
-	width: 70px;
-}
-
-.stu-pic-container:hover {
-	background: $light-sky-blue;
-	color: $sky-blue;
 }
 
 .clear {
@@ -527,6 +502,10 @@ input {
 	background: #c7c7cc;
 }
 
+.leksi-blue {
+	color: $sky-blue;
+}
+
 .leksi-orange {
 	color: $leksi-orange;
 }
@@ -604,7 +583,7 @@ input {
 	margin-top: 50px;
 
   a:not(.footer-cta){
-	  color: $dark-gray;
+	  color: #BDBDBD;
 
 	  &:hover{
 		  background: none;
@@ -808,13 +787,36 @@ input {
 	text-align: right;
 }
 
+.sb-slidebar .list-group-item {
+	color: $sky-blue;
+}
+
 .sky-blue {
 	color: $sky-blue;
 }
 
+.static-page-header-height {
+	height: 300px !important;
+}
+
 .stats-header {
-  margin-bottom: 30px;
-  padding: 10px;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+
+.stu-pic {
+	background-image: url(image-path("pup2_small.png"));
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 1px solid $light-sky-blue;
+	border-radius: 70px;
+	height: 70px;
+	width: 70px;
+}
+
+.stu-pic-container:hover {
+	background: $light-sky-blue;
+	color: $sky-blue;
 }
 
 table {
@@ -883,6 +885,14 @@ table {
 
 .white {
 	color: $white;
+}
+
+.word-card-modal-content {
+	background-color: $card-bg !important;
+}
+
+.word-name-size {
+	font-size: 23px;
 }
 
 .word-partial {
