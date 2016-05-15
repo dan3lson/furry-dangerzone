@@ -46,8 +46,6 @@ class CurrentUsersController < ApplicationController
                                where(users: { id: current_user.id })
     @current_user_words_count = @current_user_words.count
 
-    # @tag = Tag.new unless current_user.has_tags?
-
     # http://jsfiddle.net/Unspecified/uVH8s/
     # http://codepen.io/johno/pen/LkaiI
   end
