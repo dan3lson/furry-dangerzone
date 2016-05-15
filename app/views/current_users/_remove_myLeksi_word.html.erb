@@ -1,11 +1,11 @@
 <% uw_id = UserWord.object(current_user, word).id %>
 
-<div class="basic-red-link center">
-  <%= link_to user_word_path(id: uw_id), method: :delete do %>
-  <small>
-    <i class="fa fa-remove"></i>
-    Remove '<%= word.name %>'?
-    <i class="fa fa-remove"></i>
-  </small>
-  <% end %>
+<div class="alert alert-danger">
+  <div class="basic-red-link center">
+    <%= link_to user_word_path(id: uw_id), method: :delete do %>
+    <small>
+      Remove this word?
+    </small>
+    <% end %>
+  </div>
 </div>

@@ -14,9 +14,3 @@ jeopardy:
 
 - Potential issue if word is added to myLeksi multiple times and is played in the
 Jeopardy game and sent back down to Fundamentals
-
-:point_up_2::skin-tone-5: oh man, how time flies!
-
-How’ve you been man? Hope all has been well!, especially with Baby Pickett/Little Miss Pickett around! 
-
-I’m reaching out for your thoughts/guidance on how to fairly charge potential clients for their web app jobs since I know you had (have?) LaunchWare. I’ve been freelancing on Upwork  (https://www.upwork.com/freelancers/~0170f617de5f3add51) since March and now that I completed a few jobs and have some ratings/reviews, I’d like to charge more typical prices/rates since what I’ve been charging so far was just to build my history on this platform. 

@@ -1,5 +1,3 @@
-<% user_word = UserWord.object(current_user, word) %>
-
 <div class="modal fade" id="word-<%= word.id %>" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 	  <div class="modal-content word-card-modal-content">
@@ -25,8 +23,8 @@
 				%>
 				<%= render "words/word_details", word: word %>
 				<%#= render "current_users/tags", user: current_user, word: word %>
+				<%= render "current_users/freestyle_responses", user_word: user_word %>
 				<%= render "current_users/remove_myLeksi_word", word: word %>
-				<%#= render "current_users/freelance_responses" %>
 	    </div>
 	    <div class="modal-footer">
 	      <button type="button"

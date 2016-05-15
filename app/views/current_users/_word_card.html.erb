@@ -2,7 +2,7 @@
 	<div class="panel-body">
 		<div class="pull-right">
 			<%= render "current_users/word_mastery_percentage",
-				user_word: UserWord.object(current_user, word),
+				user_word: user_word,
 				word: word
 			%>
 		</div>
@@ -12,7 +12,9 @@
 							data-target="#word-<%= word.id %>">
 				<%= word.name %>
 			</strong>
-			<%= render "current_users/word_card_modal", word: word %>
+			<%= render "current_users/word_card_modal", word: word,
+																									user_word: user_word
+			%>
 			<br>
 			<%= top_three_entries_for(word, "definition").first %>
 		</span>
