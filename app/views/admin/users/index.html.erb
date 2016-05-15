@@ -52,7 +52,12 @@
       <td><%= u.last_name || "-" %></td>
       <td><%= u.email || "-" %></td>
       <td><%= u.num_logins %></td>
-      <td><%= time_ago_in_words(u.last_login) ago || "-" %></td>
+      <td>
+        <% if u.last_login.nil? %>
+          -
+        <% else %>
+          <%= time_ago_in_words(u.last_login) %> ago</td>
+        <% end %>
       <td><%= time_ago_in_words(u.created_at) %> ago</td>
     </tr>
   <% end %>

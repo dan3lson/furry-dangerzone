@@ -109,7 +109,9 @@ class Word < ActiveRecord::Base
 
   def self.untagged_for(user)
     words_with_tags = user.word_tags.pluck(
-      :word_id).map { |word_id| Word.find(word_id) }
+      :word_id
+    ).map { |word_id| Word.find(word_id) }
+
     user.words - words_with_tags
   end
 

@@ -1,37 +1,27 @@
 <div class="panel panel-info">
-	<div class="panel-heading">Tags</div>
+	<div class="panel-heading">
+		<div class="pull-right">
+			<i class="fa fa-info-circle pointer leksi-purple"></i>
+			<!-- Tag This Word
+			<small>Choose one of your Tags to group this word.</small> -->
+		</div>
+		<i class="fa fa-tag"></i>
+		Tags
+	</div>
 	<div class="panel-body">
-		<em>(to be factored...)</em>
-		<%#= render "tags/user_tags", user: current_user, word: word %>
+		<% if current_user.has_tags? %>
+			<%# binding.pry %>
+			<% if tags_exist?(current_user, word) %>
+				<%= render "current_users/tags_index", word: word %>
+				<div class="clear"></div>
+				<hr>
+			<% end %>
+			<%= render "current_users/tags_form", word: word %>
+		<% else %>
+			<small>
+				<%= link_to "Create your first tag", new_tag_path %>
+				to start organizing your words.
+			</small>
+		<% end %>
 	</div>
 </div>
-
-<% if logged_in? %>
-  <%= render "tags/user_tags", user: current_user, word: @word %>
-
-  <div class="clear"></div>
-
-  <% unless unused_tags(current_user, @word).first.nil? %>
-    <% if tags_exist?(current_user, @word) %>
-      <br>
-    <% end %>
-
-    <div class="well">
-      <h4>
-        Add Tags
-        <small>Choose one of your Tags to group this word.</small>
-      </h4>
-
-      <%= form_for :user_word_tag, url: user_word_tag_path,
-        method: :post do |f| %>
-        <%= hidden_field_tag :id, @word.id %>
-        <%= f.label :tag_id, "Tags", class: "sr-only" %>
-        <%= f.collection_select :tag_id, unused_tags(current_user, @word),
-          :id, :name, prompt: true %>
-        <%= f.submit class: "btn btn-default btn-sm", value: "add" %>
-      <% end %>
-    </div>
-
-    <hr>
-  <% end %>
-<% end %>
