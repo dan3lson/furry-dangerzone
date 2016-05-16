@@ -10,7 +10,6 @@
 	</div>
 	<div class="panel-body">
 		<% if current_user.has_tags? %>
-			<%# binding.pry %>
 			<% if tags_exist?(current_user, word) %>
 				<%= render "current_users/tags_index", word: word %>
 				<div class="clear"></div>
@@ -18,7 +17,7 @@
 			<% end %>
 			<%= render "current_users/tags_form", word: word %>
 		<% else %>
-			<small>
+			<small class="dark-gray">
 				<%= link_to "Create your first tag", new_tag_path %>
 				to start organizing your words.
 			</small>

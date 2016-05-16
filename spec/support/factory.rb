@@ -9,7 +9,7 @@ FactoryGirl.define do
   end
 
   factory :word do
-    name "Chess"
+    sequence(:name) { |n| "chess #{n}" }
     phonetic_spelling "/tʃes/"
     definition "a game for two people, played on a board"
     part_of_speech "noun"

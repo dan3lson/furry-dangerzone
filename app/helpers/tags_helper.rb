@@ -1,14 +1,6 @@
 module TagsHelper
-  # In desperate need of refactor
   def tags_for(user, word)
-    Tag.includes(:words).select do |t|
-      t.words.include?(word) &&
-      user.words.include?(word)
-    end.keep_if { |t| user.tags.include?(t) && UserWordTag.find_by(
-        user: user,
-        word_tag: WordTag.find_by(word: word, tag: t)
-      )
-    }
+    user.word_tags.includes(:tag).where(word: word).map { |wt| wt.tag }
   end
 
   def tags_exist?(user, word)
