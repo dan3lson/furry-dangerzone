@@ -212,6 +212,12 @@ class User < ActiveRecord::Base
     user_words.map { |uw| uw.game_stats.sum(:time_spent) }.inject(&:+) || 0
   end
 
+  def sort_progress(asc_or_desc)
+    user_words.order("games_completed #{asc_or_desc}")
+              .joins(:word)
+              .order("words.name")
+  end
+
   # Eventually will be deleted
 
   def self.baseline_gamification
