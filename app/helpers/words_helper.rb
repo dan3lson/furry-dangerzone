@@ -1,8 +1,6 @@
 module WordsHelper
   def words_for(user, tag)
-    user.word_tags.includes(:word).where(tag: tag).map { |word_tag|
-      word_tag.word
-    }
+    user.word_tags.includes(:word).where(tag: tag).map { |wt| wt.word }
   end
 
   # not tested
@@ -17,7 +15,7 @@ module WordsHelper
 
   # not tested
   def user_words(user, tag)
-    words_for(user, tag).map { |w| UserWord.find_by(user: user, word: w) }
+    words_for(user, tag).map { |word| UserWord.object(user, word) }
   end
 
   # not tested

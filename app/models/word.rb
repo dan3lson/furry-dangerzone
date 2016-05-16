@@ -23,6 +23,7 @@ class Word < ActiveRecord::Base
     where(name: name).limit(3)
   end
 
+  # not tested
   def self.words_are_found?(word)
     !search(word).empty?
   end
@@ -95,18 +96,22 @@ class Word < ActiveRecord::Base
     find(Word.pluck(:id).shuffle[0..num])
   end
 
+  # not tested
   def has_synonyms?
     synonyms.any?
   end
 
+  # not tested
   def has_antonyms?
     antonyms.any?
   end
 
+  # not tested
   def doesnt_have_any_syn_or_ant?
     !has_synonyms? && !has_antonyms?
   end
 
+  # not tested
   def self.untagged_for(user)
     words_with_tags = user.word_tags.pluck(
       :word_id

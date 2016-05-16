@@ -2,7 +2,6 @@
 <% provide(:header, "myLeksi") %>
 
 <%= render "searches/myLeksi_modal" %>
-
 <div class="row lead">
   <div class="col-sm-6 col-sm-offset-3">
     <% if current_user.has_words? %>
@@ -12,10 +11,19 @@
         </div>
       </div>
       <div class="clear"></div>
-      <%= render "current_users/word_cards", words: @current_user_words %>
+      <div id="myLeksi-words" data-total="<%= @current_user_words_count %>">
+        <%= render "current_users/word_cards", words: @current_user_words_pag %>
+      </div>
     <% else %>
       <%= render "current_users/no_words_guide" %>
     <% end %>
     <br>
+    <%= render "shared/spinner" %>
+    <p id="view-more-link-container"></p>
+    <div id="myLeksi-pagination">
+      <%= will_paginate @current_user_words_pag,
+      renderer: BootstrapPagination::Rails
+      %>
+    </div>
   </div>
 </div>

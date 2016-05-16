@@ -42,12 +42,21 @@ class CurrentUsersController < ApplicationController
   end
 
   def myLeksi
-    @current_user_words = Word.joins(:users).
-                               where(users: { id: current_user.id })
+    @current_user_words = current_user.sort_progress("ASC")
+                                      .includes(:word)
+                                      .map { |uw| uw.word }
+    @current_user_words_pag = @current_user_words.paginate(
+      page: params[:page],
+      per_page: 15
+    )
     @current_user_words_count = @current_user_words.count
 
     # http://jsfiddle.net/Unspecified/uVH8s/
     # http://codepen.io/johno/pen/LkaiI
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def progress
