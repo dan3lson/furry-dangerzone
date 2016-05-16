@@ -4,7 +4,7 @@ RSpec.describe TagsHelper, type: :helper do
   let(:user) { FactoryGirl.create(:user) }
   let(:user_2) { FactoryGirl.create(:user) }
   let(:word) { FactoryGirl.create(:word) }
-  let(:word_2) { FactoryGirl.create(:word) }
+  let(:word_2) { FactoryGirl.create(:word, name: "chess_2") }
   let(:word_3) { FactoryGirl.create(:word, definition: "best strategy game!") }
   let(:tag) { FactoryGirl.create(:tag, name: "tag_1") }
   let(:tag_2) { FactoryGirl.create(:tag, name: "tag_2") }

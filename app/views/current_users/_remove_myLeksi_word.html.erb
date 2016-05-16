@@ -1,11 +1,7 @@
 <% uw_id = UserWord.object(current_user, word).id %>
 
-<div class="alert alert-danger">
-  <div class="basic-red-link center">
-    <%= link_to user_word_path(id: uw_id), method: :delete do %>
-    <small>
-      Remove this word?
-    </small>
-    <% end %>
-  </div>
-</div>
+<%= button_to "Remove this word",
+  user_word_path(id: uw_id),
+  class: "btn btn-default",
+  method: :delete
+%>
