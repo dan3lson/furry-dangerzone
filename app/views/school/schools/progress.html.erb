@@ -41,25 +41,17 @@
 		<br>
 
 		<div class="col-xs-6 light-red-bg">
-			<ol>
-				<% @lowest_num_logins.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>(<%= u.num_logins %>)</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @lowest_num_logins,
+				stat: "num_logins"
+			%>
 		</div>
 
 		<div class="col-xs-6 light-green-bg">
-			<ol>
-				<% @highest_num_logins.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>(<%= u.num_logins %>)</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @highest_num_logins,
+				stat: "num_logins"
+			%>
 		</div>
 	</div>
 
@@ -84,25 +76,17 @@
 		<br>
 
 		<div class="col-xs-6 light-red-bg">
-			<ol>
-				<% @lowest_myLeksi_mastery.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>(<%= u.myLeksi_mastery %>%)</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @lowest_myLeksi_mastery,
+				stat: "myLeksi_mastery"
+			%>
 		</div>
 
 		<div class="col-xs-6 light-green-bg">
-			<ol>
-				<% @highest_myLeksi_mastery.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>(<%= u.myLeksi_mastery %>%)</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @highest_myLeksi_mastery,
+				stat: "myLeksi_mastery"
+			%>
 		</div>
 	</div>
 
@@ -126,25 +110,17 @@
 		<br>
 
 		<div class="col-xs-6 light-red-bg">
-			<ol>
-				<% @least_saved_words.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>(<%= u.words.count %>)</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @least_saved_words,
+				stat: "num_words"
+			%>
 		</div>
 
 		<div class="col-xs-6 light-green-bg">
-			<ol>
-				<% @most_saved_words.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>(<%= u.words.count %>)</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @most_saved_words,
+				stat: "num_words"
+			%>
 		</div>
 	</div>
 
@@ -169,25 +145,17 @@
 		<br>
 
 		<div class="col-xs-6 light-red-bg">
-			<ol>
-				<% @least_time_spent_playing.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>(<%= u.time_spent_playing %>)</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @least_time_spent_playing,
+				stat: "time_spent_playing"
+			%>
 		</div>
 
 		<div class="col-xs-6 light-green-bg">
-			<ol>
-				<% @most_time_spent_playing.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>(<%= u.time_spent_playing %>)</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @most_time_spent_playing,
+				stat: "time_spent_playing"
+			%>
 		</div>
 	</div>
 
@@ -212,33 +180,17 @@
 		<br>
 
 		<div class="col-xs-6 light-red-bg">
-			<ol>
-				<% @least_funds_played.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>
-							(<%= num_freestyle_games_completed(u) %>
-							|
-							<%= percentage_of_freestyle_games_completed(u) %>%)
-						</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @least_funds_played,
+				stat: "percentage_of_fundamental_games_completed"
+			%>
 		</div>
 
 		<div class="col-xs-6 light-green-bg">
-			<ol>
-				<% @most_funds_played.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>
-							(<%= num_freestyle_games_completed(u) %>
-							|
-							<%= percentage_of_freestyle_games_completed(u) %>%)
-						</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @most_funds_played,
+				stat: "percentage_of_fundamental_games_completed"
+			%>
 		</div>
 	</div>
 
@@ -263,33 +215,17 @@
 		<br>
 
 		<div class="col-xs-6 light-red-bg">
-			<ol>
-				<% @least_jeops_played.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>
-							(<%= num_jeopardy_games_completed(u) %>
-							|
-							<%= percentage_of_jeopardy_games_completed(u) %>%)
-						</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @least_jeops_played,
+				stat: "percentage_of_jeopardy_games_completed"
+			%>
 		</div>
 
 		<div class="col-xs-6 light-green-bg">
-			<ol>
-				<% @most_jeops_played.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>
-							(<%= num_jeopardy_games_completed(u) %>
-							|
-							<%= percentage_of_jeopardy_games_completed(u) %>%)
-						</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @most_jeops_played,
+				stat: "percentage_of_jeopardy_games_completed"
+			%>
 		</div>
 	</div>
 
@@ -314,33 +250,17 @@
 		<br>
 
 		<div class="col-xs-6 light-red-bg">
-			<ol>
-				<% @least_frees_played.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>
-							(<%= num_freestyle_games_completed(u) %>
-							|
-							<%= percentage_of_freestyle_games_completed(u) %>%)
-						</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @least_frees_played,
+				stat: "percentage_of_freestyle_games_completed"
+			%>
 		</div>
 
 		<div class="col-xs-6 light-green-bg">
-			<ol>
-				<% @most_frees_played.each do |u| %>
-					<li class="basic-apple-blue-link">
-						<%= link_to u.username, "student?id=#{u.id}" %>
-						<small>
-							(<%= num_freestyle_games_completed(u) %>
-							|
-							<%= percentage_of_freestyle_games_completed(u) %>%)
-						</small>
-					</li>
-				<% end %>
-			</ol>
+			<%= render "school/schools/progress_category",
+				students: @most_frees_played,
+				stat: "percentage_of_freestyle_games_completed"
+			%>
 		</div>
 	</div>
 </div>

@@ -1,5 +1,16 @@
 <% provide(:title, "Student") %>
-<% provide(:header, "#{@student.username}") %>
+
+
+
+
+<% if current_user.is_demo_teacher? %>
+	<% provide(:header, "#{User.demo_random_username}") %>
+<% else %>
+	<% provide(:header, "#{@student.username}") %>
+<% end %>
+
+
+
 
 <%= render "users/overview_stats", user: @student %>
 

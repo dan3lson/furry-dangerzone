@@ -4,7 +4,7 @@
 	<div class="progress-xp-container row remove-side-margins">
 		<div class="col-sm-6" align="center">
 			<div class="prog-header prog-not-started-circle-green">
-				<%= num_freestyle_games_not_started(user) %>
+				<%= user.num_freestyle_games_not_started %>
 			</div>
 			<p class="lead">
 				Not started
@@ -20,7 +20,7 @@
 				&nbsp;
 				<div class="inline-block">
 					<span class="leksi-green">
-						<%= num_freestyle_games_completed(user) %>
+						<%= user.num_freestyle_games_completed %>
 					</span>
 				</div>
 			</div>

@@ -41,7 +41,8 @@ class School::SchoolsController < BaseSchoolController
       uw.freestyle_responses
     }.flatten.sort_by { |fr| fr.updated_at }.reverse
     @sliced_responses = @responses.each_slice(3).to_a.paginate(
-      :page => params[:page]
+      page: params[:page],
+      per_page: 12
     )
   end
 

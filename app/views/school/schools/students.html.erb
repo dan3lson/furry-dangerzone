@@ -8,7 +8,17 @@
 				 data-url="/school/student?id=<%= s.id %>">
 			<div class="stu-pic center"></div>
 			<p class="lead">
-				<%= s.username %>
+
+
+
+				<% if current_user.is_demo_teacher? %>
+					<%= User.demo_random_username %>
+				<% else %>
+					<%= s.username %>
+				<% end %>
+
+				
+
 			</p>
 		</div>
 	<% end %>

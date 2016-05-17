@@ -4,7 +4,7 @@
 	<div class="progress-xp-container row remove-side-margins">
 		<div class="col-sm-6" align="center">
 			<div class="prog-header prog-not-started-circle">
-				<%= num_fundamentals_games_not_started(user) %>
+				<%= user.num_fundamentals_games_not_started %>
 			</div>
 			<p class="lead">
 				Not started
@@ -13,12 +13,15 @@
 		<div class="col-sm-6">
 			<div class="prog-header">
 				<div class="inline-block">
-					<%= image_tag("medal_red_78.png", class: "img-responsive", alt: "You\'ve earned a medal") %>
+					<%= image_tag("medal_red_78.png",
+						class: "img-responsive",
+						alt: "You\'ve earned a medal")
+					%>
 				</div>
 				&nbsp;
 				<div class="inline-block">
 					<span class="leksi-red">
-						<%= num_fundamentals_games_completed(user) %>
+						<%= user.num_fundamentals_games_completed %>
 					</span>
 				</div>
 			</div>

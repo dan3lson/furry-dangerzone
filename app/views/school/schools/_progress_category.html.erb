@@ -1,0 +1,18 @@
+<ol>
+	<% students.each do |u| %>
+		<li class="basic-apple-blue-link">
+
+
+			<% if current_user.is_demo_teacher? %>
+				<%= link_to User.demo_random_username, "student?id=#{u.id}" %>
+			<% else %>
+				<%= link_to u.username, "student?id=#{u.id}" %>
+			<% end %>
+
+
+
+
+			<small>(<%= u.send(stat) %><%= "%" if stat.include?("perc") %>)</small>
+		</li>
+	<% end %>
+</ol>

@@ -218,6 +218,59 @@ class User < ActiveRecord::Base
               .order("words.name")
   end
 
+  def num_words
+    words.count
+  end
+
+  # MOVED AS A RESULT OF SCEC & SCHOOL REFACTOR. UPDATE TEST FILES/LOCATIONS
+  def num_fundamentals_games_not_started
+    incomplete_fundamentals.count
+  end
+
+  def num_fundamentals_games_completed
+    completed_fundamentals.count
+  end
+
+  def num_jeopardy_games_not_started
+    incomplete_jeopardys.count
+  end
+
+  def num_jeopardy_games_completed
+    completed_jeopardys.count
+  end
+
+  def num_freestyle_games_not_started
+    incomplete_freestyles.count
+  end
+
+  def num_freestyle_games_completed
+    completed_freestyles.count
+  end
+
+  def percentage_of_fundamental_games_completed
+    completed = self.num_fundamentals_games_completed
+    not_started = self.num_fundamentals_games_not_started
+    total = completed + not_started
+
+    (completed / total.to_f * 100).round
+  end
+
+  def percentage_of_jeopardy_games_completed
+    completed = self.num_jeopardy_games_completed
+    not_started = self.num_jeopardy_games_not_started
+    total = completed + not_started
+
+    (completed / total.to_f * 100).round
+  end
+
+  def percentage_of_freestyle_games_completed
+    completed = self.num_freestyle_games_completed
+    not_started = self.num_freestyle_games_not_started
+    total = completed + not_started
+
+    (completed / total.to_f * 100).round
+  end
+
   # Eventually will be deleted
 
   def self.baseline_gamification
@@ -267,7 +320,6 @@ class User < ActiveRecord::Base
       22yamazaki
       22zenkerc
     )
-
     where(username: usernames)
   end
 
@@ -290,7 +342,6 @@ class User < ActiveRecord::Base
       22weber
       22zenkerm
     )
-
     where(username: usernames)
   end
 
@@ -353,4 +404,182 @@ class User < ActiveRecord::Base
       s.save
     end
   end
+
+  # SCEC
+
+  def self.create_demo_teachers
+    usernames = %w(
+      demo_teacher_one
+      demo_teacher_two
+      demo_teacher_three
+      demo_teacher_four
+      demo_teacher_five
+      demo_teacher_six
+      demo_teacher_seven
+      demo_teacher_eight
+      demo_teacher_nine
+      demo_teacher_ten
+    )
+    usernames.each do |u|
+      User.create!(
+        username: "#{u}",
+        email: "#{u}@leksi.education",
+        password: "#{u}",
+        password_confirmation: "#{u}",
+        role: "teacher"
+      )
+    end
+  end
+
+  def self.create_demo_students
+    usernames = %w(
+      demo_student_one
+      demo_student_two
+      demo_student_three
+      demo_student_four
+      demo_student_five
+      demo_student_six
+      demo_student_seven
+      demo_student_eight
+      demo_student_nine
+      demo_student_ten
+    )
+    usernames.each do |u|
+      User.create!(
+        username: u,
+        email: "#{u}@leksi.education",
+        password: "#{u}",
+        password_confirmation: "#{u}",
+        role: "student"
+      )
+    end
+  end
+
+  def is_demo_teacher?
+    username.include?("demo_teacher_")
+  end
+
+  def self.demo_random_username
+    %w(
+      Constance Kozey
+      Milton Doyle
+      Harry White
+      Jordon Gleason
+      Koby Nolan
+      Dominique Tremblay
+      Matilda Bergnaum
+      Otis MacGyver
+      Lisandro Toy
+      Marcos Hartmann
+      Lurline Dooley
+      Shyanne Schoen
+      Ivah Smitham
+      Madilyn Wilderman
+      Earnestine Okuneva Jr.
+      Hal Harris
+      Owen Rodriguez
+      Ivory Gislason
+      Karson Weimann
+      Leland Gislason
+      Rod Heaney
+      Leila Wyman
+      Natalie Watsica
+      Tate Borer
+      Ignatius Fadel V
+      Josue Emmerich
+      Trenton Bashirian
+      Derick Wisoky
+      Heaven Pacocha
+      Reyes Casper
+      Lamont Schaden
+      Kirstin Larkin
+      Marcia Treutel
+      Olen King
+      Kim Cruickshank
+      Gregorio Wilderman
+      Braulio Morar
+      Doug Prohaska
+      Lupe Mraz II
+      Tevin McLaughlin
+      Kylie Daugherty
+      Adriana Tremblay
+      Jalen Hayes
+      Kailey Effertz
+      Omari Cremin
+      Kathlyn Borer II
+      Domenica Tremblay
+      Edward Medhurst
+      Gaetano Bogisich
+      Preston West V
+      Arvel Harber
+      Louisa Prohaska
+      Bertram Collins
+      Colin Wilkinson
+      Janie Wiza
+      Jerald Lemke
+      Felicita Brakus
+      Jadyn Heaney
+      Dale Berge
+      Ruthie Crooks
+      Retha Muller
+      Ariane Streich
+      Gus Harvey
+      Clotilde Heathcote
+      Christiana Auer
+      Phyllis Leuschke Sr.
+      Abigale Hagenes
+      Laila Borer
+      Marianna Sipes DVM
+      Abigail Medhurst
+      Polly Jerde
+      Ahmad Muller
+      Elvis Kuhn
+      Dale Schuster
+      Zoie Ondricka
+      Vada Gorczany
+      Kaylah Beier DVM
+      Mozelle Hilll
+      Matilde Lockman
+      Paul Schmidt
+      Norval Weber
+      Gavin Barrows
+      Loren Kozey
+      Alec Cremin
+      Darren Kulas
+      Hannah Stokes
+      Paris Vandervort
+      Freddy Cassin
+      Araceli Wisozk
+      Elnora Ullrich
+      Aubree Mante
+      Soledad Kutch
+      Nikita Berge
+      Lauretta Padberg
+      Rigoberto Stamm
+      Sandra Hermiston
+      Danika Lindgren
+      Una Grady
+      Duncan Beer
+      Kari Hermann
+    ).sample
+  end
+
+  # def self.scec_class_one
+  #   usernames = %w(student_one, student_two, student_three)
+  #   where(username: usernames)
+  # end
+  #
+  # def self.scec_class_two
+  #   usernames = %w(student_four, student_five, student_six)
+  #   where(username: usernames)
+  # end
+  #
+  # def self.scec_class_three
+  #   usernames = %w(student_seven, student_eight, student_nine)
+  #   where(username: usernames)
+  # end
+  #
+  # def self.scec_classes
+  #   scec_class_one + scec_class_two + scec_class_three
+  # end
 end
