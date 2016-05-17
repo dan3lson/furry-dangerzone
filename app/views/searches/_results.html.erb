@@ -3,7 +3,7 @@
 <% else %>
 	<% results.each_with_index do |word, index| %>
 		<div class="panel panel-default">
-			<div class="panel-heading">
+			<div class="panel-body">
 				<div class="pull-right">
 					<%= form_for :user_word, url: user_word_path, html: {
 						id: "search-results" }, method: :post do |f| %>
@@ -25,29 +25,25 @@
 						<% end %>
 					<% end %>
 				</div>
-				<h4>
-					<%= word.name %>
+				<strong class="word-name-size">
+					<%= truncate(word.name, length: 10) %>
+				</strong>
+				<div>
+					<% if word.phonetic_spelling %>
+						<span class="word-phonetic-spelling">
+							<%= word.phonetic_spelling %>
+						</span>
+					<% end %>
 
-					<br>
+					<%= "|" if word.phonetic_spelling && word.part_of_speech %>
 
-					<small>
-						<% if word.phonetic_spelling %>
-							<span class="word-phonetic-spelling">
-								<%= word.phonetic_spelling %>
-							</span>
-						<% end %>
-
-						<%= "|" if word.phonetic_spelling && word.part_of_speech %>
-
-						<% if word.part_of_speech %>
-							<span class="word-part-of-speech">
-								<%= word.part_of_speech %>
-							</span>
-						<% end %>
-					</small>
-				</h4>
-			</div>
-			<div class="panel-body">
+					<% if word.part_of_speech %>
+						<span class="word-part-of-speech">
+							<%= word.part_of_speech %>
+						</span>
+					<% end %>
+				</div>
+				<br>
 				<%= render "words/word_details", word: word %>
 			</div>
 		</div>

@@ -1,43 +1,42 @@
 <footer class="navbar navbar-default navbar-fixed-bottom navbar-footer"
         role="navigation">
   <div class="row center">
-    <br>
     <div class="col-xs-3">
       <% if params[:action] == "myLeksi" %>
-        <i class="fa fa-book fa-3x"></i>
+        <i class="fa fa-book fa-2x"></i>
         <br>
-        myLeksi
+        Words
   		<% else %>
         <%= link_to myLeksi_path do %>
-          <i class="fa fa-book fa-3x"></i>
+          <i class="fa fa-book fa-2x"></i>
           <br>
-          myLeksi
+          Words
         <% end %>
   		<% end %>
     </div>
 
     <div class="col-xs-3">
       <% if params[:controller] == "searches" %>
-        <i class="fa fa-search fa-3x"></i>
+        <i class="fa fa-search fa-2x"></i>
         <br>
-        Look Up
+        Explore
   		<% else %>
   			<%= link_to search_path do %>
-          <i class="fa fa-search fa-3x"></i>
+          <i class="fa fa-search fa-2x"></i>
           <br>
-          Look Up
+          Explore
   			<% end %>
   		<% end %>
     </div>
 
     <div class="col-xs-3">
       <% if params[:controller] == "my_tags" && params[:action] == "index" %>
-        <i class="fa fa-tag fa-3x"></i>
+        <i class="fa fa-tag fa-2x"></i>
         <br>
         Tags
   		<% else %>
         <%= link_to myTags_path do %>
-          <i class="fa fa-tag fa-3x"></i>
+          <i class="fa fa-tag fa-2x"></i>
           <br>
           Tags
         <% end %>
@@ -46,12 +45,12 @@
 
     <div class="col-xs-3">
       <% if params[:action] == "menu" %>
-  			<i class="fa fa-bars fa-3x"></i>
+  			<i class="fa fa-bars fa-2x"></i>
         <br>
         Menu
   		<% else %>
         <%= link_to menu_path do %>
-          <i class="fa fa-bars fa-3x"></i>
+          <i class="fa fa-bars fa-2x"></i>
           <br>
           Menu
         <% end %>

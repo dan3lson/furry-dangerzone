@@ -3,8 +3,11 @@
     method: "get", id: "search-form", remote: true) do %>
     <div class="input-group">
       <%= label_tag :inputSuccess5, "Search", class: "control-label sr-only" %>
-      <%= text_field_tag(:search, params[:search], class: "form-control center",
-        id: "inputSuccess5") %>
+      <%= text_field_tag(:search, params[:search],
+        class: "form-control center",
+        id: "inputSuccess5",
+        placeholder: "Search")
+      %>
       <span class="input-group-btn">
         <%= button_tag type: "submit",
                        class: "btn btn-info",

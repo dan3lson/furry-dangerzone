@@ -1,8 +1,9 @@
-<span class="hover">	
+<span class="hover">
 	<% unless current_user.already_has_word?(word) %>
 		<%= link_to user_word_path(search_btn: :play, id: word.id),
-			method: :post do %>
-			<i class="fa fa-gamepad fa-3x leksi-purple"></i>
+			method: :post do
+		%>
+			<i class="fa fa-gamepad fa-2x dark-gray"></i>
 		<% end %>
 	<% end %>
 </span>
