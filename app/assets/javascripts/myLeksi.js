@@ -1,17 +1,19 @@
 $(document).ready(function() {
-	var url = $('.pagination .next a').attr('href');
-	var $view_more_link = $("<a>", {
-		role: "button",
-		"data-remote": "true",
-		id: "view-more-link",
-		class: "btn btn-info btn-block",
-		href: url,
-		text: "VIEW MORE WORDS"
-	});
-
 	$("#myLeksi-pagination").hide();
-	$("#view-more-link-container").html($view_more_link);
-	$("#view-more-link").click(load_more_words);
+
+	if ($("#myLeksi-words .panel-default").length + 1 > 15) {
+		var url = $('.pagination .next a').attr('href');
+		var $view_more_link = $("<a>", {
+			role: "button",
+			"data-remote": "true",
+			id: "view-more-link",
+			class: "btn btn-info btn-block",
+			href: url,
+			text: "VIEW MORE WORDS"
+		});
+		$("#view-more-link-container").html($view_more_link);
+		$("#view-more-link").click(load_more_words);
+	}
 
 	function load_more_words() {
 		var num_words = $("#myLeksi-words .panel-default").length;

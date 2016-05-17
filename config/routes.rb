@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   resources :reviews
   resources :feedbacks
   namespace :school do
-    root "schools#classrooms"
+    root "schools#classes"
     get "classes" => "schools#classes"
     get "words" => "schools#words"
     get "student_words" => "words#student_words"

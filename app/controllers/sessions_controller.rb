@@ -24,7 +24,13 @@ class SessionsController < ApplicationController
 
       log_in(user)
 
-      redirect_to root_path
+      if user.is_admin?
+        redirect_to root_path
+      elsif user.is_teacher? || user.is_demo_teacher?
+        redirect_to school_root_path
+      else
+        redirect_to root_path
+      end
     else
       msg = "Yikes! That username/password combination didn\'t work. "
       msg_2 = "Please try again."
