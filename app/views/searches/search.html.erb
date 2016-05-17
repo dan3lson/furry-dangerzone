@@ -16,12 +16,30 @@
 } %>
 
 <div class="col-sm-6 col-sm-offset-3 add-look-up-word-container well">
+  <div class="row center">
+    <div class="col-xs-6">
+      <span class="badge">1</span>
+      Using the box or link below, look up a word that you don't know.
+    </div>
+    <div class="col-xs-6">
+      <span class="badge">2</span>
+      Tap "<i class="fa fa-plus-circle"></i>"
+      to add and continue defining words or
+      "<i class="fa fa-gamepad"></i>"
+      to begin playing immediately!
+    </div>
+  </div>
+  <br>
   <p>
     <%= render "searches/form", display_button_for: "user" %>
   </p>
   <p class="center">
     <span id="random-search-btn">
-      <%= link_to "I\'m feeling adventurous!", search_results_path(rand: "rand", display_button_for: "user"), remote: true %>
+      <%= link_to "I\'m feeling adventurous!", search_results_path(
+        rand: "rand",
+        display_button_for: "user"),
+        remote: true
+      %>
     </span>
   </p>
 </div>

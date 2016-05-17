@@ -1,16 +1,15 @@
 <footer class="navbar navbar-default navbar-fixed-bottom navbar-footer"
   role="navigation">
-  <br>
   <div class="row center">
     <div class="col-xs-4">
       <% if params[:controller] == "admin/admins" &&
         params[:action] == "stats" %>
-        <i class="fa fa-line-chart fa-3x"></i>
+        <i class="fa fa-line-chart fa-2x"></i>
         <br>
         Stats
       <% else %>
         <%= link_to admin_stats_path do %>
-          <i class="fa fa-line-chart fa-3x"></i>
+          <i class="fa fa-line-chart fa-2x"></i>
           <br>
           Stats
         <% end %>
@@ -19,12 +18,12 @@
     <div class="col-xs-4">
       <% if params[:controller] == "admin/users" &&
         params[:action] == "index" %>
-        <i class="fa fa-users fa-3x"></i>
+        <i class="fa fa-users fa-2x"></i>
         <br>
         Users
       <% else %>
         <%= link_to admin_users_path do %>
-          <i class="fa fa-users fa-3x"></i>
+          <i class="fa fa-users fa-2x"></i>
           <br>
           Users
         <% end %>
@@ -33,12 +32,12 @@
     <div class="col-xs-4">
       <% if params[:controller] == "admin/admins" &&
         params[:action] == "menu" %>
-        <i class="fa fa-bars fa-3x"></i>
+        <i class="fa fa-bars fa-2x"></i>
         <br>
         Menu
       <% else %>
         <%= link_to admin_menu_path do %>
-          <i class="fa fa-bars fa-3x"></i>
+          <i class="fa fa-bars fa-2x"></i>
           <br>
           Menu
         <% end %>

@@ -579,9 +579,9 @@ input {
 .navbar-footer{
 	color: $sky-blue;
 	font-weight: normal;
-	font-size: smaller;
 	margin: 0;
 	margin-top: 50px;
+	padding-top: 5px;
 
   a:not(.footer-cta){
 	  color: #BDBDBD;
@@ -790,6 +790,12 @@ input {
 
 .sb-slidebar .list-group-item {
 	color: $sky-blue;
+}
+
+.search-results-container .panel-info,
+.modal .panel-info,
+.modal .panel-success {
+	border: none;
 }
 
 .sky-blue {
