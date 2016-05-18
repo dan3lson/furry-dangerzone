@@ -153,6 +153,14 @@ p {
   display: none;
 }
 
+.add-look-up-word-container {
+	background: $light-gray;
+	left: 0;
+	padding: 10px;
+	position: absolute;
+	top: 50px;
+}
+
 .apple-blue {
 	color: $apple-blue;
 }
@@ -790,6 +798,11 @@ input {
 
 .sb-slidebar .list-group-item {
 	color: $sky-blue;
+}
+
+.search-results-container {
+	margin-top: 70px;
+	position: inherit;
 }
 
 .search-results-container .panel-info,

@@ -89,4 +89,8 @@ module WordsHelper
   def attribute_is_synonym_or_antonym?(attribute)
     attribute.end_with?("onyms")
   end
+
+  def thesuarus_names(word, syn_or_ant)
+    word.send(syn_or_ant).pluck(:name).uniq
+  end
 end

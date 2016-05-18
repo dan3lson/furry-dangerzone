@@ -22,7 +22,7 @@ class FreeDictionary
   end
 
   def self.define(word)
-    word.gsub!(" ", "-")
+    word.gsub!(" ", "-") if word.split(" ").count > 1
     word.chop! if word.end_with?("-") || word.end_with?(" ")
 
     page = open_page(URL, word)

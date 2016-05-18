@@ -22,6 +22,8 @@
 					word: word
 				%>
 				<%= render "words/word_details", word: word %>
+				<%= render "words/synonyms", word: word %>
+				<%= render "words/antonyms", word: word %>
 				<%= render "current_users/tags", user: current_user, word: word %>
 				<%= render "current_users/freestyle_responses", user_word: user_word %>
 				<%= render "current_users/remove_myLeksi_word", word: word %>
