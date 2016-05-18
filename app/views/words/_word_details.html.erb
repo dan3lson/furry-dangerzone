@@ -1,5 +1,5 @@
 <div class="word-details">
-  <div class="panel panel-info">
+  <div class="panel panel-default">
     <div class="panel-heading">Meanings</div>
     <div class="panel-body">
       <% top_three_entries_for(word, "definition").each do |d| %>
@@ -10,7 +10,7 @@
 
   <% unless word.example_sentence.nil? %>
     <div>
-      <div class="panel panel-info">
+      <div class="panel panel-default">
         <div class="panel-heading">Examples</div>
         <div class="panel-body">
           <% top_three_entries_for(word, "example_sentence").each do |es| %>

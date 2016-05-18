@@ -161,6 +161,11 @@ p {
 	top: 50px;
 }
 
+.alert-container {
+	position: absolute;
+	z-index: 4000;
+}
+
 .apple-blue {
 	color: $apple-blue;
 }
@@ -369,6 +374,11 @@ p {
 
 .hover:hover {
 	opacity: $show-game-circle-container-hover-opac;
+	text-decoration: none;
+
+	a:link, a:visited, a:hover, a:active {
+		text-decoration: none;
+	}
 }
 
 .game-circle {
@@ -803,10 +813,17 @@ input {
 .search-results-container {
 	margin-top: 70px;
 	position: inherit;
+
+	.panel-footer {
+		background: $bootstrap-blue;
+
+		a:link, a:visited, a:active {
+			color: $white;
+		}
+	}
 }
 
-.search-results-container .panel-info,
-.modal .panel-info,
+.search-results-container,
 .modal .panel-success {
 	border: none;
 }

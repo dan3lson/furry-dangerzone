@@ -83,6 +83,10 @@ $(document).ready(function(){
 		$(".category-words-container").fadeIn();
 	});
 
+	setTimeout(function(){
+	  $(".alert-success").fadeOut()
+	}, 2000);
+
 	$(function () {
   	$('[data-toggle="popover"]').popover()
 	});
