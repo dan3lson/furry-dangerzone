@@ -45,8 +45,9 @@ class CurrentUsersController < ApplicationController
     @current_user_words = current_user.sort_progress("ASC")
                                       .includes(:word)
                                       .map { |uw| uw.word }
+    page = params[:page] ? params[:page].to_i - 1 : 1
     @current_user_words_pag = @current_user_words.paginate(
-      page: params[:page],
+      page: page,
       per_page: 15
     )
     @current_user_words_count = @current_user_words.count

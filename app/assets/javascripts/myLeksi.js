@@ -26,12 +26,12 @@ $(document).ready(function() {
 		var previous_url = $('#view-more-link').attr('href');
 		var previous_page = parseInt(previous_url.split("=")[1]);
 		var next_page = previous_page + 1;
-		var last_page = $(".pagination li").length - 1;
+		var last_page = $(".pagination li").length - 2;
 		var new_url = "/myLeksi?page=" + next_page;
 
 		$("#view-more-link").attr("href", new_url);
 		$("#view-more-link-container").html($view_more_link);
-		if (next_page == last_page) $("#view-more-link").hide();
+		if (next_page > last_page) $("#view-more-link").hide();
 		spinner();
 	}
 
