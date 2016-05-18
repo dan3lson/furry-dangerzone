@@ -4,34 +4,8 @@
 	<% results.each_with_index do |word, index| %>
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<div class="pull-right">
-					<%= form_for :user_word, url: user_word_path, html: {
-						id: "search-results" }, method: :post do |f| %>
-						<%= hidden_field_tag :id, word.id %>
-
-						<% if display_button == "guest" %>
-							=)
-						<% elsif display_button == "user" %>
-							<% if logged_in? %>
-								<%= render "searches/user_add", word: word %>
-								&nbsp;
-								&nbsp;
-								<%= render "searches/user_play", word: word %>
-							<% end %>
-						<% elsif display_button == "teacher" %>
-							<% if logged_in? %>
-								<%= render "searches/teacher_select", word: word %>
-							<% end %>
-						<% end %>
-					<% end %>
-				</div>
 				<strong class="word-name-size">
-					<span class="visible-xs">
-						<%= truncate(word.name, length: 10) %>
-					</span>
-					<span class="hidden-xs">
-						<%= word.name %>
-					</span>
+					<%= word.name %>
 				</strong>
 				<div>
 					<% if word.phonetic_spelling %>
@@ -50,6 +24,31 @@
 				</div>
 				<br>
 				<%= render "words/word_details", word: word %>
+			</div>
+			<div class="panel-footer">
+				<%= form_for :user_word, url: user_word_path, html: {
+					id: "search-results" }, method: :post do |f| %>
+					<%= hidden_field_tag :id, word.id %>
+
+					<% if display_button == "guest" %>
+						=)
+					<% elsif display_button == "user" %>
+						<% if logged_in? %>
+							<div class="row center">
+								<div class="col-xs-6">
+									<%= render "searches/user_add", word: word %>
+								</div>
+								<div class="col-xs-6">
+									<%= render "searches/user_play", word: word %>
+								</div>
+							</div>
+						<% end %>
+					<% elsif display_button == "teacher" %>
+						<% if logged_in? %>
+							<%= render "searches/teacher_select", word: word %>
+						<% end %>
+					<% end %>
+				<% end %>
 			</div>
 		</div>
 	<% end %>
