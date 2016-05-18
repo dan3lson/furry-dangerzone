@@ -15,21 +15,8 @@
   description: "Look up words you don\'t know or select ones from a specific list"
 } %>
 
-<div class="col-sm-6 col-sm-offset-3 add-look-up-word-container well">
-  <div class="row center">
-    <div class="col-xs-6">
-      <span class="badge">1</span>
-      Using the box or link below, look up a word that you don't know.
-    </div>
-    <div class="col-xs-6">
-      <span class="badge">2</span>
-      Tap "<i class="fa fa-plus-circle"></i>"
-      to add and continue defining words or
-      "<i class="fa fa-gamepad"></i>"
-      to begin playing immediately!
-    </div>
-  </div>
-  <br>
+<%= render "searches/guide" %>
+<div class="add-look-up-word-container">
   <p>
     <%= render "searches/form", display_button_for: "user" %>
   </p>

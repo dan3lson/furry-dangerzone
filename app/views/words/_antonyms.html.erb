@@ -1,0 +1,13 @@
+<% if word.has_antonyms? %>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			Antonyms
+		</div>
+		<div class="panel-body">
+			<% thesuarus_names(word, "antonyms").each do |name| %>
+				&#8605; <%= name %>
+				<br>
+			<% end %>
+		</div>
+	</div>
+<% end %>

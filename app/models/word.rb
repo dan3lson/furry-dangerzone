@@ -98,12 +98,12 @@ class Word < ActiveRecord::Base
 
   # not tested
   def has_synonyms?
-    synonyms.any?
+    WordSynonym.where(word: self).any?
   end
 
   # not tested
   def has_antonyms?
-    antonyms.any?
+    WordAntonym.where(word: self).any?
   end
 
   # not tested

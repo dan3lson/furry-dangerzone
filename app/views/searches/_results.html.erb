@@ -26,7 +26,12 @@
 					<% end %>
 				</div>
 				<strong class="word-name-size">
-					<%= truncate(word.name, length: 10) %>
+					<span class="visible-xs">
+						<%= truncate(word.name, length: 10) %>
+					</span>
+					<span class="hidden-xs">
+						<%= word.name %>
+					</span>
 				</strong>
 				<div>
 					<% if word.phonetic_spelling %>

@@ -15,7 +15,7 @@ class Thesaurus
     connection = HTTParty.get("#{API_URL}/#{API_KEY}/#{word}/json")
 
     if connection.success?
-      part_of_speech.gsub!(" ", "")
+      part_of_speech.gsub!(" ", "") if part_of_speech.include?(" ")
       response = JSON.parse(connection)
 
       response_pos = response[part_of_speech]
@@ -38,7 +38,7 @@ class Thesaurus
 
     unless @thesaurus.nil?
       @thesaurus.each do |w|
-        next if MacmillanDictionary.define(w).nil?
+        next if FreeDictionary.define(w).nil?
 
         palabra = Word.define(w).first
 

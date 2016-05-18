@@ -407,54 +407,6 @@ class User < ActiveRecord::Base
 
   # SCEC
 
-  def self.create_demo_teachers
-    usernames = %w(
-      demo_teacher_one
-      demo_teacher_two
-      demo_teacher_three
-      demo_teacher_four
-      demo_teacher_five
-      demo_teacher_six
-      demo_teacher_seven
-      demo_teacher_eight
-      demo_teacher_nine
-      demo_teacher_ten
-    )
-    usernames.each do |u|
-      User.create!(
-        username: "#{u}",
-        email: "#{u}@leksi.education",
-        password: "#{u}",
-        password_confirmation: "#{u}",
-        role: "teacher"
-      )
-    end
-  end
-
-  def self.create_demo_students
-    usernames = %w(
-      demo_student_one
-      demo_student_two
-      demo_student_three
-      demo_student_four
-      demo_student_five
-      demo_student_six
-      demo_student_seven
-      demo_student_eight
-      demo_student_nine
-      demo_student_ten
-    )
-    usernames.each do |u|
-      User.create!(
-        username: u,
-        email: "#{u}@leksi.education",
-        password: "#{u}",
-        password_confirmation: "#{u}",
-        role: "student"
-      )
-    end
-  end
-
   def is_demo_teacher?
     username.include?("demo_teacher_")
   end
@@ -563,23 +515,4 @@ class User < ActiveRecord::Base
       Kari Hermann
     ).sample
   end
-
-  # def self.scec_class_one
-  #   usernames = %w(student_one, student_two, student_three)
-  #   where(username: usernames)
-  # end
-  #
-  # def self.scec_class_two
-  #   usernames = %w(student_four, student_five, student_six)
-  #   where(username: usernames)
-  # end
-  #
-  # def self.scec_class_three
-  #   usernames = %w(student_seven, student_eight, student_nine)
-  #   where(username: usernames)
-  # end
-  #
-  # def self.scec_classes
-  #   scec_class_one + scec_class_two + scec_class_three
-  # end
 end
