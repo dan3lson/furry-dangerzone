@@ -2,15 +2,15 @@
         role="navigation">
   <div class="row center">
     <div class="col-xs-3">
-      <% if params[:action] == "myLeksi" %>
+      <% if params[:action].include?("myLeksi") %>
         <i class="fa fa-book fa-2x"></i>
         <br>
-        Words
+        myLeksi
   		<% else %>
         <%= link_to myLeksi_path do %>
           <i class="fa fa-book fa-2x"></i>
           <br>
-          Words
+          myLeksi
         <% end %>
   		<% end %>
     </div>

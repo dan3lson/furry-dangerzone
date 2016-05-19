@@ -64,7 +64,6 @@ html {
 body {
 	color: $even-darker-gray;
   padding: 90px 0;
-  font-size: 1.4em;
 }
 
 .body-brainiac {
@@ -815,10 +814,11 @@ input {
 	position: inherit;
 
 	.panel-footer {
-		background: $bootstrap-blue;
+		background: $white;
+		color: $bootstrap-blue;
 
 		a:link, a:visited, a:active {
-			color: $white;
+			color: $bootstrap-blue;
 		}
 	}
 }
@@ -933,8 +933,17 @@ table {
 	background-color: $card-bg !important;
 }
 
+.word-details {
+	margin-left: 14px;
+}
+
 .word-name-size {
 	font-size: 23px;
+}
+
+.word-of-knowledge-container {
+	background: none !important;
+	padding: 10px;
 }
 
 .word-partial {
@@ -950,8 +959,8 @@ table {
 	margin-bottom: -.01em;
 }
 
-.word-details p {
-	line-height: normal;
+.word-part-of-speech{
+	margin: 6px 0;
 }
 
 .tightness {

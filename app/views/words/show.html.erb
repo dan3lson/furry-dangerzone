@@ -1,13 +1,12 @@
-<% provide(:title, @word.name) %>
-<% provide(:header, @word.name) %>
+<% provide(:title, "Words") %>
+<% provide(:header, "Words") %>
 
-<div>
-  <p>
-    <%= @word.phonetic_spelling %>
-    &nbsp;
-    &nbsp;
-    <%= @word.part_of_speech %>
-  </p>
-
-  <%= render "words/word_details", word: @word %>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= render "words/display", word: @word %>
+      </div>
+    </div>
+  </div>
 </div>

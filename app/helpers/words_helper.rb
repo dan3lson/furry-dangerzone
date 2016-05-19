@@ -71,8 +71,7 @@ module WordsHelper
   end
 
   # not tested
-  # need to change name to something like array_of(attribute, word)
-  def top_three_entries_for(word, attribute)
+  def array_of(word, attribute)
     word.send(attribute).split("***")
   end
 

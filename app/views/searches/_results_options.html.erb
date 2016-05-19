@@ -1,0 +1,32 @@
+<%= form_for :user_word, 
+	url: user_word_path,
+	html: {
+		id: "search-results"
+	},
+	method: :post do |f|
+%>
+	<%= hidden_field_tag :id, word.id %>
+
+	<% if display_button == "guest" %>
+		=)
+	<% elsif display_button == "user" %>
+		<% if logged_in? %>
+			<div class="row center">
+				<% if current_user.already_has_word?(word) %>
+					<div class="white">You already have this word.</div>
+				<% else %>
+					<div class="col-xs-6">
+						<%= render "searches/user_add", word: word %>
+					</div>
+					<div class="col-xs-6">
+						<%= render "searches/user_play", word: word %>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	<% elsif display_button == "teacher" %>
+		<% if logged_in? %>
+			<%= render "searches/teacher_select", word: word %>
+		<% end %>
+	<% end %>
+<% end %>

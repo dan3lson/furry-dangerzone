@@ -9,13 +9,18 @@
 			<i class="data-url fa fa-chevron-left" data-url="/myTags"></i>
 
 		<% elsif params[:controller] == "users" && params[:action] == "show" %>
-			<span class="data-url glyphicon glyphicon-chevron-left"
+			<span class="data-url fa fa-chevron-left"
 						aria-hidden="true" data-url="/admin/users"></span>
 
 		<% elsif params[:controller] == "school/schools" &&
 						 params[:action] == "students" &&
 						 current_user.is_teacher? %>
 			<i class="data-url fa fa-chevron-left" data-url="/school/classes"></i>
+
+		<% elsif params[:controller] == "current_users" &&
+						 params[:action] == "myLeksi_word"
+		%>
+			<i class="data-url fa fa-chevron-left" data-url="/myLeksi"></i>
 
 		<% elsif params[:controller] == "school/schools" &&
 						 params[:action] == "words" &&

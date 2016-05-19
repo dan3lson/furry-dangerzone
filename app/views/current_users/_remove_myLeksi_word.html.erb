@@ -1,7 +1,10 @@
 <% uw_id = UserWord.object(current_user, word).id %>
 
+<br>
+<br>
+<br>
 <%= button_to "Remove this word",
   user_word_path(id: uw_id),
-  class: "btn btn-default",
+  class: "btn btn-danger",
   method: :delete
 %>

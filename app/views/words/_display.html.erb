@@ -1,0 +1,29 @@
+<strong class="word-name-size">
+	<% if params[:action] == "myLeksi" %>
+		<%= link_to word.name, "/myLeksi/#{word.id}" %>
+	<% else %>
+		<%= word.name %>
+	<% end %>
+</strong>
+<div>
+	<% if word.phonetic_spelling %>
+		<span class="word-phonetic-spelling">
+			<%= word.phonetic_spelling %>
+		</span>
+	<% end %>
+</div>
+<% if word.part_of_speech %>
+	<div class="word-part-of-speech">
+		<em><%= word.part_of_speech %></em>
+	<% end %>
+</div>
+<%= render "words/word_details", word: word %>
+
+<!-- <strong class="pointer word-name-size"
+				data-toggle="modal"
+				data-target="#word-<%#= word.id %>">
+	<%#= word.name %>
+</strong>
+<%#= render "current_users/word_card_modal", word: word,
+																						user_word: user_word
+%> -->

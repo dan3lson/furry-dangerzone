@@ -1,27 +1,9 @@
 <div class="word-details">
-  <div class="panel panel-default">
-    <div class="panel-heading">Meanings</div>
-    <div class="panel-body">
-      <% top_three_entries_for(word, "definition").each do |d| %>
-        <p><span>&#8605; <%= d %></span></p>
-      <% end %>
-    </div>
-  </div>
-
+  <%= array_of(word, "definition").first %>.
+  <br>
   <% unless word.example_sentence.nil? %>
-    <div>
-      <div class="panel panel-default">
-        <div class="panel-heading">Examples</div>
-        <div class="panel-body">
-          <% top_three_entries_for(word, "example_sentence").each do |es| %>
-            <p>
-              <span class="word-example-sentence">
-                &#8605; <%= es %>
-              </span>
-            </p>
-          <% end %>
-        </div>
-      </div>
-    </div>
+    <span class="dark-gray">
+      "<%= array_of(word, "example_sentence").first %>"
+    </span>
   <% end %>
 </div>
