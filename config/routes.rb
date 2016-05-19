@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "menu" => "current_users#menu"
   get "home" => "current_users#home"
   get "myLeksi" => "current_users#myLeksi"
+  get "myLeksi/:id" => "current_users#myLeksi_word"
   get "search_words_for_students" => "searches#student_words"
   get "progress" => "current_users#progress"
   get "myTags" => "my_tags#index"

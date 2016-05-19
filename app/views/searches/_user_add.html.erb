@@ -1,13 +1,10 @@
 <span class="hover">
-	<% if current_user.already_has_word?(word) %>
-		<% uw_id = UserWord.object(current_user, word).id %>
-
-		<%= link_to user_word_path(id: uw_id), method: :delete do %>
-			<i class="fa fa-remove fa-3x leksi-red"></i>
-		<% end %>
-	<% else %>
-		<%= link_to user_word_path(id: word.id), method: :post do %>
-			<i class="fa fa-plus-circle fa-3x"></i>
-		<% end %>
+	<%= link_to user_word_path(id: word.id), method: :post do %>
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		</span>
+		ADD
+		<br>
 	<% end %>
 </span>

@@ -1,0 +1,28 @@
+<% provide(:title, "myLeksi") %>
+<% provide(:header, "myLeksi") %>
+
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="pull-right">
+					<%= render "current_users/word_mastery_percentage",
+					user_word: @user_word,
+					word: @word
+					%>
+				</div>
+				<%= render "words/display", word: @word %>
+			</div>
+		</div>
+
+		<%= render "current_users/word_card_game_zone",
+		user_word: @user_word,
+		word: @word
+		%>
+		<%= render "words/synonyms", word: @word %>
+		<%= render "words/antonyms", word: @word %>
+		<%= render "current_users/tags", user: current_user, word: @word %>
+		<%= render "current_users/freestyle_responses", user_word: @user_word %>
+		<%= render "current_users/remove_myLeksi_word", word: @word %>
+	</div>
+</div>

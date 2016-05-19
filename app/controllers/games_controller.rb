@@ -72,7 +72,7 @@ class GamesController < ApplicationController
 
           if word_has_attribute_value?(@attribute_value)
             if attribute_is_example_sentence_or_definition?(@attribute)
-              top_three_entries_for(w, @attribute).join("; ").gsub(
+              array_of(w, @attribute).join("; ").gsub(
               "#{w.name}", "______"
               )
             elsif attribute_is_synonym_or_antonym?(@attribute)
@@ -81,7 +81,7 @@ class GamesController < ApplicationController
           else
             @attributes[i] = "definition"
             @attribute_value = w.send("definition")
-            top_three_entries_for(w, "definition").join("; ").gsub(
+            array_of(w, "definition").join("; ").gsub(
             "#{w.name}", "______"
             )
           end

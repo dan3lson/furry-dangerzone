@@ -49,7 +49,7 @@
 
 <div id="meanings_container">
 	<div class="well lead">
-		<% top_three_entries_for(word, "definition").each_with_index do |d, i| %>
+		<% array_of(word, "definition").each_with_index do |d, i| %>
 			<p class="<%= word.name %>-def" id="<%= word.name %>-def-<%= i %>">
 				&#8605; <%= d %>
 			</p>

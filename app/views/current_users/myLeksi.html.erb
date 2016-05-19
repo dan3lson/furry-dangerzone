@@ -1,9 +1,9 @@
-<% provide(:title, "Words") %>
-<% provide(:header, "Words") %>
+<% provide(:title, "myLeksi") %>
+<% provide(:header, "myLeksi") %>
 
 <%= render "searches/myLeksi_modal" %>
-<div class="row lead">
-  <div class="col-sm-6 col-sm-offset-3">
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-2">
     <% if current_user.has_words? %>
       <div id="myLeksi-filter-container">
         <div class="dark-gray">
@@ -20,10 +20,15 @@
     <br>
     <%= render "shared/spinner" %>
     <p id="view-more-link-container"></p>
+    <br>
+    <br>
     <div id="myLeksi-pagination">
       <%= will_paginate @current_user_words_pag,
         renderer: BootstrapPagination::Rails
       %>
     </div>
+  </div>
+  <div class="col-sm-4">
+    <%= render "words/knowledge_key" %>
   </div>
 </div>

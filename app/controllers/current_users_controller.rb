@@ -60,6 +60,11 @@ class CurrentUsersController < ApplicationController
     end
   end
 
+  def myLeksi_word
+    @word = Word.find(params[:id])
+    @user_word = UserWord.object(current_user, @word)
+  end
+
   def progress
     @gold_user = User.top_ten_highest_points[0]
     @silver_user = User.top_ten_highest_points[1]

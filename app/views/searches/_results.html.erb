@@ -4,51 +4,13 @@
 	<% results.each_with_index do |word, index| %>
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<strong class="word-name-size">
-					<%= word.name %>
-				</strong>
-				<div>
-					<% if word.phonetic_spelling %>
-						<span class="word-phonetic-spelling">
-							<%= word.phonetic_spelling %>
-						</span>
-					<% end %>
-
-					<%= "|" if word.phonetic_spelling && word.part_of_speech %>
-
-					<% if word.part_of_speech %>
-						<span class="word-part-of-speech">
-							<%= word.part_of_speech %>
-						</span>
-					<% end %>
-				</div>
-				<br>
-				<%= render "words/word_details", word: word %>
+				<%= render "words/display", word: word %>
 			</div>
 			<div class="panel-footer">
-				<%= form_for :user_word, url: user_word_path, html: {
-					id: "search-results" }, method: :post do |f| %>
-					<%= hidden_field_tag :id, word.id %>
-
-					<% if display_button == "guest" %>
-						=)
-					<% elsif display_button == "user" %>
-						<% if logged_in? %>
-							<div class="row center">
-								<div class="col-xs-6">
-									<%= render "searches/user_add", word: word %>
-								</div>
-								<div class="col-xs-6">
-									<%= render "searches/user_play", word: word %>
-								</div>
-							</div>
-						<% end %>
-					<% elsif display_button == "teacher" %>
-						<% if logged_in? %>
-							<%= render "searches/teacher_select", word: word %>
-						<% end %>
-					<% end %>
-				<% end %>
+				<%= render "searches/results_options",
+					display_button: display_button,
+					word: word
+				%>
 			</div>
 		</div>
 	<% end %>

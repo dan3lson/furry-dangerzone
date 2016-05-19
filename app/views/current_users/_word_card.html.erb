@@ -6,17 +6,6 @@
 				word: word
 			%>
 		</div>
-		<span class="basic-black-link">
-			<strong class="pointer word-name-size"
-							data-toggle="modal"
-							data-target="#word-<%= word.id %>">
-				<%= word.name %>
-			</strong>
-			<%= render "current_users/word_card_modal", word: word,
-																									user_word: user_word
-			%>
-			<br>
-			<%= top_three_entries_for(word, "definition").first %>
-		</span>
+		<%= render "words/display", word: word %>
 	</div>
 </div>
