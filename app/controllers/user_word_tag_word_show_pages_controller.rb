@@ -16,6 +16,6 @@ class UserWordTagWordShowPagesController < ApplicationController
 
     end
 
-    redirect_to root_path
+    redirect_to "/myLeksi/#{@word.id}"
   end
 end

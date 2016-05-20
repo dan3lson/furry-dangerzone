@@ -9,13 +9,12 @@ $(document).ready(function() {
 			role: "button",
 			"data-remote": "true",
 			id: "view-more-link",
-			class: "btn btn-info btn-block",
+			class: "btn btn-success btn-block",
 			href: url,
 			text: "VIEW MORE WORDS"
 		});
 		$("#view-more-link-container").html($view_more_link);
 	}
-
 	$("#view-more-link-container").on(
 		"click",
 		"#view-more-link",

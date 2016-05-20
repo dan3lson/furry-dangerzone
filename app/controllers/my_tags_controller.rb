@@ -1,6 +1,6 @@
 class MyTagsController < ApplicationController
 	def index
-		@current_user_tags = current_user.tags.alphabetical
+		@current_user_tags = current_user.tags
 		@tag = Tag.new
 	end
 

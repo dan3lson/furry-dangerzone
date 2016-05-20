@@ -1,9 +1,10 @@
 <% if word.has_synonyms? %>
 	<div class="panel panel-default">
-		<div class="panel-heading">
-			Synonyms
-		</div>
 		<div class="panel-body">
+			<div class="lead">
+				<i class="fa fa-book"></i>
+				Synonyms
+			</div>
 			<% thesuarus_names(word, "synonyms").each do |name| %>
 				&#8605; <%= name %>
 				<br>

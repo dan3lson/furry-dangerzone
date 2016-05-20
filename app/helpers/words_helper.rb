@@ -1,6 +1,10 @@
 module WordsHelper
   def words_for(user, tag)
-    user.word_tags.includes(:word).where(tag: tag).map { |wt| wt.word }
+    user.word_tags.joins(:word)
+                  .order("words.name ASC")
+                  .includes(:word)
+                  .where(tag: tag)
+                  .map { |wt| wt.word }
   end
 
   # not tested

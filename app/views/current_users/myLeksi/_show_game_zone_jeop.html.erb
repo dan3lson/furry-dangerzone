@@ -1,0 +1,57 @@
+<% if ready_for_jeopardy?(current_user, user_word) %>
+	<p class="data-url pointer hover"
+				data-url="<%= jeop_game_link(word.id) %>">
+		<%= image_tag(
+			"strength2.png",
+			alt: "33% Mastered",
+			title: "33% Mastered")
+		%>
+		<br>
+		Jeopardy
+	</p>
+<% elsif user_word.jeopardy_completed? %>
+	<% if current_user.has_enough_jeopardy_words? %>
+		<p class="data-url pointer leksi-green hover"
+			data-url="<%= jeop_game_link(word.id) %>">
+			<%= image_tag(
+				"strength2.png",
+				alt: "33% Mastered",
+				title: "33% Mastered")
+			%>
+			<br>
+			Jeopardy
+		</p>
+	<% else %>
+		<p class="data-url pointer leksi-green hover"
+					data-toggle="popover"
+					title="Why is this game locked?"
+					data-content="To activate this Jeoapardy game, you need to
+					play the Fundamentals game for at least 3 other words."
+					data-placement="bottom">
+			<%= image_tag(
+				"strength2_gray.png",
+				alt: "33% Mastered",
+				title: "33% Mastered")
+			%>
+			<br>
+			Jeopardy
+			<i class="fa fa-lock"></i>
+		</p>
+	<% end %>
+<% else %>
+	<p class="data-url pointer hover"
+				data-toggle="popover"
+				title="Why is this game locked?"
+				data-content="To activate this Jeoapardy game, you need to
+				play the Fundamentals for this word first."
+				data-placement="bottom">
+		<%= image_tag(
+			"strength2_gray.png",
+			alt: "33% Mastered",
+			title: "33% Mastered")
+		%>
+		<br>
+		Jeopardy
+		<i class="fa fa-lock"></i>
+	</p>
+<% end %>

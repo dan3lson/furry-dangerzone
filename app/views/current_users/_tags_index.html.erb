@@ -1,16 +1,12 @@
 <% tags_for(current_user, word).each do |tag| %>
-	<div class="tags-for-a-word">
 		<div class="tag">
-			<div class="basic-black-link inline-block">
-				<%= tag.name.truncate(30) %>
-			</div>
+			<%= tag.name %>
 			&nbsp;
-			<div class="tag-on-word-show-page inline-block pull-right">
+			<span class="tag-on-word-show-page">
 				<%= render "tags/remove_tag_btn_word_show_page",
 					word: word,
 					tag: tag
 				%>
-			</div>
+			</span>
 		</div>
-	</div>
 <% end %>

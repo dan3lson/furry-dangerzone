@@ -7,7 +7,8 @@
     ) do
   %>
     <div class="input-group">
-      <%= label_tag :current_user_words, "Search", class: "control-label sr-only" %>
+      <%= label_tag :current_user_words, "Search",
+        class: "control-label sr-only" %>
       <%= text_field_tag(
         :search,
         params[:search],
@@ -16,10 +17,10 @@
       ) %>
       <span class="input-group-btn">
         <%= button_tag type: "submit",
-                       class: "btn btn-info",
+                       class: "btn btn-success",
                        id: "search-current-user-words-btn" do
         %>
-          <i class="fa fa-search "></i>
+          <i class="fa fa-search"></i>
         <% end %>
       </span>
     </div>

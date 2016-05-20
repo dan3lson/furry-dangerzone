@@ -1,6 +1,11 @@
 <div class="panel panel-default word-of-knowledge-container">
+	<div class="pull-right">
+		<i class="fa fa-question-circle-o pointer fa-2x dark-gray"
+			 data-toggle="modal"
+			 data-target="#word-tree-of-knowledge-modal"></i>
+	</div>
 	<p>
-		<strong>Word Knowledge</strong>
+		<strong>Word-Tree of Knowledge</strong>
 	</p>
 	<%= image_tag(
 		"strength4_key.png",
@@ -29,4 +34,37 @@
 		title: "Overdue")
 	%>
 	&nbsp; Overdue
+</div>
+<div class="modal fade" id="word-tree-of-knowledge-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">
+					The Word-Tree of Knowledge
+				</h4>
+      </div>
+      <div class="modal-body">
+				<p>
+					This shows how well you know a word; the more times you play our
+					games, you grow your knowledge of the word.
+				</p>
+				<p>
+					Your goal is to grow each word and earn the Apple Tree:
+					<%= image_tag(
+						"strength4.png",
+						alt: "Gold Apple Tree",
+						title: "Gold Apple Tree")
+					%>
+				</p>
+				<p>
+					We'll let you know when it's time to practice a word so you don't
+					forget what it means and how to use it.
+				</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

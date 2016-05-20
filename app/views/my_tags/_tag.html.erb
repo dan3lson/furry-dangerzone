@@ -1,6 +1,6 @@
-<div class="col-sm-8 col-sm-offset-2">
+<div class="col-sm-6 col-sm-offset-3">
 	<div class="panel panel-default">
-		<div class="panel-body tag-container center"
+		<div class="panel-body tag-container"
 				 data-tag-id="<%= tag.id %>"
 				 data-tag-name="<%= tag.name %>">
 			<div class="pull-right">
@@ -10,32 +10,29 @@
 				&nbsp;
 				<%= render "tags/remove_tag_btn_tag_show_page", tag: tag %>
 			</div>
-
 			<h3>
-				<%= tag.name.truncate(20) %>
+				<%= tag.name %>
 				<br>
 				<small>
 					<%= pluralize(words_for(current_user, tag).count, "word") %>,
 					<%= progress_for(current_user, tag) %>% mastered
 				</small>
 			</h3>
-
 			<hr>
-
-			<div class="lead">
+			<div>
 				<% if tag_has_words?(current_user, tag) %>
 					<% words_for(current_user, tag).each do |word| %>
 						<span class="tag">
-							<span class="basic-black-link">
-								<%= link_to word.name, word %>
-								&nbsp;
-							</span>
+							<%= link_to word.name, word %>
+							&nbsp;
 							<span>
 								<%= link_to user_word_tag_tag_show_page_path(
 									word_id: word.id,
-									tag_id: tag), class: "word-on-tag-show-page-remove-btn",
-									method: :delete do %>
-									<i class="fa fa-remove gray"></i>
+									tag_id: tag),
+									class: "word-on-tag-show-page-remove-btn",
+									method: :delete do
+								%>
+									<i class="fa fa-remove medium-gray"></i>
 								<% end %>
 							</span>
 						</span>
@@ -45,7 +42,6 @@
 							This tag doesn't have any words.
 					</div>
 				<% end %>
-
 				<div class="clear"></div>
 			</div>
 

@@ -1,10 +1,15 @@
-<% uw_id = UserWord.object(current_user, word).id %>
+<% uw = UserWord.object(current_user, word) %>
 
 <br>
-<br>
-<br>
-<%= button_to "Remove this word",
-  user_word_path(id: uw_id),
-  class: "btn btn-danger",
-  method: :delete
-%>
+<div class="center">
+  <p class="dark-gray">
+    You added this word <%= time_ago_in_words(uw.created_at) %> ago.
+  </p>
+  <%= button_to user_word_path(id: uw.id),
+    class: "btn btn-default",
+    method: :delete do
+  %>
+    <i class="fa fa-trash"></i>
+    Remove
+  <% end %>
+</div>
