@@ -23,7 +23,7 @@
 				<% if tag_has_words?(current_user, tag) %>
 					<% words_for(current_user, tag).each do |word| %>
 						<span class="tag">
-							<%= link_to word.name, word %>
+							<%= link_to word.name, "/myLeksi/#{word.id}" %>
 							&nbsp;
 							<span>
 								<%= link_to user_word_tag_tag_show_page_path(
