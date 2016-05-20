@@ -6,19 +6,29 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="pull-right">
-					<%= render "current_users/word_mastery_percentage",
-					user_word: @user_word,
-					word: @word
-					%>
+					<% if @user_word.freestyle_completed? %>
+						<%= image_tag(
+							"strength4.png",
+							alt: "100% Mastered",
+							title: "100% Mastered")
+						%>
+					<% end %>
 				</div>
 				<%= render "words/display", word: @word %>
 			</div>
 		</div>
-
-		<%= render "current_users/word_card_game_zone",
-		user_word: @user_word,
-		word: @word
-		%>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="lead">
+					<i class="fa fa-gamepad"></i>
+					Gamezone
+				</div>
+			</div>
+			<%= render "current_users/myLeksi/show_game_zone",
+				user_word: @user_word,
+				word: @word
+			%>
+		</div>
 		<%= render "words/synonyms", word: @word %>
 		<%= render "words/antonyms", word: @word %>
 		<%= render "current_users/tags", user: current_user, word: @word %>

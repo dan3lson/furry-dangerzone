@@ -1,6 +1,10 @@
 module TagsHelper
   def tags_for(user, word)
-    user.word_tags.includes(:tag).where(word: word).map { |wt| wt.tag }
+    user.word_tags.joins(:tag)
+                  .order("tags.name ASC")
+                  .includes(:tag)
+                  .where(word: word)
+                  .map { |wt| wt.tag }
   end
 
   def tags_exist?(user, word)

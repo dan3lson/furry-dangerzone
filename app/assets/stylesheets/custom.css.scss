@@ -12,8 +12,8 @@ $apple-blue: #097FF0;
 $apple-star-orange: #fd9603;
 $black: #000;
 $bootstrap-blue: #5BC0DE;
-$bootstrap-green: #DFF0D8;
-$bootstrap-red: #a94442;
+$bootstrap-green: #5FB760;
+$bootstrap-red: #D9534F;
 $dark-gray: #8E8E93;
 $medium-gray: lighten($dark-gray, 30);
 $dark-green: darken($bootstrap-green, 60);
@@ -104,6 +104,10 @@ p {
 //*
 //**********
 
+a, a:active {
+	text-decoration: none;
+}
+
 #awfs-step-2-container,
 #awfs-step-3-container,
 #awfs-review-container,
@@ -153,11 +157,13 @@ p {
 }
 
 .add-look-up-word-container {
-	background: $light-gray;
+	background: $white;
+	box-shadow: 0px -1px 10px 3px $medium-gray;
 	left: 0;
 	padding: 10px;
-	position: absolute;
+	position: fixed;
 	top: 50px;
+	z-index: 300;
 }
 
 .alert-container {
@@ -203,6 +209,22 @@ p {
 	&:hover {
 		background: none;
 		color: darken($leksi-red, 15%);
+		text-decoration: none;
+	}
+}
+
+.bootstrap-blue-link a {
+	color: $bootstrap-blue;
+
+	&:visited, &:hover, &:active  {
+		text-decoration: none;
+	}
+}
+
+.bootstrap-green-link a {
+	color: $bootstrap-green;
+
+	&:visited, &:hover, &:active  {
 		text-decoration: none;
 	}
 }
@@ -489,6 +511,10 @@ input {
 
 .light-blue-bg {
   background: $light-blue;
+}
+
+.light-gray {
+	color: $light-gray;
 }
 
 .light-green-bg {
@@ -818,7 +844,7 @@ input {
 		color: $bootstrap-blue;
 
 		a:link, a:visited, a:active {
-			color: $bootstrap-blue;
+			color: $bootstrap-green;
 		}
 	}
 }
@@ -870,12 +896,18 @@ table {
 }
 
 .tag {
-	background: $light-gray;
-	border: 2px solid $light-gray;
+	background: $white;
+	border: 2px solid $bootstrap-blue;
 	border-radius: 100px;
-	float: left;
-	padding: 5px;
+	color: $bootstrap-blue;
 	padding-left: 15px;
+	display: inline-block;
+	margin: 0 15px 15px 0;
+	padding: 10px;
+
+	a, a:visited, a:hover, a:active {
+		color: $bootstrap-blue;
+	}
 }
 
 .valign-middle {
@@ -980,6 +1012,14 @@ table {
 	color: $bootstrap-blue;
 }
 
+.bootstrap-green {
+	color: $bootstrap-green;
+}
+
+.bootstrap-red {
+	color: $bootstrap-red;
+}
+
 .btn-custom {
   background: #fff;
   border-radius: 100px;
@@ -1014,10 +1054,6 @@ table {
 	h4 {
 		margin-top: 0;
 	}
-}
-
-a {
-	text-decoration: none;
 }
 
 .fa-eye {

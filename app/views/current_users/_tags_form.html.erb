@@ -10,5 +10,8 @@
 		:name,
 		{ prompt: "Add a new tag" }
 	%>
-	<%= f.submit class: "btn btn-info btn-sm", value: "Save" %>
+	<%= f.button class: "btn btn-info btn-block" do %>
+		<i class="fa fa-save"></i>
+		SAVE
+	<% end %>
 <% end %>

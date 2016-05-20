@@ -4,9 +4,9 @@ class UserWordTagsController < ApplicationController
     @tag_id = params[:user_word_tag][:tag_id]
 
     if @tag_id.blank?
-      flash[:danger] = "Please select a tag before clicking \'add\'."
+      flash[:danger] = "Please select a tag before clicking \'Save\'."
 
-      redirect_to myLeksi_path
+      redirect_to "/myLeksi/#{@word.id}"
     else
       @tag = Tag.find(@tag_id)
       @word_tag = WordTag.where(word: @word, tag: @tag).first_or_initialize
@@ -20,7 +20,7 @@ class UserWordTagsController < ApplicationController
         if @user_word_tag.save
           flash[:success] = "Success!"
 
-          redirect_to myLeksi_path
+          redirect_to "/myLeksi/#{@word.id}"
         else
           msg =  "Yikes! - adding a tag didn\'t work! Please try again."
           flash[:danger] = msg
@@ -32,7 +32,7 @@ class UserWordTagsController < ApplicationController
         msg =  "Yikes! - adding a word tag didn\'t work! Please try again."
         flash[:danger] = msg
 
-        redirect_to myLeksi_path
+        redirect_to "/myLeksi/#{@word.id}"
       end
     end
   end

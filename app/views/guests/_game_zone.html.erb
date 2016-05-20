@@ -5,8 +5,11 @@
 		<div class="inline-block pointer game-zone-margin hover">
 			<div>
 				<%= link_to get_started_fundamentals_path(word_id: word),
-					id: "get-started-mastery-circle-btn", class: "gs-tracker",
-					remote: true, method: :get do %>
+					id: "get-started-mastery-circle-btn",
+					class: "gs-tracker",
+					remote: true,
+					method: :get do
+				%>
 					<%= image_tag("0_big.png", alt: "0% Mastered") %>
 				<% end %>
 			</div>

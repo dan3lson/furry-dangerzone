@@ -1,14 +1,11 @@
 <span class="hover">
 	<% unless current_user.already_has_word?(word) %>
-		<%= link_to user_word_path(search_btn: :play, id: word.id),
+		<%= button_to user_word_path(search_btn: :play, id: word.id),
+			class: "btn btn-success",
 			method: :post do
 		%>
-			<span class="fa-stack fa-lg">
-			  <i class="fa fa-circle fa-stack-2x"></i>
-			  <i class="fa fa-gamepad fa-stack-1x fa-inverse"></i>
-			</span>
+			<i class="fa fa-gamepad"></i>
 			PLAY
-			<br>
 		<% end %>
 	<% end %>
 </span>

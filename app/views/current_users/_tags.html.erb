@@ -1,15 +1,12 @@
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<!-- <div class="pull-right">
-			<i class="fa fa-info-circle pointer leksi-purple"></i>
-		</div> -->
-		Tags
-	</div>
 	<div class="panel-body">
+		<div class="lead">
+			<i class="fa fa-tag pointer"></i>
+			Tags
+		</div>
 		<% if current_user.has_tags? %>
 			<% if tags_exist?(current_user, word) %>
 				<%= render "current_users/tags_index", word: word %>
-				<div class="clear"></div>
 				<hr>
 			<% end %>
 			<%= render "current_users/tags_form", word: word %>

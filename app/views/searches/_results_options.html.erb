@@ -1,4 +1,4 @@
-<%= form_for :user_word, 
+<%= form_for :user_word,
 	url: user_word_path,
 	html: {
 		id: "search-results"
@@ -13,7 +13,7 @@
 		<% if logged_in? %>
 			<div class="row center">
 				<% if current_user.already_has_word?(word) %>
-					<div class="white">You already have this word.</div>
+					<div class="bootstrap-green">You already have this word.</div>
 				<% else %>
 					<div class="col-xs-6">
 						<%= render "searches/user_add", word: word %>
