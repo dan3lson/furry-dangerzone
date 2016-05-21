@@ -92,8 +92,12 @@ class Word < ActiveRecord::Base
   end
 
   def self.random(num)
-    num -= 1
-    find(Word.pluck(:id).shuffle[0..num])
+    find(Word.pluck(:id).sample(num))
+  end
+
+  # not tested
+  def self.random_excluding(num, word_id)
+    where.not(id: word_id).random(num)
   end
 
   # not tested

@@ -179,30 +179,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#self.top_ten_highest_points?" do
-    it "returns false" do
-      user.points = 1
-      user_2 = FactoryGirl.create(:user, points: 2)
-      user_3 = FactoryGirl.create(:user, points: 3)
-      user_4 = FactoryGirl.create(:user, points: 4)
-      user_5 = FactoryGirl.create(:user, points: 5)
-      user_6 = FactoryGirl.create(:user, points: 6)
-      user_7 = FactoryGirl.create(:user, points: 7)
-      user_8 = FactoryGirl.create(:user, points: 8)
-      user_9 = FactoryGirl.create(:user, points: 9)
-      user_10 = FactoryGirl.create(:user, points: 10)
-      user_11 = FactoryGirl.create(:user, points: 11)
-      user_12 = FactoryGirl.create(:user, points: 12)
-      user_13 = FactoryGirl.create(:user, points: 13)
-      user_14 = FactoryGirl.create(:user, points: 0)
-      user_15 = FactoryGirl.create(:user, points: 100)
-
-      expect(User.top_ten_highest_points.count).to eq(10)
-      expect(User.top_ten_highest_points.map { |u|
-        u.points }.inject(:+)).to eq(181)
-    end
-  end
-
   describe "#incomplete_fundamentals" do
     let (:user) { FactoryGirl.create(:user) }
 
@@ -247,14 +223,20 @@ RSpec.describe User, type: :model do
     let(:word_3) { Word.create(name: "foobar_3", definition: "foobar def_3") }
 
     it "returns 3 incomplete Freestyle UW objects" do
-      user_word = UserWord.create!(word: word, user: user,
-       games_completed: 2
+      user_word = UserWord.create!(
+        word: word,
+        user: user,
+        games_completed: 2
       )
-      user_word_2 = UserWord.create!(word: word_2, user: user,
-       games_completed: 2
+      user_word_2 = UserWord.create!(
+        word: word_2,
+        user: user,
+        games_completed: 2
       )
-      user_word_3 = UserWord.create!(word: word_3, user: user,
-       games_completed: 2
+      user_word_3 = UserWord.create!(
+        word: word_3,
+        user: user,
+        games_completed: 2
       )
 
       expect(user.incomplete_freestyles.count).to eq(3)
@@ -656,25 +638,12 @@ RSpec.describe User, type: :model do
 
     it "returns false" do
       user_word = UserWord.create!(word: word, user: user)
-      user_word_2 = UserWord.create!(word: word_2, user: user)
-      user_word_3 = UserWord.create!(word: word_3, user: user)
-
-      expect(user.has_enough_jeopardy_words?).to eq(false)
-    end
-
-    it "returns false" do
-      UserWord.create!(word: word, user: user, games_completed: 1)
-      UserWord.create!(word: word_2, user: user, games_completed: 1)
-      UserWord.create!(word: word_3, user: user, games_completed: 1)
 
       expect(user.has_enough_jeopardy_words?).to eq(false)
     end
 
     it "returns true" do
       UserWord.create!(word: word, user: user, games_completed: 2)
-      UserWord.create!(word: word_2, user: user, games_completed: 2)
-      UserWord.create!(word: word_3, user: user, games_completed: 2)
-      UserWord.create!(word: word_4, user: user, games_completed: 2)
 
       expect(user.has_enough_jeopardy_words?).to eq(true)
     end
@@ -682,10 +651,8 @@ RSpec.describe User, type: :model do
     it "returns true" do
       UserWord.create!(word: word, user: user, games_completed: 3)
       UserWord.create!(word: word_2, user: user, games_completed: 3)
-      UserWord.create!(word: word_3, user: user, games_completed: 3)
-      UserWord.create!(word: word_4, user: user, games_completed: 3)
 
-      expect(user.has_enough_jeopardy_words?).to eq(true)
+      expect(user.has_enough_jeopardy_words?).to eq(false)
     end
 
     it "returns true" do

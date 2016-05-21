@@ -6,10 +6,10 @@
 User.sum(:num_logins)
 
 # Users Without Words
-User.select { |u| u.words.count == 0 }.count
+User.select { |u| u.num_words == 0 }.count
 
 # Users With Words
-User.select { |u| u.words.count > 0 }.count
+User.select { |u| u.num_words > 0 }.count
 
 # Users Without Tags
 User.select { |u| u.tags.count == 0 }.count

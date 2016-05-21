@@ -71,28 +71,29 @@ class User < ActiveRecord::Base
     role == "student"
   end
 
+  def is_not_a_student?
+    !is_student?
+  end
+
   def can_create_words?
     is_admin? || is_teacher?
   end
 
-  def self.top_ten_highest_points
-    order("points DESC").take(10)
-  end
-
   def incomplete_fundamentals
-    UserWord.where(user: self).select { |uw| uw.fundamental_not_completed? }
+    UserWord.where(user: self, games_completed: 0)
   end
 
   def incomplete_jeopardys
-    UserWord.where(user: self).select do |uw|
-      uw.jeopardy_not_completed?
-    end.keep_if { |uw| uw.games_completed == 1 }
+    UserWord.where(user: self, games_completed: 1)
+  end
+
+  # not tested
+  def incomplete_jeops_not(word)
+    incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
   end
 
   def incomplete_freestyles
-    UserWord.where(user: self).select do |uw|
-      uw.freestyle_not_completed?
-    end.keep_if { |uw| uw.games_completed == 2 }
+    UserWord.where(user: self, games_completed: 2)
   end
 
   def has_incomplete_fundamentals?
@@ -137,7 +138,50 @@ class User < ActiveRecord::Base
   end
 
   def has_enough_jeopardy_words?
-    incomplete_jeopardys.count + completed_jeopardys.count > 3
+    num_incomplete_jeops > 1
+  end
+
+  # not tested
+  def num_rands_needed
+    if has_enough_jeopardy_words?
+      if num_incomplete_jeops == 2
+        2
+      elsif num_incomplete_jeops == 3
+        1
+      else
+        0
+      end
+    else
+      3
+    end
+  end
+
+  # not tested
+  # refactor into two methods
+  def combine_jeop_words(word)
+    my_ids = self.incomplete_jeops_not(word)
+
+    if num_rands_needed == 2
+      my_words = Word.find(my_ids)
+      random_words = Word.random_excluding(num_rands_needed, my_ids)
+    elsif num_rands_needed == 1
+      my_words = Word.find(my_ids.sample(2))
+      random_words = Word.random_excluding(num_rands_needed, my_ids)
+    else
+      my_words = Word.find(my_ids.sample(3))
+      random_words = []
+    end
+
+    my_words + random_words
+  end
+
+  # not tested
+  def get_jeop_words(word)
+    if has_enough_jeopardy_words?
+      [word] + combine_jeop_words(word)
+    else
+      [word] + Word.random_excluding(3, word.id)
+    end
   end
 
   def last_login_nil?
@@ -148,6 +192,7 @@ class User < ActiveRecord::Base
     user_words.where(created_at: 1.days.ago..Time.now)
   end
 
+  # not tested
   def fundamentals_completed_yesterday
     user_words.select do |uw|
       next unless uw.fundamental_completed?
@@ -156,6 +201,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # not tested
   def jeopardys_completed_yesterday
     user_words.select do |uw|
       next unless uw.jeopardy_completed?
@@ -164,6 +210,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # not tested
   def freestyles_completed_yesterday
     user_words.select do |uw|
       next unless uw.freestyle_completed?
@@ -172,6 +219,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # not tested
   def freestyles_completed_today
     user_words.select do |uw|
       next unless uw.freestyle_completed?
@@ -180,6 +228,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # not tested
   def has_recent_activity?
     words_added_last_day.any? ||
     fundamentals_completed_yesterday.any? ||
@@ -187,85 +236,91 @@ class User < ActiveRecord::Base
     freestyles_completed_yesterday.any?
   end
 
+  # not tested
   def has_completed_freestyle_yesterday_or_today?
     freestyles_completed_yesterday.count > 0 ||
     freestyles_completed_today.count > 0
   end
 
+  # not tested
   def completed_freestyle_on?(date)
     UserWord.where(user: self, games_completed: 3).select { |uw|
       uw.updated_at.to_date == date
     }.any?
   end
 
+  # not tested
   def myLeksi_mastery
-    words = self.words.count
+    words = self.num_words
 
     return 0 if words == 0
 
     (completed_freestyles.count / words.to_f * 100).round
   end
 
+  # not tested
   def time_spent_playing
     user_words = UserWord.where(user: self)
 
     user_words.map { |uw| uw.game_stats.sum(:time_spent) }.inject(&:+) || 0
   end
 
-  def sort_progress(asc_or_desc)
+  # not tested
+  def sort_words_by_progress(asc_or_desc)
     user_words.order("games_completed #{asc_or_desc}")
               .joins(:word)
               .order("words.name")
   end
 
+  # not tested
   def num_words
     words.count
   end
 
   # MOVED AS A RESULT OF SCEC & SCHOOL REFACTOR. UPDATE TEST FILES/LOCATIONS
-  def num_fundamentals_games_not_started
+  def num_incomplete_funds
     incomplete_fundamentals.count
   end
 
-  def num_fundamentals_games_completed
+  def num_completed_funds
     completed_fundamentals.count
   end
 
-  def num_jeopardy_games_not_started
+  def num_incomplete_jeops
     incomplete_jeopardys.count
   end
 
-  def num_jeopardy_games_completed
+  def num_completed_jeops
     completed_jeopardys.count
   end
 
-  def num_freestyle_games_not_started
+  def num_incomplete_frees
     incomplete_freestyles.count
   end
 
-  def num_freestyle_games_completed
+  def num_completed_frees
     completed_freestyles.count
   end
 
   def percentage_of_fundamental_games_completed
-    completed = self.num_fundamentals_games_completed
-    not_started = self.num_fundamentals_games_not_started
+    completed = self.num_completed_funds
+    not_started = self.num_incomplete_funds
     total = completed + not_started
 
     (completed / total.to_f * 100).round
   end
 
   def percentage_of_jeopardy_games_completed
-    completed = self.num_jeopardy_games_completed
-    not_started = self.num_jeopardy_games_not_started
+    completed = self.num_completed_jeops
+    not_started = self.num_incomplete_jeops
     total = completed + not_started
 
     (completed / total.to_f * 100).round
   end
 
   def percentage_of_freestyle_games_completed
-    completed = self.num_freestyle_games_completed
-    not_started = self.num_freestyle_games_not_started
+    completed = self.num_completed_frees
+    not_started = self.num_incomplete_frees
     total = completed + not_started
 
     (completed / total.to_f * 100).round
@@ -278,7 +333,7 @@ class User < ActiveRecord::Base
       u.points = 0
 
       if u.has_words?
-        u.points += u.words.count
+        u.points += u.num_words
       end
 
       if u.has_tags?

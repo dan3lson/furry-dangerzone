@@ -43,7 +43,7 @@ class TagsController < ApplicationController
     if @tag.update(tag_params)
       flash[:success] = "Changes successfully made."
 
-      redirect_to @tag
+      redirect_to myTags_path
     else
       flash[:danger] = "Changes not successfully made."
 

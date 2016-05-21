@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UserWordHelper, type: :helper do
 
-  describe "#ready_for_jeopardy?" do
+  describe "#myLeksi_jeop_ready?" do
     let(:user_word) { FactoryGirl.create(:user_word) }
     let(:user) { user_word.user }
     let(:word) { user_word.word }
@@ -25,32 +25,32 @@ RSpec.describe UserWordHelper, type: :helper do
         games_completed: 1
       )
 
-      expect(ready_for_jeopardy?(user, user_word)).to eq(true)
-      expect(ready_for_jeopardy?(user, user_word_2)).to eq(true)
-      expect(ready_for_jeopardy?(user, user_word_3)).to eq(true)
-      expect(ready_for_jeopardy?(user, user_word_4)).to eq(true)
+      expect(myLeksi_jeop_ready?(user, user_word)).to eq(true)
+      expect(myLeksi_jeop_ready?(user, user_word_2)).to eq(true)
+      expect(myLeksi_jeop_ready?(user, user_word_3)).to eq(true)
+      expect(myLeksi_jeop_ready?(user, user_word_4)).to eq(true)
     end
 
     it "returns false" do
-      expect(ready_for_jeopardy?(user, user_word)).to eq(false)
+      expect(myLeksi_jeop_ready?(user, user_word)).to eq(false)
     end
 
     it "returns false" do
       user_word.games_completed = 1
 
-      expect(ready_for_jeopardy?(user, user_word)).to eq(false)
+      expect(myLeksi_jeop_ready?(user, user_word)).to eq(false)
     end
 
     it "returns false" do
       user_word.games_completed = 2
 
-      expect(ready_for_jeopardy?(user, user_word)).to eq(false)
+      expect(myLeksi_jeop_ready?(user, user_word)).to eq(false)
     end
 
     it "returns false" do
       user_word.games_completed = 3
 
-      expect(ready_for_jeopardy?(user, user_word)).to eq(false)
+      expect(myLeksi_jeop_ready?(user, user_word)).to eq(false)
     end
 
     it "returns false" do
@@ -71,9 +71,9 @@ RSpec.describe UserWordHelper, type: :helper do
         games_completed: 3
       )
 
-      expect(ready_for_jeopardy?(user, user_word_2)).to eq(false)
-      expect(ready_for_jeopardy?(user, user_word_3)).to eq(false)
-      expect(ready_for_jeopardy?(user, user_word_4)).to eq(false)
+      expect(myLeksi_jeop_ready?(user, user_word_2)).to eq(false)
+      expect(myLeksi_jeop_ready?(user, user_word_3)).to eq(false)
+      expect(myLeksi_jeop_ready?(user, user_word_4)).to eq(false)
     end
   end
 end

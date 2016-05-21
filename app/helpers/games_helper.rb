@@ -13,13 +13,13 @@ module GamesHelper
 
   def mastery_circle(word, user_word)
     if user_word.current_game == "one"
-      mastery_circle_link_to(fund_game_link(word.id), "0_big", 0)
+      mastery_circle_link_to(fund_game_link(word.id), "strength1", 0)
     elsif user_word.current_game == "two"
-      mastery_circle_link_to(jeop_game_link(word.id), "33_big", 33)
+      mastery_circle_link_to(jeop_game_link(word.id), "strength2", 33)
     elsif user_word.current_game == "three"
-      mastery_circle_link_to(free_game_link(word.id), "66_big", 66)
+      mastery_circle_link_to(free_game_link(word.id), "strength3", 66)
     else
-      image_tag("100_big.png", alt: "100% Mastery")
+      image_tag("strength4.png", alt: "100% Mastery")
     end
   end
 
