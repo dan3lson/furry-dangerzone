@@ -123,30 +123,34 @@ class Word < ActiveRecord::Base
   # HEROKU UPDATES
 
   # Update phonetic spellings for all words
-  # def self.update_phonetic_spelling_from_free_dictionary
-  #   url = "http://wwww.thefreedictionary.com"
-  #
-  #   all.each do |word|
-  #     page = Nokogiri::HTML(open("#{url}/#{word.name}"))
-  #     phonetic_spellings = page.xpath(
-  #       "//*[@id='Definition']/section[3]/h2"
-  #     )
-  #
-  #     next unless phonetic_spellings.any?
-  #
-  #     phonetic_spelling = phonetic_spellings.first.text
-  #
-  #     if phonetic_spelling =~ /\d/
-  #       phonetic_spelling = phonetic_spelling.gsub(/\d/, ";").split(";").first
-  #     end
-  #
-  #     word.phonetic_spelling = phonetic_spelling
-  #
-  #     if word.save
-  #       puts "#{word.name} succesfully updated"
-  #     else
-  #       puts "ERROR with #{word.name}"
-  #     end
-  #   end
-  # end
+  def self.update_phonetic_spellings(limit, offset)
+    url = "http://wwww.thefreedictionary.com"
+
+    limit(limit).offset(offset).each do |word|
+      page = Nokogiri::HTML(open("#{url}/#{word.name}"))
+      phonetic_spellings = page.xpath(
+        "//*[@id='Definition']/section[3]/h2"
+      )
+
+      next unless phonetic_spellings.any?
+
+      phonetic_spelling = phonetic_spellings.first.text
+
+      if phonetic_spelling =~ /\d/
+        phonetic_spelling = phonetic_spelling.gsub(/\d/, ";").split(";").first
+      end
+
+      word.phonetic_spelling = phonetic_spelling
+
+      if word.save
+        puts "#{word.name} succesfully updated"
+      else
+        puts "ERROR with #{word.name}"
+      end
+    end
+  end
+
+  def self.p_s(name, p_s)
+    where(name: name).update_all(phonetic_spelling: p_s)
+  end
 end
