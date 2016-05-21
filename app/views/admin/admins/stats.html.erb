@@ -25,11 +25,11 @@
 				<th>Today</th>
 				<tr>
 					<td>Users w/o Words</td>
-					<td><%= User.select { |u| u.words.count == 0 }.count %></td>
+					<td><%= User.select { |u| u.num_words == 0 }.count %></td>
 				</tr>
 				<tr>
 					<td>Users w/ Words</td>
-					<td><%= User.select { |u| u.words.count > 0 }.count %></td>
+					<td><%= User.select { |u| u.num_words > 0 }.count %></td>
 				</tr>
 				<tr>
 					<td># UserWords</td>

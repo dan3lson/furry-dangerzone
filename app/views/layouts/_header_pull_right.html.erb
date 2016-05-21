@@ -7,13 +7,13 @@
 	<% elsif params[:controller] == "versions" &&
 					 params[:action] == "index"
 	%>
-		<%= link_to image_tag("add_black_32.png"), new_version_path %>
+		<%= link_to "Add", new_version_path %>
 
 	<% elsif params[:controller] == "versions" &&
 					 params[:action] == "show"
 	%>
 		<% if logged_in? && current_user.is_admin? %>
-			<%= link_to image_tag("edit_black_32.png"), edit_version_path(@version) %>
+			<%= link_to "Edit", edit_version_path(@version) %>
 		<% end %>
 
 	<% elsif params[:controller] == "school/schools" &&

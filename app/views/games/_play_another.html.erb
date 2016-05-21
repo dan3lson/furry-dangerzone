@@ -1,0 +1,49 @@
+<% if logged_in? %>
+	<br>
+
+	<% if current_user.incomplete_fundamentals.count > 1 %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Play another Fundamental game?</h4>
+			</div>
+			<div class="panel-body center">
+				<div class="row">
+					<% @three_fund_words.each do |w| %>
+						<div class="col-sm-3">
+							<div class="data-url pointer new-fundamental-game-circle"
+									 data-url="/fundamentals?word_id=<%= w.id %>">
+								<%= w.name %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	<% end %>
+
+	<% if current_user.has_enough_jeopardy_words? %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Play Jeopardy</h4>
+			</div>
+			<div class="panel-body center">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="data-url pointer new-jeopardy-game-circle"
+								 data-url="/jeopardy?word_id=<%= @chosen_word.id %>">
+							<%= @chosen_word.name %>
+						</div>
+					</div>
+					<% @three_j_words.each do |w| %>
+						<div class="col-sm-3">
+							<div class="data-url pointer new-jeopardy-game-circle"
+									 data-url="/jeopardy?word_id=<%= w.id %>">
+								<%= w.name %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>

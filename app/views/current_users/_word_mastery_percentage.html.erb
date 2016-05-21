@@ -14,24 +14,11 @@
 			%>
 		<% end %>
 	<% elsif user_word.jeopardy_not_completed? %>
-		<% if current_user.has_enough_jeopardy_words? %>
-			<%= link_to jeop_game_link(word.id) do %>
-				<%= image_tag(
-					"strength2.png",
-					alt: "33% Mastered",
-					title: "33% Mastered")
-				%>
-			<% end %>
-		<% else %>
+		<%= link_to jeop_game_link(word.id) do %>
 			<%= image_tag(
-				"small_locked.png",
-				alt: "33% Mastered Locked",
-				data: {
-					toggle: "popover",
-					title: "How can I play?",
-					placement: "left",
-					content: "To play this next game, you need to play the Fundamentals
-									 game for at least 4 words first." })
+				"strength2.png",
+				alt: "33% Mastered",
+				title: "33% Mastered")
 			%>
 		<% end %>
 	<% elsif user_word.jeopardy_completed? %>

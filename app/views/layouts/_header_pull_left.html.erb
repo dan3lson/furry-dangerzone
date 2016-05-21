@@ -18,14 +18,16 @@
 			<i class="data-url fa fa-chevron-left" data-url="/school/classes"></i>
 
 		<% elsif params[:controller] == "current_users" &&
-						 params[:action] == "myLeksi_word"
+						 params[:action] == "myLeksi_show"
 		%>
 			<i class="data-url fa fa-chevron-left" data-url="/myLeksi"></i>
 
 		<% elsif params[:controller] == "school/schools" &&
 						 params[:action] == "words" &&
 						 current_user.is_teacher? %>
-			<%= link_to image_tag("back_white_25.png"), :back %>
+			<%= link_to :back do %>
+				<i class="fa fa-chevron-left"></i>
+			<% end %>
 
 		<% end %>
 	<% end %>

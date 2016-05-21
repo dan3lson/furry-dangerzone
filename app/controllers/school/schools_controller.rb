@@ -62,7 +62,7 @@ class School::SchoolsController < BaseSchoolController
     @lowest_myLeksi_mastery = @sorted_myLeksi_mastery.take(5)
     @highest_myLeksi_mastery = @sorted_myLeksi_mastery.reverse.take(5)
 
-    @sorted_words_count = @class.sort_by { |u| u.words.count }
+    @sorted_words_count = @class.sort_by { |u| u.num_words }
     @least_saved_words = @sorted_words_count.take(5)
     @most_saved_words = @sorted_words_count.reverse.take(5)
 

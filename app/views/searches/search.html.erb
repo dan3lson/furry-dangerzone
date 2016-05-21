@@ -2,7 +2,7 @@
 
 <% title "Leksi Dictionary" %>
 <% description "Look up words you don\'t know or select ones from a specific list" %>
-<% set_meta_tags keywords: %w[learn education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
+<% set_meta_tags keywords: "learn education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook" %>
 
 <% set_meta_tags og: {
   title:    "Leksi Dictionary",
@@ -21,11 +21,12 @@
     <%= render "searches/form", display_button_for: "user" %>
   </p>
   <p class="center">
-    <span id="random-search-btn" class="bootstrap-green-link">
-      <%= link_to "I\'m feeling adventurous!", search_results_path(
-        rand: "rand",
-        display_button_for: "user"),
-        remote: true
+    <span id="random-search-btn" class="basic-black-link">
+      <%= link_to "I\'m feeling adventurous!",
+        search_results_path(
+          rand: "rand",
+          display_button_for: "user"
+        ), remote: true
       %>
     </span>
   </p>

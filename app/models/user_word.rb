@@ -17,7 +17,7 @@ class UserWord < ActiveRecord::Base
         "You\'re so silly; type in a word first."
       else
         words = Word.where(name: name)
-        user_words = UserWord.where(user: user, word: words) unless words.empty?
+        user_words = UserWord.object(user, words) unless words.empty?
 
         if user_words
           user_words.map { |uw| uw.word }
@@ -60,43 +60,62 @@ class UserWord < ActiveRecord::Base
   end
 
   def fundamental_completed?
-    games_completed > 0
+    current_game != "one" && !current_game.nil?
   end
 
   def fundamental_not_completed?
-    current_game == "one" && !fundamental_completed?
+    current_game == "one"
   end
 
   def jeopardy_completed?
-    games_completed == 2 || games_completed == 3
+    current_game == "three" || current_game == "all-games-completed"
   end
 
   def jeopardy_not_completed?
-    current_game == "two" && !jeopardy_completed?
+    current_game == "two"
   end
 
   def freestyle_completed?
-    jeopardy_completed? && games_completed == 3
+    current_game == "all-games-completed"
   end
 
   def freestyle_not_completed?
     current_game == "three" && !freestyle_completed?
   end
 
+  # not tested
+  def _to_date(date)
+    date.to_date
+  end
+
+  # not tested
+  def yesterday
+    Date.yesterday
+  end
+
+  # not tested
+  def today
+    Date.yesterday
+  end
+
+  # not tested
   def fundamental_completed_yesterday?
-    updated_at.to_date == Date.yesterday && games_completed == 1
+    _to_date(updated_at) == yesterday && current_game == "one"
   end
 
+  # not tested
   def jeopardy_completed_yesterday?
-    updated_at.to_date == Date.yesterday && games_completed == 2
+    _to_date(updated_at) == yesterday && current_game == "two"
   end
 
+  # not tested
   def freestyle_completed_yesterday?
-    updated_at.to_date == Date.yesterday && games_completed == 3
+    _to_date(updated_at) == yesterday && current_game == "three"
   end
 
+  # not tested
   def freestyle_completed_today?
-    updated_at.to_date == Date.today && games_completed == 3
+    _to_date(updated_at) == today && current_game == "three"
   end
 
   # not tested

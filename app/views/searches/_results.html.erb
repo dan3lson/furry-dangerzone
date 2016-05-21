@@ -1,7 +1,7 @@
 <% if results.class == String %>
 	<div class="alert alert-danger center"><%= results %></div>
 <% else %>
-	<% results.each_with_index do |word, index| %>
+	<% results.each do |word| %>
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<%= render "words/display", word: word %>

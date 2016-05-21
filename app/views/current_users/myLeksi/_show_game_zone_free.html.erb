@@ -1,5 +1,5 @@
 <% if user_word.freestyle_completed? %>
-	<p class="data-url pointer leksi-green hover"
+	<p class="data-url pointer hover"
 				data-url="<%= free_game_link(word.id) %>">
 		<%= image_tag(
 			"strength3.png",
@@ -8,6 +8,7 @@
 		%>
 		<br>
 		Freestyle
+		<i class="fa fa-check-square-o"></i>
 	</p>
 <% elsif user_word.current_game == "three" %>
 	<p class="data-url pointer hover"
@@ -26,7 +27,7 @@
 				title="Why is this game locked?"
 				data-content="To activate this Freestyle game, you need to
 				play Jeopardy for this word."
-				data-placement="bottom">
+				data-placement="top">
 		<%= image_tag(
 			"strength3_gray.png",
 			alt: "66% Mastered",
