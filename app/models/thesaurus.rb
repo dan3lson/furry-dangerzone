@@ -15,7 +15,10 @@ class Thesaurus
     connection = HTTParty.get("#{API_URL}/#{API_KEY}/#{word}/json")
 
     if connection.success?
-      part_of_speech.gsub!(" ", "") if part_of_speech.include?(" ")
+      if !part_of_speech.nil? && part_of_speech.include?(" ")
+        part_of_speech.gsub!(" ", "")
+      end
+
       response = JSON.parse(connection)
 
       response_pos = response[part_of_speech]

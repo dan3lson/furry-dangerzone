@@ -1,5 +1,5 @@
 <strong class="word-name-size">
-	<% if params[:action] == "myLeksi" %>
+	<% if params[:controller] == "my_leksi" && params[:action] == "index" %>
 		<%= link_to word.name, "/myLeksi/#{word.id}" %>
 	<% else %>
 		<%= word.name %>

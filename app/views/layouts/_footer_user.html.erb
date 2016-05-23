@@ -2,7 +2,7 @@
         role="navigation">
   <div class="row center">
     <div class="col-xs-3">
-      <% if params[:action].include?("myLeksi") %>
+      <% if params[:controller].include?("my_leksi") %>
         <i class="fa fa-book fa-2x"></i>
         <br>
         myLeksi
@@ -30,15 +30,15 @@
     </div>
 
     <div class="col-xs-3">
-      <% if params[:controller] == "my_tags" && params[:action] == "index" %>
+      <% if params[:controller] == "my_tags" %>
         <i class="fa fa-tag fa-2x"></i>
         <br>
-        Tags
+        myTags
   		<% else %>
         <%= link_to myTags_path do %>
           <i class="fa fa-tag fa-2x"></i>
           <br>
-          Tags
+          myTags
         <% end %>
   		<% end %>
     </div>

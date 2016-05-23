@@ -1,8 +1,13 @@
 <span class="pull-right header-buttons">
-	<% if params[:controller] == "my_tags" %>
-		<%= link_to new_tag_path, id: "my_tags-new-btn" do %>
-			<i class="fa fa-plus-circle white"></i>
-		<% end %>
+	<% if params[:controller] == "my_tags" &&
+				params[:action] == "index"
+	%>
+		<%= link_to "New", new_tag_path, id: "my-tags-new-btn" %>
+
+	<% elsif params[:controller] == "my_tags" &&
+					 params[:action] == "show"
+	%>
+		<%= link_to "Edit", edit_tag_path(@tag), id: "my-tags-edit-btn" %>
 
 	<% elsif params[:controller] == "versions" &&
 					 params[:action] == "index"
@@ -23,8 +28,8 @@
 			<i class="fa fa-book white"></i>
 		<% end %>
 
-	<% elsif params[:controller] == "current_users" &&
-					 params[:action] == "myLeksi"
+	<% elsif params[:controller] == "my_leksi" &&
+					 params[:action] == "index"
 	%>
 		<i class="fa fa-search pointer"
 			 id="current-user-words-search"

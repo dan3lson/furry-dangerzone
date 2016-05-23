@@ -9,6 +9,13 @@ class UserWord < ActiveRecord::Base
   validates :word, presence: true
 
   scope :alphabetical, -> { joins(:word).order("words.name") }
+  scope :completed_fundamentals, -> { where.not(games_completed: 0) }
+  scope :incomplete_fundamentals, -> { where(games_completed: 0) }
+  scope :completed_jeopardys, -> { where(games_completed: [2, 3]) }
+  scope :incomplete_jeopardys, -> { where(games_completed: 1) }
+  scope :completed_freestyles, -> { where(games_completed: 3) }
+  scope :incomplete_freestyles, -> { where(games_completed: 2) }
+  scope :completed_games, -> { where(games_completed: [1, 2, 3]) }
 
   # updated -> not tested
   def self.search(user, name)

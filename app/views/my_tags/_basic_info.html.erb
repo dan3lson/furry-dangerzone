@@ -3,7 +3,7 @@
 			 data-tag-id="<%= tag.id %>"
 			 data-tag-name="<%= tag.name %>">
 		<strong class="word-name-size">
-			<%= link_to tag.name, "/myTags/#{tag.id}" %>
+			<%= tag.name %>
 		</strong>
 		<div>
 			<%= pluralize(words_for(current_user, tag).count, "word") %>,

@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="lead">
+			<i class="fa fa-book"></i>
+			Words
+		</div>
+		<% if tag_has_words?(current_user, tag) %>
+			<% words_for(current_user, tag).each do |word| %>
+				<span class="tag">
+					<%= link_to word.name, "/myLeksi/#{word.id}" %>
+					&nbsp;
+					<span>
+						<%= link_to user_word_tag_tag_show_page_path(
+							word_id: word.id,
+							tag_id: tag.id),
+							class: "word-on-tag-show-page-remove-btn",
+							method: :delete do
+						%>
+							<i class="fa fa-remove medium-gray"></i>
+						<% end %>
+					</span>
+				</span>
+			<% end %>
+		<% else %>
+			<div class="alert alert-warning">
+					This tag doesn't have any words.
+			</div>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+</div>

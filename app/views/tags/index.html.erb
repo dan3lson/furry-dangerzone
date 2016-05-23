@@ -2,10 +2,6 @@
 <% provide(:header, "All tags") %>
 
 <div>
-  <% if Rails.env.test? %>
-    <%= link_to "new tag", new_tag_path %>
-  <% end %>
-
   <% @tags.each do |tag| %>
     <h1><%= link_to tag.name, tag %></h1>
     <hr>

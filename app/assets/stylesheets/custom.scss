@@ -1,43 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "colors";
 
 //**********
 //*
 //* MIXINS, VARIABLES, ETC.
 //*
 //**********
-
-$amber: #F0A30A;
-$apple-blue: #097FF0;
-$apple-star-orange: #fd9603;
-$black: #000;
-$bootstrap-blue: #5BC0DE;
-$bootstrap-green: #5FB760;
-$bootstrap-red: #D9534F;
-$dark-gray: #8E8E93;
-$medium-gray: lighten($dark-gray, 30);
-$dark-green: darken($bootstrap-green, 60);
-$even-darker-gray: darken($dark-gray, 20);
-$game-circle-sizes: 35px;
-$home-game-circle-size: 100px;
-$leksi-green: #81CE97;
-$light-leksi-green: lighten($leksi-green, 17);
-$dark-leksi-green: darken($leksi-green, 20);
-$leksi-orange: orange;
-$dark-leksi-orange: darken($leksi-orange, 20);
-$leksi-red: #FF1300;
-$dark-leksi-red: darken($leksi-red, 20);
-$light-gray: #F2F2F2;
-$even-lighter-gray: lighten($light-gray, 3);
-$light-leksi-orange: lighten($leksi-orange, 47);
-$light-blue: lighten($bootstrap-blue, 37);
-$light-green: lighten($bootstrap-green, 8);
-$light-leksi-red: lighten($leksi-red, 47);
-$sky-blue: #1677BA;
-$show-game-circle-container-hover-opac: .7;
-$light-sky-blue: lighten($sky-blue, 55);
-$white: #FFF;
-$card-bg: #F8F8F8;
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
@@ -393,6 +362,19 @@ a, a:active {
   color: $dark-leksi-red;
 }
 
+.header-buttons a {
+	color: $white;
+	font-weight: 100;
+
+	&:visited {
+	}
+	&:hover {
+		color: $white;
+	}
+	&:active {
+	}
+}
+
 .hover:hover {
 	opacity: $show-game-circle-container-hover-opac;
 	text-decoration: none;
@@ -619,12 +601,16 @@ input {
 	border-color: lighten($dark-gray, 30%);
 }
 
-.navbar-footer{
+.navbar-footer {
 	color: $sky-blue;
 	font-weight: normal;
 	margin: 0;
 	margin-top: 50px;
 	padding-top: 5px;
+
+	.col-xs-3 {
+		padding-right: 0;
+	}
 
   a:not(.footer-cta){
 	  color: #BDBDBD;
@@ -896,65 +882,21 @@ table {
 }
 
 .tag {
-	background: $white;
-	border: 2px solid $bootstrap-blue;
+	background: #EEE;
+	border: 2px solid #EEE;
 	border-radius: 100px;
-	color: $bootstrap-blue;
-	padding-left: 15px;
+	color: #757575;
 	display: inline-block;
 	margin: 0 15px 15px 0;
-	padding: 10px;
+	padding: 5px 10px 5px 10px;
 
 	a, a:visited, a:hover, a:active {
-		color: $bootstrap-blue;
+		color: #757575;
 	}
 }
 
 .valign-middle {
 	vertical-align: -webkit-baseline-middle;
-}
-
-#vks-categories > * {
-	display: none;
-	font-size: 23px;
-}
-
-.vks-emoji-first-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("hushed_face.png"));
-}
-
-.vks-emoji-second-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("confused_face.png"));
-}
-
-.vks-emoji-third-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("thinking_face.png"));
-}
-
-.vks-emoji-fourth-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("grinning_face.png"));
-}
-
-.vks-emoji-fifth-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("nerd_face.png"));
-}
-
-.weekly-goal-container {
-	padding: 10px;
-}
-
-.weekly-goal-text {
-	color: #f0ad4e;
 }
 
 .white {
@@ -971,6 +913,7 @@ table {
 
 .word-name-size {
 	font-size: 23px;
+  overflow-wrap: break-word;
 }
 
 .word-of-knowledge-container {
@@ -1198,22 +1141,6 @@ table {
 	@extend .word-show-game-circle;
 
 	background: $leksi-red;
-}
-
-#flashcard-game {
-	display: none;
-}
-.flashcard-show-game-circle {
-	@extend .word-show-game-circle;
-
-	background: linear-gradient(
-	  to bottom,
-	  #ffffe0,
-	  #ffffe0 94%,
-	  lightblue 94%,
-	  lightblue
-	);
-	background-size: 100% 20px;
 }
 
 .jeop-show-game-circle {

@@ -1,32 +1,25 @@
 Rails.application.routes.draw do
   root 'static_pages#guest_home'
-  get "get_started" => "guests#get_started"
-  get "get_started_game_zone" => "guests#game_zone"
-  get "get_started_fundamentals" => "guests#fundamentals"
-  put "get_started_stats" => "guests#update"
   get "about_us" => "static_pages#about_us"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
-  get "search_current_user_words" => "searches#search_current_user_words"
-  get "menu" => "current_users#menu"
-  get "myLeksi" => "current_users#myLeksi"
-  get "myLeksi/:id" => "current_users#myLeksi_show"
+  get "search_myLeksi" => "searches#search_myLeksi"
   get "search_words_for_students" => "searches#student_words"
+  get "menu" => "current_users#menu"
   get "progress" => "current_users#progress"
+  get "myLeksi" => "my_leksi#index"
+  get "myLeksi/:id" => "my_leksi#show"
   get "myTags" => "my_tags#index"
+  get "myTags/:id" => "my_tags#show"
   get "tag_rand_word" => "my_tags#random_word"
-  get "weekly_goal" => "weekly_goals#weekly_goal"
+  get "jeopardy_tag" => "tag_games#jeopardy"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
-  get "jeopardy_tag" => "tag_games#jeopardy"
-  get "flashcards" => "flashcards#study"
   get "freestyle" => "games#freestyle"
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
-  get "knowledge_scale" => "assessments#knowledge_scale"
-  get "find_words_to_assess" => "assessments#search_results"
   get "blog" => "blog_posts#index"
   resources :blog_posts do
     resources :comments
@@ -47,7 +40,6 @@ Rails.application.routes.draw do
   resource :user_word_tag, only: [:create, :edit, :destroy]
   resource :user_word_tag_word_show_page, only: [:destroy]
   resource :user_word_tag_tag_show_page, only: [:destroy]
-  resource :weekly_goal, only: [:update]
   resources :versions do
     resources :reviews
   end

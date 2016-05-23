@@ -38,6 +38,7 @@ gem 'meta-tags'
 group :development do
   # Helps to kill N+1 queries and unused eager loading
   gem "bullet"
+  # SEO
   gem 'meta_request'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

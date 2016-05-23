@@ -1,0 +1,13 @@
+<br>
+<div class="center">
+  <p class="dark-gray">
+    You added this word <%= time_ago_in_words(user_word.created_at) %> ago.
+  </p>
+  <%= button_to user_word_path(id: user_word.id),
+    class: "btn btn-danger btn-sm",
+    method: :delete do
+  %>
+    <i class="fa fa-trash"></i>
+    REMOVE
+  <% end %>
+</div>

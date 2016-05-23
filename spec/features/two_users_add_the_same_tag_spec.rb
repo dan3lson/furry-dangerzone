@@ -23,7 +23,7 @@ feature "two users add the same tag", %{
 
       visit myTags_path
 
-      find("#my_tags-new-btn").click
+      find("#my-tags-new-btn").click
 
       fill_in "Name", with: tag.name
 

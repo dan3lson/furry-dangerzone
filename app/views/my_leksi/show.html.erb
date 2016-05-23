@@ -1,4 +1,6 @@
-<% provide(:title, "myLeksi") %>
+<% title "View details for your myLeksi word: #{@word.name}." %>
+<% description "Designed with vocabulary academic research and gamification, Leksi helps you learn new words." %>
+<% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research organize dictionary words" %>
 <% provide(:header, "myLeksi") %>
 
 <div class="row">
@@ -24,15 +26,15 @@
 					Game Zone
 				</div>
 			</div>
-			<%= render "current_users/myLeksi/show_game_zone",
+			<%= render "my_leksi/show_game_zone",
 				user_word: @user_word,
 				word: @word
 			%>
 		</div>
 		<%= render "words/synonyms", word: @word %>
 		<%= render "words/antonyms", word: @word %>
-		<%= render "current_users/tags", user: current_user, word: @word %>
-		<%= render "current_users/freestyle_responses", user_word: @user_word %>
-		<%= render "current_users/remove_myLeksi_word", word: @word %>
+		<%= render "my_leksi/tags", word: @word %>
+		<%= render "my_leksi/freestyle_responses", user_word: @user_word %>
+		<%= render "my_leksi/remove", word: @word, user_word: @user_word %>
 	</div>
 </div>
