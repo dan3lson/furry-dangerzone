@@ -80,20 +80,37 @@ class User < ActiveRecord::Base
   end
 
   def incomplete_fundamentals
-    UserWord.where(user: self, games_completed: 0)
+    UserWord.where(user: self).incomplete_freestyles
   end
 
   def incomplete_jeopardys
-    UserWord.where(user: self, games_completed: 1)
+    UserWord.where(user: self).incomplete_jeopardys
+  end
+
+  def complete_jeopardys
+    UserWord.where(user: self).completed_jeopardys
   end
 
   # not tested
-  def incomplete_jeops_not(word)
+  def incomplete_jeop_ids_not(word)
     incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
   end
 
+  # not tested
+  def incomplete_tag_jeop_ids_not(word)
+    incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
+  end
+
+  def word_ids_for(tag)
+    word_tags.joins(:word)
+             .order("words.name ASC")
+             .includes(:word)
+             .where(tag: tag)
+             .pluck(:word_id)
+  end
+
   def incomplete_freestyles
-    UserWord.where(user: self, games_completed: 2)
+    UserWord.where(user: self).incomplete_freestyles
   end
 
   def has_incomplete_fundamentals?
@@ -109,15 +126,15 @@ class User < ActiveRecord::Base
   end
 
   def completed_fundamentals
-    UserWord.where(user: self).select { |uw| uw.fundamental_completed? }
+    UserWord.where(user: self).completed_fundamentals
   end
 
   def completed_jeopardys
-    UserWord.where(user: self).select { |uw| uw.jeopardy_completed? }
+    UserWord.where(user: self).completed_jeopardys
   end
 
   def completed_freestyles
-    UserWord.where(user: self).select { |uw| uw.freestyle_completed? }
+    UserWord.where(user: self).completed_freestyles
   end
 
   def has_completed_fundamentals?
@@ -137,13 +154,17 @@ class User < ActiveRecord::Base
     has_incomplete_freestyles?
   end
 
-  def has_enough_jeopardy_words?
+  def has_enough_incomplete_jeops?
     num_incomplete_jeops > 1
+  end
+
+  def has_enough_incomplete_and_complete_jeops?
+    num_incomplete_and_complete_jeops > 2
   end
 
   # not tested
   def num_rands_needed
-    if has_enough_jeopardy_words?
+    if has_enough_incomplete_jeops?
       if num_incomplete_jeops == 2
         2
       elsif num_incomplete_jeops == 3
@@ -159,7 +180,7 @@ class User < ActiveRecord::Base
   # not tested
   # refactor into two methods
   def combine_jeop_words(word)
-    my_ids = self.incomplete_jeops_not(word)
+    my_ids = self.incomplete_jeop_ids_not(word)
 
     if num_rands_needed == 2
       my_words = Word.find(my_ids)
@@ -177,7 +198,7 @@ class User < ActiveRecord::Base
 
   # not tested
   def get_jeop_words(word)
-    if has_enough_jeopardy_words?
+    if has_enough_incomplete_jeops?
       [word] + combine_jeop_words(word)
     else
       [word] + Word.random_excluding(3, word.id)
@@ -277,12 +298,13 @@ class User < ActiveRecord::Base
     words.count
   end
 
-  # MOVED AS A RESULT OF SCEC & SCHOOL REFACTOR. UPDATE TEST FILES/LOCATIONS
+  # MOVED AS A RESULT OF SCEC & SCHOOL REFACTOR.
+  # UPDATE TEST FILES/LOCATIONS
   def num_incomplete_funds
     incomplete_fundamentals.count
   end
 
-  def num_completed_funds
+  def num_completed_fundamentals
     completed_fundamentals.count
   end
 
@@ -294,6 +316,10 @@ class User < ActiveRecord::Base
     completed_jeopardys.count
   end
 
+  def num_incomplete_and_complete_jeops
+    num_incomplete_jeops + num_completed_jeops
+  end
+
   def num_incomplete_frees
     incomplete_freestyles.count
   end
@@ -303,7 +329,7 @@ class User < ActiveRecord::Base
   end
 
   def percentage_of_fundamental_games_completed
-    completed = self.num_completed_funds
+    completed = self.num_completed_fundamentals
     not_started = self.num_incomplete_funds
     total = completed + not_started
 

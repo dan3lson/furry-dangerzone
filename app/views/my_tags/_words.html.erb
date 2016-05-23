@@ -4,12 +4,10 @@
 			<i class="fa fa-book"></i>
 			Words
 		</div>
-		<% if tag_has_words?(current_user, tag) %>
-			<% words_for(current_user, tag).each do |word| %>
-				<span class="tag">
-					<%= link_to word.name, "/myLeksi/#{word.id}" %>
-					&nbsp;
-					<span>
+		<div>
+			<% if tag_has_words?(current_user, tag) %>
+				<% words_for(current_user, tag).each do |word| %>
+					<div class="pull-right">
 						<%= link_to user_word_tag_tag_show_page_path(
 							word_id: word.id,
 							tag_id: tag.id),
@@ -18,14 +16,24 @@
 						%>
 							<i class="fa fa-remove medium-gray"></i>
 						<% end %>
+					</div>
+					<span class="word-name-size">
+						<%= link_to word.name, "/myLeksi/#{word.id}" %>
 					</span>
-				</span>
+					<div class="clear"></div>
+					<br>
+					<%= render "my_tags/game_zone",
+						tag: @tag,
+						word: word,
+						user_word: UserWord.object(current_user, word)
+					%>
+					<hr>
+				<% end %>
+			<% else %>
+				<div class="alert alert-warning">
+						This tag doesn't have any words.
+				</div>
 			<% end %>
-		<% else %>
-			<div class="alert alert-warning">
-					This tag doesn't have any words.
-			</div>
-		<% end %>
-		<div class="clear"></div>
+		</div>
 	</div>
 </div>

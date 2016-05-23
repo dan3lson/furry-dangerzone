@@ -1,55 +1,73 @@
-<div class="panel panel-default">
-	<div class="panel-body">
-		<div class="lead">
-			<i class="fa fa-gamepad"></i>
-			Game Zone
-		</div>
-		<div class="row center">
-			<div class="col-xs-4">
-				<p class="data-url pointer hover tag-rand-fund"
-					 data-url="<%#= fund_game_link(word.id) %>"
-					 data-activity="fund">
-					<%= image_tag(
-						"strength1.png",
-						alt: "0% Mastered",
-						title: "0% Mastered")
-					%>
-					<br>
-					Fundamentals
-				</p>
+<div class="row center">
+	<div class="col-xs-4 hover">
+		<% if user_word.fundamental_completed? %>
+			<div class="data-url" data-url="<%= fund_game_link(word.id) %>">
+				<%= image_tag(
+					"strength1.png",
+					alt: "0% Mastered",
+					title: "0% Mastered")
+				%>
 			</div>
+			Fundame...
+			<i class="fa fa-check-square-o"></i>
+		<% else %>
+			<div class="data-url" data-url="<%= fund_game_link(word.id) %>">
+				<%= image_tag(
+					"strength1.png",
+					alt: "0% Mastered",
+					title: "0% Mastered")
+				%>
+			</div>
+			Fundame...
+		<% end %>
+	</div>
+	<div class="col-xs-4 hover">
+		<% if enough_jeopardy_words_exist?(current_user, tag) %>
+			<div class="data-url"
+					 data-url="<%= jeopardy_path(word_id: word.id, tag_id: tag.id) %>">
+				<%= image_tag(
+					"strength2.png",
+					alt: "33% Mastered",
+					title: "33% Mastered")
+				%>
+			</div>
+			Jeopardy
+		<% else %>
+			<div>
+				<%= image_tag(
+					"strength2_gray.png",
+					alt: "33% Mastered",
+					title: "33% Mastered")
+				%>
+			</div>
+			Jeopardy
+			<!-- Show a gray strength2 because words in this tag aren't eligible  -->
+			<!-- and also a modal popup explaining why  -->
+		<% end %>
+	</div>
 
-			<% if incomplete_jeopardys_exist?(current_user, tag) %>
-				<div class="col-xs-4 data-url hover tag-rand-jeop"
-						 data-activity="jeop">
-					<%= image_tag(
-						"strength2.png",
-						alt: "33% Mastered",
-						title: "33% Mastered")
-					%>
-					<br>
-					Jeopardy
-				</div>
-			<% else %>
-				<!-- Show a gray strength2 because words in this tag aren't eligible  -->
-				<!-- and also a modal popup explaining why  -->
-			<% end %>
-
-			<% if incomplete_freestyles_exist?(current_user, tag) %>
-				<div class="col-xs-4 data-url hover tag-rand-free"
-						 data-activity="free">
-					<%= image_tag(
-						"strength3.png",
-						alt: "66% Mastered",
-						title: "66% Mastered")
-					%>
-					<br>
-					Freestyle
-				</div>
-			<% else %>
-				<!-- Show a gray strength3 because words in this tag aren't eligible  -->
-				<!-- and also a modal popup explaining why  -->
-			<% end %>
-		</div>
+	<div class="col-xs-4 hover">
+		<% if user_word.freestyle_completed? %>
+			<div class="data-url" data-url="<%= free_game_link(word.id) %>">
+				<%= image_tag(
+					"strength3.png",
+					alt: "66% Mastered",
+					title: "66% Mastered")
+				%>
+			</div>
+			Freestyle
+			<i class="fa fa-check-square-o"></i>
+		<% else %>
+			<div class="data-url" data-url="<%= free_game_link(word.id) %>">
+				<%= image_tag(
+					"strength3_gray.png",
+					alt: "66% Mastered",
+					title: "66% Mastered")
+				%>
+			</div>
+			Freestyle
+			<!-- Show a gray strength3 because words in this tag aren't eligible  -->
+			<!-- and also a modal popup explaining why  -->
+		<% end %>
 	</div>
 </div>

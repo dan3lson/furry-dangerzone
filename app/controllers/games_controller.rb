@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  # This is hit twice because of the respond_to -__-
+  # This action is hit twice because of the respond_to -__-
   def fundamentals
     @chosen_word = Word.find(params[:word_id])
     @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
@@ -25,8 +25,12 @@ class GamesController < ApplicationController
   def jeopardy
     if logged_in?
       @chosen_word = Word.find(params[:word_id])
-      @jeopardy_words = current_user.get_jeop_words(@chosen_word)
-
+      @jeopardy_words = if params[:tag_id]
+        @tag = Tag.find(params[:tag_id])
+        get_jeop_words_tag(current_user, @tag, @chosen_word) << @chosen_word
+      else
+        current_user.get_jeop_words(@chosen_word)
+      end
       @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
       @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
       @jeopardy_lineup = (@jeopardy_words * 5).shuffle
@@ -117,7 +121,7 @@ class GamesController < ApplicationController
     #     ).map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
     #   end
     #
-    #   if current_user.has_enough_jeopardy_words?
+    #   if current_user.has_enough_incomplete_jeops?
     #     @three_j_words = current_user.incomplete_freestyles.shuffle.take(
     #       3
     #     ).map { |uw| uw.word }

@@ -19,9 +19,6 @@ module TagsHelper
   def progress_for(user, tag)
     if num_words_for(user, tag) > 0
       completed_games = user_words(user, tag).completed_games.count
-      # completed_games = completed_funds(current_user, tag).count +
-      #                   completed_jeops(current_user, tag).count +
-      #                   completed_frees(current_user, tag).count
       total_games = num_words_for(user, tag) * 3
       (completed_games / total_games.to_f * 100).round
     else
