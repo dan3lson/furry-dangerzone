@@ -7,6 +7,10 @@ module GamesHelper
     "/jeopardy?word_id=#{word_id}"
   end
 
+  def jeop_tag_game_link(word_id)
+    "/jeopardy_tag?tag_id=#{word_id}"
+  end
+
   def free_game_link(word_id)
     "/freestyle?word_id=#{word_id}"
   end

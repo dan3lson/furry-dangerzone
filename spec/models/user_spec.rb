@@ -629,7 +629,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#has_enough_jeopardy_words?" do
+  describe "#has_enough_incomplete_jeops?" do
     let (:user) { FactoryGirl.create(:user) }
     let(:word) { Word.create(name: "foobar", definition: "foobar def") }
     let(:word_2) { Word.create(name: "foobar_2", definition: "foobar def_2") }
@@ -639,20 +639,20 @@ RSpec.describe User, type: :model do
     it "returns false" do
       user_word = UserWord.create!(word: word, user: user)
 
-      expect(user.has_enough_jeopardy_words?).to eq(false)
+      expect(user.has_enough_incomplete_jeops?).to eq(false)
     end
 
     it "returns true" do
       UserWord.create!(word: word, user: user, games_completed: 2)
 
-      expect(user.has_enough_jeopardy_words?).to eq(true)
+      expect(user.has_enough_incomplete_jeops?).to eq(true)
     end
 
     it "returns true" do
       UserWord.create!(word: word, user: user, games_completed: 3)
       UserWord.create!(word: word_2, user: user, games_completed: 3)
 
-      expect(user.has_enough_jeopardy_words?).to eq(false)
+      expect(user.has_enough_incomplete_jeops?).to eq(false)
     end
 
     it "returns true" do
@@ -661,7 +661,7 @@ RSpec.describe User, type: :model do
       UserWord.create!(word: word_3, user: user, games_completed: 2)
       UserWord.create!(word: word_4, user: user, games_completed: 3)
 
-      expect(user.has_enough_jeopardy_words?).to eq(true)
+      expect(user.has_enough_incomplete_jeops?).to eq(true)
     end
   end
 

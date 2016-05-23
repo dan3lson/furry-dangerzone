@@ -20,13 +20,15 @@ $(document).ready(function(){
 		$("#jeopardy-pregame").hide();
 		$("#activity_name").fadeIn();
 
-		var $controller_url = ""
-		if ($("#jeop-controller").data("controller") == "tag_games") {
-			$controller_url = "/jeopardy_tag?tag_id=" +
-												$("#jeop-controller").data("tag-id");
-		} else {
-			$controller_url = "/jeopardy?word_id=" + $chosen_word_id;
-		};
+		// var $controller_url = ""
+		// if ($("#jeop-controller").data("controller") == "tag_games") {
+		// 	$controller_url = "/jeopardy_tag?tag_id=" +
+		// 										$("#jeop-controller").data("tag-id");
+		// } else {
+		// 	// $controller_url = "/jeopardy?word_id=" + $chosen_word_id;
+		// };
+		var $controller_url = "/jeopardy?word_id=" + $chosen_word_id + ";tag_id=" +
+													$("#jeop-controller").data("tag-id");
 
 		load_game_info($controller_url);
 
