@@ -2,7 +2,7 @@
 	<div class="alert alert-danger center"><%= words %></div>
 <% else %>
 	<% words.each do |word| %>
-		<%= render "current_users/word_card",
+		<%= render "my_leksi/word",
 			word: word,
 			user_word: UserWord.object(current_user, word)
 		%>

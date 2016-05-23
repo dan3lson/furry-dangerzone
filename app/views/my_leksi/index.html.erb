@@ -1,4 +1,7 @@
-<% provide(:title, "myLeksi") %>
+<% title "Grow your vocabulary by first creating your very own personal list." %>
+<% description "Designed with vocabulary academic research and gamification, Leksi helps you master new words." %>
+<% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
+
 <% provide(:header, "myLeksi") %>
 
 <%= render "searches/myLeksi_modal" %>
@@ -12,10 +15,10 @@
       </div>
       <div class="clear"></div>
       <div id="myLeksi-words" data-total="<%= @current_user_words_count %>">
-        <%= render "current_users/word_cards", words: @current_user_words_pag %>
+        <%= render "my_leksi/words", words: @current_user_words_pag %>
       </div>
     <% else %>
-      <%= render "current_users/no_words_guide" %>
+      <%= render "my_leksi/no_words_guide" %>
     <% end %>
     <br>
     <%= render "shared/spinner" %>
@@ -29,6 +32,6 @@
     </div>
   </div>
   <div class="col-sm-4">
-    <%= render "words/knowledge_key" %>
+    <%= render "my_leksi/knowledge_key" %>
   </div>
 </div>

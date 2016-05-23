@@ -20,7 +20,7 @@ feature "user creates a tag", %{
 
       visit myTags_path
 
-      find("#my_tags-new-btn").click
+      find("#my-tags-new-btn").click
 
       fill_in "Name", with: "foo"
 
@@ -39,7 +39,7 @@ feature "user creates a tag", %{
 
       visit myTags_path
 
-      find("#my_tags-new-btn").click
+      find("#my-tags-new-btn").click
 
       fill_in "Name", with: ""
 

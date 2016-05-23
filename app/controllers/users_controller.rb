@@ -14,8 +14,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @goal = params[:weekly_goal]
-    @user.goal = @goal if @goal
 
     User.set_up_login_data(@user)
 

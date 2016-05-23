@@ -1,11 +1,20 @@
 module WordsHelper
-  def words_for(user, tag)
+  def word_ids_for(user, tag)
     user.word_tags.joins(:word)
                   .order("words.name ASC")
                   .includes(:word)
                   .where(tag: tag)
-                  .map { |wt| wt.word }
+                  .pluck(:word_id)
   end
+  def words_for(user, tag)
+    # user.word_tags.joins(:word)
+    #               .order("words.name ASC")
+    #               .includes(:word)
+    #               .where(tag: tag)
+    #               .map { |wt| wt.word }
+                  Word.find(word_ids_for(user, tag))
+  end
+  # user.word_tags.joins(:word).order("words.name ASC").pluck(:word_id)
 
   # not tested
   def num_words_for(user, tag)
@@ -19,39 +28,46 @@ module WordsHelper
 
   # not tested
   def user_words(user, tag)
-    words_for(user, tag).map { |word| UserWord.object(user, word) }
+    # words_for(user, tag).map { |word| UserWord.object(user, word) }
+    UserWord.where(user: user, word: word_ids_for(user, tag))
   end
 
   # not tested
   def completed_funds(user, tag)
-    user_words(user, tag).select { |uw| uw.fundamental_completed? }
+    # user_words(user, tag).select { |uw| uw.fundamental_completed? }
+    user_words(user, tag).completed_fundamentals
   end
 
   # not tested
   def completed_jeops(user, tag)
-    user_words(user, tag).select { |uw| uw.fundamental_completed? &&
-      uw.jeopardy_completed?
-    }
+    # user_words(user, tag).select { |uw| uw.fundamental_completed? &&
+    #   uw.jeopardy_completed?
+    # }
+    user_words(user, tag).completed_jeopardys
   end
 
   # not tested
   def completed_frees(user, tag)
-    user_words(user, tag).select { |uw| uw.freestyle_completed? }
+    # user_words(user, tag).select { |uw| uw.freestyle_completed? }
+    user_words(user, tag).completed_freestyles
   end
 
   # not tested
   def incomplete_fundamentals(user, tag)
-    user_words(user, tag).select { |uw| !uw.fundamental_completed? }
+    # user_words(user, tag).select { |uw| !uw.fundamental_completed? }
+    user_words(user, tag).incomplete_fundamentals
   end
 
   # not tested
   def incomplete_jeopardys(user, tag)
-    user_words(user, tag).select { |uw| uw.jeopardy_not_completed? }
+    # user_words(user, tag).select { |uw| uw.jeopardy_not_completed? }
+    user_words(user, tag).incomplete_jeopardys
   end
 
   # not tested
   def incomplete_freestyles(user, tag)
-    user_words(user, tag).select { |uw| uw.freestyle_not_completed? }
+    # user_words(user, tag).select { |uw| uw.freestyle_not_completed? }
+    user_words(user, tag).incomplete_freestyles
   end
 
   # not tested

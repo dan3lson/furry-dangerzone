@@ -21,7 +21,7 @@ class SearchesController < ApplicationController
     end
   end
 
-  def search_current_user_words
+  def search_myLeksi
     word_name = params[:search]
     @words = Word.search_myLeksi(current_user, word_name) if word_name
 

@@ -6,10 +6,15 @@
 		</div>
 		<% if current_user.has_tags? %>
 			<% if tags_exist?(current_user, word) %>
-				<%= render "current_users/tags_index", word: word %>
-				<hr>
+				<% tags_for(current_user, word).each do |tag| %>
+					<%= render "my_leksi/tag", tag: tag, word: word %>
+				<% end %>
+			<% else %>
+				<small class="dark-gray">
+					This is where you'll see Tags for this word.
+				</small>
 			<% end %>
-			<%= render "current_users/tags_form", word: word %>
+			<%= render "my_leksi/tags_form", word: word %>
 		<% else %>
 			<small class="dark-gray">
 				<%= link_to "Create your first tag", new_tag_path %>

@@ -17,13 +17,12 @@ module TagsHelper
 
   # not tested
   def progress_for(user, tag)
-    num_words_for_tag = words_for(current_user, tag).count
-
-    if num_words_for_tag > 0
-      completed_games = completed_funds(current_user, tag).count +
-                        completed_jeops(current_user, tag).count +
-                        completed_frees(current_user, tag).count
-      total_games = num_words_for_tag * 3
+    if num_words_for(user, tag) > 0
+      completed_games = user_words(user, tag).completed_games.count
+      # completed_games = completed_funds(current_user, tag).count +
+      #                   completed_jeops(current_user, tag).count +
+      #                   completed_frees(current_user, tag).count
+      total_games = num_words_for(user, tag) * 3
       (completed_games / total_games.to_f * 100).round
     else
       0

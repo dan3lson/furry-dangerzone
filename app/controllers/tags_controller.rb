@@ -40,10 +40,12 @@ class TagsController < ApplicationController
   end
 
   def update
+    @tag = Tag.find(params[:id])
+
     if @tag.update(tag_params)
       flash[:success] = "Changes successfully made."
 
-      redirect_to myTags_path
+      redirect_to "/myTags/#{@tag.id}"
     else
       flash[:danger] = "Changes not successfully made."
 

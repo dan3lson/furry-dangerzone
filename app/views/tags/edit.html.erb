@@ -1,13 +1,24 @@
-<% provide(:title, "Edit tag") %>
-<% provide(:header, "Edit tag") %>
+<% provide(:title, "Edit Tag") %>
+<% provide(:header, "Edit Tag") %>
 
-<div class="well">
-  <%= form_for(@tag) do |f| %>
-  <%= render 'shared/error_messages', object: @tag %>
-
-    <%= f.label :name, class: "sr-only" %>
-    <%= f.text_field :name, class: "form-control", placeholder: "Name *"  %>
-
-    <%= f.submit "Save changes", class: "btn btn-default" %>
-  <% end %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p class="lead">Use the form below to update this tag.</p>
+    <%= render 'shared/error_messages', object: @tag %>
+    <%= form_for(@tag) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", placeholder: "Name *"  %>
+      <%= f.button type:"submit", class: "btn btn-info btn-block" do %>
+        <i class="fa fa-save"></i>
+        UPDATE
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<br>
+<div class="center">
+  <p class="dark-gray">
+    You added this tag <%= time_ago_in_words(@tag.created_at) %> ago.
+  </p>
+  <%= render "tags/remove_tag_btn_tag_show_page", tag: @tag %>
 </div>

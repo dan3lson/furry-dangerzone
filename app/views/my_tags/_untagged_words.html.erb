@@ -1,21 +1,22 @@
-<div class="col-sm-8 col-sm-offset-2 lead">
-	<div class="panel panel-warning">
-		<div class="panel panel-heading">
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="lead">
+			<span class="fa-stack">
+			  <i class="fa fa-tag fa-stack-1x"></i>
+			  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+			</span>
 			Untagged Words
 		</div>
-		<div class="panel panel-body">
-			<div id="untagged-words-container">
-				<% if current_user.has_words? %>
-					<div class="clear"></div>
-					<% Word.untagged_for(current_user).each do |word| %>
-						<span class="basic-black-link">
-							<%= word.name %>
-						</span> |
-					<% end %>
-				<% else %>
-					<small class="dark-gray">Empty</small>
+		<div id="untagged-words-container">
+			<% if current_user.has_words? %>
+				<% Word.untagged_for(current_user).each do |word| %>
+					<span class="tag">
+						<%= link_to word.name, "/myLeksi/#{word.id}" %>
+					</span>
 				<% end %>
-			</div>
+			<% else %>
+				<small class="dark-gray">Empty</small>
+			<% end %>
 		</div>
 	</div>
 </div>

@@ -1,14 +1,10 @@
-<% provide(:title, "Sign Up") %>
-
 <% title "New to Leksi? Sign up." %>
 <% description "Give us a try with no need to create a (free) account." %>
 <% set_meta_tags keywords: %w[login signup account signin] %>
-
 <% set_meta_tags og: {
-  title:    "Sign up.",
+  title:    "Sign up to start collecting, organizing, and learning new words.",
 	description: "See what the buzz is about with this new vocab app."
 } %>
-
 <% set_meta_tags twitter: {
   card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun,
     and based on research.",
@@ -21,12 +17,6 @@
     <h2>New to Leksi? Sign up.</h2>
 
     <%= render 'shared/error_messages', object: @user %>
-
-    <%= hidden_field_tag :word_ids, params[:word_ids] %>
-    <%= hidden_field_tag :completed_fund, params[:completed_fund] %>
-    <%= hidden_field_tag :weekly_goal, params[:weekly_goal] %>
-    <%= hidden_field_tag :game_name, params[:game_name] %>
-    <%= hidden_field_tag :time_spent, params[:time_spent_in_min] %>
 
     <div class="form-group">
       <%= f.label :email, class: "sr-only" %>
@@ -61,7 +51,7 @@
   <br/>
 
   <div class="center basic-apple-blue-link">
-    Already have an account?
+    Have an account?
     <%= link_to "Log in", login_path %>.
   </div>
 </div>

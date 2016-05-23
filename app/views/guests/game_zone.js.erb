@@ -1,6 +1,0 @@
-$("#gs-rand-word-ids").html("<%= @word_ids %>");
-$('#gs-game-zone-container').empty().hide();
-$('#gs-game-zone-container').append(`<%= j render(partial: 'guests/game_zone',
-	locals: { words: @first_row_rand_words }) %>`).fadeIn();
-$('#gs-game-zone-container').append(`<%= j render(partial: 'guests/game_zone',
-	locals: { words: @second_row_rand_words }) %>`).fadeIn();
