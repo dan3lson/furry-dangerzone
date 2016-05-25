@@ -5,7 +5,7 @@
     <%= f.label :description %>
     <%= f.text_area :description, class: "form-control" %>
   </div>
-  <% if current_user.has_email_address? %>
+  <% unless current_user.has_email_address? %>
     <br>
     <div class="alert alert-warning">
     	<p>
