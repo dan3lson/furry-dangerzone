@@ -1,9 +1,20 @@
 <% title "View details for your #{@tag.name} tag." %>
 <% description "Designed with vocabulary academic research and gamification, Leksi helps you learn new words." %>
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research organize dictionary words" %>
-<% provide(:header, "myTags") %>
+<% provide(:header, "Tags") %>
 
 <div class="col-sm-6 col-sm-offset-3">
 	<%= render "my_tags/basic_info", tag: @tag %>
 	<%= render "my_tags/words", tag: @tag %>
+	
+	<%= render "my_tags/game_zone_gray_modal",
+		game_name: "Jeopardy",
+		prev_game: "Fundamentals",
+		target: "jeop"
+	%>
+	<%= render "my_tags/game_zone_gray_modal",
+		game_name: "Freestyle",
+		prev_game: "Jeopardy",
+		target: "free"
+	%>
 </div>

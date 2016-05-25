@@ -4,14 +4,24 @@
 	<% results.each do |word| %>
 		<div class="panel panel-default">
 			<div class="panel-body">
+				<% if current_user.already_has_word?(word) %>
+					<div class="pull-right">
+						<%= render "my_leksi/mastery_percentage",
+							word: word,
+							user_word: UserWord.object(current_user, word)
+						%>
+					</div>
+				<% end %>
 				<%= render "words/display", word: word %>
 			</div>
-			<div class="panel-footer">
-				<%= render "searches/results_options",
+			<% unless current_user.already_has_word?(word) %>
+				<div class="panel-footer">
+					<%= render "searches/results_options",
 					display_button: display_button,
 					word: word
-				%>
-			</div>
+					%>
+				</div>
+			<% end %>
 		</div>
 	<% end %>
 <% end %>

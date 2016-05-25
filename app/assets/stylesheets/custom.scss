@@ -87,12 +87,7 @@ a, a:active {
 #get-started-finish-btn,
 #get-started-save-my-progress-btn,
 #gs-save-progress-container,
-#gs-time-spent,
-#vks-chosen-word,
-#vks-identify-knowledge,
-#vks-categories,
-#vks-input-container,
-#vks-finish-btn {
+#gs-time-spent {
 	display: none;
 }
 
@@ -119,10 +114,6 @@ a, a:active {
 
 .add-category-btn {
   cursor: pointer;
-}
-
-.add-categories-container {
-  display: none;
 }
 
 .add-look-up-word-container {
@@ -375,11 +366,14 @@ a, a:active {
 	}
 }
 
-.hover:hover {
-	opacity: $show-game-circle-container-hover-opac;
-	text-decoration: none;
+.hover {
+	cursor: pointer;
 
-	a:link, a:visited, a:hover, a:active {
+	a:link, a:visited, a:active {
+		text-decoration: none;
+	}
+	&:hover {
+		opacity: $show-game-circle-container-hover-opac;
 		text-decoration: none;
 	}
 }
@@ -833,11 +827,6 @@ input {
 			color: $bootstrap-green;
 		}
 	}
-}
-
-.search-results-container,
-.modal .panel-success {
-	border: none;
 }
 
 .sky-blue {

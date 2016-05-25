@@ -1,18 +1,11 @@
 <% title "Grow your vocabulary by first creating your very own personal list." %>
 <% description "Designed with vocabulary academic research and gamification, Leksi helps you master new words." %>
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
-
 <% provide(:header, "myLeksi") %>
 
-<%= render "searches/myLeksi_modal" %>
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-2">
+  <div class="col-sm-6 col-sm-offset-3">
     <% if current_user.has_words? %>
-      <div id="myLeksi-filter-container">
-        <div class="dark-gray">
-          You have <%= pluralize(@current_user_words_count, "word") %>.
-        </div>
-      </div>
       <div class="clear"></div>
       <div id="myLeksi-words" data-total="<%= @current_user_words_count %>">
         <%= render "my_leksi/words", words: @current_user_words_pag %>
@@ -22,6 +15,9 @@
     <% end %>
     <br>
     <%= render "shared/spinner" %>
+    <div class="dark-gray center">
+      You have <%= pluralize(@current_user_words_count, "word") %>.
+    </div>
     <p id="view-more-link-container"></p>
     <br>
     <br>
@@ -31,7 +27,7 @@
       %>
     </div>
   </div>
-  <div class="col-sm-4">
-    <%= render "my_leksi/knowledge_key" %>
+  <div class="col-sm-3">
+    <%= render "my_leksi/word_tree_of_knowledge_key" %>
   </div>
 </div>

@@ -21,15 +21,6 @@ class SearchesController < ApplicationController
     end
   end
 
-  def search_myLeksi
-    word_name = params[:search]
-    @words = Word.search_myLeksi(current_user, word_name) if word_name
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
   def student_words
   end
 end

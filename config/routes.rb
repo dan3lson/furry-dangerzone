@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get "about_us" => "static_pages#about_us"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
-  get "search_myLeksi" => "searches#search_myLeksi"
   get "search_words_for_students" => "searches#student_words"
   get "menu" => "current_users#menu"
   get "progress" => "current_users#progress"

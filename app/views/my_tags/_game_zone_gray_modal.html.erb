@@ -1,0 +1,33 @@
+<div class="modal fade"
+		 id="myTags-game-zone-show-<%= target %>-gray-modal"
+		 tabindex="-1"
+		 role="dialog"
+		 aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button"
+								class="close"
+								data-dismiss="modal"
+								aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+        <h4 class="modal-title" id="myModalLabel">
+					Locked <%= game_name %> Game
+				</h4>
+      </div>
+      <div class="modal-body">
+				<p>
+					To play this game, you have to first complete
+					<%= prev_game %> for this word.
+				</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+								data-dismiss="modal">
+					Close
+				</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@
 		<strong class="word-name-size">
 			<%= tag.name %>
 		</strong>
-		<div>
+		<div class="dark-gray">
 			<%= pluralize(words_for(current_user, tag).count, "word") %>,
 			<%= progress_for(current_user, tag) %>% mastered
 		</div>

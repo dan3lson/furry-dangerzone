@@ -1,10 +1,16 @@
 <strong class="word-name-size">
-	<% if params[:controller] == "my_leksi" && params[:action] == "index" %>
+	<% if (params[:controller] == "my_leksi" && params[:action] == "index") ||
+				current_user.has_word?(word) && (
+					params[:controller] == "searches" &&
+					params[:action] == "search_results"
+				)
+	%>
 		<%= link_to word.name, "/myLeksi/#{word.id}" %>
 	<% else %>
 		<%= word.name %>
 	<% end %>
 </strong>
+
 <% if word.phonetic_spelling %>
 	<div>
 		<span class="word-phonetic-spelling">
@@ -17,4 +23,5 @@
 		<em><%= word.part_of_speech %></em>
 	</div>
 	<% end %>
+
 <%= render "words/word_details", word: word %>
