@@ -1,17 +1,11 @@
-<% provide(:header, "myTags") %>
-
-<% title "myTags" %>
+<% provide(:header, "Tags") %>
+<% title "Organize and group your words with Tags." %>
 <% description "View and organize your words so you can learn specific words." %>
 <% set_meta_tags keywords: "literacy reading english vocabulary vocab tag tags group organize list notebook" %>
 
 <div id="myTags-container">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <div id="myLeksi-filter-container">
-        <div class="dark-gray">
-          You have <%= pluralize(@num_current_user_tags, "tag") %>.
-        </div>
-      </div>
       <% if current_user.has_tags? %>
           <% @current_user_tags.each do |tag| %>
             <%= render "my_tags/tag", tag: tag %>
@@ -20,6 +14,9 @@
         <%= render "current_users/no_tags_guide" %>
       <% end %>
       <%= render "my_tags/untagged_words" %>
+      <div class="dark-gray center">
+        You have <%= pluralize(@num_current_user_tags, "tag") %>.
+      </div>
     </div>
   </div>
 </div>

@@ -8,7 +8,7 @@ class MyLeksiController < ApplicationController
 		page = params[:page] ? params[:page].to_i - 1 : 1
 		@current_user_words_pag = @current_user_words.paginate(
 			page: page,
-			per_page: 15
+			per_page: 10
 		)
 		@current_user_words_count = @current_user_words.count
 

@@ -1,0 +1,33 @@
+<% if uw.freestyle_completed? %>
+	<div class="data-url" data-url="<%= free_game_link(word.id) %>">
+		<%= image_tag(
+			"strength3.png",
+			alt: "66% Mastered",
+			title: "66% Mastered")
+		%>
+	</div>
+	<small>
+		Advanced
+		<i class="fa fa-check-square-o"></i>
+	</small>
+<% elsif uw.jeopardy_completed? %>
+	<div class="data-url" data-url="<%= free_game_link(word.id) %>">
+		<%= image_tag(
+			"strength3.png",
+			alt: "66% Mastered",
+			title: "66% Mastered")
+		%>
+	</div>
+	<small>Advanced</small>
+<% else %>
+	<div class="pointer"
+			 data-toggle="modal"
+			 data-target="#myTags-game-zone-show-free-gray-modal">
+		<%= image_tag(
+			"strength3_gray.png",
+			alt: "66% Mastered",
+			title: "66% Mastered")
+		%>
+	</div>
+	<small>Advanced</small>
+<% end %>

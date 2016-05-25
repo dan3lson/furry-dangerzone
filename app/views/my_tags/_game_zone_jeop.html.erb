@@ -1,0 +1,39 @@
+<% if enough_jeopardy_words_exist?(current_user, tag) &&
+			uw.jeopardy_completed?
+%>
+	<div class="data-url"
+			 data-url="<%= jeopardy_path(word_id: word.id, tag_id: tag.id) %>">
+		<%= image_tag(
+			"strength2.png",
+			alt: "33% Mastered",
+			title: "33% Mastered")
+		%>
+	</div>
+	<small>
+		Intermediate
+		<i class="fa fa-check-square-o"></i>
+	</small>
+<% elsif enough_jeopardy_words_exist?(current_user, tag) &&
+				 uw.fundamental_completed?
+%>
+	<div class="data-url"
+			 data-url="<%= jeopardy_path(word_id: word.id, tag_id: tag.id) %>">
+		<%= image_tag(
+			"strength2.png",
+			alt: "33% Mastered",
+			title: "33% Mastered")
+		%>
+	</div>
+	<small>Intermediate</small>
+<% else %>
+	<div class="pointer"
+			 data-toggle="modal"
+			 data-target="#myTags-game-zone-show-jeop-gray-modal">
+		<%= image_tag(
+			"strength2_gray.png",
+			alt: "33% Mastered",
+			title: "33% Mastered")
+		%>
+	</div>
+	<small>Intermediate</small>
+<% end %>

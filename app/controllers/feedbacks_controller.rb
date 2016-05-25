@@ -16,12 +16,11 @@ class FeedbacksController < ApplicationController
     @feedback.kind = params[:kind]
 
     if @feedback.save
-      flash[:success] = "Thanks for giving feedback!"
+      msg_2 = "If we have your email address, we\'ll respond within 24 hours."
+      flash[:success] = "Thanks for giving feedback! #{msg_2}"
 
       redirect_to menu_path
     else
-      flash.now[:danger] = "Yikes! Something went wrong. Please try again."
-
       render "feedbacks/new"
     end
   end

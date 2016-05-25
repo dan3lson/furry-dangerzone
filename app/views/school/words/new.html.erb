@@ -3,65 +3,61 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <div class="well">
-      <div class="row center">
-        <div class="col-xs-6">
-          <span class="badge">1</span>
-            Want to add a word, but are unsure if it already exists? Try
-            finding it first.
-        </div>
-        <div class="col-xs-6">
-          <span class="badge">2</span>
-          If it doesn't, use the form down below to create a new word!
-        </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <span class="badge">1</span>
+          Want to add a word, but are unsure if it already exists? Try
+          finding it first.
+          <div>
+            <span class="badge">2</span>
+            If the exact word you want isn't there, use the form down below to
+            create a new word.
+          </div>
+          <p>
+            <%= render "searches/form", display_button_for: "nobody" %>
+          </p>
       </div>
-      <br>
-      <p>
-        <%= render "searches/form", display_button_for: "nobody" %>
-      </p>
     </div>
     <div class="search-results-container"></div>
   </div>
   <div class="col-sm-6">
-    <div class="well">
-      <p class="lead">
-        Create
-      </p>
-      <%= form_for([:school, @word]) do |f| %>
-      <%= render 'shared/error_messages', object: @word %>
-
-      <div class="form-group">
-        <%= f.label :name, class: "sr-only" %>
-        <%= f.text_field :name, class: "form-control",
-        placeholder: "Name *"  %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Create a New Word
       </div>
+      <div class="panel-body">
+        <%= form_for([:school, @word]) do |f| %>
+          <%= render 'shared/error_messages', object: @word %>
 
-      <div class="form-group">
-        <%= f.label :phonetic_spelling, class: "sr-only" %>
-        <%= f.text_field :phonetic_spelling, class: "form-control",
-        placeholder: "Phonetic Spelling *"%>
+          <div class="form-group">
+            <%= f.label :name, class: "sr-only" %>
+            <%= f.text_field :name, class: "form-control",
+            placeholder: "Name *"  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :phonetic_spelling, class: "sr-only" %>
+            <%= f.text_field :phonetic_spelling, class: "form-control",
+            placeholder: "Phonetic Spelling *"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :part_of_speech, class: "sr-only" %>
+            <%= f.text_field :part_of_speech, class: "form-control",
+            placeholder: "Part of Speech *"  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :definition, class: "sr-only" %>
+            <%= f.text_field :definition, class: "form-control",
+            placeholder: "Definition *"  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :example_sentence, class: "sr-only" %>
+            <%= f.text_field :example_sentence, class: "form-control",
+            placeholder: "Example Sentence *"  %>
+          </div>
+
+          <%= f.submit "Create new word", class: "btn btn-default" %>
+        <% end %>
       </div>
-
-      <div class="form-group">
-        <%= f.label :part_of_speech, class: "sr-only" %>
-        <%= f.text_field :part_of_speech, class: "form-control",
-        placeholder: "Part of Speech *"  %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :definition, class: "sr-only" %>
-        <%= f.text_field :definition, class: "form-control",
-        placeholder: "Definition *"  %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :example_sentence, class: "sr-only" %>
-        <%= f.text_field :example_sentence, class: "form-control",
-        placeholder: "Example Sentence *"  %>
-      </div>
-
-      <%= f.submit "Create new word", class: "btn btn-default" %>
-      <% end %>
     </div>
   </div>
 </div>

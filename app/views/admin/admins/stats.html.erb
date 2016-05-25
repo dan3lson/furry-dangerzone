@@ -6,7 +6,7 @@
 			<div class="panel-heading">General</div>
 			<table class="table table-responsive table-bordered">
 				<th></th>
-				<th>Today</th>
+				<th>Latest</th>
 				<tr>
 					<td># Users</td>
 					<td><%= User.count %></td>
@@ -22,7 +22,7 @@
 			<div class="panel-heading">Words</div>
 			<table class="table table-responsive table-bordered">
 				<th></th>
-				<th>Today</th>
+				<th>Latest</th>
 				<tr>
 					<td>Users w/o Words</td>
 					<td><%= User.select { |u| u.num_words == 0 }.count %></td>
@@ -42,7 +42,7 @@
 			<div class="panel-heading">Tags</div>
 			<table class="table table-responsive table-bordered">
 				<th></th>
-				<th>Today</th>
+				<th>Latest</th>
 				<tr>
 					<td>Users w/o Tags</td>
 					<td><%= User.select { |u| u.tags.count == 0 }.count %></td>
@@ -62,7 +62,7 @@
 			<div class="panel-heading">Fundamental Games</div>
 			<table class="table table-responsive table-bordered">
 				<th></th>
-				<th>Today</th>
+				<th>Latest</th>
 				<tr>
 					<td>Fundamentals Completed</td>
 					<td><%= UserWord.where.not(games_completed: 0).count %></td>
@@ -86,7 +86,7 @@
 			<div class="panel-heading">Jeopardy Games</div>
 			<table class="table table-responsive table-bordered">
 				<th></th>
-				<th>Today</th>
+				<th>Latest</th>
 				<tr>
 					<td>Jeopardys Completed</td>
 					<td>
@@ -121,7 +121,7 @@
 			<div class="panel-heading">Freestyle Games</div>
 			<table class="table table-responsive table-bordered">
 				<th></th>
-				<th>Today</th>
+				<th>Latest</th>
 				<tr>
 					<td>Freestyles Completed</td>
 					<td><%= UserWord.where(games_completed: 3).count %></td>
@@ -149,7 +149,7 @@
 			<div class="panel-heading">Testimonials</div>
 			<table class="table table-responsive table-bordered">
 				<th></th>
-				<th>Today</th>
+				<th>Latest</th>
 				<tr>
 					<td>Reviews</td>
 					<td><%= Review.count %></td>

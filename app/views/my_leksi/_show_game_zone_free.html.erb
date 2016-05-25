@@ -7,8 +7,10 @@
 			title: "66% Mastered")
 		%>
 		<br>
-		Freestyle
-		<i class="fa fa-check-square-o"></i>
+		<small>
+			Advanced
+			<i class="fa fa-check-square-o"></i>
+		</small>
 	</p>
 <% elsif user_word.current_game == "three" %>
 	<p class="data-url pointer hover"
@@ -19,13 +21,13 @@
 			title: "66% Mastered")
 		%>
 		<br>
-		Freestyle
+		<small>Advanced</small>
 	</p>
 <% else %>
 	<p class="data-url pointer hover"
 				data-toggle="popover"
 				title="Why is this game locked?"
-				data-content="To activate this Freestyle game, you need to
+				data-content="To activate this Advanced game, you need to
 				play Jeopardy for this word."
 				data-placement="top">
 		<%= image_tag(
@@ -34,7 +36,9 @@
 			title: "66% Mastered")
 		%>
 		<br>
-		Freestyle
-		<i class="fa fa-lock"></i>
+		<small class="dark-gray">
+			Advanced
+			<i class="fa fa-lock"></i>
+		</small>
 	</p>
 <% end %>

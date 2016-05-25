@@ -1,0 +1,38 @@
+<div class="panel panel-default word-of-knowledge-container">
+	<div class="pull-right">
+		<i class="fa fa-question-circle-o pointer fa-2x dark-gray"
+			 data-toggle="modal"
+			 data-target="#word-tree-of-knowledge-modal"></i>
+	</div>
+	<p>
+		<strong>Word-Tree of Knowledge</strong>
+	</p>
+	<%= image_tag(
+		"strength4_key.png",
+		alt: "Still strong",
+		title: "Still strong")
+	%>
+	&nbsp; Mastered
+	<hr>
+	<%= image_tag(
+		"strength3_key.png",
+		alt: "Pretty good",
+		title: "Pretty good")
+	%>
+	&nbsp; Advanced
+	<hr>
+	<%= image_tag(
+		"strength2_key.png",
+		alt: "Time to practice",
+		title: "Time to practice")
+	%>
+	&nbsp; Intermediate
+	<hr>
+	<%= image_tag(
+		"strength1_key.png",
+		alt: "Overdue",
+		title: "Overdue")
+	%>
+	&nbsp; Basic
+</div>
+<%= render "my_leksi/word_tree_of_knowledge_modal" %>

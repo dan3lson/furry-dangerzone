@@ -35,8 +35,12 @@ class User < ActiveRecord::Base
     user.num_logins += 1
   end
 
+  def has_email_address?
+    !email.nil?
+  end
+
   def has_word?(word)
-    words.include?(word)
+    !UserWord.find_by(user: self, word: word).nil?
   end
 
   def has_words?

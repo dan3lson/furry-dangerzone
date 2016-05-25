@@ -7,8 +7,10 @@
 				title: "33% Mastered")
 			%>
 			<br>
-			Jeopardy
-			<i class="fa fa-check-square-o"></i>
+			<small>
+				Intermediate
+				<i class="fa fa-check-square-o"></i>
+			</small>
 		</p>
 <% elsif user_word.jeopardy_not_completed? %>
 	<p class="data-url pointer hover"
@@ -19,7 +21,9 @@
 			title: "33% Mastered")
 		%>
 		<br>
-		Jeopardy
+		<small>
+			Intermediate
+		</small>
 	</p>
 <% else %>
 	<p class="data-url pointer hover"
@@ -34,7 +38,9 @@
 			title: "33% Mastered")
 		%>
 		<br>
-		Jeopardy
-		<i class="fa fa-lock"></i>
+		<small class="dark-gray">
+			Intermediate
+			<i class="fa fa-lock"></i>
+		</small>
 	</p>
 <% end %>
