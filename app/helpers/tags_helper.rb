@@ -18,7 +18,7 @@ module TagsHelper
   # not tested
   def progress_for(user, tag)
     if num_words_for(user, tag) > 0
-      completed_games = user_words(user, tag).completed_games.count
+      completed_games = user_words(user, tag).map(&:games_completed).inject(:+)
       total_games = num_words_for(user, tag) * 3
       (completed_games / total_games.to_f * 100).round
     else

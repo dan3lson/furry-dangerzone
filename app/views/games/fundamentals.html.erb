@@ -3,26 +3,28 @@
 	record: @record,
 	synonyms: @synonyms,
 	antonyms: @antonyms,
-	rwe: @real_world_examples %>
-
-<div id="review_level_one_container" align="center">
-	<div align="center">
-		<%= image_tag("medal_red_100.png", alt: "Fundamental Medal") %>
-
-		<h1>Congratulations!</h1>
-
-		<p class="lead">
-			<span id="level_congrats_text">
-				You've completed the Fundamentals for
+	rwe: @real_world_examples
+%>
+<div id="review_level_one_container" class="center">
+	<div class="bg-success">
+		<%= image_tag("strength1.png",
+			alt: "Congrats on Basics Gold!",
+			title: "Congrats on Basics Gold!")
+		%>
+		<h1 class="text-success"><%= random_congrats %>!</h1>
+		<p>
+			<span id="level-congrats-text">
+				You now know the Basics for
 			</span>
 		</p>
-
-		<% if logged_in? && current_user.is_not_a_student? %>
-			<%= render "games/share_accomplishment" %>
-		<% end %>
 	</div>
+	<%= render "games/play_another",
+		url: "#{jeop_game_link(@chosen_word.id)}",
+		image_src: "strength2.png",
+		game_name: "Intermediate"
+	%>
+	<% if logged_in? && current_user.is_not_a_student? %>
+		<%= render "games/share_accomplishment" %>
+	<% end %>
 </div>
-
-<%#= render "games/play_another" %>
-
 <%= render "games/fund_buttons" %>

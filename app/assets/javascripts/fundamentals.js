@@ -783,8 +783,8 @@ $(document).ready(function() {
 			"visibility", "hidden"
 		);
 		$("#all_levels_button").show();
-		$("#level_congrats_text").append(
-			"<strong>'" + chosen_word_name + "'</strong> "
+		$("#level-congrats-text").append(
+			"<strong>'" + chosen_word_name + "'</strong>."
 		);
 		$("#goodies_total").html($new_goodies_total);
 	};

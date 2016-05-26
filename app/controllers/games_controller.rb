@@ -89,7 +89,6 @@ class GamesController < ApplicationController
       end
     else
       flash[:danger] = "Yikes! Log in first and then play."
-
       redirect_to root_path
     end
   end
@@ -97,7 +96,6 @@ class GamesController < ApplicationController
   def freestyle
     if logged_in?
       @chosen_word = Word.find(params[:word_id])
-
       @game_started = true
 
       if current_user.has_incomplete_freestyles?
@@ -106,7 +104,6 @@ class GamesController < ApplicationController
       end
     else
       flash[:danger] = "Yikes! Log in first and then play."
-
       redirect_to root_path
     end
   end

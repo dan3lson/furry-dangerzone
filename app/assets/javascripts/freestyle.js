@@ -4,6 +4,11 @@ $(document).ready(function(){
 	 */
 	var $chosen_word_value = $("#palabra").data("word-name");
 	var $chosen_word_id = $("#palabra").data("word-id");
+	var $chosen_word_show_page = $("<a>", {
+		text: $chosen_word_value + "!",
+		title: "View more details",
+		href: "/myLeksi/" + $chosen_word_id
+	})
 	var $response;
 	var $input;
 	var $input_value;
@@ -29,26 +34,34 @@ $(document).ready(function(){
 
 	$("#level_3_details").fadeIn();
 	$("#semantic_map_form").fadeIn();
-	// Update the activity name and instruction
-	display_instruction("Type three words similar to <strong>'" + $chosen_word_value + "'</strong>.");
 
-	$(".game-three-start-circle").click(function(){
-	});
-
-	/**
-	 * Start the progress made on learning this word
-	 */
-
+	display_instruction(
+		"Type three words similar to <strong>'" +
+		$chosen_word_value +
+		"'</strong>."
+	);
 	progressBar(0);
 
 	if ($("#game-started-bool").hasClass("begin-timer")) {
 		$time_game_started = new Date();
 	}
 
-	validate_input_values("semantic_map_form", "semantic_map_continue_button");
-	validate_input_values("word_map_form", "word_map_continue_button");
-	validate_input_values("definition_map_form", "definition_map_continue_button");
-	validate_input_values("sentence_form", "sentence_continue_button");
+	validate_input_values(
+		"semantic_map_form",
+		"semantic_map_continue_button"
+	);
+	validate_input_values(
+		"word_map_form",
+		"word_map_continue_button"
+	);
+	validate_input_values(
+		"definition_map_form",
+		"definition_map_continue_button"
+	);
+	validate_input_values(
+		"sentence_form",
+		"sentence_continue_button"
+	);
 
 	/**
 	 * Handle the continue buttons
@@ -56,7 +69,11 @@ $(document).ready(function(){
 
 	$("#semantic_map_continue_button").click(function(){
 		// Update the activity name and instruction
-		display_instruction("What words can be formed from <strong>'" + $chosen_word_value + "'</strong>?");
+		display_instruction(
+			"What words can be formed from <strong>'" +
+			$chosen_word_value +
+			"'</strong>?"
+		);
 
 		// Display the next round of input fields and hide the previous one
 		$("#semantic_map_form").hide();
@@ -65,8 +82,12 @@ $(document).ready(function(){
 		// Hide the current button
 		$("#semantic_map_continue_button").hide();
 
-		// Display the Word Map button only if the values were previously completed, i.e. the user hit the back-button
-		show_continue_button_if_activity_completed("word_map_form", "word_map_continue_button");
+		// Display the Word Map button only if the values were previously
+		// completed, i.e. the user hit the back-button
+		show_continue_button_if_activity_completed(
+			"word_map_form",
+			"word_map_continue_button"
+		);
 
 		$("#semantic_map_back_button").hide();
 		$("#word_map_back_button").show();
@@ -77,7 +98,11 @@ $(document).ready(function(){
 
 	$("#word_map_continue_button").click(function(){
 		// Update the activity name and instruction
-		display_instruction("What do you think <strong>'" + $chosen_word_value + "'</strong> means?");
+		display_instruction(
+			"What do you think <strong>'" +
+			$chosen_word_value +
+			"'</strong> means?"
+		);
 
 		// Display the next round of input fields and hide the previous one
 		$("#word_map_form").hide();
@@ -86,8 +111,12 @@ $(document).ready(function(){
 		// Display the next button and hide the previous one
 		$("#word_map_continue_button").hide();
 
-		// Display the Word Map button only if the values were previously completed, i.e. the user hit the back-button
-		show_continue_button_if_activity_completed("definition_map_form", "definition_map_continue_button");
+		// Display the Word Map button only if the values were previously
+		// completed, i.e. the user hit the back-button
+		show_continue_button_if_activity_completed(
+			"definition_map_form",
+			"definition_map_continue_button"
+		);
 
 		// Display the next button and hide the previous one
 		$("#word_map_back_button").hide();
@@ -99,7 +128,11 @@ $(document).ready(function(){
 
 	$("#definition_map_continue_button").click(function(){
 		// Update the activity name and instruction
-		display_instruction("Create three sentences with <strong>'" + $chosen_word_value + "'</strong> in each one.");
+		display_instruction(
+			"Create three sentences with <strong>'" +
+			$chosen_word_value +
+			"'</strong> in each one."
+		);
 
 		// Display the next round of input fields and hide the previous one
 		$("#definition_map_form").hide();
@@ -108,8 +141,12 @@ $(document).ready(function(){
 		// Hide the button
 		$("#definition_map_continue_button").hide();
 
-		// Display the Word Map button only if the values were previously completed, i.e. the user hit the back-button
-		show_continue_button_if_activity_completed("sentence_form", "sentence_continue_button");
+		// Display the Word Map button only if the values were previously
+		// completed, i.e. the user hit the back-button
+		show_continue_button_if_activity_completed(
+			"sentence_form",
+			"sentence_continue_button"
+		);
 
 		// Display the previous button and hide the previous one
 		$("#definition_map_back_button").hide();
@@ -122,7 +159,9 @@ $(document).ready(function(){
 	$("#sentence_continue_button").click(function(){
 		// Ensure the semantic map array and container is empty before adding values
 		$semantic_map_responses = [];
-		$("#semantic_map_response_container").find("*").not(".review_title").remove();
+		$("#semantic_map_response_container").find("*")
+																				 .not(".review_title")
+																				 .remove();
 
 		// Get the Semantic Map input values and add it to the semantic map array
 		$("#semantic_map_form input[type=text]").map(function(){
@@ -142,7 +181,9 @@ $(document).ready(function(){
 
 		//Ensure the definition map array and container is empty before adding values
 		$definition_map_responses = [];
-		$("#definition_map_response_container").find("*").not(".review_title").remove();
+		$("#definition_map_response_container").find("*")
+																					 .not(".review_title")
+																					 .remove();
 
 		//Get the definition map input values and add it to the definition map array
 		$("#definition_map_form input[type=text]").map(function(){
@@ -152,7 +193,9 @@ $(document).ready(function(){
 
 		//Ensure the sentence array and container is empty before adding values
 		$sentence_responses = [];
-		$("#sentence_response_container").find("*").not(".review_title").remove();
+		$("#sentence_response_container").find("*")
+																		 .not(".review_title")
+																		 .remove();
 
 		//Get the sentence map input values and add it to the sentence array
 		$("#sentence_form input[type=text]").map(function(){
@@ -168,19 +211,16 @@ $(document).ready(function(){
 
 		$("#level_3_completed").show();
 
-		$("#level_3_details, #goodies").hide();
-
-		$("#goodies, #progress_bar_container").css("visibility","hidden");
+		$("#freestyle-form").hide();
+		$("#progress_bar_container").hide(); // ("visibility", "hidden");
 		$("#all_levels_button").show();
-		$("#level_congrats_text").append("<strong>'" + $chosen_word_value + "'</strong> ");
-		$("#goodies_total").html($new_goodies_total);
+		$("#level-congrats-text").append($chosen_word_show_page);
 
 		create_freestyle_responses_for_uw();
 		update_num_played();
 
 		// Hide the exit btn and display the home btn
 		$("#game-exit-btn").hide();
-		$("#game-home-btn").show();
 	});
 
 	/**
@@ -259,7 +299,10 @@ $(document).ready(function(){
 		});
 	}
 
-	function show_continue_button_if_activity_completed(form_name, continue_button_name) {
+	function show_continue_button_if_activity_completed(
+		form_name,
+		continue_button_name
+	) {
 		var $continue_button_name = "#"+continue_button_name;
 		var $input_valid = "#" + form_name + " input.valid";
 
@@ -281,10 +324,10 @@ $(document).ready(function(){
 	};
 
 	function progressBar(value) {
-		$('.game-progress-bar').css('width', value+'%').attr('aria-valuenow', value);
+		$('.game-progress-bar').css('width', value+'%')
+													 .attr('aria-valuenow', value);
 	}
 
-	// Shortcut for retrieving an element's ID
 	function _(x) {
 		return document.getElementById(x);
 	};

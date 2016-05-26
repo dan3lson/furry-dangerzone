@@ -1,20 +1,21 @@
 <%= render "games/jeop_game_container" %>
-
-<div id="review_level_two_container" align="center">
-	<%= image_tag("medal_orange_100.png", alt: "You\'ve earned a medal") %>
-
-	<h1>Congratulations!</h1>
-
-	<p class="lead">
-		<span id="level_congrats_text">
-			You've completed Jeopardy for the words below!
-	</p>
-
+<div id="review_level_two_container" class="center">
+	<div class="bg-success">
+		<%= image_tag("strength2.png",
+			alt: "Congrats on Intermediate Gold!",
+			title: "Congrats on Intermediate Gold!")
+		%>
+		<h1 class="text-success"><%= random_congrats %>!</h1>
+		<p>
+			<span id="level-congrats-text">
+				You got through the Intermediate game for
+				<strong>'<%= @chosen_word.name %>'</strong>.
+				Check out how you did:
+			</span>
+		</p>
+	</div>
+	<%= render "games/jeop_results" %>
 	<% unless current_user.is_student? %>
 		<%= render "games/share_accomplishment" %>
 	<% end %>
-
-	<hr/>
-
-	<%= render "games/jeop_results" %>
 </div>
