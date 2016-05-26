@@ -34,17 +34,6 @@ class Word < ActiveRecord::Base
   end
 
   # not tested
-  def self.search_myLeksi(user, name)
-    blank_msg = "Type a word and then we'll try to find it."
-
-    return blank_msg if name.blank?
-
-    not_found_msg = "You don\'t have '#{name}'."
-
-    found_in_myLeksi?(user, name) ? myLeksi_words(user, name) : not_found_msg
-  end
-
-  # not tested
   def self.found_in_myLeksi?(user, name)
     myLeksi_words(user, name).any?
   end

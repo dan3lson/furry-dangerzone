@@ -7,10 +7,6 @@ module GamesHelper
     "/jeopardy?word_id=#{word_id}"
   end
 
-  def jeop_tag_game_link(word_id)
-    "/jeopardy_tag?tag_id=#{word_id}"
-  end
-
   def free_game_link(word_id)
     "/freestyle?word_id=#{word_id}"
   end
@@ -31,5 +27,26 @@ module GamesHelper
     link_to link, class: "hover" do
       image_tag("#{image_src}.png", alt: "#{mastery_percentage}% Mastered")
     end
+  end
+
+  def random_congrats
+    %w(
+      Congratulations
+      Awesome
+      Nice
+      Great
+      Yay
+      Kudos
+      Groovy
+      Props
+      Terrific
+      Excellent
+      Outstanding
+      Splendid
+      Cool
+      Fantastic
+      Fabulous
+      Exquisite
+    ).sample
   end
 end

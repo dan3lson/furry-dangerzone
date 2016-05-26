@@ -11,7 +11,6 @@
 		</div>
 	</div>
 </div>
-
 <div id="palabra" data-word-name="<%= @chosen_word.name %>"
 									data-word-id="<%= @chosen_word.id %>"></div>
 
@@ -86,37 +85,20 @@
 
 </form> <!-- end of level 3 form -->
 
-<div id="level_3_completed" align="center">
-	<%= image_tag("medal_green_100.png", alt: "Freestyle Medal") %>
-
-	<h1>Congratulations!</h1>
-
-	<p class="lead">
-		<span id="level_congrats_text">You've completed Freestyle for </span>
-		and earned 5 experience points (XP)!
-	</p>
-
+<div id="level_3_completed" class="center">
+	<div class="bg-success">
+		<%= image_tag("strength4.png",
+			alt: "Congrats on earning the Apple Tree!",
+			title: "Congrats on earning the Apple Tree!")
+		%>
+		<h1 class="text-success"><%= random_congrats %>!</h1>
+		<p>
+			<span id="level-congrats-text">
+				You now should be Advanced with the word
+			</span>
+		</p>
+	</div>
 	<% unless current_user.is_student? %>
 		<%= render "games/share_accomplishment" %>
-	<% end %>
-
-	<% if current_user.incomplete_freestyles.count > 1 %>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4>Play another Freestyle game?</h4>
-			</div>
-			<div class="panel-body center">
-				<div class="row">
-					<% @four_free_words.each do |w| %>
-						<div class="col-sm-3">
-							<div class="data-url pointer new-freestyle-game-circle"
-									 data-url="/freestyle?word_id=<%= w.id %>">
-								<%= w.name %>
-							</div>
-						</div>
-					<% end %>
-				</div>
-			</div>
-		</div>
 	<% end %>
 </div>

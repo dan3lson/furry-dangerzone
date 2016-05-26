@@ -14,6 +14,8 @@ $(document).ready(function(){
 	var $counter = 0;
 	var $correct_word_proggress_bar_without_pbc_class = "";
 	var $time_game_started;
+	var $up_arrow = create_elem("i", "fa fa-long-arrow-up");
+	var $down_arrow = create_elem("i", "fa fa-long-arrow-down");
 
 	// Start the main activity
 	$(".jeopardy-begin-game").click(function(){
@@ -140,8 +142,8 @@ $(document).ready(function(){
 						"#" +
 						$("button:contains('" + lineup_names[$counter] + "')")
 						.next()
-						.attr("id")
-						+ " .progress-bar-custom:first";
+						.attr("id") +
+						" .progress-bar-custom:first";
 					$($correct_word_proggress_bar_without_pbc_class)
 						.html("&#10006;")
 						.css("color", "#ccc")
@@ -171,8 +173,6 @@ $(document).ready(function(){
 
 					setTimeout(function(){
 						$("#game-exit-btn").hide();
-						$("#game-home-btn").show();
-
 						$("#level_2_container").hide();
 						$("#review_level_two_container").fadeIn();
 
@@ -216,6 +216,13 @@ $(document).ready(function(){
 	/**
 	 * Helper Functions: Support ones that help each activity above
 	 */
+
+	function create_elem(elem, elem_class, elem_id) {
+		elem_class = elem_class ||  null;
+		elem_id = elem_id || null;
+
+		return $("<" + elem + ">", { class: elem_class, id: elem_id });
+	}
 
 	// Update user_word status
 	function update_jeopardy_status_as_complete(word_id) {
@@ -324,11 +331,13 @@ $(document).ready(function(){
 			// award goodies
 			update_user_points(4);
 
-			$(level_two_results_num_circle).html("&#8593;");
+			$(level_two_results_num_circle).html($up_arrow);
 			$(level_two_results_num_word).html(
 				"<strong>'" + word_name +
 				"'</strong> " +
-				"is now ready for Freestyle!"
+				"has moved up! " +
+				"<a href='/freestyle?word_id=" + word_id +
+				"'>Play its Advanced game now!</a>"
 			);
 		}
 		else {
@@ -339,11 +348,13 @@ $(document).ready(function(){
 
 			reset_uw_fund_status_from_1_to_0(word_id);
 
-			$(level_two_results_num_circle).html("&#8595;");
+			$(level_two_results_num_circle).html($down_arrow);
 			$(level_two_results_num_word).html(
 				"<strong>'" + word_name +
 				"'</strong> " +
-				"returns to the Fundamentals."
+				"needs a little more work before it can move up. " +
+				"<a href='/fundamentals?word_id=" + word_id +
+				"'>Play the Basics again to sharpen your knowledge!</a>"
 			);
 		}
 	};
