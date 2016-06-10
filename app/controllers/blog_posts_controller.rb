@@ -1,7 +1,15 @@
 class BlogPostsController < ApplicationController
-  before_action :admin_only, except: [:index, :show]
+  before_action :admin_only, except: [
+    :index,
+    :show,
+    :all_about_leksi_part_1,
+    :all_about_leksi_part_2
+  ]
 
   layout "application_guest", except: [:edit, :new]
+
+  def danelson_rosa
+  end
 
   def index
     @blog_posts = BlogPost.all

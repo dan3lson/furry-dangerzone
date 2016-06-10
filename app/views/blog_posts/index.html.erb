@@ -23,16 +23,18 @@
 <div class="thin-gray-section">
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">
-        <% @blog_posts.each do |blog_post| %>
-          <%= render "blog_posts/preview",
-            icon: blog_post.icon,
-            title: blog_post.title,
-            date: time_ago_in_words(blog_post.created_at),
-            content: blog_post.content.truncate(60),
-            blog_post: blog_post %>
-        <% end %>
-
-			<div class="clear"></div>
+      <%= render "blog_posts/preview",
+        icon: "map-o",
+        title: "All About Leksi, Part II: Our Founder's Aha! Moment",
+        date: "08/06/1988",
+        content: "Preview for blog post",
+        url: all_about_leksi_part_2_path %>
+      <%= render "blog_posts/preview",
+        icon: "map-o",
+        title: "All About Leksi, Part I: What\'s in a Name?",
+        date: "08/06/1988",
+        content: "Preview for blog post",
+        url: all_about_leksi_part_1_path %>
 		</div>
 	</div>
 </div>
