@@ -1,18 +1,14 @@
 <div>
 	<h2 class="basic-apple-blue-link">
-		<%= link_to blog_post do %>
+		<%= link_to url do %>
 			<i class="fa fa-<%= icon %>"></i>
 			<%= title %>
 		<% end %>
-
 		<br>
-
-		<small><%= date %> ago</small>
+		<small><%= date %></small>
 	</h2>
-
 	<p class="lead">
 		<%= content %>
 	</p>
+	<hr>
 </div>
-
-<hr>

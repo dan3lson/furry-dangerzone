@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
   get "blog" => "blog_posts#index"
+  get "all-about-leksi-part-1" => "blog_posts#all_about_leksi_part_1"
+  get "all-about-leksi-part-2" => "blog_posts#all_about_leksi_part_2"
   resources :blog_posts do
     resources :comments
   end
