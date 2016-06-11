@@ -7,4 +7,7 @@ class StaticPagesController < ApplicationController
 
   def about_us
   end
+
+  def english_language_learners
+  end
 end
