@@ -121,9 +121,8 @@ a, a:active {
 	box-shadow: 0px -1px 10px 3px $medium-gray;
 	left: 0;
 	padding: 10px;
-	position: fixed;
+	position: absolute;
 	top: 50px;
-	z-index: 300;
 }
 
 .alert-container {
@@ -1067,6 +1066,12 @@ table {
     border-radius: 100px;
   }
 }
+#myLeksi-bg {
+	background-image: url(image-path("myLeksi_bg.png"));
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 600px;
+}
 
 .thin-gray-section {
 	@extend .thin-section;
@@ -1112,10 +1117,13 @@ table {
 
   h1 {
     font-size: 60px;
+		text-shadow: 1px 1px 1px $black;
+		text-transform: uppercase;
   }
 
   h3 {
     font-size: 40px;
+		text-shadow: 1px 1px 1px $black;
   }
 }
 

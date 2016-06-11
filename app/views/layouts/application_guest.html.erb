@@ -11,13 +11,15 @@
 
         <%= yield %>
 
-        <%= debug(params) if Rails.env.development? %>
+        <% unless page_is_landing_page? %>
+          <%= debug(params) if Rails.env.development? %>
+        <% end %>
       </div>
 
-      <%= render "layouts/footer_guest" %>
+      <%= render "layouts/footer_guest" unless page_is_landing_page? %>
     </div>
 
-    <%= render "layouts/header_logged_out" %>
+    <%= render "layouts/header_logged_out" unless page_is_landing_page? %>
 
     <div class="sb-slidebar sb-right lead">
       <a class="list-group-item" href="/about_us">
