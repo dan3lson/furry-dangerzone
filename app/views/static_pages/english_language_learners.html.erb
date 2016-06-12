@@ -25,34 +25,36 @@
 
 	<br>
 
-	<div class="row hvr-bob">
+	<div class="row">
 		<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 center
-								data-url btn-custom-get-started gs-tracker"
-				 id="get-started-top-btn"
-				 data-url="/signup">
-			Get started
+								btn-custom-get-started"
+				 id="get-leksi-app-btn">
+			GET THE APP
 		</div>
 	</div>
 </div>
 
 <div class="thin-gray-section center">
 	<h3>
-		Create Your Personal Dictionary
+		Create a Vocabulary Notebook
 	</h3>
 
-	<div class="guest-homepage-images-container col-sm-8 col-sm-offset-2">
+	<div class="guest-homepage-images-container">
     <div class="row">
-      <div class="col-sm-5">
-        <div id="myLeksi-bg"></div>
-      </div>
-      <div class="col-sm-7">
+      <div class="col-sm-6 col-sm-offset-3">
         <p>
           It's up to you to take control of your vocabulary learning.
-          Having a vocabulary notebook is an effective tool for you to
-          organize, manage, and learn words you don't know. Leksi makes this
-          easy by empowering you to find, add, and group words, which will
-          make sure you don't forget a word and enhance your vocabulary study.
+          When you see or hear a word you don't know, add it to your list.
+          Having a personal dictionary is an effective tool for you to
+          organize, manage, and learn words you don't know.
         </p>
+        <p>
+          Leksi makes this easy by empowering you to find, add, and group words,
+          which will make sure you don't forget a word and enhance your
+          vocabulary study.
+        </p>
+        <br>
+        <div id="myLeksi-bg"></div>
       </div>
     </div>
 	</div>
@@ -65,57 +67,85 @@
 		Learn (and Remember!) More Words
 	</h3>
 
-  <div class="guest-homepage-images-container col-sm-8 col-sm-offset-2">
+  <div class="guest-homepage-images-container">
     <div class="row">
-      <div class="col-sm-5">
-        <div id="myLeksi-bg"></div>
-      </div>
-      <div class="col-sm-7">
+      <div class="col-sm-6 col-sm-offset-3">
         <p>
           There are many ways to try and learn new words. We did a lot of
-          research on what works and based on that, we created game-like
+          research on what works and based on that, created game-like
           activities that motivate and really help you to build and retain new
-          vocabulary.
+          vocabulary. To master a word, complete the Basic, Intermediate, and
+          Advanced games:
         </p>
-        <p>
-          How does it work? You first play <em>The Fundamentals</em>:
-          this game focuses on and has quiz-checkpoints for the basics of an
-          individual word, i.e. spelling, meanings, synonyms, antonyms, and
-          example sentences.
-        </p>
-        <p>
-          Then you play <em>Jeopardy</em>:
-          this more challenging activity sharpens your knowledge of multiple
-          words at the same time. For a word to reach the next game, you need to
-          earn three of five hearts, i.e. answer three of five questions
-          correctly.
-        </p>
-        <p>
-          After that, you complete <em>Freestyle</em>:
-          Unleash your creativity by using the words you've learned and create
-          a short story, poem, rap, mad-lib - anything! If you share it
-          publically, it could be featured in the Leksi Spotlight!
-        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Basic
+          </div>
+          <div class="panel-body">
+            <p>
+              This game focuses on and has quiz-checkpoints for the basics of an
+              individual word, i.e. spelling, meanings, synonyms, antonyms, and
+              example sentences.
+            </p>
+            <div id="myLeksi-bg"></div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Intermediate
+          </div>
+          <div class="panel-body">
+            <p>
+              This more challenging activity sharpens your knowledge of multiple
+              words at the same time. For a word to reach the next game, you need to
+              earn three of five hearts, i.e. answer three of five questions
+              correctly.
+            </p>
+            <div id="myLeksi-bg"></div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Advanced
+          </div>
+          <div class="panel-body">
+            <p>
+              Unleash your creativity by using the words you've learned and create
+              a short story, poem, rap, mad-lib - anything! If you share it
+              publically, it could be featured in the Leksi Spotlight!
+            </p>
+            <div id="myLeksi-bg"></div>
+          </div>
+        </div>
       </div>
     </div>
 	</div>
   <div class="clear"></div>
 </div>
 
-<div class="thin-gray-section center">
-  <h3>
-		Coming Soon
-	</h3>
+<div class="leksi-blue-bg center" id="lp-cta">
+  <h1>
+		Mobile App Coming Soon!
+	</h1>
 
-  <div class="guest-homepage-images-container col-sm-8 col-sm-offset-2">
+  <div class="guest-homepage-images-container">
     <div class="row">
-      <div class="col-sm-5">
-        <div id="myLeksi-bg"></div>
-      </div>
-      <div class="col-sm-7">
-        Leksi will be released as an Apple and Android mobile app this summer.
-        Give us your email address and we'll keep you updated as we finish
-        and get this out to you.
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-default">
+          <div class="panel panel-body">
+            <p>
+              You can soon download Leksi on Apple and Android devices.
+              Provide your email address below and we'll let you know when it's
+              ready!
+            </p>
+            <br>
+            <%= render "landing_pages/form", target: "english-language-learners" %>
+          </div>
+        </div>
       </div>
     </div>
 	</div>
