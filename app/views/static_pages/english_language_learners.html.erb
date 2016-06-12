@@ -54,13 +54,18 @@
           vocabulary study.
         </p>
         <br>
-        <div id="myLeksi-bg"></div>
+        <div>
+          <%= image_tag("words.gif",
+          class: "img img-responsive",
+            alt: "Leksi Vocabulary Notebook",
+            title: "Leksi Vocabulary Notebook")
+            %>
+        </div>
       </div>
     </div>
 	</div>
   <div class="clear"></div>
 </div>
-
 
 <div class="fat-section center">
 	<h3>
@@ -68,58 +73,62 @@
 	</h3>
 
   <div class="guest-homepage-images-container">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-sm-6 col-sm-offset-3">
+      <p>
+        We created game-like activities based on proven research. Our games
+        motivate and really help you to build and retain new
+        vocabulary. To master a word, complete the Basic, Intermediate, and
+        Advanced games:
+      </p>
+      <div>
+        <br>
+        <h4>Basic</h4>
         <p>
-          There are many ways to try and learn new words. We did a lot of
-          research on what works and based on that, created game-like
-          activities that motivate and really help you to build and retain new
-          vocabulary. To master a word, complete the Basic, Intermediate, and
-          Advanced games:
+          This game focuses on and has quiz-checkpoints for the basics of an
+          individual word, i.e. spelling, meanings, synonyms, antonyms, and
+          example sentences.
         </p>
+        <div>
+          <%= image_tag("fundamentals.gif",
+            class: "img img-responsive",
+            alt: "Leksi Basic Game",
+            title: "Leksi Basic Game")
+          %>
+        </div>
+        <hr>
+        <br>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Basic
-          </div>
-          <div class="panel-body">
-            <p>
-              This game focuses on and has quiz-checkpoints for the basics of an
-              individual word, i.e. spelling, meanings, synonyms, antonyms, and
-              example sentences.
-            </p>
-            <div id="myLeksi-bg"></div>
-          </div>
+      <div>
+        <h4>Intermediate</h4>
+        <p>
+          This more challenging activity sharpens your knowledge of multiple
+          words at the same time. For a word to reach the next game, you need to
+          earn three of five hearts, i.e. answer three of five questions
+          correctly.
+        </p>
+        <div>
+          <%= image_tag("jeopardy.gif",
+            class: "img img-responsive",
+            alt: "Leksi Intermediate Game",
+            title: "Leksi Intermediate Game")
+          %>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Intermediate
-          </div>
-          <div class="panel-body">
-            <p>
-              This more challenging activity sharpens your knowledge of multiple
-              words at the same time. For a word to reach the next game, you need to
-              earn three of five hearts, i.e. answer three of five questions
-              correctly.
-            </p>
-            <div id="myLeksi-bg"></div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Advanced
-          </div>
-          <div class="panel-body">
-            <p>
-              Unleash your creativity by using the words you've learned and create
-              a short story, poem, rap, mad-lib - anything! If you share it
-              publically, it could be featured in the Leksi Spotlight!
-            </p>
-            <div id="myLeksi-bg"></div>
-          </div>
+        <hr>
+        <br>
+      </div>
+      <div>
+        <h4>Advanced</h4>
+        <p>
+          Unleash your creativity by using the words you've learned and create
+          a short story, poem, rap, mad-lib - anything! If you share it
+          publically, it could be featured in the Leksi Spotlight!
+        </p>
+        <div>
+          <%= image_tag("freestyle.gif",
+            class: "img img-responsive",
+            alt: "Leksi Advanced Game",
+            title: "Leksi Advanced Game")
+          %>
         </div>
       </div>
     </div>
@@ -138,12 +147,13 @@
         <div class="panel panel-default">
           <div class="panel panel-body">
             <p>
-              You can soon download Leksi on Apple and Android devices.
+              Leksi will soon be available for Apple and Android devices.
               Provide your email address below and we'll let you know when it's
               ready!
             </p>
             <br>
-            <%= render "landing_pages/form", target: "english-language-learners" %>
+            <%= render "landing_pages/form",
+              target: "english-language-learners" %>
           </div>
         </div>
       </div>

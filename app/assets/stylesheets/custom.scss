@@ -1078,13 +1078,6 @@ table {
     border-radius: 100px;
   }
 }
-#myLeksi-bg {
-	background-image: url(image-path("words.gif"));
-	background-position: center center;
-	background-size: contain;
-	background-repeat: no-repeat;
-	height: 347px;
-}
 
 .thin-gray-section {
 	@extend .thin-section;
