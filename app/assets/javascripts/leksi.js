@@ -19,6 +19,10 @@ $(document).ready(function(){
   	$('[data-toggle="popover"]').popover()
 	});
 
+	$("#get-leksi-app-btn").click(function() {
+		scroll_to_section("#lp-cta");
+	});
+
 	spinner();
 
 	function spinner() {
@@ -33,5 +37,9 @@ $(document).ready(function(){
 			$(".spinner").fadeOut();
 			$("#awfs-suc-war-err-container").fadeIn();
 		});
+	};
+
+	function scroll_to_section(section) {
+		$("html, body").animate({ scrollTop: $(document).height() }, 1300);
 	};
 });

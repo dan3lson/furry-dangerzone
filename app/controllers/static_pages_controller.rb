@@ -9,5 +9,6 @@ class StaticPagesController < ApplicationController
   end
 
   def english_language_learners
+    @landing_page = LandingPage.new
   end
 end

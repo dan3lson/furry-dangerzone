@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   resource :user_word_tag, only: [:create, :edit, :destroy]
   resource :user_word_tag_word_show_page, only: [:destroy]
   resource :user_word_tag_tag_show_page, only: [:destroy]
+  resource :landing_pages, only: [:create]
   resources :versions do
     resources :reviews
   end

@@ -525,6 +525,18 @@ input {
 	color: $sky-blue;
 }
 
+.leksi-blue-bg {
+	@extend .thin-section;
+
+	background: $sky-blue;
+
+	h1 {
+		color: $white;
+		text-transform: uppercase;
+		text-shadow: 1px 1px 1px $black;
+	}
+}
+
 .leksi-orange {
 	color: $leksi-orange;
 }
@@ -1067,7 +1079,8 @@ table {
   }
 }
 #myLeksi-bg {
-	background-image: url(image-path("myLeksi_bg.png"));
+	background-image: url(image-path("words.gif"));
+	background-position: center center;
 	background-size: contain;
 	background-repeat: no-repeat;
 	height: 600px;
@@ -1116,7 +1129,7 @@ table {
 	padding-top: 10em;
 
   h1 {
-    font-size: 60px;
+    font-size: 90px;
 		text-shadow: 1px 1px 1px $black;
 		text-transform: uppercase;
   }
