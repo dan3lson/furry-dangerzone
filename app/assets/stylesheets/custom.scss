@@ -1014,6 +1014,10 @@ table {
 
 .guest-homepage-images-container {
 	padding: 40px 10px 0 10px;
+
+	.img-responsive {
+		margin: 0 auto;
+	}
 }
 
 .guest-homepage-image {
