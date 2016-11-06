@@ -676,6 +676,12 @@ input {
 	padding-bottom: 6em;
 }
 
+#pricing-container {
+	table {
+		font-size: 2em;
+	}
+}
+
 .progress-meter-header {
   @extend .stats-header;
 
@@ -780,42 +786,6 @@ input {
 .remove-side-margins {
 	margin-left: 0;
 	margin-right: 0;
-}
-
-.research-first-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("myLeksi_color_100.png"));
-}
-
-.research-second-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("focus_color_100.png"));
-}
-
-.research-third-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("multiple_color_100.png"));
-}
-
-.research-fourth-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("exposure_color_100.png"));
-}
-
-.research-fifth-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("recycle_color_100.png"));
-}
-
-.research-sixth-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("more_color_100.png"));
 }
 
 .right {
@@ -977,10 +947,11 @@ table {
 .btn-custom-get-started {
   @extend .btn-custom;
 
-  background: $amber;
-  border: $amber 1px solid;
+  background: $leksi-red;
+  border: $leksi-red 1px solid;
 	font-size: large;
 	font-weight: 500;
+	margin-bottom: 20px;
 
   a {
     color: $white;
@@ -1012,52 +983,10 @@ table {
 	}
 }
 
-.guest-homepage-images-container {
-	padding: 40px 10px 0 10px;
-
-	.img-responsive {
-		margin: 0 auto;
-	}
-}
-
-.guest-homepage-image {
-	display: inline-block;
-	height: 100px;
-	width: 100px;
-}
 .gamification-spotlight {
 	display: table;
 	text-align: left;
 	position: relative;
-}
-
-.gamification-first-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("apple_100.png"));
-}
-
-.gamification-second-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("grade_color_100.png"));
-}
-
-.gamification-third-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("level_up_color_100.png"));
-}
-
-.gamification-fourth-image {
-	@extend .guest-homepage-image;
-
-	background-image: url(image-path("leaderboard_color_100.png"));
-}
-
-.gamificaton-text {
-	display: inline-block;
-	padding: 5px 0 0 15px;
 }
 
 .gray {
@@ -1081,6 +1010,26 @@ table {
   .btn {
     border-radius: 100px;
   }
+}
+
+#sneak-peak-img-container {
+	img:not(:first-child) {
+		display: none;
+	}
+	img {
+		margin: 0 auto;
+	}
+}
+
+.thin-brown-section {
+	@extend .thin-section;
+
+	background: $tree-brown;
+	color: $white;
+
+	h3 {
+		padding-bottom: 43px;
+	}
 }
 
 .thin-gray-section {
@@ -1119,21 +1068,20 @@ table {
 }
 
 .top-section {
-	background: url(image-path("home_bg.jpg"));
+	background: url(image-path("tree_background.jpg"));
   background-size: cover;
 	color: $white;
-	height: 755px;
-	padding-top: 4em;
+	height: 628px;
+	padding-top: 6em;
 
   h1 {
-    font-size: 90px;
+    font-size: 45px;
 		text-shadow: 1px 1px 1px $black;
 		text-transform: uppercase;
   }
 
   h3 {
-    font-size: 40px;
-		text-shadow: 1px 1px 1px $black;
+    font-size: 27px;
   }
 }
 
