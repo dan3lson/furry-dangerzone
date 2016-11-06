@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     root "schools#classes"
     get "classes" => "schools#classes"
     get "words" => "schools#words"
+    get "frayer" => "words#frayer_model"
     get "student_words" => "words#student_words"
     get "students" => "schools#students"
     get "student" => "schools#student"

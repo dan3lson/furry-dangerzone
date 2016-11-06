@@ -27,7 +27,7 @@ feature "teacher views the menu", %{
 
       expect(page).to have_link("Edit")
       expect(page).to have_link("Stats")
-      expect(page).to have_link("Activate Brainiac Edition")
+      expect(page).to have_link("Activate Scholar Edition")
       expect(page).to have_link("Create a word")
       expect(page).to have_link("Add words for students")
       expect(page).to have_link("Report a problem")

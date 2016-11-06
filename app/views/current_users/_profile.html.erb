@@ -26,7 +26,7 @@
 
 <% if params[:controller] == "school/schools" %>
 	<%= link_to menu_path, class: "list-group-item" do %>
-		<i class="fa fa-gamepad fa-fw"></i>&nbsp; Activate Brainiac Edition
+		<i class="fa fa-gamepad fa-fw"></i>&nbsp; Activate Scholar Edition
 	<% end %>
 
 	<% if current_user.is_admin? %>
@@ -38,7 +38,7 @@
 
 <% if params[:controller] == "admin/admins" %>
 	<%= link_to menu_path, class: "list-group-item" do %>
-		<i class="fa fa-gamepad fa-fw"></i>&nbsp; Activate Brainiac Edition
+		<i class="fa fa-gamepad fa-fw"></i>&nbsp; Activate Scholar Edition
 	<% end %>
 
 	<%= link_to school_menu_path, class: "list-group-item" do %>

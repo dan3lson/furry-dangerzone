@@ -35,11 +35,19 @@ class School::WordsController < BaseSchoolController
     end
   end
 
+  def frayer_model
+
+  end
+
   private
 
   def word_params
-    params.require(:word).permit(:name, :phonetic_spelling, :part_of_speech,
-      :definition, :example_sentence
+    params.require(:word).permit(
+      :name,
+      :phonetic_spelling,
+      :part_of_speech,
+      :definition,
+      :example_sentence
     )
   end
 
