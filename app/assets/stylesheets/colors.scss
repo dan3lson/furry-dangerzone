@@ -32,3 +32,8 @@ $light-sky-blue: lighten($sky-blue, 55);
 $show-game-circle-container-hover-opac: .7;
 $tree-brown: #966A3D;
 $white: #FFF;
+
+.bg-tree-brown {
+	background: $tree-brown;
+	color: $white;
+}
