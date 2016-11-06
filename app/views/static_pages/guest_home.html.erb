@@ -244,11 +244,11 @@
   </div>
 </div>
 
-<!-- <div class="bg-info">
+<div class="bg-info">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
       <div class="center">
-        <%#= image_tag("school_color_100.png") %>
+        <%= image_tag("school_color_100.png") %>
         <h3>Get in Touch</h3>
       </div>
       <p>
@@ -261,7 +261,7 @@
 
       <p><small>All fields are required</small></p>
 
-      <form action="hire_me.php" method="post">
+      <%= form_tag(static_pages_contact_us_path, method: "post") do %>
         <div>
           <input type="text" value="" name="cf_name"
                  class="form-control" id="cf-name"
@@ -275,8 +275,8 @@
                  class="form-control"        id="cf-school-name"
                  placeholder="School Name"   required>
           <br/>
-          <textarea class="form-control" name="cf_description" rows="3"
-                    id="cf-description"
+          <textarea class="form-control" name="cf_comments" rows="3"
+                    id="cf-comments"
                     placeholder="Comments"
                     required></textarea>
           <br>
@@ -292,12 +292,12 @@
         </div>
         <div class="center">
           <button type="submit" value="Send" id="cf-submit-btn"
-                  class="btn btn-danger btn-lg" disabled>
+                  class="btn btn-danger btn-lg btn-block" disabled>
             <i class="fa fa-send-o"></i>
             Send
           </button>
         </div>
-      </form>
+      <% end %>
     </div>
   </div>
-</div> -->
+</div>

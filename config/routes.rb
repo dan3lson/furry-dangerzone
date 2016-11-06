@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#guest_home'
   get "about_us" => "static_pages#about_us"
-  get "english-language-learners" => "static_pages#english_language_learners"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
   get "search_words_for_students" => "searches#student_words"
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"
+  post "static_pages/contact_us"
   delete "logout" => "sessions#destroy"
   get "blog" => "blog_posts#index"
   get "all-about-leksi-part-1" => "blog_posts#all_about_leksi_part_1"
