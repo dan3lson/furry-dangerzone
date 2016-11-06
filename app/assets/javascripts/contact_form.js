@@ -7,7 +7,7 @@ $(document).ready(function() {
 	validate_text_field_live("#cf-name");
 	validate_text_field_live("#cf-email");
 	validate_text_field_live("#cf-school-name");
-	validate_text_field_live("#cf-description");
+	validate_text_field_live("#cf-comments");
 	validate_submission_by_human("#prove-ur-human-field", $random_string);
 
 	function create_random_string() {
