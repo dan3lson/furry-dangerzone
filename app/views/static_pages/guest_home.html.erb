@@ -18,190 +18,286 @@
 <div class="top-section">
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3 center">
-			<h1>Leksi</h1>
+			<h1>Improve Literacy Proficiency</h1>
 			<h3>
-				Boost your vocabulary in a fun and simple way.
+        Leksi increases vocabulary, which leads to better reading and writing
+        skills.
 			</h3>
 		</div>
 	</div>
 
 	<br>
 
-	<div class="row hvr-bob">
+	<div class="row">
 		<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 center
-								data-url btn-custom-get-started gs-tracker"
+								data-url btn-custom-get-started"
 				 id="get-started-top-btn"
 				 data-url="/signup">
-			Get started
+			LEARN MORE
+		</div>
+		<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 center
+								data-url btn-custom-get-started"
+				 id="get-started-top-btn"
+				 data-url="/signup">
+			TRY FOR FREE
 		</div>
 	</div>
+</div>
+
+<div class="thin-brown-section center">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <blockquote class="lead">
+        <p>
+          The extra practice Leksi afforded my scholars enabled them to master
+          new words more quickly and more deeply than before.
+        </p>
+        <p>
+          <em>
+            Leana P., Friends Seminary Middle School English Teacher
+          </em>
+        </p>
+      </blockquote>
+    </div>
+  </div>
 </div>
 
 <div class="thin-gray-section center">
-	<h3>
-		Design based on research studies into how vocabulary is learned best*
-	</h3>
-
-	<div class="guest-homepage-images-container col-sm-8 col-sm-offset-2">
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="research-first-image"></div>
-
-				<h4>Personalization</h4>
-
-				<p>
-					Collect, organize, and use words that you want
-				</p>
-			</div>
-
-			<div class="col-sm-6">
-				<div class="research-second-image"></div>
-
-				<h4>Learning in chunks</h4>
-
-				<p>
-					Focus on a limited number of words at a time
-				</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="research-third-image"></div>
-
-				<h4>A holistic approach</h4>
-
-				<p>
-					Learn different parts of the word
-				</p>
-			</div>
-
-			<div class="col-sm-6">
-				<div class="research-fourth-image"></div>
-
-				<h4>Multiple exposures</h4>
-
-				<p>
-					Be exposed to words in various contexts
-				</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="research-fifth-image"></div>
-
-				<h4>Re-play</h4>
-
-				<p>
-					Engage in activities that reuse a lot of words at one time
-				</p>
-			</div>
-
-			<div class="col-sm-6">
-				<div class="research-sixth-image"></div>
-
-				<h4>...and more word-learning strategies!</h4>
-			</div>
-		</div>
-	</div>
-
-	<div class="clear"></div>
-
-	<br>
-
-	<small class="gray">
-		*(Anderson, 1999; Beck, McKeown, &amp; Kucan, 2002; Nation,
-		2001; Stahl, 2005; Stahl &amp; Nagy, 2006)
-	</small>
+  <h3>How It Works</h3>
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <p>
+        Based on proven research, our game-like activities
+        motivate and help scholars learn and use new
+        vocabulary.
+        Take a sneak peak into our three-step gamified process for learning
+        new words:
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="sneak-peak-container bg-danger">
+        <h4>Fundamentals</h4>
+        <p>
+          Students acquire knowledge related to the basics of an
+          individual word, i.e. spelling, meanings, synonyms, antonyms, and
+          example sentences.
+        </p>
+        <div>
+          <%= button_tag "TAKE A SNEAK PEAK",
+            class: "btn btn-danger sneak-peak-btn",
+            data: { "game": "sneak-peak-fundamentals", "color": "bg-danger" } %>
+        </div>
+        <br>
+      </div>
+      <br>
+      <div class="sneak-peak-container">
+        <h4>Match'em All</h4>
+        <p>
+          This more challenging activity sharpens scholars' knowledge of multiple
+          words simultaneously. For a word to advance to the final game,
+          scholars must answer at least three questions correctly.
+        </p>
+        <div>
+          <%= button_tag "TAKE A SNEAK PEAK",
+            class: "btn btn-warning sneak-peak-btn",
+            data: { "game": "sneak-peak-jeopardy", "color": "bg-warning" } %>
+        </div>
+        <br>
+      </div>
+      <br>
+      <div class="sneak-peak-container">
+        <h4>Freestyle</h4>
+        <p>
+          Finally, scholars unleash their creativity by creating a semantic,
+          word, and definition map. Also, they create example sentences.
+        </p>
+        <div>
+          <%= button_tag "TAKE A SNEAK PEAK",
+            class: "btn btn-success sneak-peak-btn",
+            data: { "game": "sneak-peak-freestyle", "color": "bg-success" } %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-7 bg-danger" id="sneak-peak-img-container">
+      <%= image_tag("fundamentals.gif",
+        class: "img img-responsive",
+        id: "sneak-peak-fundamentals",
+        alt: "Leksi Basic Game",
+        title: "Leksi Basic Game")
+      %>
+      <%= image_tag("jeopardy.gif",
+        class: "img img-responsive",
+        id: "sneak-peak-jeopardy",
+        alt: "Leksi Intermediate Game",
+        title: "Leksi Intermediate Game")
+      %>
+      <%= image_tag("freestyle.gif",
+        class: "img img-responsive",
+        id: "sneak-peak-freestyle",
+        alt: "Leksi Advanced Game",
+        title: "Leksi Advanced Game")
+      %>
+    </div>
+  </div>
 </div>
 
-
-<div class="fat-section center">
-	<h3>
-		Leksi makes the learning experience fun and engaging.
-	</h3>
-
-	<div class="guest-homepage-images-container col-sm-8 col-sm-offset-2">
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="gamification-first-image"></div>
-
-				<h4>Game on!</h4>
-
-				<p>
-					Master each word in your list by completing our games
-				</p>
-			</div>
-
-			<div class="col-sm-6">
-				<div class="gamification-second-image"></div>
-				<h4>Checkpoints</h4>
-
-				<p>
-					Instantly see your progress as you learn
-				</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="gamification-third-image"></div>
-
-				<h4>Level Up</h4>
-
-				<p>
-					Earn experience points, level up, and achieve your weekly goals
-					with each game you complete
-				</p>
-			</div>
-
-			<div class="col-sm-6">
-				<div class="gamification-fourth-image"></div>
-				<h4>Leaderboard</h4>
-
-				<p>
-					Climb the Leaderboard ranks - and stay there!
-				</p>
-			</div>
-		</div>
-	</div>
-	<div class="clear"></div>
+<div class="thin-brown-section center">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <blockquote class="lead">
+        <p>
+          The kids love it! They became addicted right away and didn't want to
+          close their iPads when it was time to move on to the next thing.
+        </p>
+        <p>
+          <em>
+            Leana P., Friends Seminary Middle School English Teacher
+          </em>
+        </p>
+      </blockquote>
+    </div>
+  </div>
 </div>
 
 <div class="thin-gray-section">
-	<div class="col-sm-8 col-sm-offset-2">
-		<div class="center">
-			<%= image_tag("multiple_devices_color_100.png") %>
-			<h4>Use Leksi on any software or device</h4>
-		</div>
+	<h3 class="center">
+		Pricing
+	</h3>
 
-		<p>
-			Be more productive wherever you are, on the go. To use Leksi, all you need
-			is internet access and a web browser (e.g. Safari, Chrome, Firefox).
-			This means you can use Leksi on any phone, tablet, laptop, or computer
-			device.
-		</p>
-	</div>
+  <br>
+
+	<div id="pricing-container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <table class="table table-bordered table-condensed">
+          <th>1st Month</th>
+          <th>Monthly</th>
+          <tr>
+            <td>FREE</td>
+            <td>
+              $1.99 per student
+            </td>
+          </tr>
+        </table>
+        <p>
+          For one month, try Leksi for FREE. There is no limit on the number
+          of scholars and teachers who can participate.
+          When the pilot ends, review the collected results and feedback to
+          decide if you want to continue with paid accounts.
+        </p>
+      </div>
+    </div>
+  </div>
 
 	<div class="clear"></div>
 </div>
 
-<div class="thin-white-section">
-	<div class="col-sm-8 col-sm-offset-2">
-		<div class="center">
-			<%= image_tag("school_color_100.png") %>
-			<h4>Leksi for Schools</h4>
-		</div>
-
-		Vocabulary is the biggest indicator of a student's success. See why
-		it's crucial to not only literacy development, but also other academic
-		areas as well.
-
-		<p>
-			<%= mail_to "help@leksi.education", "Bring Leksi to your classroom",
-				  subject: "Bring Leksi to My Classroom"
-			%>
-		</p>
-	</div>
+<div class="thin-brown-section center">
+  <h3>Scholar Reactions</h3>
+  <div class="row">
+    <div class="col-sm-4">
+      <blockquote class="lead">
+        <p>
+          Kind of addictive; awesome!
+        </p>
+      </blockquote>
+    </div>
+    <div class="col-sm-4">
+      <blockquote class="lead">
+        <p>
+          Helps you really know the words, love it!
+        </p>
+      </blockquote>
+    </div>
+    <div class="col-sm-4">
+      <blockquote class="lead">
+        <p>
+          I like how Leksi makes learning vocab words easier.
+        </p>
+      </blockquote>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <blockquote class="lead">
+        <p>
+          I like that you get to learn in a fun but useful way.
+        </p>
+      </blockquote>
+    </div>
+    <div class="col-sm-4">
+      <blockquote class="lead">
+        <p>
+          I like how the different levels are very different activities.
+        </p>
+      </blockquote>
+    </div>
+    <div class="col-sm-4">
+      <blockquote class="lead">
+        <p>
+          I like that it can sort out all of my words so I can study.
+        </p>
+      </blockquote>
+    </div>
+  </div>
 </div>
+
+<!-- <div class="bg-info">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="center">
+        <%#= image_tag("school_color_100.png") %>
+        <h3>Get in Touch</h3>
+      </div>
+      <p>
+        We'd love to learn about your literacy goals and quickly show how
+        Leksi can boost both literacy and test scores.
+      </p>
+      <p>
+        Complete the form below to get started and bring Leksi to your classroom.
+      </p>
+
+      <p><small>All fields are required</small></p>
+
+      <form action="hire_me.php" method="post">
+        <div>
+          <input type="text" value="" name="cf_name"
+                 class="form-control" id="cf-name"
+                 placeholder="Name"   required>
+          <br/>
+          <input type="email" value="" name="cf_email"
+                 class="form-control"  id="cf-email"
+                 placeholder="Email"   required>
+          <br/>
+          <input type="school_name" value="" name="cf_school_name"
+                 class="form-control"        id="cf-school-name"
+                 placeholder="School Name"   required>
+          <br/>
+          <textarea class="form-control" name="cf_description" rows="3"
+                    id="cf-description"
+                    placeholder="Comments"
+                    required></textarea>
+          <br>
+          <p>
+            To verify you're a person, please type the following exactly as
+            you see it:
+            <strong>L3ks!</strong>.
+
+            <input type="text" value="" name="prove_ur_human"
+                   class="form-control" id="prove-ur-human-field"
+                   required>
+          </p>
+        </div>
+        <div class="center">
+          <button type="submit" value="Send" id="cf-submit-btn"
+                  class="btn btn-danger btn-lg" disabled>
+            <i class="fa fa-send-o"></i>
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
