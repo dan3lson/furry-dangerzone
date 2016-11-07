@@ -273,6 +273,12 @@ a, a:active {
 	padding: 5rem;
 }
 
+#get-started-now {
+	.btn {
+		margin-bottom: 40px;	
+	}
+}
+
 .vks-emojis {
 	@extend .five-columns;
 

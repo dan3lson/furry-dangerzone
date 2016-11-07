@@ -19,8 +19,8 @@ $(document).ready(function(){
   	$('[data-toggle="popover"]').popover()
 	});
 
-	$("#get-leksi-app-btn").click(function() {
-		scroll_to_section("#lp-cta");
+	$("#try-for-free-btn").click(function() {
+		scroll_to_section("#get-started-now");
 	});
 
 	spinner();
@@ -40,6 +40,8 @@ $(document).ready(function(){
 	};
 
 	function scroll_to_section(section) {
-		$("html, body").animate({ scrollTop: $(document).height() }, 1300);
+		$('html, body').animate({
+				scrollTop: $("#get-started-now").offset().top - 50
+		}, 2000);
 	};
 });
