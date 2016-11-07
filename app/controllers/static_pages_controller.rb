@@ -15,6 +15,8 @@ class StaticPagesController < ApplicationController
 
     ContactUsMailer.new_message(@form_fields).deliver_later
 
+    flash[:success] = "Thanks for reaching out! We\'ll respond shortly :)."
+
     redirect_to root_path
   end
 
