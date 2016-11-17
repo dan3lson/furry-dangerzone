@@ -32,7 +32,7 @@ module UsersHelper
   # not tested
   def display_average_objs(students, method)
     array_values = students.map { |s| s.send(method).count }
-
+    binding.pry
     array_values.inject(&:+) / array_values.count
   end
 end
