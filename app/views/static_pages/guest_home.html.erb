@@ -15,26 +15,20 @@
 
 <%= render "shared/flash_messages" %>
 
-<div class="top-section">
-	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 center">
-			<h1>Improve Literacy Proficiency</h1>
-			<h3>
-        Leksi increases vocabulary, which leads to better reading and writing
-        skills.
-			</h3>
-		</div>
-	</div>
-
-	<br>
-
-	<div class="row">
-		<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 center
-								data-url btn-custom-get-started"
-				 id="try-for-free-btn">
-			TRY FOR FREE
-		</div>
-	</div>
+<div class="top-section text-xs-center">
+  <h1 class="display-1">Words equal wealth.</h1>
+  <p class="lead">
+    Leksi increases vocabulary, which leads to better reading and writing
+    skills and overall student performance.
+  </p>
+  <%= link_to "Get started",
+            "#",
+            class: "btn btn-primary",
+            role: "button" %>
+  <%= link_to "Learn more",
+              "#",
+              class: "btn btn-secondary",
+              role: "button" %>
 </div>
 
 <div class="thin-brown-section center">

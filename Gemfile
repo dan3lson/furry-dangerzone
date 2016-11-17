@@ -3,7 +3,11 @@ source 'https://rubygems.org'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # Bootstrap (http://getbootstrap.com)
-gem 'bootstrap-sass', '~> 3.3.5'
+gem 'bootstrap', '~> 4.0.0.alpha5'
+# Bootstrap Tooltips and popovers dependency
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # Solves the problems of setting project-specific environment vars
