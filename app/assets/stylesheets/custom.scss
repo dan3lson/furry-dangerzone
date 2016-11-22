@@ -4,10 +4,6 @@
 //*
 //**********
 
-.body-brainiac {
-	background: $card-bg !important;
-}
-
 .games-body-padding {
 	padding: 25px 0;
 }
@@ -269,10 +265,6 @@ a, a:active {
   background: $light-leksi-green;
   border-left: 3px solid $dark-leksi-green;
   color: $dark-leksi-green;
-}
-
-.full-header {
-  font-size: 1.5em;
 }
 
 .fundamentals-header {
@@ -908,11 +900,6 @@ table {
 
 .add-show-game-circle:hover {
 	opacity: $show-game-circle-container-hover-opac;
-}
-
-.school-header {
-	background: $sky-blue !important;
-	color: $white;
 }
 
 .freestyle-types {

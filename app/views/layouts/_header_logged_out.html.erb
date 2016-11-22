@@ -1,6 +1,8 @@
 <nav class="navbar navbar-light bg-faded">
   <div class="nav navbar-nav">
-    <%= link_to "Leksi&#8482;".html_safe, root_path, class: "navbar-brand" %>
+    <%= link_to root_path, class: "navbar-brand" do %>
+			Leksi&#8482;
+		<% end %>
     <%= link_to "About Us", about_us_path, class: "nav-item nav-link" %>
   </div>
 	<div class="text-xs-right">

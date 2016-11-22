@@ -1,21 +1,19 @@
-<div id="search-bar-container">
-  <%= form_tag(search_results_path(display_button_for: display_button_for),
-    method: "get", id: "search-form", remote: true) do %>
-    <div class="input-group">
-      <%= label_tag :inputSuccess5, "Search", class: "control-label sr-only" %>
-      <%= text_field_tag(:search, params[:search],
-        class: "form-control center",
-        placeholder: "Look up a word",
-        id: "inputSuccess5")
+<%= form_tag(search_results_path(display_button_for: display_button_for),
+  method: "get", id: "search-form", class: "form-inline", remote: true) do %>
+  <div class="input-group">
+    <%= label_tag :inputSuccess5, "Search", class: "control-label sr-only" %>
+    <%= text_field_tag(:search, params[:search],
+      class: "form-control center",
+      placeholder: "Look up a word",
+      id: "inputSuccess5")
+    %>
+    <span class="input-group-btn">
+      <%= button_tag type: "submit",
+                     class: "btn btn-primary",
+                     id: "search-btn" do
       %>
-      <span class="input-group-btn">
-        <%= button_tag type: "submit",
-                       class: "btn btn-info",
-                       id: "search-btn" do
-        %>
-          <i class="fa fa-search"></i>
-        <% end %>
-      </span>
-    </div>
-  <% end %>
-</div>
+        <i class="fa fa-search"></i>
+      <% end %>
+    </span>
+  </div>
+<% end %>

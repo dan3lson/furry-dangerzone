@@ -24,6 +24,7 @@ $(document).ready(function() {
 	return_to_myTags_index_page();
 
 	function initalize_header(words, num_words, tag_name) {
+		// Removed .full-header when fixing user navbar
 		$("#myTags-container").hide();
 		$("#flashcard-game").fadeIn();
 		$(".full-header").html(truncate(tag_name, 23));
