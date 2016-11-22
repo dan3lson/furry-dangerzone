@@ -11,16 +11,12 @@ $(document).ready(function(){
 		location.reload();
 	});
 
-	setTimeout(function(){
-	  $(".alert-success").fadeOut()
-	}, 2000);
-
 	$(function () {
   	$('[data-toggle="popover"]').popover()
 	});
 
-	$("#try-for-free-btn").click(function() {
-		scroll_to_section("#get-started-now");
+	$("#get-started-btn").click(function() {
+		scrollToSection($("#get-started-now").find("h1"));
 	});
 
 	spinner();
@@ -39,9 +35,9 @@ $(document).ready(function(){
 		});
 	};
 
-	function scroll_to_section(section) {
+	function scrollToSection(section) {
 		$('html, body').animate({
-				scrollTop: $("#get-started-now").offset().top - 50
+				scrollTop: section.offset().top - 50
 		}, 2000);
 	};
 });

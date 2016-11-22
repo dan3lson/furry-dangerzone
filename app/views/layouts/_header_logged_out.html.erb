@@ -1,22 +1,11 @@
-<div class="navbar navbar-fixed-top sb-slide header_logged_out"
-		 role="navigation">
-	<div class="pull-left">
-		<h4>
-			<%= link_to "Leksi<sup><small class='white'>TM</small></sup>".html_safe,
-				root_path %>
-		</h4>
-	</div>
-	<div class="pull-right">
-		<% if logged_in? %>
-			<%= link_to root_path, class: "hover" do %>
-				<i class="fa fa-sign-in fa-2x leksi-orange">Go to myLeksi</i>
-			<% end %>
-		<% else %>
-			<%= link_to login_path, class: "hover" do %>
-				<i class="fa fa-sign-in fa-2x leksi-orange">Log in</i>
-			<% end %>
+<nav class="navbar navbar-light bg-faded">
+  <div class="nav navbar-nav">
+    <%= link_to "Leksi&#8482;".html_safe, root_path, class: "navbar-brand" %>
+    <%= link_to "About Us", about_us_path, class: "nav-item nav-link" %>
+  </div>
+	<div class="text-xs-right">
+		<%= link_to login_path, class: "btn btn-primary", role: "button" do %>
+			<i class="fa fa-sign-in"></i> Log in
 		<% end %>
-		&nbsp;
-		<i class="fa fa-bars fa-2x sb-toggle-right pointer hover white"></i>
 	</div>
-</div>
+</nav>

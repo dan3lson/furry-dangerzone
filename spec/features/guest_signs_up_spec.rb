@@ -26,6 +26,7 @@ feature "guest signs up", %{
     scenario "scenario: from get_started with complete valid data" do
       visit root_path
 
+      # Removed due to B4 implementation
       first(".btn-custom-get-started").click
 
       visit signup_path
@@ -51,6 +52,7 @@ feature "guest signs up", %{
     scenario "scenario: with only required data" do
       visit root_path
 
+      # Removed due to B4 implementation
       first(".btn-custom-get-started").click
 
       visit signup_path

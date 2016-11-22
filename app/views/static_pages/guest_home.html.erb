@@ -14,238 +14,193 @@
 } %>
 
 <%= render "shared/flash_messages" %>
-
-<div class="top-section text-xs-center">
+<section class="text-xs-center guest-section-home">
   <h1 class="display-1">Words equal wealth.</h1>
-  <p class="lead">
-    Leksi increases vocabulary, which leads to better reading and writing
-    skills and overall student performance.
-  </p>
-  <%= link_to "Get started",
-            "#",
-            class: "btn btn-primary",
-            role: "button" %>
-  <%= link_to "Learn more",
-              "#",
-              class: "btn btn-secondary",
-              role: "button" %>
-</div>
-
-<div class="thin-brown-section center">
   <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <blockquote class="lead">
+    <div class="col-md-6 offset-md-3">
+      <p class="lead">
+        Leksi increases vocabulary, which leads to better reading and
+        writing skills as well as lifelong success.
+      </p>
+      <%= button_tag "Get Started", name: nil,
+                                    type: "button",
+                                    id: "get-started-btn",
+                                    class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+</section>
+<section class="guest-section-home">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">The Opportunity</h1>
+      <blockquote class="blockquote">
+        There’s a positive correlation between a student’s vocabulary size in
+        grade 12, the likelihood that she will graduate from college, and her
+        future level of income.
+        <br>
+        <small class="text-muted">
+          Dr. E.D. Hirsch, Jr.
+        </small>
+      </blockquote>
+      <p class="highlight">
+        The more words students can recognize and use by senior
+        year in high school, the better off they'll be in college and beyond.
+        It's that simple.
+      </p>
+      <p class="text-xs-center">
+        <%= link_to "See more research",
+                    research_path,
+                    class: "btn btn-secondary",
+                    role: "button" %>
+      </p>
+    </div>
+  </div>
+</section>
+<section class="guest-section-home">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">Our Approach</h1>
+      <p class="lead">
+        Students need exposure and practice to Tier 2 words. We want them to own
+        and be excited about expanding their vocabulary. To that end,
+      </p>
+      <h5>
+        we combine...
+      </h5>
+      <div class="row text-xs-center">
+        <div class="col-sm-4">
+          <i class="fa fa-lightbulb-o fa-3x"></i>
+          <br>
+          Vocabulary research
+        </div>
+        <div class="col-sm-4">
+          <i class="fa fa-connectdevelop fa-3x"></i>
+          <br>
+          Science
+        </div>
+        <div class="col-sm-4">
+          <i class="fa fa-gamepad fa-3x"></i>
+          <br>
+          Game-like activities
+        </div>
+      </div>
+      <h5>
+        ...which directly improves:
+      </h5>
+      <div class="row text-xs-center">
+        <div class="col-sm-4">
+          <i class="fa fa-book fa-3x"></i>
+          <br>
+          Literacy profiency
+        </div>
+        <div class="col-sm-4">
+          <i class="fa fa-graduation-cap fa-3x"></i>
+          <br>
+          Likelihood of academic success
+        </div>
+        <div class="col-sm-4">
+          <i class="fa fa-black-tie fa-3x"></i>
+          <br>
+          College and career readiness
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="text-xs-center">
+    <%= link_to "Learn more",
+                our_approach_path,
+                class: "btn btn-secondary",
+                role: "button" %>
+  </p>
+</section>
+<section class="guest-section-home">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">Our Results</h1>
+      <div class="row text-xs-center">
+        <div class="col-md-6">
+          <h3>
+            93%
+            <br>
+            <small>of scholars would recommend Leksi to their friends</small>
+          </h3>
+        </div>
+        <div class="col-md-6">
+          <h3>
+            66%
+            <br>
+            <small>of scholars used Leksi outside of the classroom</small>
+          </h3>
+        </div>
+      </div>
+      <blockquote class="blockquote">
         <p>
           The extra practice Leksi afforded my scholars enabled them to master
           new words more quickly and more deeply than before.
         </p>
-        <p>
-          <em>
-            Leana P., Friends Seminary Middle School English Teacher
-          </em>
-        </p>
+        <footer class="blockquote-footer">
+          Leana P., Friends Seminary Middle School Teacher
+        </footer>
       </blockquote>
-    </div>
-  </div>
-</div>
-
-<div class="thin-gray-section center">
-  <h1>How It Works</h1>
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <p>
-        Based on proven research, our game-like activities
-        motivate and help scholars learn and use new
-        vocabulary.
-        Take a sneak peak into our three-step gamified process for learning
-        new words:
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-5">
-      <div class="sneak-peak-container bg-danger">
-        <h4>Fundamentals</h4>
-        <p>
-          Students acquire knowledge related to the basics of an
-          individual word, i.e. spelling, meanings, synonyms, antonyms, and
-          example sentences.
-        </p>
-        <div>
-          <%= button_tag "TAKE A SNEAK PEAK",
-            class: "btn btn-danger sneak-peak-btn",
-            data: { "game": "sneak-peak-fundamentals", "color": "bg-danger" } %>
-        </div>
-        <br>
-      </div>
-      <br>
-      <div class="sneak-peak-container">
-        <h4>Match'em All</h4>
-        <p>
-          This more challenging activity sharpens scholars' knowledge of multiple
-          words simultaneously. For a word to advance to the final game,
-          scholars must answer at least three questions correctly.
-        </p>
-        <div>
-          <%= button_tag "TAKE A SNEAK PEAK",
-            class: "btn btn-warning sneak-peak-btn",
-            data: { "game": "sneak-peak-jeopardy", "color": "bg-warning" } %>
-        </div>
-        <br>
-      </div>
-      <br>
-      <div class="sneak-peak-container">
-        <h4>Freestyle</h4>
-        <p>
-          Finally, scholars unleash their creativity by creating a semantic,
-          word, and definition map. Also, they create example sentences.
-        </p>
-        <div>
-          <%= button_tag "TAKE A SNEAK PEAK",
-            class: "btn btn-success sneak-peak-btn",
-            data: { "game": "sneak-peak-freestyle", "color": "bg-success" } %>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-7 bg-danger" id="sneak-peak-img-container">
-      <%= image_tag("fundamentals.gif",
-        class: "img img-responsive",
-        id: "sneak-peak-fundamentals",
-        alt: "Leksi Basic Game",
-        title: "Leksi Basic Game")
-      %>
-      <%= image_tag("jeopardy.gif",
-        class: "img img-responsive",
-        id: "sneak-peak-jeopardy",
-        alt: "Leksi Intermediate Game",
-        title: "Leksi Intermediate Game")
-      %>
-      <%= image_tag("freestyle.gif",
-        class: "img img-responsive",
-        id: "sneak-peak-freestyle",
-        alt: "Leksi Advanced Game",
-        title: "Leksi Advanced Game")
-      %>
-    </div>
-  </div>
-</div>
-
-<div class="thin-brown-section center">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <blockquote class="lead">
-        <p>
-          The kids love it! They became addicted right away and didn't want to
-          close their iPads when it was time to move on to the next thing.
-        </p>
-        <p>
-          <em>
-            Leana P., Friends Seminary Middle School English Teacher
-          </em>
-        </p>
-      </blockquote>
-    </div>
-  </div>
-</div>
-
-<div class="thin-gray-section">
-	<h1 class="center">
-		Pricing
-	</h1>
-
-  <br>
-
-	<div id="pricing-container">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
-        <table class="table table-bordered table-condensed">
-          <th>1st Month</th>
-          <th>Monthly</th>
-          <tr>
-            <td>FREE</td>
-            <td>
-              $1.99 per student
-            </td>
-          </tr>
-        </table>
-        <p>
-          For one month, try Leksi for FREE. There is no limit on the number
-          of scholars and teachers who can participate.
-          When the pilot ends, review the collected results and feedback to
-          decide if you want to continue with paid accounts.
-        </p>
-      </div>
-    </div>
-  </div>
-
-	<div class="clear"></div>
-</div>
-
-<div class="thin-brown-section center">
-  <h1>Scholar Reactions</h1>
-  <div class="row">
-    <div class="col-sm-4">
-      <blockquote class="lead">
-        <p>
-          Kind of addictive; awesome!
-        </p>
-      </blockquote>
-    </div>
-    <div class="col-sm-4">
-      <blockquote class="lead">
+      <blockquote class="blockquote">
         <p>
           Helps you really know the words, love it!
         </p>
-      </blockquote>
-    </div>
-    <div class="col-sm-4">
-      <blockquote class="lead">
-        <p>
-          I like how Leksi makes learning vocab words easier.
-        </p>
+        <footer class="blockquote-footer">
+          5th Grader, Friends Seminary
+        </footer>
       </blockquote>
     </div>
   </div>
+  <p class="text-xs-center">
+    <%= link_to "See more reactions",
+                results_path,
+                class: "btn btn-secondary",
+                role: "button" %>
+  </p>
+</section>
+<section class="guest-section-home">
   <div class="row">
-    <div class="col-sm-4">
-      <blockquote class="lead">
-        <p>
-          I like that you get to learn in a fun but useful way.
-        </p>
-      </blockquote>
-    </div>
-    <div class="col-sm-4">
-      <blockquote class="lead">
-        <p>
-          I like how the different levels are very different activities.
-        </p>
-      </blockquote>
-    </div>
-    <div class="col-sm-4">
-      <blockquote class="lead">
-        <p>
-          I like that it can sort out all of my words so I can study.
-        </p>
-      </blockquote>
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">
+        Pricing
+      </h1>
+      <table class="table table-bordered table-condensed">
+        <th>1st Month</th>
+        <th>Monthly</th>
+        <tr>
+          <td>FREE</td>
+          <td>
+            $1.99 per student
+          </td>
+        </tr>
+      </table>
+      <p>
+        For one month, try Leksi for FREE. There is no limit on the number
+        of scholars and teachers who can participate.
+        When the pilot ends, review the collected results and feedback to
+        decide if you want to continue with paid accounts.
+      </p>
+      <p class="text-xs-center">
+        <%= link_to "Add your class",
+                    research_path,
+                    class: "btn btn-primary",
+                    role: "button" %>
+        <br>
+        <span class="text-muted">No payment necessary.</span>
+      </p>
     </div>
   </div>
-</div>
-
-<div class="bg-info" id="get-started-now">
+</section>
+<section class="guest-section-home" id="get-started-now">
   <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <div class="center">
-        <h1>Get Started Now</h1>
-      </div>
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">Get Started Now</h1>
       <p>
-        We'd love to learn about your literacy goals and quickly show how
-        Leksi can boost both literacy and test scores.
-      </p>
-      <p>
-        Complete the form below to get started and bring Leksi to your classroom.
+        Complete the form below to bring Leksi to your classroom(s).
       </p>
 
-      <p><small>All fields are required</small></p>
+      <p><small>All fields are required.</small></p>
 
       <%= form_tag(static_pages_contact_us_path, method: "post") do %>
         <div>
@@ -267,9 +222,9 @@
                     required></textarea>
           <br>
           <p>
-            Security Check: please type the following exactly as
-            you see it:
-            <strong>L3ks!</strong>.
+            <i class="fa fa-lock"></i>
+            Security Check - please type:
+            <strong>L3ks!</strong>
 
             <input type="text" value="" name="prove_ur_human"
                    class="form-control" id="prove-ur-human-field"
@@ -278,7 +233,7 @@
         </div>
         <div class="center">
           <button type="submit" value="Send" id="cf-submit-btn"
-                  class="btn btn-danger btn-lg btn-block" disabled>
+                  class="btn btn-primary btn-lg btn-block" disabled>
             <i class="fa fa-send-o"></i>
             Send
           </button>
@@ -286,4 +241,4 @@
       <% end %>
     </div>
   </div>
-</div>
+</section>

@@ -13,42 +13,35 @@
   description: "Learn who we are and why we love helping you boost your vocab."
 } %>
 
-<%= render "static_pages/header", icon: "", header: "About Us" %>
+<section>
+  <h1>About Us</h1>
+  <h3>
+    We believe students should be able to define their future.
+  </h3>
+  <p>
+    Leksi is an application that boosts student's vocabulary, a major
+    indicator of student's success, in a fun and exciting way.
+  </p>
 
-<div class="thin-gray-section center">
-	<h3>
-		We believe students should be able to define their future.
-	</h3>
+  <p>
+    Leksi was created by Danelson Rosa
+    <%= link_to "http://www.linkedin.com/in/dan3lson" do %>
+      <i class="fa fa-linkedin-square"></i>
+    <% end %>
+    who previously worked on Wall Street
+    in various technology roles. Danelson wanted a way to solve his own
+    vocabulary-related frustrations and just wasn't satisfied with
+    any existing vocabulary apps.
+  </p>
 
-	<div class="guest-homepage-images-container col-sm-8 col-sm-offset-2">
-		<p>
-      Leksi is an application that boosts student's vocabulary, a major
-      indicator of student's success, in a fun and exciting way.
-		</p>
+  <p>
+    Leksi is still growing given the continuous testing and feedback from
+    teachers, students, and the education community overall. We’re developing
+    new features to engage, excite, and, of course, improve outcomes at the
+    end of the day.
+  </p>
 
-		<p>
-      Leksi was created by Danelson Rosa
-      <%= link_to "http://www.linkedin.com/in/dan3lson" do %>
-        <i class="fa fa-linkedin-square"></i>
-      <% end %>
-      who previously worked on Wall Street
-      in various technology roles. Danelson wanted a way to solve his own
-      vocabulary-related frustrations and just wasn't satisfied with
-      any existing vocabulary apps.
-		</p>
-
-		<p>
-			Leksi is still growing given the continuous testing and feedback from
-			teachers, students, and the education community overall. We’re developing
-			new features to engage, excite, and, of course, improve outcomes at the
-			end of the day.
-		</p>
-
-		<p>
-			Happy learning!
-		</p>
-	</div>
-
-	<div class="clear"></div>
-
-</div>
+  <p>
+    Happy learning!
+  </p>
+</section>
