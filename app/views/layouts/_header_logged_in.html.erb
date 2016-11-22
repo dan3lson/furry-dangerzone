@@ -1,12 +1,57 @@
-<div class="navbar navbar-default navbar-fixed-top logged-in-header school-header"
-		 role="navigation">
-	<div class="container">
-		<h1 class="center full-header">
-			<%= render "layouts/header_pull_left" %>
+<nav class="navbar navbar-light bg-faded">
+  <div class="nav navbar-nav">
+    <%= link_to root_path, class: "navbar-brand" do %>
+			Leksi&#8482;
+		<% end %>
+		<% if params[:controller].include?("my_leksi") %>
+			<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>
+				<i class="fa fa-book"></i> Words
+			<% end %>
+		<% else %>
+			<%= link_to myLeksi_path, class: "nav-item nav-link" do %>
+				<i class="fa fa-book"></i> Words
+			<% end %>
+		<% end %>
 
-			<%= full_header(yield(:header).truncate(23)) %>
+		<% if params[:controller] == "my_tags" %>
+			<%= link_to myTags_path, class: "nav-item nav-link active" do %>
+				<i class="fa fa-tags"></i> Tags
+			<% end %>
+		<% else %>
+			<%= link_to myTags_path, class: "nav-item nav-link" do %>
+				<i class="fa fa-tags"></i> Tags
+			<% end %>
+		<% end %>
 
-			<%= render "layouts/header_pull_right" %>
-		</h1>
+		<% if params[:controller] == "users" && params[:action] == "show" %>
+			<%= link_to current_user, class: "nav-item nav-link active" do %>
+				<i class="fa fa-line-chart"></i> Stats
+			<% end %>
+		<% else %>
+			<%= link_to current_user, class: "nav-item nav-link" do %>
+				<i class="fa fa-line-chart"></i> Stats
+			<% end %>
+		<% end %>
+
+		<% if params[:action] == "menu" %>
+			<%= link_to menu_path, class: "nav-item nav-link active" do %>
+				<i class="fa fa-gear"></i> Settings
+			<% end %>
+		<% else %>
+			<%= link_to menu_path, class: "nav-item nav-link" do %>
+				<i class="fa fa-gear"></i> Settings
+			<% end %>
+		<% end %>
+		<%= link_to search_path, class: "nav-item nav-link" do %>
+			<i class="fa fa-search"></i> Explore
+		<% end %>
+  </div>
+	<div class="float-xs-right">
+		<%= render "searches/form", display_button_for: "user" %>
 	</div>
-</div>
+</nav>
+
+<%#= render "layouts/header_pull_left" %>
+<%#= render "layouts/header_pull_right" %>
+
+<%#= full_header(yield(:header).truncate(23)) %>
