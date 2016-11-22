@@ -1,45 +1,16 @@
 <!DOCTYPE html>
 <html>
   <%= render "layouts/head" %>
-
-  <body class="body-spacing">
+  <body>
     <%= render "sessions/facebook_sdk" %>
-
-    <div id="sb-site">
-      <div>
-        <%= render "shared/flash_messages" %>
-
-        <%= yield %>
-
-        <% unless page_is_landing_page? %>
-          <%= debug(params) if Rails.env.development? %>
-        <% end %>
-      </div>
-
-      <%= render "layouts/footer_guest" unless page_is_landing_page? %>
+    <%= render "layouts/header_logged_out" %>
+    <div class="container">
+      <%= render "shared/flash_messages" %>
+      <%= yield %>
+      <%= render "layouts/footer_guest" %>
+      <%= debug(params) if Rails.env.development? %>
     </div>
-
-    <%= render "layouts/header_logged_out" unless page_is_landing_page? %>
-
-    <div class="sb-slidebar sb-right lead">
-      <a class="list-group-item" href="/about_us">
-      	<i class="fa fa-smile-o fa-fw"></i>&nbsp; About Us
-      </a>
-
-      <a class="list-group-item" href="/blog">
-      	<i class="fa fa-newspaper-o fa-fw"></i>&nbsp; Blog
-      </a>
-
-      <a class="list-group-item" href="/reviews">
-      	<i class="fa fa-star fa-fw"></i>&nbsp; Reviews
-      </a>
-    </div>
-
-    <%= render "shared/slidebars" %>
-
     <%= render "shared/google_analytics" %>
-
     <%= render "shared/script_src" %>
-
   </body>
 </html>

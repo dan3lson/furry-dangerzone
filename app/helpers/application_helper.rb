@@ -6,8 +6,4 @@ module ApplicationHelper
       header
     end
   end
-
-  def page_is_landing_page?
-    params[:action] == "english_language_learners"
-  end
 end

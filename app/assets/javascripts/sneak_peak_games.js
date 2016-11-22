@@ -4,12 +4,12 @@ $(document).ready(function(){
 		var $sneakPeakContainer = $(this).parent().parent();
 		var $sneakPeakImgContainer = $("#sneak-peak-img-container");
 		var game = $(this).data("game");
-		var bgColor = $(this).data("color");
+		var gameName = $sneakPeakContainer.find("h4").text();
+		var bgColor = "bg-primary";
 
-		$sneakPeakContainers.removeClass("bg-danger")
-												.removeClass("bg-warning")
-												.removeClass("bg-success");
-		$sneakPeakContainer.addClass(bgColor);
+		$sneakPeakImgContainer.siblings().html(gameName);
+		$sneakPeakContainers.removeClass(bgColor).removeClass("text-white");
+		$sneakPeakContainer.addClass(bgColor).addClass("text-white");
 		$sneakPeakImgContainer.attr("class", "col-sm-7 " + bgColor);
 		$sneakPeakImgContainer.find("img").hide();
 		$("#" + game).fadeIn("slow");

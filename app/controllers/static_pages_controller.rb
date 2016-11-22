@@ -20,6 +20,12 @@ class StaticPagesController < ApplicationController
     redirect_to root_path
   end
 
-  def about_us
+  def research
+  end
+
+  def our_approach
+  end
+
+  def results
   end
 end

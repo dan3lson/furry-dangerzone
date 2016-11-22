@@ -8,20 +8,20 @@
   >
     <% if @filter == "latest" %>
       <div class="btn-group" role="group">
-        <%= link_to "A-Z", admin_users_path, class: "btn btn-default" %>
+        <%= link_to "A-Z", admin_users_path, class: "btn btn-secondary" %>
       </div>
       <div class="btn-group" role="group">
         <%= link_to "Latest", admin_users_path(filter: "latest"),
-          class: "btn btn-default active"
+          class: "btn btn-secondary active"
         %>
       </div>
     <% else %>
       <div class="btn-group" role="group">
-        <%= link_to "A-Z", "#", class: "btn btn-default active" %>
+        <%= link_to "A-Z", "#", class: "btn btn-secondary active" %>
       </div>
       <div class="btn-group" role="group">
         <%= link_to "Latest", admin_users_path(filter: "latest"),
-          class: "btn btn-default"
+          class: "btn btn-secondary"
         %>
       </div>
     <% end %>

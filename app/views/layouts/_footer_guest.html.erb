@@ -1,36 +1,15 @@
-<div class="clear"></div>
-
-<div class="thin-footer-section center">
-	<div class="basic-apple-blue-link">
-		<%= link_to "About Us", about_us_path, title: "About Us" %> &nbsp;
-		<%= link_to "Reviews", reviews_path %> &nbsp;
-		<%#= link_to "Careers" %>
-	</div>
-
-  <br>
-  <br>
-
-	<%= link_to "https://www.facebook.com/LeksiEducation" do %>
-		<i class="fa fa-facebook fa-3x"></i>
-	<% end %>
-	&nbsp;
-	<%= link_to "https://twitter.com/leksieducation" do %>
-		<i class="fa fa-twitter fa-3x"></i>
-	<% end %>
-	&nbsp;
-	<%= mail_to "info@Leksi.education" do %>
-		<i class="fa fa-envelope fa-3x"></i>
-	<% end %>
-	&nbsp;
-
-	<%#= render "static_pages/newsletter_modal" %>
-
-	<br>
-	<br>
-
-  <p>
-    &copy; <%= Date.today.year %>
-		Leksi<sup><small class='white'>TM</small></sup> Education
-  </p>
-
-</div>
+<footer class="footer text-xs-center">
+	<p>
+		&copy; <%= Date.today.year %>
+		Leksi&#8482; Education
+	</p>
+	<p>
+		<%= link_to "https://www.facebook.com/LeksiEducation" do %>
+			<i class="fa fa-facebook fa-3x"></i>
+		<% end %>
+		&nbsp;
+		<%= link_to "https://twitter.com/LeksiEducation" do %>
+			<i class="fa fa-twitter fa-3x"></i>
+		<% end %>
+	</p>
+</footer>

@@ -1,35 +1,8 @@
 //**********
 //*
-//* MIXINS, VARIABLES, ETC.
-//*
-//**********
-
-@mixin box_sizing {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-//**********
-//*
 //* UNIVERSAL
 //*
 //**********
-
-html {
-	overflow-y: scroll;
-	-webkit-text-size-adjust: 100%;
-}
-
-// html, body {
-//   width: auto;
-//   overflow-x: hidden;
-// }
-
-body {
-	color: $even-darker-gray;
-  padding: 90px 0;
-}
 
 .body-brainiac {
 	background: $card-bg !important;
@@ -41,26 +14,6 @@ body {
 
 .no-underline a {
 	text-decoration: none;
-}
-
-//**********
-//*
-//* TYPOGRAPHY
-//*
-//**********
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  font-size: 2em;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-p {
-  line-height: 1.7em;
 }
 
 //**********
@@ -205,26 +158,6 @@ a, a:active {
   margin-bottom: 25px;
 }
 
-.btn-custom {
-  background: #fff;
-  border-radius: 20px;
-  padding: 7px;
-}
-
-.btn-custom-leksi-red {
-  @extend .btn-custom;
-
-  border: $leksi-red 1px solid;
-  color: $leksi-red;
-}
-
-.btn-custom-bootstrap-blue {
-  @extend .btn-custom;
-
-  border: $bootstrap-blue 1px solid;
-  color: $bootstrap-blue;
-  cursor: pointer;
-}
 
 #card {
 	cursor: pointer;
@@ -269,12 +202,6 @@ a, a:active {
 	padding: 5rem;
 }
 
-#get-started-now {
-	.btn {
-		margin-bottom: 40px;
-	}
-}
-
 .vks-emojis {
 	@extend .five-columns;
 
@@ -294,8 +221,6 @@ a, a:active {
 }
 
 .debug_dump {
-  @include box_sizing;
-
 	clear: both;
   float: left;
   margin-top: 45px;
@@ -311,7 +236,7 @@ a, a:active {
 }
 
 .field_with_errors {
-  @extend .has-error;
+  // @extend .has-error;
 
   .form-control {
     color: $state-danger-text;
@@ -463,18 +388,6 @@ a, a:active {
 	display: inline-block;
 }
 
-input, textarea, select, .uneditable-input {
-  @include box_sizing;
-
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-input {
-  height: auto !important;
-}
-
 .italics {
 	font-style: italic;
 }
@@ -608,37 +521,6 @@ input {
   width: 30px;
 }
 
-.navbar-default {
-	border-color: lighten($dark-gray, 30%);
-}
-
-.navbar-footer {
-	color: $sky-blue;
-	font-weight: normal;
-	margin: 0;
-	margin-top: 50px;
-	padding-top: 5px;
-
-	.col-xs-3 {
-		padding-right: 0;
-	}
-
-  a:not(.footer-cta){
-	  color: #BDBDBD;
-
-	  &:hover{
-		  background: none;
-			color: $sky-blue;
-		  text-decoration: none;
-	  };
-	  &:active{
-		  background: none;
-			color: $sky-blue;
-		  text-decoration: none;
-	  };
-  }
-}
-
 .new-followup-game-circle {
 	border-radius: 100px;
 	color: $white;
@@ -680,12 +562,6 @@ input {
 .padding-top {
 	padding-top: 6em;
 	padding-bottom: 6em;
-}
-
-#pricing-container {
-	table {
-		font-size: 2em;
-	}
 }
 
 .progress-meter-header {
@@ -825,10 +701,6 @@ input {
 	font-size: 35px;
 }
 
-.static-page-header-height {
-	height: 300px !important;
-}
-
 .stats-header {
 	margin-bottom: 30px;
 	padding: 10px;
@@ -921,35 +793,6 @@ table {
 
 // LOGGED OUT HOMEPAGE
 
-
-.body-spacing {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.bootstrap-blue {
-	color: $bootstrap-blue;
-}
-
-.bootstrap-green {
-	color: $bootstrap-green;
-}
-
-.bootstrap-red {
-	color: $bootstrap-red;
-}
-
-.btn-custom {
-  background: #fff;
-  border-radius: 100px;
-  padding: 7px;
-
-	&:hover {
-		cursor: pointer;
-		opacity: .90;
-	}
-}
-
 .thin-section {
 	padding: 32px;
 
@@ -981,42 +824,12 @@ table {
 	color: gray;
 }
 
-.header_logged_out {
-	background: $sky-blue;
-  border-color: $sky-blue;
-  opacity: .90;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 9px;
-
-  h4 a {
-    color: $white;
-    font-weight: 600;
-    font-size: larger;
-  }
-
-  .btn {
-    border-radius: 100px;
-  }
-}
-
 #sneak-peak-img-container {
 	img:not(:first-child) {
 		display: none;
 	}
 	img {
 		margin: 0 auto;
-	}
-}
-
-.thin-brown-section {
-	@extend .thin-section;
-
-	background: $tree-brown;
-	color: $white;
-
-	h3 {
-		padding-bottom: 43px;
 	}
 }
 
@@ -1039,38 +852,6 @@ table {
 	p {
 		margin-top: 10px;
 	}
-}
-
-.thin-footer-section {
-	@extend .thin-section;
-
-	background: $sky-blue;
-	// background: url(image-path("footer_word_tree.jpg"));
-  background-size: cover;
-	color: $white;
-  margin-bottom: -90px;
-
-	a {
-		color: $white;
-	}
-}
-
-.top-section {
-	background: url(image-path("tree_background.jpg"));
-  background-size: cover;
-	color: $white;
-	height: 628px;
-	padding-top: 6em;
-
-  h1 {
-    font-size: 45px;
-		text-shadow: 1px 1px 1px $black;
-		text-transform: uppercase;
-  }
-
-  h3 {
-    font-size: 27px;
-  }
 }
 
 .word-show-game-circle {

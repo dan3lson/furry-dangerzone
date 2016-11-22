@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'static_pages#guest_home'
   get "about_us" => "static_pages#about_us"
+  get "research" => "static_pages#research"
+  get "our_approach" => "static_pages#our_approach"
+  get "results" => "static_pages#results"
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
   get "search_words_for_students" => "searches#student_words"
