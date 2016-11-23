@@ -19,6 +19,12 @@ $(document).ready(function(){
 		scrollToSection($("#get-started-now").find("h1"));
 	});
 
+	$(".fa-volume-up").click(function() {
+		var audio = $(this).siblings()[0];
+
+		audio.play();
+	});
+
 	spinner();
 
 	function spinner() {
