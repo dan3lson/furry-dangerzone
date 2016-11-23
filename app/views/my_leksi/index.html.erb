@@ -1,23 +1,67 @@
-<% title "Grow your vocabulary by first creating your very own personal list." %>
+<% title "View and master all of the words in your personal list." %>
 <% description "Designed with vocabulary academic research and gamification, Leksi helps you master new words." %>
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
 <% provide(:header, "Words") %>
 
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
-    <% if current_user.has_words? %>
-      <div class="clear"></div>
-      <div id="myLeksi-words" data-total="<%= @current_user_words_count %>">
-        <%= render "my_leksi/words", words: @current_user_words_pag %>
+<% if !current_user.has_words? %>
+  <%= render "my_leksi/no_words_guide" %>
+<% else %>
+  <div class="card-columns"
+       id="myLeksi-words"
+       data-total="<%= @current_user_words_count %>">
+    <% @current_user_words_pag.each_with_index do |word, index| %>
+      <div class="card">
+        <div class="card-block">
+          <div class="float-xs-right">
+            <%= render "my_leksi/mastery_percentage",
+                       word: word,
+                       user_word: UserWord.object(current_user, word)
+            %>
+          </div>
+          <h2 class="card-title">
+            <%= word.name %>
+            <audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
+                   id="audio"
+                   preload="auto">
+            </audio>
+            <i class="fa fa-volume-up text-muted pointer hover"></i>
+            <br>
+            <small class="text-muted"><%= word.part_of_speech %></small>
+          </h2>
+          <p class="card-text">
+            <%= array_of(word, "definition").first %>
+          </p>
+          <div class="text-xs-center">
+            <a style="font-size: 2rem" data-toggle="collapse" href="#collapseWord<%= index %>" aria-expanded="false" aria-controls="collapseWord<%= index %>">
+              <i class="em em-video_game hover"></i>
+            </a>
+          </div>
+        </div>
+        <div class="collapse" id="collapseWord<%= index %>">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              Fundamentals
+              <div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
+            </li>
+            <li class="list-group-item">
+              Jeopardy
+              <div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
+            </li>
+            <li class="list-group-item">
+              Freestyle
+              <div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
+            </li>
+          </ul>
+        </div>
       </div>
-    <% else %>
-      <%= render "my_leksi/no_words_guide" %>
     <% end %>
+  </div>
+  <div class="text-xs-center">
     <br>
     <%= render "shared/spinner" %>
-    <div class="dark-gray center">
+    <p class="text-muted ">
       You have <%= pluralize(@current_user_words_count, "word") %>.
-    </div>
+    </p>
     <p id="view-more-link-container"></p>
     <br>
     <br>
@@ -27,7 +71,5 @@
       %>
     </div>
   </div>
-  <div class="col-sm-3">
-    <%= render "my_leksi/word_tree_of_knowledge_key" %>
-  </div>
-</div>
+  <%#= render "my_leksi/words", words: @current_user_words_pag %>
+<% end %>

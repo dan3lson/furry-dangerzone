@@ -3,34 +3,34 @@ $(document).ready(function() {
 
 	$("#myLeksi-pagination").hide();
 
-	if (NUM_WORDS > 10) {
+	if (NUM_WORDS > 12) {
 		var url = $('.pagination .next a').attr('href');
-		var $view_more_link = $("<a>", {
+		var $viewMoreLink = $("<a>", {
 			role: "button",
 			"data-remote": "true",
 			id: "view-more-link",
-			class: "btn btn-success btn-block",
+			class: "btn btn-success btn-lg",
 			href: url,
 			text: "VIEW MORE WORDS"
 		});
-		$("#view-more-link-container").html($view_more_link);
+		$("#view-more-link-container").html($viewMoreLink);
 	}
 	$("#view-more-link-container").on(
 		"click",
 		"#view-more-link",
-		load_more_words
+		loadMoreWords
 	);
 
-	function load_more_words() {
+	function loadMoreWords() {
 		var previous_url = $('#view-more-link').attr('href');
 		var previous_page = parseInt(previous_url.split("=")[1]);
-		var next_page = previous_page + 1;
-		var last_page = $(".pagination li").length - 2;
-		var new_url = "/myLeksi?page=" + next_page;
+		var nextPage = previous_page + 1;
+		var lastPage = $(".pagination li").length - 2;
+		var new_url = "/myLeksi?page=" + nextPage;
 
 		$("#view-more-link").attr("href", new_url);
-		$("#view-more-link-container").html($view_more_link);
-		if (next_page > last_page) $("#view-more-link").hide();
+		$("#view-more-link-container").html($viewMoreLink);
+		if (nextPage > lastPage) $("#view-more-link").hide();
 		spinner();
 	}
 

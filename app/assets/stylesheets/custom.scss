@@ -223,6 +223,10 @@ a, a:active {
   width: 100%;
 }
 
+.em-video_game {
+	font-size: 2.5rem;
+}
+
 #error_explanation {
   color: $leksi-red;
   ul {
@@ -749,11 +753,6 @@ table {
 
 .word-details {
 	margin-left: 14px;
-}
-
-.word-name-size {
-	font-size: 23px;
-  overflow-wrap: break-word;
 }
 
 .word-of-knowledge-container {
