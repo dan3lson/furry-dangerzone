@@ -1,47 +1,66 @@
-<div class="menu-header">
-	<span class="lead">Profile</span>
+<div class="card">
+	<div class="card-block">
+		<h1 class="card-title">
+			<i class="fa fa-user"></i> My Account
+		</h1>
+	</div>
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">
+			<%= link_to edit_user_path(current_user) do %>
+				<i class="fa fa-edit fa-fw"></i> Edit my profile
+			<% end %>
+		</li>
+		<li class="list-group-item">
+			<%= link_to progress_path do %>
+				<i class="fa fa-line-chart fa-fw"></i> View my stats
+			<% end %>
+		</li>
+		<li class="list-group-item">
+			<%= link_to logout_path, method: :delete do %>
+				<i class="fa fa-sign-out fa-fw"></i>&nbsp; Log out
+			<% end %>
+		</li>
+		<% if params[:controller] == "current_users" %>
+			<% if current_user.is_teacher? %>
+				<li class="list-group-item">
+					<%= link_to school_menu_path do %>
+						<i class="fa fa-university fa-fw"></i> Activate Teacher Edition
+					<% end %>
+				</li>
+			<% end %>
+		<% end %>
+		<% if current_user.is_admin? %>
+			<li class="list-group-item">
+				<%= link_to admin_menu_path do %>
+					<i class="fa fa-user-secret fa-fw"></i> Activate Admin Portal
+				<% end %>
+			</li>
+		<% end %>
+		<% if params[:controller] == "school/schools" %>
+			<li class="list-group-item">
+				<%= link_to menu_path do %>
+					<i class="fa fa-gamepad fa-fw"></i> Activate Scholar Edition
+				<% end %>
+			</li>
+			<% if current_user.is_admin? %>
+				<li class="list-group-item">
+					<%= link_to admin_menu_path do %>
+						<i class="fa fa-user-secret fa-fw"></i> Activate Admin Portal
+					<% end %>
+				</li>
+			<% end %>
+		<% end %>
+		<% if params[:controller] == "admin/admins" %>
+			<li class="list-group-item">
+				<%= link_to menu_path do %>
+					<i class="fa fa-gamepad fa-fw"></i> Activate Scholar Edition
+				<% end %>
+			</li>
+			<li class="list-group-item">
+				<%= link_to school_menu_path do %>
+					<i class="fa fa-university fa-fw"></i> Activate Teacher Edition
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
 </div>
-
-<a class="list-group-item" href="<%= edit_user_path(current_user) %>">
-	<i class="fa fa-edit fa-fw"></i>&nbsp; Edit
-</a>
-
-<a class="list-group-item" href="<%= progress_path %>">
-	<i class="fa fa-line-chart fa-fw"></i>&nbsp; My Stats
-</a>
-
-<% if params[:controller] == "current_users" %>
-	<% if current_user.is_teacher? %>
-		<%= link_to school_menu_path, class: "list-group-item" do %>
-			<i class="fa fa-university fa-fw"></i>&nbsp; Activate Teacher Edition
-		<% end %>
-	<% end %>
-
-	<% if current_user.is_admin? %>
-		<%= link_to admin_menu_path, class: "list-group-item" do %>
-			<i class="fa fa-user-secret fa-fw"></i>&nbsp; Activate Admin Portal
-		<% end %>
-	<% end %>
-<% end %>
-
-<% if params[:controller] == "school/schools" %>
-	<%= link_to menu_path, class: "list-group-item" do %>
-		<i class="fa fa-gamepad fa-fw"></i>&nbsp; Activate Scholar Edition
-	<% end %>
-
-	<% if current_user.is_admin? %>
-		<%= link_to admin_menu_path, class: "list-group-item" do %>
-			<i class="fa fa-user-secret fa-fw"></i>&nbsp; Activate Admin Portal
-		<% end %>
-	<% end %>
-<% end %>
-
-<% if params[:controller] == "admin/admins" %>
-	<%= link_to menu_path, class: "list-group-item" do %>
-		<i class="fa fa-gamepad fa-fw"></i>&nbsp; Activate Scholar Edition
-	<% end %>
-
-	<%= link_to school_menu_path, class: "list-group-item" do %>
-		<i class="fa fa-university fa-fw"></i>&nbsp; Activate Teacher Edition
-	<% end %>
-<% end %>
