@@ -1,10 +1,9 @@
 <% provide(:title, "Admin Menu") %>
 <% provide(:header, "Admin Menu") %>
 
-<div class="list-group row lead">
-  <div class="col-sm-6 col-sm-offset-3">
+<div class="card-deck-wrapper">
+  <div class="card-deck">
     <%= render "current_users/profile" %>
-
-    <%= render "current_users/settings" %>
+    <%= render "admin/admins/tools" %>
   </div>
 </div>
