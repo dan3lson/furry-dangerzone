@@ -15,11 +15,6 @@
 				<i class="fa fa-line-chart fa-fw"></i> View my stats
 			<% end %>
 		</li>
-		<li class="list-group-item">
-			<%= link_to logout_path, method: :delete do %>
-				<i class="fa fa-sign-out fa-fw"></i>&nbsp; Log out
-			<% end %>
-		</li>
 		<% if params[:controller] == "current_users" %>
 			<% if current_user.is_teacher? %>
 				<li class="list-group-item">
@@ -62,5 +57,10 @@
 				<% end %>
 			</li>
 		<% end %>
+		<li class="list-group-item">
+			<%= link_to logout_path, method: :delete do %>
+				<i class="fa fa-sign-out fa-fw"></i>&nbsp; Log out
+			<% end %>
+		</li>
 	</ul>
 </div>

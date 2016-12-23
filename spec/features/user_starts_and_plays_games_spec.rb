@@ -79,7 +79,7 @@
 #       start_game_one
 #
 #       # Level 1
-#       fill_in "spell_the_word", with: "chess"
+#       fill_in "spell-the-word", with: "chess"
 #       click_on "continue"
 #
 #       # Level 2

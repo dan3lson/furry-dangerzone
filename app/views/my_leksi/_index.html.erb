@@ -22,7 +22,11 @@
 				<%= array_of(word, "definition").first %>
 			</p>
 			<div class="text-xs-center">
-				<a style="font-size: 2rem" data-toggle="collapse" href="#collapseWord<%= index %>" aria-expanded="false" aria-controls="collapseWord<%= index %>">
+				<a style="font-size: 2rem"
+					 data-toggle="collapse"
+					 href="#collapseWord<%= index %>"
+					 aria-expanded="false"
+					 aria-controls="collapseWord<%= index %>">
 					<i class="em em-video_game hover"></i>
 				</a>
 			</div>
@@ -30,7 +34,7 @@
 		<div class="collapse" id="collapse-word-extra-<%= index %>">
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">
-					Fundamentals
+					<%= link_to "Fundamentals", fund_game_link(word.id) %>
 					<div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
 				</li>
 				<li class="list-group-item">

@@ -221,15 +221,16 @@
                     placeholder="Comments"
                     required></textarea>
           <br>
-          <p>
+          <div class="form-group">
             <i class="fa fa-lock"></i>
-            Security Check - please type:
-            <strong>L3ks!</strong>
-
-            <input type="text" value="" name="prove_ur_human"
+            <label for="prove_ur_human" class="form-control-label">
+              Security Check - please type:
+              <strong>L3ks!</strong>
+            </label>
+            <input type="text" name="prove_ur_human"
                    class="form-control" id="prove-ur-human-field"
                    required>
-          </p>
+          </div>
         </div>
         <div class="center">
           <button type="submit" value="Send" id="cf-submit-btn"

@@ -1,3 +1,5 @@
+# TODO: Remove BlogPost and related files
+
 class BlogPost < ActiveRecord::Base
   default_scope -> { order('blog_posts.created_at DESC') }
 

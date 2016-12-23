@@ -6,6 +6,20 @@
 <% if !current_user.has_words? %>
   <%= render "my_leksi/no_words_guide" %>
 <% else %>
+  <div class="text-muted">
+    Filter:
+    <i class="fa fa-book"></i>
+    &nbsp;
+    <i class="fa fa-tag"></i>
+    &nbsp;
+    <i class="fa fa-percent"></i>
+    <div class="float-xs-right">
+      <p>
+        You have <%= pluralize(@current_user_words_count, "word") %>.
+      </p>
+    </div>
+    <div class="clear"></div>
+  </div>
   <div class="card-columns"
        id="myLeksi-words"
        data-total="<%= @current_user_words_count %>">
@@ -17,6 +31,12 @@
                        word: word,
                        user_word: UserWord.object(current_user, word)
             %>
+            <a data-toggle="collapse"
+               href="#collapseWord<%= index %>"
+               aria-expanded="false"
+               aria-controls="collapseWord<%= index %>">
+              <i class="fa fa-gamepad fa-2x"></i>
+            </a>
           </div>
           <h2 class="card-title">
             <%= word.name %>
@@ -31,19 +51,11 @@
           <p class="card-text">
             <%= array_of(word, "definition").first %>
           </p>
-          <div class="text-xs-center">
-            <a data-toggle="collapse"
-               href="#collapseWord<%= index %>"
-               aria-expanded="false"
-               aria-controls="collapseWord<%= index %>">
-              <i class="em em-video_game hover"></i>
-            </a>
-          </div>
         </div>
         <div class="collapse" id="collapseWord<%= index %>">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              Fundamentals
+              <%= link_to "Fundamentals", fund_game_link(word.id) %>
               <div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
             </li>
             <li class="list-group-item">
@@ -62,9 +74,6 @@
   <div class="text-xs-center">
     <br>
     <%= render "shared/spinner" %>
-    <p class="text-muted ">
-      You have <%= pluralize(@current_user_words_count, "word") %>.
-    </p>
     <p id="view-more-link-container"></p>
     <br>
     <br>

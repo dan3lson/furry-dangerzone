@@ -9,7 +9,7 @@ $(document).ready(function() {
 			role: "button",
 			"data-remote": "true",
 			id: "view-more-link",
-			class: "btn btn-success btn-lg",
+			class: "btn btn-outline-primary btn-lg",
 			href: url,
 			text: "VIEW MORE WORDS"
 		});

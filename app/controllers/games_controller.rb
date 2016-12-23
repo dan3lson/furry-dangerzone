@@ -14,11 +14,7 @@ class GamesController < ApplicationController
     # when all questions answered, display continue btn
     respond_to do |format|
       format.html
-      format.json {
-        render json: {
-          words: @words,
-        }
-      }
+      format.json { render json: { words: @words } }
     end
   end
 

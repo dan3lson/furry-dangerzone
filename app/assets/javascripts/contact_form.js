@@ -41,10 +41,10 @@ $(document).ready(function() {
 			$word_being_spelled = $.trim($(this).val());
 
 			if ($word_being_spelled == string) {
-				display_passing_border_color(input_selector);
+				inputValidation(input_selector, "success");
 				validate_form_fields("#cf-submit-btn");
 			} else {
-				display_failing_border_color(input_selector);
+				inputValidation(input_selector, "danger");
 				validate_form_fields("#cf-submit-btn");
 			}
 		});
@@ -57,28 +57,31 @@ $(document).ready(function() {
 			$text = $.trim($(this).val());
 
 			if ($text != "" && $regex.test($text)) {
-				display_passing_border_color(this);
+				inputValidation(this, "success");
 				validate_form_fields("#cf-submit-btn");
 			} else {
-				display_failing_border_color(this);
+				inputValidation(this, "danger");
 				validate_form_fields("#cf-submit-btn");
 			}
 		});
 	}
 
 	function validate_form_fields(btn_selector) {
-		if($(".valid").length == 5) {
+		if($(".has-success").length == 5) {
 			$(btn_selector).attr("disabled", false);
 		} else {
 			$(btn_selector).attr("disabled", true);
 		}
 	}
 
-	function display_passing_border_color(field_selector) {
-		$(field_selector).removeClass("invalid").addClass("valid");
-	}
-
-	function display_failing_border_color(field_selector) {
-		$(field_selector).removeClass("valid").addClass("invalid");
+	function inputValidation(field_selector, className) {
+		$(field_selector).removeClass("form-control-danger")
+										 .removeClass("form-control-warning")
+										 .removeClass("form-control-success")
+										 .addClass("form-control-" + className);
+		$(field_selector).parent().removeClass("has-danger")
+															.removeClass("has-warning")
+															.removeClass("has-success")
+															.addClass("has-" + className);
 	}
 });

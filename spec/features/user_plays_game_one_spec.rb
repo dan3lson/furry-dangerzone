@@ -30,7 +30,7 @@ feature "user plays game one", %{
       page.find(".hvr-float-shadow").click
 
       # Level 1
-      fill_in "spell_the_word", with: "time"
+      fill_in "spell-the-word", with: "time"
 
       click_on "Continue"
 

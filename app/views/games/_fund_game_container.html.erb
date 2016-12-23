@@ -2,12 +2,21 @@
 	<div id="game-started-bool" class="begin-timer"></div>
 <% end %>
 
-<div id="progress_bar_container">
-	<div class="progress">
-		<div class="game-progress-bar progress-bar progress-bar-success"
-				 role="progressbar" aria-valuenow="0"
-				 aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-				<span class="sr-only">0%</span>
+<div class="scoreboard text-xs-center bg-faded text-muted">
+	<div class="row">
+		<div class="col-md-4">
+			<div id="progress-bar-container">
+				<progress class="progress game-progress-bar progress-striped"
+									value="0"
+									max="100">
+					0%
+				</progress>
+			</div>
+		</div>
+		<div class="col-md-4">
+			Points
+		</div>
+		<div class="col-md-4">
 		</div>
 	</div>
 </div>
@@ -15,37 +24,26 @@
 <div class="palabra">
 	<span id="word-name"><%= word.name %></span>
 	<span id="word-part-of-speech"><%= word.part_of_speech %></span>
-
 	<span class="palabra-id"><%= word.id %></span>
 </div>
 
-<div id="level_1_details">
-	<div>
-		<span class="fundamentals-game-instructions"></span>
-	</div>
-
-	<div id="chosen-word-header-container"></div>
-
-	<br>
+<div id="game-details">
+	<h1 class="display-3">
+		<span id="fundamentals-game-instructions"></span>
+		<strong id="chosen-word-header-container"></strong>
+	</h1>
 </div>
 
 <div>
-	<div class="form-group" id="spell_the_word_form">
-		<label for="spell_the_word" class="sr-only" ></label>
-		<input id="spell_the_word" class="form-control input-lg" type="text"
-					 placeholder=""></input>
+	<div class="form-group" id="spell-by-typing-form">
+		<label for="spell-the-word" class="form-control-label sr-only" ></label>
+		<input id="spell-the-word"
+					 class="form-control input-lg"
+					 type="text"></input>
 	</div>
 </div>
 
-<div class="row" id="fill_in_the_blank_container">
-	<div class="text-default lead" id="fill_in_the_blank_game_over_message">
-		Hey, are you having trouble?
-		<span class="pointer apple-blue" id="fill_in_the_blank_back_button">
-			Tap here
-		</span>
-		to see the spelling of the word. Then tap 'continue' to try again!
-	</div>
-</div>
+<div id="fill-in-the-blank-container"></div>
 
 <div id="meanings_container">
 	<div class="well lead">

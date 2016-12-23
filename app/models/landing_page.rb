@@ -1,3 +1,4 @@
+# TODO: Remove this nad associated files
 class LandingPage < ActiveRecord::Base
   default_scope -> { order('landing_page.created_at DESC') }
 

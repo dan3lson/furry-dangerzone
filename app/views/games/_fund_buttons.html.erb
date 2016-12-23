@@ -1,45 +1,45 @@
-<div class="round-the-buttons" id="continue_button_container">
+<div id="continueButtonContainer">
 	<br>
-	<button type="button" class="btn btn-success btn-block hvr-bob"
-					id="spell_the_word_continue_button">
-		Continue
-		<i class="fa fa-arrow-circle-o-right"></i>
-	</button>
-	<button type="button" class="btn btn-success btn-block hvr-bob"
-					id="fill_in_the_blank_continue_button">
-		Continue
-		<i class="fa fa-arrow-circle-o-right"></i>
-	</button>
-	<button type="button" class="btn btn-success btn-block hvr-bob"
-					id="meanings_continue_button">
-		Continue
-		<i class="fa fa-arrow-circle-o-right"></i>
-	</button>
-	<button type="button" class="btn btn-success btn-block hvr-bob"
-					id="meanings_checkpoint_continue_button">
-		Continue
-		<i class="fa fa-arrow-circle-o-right"></i>
-	</button>
-	<button type="button" class="btn btn-success btn-block hvr-bob"
-					id="synonyms_continue_button">
-		Continue
-		<i class="fa fa-arrow-circle-o-right"></i>
-	</button>
-	<button type="button" class="btn btn-success btn-block hvr-bob"
-					id="antonyms_continue_button">
-		Continue
-		<i class="fa fa-arrow-circle-o-right"></i>
-	</button>
-	<button type="button" class="btn btn-success btn-block hvr-bob"
-					id="syn_ant_checkpoint_continue_button">
-		Continue
-		<i class="fa fa-arrow-circle-o-right"></i>
-	</button>
+	<%= button_tag "CONTINUE",
+								 type: "button",
+								 class: "btn btn-primary btn-lg btn-block",
+								 id: "spell-the-word-continue-btn"
+  %>
+	<%= button_tag "CONTINUE",
+								 type: "button",
+								 class: "btn btn-primary btn-lg btn-block",
+								 id: "fill-in-the-blank-continue-btn"
+  %>
+	<%= button_tag "CONTINUE",
+								 type: "button",
+								 class: "btn btn-primary btn-lg btn-block",
+								 id: "meanings_continue_button"
+  %>
+	<%= button_tag "CONTINUE",
+								 type: "button",
+								 class: "btn btn-primary btn-lg btn-block",
+								 id: "meanings_checkpoint_continue_button"
+  %>
+	<%= button_tag "CONTINUE",
+								 type: "button",
+								 class: "btn btn-primary btn-lg btn-block",
+								 id: "synonyms_continue_button"
+  %>
+	<%= button_tag "CONTINUE",
+								 type: "button",
+								 class: "btn btn-primary btn-lg btn-block",
+								 id: "antonyms_continue_button"
+  %>
+	<%= button_tag "CONTINUE",
+								 type: "button",
+								 class: "btn btn-primary btn-lg btn-block",
+								 id: "syn_ant_checkpoint_continue_button"
+  %>
 	<% if params[:controller] == "games" %>
-		<button type="button" class="btn btn-warning btn-block hvr-bob"
-						id="real_world_examples_continue_button">
-		Finish
-		<i class="fa fa-flag-checkered"></i>
-	</button>
+		<%= button_tag "FINISH",
+									 type: "button",
+									 class: "btn btn-primary btn-lg btn-block",
+									 id: "real_world_examples_continue_button"
+		%>
 	<% end %>
 </div>

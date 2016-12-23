@@ -1,0 +1,13 @@
+================
+words
+================
+has_many :meaning_alts
+
+================
+meaning_alts
+================
+belongs_to :word
+text: string
+word_id: integer
+
+WordID WordName Text

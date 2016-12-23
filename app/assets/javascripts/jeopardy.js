@@ -14,8 +14,8 @@ $(document).ready(function(){
 	var $counter = 0;
 	var $correct_word_proggress_bar_without_pbc_class = "";
 	var $time_game_started;
-	var $up_arrow = create_elem("i", "fa fa-long-arrow-up");
-	var $down_arrow = create_elem("i", "fa fa-long-arrow-down");
+	var $up_arrow = createElem("i", "fa fa-long-arrow-up");
+	var $down_arrow = createElem("i", "fa fa-long-arrow-down");
 
 	// Start the main activity
 	$(".jeopardy-begin-game").click(function(){
@@ -217,7 +217,7 @@ $(document).ready(function(){
 	 * Helper Functions: Support ones that help each activity above
 	 */
 
-	function create_elem(elem, elem_class, elem_id) {
+	function createElem(elem, elem_class, elem_id) {
 		elem_class = elem_class ||  null;
 		elem_id = elem_id || null;
 
@@ -382,7 +382,7 @@ $(document).ready(function(){
 
 	// Set the value for the progress bar
 	function progressBar(value) {
-		$('.progress-bar').css('width', value+'%').attr('aria-valuenow', value);
+		$(".progress-bar").attr("max", value);
 	};
 
 	// Shuffle an array's contents

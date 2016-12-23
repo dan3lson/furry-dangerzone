@@ -212,7 +212,7 @@ $(document).ready(function(){
 		$("#level_3_completed").show();
 
 		$("#freestyle-form").hide();
-		$("#progress_bar_container").hide(); // ("visibility", "hidden");
+		$("#progress-bar-container").hide(); // ("visibility", "hidden");
 		$("#all_levels_button").show();
 		$("#level-congrats-text").append($chosen_word_show_page);
 
@@ -318,14 +318,13 @@ $(document).ready(function(){
 	}
 
 	function reset_input_value(id_name) {
-		$("#"+id_name).val(function (){
+		$("#" + id_name).val(function () {
 			return this.defaultValue;
 		});
 	};
 
 	function progressBar(value) {
-		$('.game-progress-bar').css('width', value+'%')
-													 .attr('aria-valuenow', value);
+		$(".game-progress-bar").attr("max", value);
 	}
 
 	function _(x) {

@@ -2,7 +2,7 @@
 	margin-top: 10px;
 }
 
-#continue_button_container{
+#continueButtonContainer{
 	margin-bottom: 20px;
 }
 
@@ -20,28 +20,8 @@ button#word_map_continue_button, #definition_map_continue_button, #sentence_cont
 #definition_map_continue_button,
 #sentence_continue_button,
 #review_level_3_container,
-#review_level_3_button,
-#error{
+#review_level_3_button {
 	display: none;
-}
-
-#error{
-	background: red;
-	margin-top: 25px;
-	padding: 5px;
-	color: #FFF;
-}
-
-input.invalid{
-	border: 2px solid red;
-}
-
-input.valid{
-	border: 2px solid #0BD318;
-}
-
-.form-control{
-	width: 100% !important;
 }
 
 .freestyle-instructions {

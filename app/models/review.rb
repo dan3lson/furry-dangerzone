@@ -1,3 +1,4 @@
+# TODO: Remove this and associated files
 class Review < ActiveRecord::Base
   default_scope -> { order('reviews.created_at DESC') }
 
