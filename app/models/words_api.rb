@@ -24,7 +24,7 @@ class WordsApi
 				"Accept" => "application/json"
 			}
 		)
-		binding.pry
+
 		if response.code == 200
 			# TODO: Create example_sentences table for better DB design/flexibility
 			words = []
