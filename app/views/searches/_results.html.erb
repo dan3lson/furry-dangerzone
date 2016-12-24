@@ -2,26 +2,47 @@
 	<div class="alert alert-danger center"><%= results %></div>
 <% else %>
 	<% results.each do |word| %>
-		<div class="panel panel-default">
-			<div class="panel-body">
+		<div class="card">
+			<div class="card-block">
+				<h2 class="card-title">
+					<% if (isController?("my_leksi") && isAction?("index") ||
+								 current_user.has_word?(word) && (
+								 isController?("searches") &&
+								 isAction?("search_results"))
+					) %>
+						<%= link_to word.name, "/myLeksi/#{word.id}" %>
+					<% else %>
+						<%= word.name %>
+					<% end %>
+					<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
+								 id="audio"
+								 preload="auto">
+					</audio>
+					<small>
+						<i class="fa fa-volume-up hover pointer text-primary"></i>
+					</small>
+					<br>
+					<small class="text-muted"><%= word.part_of_speech %></small>
+				</h2>
+				<p class="card-text">
+					<%= array_of(word, "definition").first %>
+				</p>
+			</div>
+			<div class="card-footer text-xs-center">
 				<% if current_user.already_has_word?(word) %>
-					<div class="pull-right">
+					<div>
 						<%= render "my_leksi/mastery_percentage",
-							word: word,
-							user_word: UserWord.object(current_user, word)
+											 word: word,
+											 user_word: UserWord.object(current_user, word)
 						%>
 					</div>
-				<% end %>
-				<%= render "words/display", word: word %>
-			</div>
-			<% unless current_user.already_has_word?(word) %>
-				<div class="panel-footer">
+				<% else %>
 					<%= render "searches/results_options",
-					display_button: display_button,
-					word: word
+										 display_button: display_button,
+										 word: word
 					%>
-				</div>
-			<% end %>
+				<% end %>
+			</div>
 		</div>
 	<% end %>
 <% end %>

@@ -1,0 +1,15 @@
+<% provide(:title, "Examples") %>
+<% provide(:header, "Examples") %>
+
+<div class="card-columns">
+	<% @examples.each_with_index do |example, index| %>
+		<div class="card">
+			<div class="card-block">
+	      <h4 class="card-title">
+	        <%= index + 1 %>. <%= example.text %>
+	      </h4>
+				<p><%= link_to example.word, example.word %></p>
+	    </div>
+		</div>
+	<% end %>
+</div>

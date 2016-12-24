@@ -1,0 +1,33 @@
+<div class="card">
+	<div class="card-block">
+		<% if current_user.already_has_word?(word) %>
+			<div class="float-xs-right">
+				<%= render "my_leksi/mastery_percentage",
+									 word: word,
+									 user_word: UserWord.object(current_user, word)
+				%>
+			</div>
+		<% end %>
+		<h2 class="card-title">
+			<% if (isController?("my_leksi") && isAction?("index") ||
+						 current_user.has_word?(word) && (
+						 isController?("searches") &&
+						 isAction?("search_results"))
+			) %>
+				<%= link_to word.name, "/myLeksi/#{word.id}" %>
+			<% else %>
+				<%= word.name %>
+			<% end %>
+			<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
+						 id="audio"
+						 preload="auto">
+			</audio>
+			<i class="fa fa-volume-up hover pointer text-primary"></i>
+			<br>
+			<small class="text-muted"><%= word.part_of_speech %></small>
+		</h2>
+		<p class="card-text">
+			<%= array_of(word, "definition").first %>
+		</p>
+	</div>
+</div>

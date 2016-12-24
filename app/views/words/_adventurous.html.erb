@@ -1,0 +1,17 @@
+<div id="adventurous-word">
+	<h2 class="card-title">
+		<%= word.name %>
+		<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
+					 id="audio"
+					 preload="auto">
+		</audio>
+		<small>
+			<i class="fa fa-volume-up hover pointer text-primary"></i>
+		</small>
+		<br>
+		<small class="text-muted"><%= word.part_of_speech %></small>
+	</h2>
+	<p class="card-text">
+		<%= array_of(word, "definition").first %>
+	</p>
+</div>

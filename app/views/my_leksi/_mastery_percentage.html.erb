@@ -1,30 +1,27 @@
-<div class="center">
-	<% if user_word.freestyle_completed? %>
-		<div class="text-xs-center text-primary" id="progress-bar-100">100%</div>
-		<progress class="progress progress-primary progress-striped"
-							value="100"
-							max="100"></progress>
-	<% elsif user_word.fundamental_not_completed? %>
-		<div class="text-xs-center text-primary" id="progress-bar">0%</div>
-		<progress class="progress progress-primary progress-striped"
-							value="0"
-							max="100"></progress>
-
-		<%= link_to fund_game_link(word.id) do %>
-		<% end %>
-	<% elsif user_word.jeopardy_not_completed? %>
-		<div class="text-xs-center text-primary" id="progress-bar-33">33%</div>
-		<progress class="progress progress-primary progress-striped"
-							value="33"
-							max="100"></progress>
-		<%= link_to jeop_game_link(word.id) do %>
-		<% end %>
-	<% elsif user_word.jeopardy_completed? %>
-		<div class="text-xs-center text-primary" id="progress-bar-66">66%</div>
-		<progress class="progress progress-primary progress-striped"
-							value="66"
-							max="100"></progress>
-		<%= link_to free_game_link(word.id) do %>
-		<% end %>
+<% if user_word.freestyle_completed? %>
+	100
+	<i class="fa fa-percent"></i>
+	<br>
+	COMPLETED
+<% elsif user_word.fundamental_not_completed? %>
+	<%= link_to fund_game_link(word.id) do %>
+		0
+		<i class="fa fa-percent"></i>
+		<br>
+		START PLAYING
 	<% end %>
-</div>
+<% elsif user_word.jeopardy_not_completed? %>
+	<%= link_to jeop_game_link(word.id) do %>
+		33
+		<i class="fa fa-percent"></i>
+		<br>
+		CONTINUE PLAYING
+	<% end %>
+<% elsif user_word.jeopardy_completed? %>
+  <%= link_to free_game_link(word.id) do %>
+		66
+		<i class="fa fa-percent"></i>
+		<br>
+		FINISH PLAYING
+	<% end %>
+<% end %>

@@ -2,7 +2,7 @@
   <%= array_of(word, "definition").first %>.
   <br>
   <% unless word.example_sentence.nil? %>
-    <span class="dark-gray">
+    <span class="text-muted">
       "<%= array_of(word, "example_sentence").first %>"
     </span>
   <% end %>

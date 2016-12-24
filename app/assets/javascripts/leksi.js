@@ -19,8 +19,9 @@ $(document).ready(function(){
 		scrollToSection($("#get-started-now").find("h1"));
 	});
 
-	$(".fa-volume-up").click(function() {
-		var audio = $(this).siblings()[0];
+	$(".card-title, .search-results-container, #adventurous-word").on(
+		"click", ".fa-volume-up", function() {
+		const audio = $(this).parent().prev()[0];
 
 		audio.play();
 	});

@@ -7,12 +7,12 @@
   <%= render "my_leksi/no_words_guide" %>
 <% else %>
   <div class="text-muted">
-    Filter:
-    <i class="fa fa-book"></i>
+    Filter by
+    <i class="fa fa-book hover pointer text-primary"></i>
     &nbsp;
-    <i class="fa fa-tag"></i>
+    <i class="fa fa-tag hover pointer text-primary"></i>
     &nbsp;
-    <i class="fa fa-percent"></i>
+    <i class="fa fa-percent hover pointer text-primary"></i>
     <div class="float-xs-right">
       <p>
         You have <%= pluralize(@current_user_words_count, "word") %>.
@@ -26,25 +26,15 @@
     <% @current_user_words_pag.each_with_index do |word, index| %>
       <div class="card">
         <div class="card-block">
-          <div class="float-xs-right">
-            <%= render "my_leksi/mastery_percentage",
-                       word: word,
-                       user_word: UserWord.object(current_user, word)
-            %>
-            <a data-toggle="collapse"
-               href="#collapseWord<%= index %>"
-               aria-expanded="false"
-               aria-controls="collapseWord<%= index %>">
-              <i class="fa fa-gamepad fa-2x"></i>
-            </a>
-          </div>
           <h2 class="card-title">
             <%= word.name %>
             <audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
                    id="audio"
                    preload="auto">
             </audio>
-            <i class="fa fa-volume-up text-muted pointer hover"></i>
+            <small>
+              <i class="fa fa-volume-up hover pointer text-primary"></i>
+            </small>
             <br>
             <small class="text-muted"><%= word.part_of_speech %></small>
           </h2>
@@ -67,6 +57,14 @@
               <div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
             </li>
           </ul>
+        </div>
+        <div class="card-footer">
+          <div class="text-xs-center">
+            <%= render "my_leksi/mastery_percentage",
+                       word: word,
+                       user_word: UserWord.object(current_user, word)
+            %>
+          </div>
         </div>
       </div>
     <% end %>

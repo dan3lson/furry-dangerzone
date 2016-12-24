@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612004045) do
+ActiveRecord::Schema.define(version: 20161224214811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 20160612004045) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "examples", force: :cascade do |t|
+    t.string   "text",       null: false
+    t.integer  "word_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "examples", ["word_id"], name: "index_examples_on_word_id", using: :btree
 
   create_table "feedbacks", force: :cascade do |t|
     t.text     "description", null: false
