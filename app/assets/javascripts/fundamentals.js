@@ -813,8 +813,10 @@ $(document).ready(function() {
 		return $(selector).unbind();
 	}
 
-	function createElem(elemClass = null, elemId = null, elem) {
-		return $("<" + elem + ">", { class: elemClass, id: elemId });
+	function createElem(elem, elemClass, elemID) {
+		_class = elemClass || null;
+		_id = elemID || null;
+		return $("<" + elem + ">", { class: _class, id: _id });
 	}
 
 	function array_of_attributes(string) {
