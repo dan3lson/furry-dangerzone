@@ -1,15 +1,24 @@
-<%= form_tag(search_results_path(display_button_for: display_button_for),
-  method: "get", id: "search-form", class: "form-inline", remote: true) do %>
-  <div class="input-group">
-    <%= label_tag :inputSuccess5, "Search", class: "control-label sr-only" %>
-    <%= text_field_tag(:search, params[:search],
-      class: "form-control center",
-      placeholder: "Look up a word",
-      id: "inputSuccess5")
+<%= form_tag search_results_path(display_button_for: display_button_for),
+             method: "get",
+             id: "search-form",
+             class: "form-inline",
+             remote: true do
+%>
+  <div class="input-group input-group-lg">
+    <%= label_tag :'input-search',
+                  "Search",
+                  class: "form-control-label sr-only"
+    %>
+    <%= text_field_tag :search,
+                       params[:search],
+                       type: "search",
+                       class: "form-control",
+                       id: "input_search",
+                       autofocus: true
     %>
     <span class="input-group-btn">
       <%= button_tag type: "submit",
-                     class: "btn btn-outline-primary",
+                     class: "btn btn-primary",
                      id: "search-btn" do
       %>
         <i class="fa fa-search"></i>

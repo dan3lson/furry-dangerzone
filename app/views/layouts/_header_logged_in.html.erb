@@ -13,7 +13,7 @@
 			<% end %>
 		<% end %>
 
-		<% if params[:controller] == "my_tags" %>
+		<% if isController?("my_tags") %>
 			<%= link_to myTags_path, class: "nav-item nav-link active" do %>
 				<i class="fa fa-tags"></i> Tags
 			<% end %>
@@ -23,7 +23,7 @@
 			<% end %>
 		<% end %>
 
-		<% if params[:controller] == "users" && params[:action] == "show" %>
+		<% if isController?("users") && isAction?("show") %>
 			<%= link_to current_user, class: "nav-item nav-link active" do %>
 				<i class="fa fa-line-chart"></i> Stats
 			<% end %>
@@ -33,7 +33,17 @@
 			<% end %>
 		<% end %>
 
-		<% if params[:action] == "menu" %>
+		<% if isController?("searches") && isAction?("search") %>
+      <%= link_to search_path, class: "nav-item nav-link active" do %>
+  			<i class="fa fa-search"></i> Explore
+  		<% end %>
+    <% else %>
+      <%= link_to search_path, class: "nav-item nav-link" do %>
+        <i class="fa fa-search"></i> Explore
+      <% end %>
+    <% end %>
+
+		<% if isAction?("menu") %>
 			<%= link_to menu_path, class: "nav-item nav-link active" do %>
 				<i class="fa fa-gear"></i> Settings
 			<% end %>
@@ -42,13 +52,7 @@
 				<i class="fa fa-gear"></i> Settings
 			<% end %>
 		<% end %>
-		<%= link_to search_path, class: "nav-item nav-link" do %>
-			<i class="fa fa-search"></i> Explore
-		<% end %>
   </div>
-	<div class="float-xs-right">
-		<%= render "searches/form", display_button_for: "user" %>
-	</div>
 </nav>
 
 <%#= render "layouts/header_pull_left" %>

@@ -1,12 +1,19 @@
 <% provide(:title, "Words") %>
 <% provide(:header, "Words") %>
 
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= render "words/display", word: @word %>
-      </div>
+<div class="card">
+  <div class="card-block">
+    <%= render "words/adventurous", word: @word %>
+
+    <div>
+      <h5>Examples</h5>
+      <% if @word.has_examples? %>
+        <% @word.examples.each do |example| %>
+          <p><%= example.text %></p>
+        <% end %>
+      <% else %>
+        None
+      <% end %>
     </div>
   </div>
 </div>

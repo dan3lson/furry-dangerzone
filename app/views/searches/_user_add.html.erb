@@ -1,9 +1,4 @@
-<span class="hover">
-	<%= button_to user_word_path(id: word.id),
-		class: "btn btn-success",
-		method: :post do
-	%>
-		<i class="fa fa-save"></i>
-		SAVE
-	<% end %>
-</span>
+<%= link_to user_word_path(id: word.id), method: :post do %>
+	<i class="fa fa-save"></i>
+	SAVE
+<% end %>

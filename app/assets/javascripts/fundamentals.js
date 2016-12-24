@@ -116,7 +116,7 @@ $(document).ready(function() {
 
   function fillInTheBlankContinueBtn(word) {
     $("#fill-in-the-blank-continue-btn").click(function() {
-			var part_of_speech = $("#word-part-of-speech").html();
+			var part_of_speech = word.part_of_speech;
 
       $(".checkpoint-image").hide();
       $("#fill-in-the-blank-continue-btn").hide();

@@ -7,11 +7,11 @@ module ApplicationHelper
     end
   end
 
-  def action?(params_action)
+  def isAction?(params_action)
     params[:action] == params_action
   end
 
-  def controller?(params_controller)
+  def isController?(params_controller)
     params[:controller] == params_controller
   end
 end

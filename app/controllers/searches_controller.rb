@@ -1,11 +1,15 @@
 class SearchesController < ApplicationController
   def search
+    @adventurous_word = Word.random(1).first
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def search_results
-    @results = if params[:rand]
-                 Word.define(Word.random(1).first.name)
-               elsif params[:display_button_for] == "user_words"
+    @results = if params[:display_button_for] == "user_words"
                  if current_user.has_words?
                    current_user.words
                  else

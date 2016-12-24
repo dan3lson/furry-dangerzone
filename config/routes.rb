@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   resources :comments
   resources :users, except: [:index]
   resources :words, only: [:index, :show]
+  resources :words do
+    resources :examples
+  end
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
   resource :reset_fundamentals, only: [:update]

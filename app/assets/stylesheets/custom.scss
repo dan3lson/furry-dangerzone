@@ -56,20 +56,6 @@ a, a:active {
   cursor: pointer;
 }
 
-.add-look-up-word-container {
-	background: $light-gray;
-	box-shadow: 0px -1px 10px 3px $medium-gray;
-	left: 0;
-	padding: 10px;
-	position: absolute;
-	top: 50px;
-}
-
-.alert-container {
-	position: absolute;
-	z-index: 4000;
-}
-
 .apple-blue {
 	color: $apple-blue;
 }
@@ -163,10 +149,6 @@ a, a:active {
   color: $black;
   display: none;
   font-size: 30px;
-}
-
-.center {
-	text-align: center;
 }
 
 .class-default-image {
@@ -665,20 +647,6 @@ a, a:active {
 	color: $sky-blue;
 }
 
-.search-results-container {
-	margin-top: 70px;
-	position: inherit;
-
-	.panel-footer {
-		background: $white;
-		color: $bootstrap-blue;
-
-		a:link, a:visited, a:active {
-			color: $bootstrap-green;
-		}
-	}
-}
-
 .sky-blue {
 	color: $sky-blue;
 }
@@ -736,28 +704,6 @@ table {
 	background: none !important;
 	padding: 10px;
 }
-
-.word-partial {
-	padding-left: 0 !important;
-	padding-right: 0 !important;
-}
-
-.word-partial-myLeksi {
-  padding-top: 13px;
-}
-
-.word-partial .tightness{
-	margin-bottom: -.01em;
-}
-
-.word-part-of-speech{
-	margin: 6px 0;
-}
-
-.tightness {
-	margin-top: 0;
-}
-
 
 // LOGGED OUT HOMEPAGE
 

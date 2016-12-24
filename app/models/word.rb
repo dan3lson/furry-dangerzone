@@ -4,6 +4,7 @@ class Word < ActiveRecord::Base
 
   default_scope -> { order('words.name ASC') }
 
+  has_many :examples
   has_many :user_words, dependent: :destroy
   has_many :users, through: :user_words
   has_many :word_tags, dependent: :destroy
@@ -47,14 +48,14 @@ class Word < ActiveRecord::Base
 
         return blank_msg if name.blank?
 
-        free_dictionary_search = FreeDictionary.define(name)
+        words_api_search = WordsApi.define(name)
 
-        if free_dictionary_search.nil?
+        if words_api_search.nil?
           "Yikes, we couldn\'t find '#{name}'. Please search again."
         else
           words = []
 
-          free_dictionary_search.each do |w|
+          words_api_search.each do |w|
             word = Word.new(
                 name: name,
                 phonetic_spelling: w.phonetic_spelling,
@@ -87,6 +88,11 @@ class Word < ActiveRecord::Base
   # not tested
   def self.random_excluding(num, word_id)
     where.not(id: word_id).random(num)
+  end
+
+  # not tested
+  def has_examples?
+    examples.any?
   end
 
   # not tested
