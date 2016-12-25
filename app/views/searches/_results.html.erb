@@ -1,14 +1,14 @@
 <% if results.class == String %>
-	<div class="alert alert-danger center"><%= results %></div>
+	<div class="alert alert-danger"><%= results %></div>
 <% else %>
 	<% results.each do |word| %>
 		<div class="card">
 			<div class="card-block">
 				<h2 class="card-title">
-					<% if (isController?("my_leksi") && isAction?("index") ||
+					<% if (controllerIs?("my_leksi") && actionIs?("index") ||
 								 current_user.has_word?(word) && (
-								 isController?("searches") &&
-								 isAction?("search_results"))
+								 controllerIs?("searches") &&
+								 actionIs?("search_results"))
 					) %>
 						<%= link_to word.name, "/myLeksi/#{word.id}" %>
 					<% else %>

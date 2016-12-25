@@ -1,0 +1,21 @@
+<% if review.has_description? %>
+	<%= render "reviews/stars", rating: review.rating %>
+
+	<br>
+
+	<i class="fa fa-comment-o"></i>&nbsp;
+	<%= review.description %>
+
+	<br>
+
+	<i class="fa fa-user"></i>&nbsp;<%= review.user.username %>
+
+	<br>
+
+	<i class="fa fa-calendar"></i>&nbsp;
+	<%= time_ago_in_words(review.created_at) %> ago
+
+	<div class="clear"></div>
+
+	<hr>
+<% end %>

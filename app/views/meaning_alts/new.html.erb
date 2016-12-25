@@ -1,0 +1,10 @@
+<% provide(:title, "New Meaning Alternative") %>
+<% provide(:header, "New Meaning Alternative") %>
+
+<% if logged_in? %>
+  <div class="card">
+    <div class="card-block">
+      <%= render "form" %>
+    </div>
+  </div>
+<% end %>

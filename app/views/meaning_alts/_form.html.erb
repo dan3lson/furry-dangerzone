@@ -1,0 +1,15 @@
+<%= form_for [latest_version, @review] do |f| %>
+  <%= render "shared/error_messages", object: @review %>
+
+  <div>
+    <%= f.label :rating, "Rating (1 = worst, 5 = best) *" %>
+    <%= f.select :rating, Review::RATINGS, prompt: true %>
+  </div>
+  
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <%= f.submit "submit", class: "form-control" %>
+<% end %>

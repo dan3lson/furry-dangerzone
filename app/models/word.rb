@@ -5,6 +5,7 @@ class Word < ActiveRecord::Base
   default_scope -> { order('words.name ASC') }
 
   has_many :examples
+  has_many :meaning_alts
   has_many :user_words, dependent: :destroy
   has_many :users, through: :user_words
   has_many :word_tags, dependent: :destroy
@@ -19,29 +20,29 @@ class Word < ActiveRecord::Base
 
   before_create { self.name = name.downcase }
 
-  # not tested
+  # TODO: Create test
   def self.search(name)
     where(name: name).limit(3)
   end
 
-  # not tested
-  def self.words_are_found?(word)
-    !search(word).empty?
+  # TODO: Create test
+  def self.word_exists?(name)
+    !search(name).empty?
   end
 
-  # not tested
+  # TODO: Create test
   def self.myLeksi_words(user, name)
     user.words.where(name: name)
   end
 
-  # not tested
+  # TODO: Create test
   def self.found_in_myLeksi?(user, name)
     myLeksi_words(user, name).any?
   end
 
   def self.define(name)
     if name
-      if words_are_found?(name)
+      if word_exists?(name)
         search(name)
       else
         blank_msg = "Type a word and then we'll try to find it."
@@ -60,9 +61,19 @@ class Word < ActiveRecord::Base
                 name: name,
                 phonetic_spelling: w.phonetic_spelling,
                 part_of_speech: w.part_of_speech,
-                definition: w.definition,
-                example_sentence: w.example_sentence
+                definition: w.definition
               )
+
+            if w.examples
+              if w.examples.count > 1
+                text = w.examples.join("***")
+              else
+                text = w.examples.first
+              end
+
+              example = Example.new(text: text, word: word)
+              word.examples << example
+            end
 
             if word.save
               words << word
@@ -85,32 +96,32 @@ class Word < ActiveRecord::Base
     find(Word.pluck(:id).sample(num))
   end
 
-  # not tested
+  # TODO: Create test
   def self.random_excluding(num, word_id)
     where.not(id: word_id).random(num)
   end
 
-  # not tested
+  # TODO: Create test
   def has_examples?
     examples.any?
   end
 
-  # not tested
+  # TODO: Create test
   def has_synonyms?
     WordSynonym.where(word: self).any?
   end
 
-  # not tested
+  # TODO: Create test
   def has_antonyms?
     WordAntonym.where(word: self).any?
   end
 
-  # not tested
+  # TODO: Create test
   def doesnt_have_any_syn_or_ant?
     !has_synonyms? && !has_antonyms?
   end
 
-  # not tested
+  # TODO: Create test
   def self.untagged_for(user)
     words_with_tags = user.word_tags.pluck(
       :word_id

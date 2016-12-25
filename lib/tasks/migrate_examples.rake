@@ -20,6 +20,6 @@ namespace :examples do
       end
     end
     puts
-    puts "NUMBER OF ERRORS: #{num_errors}"
+    puts "TOTAL ERRORS: #{num_errors}"
   end
 end

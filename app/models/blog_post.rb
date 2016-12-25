@@ -10,7 +10,7 @@ class BlogPost < ActiveRecord::Base
   validates :icon, presence: true
   validates :slug, presence: true
 
-  # not tested
+  # TODO: Create test 
   def to_param
     slug
   end

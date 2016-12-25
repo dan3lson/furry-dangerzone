@@ -35,12 +35,12 @@ class UserWord < ActiveRecord::Base
     end
   end
 
-  # not tested
+  # TODO: Create test 
   def self.object(user, word)
     find_by(user: user, word: word)
   end
 
-  # not tested
+  # TODO: Create test 
   def self.mark_fundamentals_completed(user, word)
     user_word = UserWord.find_by(user: user, word: word)
     user_word.games_completed = 1
@@ -90,42 +90,42 @@ class UserWord < ActiveRecord::Base
     current_game == "three" && !freestyle_completed?
   end
 
-  # not tested
+  # TODO: Create test 
   def _to_date(date)
     date.to_date
   end
 
-  # not tested
+  # TODO: Create test 
   def yesterday
     Date.yesterday
   end
 
-  # not tested
+  # TODO: Create test 
   def today
     Date.yesterday
   end
 
-  # not tested
+  # TODO: Create test 
   def fundamental_completed_yesterday?
     _to_date(updated_at) == yesterday && current_game == "one"
   end
 
-  # not tested
+  # TODO: Create test 
   def jeopardy_completed_yesterday?
     _to_date(updated_at) == yesterday && current_game == "two"
   end
 
-  # not tested
+  # TODO: Create test 
   def freestyle_completed_yesterday?
     _to_date(updated_at) == yesterday && current_game == "three"
   end
 
-  # not tested
+  # TODO: Create test 
   def freestyle_completed_today?
     _to_date(updated_at) == today && current_game == "three"
   end
 
-  # not tested
+  # TODO: Create test 
   def self.add_words(user, words)
     words_successfully_added = 0
 

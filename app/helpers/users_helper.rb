@@ -1,5 +1,5 @@
 module UsersHelper
-  # not tested
+  # TODO: Create test
   def calculate_streak(user)
     streak = 0
     num_freestyles_completed = user.completed_freestyles.count
@@ -22,17 +22,16 @@ module UsersHelper
     streak
   end
 
-  # not tested
+  # TODO: Create test
   def display_average_values(students, method)
     array_values = students.map { |s| s.send(method) }
 
     array_values.inject(&:+) / array_values.count
   end
 
-  # not tested
+  # TODO: Create test
   def display_average_objs(students, method)
     array_values = students.map { |s| s.send(method).count }
-    binding.pry
     array_values.inject(&:+) / array_values.count
   end
 end

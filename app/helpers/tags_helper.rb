@@ -15,7 +15,7 @@ module TagsHelper
     user.tags - tags_for(user, word)
   end
 
-  # not tested
+  # TODO: Create test 
   def progress_for(user, tag)
     if num_words_for(user, tag) > 0
       completed_games = user_words(user, tag).map(&:games_completed).inject(:+)

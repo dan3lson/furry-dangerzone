@@ -1,50 +1,44 @@
 class WordsApi
-	attr_accessor :phonetic_spelling
-	attr_accessor :part_of_speech
 	attr_accessor :definition
-	attr_accessor :example_sentence
+	attr_accessor :examples
+	attr_accessor :part_of_speech
+	attr_accessor :phonetic_spelling
 
-	def initialize(
-		phonetic_spelling,
-		part_of_speech,
-		definition,
-		example_sentence
-	)
-		@phonetic_spelling = phonetic_spelling
-		@part_of_speech = part_of_speech
+	URL = URI.parse(URI.encode("https://wordsapiv1.p.mashape.com/words"))
+
+	def initialize(definition, examples, part_of_speech, phonetic_spelling)
 		@definition = definition
-		@example_sentence = example_sentence
+		@examples = examples
+		@part_of_speech = part_of_speech
+		@phonetic_spelling = phonetic_spelling
 	end
 
 	def self.define(word)
-		response = HTTParty.get(
-			"https://wordsapiv1.p.mashape.com/words/#{word}",
+		response = HTTParty.get("#{URL}/#{word}",
 			headers: {
-				"X-Mashape-Key" => "vUKklAfkqMmshfX8yZfZ65uhXlvnp1MBDtejsnhSKRB3G7MBR4",
+				"X-Mashape-Key" => "jxec7LMiQymshHsPPG7i86q1rdXNp1Ndvi0jsnTSbYjDIDo0Kk",
 				"Accept" => "application/json"
 			}
 		)
+		words = []
+		if response.success? && response["results"]
+			various_words = response["results"]
 
-		if response.code == 200
-			# TODO: Create example_sentences table for better DB design/flexibility
-			words = []
-
-			response["results"].each do |word_info|
-				phonetic_spelling = response["syllables"]["list"].join("·")
-				part_of_speech = word_info["partOfSpeech"]
-				definition = word_info["definition"]
-				example_sentence = word_info["examples"]
-
-				words << self.new(
-					word.phonetic_spelling = phonetic_spelling,
-					word.part_of_speech = part_of_speech,
-					word.definition = definition,
-					word.example_sentence = example_sentence
+			various_words.each do |word|
+				syllables = response["syllables"]
+				joined_syllables = syllables["list"].join("·") if syllables
+				new_word = self.new(
+					word["definition"],
+					word["examples"],
+					word["partOfSpeech"],
+					joined_syllables
 				)
+				words << new_word
 			end
 
 			words
+		else
+			nil
 		end
 	end
-
 end

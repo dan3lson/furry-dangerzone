@@ -8,7 +8,7 @@ class GameStat < ActiveRecord::Base
   validates :num_jeop_won, presence: true
   validates :num_jeop_lost, presence: true
 
-  # not tested
+  # TODO: Create test 
   def self.update_user_word_game_stats(user, word, game, time_spent)
     user_word = UserWord.find_by(user: user, word: word)
     gs = GameStat.where(game: game, user_word: user_word).first_or_initialize

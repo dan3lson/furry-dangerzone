@@ -13,7 +13,7 @@
 			<% end %>
 		<% end %>
 
-		<% if isController?("my_tags") %>
+		<% if controllerIs?("my_tags") %>
 			<%= link_to myTags_path, class: "nav-item nav-link active" do %>
 				<i class="fa fa-tags"></i> Tags
 			<% end %>
@@ -23,7 +23,7 @@
 			<% end %>
 		<% end %>
 
-		<% if isController?("users") && isAction?("show") %>
+		<% if controllerIs?("users") && actionIs?("show") %>
 			<%= link_to current_user, class: "nav-item nav-link active" do %>
 				<i class="fa fa-line-chart"></i> Stats
 			<% end %>
@@ -33,7 +33,7 @@
 			<% end %>
 		<% end %>
 
-		<% if isController?("searches") && isAction?("search") %>
+		<% if controllerIs?("searches") && actionIs?("search") %>
       <%= link_to search_path, class: "nav-item nav-link active" do %>
   			<i class="fa fa-search"></i> Explore
   		<% end %>
@@ -43,7 +43,7 @@
       <% end %>
     <% end %>
 
-		<% if isAction?("menu") %>
+		<% if actionIs?("menu") %>
 			<%= link_to menu_path, class: "nav-item nav-link active" do %>
 				<i class="fa fa-gear"></i> Settings
 			<% end %>

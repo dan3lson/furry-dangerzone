@@ -1,7 +1,6 @@
 class TagGamesController < ApplicationController
   def jeopardy
     if logged_in?
-      binding.pry
       @tag = Tag.find(params[:tag_id])
       @chosen_word = Word.find(params[:word_id])
       @jeopardy_words = get_jeop_words_tag(current_user, @tag, @chosen_word) << @chosen_word

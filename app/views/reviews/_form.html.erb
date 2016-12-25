@@ -1,15 +1,10 @@
-<%= form_for [latest_version, @review] do |f| %>
-  <%= render "shared/error_messages", object: @review %>
-
-  <div>
-    <%= f.label :rating, "Rating (1 = worst, 5 = best) *" %>
-    <%= f.select :rating, Review::RATINGS, prompt: true %>
-  </div>
-  
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+<%= form_for [word, @meaning_alt] do |f| %>
+  <%= render "shared/error_messages", object: @meaning_alt %>
+  <div class="form-group">
+    <%= f.label :text, class: "form-control-label" %>
+    <%= f.text_field :text, class: "form-control" %>
   </div>
 
-  <%= f.submit "submit", class: "form-control" %>
+  What about the word???
+  <%= f.submit "submit" %>
 <% end %>

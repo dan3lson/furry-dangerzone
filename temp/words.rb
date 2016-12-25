@@ -1,3 +1,17 @@
+# ID				Text1		Text2		Text3 PartOfSpeech Definition		Generic Feedback
+# 1		word1 blah		blah		blah	blah				 blah					blah
+# 2		word2 blah		blah		blah	blah				 blah					blah
+# 3		word3 blah		blah		blah	blah				 blah					blah
+# 4		word4 blah		blah		blah	blah				 blah					blah
+#
+# 1. Create a page where David can see the info above for both grades, which
+# serves as a checklist. Once he creates it in Google Docs and I confirm it
+# passes, I'll update the webpage so he can see his progress
+# 2. Create a google docs spreadsheet in the format above. Give examples to
+# serve as a great guide for getting started quickly and easily
+# 3. Folow up with David and give both the page link and Google Docs link so he
+# can get started
+
 fifth_grade_words = [
 	"abolish",
 	"dedicate",
@@ -412,8 +426,8 @@ seventh_grade_words = [
 	"orthodox",
 	"supervise",
 	"overwhelm",
-	"Tamper",
-	"Pamper",
+	"tamper",
+	"pamper",
 	"throb",
 	"patronize",
 	"toxic",
@@ -425,7 +439,7 @@ seventh_grade_words = [
 	"trivial",
 	"perceived",
 	"perjury",
-	"Uncertainty",
+	"uncertainty",
 	"permanent",
 	"unscathed",
 	"persist",
@@ -436,7 +450,7 @@ seventh_grade_words = [
 	"utmost",
 	"pluck",
 	"poised",
-	"Vengeance",
+	"vengeance",
 	"ponder",
 	"vicious",
 	"potential",
@@ -451,14 +465,14 @@ seventh_grade_words = [
 	"prowess",
 	"wary",
 	"whim",
-	"Radiant",
+	"radiant",
 	"wince",
 	"random",
 	"wrath",
 	"rant",
 	"recede",
 	"yearn",
-	"bellow"
+	"bellow",
 	"beseech",
 	"downright",
 	"maternal",

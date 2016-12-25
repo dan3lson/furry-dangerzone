@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161224214811) do
+ActiveRecord::Schema.define(version: 20161224233623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,13 @@ ActiveRecord::Schema.define(version: 20161224214811) do
   create_table "landing_pages", force: :cascade do |t|
     t.string   "target",     null: false
     t.string   "email",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meaning_alts", force: :cascade do |t|
+    t.string   "text",       null: false
+    t.integer  "word_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -226,7 +233,6 @@ ActiveRecord::Schema.define(version: 20161224214811) do
     t.string   "name",              null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.string   "example_sentence"
   end
 
   add_index "words", ["name", "definition"], name: "index_words_on_name_and_definition", using: :btree
