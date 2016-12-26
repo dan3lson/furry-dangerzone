@@ -1,15 +1,20 @@
-<%= form_for [latest_version, @review] do |f| %>
-  <%= render "shared/error_messages", object: @review %>
-
-  <div>
-    <%= f.label :rating, "Rating (1 = worst, 5 = best) *" %>
-    <%= f.select :rating, Review::RATINGS, prompt: true %>
+<%= form_for([word, m_a]) do |f| %>
+  <%= render "shared/error_messages", object: m_a %>
+  <div class="form-group">
+    <%= f.label :text,
+                class: "sr-only form-control-label" %>
+    <%= f.text_area :text,
+                     class: "form-control",
+                     placeholder: "Text"
+    %>
   </div>
-  
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <%= f.label :feedback,
+                class: "sr-only form-control-label" %>
+    <%= f.text_area :feedback,
+                     class: "form-control",
+                     placeholder: "Feedback"
+    %>
   </div>
-
-  <%= f.submit "submit", class: "form-control" %>
+  <%= f.button "CREATE", type: "submit", class: "btn btn-primary btn-block" %>
 <% end %>

@@ -8,20 +8,16 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-
     render layout: "application_guest"
   end
 
   def create
     @user = User.new(user_params)
-
     User.set_up_login_data(@user)
 
     if @user.save
       log_in(@user)
-
       flash[:success] = "Welcome to Leksi!"
-
       redirect_to root_path
     else
       render :new
@@ -35,24 +31,21 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = "You successfully updated your profile."
-
       redirect_to menu_path
     else
       flash[:danger] = "Yikes! Profile updates not successfully made."
-
       render :edit
     end
   end
 
   def destroy
     @user = User.find(params[:id])
+
     if @user.destroy
       flash[:success] = "Account deleted; it\'s sad to see you go."
-
       redirect_to root_path
     else
       flash[:danger] = "Yikes! Something went wrong. Please try again."
-
       redirect_to menu_path
     end
   end
@@ -60,15 +53,19 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username,
-      :email, :password, :password_confirmation
+    params.require(:user).permit(
+      :first_name,
+      :last_name,
+      :username,
+      :email,
+      :password,
+      :password_confirmation
     )
   end
 
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Yikes! Please log in first to do that."
-
       redirect_to login_url
     end
   end
@@ -78,7 +75,6 @@ class UsersController < ApplicationController
 
     unless current_user?(@user)
       flash[:danger] = "Yikes! That\'s not something you can do."
-
       redirect_to menu_path
     end
   end

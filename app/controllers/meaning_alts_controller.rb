@@ -12,24 +12,19 @@ class MeaningAltsController < ApplicationController
 
   def create
     @word = Word.find(params[:word_id])
-    meaning_alt_params = params[:word][:meaning_alt]
     @meaning_alt = MeaningAlt.new(meaning_alt_params)
     @meaning_alt.word = @word
-    @meaning_alt.user = current_user
 
-    if @meaning_alt.blank?
-      flash[:danger] = "Please add an example before clicking \'submit\'."
-      redirect_to new_word_example_path(@word)
+    if @meaning_alt.save
+      flash[:success] = [
+        "Success! Thanks for creating a meaning alternative for ",
+        "#{@meaning_alt.word.name}!"
+      ].join
     else
-      if @meaning_alt.save
-        msg = "Success! Created a meaning alt for #{@meaning_alt.word.name}!"
-        flash[:success] = msg
-        redirect_to menu_path
-      else
-        flash.now[:danger] = "Yikes! Something went wrong. Please try again."
-        render "versions/show"
-      end
+      flash.now[:danger] = "Yikes! Something went wrong. Please try again."
     end
+
+    redirect_to seventh_grade_words_path
   end
 
   def destroy
@@ -37,17 +32,17 @@ class MeaningAltsController < ApplicationController
 
     if @meaning_alt.destroy
       flash[:success] = "MeaningAlt deleted successfully."
-      redirect_to reviews_path
     else
       flash.now[:danger] = "MeaningAlt not deleted."
-      redirect_to example_path(@meaning_alt)
     end
+
+    redirect_to root_path
   end
 
   private
 
   def meaning_alt_params
-    params.require(:meaning_alt).permit(:word, :text)
+    params.require(:meaning_alt).permit(:text, :feedback)
   end
 
   def logged_in_user
