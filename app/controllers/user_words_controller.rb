@@ -11,24 +11,20 @@ class UserWordsController < ApplicationController
       if @play
         redirect_to "/fundamentals?word_id=#{@word.id}"
       else
-        flash[:success] = "Success! You now have \'#{@word.name}\'."
-
+        flash[:success] = "Success! You added \'#{@word.name}\' to your Words."
         redirect_to search_path
       end
     else
       msg = "Yikes! Adding that word to your Leksi didn\'t work. "
       msg_2 = "Please try again."
       flash[:danger] = msg << msg_2
-
       redirect_to search_path
     end
   end
 
   def update
     @word = Word.find(params[:word_id])
-
     @results = UserWord.mark_fundamentals_completed(current_user, @word)
-
     render json: { errors: @results }
   end
 
@@ -40,28 +36,23 @@ class UserWordsController < ApplicationController
     @word_tags.each do |word_tag|
       if word_tag.user_word_tags.count == 1
         @user_word_tag = word_tag.user_word_tags.first
-
         word_tag.destroy
-
         @user_word_tag.destroy
       else
         @user_word_tag = UserWordTag.find_by(
           user: current_user,
           word_tag: word_tag
         )
-
         @user_word_tag.destroy
       end
     end
 
     if @user_word.destroy
       flash[:success] = "Success: \'#{@word.name}\' has been removed."
-
       redirect_to myLeksi_path
     else
       msg = "Yikes! Removing that word didn\'t work - please try again."
       flash[:danger] = msg
-
       redirect_to myLeksi_path
     end
   end

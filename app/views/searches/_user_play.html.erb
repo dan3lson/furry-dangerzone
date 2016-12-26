@@ -1,6 +1,5 @@
 <% unless current_user.already_has_word?(word) %>
-	<%= link_to user_word_path search_btn: :play,
-														 id: word.id,
+	<%= link_to user_word_path(search_btn: :play, id: word.id),
 														 method: :post do
 	%>
 		<i class="fa fa-gamepad"></i>
