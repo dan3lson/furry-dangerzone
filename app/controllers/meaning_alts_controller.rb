@@ -42,7 +42,7 @@ class MeaningAltsController < ApplicationController
   private
 
   def meaning_alt_params
-    params.require(:meaning_alt).permit(:text, :feedback)
+    params.require(:meaning_alt).permit(:text, :answer, :feedback)
   end
 
   def logged_in_user

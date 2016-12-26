@@ -9,9 +9,19 @@
 		<h4 class="card-title">Instructions</h4>
 		<p class="card-text">
 			Create one to three "meaning alternatives" with corresponding feedback for
-			each word. If you add more than one meaning alternative for a word, please
-			separate it with three asterisks (***). Also, make it so that there's a
-			clear "right" and "wrong" answer. Here are two examples:
+			each word.
+			<ul>
+				<li>
+					If you add more than one meaning alternative for a word, please
+					separate the content in each field, i.e. Text, Answer, and Feedback
+					with three asterisks (***)
+				</li>
+				<li>
+					Make it so that there's a
+				 	clear "right" and "wrong" answer
+				</li>
+			</ul>
+			Here are two examples:
 		</p>
 		<ol>
 			<li>
@@ -28,6 +38,14 @@
 															 nil,
 															 class: "form-control",
 															 placeholder: "Which would you rather anticipate - your birthday or a dentist appointment?",
+															 readonly: true %>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Answer", nil, class: "form-control-label" %>
+						<%= text_field_tag :answer,
+															 nil,
+															 class: "form-control",
+															 placeholder: "birthday",
 															 readonly: true %>
 					</p>
 					<p class="form-group">
@@ -55,6 +73,15 @@
 															 nil,
 															 class: "form-control",
 															 placeholder: "Which would you rather interact with - killer sharks or puppies?***Who would you rather interact with - your best friend or someone you don\'t respect and like?",
+															 readonly: true
+						%>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Answer", nil, class: "form-control-label" %>
+						<%= text_area_tag :answer,
+															 nil,
+															 class: "form-control",
+															 placeholder: "puppies***best friend",
 															 readonly: true
 						%>
 					</p>
@@ -104,6 +131,9 @@
 					<strong>Meaning Alternatives</strong>
 						<em>Text</em>
 						<%= words[0].meaning_alts.first.text.gsub("***", "; ") %>
+						|
+						<em>Answer</em>
+						<%= words[0].meaning_alts.first.answer.gsub("***", "; ") %>
 						|
 						<em>Feedback</em>
 						<%= words[0].meaning_alts.first.feedback.gsub("***", "; ") %>

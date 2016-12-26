@@ -9,6 +9,14 @@
     %>
   </div>
   <div class="form-group">
+    <%= f.label :answer,
+                class: "sr-only form-control-label" %>
+    <%= f.text_field :answer,
+                     class: "form-control",
+                     placeholder: "Answer"
+    %>
+  </div>
+  <div class="form-group">
     <%= f.label :feedback,
                 class: "sr-only form-control-label" %>
     <%= f.text_area :feedback,
