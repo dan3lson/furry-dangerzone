@@ -2,12 +2,30 @@
 words
 ================
 has_many :meaning_alts
+has_many :word_example_non_examples
+has_many :example_non_examples
 
 ================
 meaning_alts
 ================
 belongs_to :word
 text: string
+feedback: string
+answer: string 
+choices: string <--- Need to generate migration to add column
 word_id: integer
 
-WordID WordName Text
+================
+word_example_non_examples
+================
+belongs_to :words
+belongs_to :example_non_examples
+text: string
+
+================
+example_non_examples
+================
+has_many :words
+has_many :word_example_non_examples
+text: string
+answer: boolean

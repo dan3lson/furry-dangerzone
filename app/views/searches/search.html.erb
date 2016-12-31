@@ -15,28 +15,108 @@
   description: "Look up words you don\'t know or select ones from a specific list"
 } %>
 
-<div class="row">
-  <div class="col-md-6 offset-md-1">
-    <div class="card card-outline-primary">
-      <div class="card-block">
-        <h2 class="card-title">Look Up a Word</h2>
-        <%= render "searches/form", display_button_for: "user" %>
-      </div>
-    </div>
-    <div class="search-results-container"></div>
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs float-xs-left">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#look-up" role="tab">
+          <i class="fa fa-search"></i>
+          Look Up
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#random" role="tab">
+          <i class="fa fa-random"></i>
+          Random
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" data-toggle="tab" href="#grades-k-2" role="tab">
+          <i class="fa fa-institution"></i>
+          Grades K-2
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" data-toggle="tab" href="#grades-3-5" role="tab">
+          <i class="fa fa-institution"></i>
+          Grades 3-5
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#grades-6-8" role="tab">
+          <i class="fa fa-institution"></i>
+          Grades 6-8
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" data-toggle="tab" href="#grades-9-12" role="tab">
+          <i class="fa fa-institution"></i>
+          Grades 9-12
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" data-toggle="tab" href="#national-exams" role="tab">
+          <i class="fa fa-folder-open"></i>
+          National Exams
+        </a>
+      </li>
+    </ul>
   </div>
-  <div class="col-md-4">
-    <div class="card">
-    	<div class="card-header">
-    		Feeling Adventurous? Here's a Random Word.
-    		<div class="float-xs-right">
-    			<%= link_to search_path, remote: true do %>
-    				<i class="fa fa-refresh" id="random-search-btn"></i>
-    			<% end %>
-    		</div>
-    	</div>
-      <div class="card-block">
-        <%= render "words/adventurous", word: @adventurous_word %>
+  <div class="card-block">
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="look-up" role="tabpanel">
+        <h4 class="card-title">Look Up a Word</h4>
+        <%= render "searches/form", display_button_for: "user" %>
+        <br>
+        <div class="search-results-container"></div>
+      </div>
+      <div class="tab-pane" id="random" role="tabpanel">
+        <h4 class="card-title">
+          <i class="fa fa-random"></i>
+          Random Word
+        </h4>
+        <div>
+          <%= link_to search_path, remote: true do %>
+            <i class="fa fa-refresh" id="random-search-btn"></i>
+            New Word
+          <% end %>
+        </div>
+        <div id="random-word">
+          <div class="card">
+            <div class="card-block">
+              <%= render "words/basics", word: @random_word %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="grades-k-2" role="tabpanel">
+        Words for K-2 are coming soon!
+      </div>
+      <div class="tab-pane fade" id="grades-3-5" role="tabpanel">
+        Words for Grades 3-5 are coming soon!
+      </div>
+      <div class="tab-pane fade" id="grades-6-8" role="tabpanel">
+        <div class="text-muted">
+          Filter:
+          <a href="#" class="disabled">6th Grade</a>
+          |
+          7th Grade
+          |
+          <a href="#" class="disabled">8th Grade</a>
+          <div class="float-xs-right">
+            <p>
+              There are <%= pluralize(@seventh_grade_words.count, "word") %>.
+            </p>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <%= render "words/seventh_grade", words: @seventh_grade_words %>
+      </div>
+      <div class="tab-pane fade" id="grades-9-12" role="tabpanel">
+        Words for Grades 9-12 are coming soon!
+      </div>
+      <div class="tab-pane fade" id="grades-national-exams" role="tabpanel">
+        Words for National Exams are coming soon!
       </div>
     </div>
   </div>

@@ -1,0 +1,15 @@
+<% if UserWord.object(current_user, word).freestyle_completed? %>
+<div class="card card-outline-success">
+<% else %>
+<div class="card">
+<% end %>
+	<div class="card-block">
+		<%= render "words/basics", word: word %>
+		<div class="text-xs-center">
+			<%= render "my_leksi/mastery_percentage",
+				word: word,
+				user_word: UserWord.object(current_user, word)
+			%>
+		</div>
+	</div>
+</div>

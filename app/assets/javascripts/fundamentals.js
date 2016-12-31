@@ -1,14 +1,10 @@
 $(document).ready(function() {
 	// General
-	var $chosen_word_id = $(".palabra-id").html();
+	var $chosenWordID = $(".palabra-id").html();
 	var $regex = /^[a-zA-Z. ]+$/;
 	var $new_goodies_total = 0;
   var $time_game_started;
 	var $scoreboardTimerContainer = $(".scoreboard").find(".col-md-4").last();
-	// Spell the word
-	var $word_being_spelled;
-	var $chosen_word_substring;
-	var $chosen_word_substring_array = [];
 	// Fill in the blank
 	var $alphabet_array = "abcdefghijklmnopqrstuvwxyz".split('');
 	var	$alphabet_random_letter;
@@ -53,13 +49,13 @@ $(document).ready(function() {
 	var $rwe_container;
 	var $rwe_circle_activity_boolean = false;
 
-	if ($chosen_word_id != undefined) {
+	if ($chosenWordID != undefined) {
 		setTheStage();
 	}
 
 	function getGameWords() {
 		return $.get(
-			"/fundamentals?word_id=" + $chosen_word_id, function() {}, "json"
+			"/fundamentals?word_id=" + $chosenWordID, function() {}, "json"
 		);
 	};
 
@@ -84,7 +80,7 @@ $(document).ready(function() {
   function startActivity(chosenWordName) {
     if ($("#game-started-bool").hasClass("begin-timer")) {
       giveDirections("Type");
-      $("#chosen-word-header-container").html(chosenWordName);
+      // $("#chosen-word-header-container").html(chosenWordName);
       spellByTyping(chosenWordName);
       updateProgressBar(0);
 			displayTimer($scoreboardTimerContainer, "10");
@@ -117,7 +113,6 @@ $(document).ready(function() {
   function fillInTheBlankContinueBtn(word) {
     $("#fill-in-the-blank-continue-btn").click(function() {
 			var part_of_speech = word.part_of_speech;
-
       $(".checkpoint-image").hide();
       $("#fill-in-the-blank-continue-btn").hide();
       $fillInTheBlankContainer.hide();
@@ -125,15 +120,12 @@ $(document).ready(function() {
       $("#pronunciation_container").show();
       $("#chosen-word-header-container").hide();
       $("#meanings_back_button, #meanings_container").show();
-
 			giveDirections(
 				"As a(n) " + part_of_speech +
         ", read the meaning(s) for <strong>'" + word.name +
         "'</strong>."
       )
-
       updateProgressBar(45);
-
       start_meanings_activity();
     });
   }
@@ -360,12 +352,40 @@ $(document).ready(function() {
 	***/
 
 	function spellByTyping(word) {
+		const $chosenWordDiv = $("#chosen-word-header-container");
+		var input;
+		var wordSubstring;
+		var wordLetterSpan;
+		var chosenWordSpanLetters = [];
 		var $input = $("#spell-the-word");
 		var $btn = $("#spell-the-word-continue-btn");
+		var numLettersTyped = 0;
+		var successLetters = 0;
 		$input.focus();
+
+		$.each(word.split(""), function() {
+			wordLetterSpan = $(createElem("span")).append(this);
+			chosenWordSpanLetters.push(wordLetterSpan);
+		})
+
+		$chosenWordDiv.append(chosenWordSpanLetters);
+
 		$input.on('input', function() {
-			$word_being_spelled = $(this).val().trim().toLowerCase();
-			if ($word_being_spelled == word) {
+			input = $(this).val().trim().toLowerCase();
+			numLettersTyped = input.length;
+			wordSubstring = word.substring(0, numLettersTyped);
+
+			if (input == wordSubstring) {
+				makeLettersGreen($chosenWordDiv, numLettersTyped);
+				successLetters = $chosenWordDiv.find("span.text-success").length;
+
+				if (successLetters != numLettersTyped) {
+					makeLettersDefault($chosenWordDiv);
+					makeLettersGreen($chosenWordDiv, numLettersTyped);
+				}
+			}
+
+			if (input == word) {
 				$input.parent().addClass("has-success");
 				$input.addClass("form-control-success");
 				$btn.fadeIn();
@@ -385,20 +405,26 @@ $(document).ready(function() {
 		var underscores = "";
 		var $underscoreContainer = createElem("div", null, "underscore-container");
 		$fillInTheBlankContainer.show();
+
 		setTimeout(function() {
 			$("#chosen-word-header-container").css("opacity", ".017");
 		}, 3000);
+
 		$fillInTheBlankContainer.append($underscoreContainer);
+
 		$.each(chosenWordLetters, function() {
 			underscores += "_ ";
 		});
+
 		$underscoreContainer.text(underscores);
+
 		for (var i = 0; i < 3; i++) {
 			$alphabet_random_letter = $alphabet_array[randomRange(26, 0)];
 			$alphabetRandLetters.push($alphabet_random_letter);
 		}
 		$mergedLettersArray = merge(chosenWordLetters, $alphabetRandLetters);
 		$mergedLettersArray = shuffle_array($mergedLettersArray);
+
 		$.each($mergedLettersArray, function(index, letter) {
 			$letter = createElem(
 				"button",
@@ -406,12 +432,15 @@ $(document).ready(function() {
 			$letter.text(letter);
 			$fillInTheBlankContainer.append($letter);
 		});
+
 		$(".fitb-letter").click(function() {
 			$tappedLetterBtn = $(this);
 			tappedLetter = $(this).text();
+
 			for (var i = 0; i < chosenWordLetters.length; i++) {
 				var first_letter = chosenWordLetters[0];
 			}
+
 			if (first_letter == tappedLetter) {
 				$tappedLetterBtn.removeClass("btn-outline-primary")
 												.addClass("btn-success");
@@ -421,7 +450,7 @@ $(document).ready(function() {
 				$underscoreContainer.text(underscores);
 				chosenWordLetters.shift();
 			} else {
-				$tappedLetterBtn.removeClass("shake")
+				$tappedLetterBtn.removeClass("animated shake")
 												.addClass("animated shake");
 			 spellingClickWrongCount++;
 			}
@@ -720,6 +749,14 @@ $(document).ready(function() {
 	*
 	**/
 
+	function makeLettersGreen($section, numLetters) {
+		$($section.find("span").splice(0, numLetters)).addClass("text-success");
+	}
+
+	function makeLettersDefault($section) {
+		$($section.find("span.text-success")).removeClass("text-success");
+	}
+
 	function merge(array1, array2) {
 		return $.merge($.merge([], array1), array2);
 	}
@@ -786,31 +823,18 @@ $(document).ready(function() {
 			"button",
 			"btn btn-lg btn-info btn-block def-chkpt-btn"
 		);
-		var yes_emoji = createElem(
-			"i",
-			"fa fa-thumbs-up"
-		);
-		var no_emoji = createElem(
-			"i",
-			"fa fa-thumbs-down"
-		);
+		var yes_emoji = createElem("i","fa fa-thumbs-up");
+		var no_emoji = createElem("i","fa fa-thumbs-down");
 
 		well.append(definition);
-
 		yes_button.append(yes_emoji);
 		yes_button.append("&nbsp; YES");
 		yes_container.append(yes_button);
-
 		no_button.append(no_emoji);
 		no_button.append("&nbsp; NO");
 		no_container.append(no_button);
-
 		yes_no_container.append(yes_container);
 		yes_no_container.append(no_container);
-	}
-
-	function unbind_elem(selector) {
-		return $(selector).unbind();
 	}
 
 	function createElem(elem, elemClass, elemID) {
@@ -820,11 +844,11 @@ $(document).ready(function() {
 	}
 
 	function array_of_attributes(string) {
-		return string.split('***');
+		return string.split("***");
 	}
 
 	function update_user_word_games_completed() {
-		var game_info = { "word_id": $chosen_word_id };
+		var game_info = { "word_id": $chosenWordID };
 
 		$.ajax({
 			type: "PATCH",
@@ -839,7 +863,7 @@ $(document).ready(function() {
 
   function update_num_played() {
     var game_info = {
-      "word_id": $chosen_word_id,
+      "word_id": $chosenWordID,
       "game_name": "Fundamentals",
       "time_spent_in_min": ((new Date() - $time_game_started) / 1000 ) / 60
     };

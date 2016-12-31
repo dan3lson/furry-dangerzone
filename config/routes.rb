@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get "blog" => "blog_posts#index"
   get "all-about-leksi-part-1" => "blog_posts#all_about_leksi_part_1"
   get "all-about-leksi-part-2" => "blog_posts#all_about_leksi_part_2"
-  get "seventh_grade_words" => "words#seventh_grade"
+  get "seventh_grade_words" => "meaning_alts#seventh_grade"
   resources :blog_posts do
     resources :comments
   end

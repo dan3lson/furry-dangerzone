@@ -1,5 +1,5 @@
 class MeaningAltsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update]
+  before_action :logged_in_user
 
   def index
     @meaning_alts = MeaningAlt.all
@@ -39,6 +39,16 @@ class MeaningAltsController < ApplicationController
     redirect_to root_path
   end
 
+  def seventh_grade
+    @seventh_grade_grouped_words = Word.seventh_grade_grouped
+    @meaning_alt = MeaningAlt.new
+  end
+
+  def eigth_grade
+    @seventh_grade_words = Word.eighth_grade
+    @meaning_alt = MeaningAlt.new
+  end
+
   private
 
   def meaning_alt_params
@@ -47,7 +57,7 @@ class MeaningAltsController < ApplicationController
 
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "Yikes! Please log in first to do that."
+      flash[:danger] = "Please log in first for that."
       redirect_to login_path
     end
   end

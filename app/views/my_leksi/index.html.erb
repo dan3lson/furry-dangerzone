@@ -6,13 +6,19 @@
 <% if !current_user.has_words? %>
   <%= render "my_leksi/no_words_guide" %>
 <% else %>
-  <div class="text-muted">
-    Filter by
-    <i class="fa fa-book hover pointer text-primary"></i>
-    &nbsp;
-    <i class="fa fa-tag hover pointer text-primary"></i>
-    &nbsp;
-    <i class="fa fa-percent hover pointer text-primary"></i>
+  <div class="text-muted filter-div">
+    Filter:
+    <span class="text-primary active">
+      <i class="fa fa-list-alt"></i> Cards
+    </span>
+    |
+    <span>
+      <i class="fa fa-list hover pointer"></i> List
+    </span>
+    |
+    <span>
+      <i class="fa fa-trophy hover pointer"></i> Levels
+    </span>
     <div class="float-xs-right">
       <p>
         You have <%= pluralize(@current_user_words_count, "word") %>.
@@ -23,50 +29,8 @@
   <div class="card-columns"
        id="myLeksi-words"
        data-total="<%= @current_user_words_count %>">
-    <% @current_user_words_pag.each_with_index do |word, index| %>
-      <div class="card">
-        <div class="card-block">
-          <h2 class="card-title">
-            <%= word.name %>
-            <audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
-                   id="audio"
-                   preload="auto">
-            </audio>
-            <small>
-              <i class="fa fa-volume-up hover pointer text-primary"></i>
-            </small>
-            <br>
-            <small class="text-muted"><%= word.part_of_speech %></small>
-          </h2>
-          <p class="card-text">
-            <%= array_of(word, "definition").first %>
-          </p>
-        </div>
-        <div class="collapse" id="collapseWord<%= index %>">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <%= link_to "Fundamentals", fund_game_link(word.id) %>
-              <div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
-            </li>
-            <li class="list-group-item">
-              Jeopardy
-              <div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
-            </li>
-            <li class="list-group-item">
-              Freestyle
-              <div class="float-xs-right"><i class="fa fa-play-circle"></i></div>
-            </li>
-          </ul>
-        </div>
-        <div class="card-footer">
-          <div class="text-xs-center">
-            <%= render "my_leksi/mastery_percentage",
-                       word: word,
-                       user_word: UserWord.object(current_user, word)
-            %>
-          </div>
-        </div>
-      </div>
+    <% @current_user_words_pag.each do |word| %>
+      <%= render "my_leksi/index_word", word: word %>
     <% end %>
   </div>
   <div class="text-xs-center">

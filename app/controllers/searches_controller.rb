@@ -1,6 +1,7 @@
 class SearchesController < ApplicationController
   def search
-    @adventurous_word = Word.random(1).first
+    @random_word = Word.random(1).first
+    @seventh_grade_words = Word.seventh_grade
 
     respond_to do |format|
       format.html

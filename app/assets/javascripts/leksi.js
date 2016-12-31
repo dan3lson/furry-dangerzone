@@ -7,24 +7,27 @@ $(document).ready(function(){
 		$(location).attr("href", $(this).data("url"));
 	});
 
-	$(".reload-page").click(function(){
+	$(".reload-page").click(function() {
 		location.reload();
 	});
 
 	$(function () {
-  	$('[data-toggle="popover"]').popover()
+  	$("[data-toggle='popover']").popover();
 	});
 
 	$("#get-started-btn").click(function() {
 		scrollToSection($("#get-started-now").find("h1"));
 	});
 
-	$(".card-title, .search-results-container, #adventurous-word").on(
-		"click", ".fa-volume-up", function() {
+	$(".container").on("click", ".fa-volume-up", function() {
 		const audio = $(this).parent().prev()[0];
-
 		audio.play();
 	});
+
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		$('a[data-toggle="tab"]').removeClass("active");
+	  $(e.target).addClass("active");
+	})
 
 	spinner();
 
@@ -43,8 +46,6 @@ $(document).ready(function(){
 	};
 
 	function scrollToSection(section) {
-		$('html, body').animate({
-				scrollTop: section.offset().top - 50
-		}, 2000);
+		$("html, body").animate({ scrollTop: section.offset().top - 50 }, 2000);
 	};
 });

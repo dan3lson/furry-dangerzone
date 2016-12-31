@@ -4,10 +4,6 @@
 //*
 //**********
 
-.games-body-padding {
-	padding: 25px 0;
-}
-
 .no-underline a {
 	text-decoration: none;
 }
@@ -56,18 +52,6 @@ a, a:active {
   cursor: pointer;
 }
 
-.apple-blue {
-	color: $apple-blue;
-}
-
-.apple-star-orange {
-	color: $apple-star-orange;
-}
-
-.apple-star-container {
-	font-size: .8em;
-}
-
 .basic-apple-blue-link a {
 	color: $apple-blue;
 
@@ -88,36 +72,6 @@ a, a:active {
 	}
 }
 
-.basic-red-link a {
-	color: $bootstrap-red;
-
-	&:hover {
-		background: none;
-		color: darken($leksi-red, 15%);
-		text-decoration: none;
-	}
-}
-
-.bootstrap-blue-link a {
-	color: $bootstrap-blue;
-
-	&:visited, &:hover, &:active  {
-		text-decoration: none;
-	}
-}
-
-.bootstrap-green-link a {
-	color: $bootstrap-green;
-
-	&:visited, &:hover, &:active  {
-		text-decoration: none;
-	}
-}
-
-.bootstrap-blue-bg {
-	background: $bootstrap-blue;
-}
-
 .border-none {
 	border: none;
 	position: relative;
@@ -135,9 +89,12 @@ a, a:active {
   margin-bottom: 25px;
 }
 
-
 #card {
 	cursor: pointer;
+}
+
+.card-title {
+	word-break: break-word;
 }
 
 .blue-border {
@@ -252,9 +209,8 @@ a, a:active {
   color: $dark-leksi-red;
 }
 
-.header-buttons a {
+.text-white a {
 	color: $white;
-	font-weight: 100;
 
 	&:visited {
 	}
@@ -277,88 +233,8 @@ a, a:active {
 	}
 }
 
-.game-circle {
-	border-radius: $game-circle-sizes;
-	border-style: solid;
-	border-width: 2px;
-	color: $white;
-	display: inline-block;
-  font-size: 13px;
-	height: $game-circle-sizes;
-	line-height: 27px;
-	text-align: center;
-	width: $game-circle-sizes;
-
-	&:hover {
-		opacity: $show-game-circle-container-hover-opac;
-	}
-}
-
-.game-not-ready {
-  opacity: .1;
-}
-
-.game-one-start-circle{
-	@extend .game-circle;
-
-	background: $leksi-red;
-	border-color: $leksi-red;
-}
-
-.game-two-start-circle{
-	@extend .game-circle;
-
-  background: $leksi-orange;
-	border-color: $leksi-orange;
-}
-
-.game-three-start-circle{
-	@extend .game-circle;
-
-  background: $leksi-green;
-	border-color: $leksi-green;
-}
-
-.game-one-in-progress-circle{
-	@extend .game-circle;
-
-	background: $leksi-red;
-	border-color: $leksi-red;
-}
-
-.game-two-in-progress-circle{
-	@extend .game-circle;
-
-	background: $leksi-orange;
-	border-color: $leksi-orange;
-}
-
-.game-three-in-progress-circle{
-	@extend .game-circle;
-
-	background: $leksi-green;
-	border-color: $leksi-green;
-}
-
-.game-zone-margin {
-	margin: 12px;
-}
-
-#guest-flash-messages {
-	margin-top: 54px;
-}
-
-.home-hr {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .inline-block {
 	display: inline-block;
-}
-
-.italics {
-	font-style: italic;
 }
 
 .leaderboard-bronze {
@@ -370,10 +246,6 @@ a, a:active {
 .leaderboard-container {
   display: none;
   text-align: center;
-}
-
-.light-blue-bg {
-  background: $light-blue;
 }
 
 .light-gray {
@@ -409,36 +281,8 @@ a, a:active {
 	background: #c7c7cc;
 }
 
-.leksi-blue {
-	color: $sky-blue;
-}
-
-.leksi-blue-bg {
-	@extend .thin-section;
-
-	background: $sky-blue;
-
-	h1 {
-		color: $white;
-		text-transform: uppercase;
-		text-shadow: 1px 1px 1px $black;
-	}
-}
-
-.leksi-orange {
-	color: $leksi-orange;
-}
-
-.leksi-green {
-	color: $leksi-green;
-}
-
 .leksi-purple {
 	color: darkorchid;
-}
-
-.leksi-red {
-	color: $leksi-red;
 }
 
 .light-blue-hover:hover {
@@ -450,10 +294,6 @@ a, a:active {
   background: $sky-blue;
   border-color: $sky-blue;
   opacity: .90;
-}
-
-.margin-top {
-  margin-top: 180px;
 }
 
 .medium-gray {
@@ -503,12 +343,6 @@ a, a:active {
 	@extend .new-followup-game-circle;
 
 	background: $leksi-red;
-}
-
-.new-jeopardy-game-circle {
-	@extend .new-followup-game-circle;
-
-	background: $leksi-orange;
 }
 
 .new-freestyle-game-circle {
@@ -570,13 +404,6 @@ a, a:active {
   color: $white;
 }
 
-.prog-not-started-circle-orange {
-  @extend .prog-circle;
-
-  background: $leksi-orange;
-  color: $white;
-}
-
 .prog-not-started-circle-green {
   @extend .prog-circle;
 
@@ -619,19 +446,6 @@ a, a:active {
 .radio input[type="radio"],
 .radio-inline input[type="radio"] {
 	margin-left: 0 !important;
-}
-
-.red-border {
-	border-bottom: $leksi-red 1px solid;
-	padding: 10px 0;
-}
-
-.remove-line-height {
-	line-height: normal;
-}
-
-.remove-padding-left {
-	padding-left: 0;
 }
 
 .remove-side-margins {
@@ -715,113 +529,8 @@ table {
 	}
 }
 
-.fa-eye {
-	color: $dark-gray;
-}
-
-.fat-section {
-	background: $even-lighter-gray;
-	padding: 42px;
-
-	h3 {
-		margin-top: 0;
-	}
-}
-
-.gamification-spotlight {
-	display: table;
-	text-align: left;
-	position: relative;
-}
-
 .gray {
 	color: gray;
-}
-
-#sneak-peak-img-container {
-	img:not(:first-child) {
-		display: none;
-	}
-	img {
-		margin: 0 auto;
-	}
-}
-
-.thin-gray-section {
-	@extend .thin-section;
-
-	background: $light-gray;
-}
-
-.thin-white-section {
-	@extend .thin-section;
-
-	background: $white;
-
-	a {
-		color: $amber;
-		font-size: 19px;
-	}
-
-	p {
-		margin-top: 10px;
-	}
-}
-
-.word-show-game-circle {
-	border-radius: $home-game-circle-size;
-	height: $home-game-circle-size;
-	padding-top: 28px;
-	width: $home-game-circle-size;
-}
-
-.fund-show-game-circle {
-	@extend .word-show-game-circle;
-
-	background: $leksi-red;
-}
-
-.jeop-show-game-circle {
-	@extend .word-show-game-circle;
-
-	background: $leksi-orange;
-}
-
-.free-show-game-circle {
-	@extend .word-show-game-circle;
-
-	background: $leksi-green;
-}
-
-.medium-gray-game-circle {
-	@extend .word-show-game-circle;
-
-	background: $medium-gray;
-	font-size: 1.4em;
-}
-
-.medium-gray-game-circle-no-hover {
-	@extend .word-show-game-circle;
-
-	background: $medium-gray;
-}
-
-.medium-gray-game-circle:hover {
-	opacity: $show-game-circle-container-hover-opac;
-}
-
-.add-show-game-circle {
-	background: $light-gray;
-	border: 1px dashed $dark-gray;
-	border-radius: $home-game-circle-size;
-	color: $dark-gray;
-	height: $home-game-circle-size;
-	padding-top: 38px;
-	width: $home-game-circle-size;
-}
-
-.add-show-game-circle:hover {
-	opacity: $show-game-circle-container-hover-opac;
 }
 
 .freestyle-types {

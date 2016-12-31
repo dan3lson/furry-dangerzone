@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html>
   <%= render "layouts/head" %>
-
-<% if params[:controller] == "games" %>
-  <body class="games-body-padding">
-<% else %>
   <body>
-<% end %>
     <%= render "sessions/facebook_sdk" %>
-
-    <% unless params[:controller] == "games" %>
-      <%= render "layouts/header_logged_in" %>
-    <% end %>
-
+    <%= render "layouts/header_logged_in" %>
     <div class="container">
       <%= render "shared/flash_messages" %>
       <%= yield %>

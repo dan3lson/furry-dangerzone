@@ -135,7 +135,6 @@ class Word < ActiveRecord::Base
     user.words - words_with_tags
   end
 
-  # TODO Remove once project is complete
   def self.seventh_grade
     words = [
       "abate",
@@ -304,14 +303,16 @@ class Word < ActiveRecord::Base
       "wrath",
       "yearn"
     ]
-    where(name: words.take(60)).group_by { |w| w.name }
+    where(name: words).limit(30)
   end
 
-  def self.eigth_grade
-
+  # TODO Remove once project is complete
+  def self.seventh_grade_grouped
+    where(name: Word.seventh_grade.take(60)).group_by { |w| w.name }
   end
-  # HEROKU UPDATES
+
   # TODO Update all phonetic spellings with WordsAPI
+  # HEROKU UPDATES
   # Update phonetic spellings for all words
   def self.update_phonetic_spellings(limit, offset)
     url = "http://wwww.thefreedictionary.com"

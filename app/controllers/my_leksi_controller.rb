@@ -2,10 +2,10 @@ class MyLeksiController < ApplicationController
 	before_action :logged_in_user
 
 	def index
-		# @current_user_words = current_user.sort_words_by_progress("ASC")
-		# 																	.includes(:word)
-																				# .map { |uw| uw.word }
-		@current_user_words = current_user.words
+		@current_user_words = current_user.sort_words_by_progress("ASC")
+																			.includes(:word)
+																			.map { |uw| uw.word }
+		# @current_user_words = current_user.words
 		page = params[:page] ? params[:page].to_i - 1 : 1
 		@current_user_words_pag = @current_user_words.paginate(
 			page: page,
