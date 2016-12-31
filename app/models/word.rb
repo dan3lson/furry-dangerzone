@@ -136,7 +136,7 @@ class Word < ActiveRecord::Base
   end
 
   def self.seventh_grade
-    words = [
+    [
       "abate",
       "abnormal",
       "abode",
@@ -303,7 +303,10 @@ class Word < ActiveRecord::Base
       "wrath",
       "yearn"
     ]
-    where(name: words).limit(30)
+  end
+
+  def self.seventh_grade_objects
+    where(name: Word.seventh_grade).limit(30)
   end
 
   # TODO Remove once project is complete

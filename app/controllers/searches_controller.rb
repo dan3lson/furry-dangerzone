@@ -1,7 +1,7 @@
 class SearchesController < ApplicationController
   def search
     @random_word = Word.random(1).first
-    @seventh_grade_words = Word.seventh_grade
+    @seventh_grade_words = Word.seventh_grade_objects
 
     respond_to do |format|
       format.html
