@@ -3,7 +3,7 @@
     <%= link_to root_path, class: "navbar-brand" do %>
 			Leksi&#8482;
 		<% end %>
-    <% if actionIs?("about_us") %>
+    <% if action?("about_us") %>
       <%= link_to "About Us",
                   about_us_path,
                   class: "nav-item nav-link active"
@@ -11,7 +11,7 @@
     <% else %>
       <%= link_to "About Us", about_us_path, class: "nav-item nav-link" %>
     <% end %>
-    <% if actionIs?("research") %>
+    <% if action?("research") %>
       <%= link_to "Research",
                   research_path,
                   class: "nav-item nav-link active"
@@ -19,7 +19,7 @@
     <% else %>
       <%= link_to "Research", research_path, class: "nav-item nav-link" %>
     <% end %>
-    <% if actionIs?("our_approach") %>
+    <% if action?("our_approach") %>
       <%= link_to "Our Approach",
                   our_approach_path,
                   class: "nav-item nav-link active"

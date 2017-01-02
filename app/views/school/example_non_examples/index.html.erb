@@ -1,0 +1,22 @@
+<% title "" %>
+<% description "" %>
+<% set_meta_tags keywords: "" %>
+
+<% set_meta_tags og: {
+  title: "",
+	description: ""
+} %>
+
+<% set_meta_tags twitter: {
+  card: "",
+  title: "",
+  description: ""
+} %>
+
+<% @example_non_examples.each do |e_non_e| %>
+  <div class="card">
+    <div class="card-block">
+      <%= render "example_non_examples/example_non_example", e_non_e: e_non_e %>
+    </div>
+  </div>
+<% end %>

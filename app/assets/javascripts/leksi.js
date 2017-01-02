@@ -29,6 +29,8 @@ $(document).ready(function(){
 	  $(e.target).addClass("active");
 	})
 
+	$("#search-form").focus();
+
 	spinner();
 
 	function spinner() {

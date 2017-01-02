@@ -1,0 +1,52 @@
+<% if words.class == String %>
+	<div class="alert alert-danger"><%= results %></div>
+<% else %>
+	<div class="row">
+		<% words.each do |word| %>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-block">
+						<h2 class="card-title">
+							<% if (controller?("my_leksi") && action?("index") ||
+										 current_user.has_word?(word) && (
+										 controller?("searches") &&
+										 action?("search_results"))
+							) %>
+								<%= link_to word.name, "/myLeksi/#{word.id}" %>
+							<% else %>
+								<%= word.name %>
+							<% end %>
+							<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
+										 id="audio"
+										 preload="auto">
+							</audio>
+							<small>
+								<i class="fa fa-volume-up hover pointer text-primary"></i>
+							</small>
+							<br>
+							<small class="text-muted">
+								<u><%= word.part_of_speech %></u>
+								<%= array_of(word, "definition").first %>
+							</small>
+						</h2>
+					</div>
+					<div class="card-footer text-xs-center">
+						<% if current_user.already_has_word?(word) %>
+							<div>
+								<%= render "my_leksi/mastery_percentage",
+													 word: word,
+													 user_word: UserWord.object(current_user, word)
+								%>
+							</div>
+						<% else %>
+							<%= render "searches/results_options",
+												 display_button: display_button,
+												 word: word
+							%>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+<% end %>

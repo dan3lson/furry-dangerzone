@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   before_create { self.username = username.downcase }
   before_create { self.email = email.downcase }
 
-  # TODO: Create test 
+  # TODO: Create test
   def self.set_up_login_data(user)
     datetime_now = DateTime.now
     user.last_login = datetime_now
@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
     role == "teacher" || role == "admin"
   end
 
+  def is_admin_or_teacher?
+    is_admin? || is_teacher?
+  end
+
   def is_student?
     role == "student"
   end
@@ -79,8 +83,13 @@ class User < ActiveRecord::Base
     !is_student?
   end
 
+  # TODO Create test
   def can_create_words?
-    is_admin? || is_teacher?
+    is_admin_or_teacher?
+  end
+
+  def can_create_example_non_examples?
+    is_admin_or_teacher?
   end
 
   def incomplete_fundamentals
@@ -95,12 +104,12 @@ class User < ActiveRecord::Base
     UserWord.where(user: self).completed_jeopardys
   end
 
-  # TODO: Create test 
+  # TODO Create test
   def incomplete_jeop_ids_not(word)
     incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def incomplete_tag_jeop_ids_not(word)
     incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
   end
@@ -166,7 +175,7 @@ class User < ActiveRecord::Base
     num_incomplete_and_complete_jeops > 2
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def num_rands_needed
     if has_enough_incomplete_jeops?
       if num_incomplete_jeops == 2
@@ -181,7 +190,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   # refactor into two methods
   def combine_jeop_words(word)
     my_ids = self.incomplete_jeop_ids_not(word)
@@ -200,7 +209,7 @@ class User < ActiveRecord::Base
     my_words + random_words
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def get_jeop_words(word)
     if has_enough_incomplete_jeops?
       [word] + combine_jeop_words(word)
@@ -217,7 +226,7 @@ class User < ActiveRecord::Base
     user_words.where(created_at: 1.days.ago..Time.now)
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def fundamentals_completed_yesterday
     user_words.select do |uw|
       next unless uw.fundamental_completed?
@@ -226,7 +235,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def jeopardys_completed_yesterday
     user_words.select do |uw|
       next unless uw.jeopardy_completed?
@@ -235,7 +244,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def freestyles_completed_yesterday
     user_words.select do |uw|
       next unless uw.freestyle_completed?
@@ -244,7 +253,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def freestyles_completed_today
     user_words.select do |uw|
       next unless uw.freestyle_completed?
@@ -253,7 +262,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def has_recent_activity?
     words_added_last_day.any? ||
     fundamentals_completed_yesterday.any? ||
@@ -261,20 +270,20 @@ class User < ActiveRecord::Base
     freestyles_completed_yesterday.any?
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def has_completed_freestyle_yesterday_or_today?
     freestyles_completed_yesterday.count > 0 ||
     freestyles_completed_today.count > 0
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def completed_freestyle_on?(date)
     UserWord.where(user: self, games_completed: 3).select { |uw|
       uw.updated_at.to_date == date
     }.any?
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def myLeksi_mastery
     words = self.num_words
 
@@ -283,21 +292,21 @@ class User < ActiveRecord::Base
     (completed_freestyles.count / words.to_f * 100).round
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def time_spent_playing
     user_words = UserWord.where(user: self)
 
     user_words.map { |uw| uw.game_stats.sum(:time_spent) }.inject(&:+) || 0
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def sort_words_by_progress(asc_or_desc)
     user_words.order("games_completed #{asc_or_desc}")
               .joins(:word)
               .order("words.name")
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def num_words
     words.count
   end

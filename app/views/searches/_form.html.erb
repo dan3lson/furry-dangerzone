@@ -1,7 +1,6 @@
-<%= form_tag search_results_path(display_button_for: display_button_for),
+<%= form_tag path,
              method: "get",
              id: "search-form",
-             class: "form-inline",
              remote: true do
 %>
   <div class="input-group input-group-lg">
@@ -26,3 +25,4 @@
     </span>
   </div>
 <% end %>
+<!-- search_results_path(display_button_for: display_button_for) -->

@@ -11,11 +11,9 @@ class School::WordsController < BaseSchoolController
 
     if @word.save
       flash[:success] = "Success! You created \'#{@word.name}\'."
-
       redirect_to new_school_word_path
     else
       flash.now[:danger] = "Yikes! Something went wrong. Please try again."
-
       render :new
     end
   end
@@ -23,7 +21,6 @@ class School::WordsController < BaseSchoolController
   def student_words
     @fs_class_one = User.fs_class_one
     @fs_class_two = User.fs_class_two
-
     @selection = params[:selection]
     @class = @selection == "Class One" ? "fs_class_one" : "fs_class_two"
     @class_name = @class == "fs_class_one" ? "Class One" : "Class Two"
@@ -36,7 +33,6 @@ class School::WordsController < BaseSchoolController
   end
 
   def frayer_model
-
   end
 
   private
@@ -54,7 +50,6 @@ class School::WordsController < BaseSchoolController
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Yikes! Please log in first to do that."
-
       redirect_to login_url
     end
   end
@@ -62,9 +57,7 @@ class School::WordsController < BaseSchoolController
   def correct_user
     unless current_user.can_create_words?
       flash[:danger] = "Yikes! That\'s not something you can do."
-
       redirect_to menu_path
     end
   end
-
 end

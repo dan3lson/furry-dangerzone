@@ -9,10 +9,10 @@
 			</div>
 		<% end %>
 		<h2 class="card-title">
-			<% if (controllerIs?("my_leksi") && actionIs?("index") ||
+			<% if (controller?("my_leksi") && action?("index") ||
 						 current_user.has_word?(word) && (
-						 controllerIs?("searches") &&
-						 actionIs?("search_results"))
+						 controller?("searches") &&
+						 action?("search_results"))
 			) %>
 				<%= link_to word.name, "/myLeksi/#{word.id}" %>
 			<% else %>

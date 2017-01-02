@@ -1,48 +1,25 @@
-<% if results.class == String %>
+<% if words.class == String %>
 	<div class="alert alert-danger"><%= results %></div>
 <% else %>
-	<% results.each do |word| %>
-		<div class="card">
-			<div class="card-block">
-				<h2 class="card-title">
-					<% if (controllerIs?("my_leksi") && actionIs?("index") ||
-								 current_user.has_word?(word) && (
-								 controllerIs?("searches") &&
-								 actionIs?("search_results"))
-					) %>
-						<%= link_to word.name, "/myLeksi/#{word.id}" %>
-					<% else %>
-						<%= word.name %>
-					<% end %>
-					<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
-								 id="audio"
-								 preload="auto">
-					</audio>
-					<small>
-						<i class="fa fa-volume-up hover pointer text-primary"></i>
-					</small>
-					<br>
-					<small class="text-muted"><%= word.part_of_speech %></small>
-				</h2>
-				<p class="card-text">
-					<%= array_of(word, "definition").first %>
-				</p>
-			</div>
-			<div class="card-footer text-xs-center">
-				<% if current_user.already_has_word?(word) %>
-					<div>
-						<%= render "my_leksi/mastery_percentage",
-											 word: word,
-											 user_word: UserWord.object(current_user, word)
-						%>
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<% words.each do |word| %>
+					<div class="card">
+						<div class="card-block">
+							<%= render "words/basics", word: word %>
+						</div>
+						<div class="card-footer">
+							<% if current_user.is_teacher? &&
+										action?("multiple_words")
+							%>
+								<p class="text-muted">
+									Create an Example/Non-Example below:
+								</p>
+								<%= render "school/example_non_examples/form", word: word %>
+							<% end %>
+						</div>
 					</div>
-				<% else %>
-					<%= render "searches/results_options",
-										 display_button: display_button,
-										 word: word
-					%>
-				<% end %>
-			</div>
+			<% end %>
 		</div>
-	<% end %>
+	</div>
 <% end %>

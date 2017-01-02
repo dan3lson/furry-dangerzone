@@ -1,0 +1,19 @@
+<h1>New Example/Non-Examples</h1>
+<section id="new-e-non-e-step-one">
+  <ol class="lead">
+    <li>
+      Find words by typing one word (or multiple words separated by a comma)
+    </li>
+    <li>
+      Click the <i class="fa fa-search"></i> button
+    </li>
+    <li>
+      Use the corresponding forms that show up to add as many
+      example/non-examples as you'd like
+    </li>
+  </ol>
+  <%= render "searches/form", path: search_multi_words_path %>
+  <!-- TODO Need a new partial to deal with this or try to abstract/update the existing one for students -->
+  <br>
+  <div class="search-results-container"></div>
+</section>

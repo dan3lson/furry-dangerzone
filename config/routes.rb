@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "search" => "searches#search"
   get "search_results" => "searches#search_results"
   get "search_words_for_students" => "searches#student_words"
+  get "search_multi_words" => "searches#multiple_words"
   get "menu" => "current_users#menu"
   get "progress" => "current_users#progress"
   get "myLeksi" => "my_leksi#index"
@@ -68,8 +69,12 @@ Rails.application.routes.draw do
     get "messages" => "schools#messages"
     get "progress" => "schools#progress"
     get "menu" => "schools#menu"
-    resources :words, only: [:new, :create, :edit, :update, :destroy]
+    resources :words, only: [:new, :create]
     resource :add_words_for_student, only: [:update]
+    resources :example_non_examples, only: [:index, :new]
+    resources :words do
+      resources :example_non_examples
+    end
   end
   namespace :admin do
     root "admins#menu"

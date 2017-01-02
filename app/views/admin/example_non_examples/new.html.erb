@@ -1,0 +1,10 @@
+<% provide(:title, "New Example Non-Example") %>
+<% provide(:header, "New Example Non-Example") %>
+
+<% if logged_in? %>
+  <div class="card">
+    <div class="card-block">
+      <%= render "example_non_examples/form", e_non_e: @example_non_example %>
+    </div>
+  </div>
+<% end %>

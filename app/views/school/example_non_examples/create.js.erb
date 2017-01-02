@@ -1,0 +1,11 @@
+const saved = "<%= @saved %>";
+
+if (saved) {
+	// Find the form's container that was just submitted
+	// Prepend a flash success message
+	// http://stackoverflow.com/questions/2066162/how-can-i-get-the-button-that-caused-the-submit-from-the-form-submit-event
+	// http://stackoverflow.com/questions/5721724/jquery-how-to-get-which-button-was-clicked-upon-form-submission
+	console.log("Success: Example/Non-Example saved.");
+} else {
+	console.log("ERROR: Example/Non-Example not saved.");
+}

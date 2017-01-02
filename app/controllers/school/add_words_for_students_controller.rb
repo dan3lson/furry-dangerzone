@@ -5,7 +5,6 @@ class School::AddWordsForStudentsController < BaseSchoolController
   def update
     @students = params[:usernames].map { |s| User.find_by(username: s) }
     @words = params[:word_ids].split(",").uniq.map { |w| Word.find(w) }
-
     @all_info = []
 
     @students.each do |s|
@@ -43,7 +42,6 @@ class School::AddWordsForStudentsController < BaseSchoolController
         @war_ary = v[:warnings]
         @err_ary = v[:errors]
         @u = "<b>#{username}</b>".html_safe
-
         @num_successes += @suc_ary.count
         @num_warnings += @war_ary.count
         @num_errors += @err_ary.count
@@ -99,7 +97,6 @@ class School::AddWordsForStudentsController < BaseSchoolController
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Yikes! Please log in first to do that."
-
       redirect_to login_url
     end
   end
@@ -107,7 +104,6 @@ class School::AddWordsForStudentsController < BaseSchoolController
   def correct_user
     unless current_user.can_create_words?
       flash[:danger] = "Yikes! That\'s not something you can do."
-
       redirect_to menu_path
     end
   end

@@ -28,4 +28,17 @@ class SearchesController < ApplicationController
 
   def student_words
   end
+
+  def multiple_words
+    @search = params[:search]
+
+    if @search
+      @input_words = @search.split(",").map(&:strip)
+      @words = @input_words.map { |w| Word.define(w) }.flatten
+
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
 end

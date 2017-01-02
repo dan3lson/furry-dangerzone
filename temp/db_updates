@@ -11,7 +11,7 @@ meaning_alts
 belongs_to :word
 text: string
 feedback: string
-answer: string 
+answer: string
 choices: string <--- Need to generate migration to add column
 word_id: integer
 
@@ -28,4 +28,5 @@ example_non_examples
 has_many :words
 has_many :word_example_non_examples
 text: string
-answer: boolean
+answer: string
+feedback: string
