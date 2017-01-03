@@ -1,4 +1,16 @@
-<%= link_to user_word_path(id: word.id), method: :post do %>
-	<i class="fa fa-save"></i>
-	SAVE
+<% if current_user.already_has_word?(word) %>
+	<%= link_to "#",
+							class: "btn btn-outline-secondary btn-block disabled" do
+	%>
+		<i class="fa fa-save"></i>
+		Already Saved!
+	<% end %>
+<% else %>
+	<%= link_to user_word_path(id: word.id),
+							class: "btn btn-outline-primary btn-block",
+							method: :post do
+	%>
+		<i class="fa fa-save"></i>
+		Save
+	<% end %>
 <% end %>

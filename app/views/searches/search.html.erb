@@ -65,26 +65,23 @@
   <div class="card-block">
     <div class="tab-content">
       <div class="tab-pane fade in active" id="look-up" role="tabpanel">
-        <h4 class="card-title">Look Up a Word</h4>
-        <%= render "searches/form", display_button_for: "user" %>
+        <%= render "searches/form", path: search_multi_words_path %>
         <br>
         <div class="search-results-container"></div>
       </div>
       <div class="tab-pane" id="random" role="tabpanel">
-        <h4 class="card-title">
-          <i class="fa fa-random"></i>
-          Random Word
-        </h4>
-        <div>
+        <div class="float-xs-right">
           <%= link_to search_path, remote: true do %>
             <i class="fa fa-refresh" id="random-search-btn"></i>
             New Word
           <% end %>
         </div>
+        <div class="clear"></div>
         <div id="random-word">
           <div class="card">
             <div class="card-block">
               <%= render "words/basics", word: @random_word %>
+              <%= render "searches/results_options", word: @random_word %>
             </div>
           </div>
         </div>

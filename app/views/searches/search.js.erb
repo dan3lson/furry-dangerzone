@@ -1,2 +1,4 @@
 const partial = "<%= j render(partial: 'words/basics', locals: { word: @random_word }) %>";
-$("#random-word").hide().html(partial).fadeIn(800);
+const actions = "<%= j render(partial: 'searches/results_options', locals: { word: @random_word }) %>";
+$("#random-word .card-block").hide().html(partial).fadeIn(800);
+$("#random-word .card-block").append(actions);

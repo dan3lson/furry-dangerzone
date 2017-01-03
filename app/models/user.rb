@@ -79,6 +79,11 @@ class User < ActiveRecord::Base
     role == "student"
   end
 
+  # TODO Create test
+  def is_brainiac?
+    role == "brainiac" || is_student?
+  end
+
   def is_not_a_student?
     !is_student?
   end

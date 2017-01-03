@@ -7,17 +7,18 @@
 					<div class="card">
 						<div class="card-block">
 							<%= render "words/basics", word: word %>
+							<% if current_user.is_brainiac? %>
+								<%= render "searches/results_options", word: word %>
+							<% end %>
 						</div>
-						<div class="card-footer">
-							<% if current_user.is_teacher? &&
-										action?("multiple_words")
-							%>
+						<% if current_user.is_teacher? %>
+							<div class="card-footer">
 								<p class="text-muted">
 									Create an Example/Non-Example below:
 								</p>
 								<%= render "school/example_non_examples/form", word: word %>
-							<% end %>
-						</div>
+							</div>
+						<% end %>
 					</div>
 			<% end %>
 		</div>
