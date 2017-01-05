@@ -5,16 +5,19 @@
 //**********
 
 .palabra,
-#pronunciation-div,
 #spell-by-clicking-letters-div,
+#spell-the-word-continue-btn,
+#pronunciation-div,
+#pronunciation-continue-btn,
+#meaning-alts-div,
+.decisions-feedback,
+#meaning-alts-continue-btn,
+#example-non-examples-continue-btn,
 #synonyms_container,
 #antonyms_container,
 #real_world_examples_container,
 #syn-ant-no-results,
-#spell-the-word-continue-btn,
 #fill-in-the-blank-continue-btn,
-#pronunciation-continue-btn,
-#meanings_checkpoint_continue_button,
 #synonyms_continue_button,
 #antonyms_continue_button,
 #syn_ant_checkpoint_continue_button,
@@ -25,10 +28,7 @@
 
 #chosen-word-header-container {
 	padding: 0.7rem;
-}
-
-.pointer {
-	cursor: pointer;
+	word-break: break-word;
 }
 
 #continueButtonContainer {
@@ -62,8 +62,12 @@
 	font-size: 20px !important;
 }
 
-#progress-bar-container progress {
-	display: inline-block;
+#progress-bar-container {
+	padding-top: 0.7rem;
+
+	progress {
+		display: inline-block;
+	}
 }
 
 #pronunciation-div {
@@ -73,6 +77,5 @@
 }
 
 .scoreboard {
-	font-size: 3rem;
-	padding: 1.5rem;
+	font-size: 1.5rem;
 }

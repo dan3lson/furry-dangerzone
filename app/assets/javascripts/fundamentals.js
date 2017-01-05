@@ -3,13 +3,14 @@ $(document).ready(function() {
 	var $chosenWordID = $(".palabra-id").html();
 	var $chosenWordHeaderContainer = $("#chosen-word-header-container");
 	var $regex = /^[a-zA-Z. ]+$/;
-	var $new_goodies_total = 0;
-  var $time_game_started;
-	var $scoreboardTimerContainer = $(".scoreboard").find(".col-md-4").last();
+	var newPointsTotal = 0;
+  var $timeGameStarted;
+	var $scoreboardTimer = $(".scoreboard-timer");
 	var checkmark = "✓";
+	var $points = $(".scoreboard-points");
 	// Spell by Clicking Letters
-	var $alphabet_array = "abcdefghijklmnopqrstuvwxyz".split('');
-	var	$alphabet_random_letter;
+	var $alphabets = "abcdefghijklmnopqrstuvwxyz".split('');
+	var	$randomAlphabet;
 	var $alphabetRandLetters = [];
 	var $mergedLettersArray = [];
 	var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
@@ -68,7 +69,7 @@ $(document).ready(function() {
 			spellTheWordContinueBtn(chosenWord);
 			fillInTheBlankContinueBtn(chosenWord);
 			pronunciationContinueBtn(words);
-			meanings_checkpoint_continue_button(chosenWordName);
+			meaningAltsContinueBtn(chosenWordName);
 			synonyms_continue_button(chosenWordName);
 			antonyms_continue_button(chosenWordName);
 			syn_ant_checkpoint_continue_button(chosenWordName);
@@ -82,9 +83,8 @@ $(document).ready(function() {
       // $chosenWordHeaderContainer.html(chosenWordName);
       spellByTyping(chosenWordName);
       updateProgressBar(0);
-			displayTimer($scoreboardTimerContainer, "10");
-			startCountdown($("#countdown"), 10);
-      $time_game_started = new Date();
+			startCountup($scoreboardTimer, 0);
+      $timeGameStarted = new Date();
     }
   }
 
@@ -107,7 +107,8 @@ $(document).ready(function() {
 				"Tap the letters to spell that same word, whose definition is <mark>" +
 				word.definition + "</mark>."
 			);
-      updateProgressBar(15);
+      updateProgressBar(12);
+			boostPoints(100);
 			spellByClickingLetters(chosenWordLetters);
     });
   }
@@ -119,10 +120,11 @@ $(document).ready(function() {
       $spellByClickingLettersDiv.hide();
       $pronunciationDiv.show();
 			giveDirections(
-				"This word has " + numSyllables + " syllables. Click the volume " +
-				"button to hear its pronunciation."
+				"<mark>This word has " + numSyllables + " syllables.</mark> Click " +
+				"the volume button to hear its pronunciation."
       );
-      updateProgressBar(45);
+      updateProgressBar(25);
+			boostPoints(150);
       startPronunciationActivity(word);
     });
   }
@@ -133,47 +135,43 @@ $(document).ready(function() {
     $pronunciationContinueBtn.click(function() {
       $pronunciationDiv.hide();
       $pronunciationContinueBtn.hide();
-			startMeaningsAlternativeActivity(words);
+			boostPoints(200);
+			updateProgressBar(37);
+			startMeaningAlternativesActivity(words);
     });
   }
 
-	function meanings_checkpoint_continue_button(chosenWordName) {
-		$("#meanings_checkpoint_continue_button").click(function () {
-			$("#meanings-checkpoint-container").hide();
-			$("#meanings_checkpoint_continue_button").hide();
+	function meaningAltsContinueBtn(chosenWordName) {
+		$("#meaning-alts-continue-btn").click(function () {
+			$("#meaning-alts-div").hide();
+			$("#meaning-alts-continue-btn").hide();
+			updateProgressBar(50);
 
 			if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
 				$("#synonyms_back_button").show();
 				$("#synonyms_container").show();
-
 				giveDirections(
 					"The words below are similar to " +
 					"<strong>'" +
 					chosenWordName +
 					"'</strong>. Tap and view each one."
 				);
-
 				updateProgressBar(60);
-
 				start_synonyms_activity(chosenWordName);
 			} else if (
 				$("#synonym_no_results").hasClass("please-tap-continue") &&
 				!$("#antonym_no_results").hasClass("please-tap-continue")
 			) {
-
 				$("#synonyms_back_button").hide();
 				$("#synonyms_continue_button").hide();
 				$("#synonyms_container").hide();
 				$("#antonyms_container").show();
 				$("#antonyms_back_button").show();
-
 				giveDirections(
 					"The words below are opposite to " + "<strong>'" +
 					chosenWordName + "'</strong>. Tap and view each one."
 				);
-
 				updateProgressBar(75);
-
 				start_antonyms_activity(chosenWordName);
 			}	else if (
 				$("#synonym_no_results").hasClass("please-tap-continue") &&
@@ -187,16 +185,11 @@ $(document).ready(function() {
 				$("#review_level_one_back_button").fadeIn();
 				$("#review_level_one_continue_button").fadeIn();
 				$("#review_level_one_container").fadeIn();
-
 				update_user_word_games_completed();
-
 				updateProgressBar(100);
-
-				updateCoins(10);
-				boost_goodies(3);
-
+				updateUserPoints(10);
+				boostPoints(3);
 				update_num_played();
-
 				start_review_level_one_activity(chosenWordName);
 			} else if (
 				$("#synonym_no_results").hasClass("please-tap-continue") &&
@@ -205,15 +198,12 @@ $(document).ready(function() {
 
 				$("#real_world_examples_back_button").show();
 				$("#real_world_examples_container").show();
-
 				giveDirections(
 					"Tap each source to see how <strong>'" +
 					chosenWordName +
 					"'</strong> has been used in everyday life."
 				);
-
 				updateProgressBar(90);
-
 				start_real_world_examples_activity(chosenWordName);
 			}
 		});
@@ -289,13 +279,11 @@ $(document).ready(function() {
       $("#syn_ant_checkpoint_score_div").hide();
       $("#real_world_examples_back_button").show();
       $("#real_world_examples_container").show();
-
       giveDirections(
 				"Tap each source to see how <strong>'" +
         chosenWordName +
 				"'</strong> has been used in everyday life."
       );
-
       updateProgressBar(90);
 
       // If all words have been clicked on, show the RWE container
@@ -307,13 +295,11 @@ $(document).ready(function() {
         $("#review_level_one_back_button").fadeIn();
         $("#review_level_one_continue_button").fadeIn();
         $("#review_level_one_container").fadeIn();
-
         update_user_word_games_completed();
-
         update_num_played();
         updateProgressBar(100);
-        updateCoins(10);
-        boost_goodies(10);
+        updateUserPoints(10);
+        boostPoints(10);
 
         start_review_level_one_activity(chosenWordName);
       } else {
@@ -331,12 +317,11 @@ $(document).ready(function() {
       $("#review_level_one_back_button").fadeIn();
       $("#review_level_one_continue_button").fadeIn();
       $("#review_level_one_container").fadeIn();
-
 			start_review_level_one_activity(chosenWordName);
       update_user_word_games_completed();
       update_num_played();
       updateProgressBar(100);
-      updateCoins(10);
+      updateUserPoints(10);
     });
   }
 
@@ -412,8 +397,8 @@ $(document).ready(function() {
 		$underscoreContainer.text(underscores);
 
 		for (var i = 0; i < 3; i++) {
-			$alphabet_random_letter = $alphabet_array[randomRange(26, 0)];
-			$alphabetRandLetters.push($alphabet_random_letter);
+			$randomAlphabet = $alphabets[randomRange(26, 0)];
+			$alphabetRandLetters.push($randomAlphabet);
 		}
 
 		$mergedLettersArray = merge(chosenWordLetters, $alphabetRandLetters);
@@ -466,17 +451,26 @@ $(document).ready(function() {
 		$(".audiooo").attr("src", attr);
 
 		$audioBtn.click(function() {
+			boostPoints(1);
 			$pronunciationContinueBtn.fadeIn();
 			$chosenWordHeaderContainer.addClass("text-success");
 			$(this).addClass("text-success");
 		});
 	};
 
-	function startMeaningsAlternativeActivity(words) {
+	function startMeaningAlternativesActivity(words) {
 		var chosenWord = words[0];
 		$chosenWordHeaderContainer.html(chosenWord.name)
 															.removeClass("text-success");
-		giveDirections("Determine which statement in each pair is correct.");
+		giveDirections("Read the statements below. Decide which one is better.");
+		$("#meaning-alts-div").show();
+
+		$(".decisions-answer").click(function() {
+			$(this).removeClass("btn-primary").addClass("btn-success");
+			$(".decisions-answer").prop("disabled", true);
+			$(".decisions-feedback").fadeIn();
+			$("#example-non-examples-continue-btn").fadeIn();
+		});
 	};
 
 	function start_synonyms_activity() {
@@ -672,7 +666,7 @@ $(document).ready(function() {
 		$("#level-congrats-text").append(
 			"<strong>'" + chosenWordName + "'</strong>."
 		);
-		$("#goodies_total").html($new_goodies_total);
+		$("#goodies_total").html(newPointsTotal);
 	};
 
 	/**
@@ -715,12 +709,19 @@ $(document).ready(function() {
 		}, 1000);
 	}
 
+	function startCountup($section, seconds) {
+		var countdownID = setInterval(function() {
+			seconds++;
+			$section.html(seconds);
+		}, 1000);
+	}
+
 	function create_yes_or_no_def_checkpoint_panel(definition) {
 		// buttons need type="button"?
 		var well = createElem("div", "well def-chkpt-panel");
-		$("#meanings-checkpoint-container").append(well);
+		$("#meaning-alts-div").append(well);
 		var yes_no_container = createElem("div", "row center");
-		$("#meanings-checkpoint-container").append(yes_no_container);
+		$("#meaning-alts-div").append(yes_no_container);
 		var yes_container = createElem("div", "col-xs-6");
 		var no_container = createElem("div", "col-xs-6");
 		var yes_button = createElem(
@@ -773,7 +774,7 @@ $(document).ready(function() {
     var game_info = {
       "word_id": $chosenWordID,
       "game_name": "Fundamentals",
-      "time_spent_in_min": ((new Date() - $time_game_started) / 1000 ) / 60
+      "time_spent_in_min": ((new Date() - $timeGameStarted) / 1000 ) / 60
     };
 
     $.ajax({
@@ -787,7 +788,7 @@ $(document).ready(function() {
     });
   };
 
-	function updateCoins(num) {
+	function updateUserPoints(num) {
 		$.ajax({
 			type: "PATCH",
 			url: "/user_points",
@@ -902,14 +903,14 @@ $(document).ready(function() {
 		}); // end of the syn_ant_checkpoint buttton fn
 	}; // end of the click fn
 
-	function boost_goodies(level_multiplier) {
-		$new_goodies_total += level_multiplier;
-		$("#goodies").html($new_goodies_total);
+	function boostPoints(points) {
+		newPointsTotal += points;
+		$points.html(newPointsTotal);
 	};
 
-	function reset_goodies(old_total) {
-		new_goodies_total = old_total;
-		$("#goodies").html(new_goodies_total);
+	function removePoints(points) {
+		newPointsTotal -= points;
+		$points.html(points);
 	};
 
 	function reset_input_value(id_name) {

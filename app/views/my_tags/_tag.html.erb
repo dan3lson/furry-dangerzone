@@ -1,22 +1,17 @@
 <div class="card">
-	<div class="card-block tag-container"
+	<div class="card-block"
 			 data-tag-id="<%= tag.id %>"
 			 data-tag-name="<%= tag.name %>">
-	 <div class="float-xs-right">
-		 <div class="text-xs-center text-success"
-		 			id="progress-bar-<%=tag.name%>">
-				<%= progress_for(current_user, tag) %>%
-			</div>
-		 <progress class="progress progress-success"
-							 value="<%= progress_for(current_user, tag) %>"
-							 max="100"></progress>
-	 </div>
-		<h2 class="card-title">
+		<h4 class="card-title">
 			<%= link_to tag.name, "/myTags/#{tag.id}" %>
 			<br>
 			<small class="text-muted">
-				<%= pluralize(words_for(current_user, tag).count, "word") %>
+				<%= words_for(current_user, tag).count %>
+				<i class="fa fa-book"></i>
+				|
+				<%= progress_for(current_user, tag) %>
+				<i class="fa fa-percent"></i>
 			</small>
-		</h2>
+		</h4>
 	</div>
 </div>

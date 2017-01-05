@@ -1,15 +1,5 @@
 //**********
 //*
-//* UNIVERSAL
-//*
-//**********
-
-.no-underline a {
-	text-decoration: none;
-}
-
-//**********
-//*
 //* A-Z
 //*
 //**********
@@ -32,80 +22,12 @@ a, a:active {
 	display: none;
 }
 
-.red-circle-word-show-page {
-  background: $leksi-red;
-  border-radius: 75px;
-  height: 75px;
-  width: 75px;
-}
-
-.achievements-container {
-  display: none;
-}
-
-.add-active {
-  background: $bootstrap-blue;
-  color: $white;
-}
-
-.add-category-btn {
-  cursor: pointer;
-}
-
-.basic-apple-blue-link a {
-	color: $apple-blue;
-
-	&:hover {
-		background: none;
-		color: lighten($apple-blue, 20%);
-		text-decoration: none;
-	}
-}
-
-.basic-black-link a {
-	color: $black;
-
-	&:hover {
-		background: none;
-		color: $apple-blue;
-		text-decoration: none;
-	}
-}
-
-.border-none {
-	border: none;
-	position: relative;
-	top: -24px;
-}
-
-.box-shadow-border {
-	padding: 10px;
-  margin-bottom: 25px;
-}
-
-.box-shadow-border-home {
-	box-shadow: 1px 1px 2px #888;
-	padding: 10px;
-  margin-bottom: 25px;
-}
-
 #card {
 	cursor: pointer;
 }
 
 .card-title {
 	word-break: break-word;
-}
-
-.blue-border {
-	border-bottom: lightblue 1px solid;
-	padding: 10px 0;
-}
-
-.category-words-container {
-  color: $black;
-  display: none;
-  font-size: 30px;
 }
 
 .class-default-image {
@@ -118,28 +40,8 @@ a, a:active {
 	clear: both;
 }
 
-.five-columns div {
-	float: left;
-	min-height: 1px;
-	padding-right: 10px;
-	padding-left: 10px;
-  position: relative;
-  text-align: center;
-  width: 20%;
-}
-
 #frayer-word-container {
 	padding: 5rem;
-}
-
-.vks-emojis {
-	@extend .five-columns;
-
-	margin-bottom: 3em;
-}
-
-.vks-emojis div:hover {
-	cursor: pointer;
 }
 
 .dark-gray {
@@ -157,10 +59,6 @@ a, a:active {
   width: 100%;
 }
 
-.em-video_game {
-	font-size: 2.5rem;
-}
-
 #error_explanation {
   color: $leksi-red;
   ul {
@@ -171,42 +69,6 @@ a, a:active {
 
 .field_with_errors {
   // @extend .has-error;
-}
-
-.flashcard {
-	min-height: 11em;
-}
-
-.flashcard-container {
-	background: lightyellow;
-}
-
-#flashcard-front {
-	padding-top: 50px;
-}
-
-.jeopardy-header {
-  @extend .stats-header;
-
-  background: $light-leksi-orange;
-  border-left: 3px solid $dark-leksi-orange;
-  color: $dark-leksi-orange;
-}
-
-.freestyle-header {
-  @extend .stats-header;
-
-  background: $light-leksi-green;
-  border-left: 3px solid $dark-leksi-green;
-  color: $dark-leksi-green;
-}
-
-.fundamentals-header {
-  @extend .stats-header;
-
-  background: $light-leksi-red;
-  border-left: 3px solid $dark-leksi-red;
-  color: $dark-leksi-red;
 }
 
 .text-white a {
@@ -237,82 +99,6 @@ a, a:active {
 	display: inline-block;
 }
 
-.leaderboard-bronze {
-	@extend .leaderboard-container;
-
-	background: darken(#ff9500, 20);
-}
-
-.leaderboard-container {
-  display: none;
-  text-align: center;
-}
-
-.light-gray {
-	color: $light-gray;
-}
-
-.light-green-bg {
-  background: $light-green;
-}
-
-.light-red-bg {
-  background: $light-leksi-red;
-}
-
-.leaderboard-gold {
-	@extend .leaderboard-container;
-
-	background: #ffcc00;
-}
-
-.leaderboard-header {
-	vertical-align: bottom;
-	font-size: 30px;
-}
-
-.leaderboard-header span {
-	font-size: 18px;
-}
-
-.leaderboard-silver {
-	@extend .leaderboard-container;
-
-	background: #c7c7cc;
-}
-
-.leksi-purple {
-	color: darkorchid;
-}
-
-.light-blue-hover:hover {
-  background: $light-blue;
-  cursor: pointer;
-}
-
-.logged-in-header {
-  background: $sky-blue;
-  border-color: $sky-blue;
-  opacity: .90;
-}
-
-.medium-gray {
-  color: $medium-gray;
-}
-
-.menu-header-container {
-	margin-bottom: 15px;
-}
-
-.menu-header {
-	background: $light-gray;
-	padding: 5px;
-}
-
-#more-description {
-	display: none;
-}
-
 #myLeksi-filter-container {
 	margin-bottom: 20px;
 }
@@ -322,115 +108,8 @@ a, a:active {
   margin-bottom: 6px;
 }
 
-.myLeksi-sm-in-progress-circle {
-  border: $white 3px solid;
-  border-radius: 30px;
-  cursor: pointer;
-  height: 30px;
-  width: 30px;
-}
-
-.new-followup-game-circle {
-	border-radius: 100px;
-	color: $white;
-	font-size: large;
-	height: 100px;
-	padding-top: 38px;
-	width: 100px;
-}
-
-.new-fundamental-game-circle {
-	@extend .new-followup-game-circle;
-
-	background: $leksi-red;
-}
-
-.new-freestyle-game-circle {
-	@extend .new-followup-game-circle;
-
-	background: $leksi-green;
-}
-
-.olympic-container {
-  color: $white;
-}
-
-.overview-header {
-  @extend .stats-header;
-
-  background: $light-gray;
-  border-left: 3px solid $dark-gray;
-}
-
-.padding-top {
-	padding-top: 6em;
-	padding-bottom: 6em;
-}
-
-.progress-meter-header {
-  @extend .stats-header;
-
-  background: $light-green;
-  border-left: 3px solid $dark-green;
-  color: $dark-green;
-}
-
-.prog-circle {
-  border-radius: 80px;
-  color: white;
-  height: 80px;
-  line-height: 83px;
-  width: 80px;
-}
-
-.prog-fundamentals-circle-bg {
-  background: $leksi-red;
-}
-
-.prog-completed-circle {
-  @extend .prog-circle;
-  @extend .prog-fundamentals-circle-bg;
-}
-
-.prog-in-progress-circle {
-  @extend .prog-circle;
-  @extend .prog-fundamentals-circle-bg;
-}
-
-.prog-not-started-circle {
-  @extend .prog-circle;
-  @extend .prog-fundamentals-circle-bg;
-
-  color: $white;
-}
-
-.prog-not-started-circle-green {
-  @extend .prog-circle;
-
-  background: $leksi-green;
-  color: $white;
-}
-
-.prog-header {
-  font-size: 41px;
-
-  span {
-    margin-left: -66px;
-  }
-}
-
-.prog-sm-in-progress-circle {
-  border: $white 5px solid;
-  border-radius: 66px;
-  height: 66px;
-  position: relative;
-  line-height: 60px;
-  top: 7px;
-  width: 66px;
-}
-
-.progress-xp-container {
-  text-align: center;
+.pointer {
+	cursor: pointer;
 }
 
 .radio {
@@ -453,26 +132,9 @@ a, a:active {
 	margin-right: 0;
 }
 
-.right {
-	text-align: right;
-}
-
-.sb-slidebar {
-	color: $sky-blue;
-}
-
-.sky-blue {
-	color: $sky-blue;
-}
-
 .spinner {
 	color: $dark-gray;
 	font-size: 35px;
-}
-
-.stats-header {
-	margin-bottom: 30px;
-	padding: 10px;
 }
 
 .stu-pic {
@@ -502,40 +164,7 @@ table {
 	vertical-align: -webkit-baseline-middle;
 }
 
-.white {
-	color: $white;
-}
-
-.word-card-modal-content {
-	background-color: $card-bg !important;
-}
-
-.word-details {
-	margin-left: 14px;
-}
-
-.word-of-knowledge-container {
-	background: none !important;
-	padding: 10px;
-}
-
 // LOGGED OUT HOMEPAGE
-
-.thin-section {
-	padding: 32px;
-
-	h4 {
-		margin-top: 0;
-	}
-}
-
-.gray {
-	color: gray;
-}
-
-.freestyle-types {
-	margin-top: 0;
-}
 
 .zero-padding {
 	padding: 0;

@@ -1,5 +1,4 @@
 <div>
-  <p class="lead">Use the form below to create a new tag.</p>
   <%= form_for(@tag) do |f| %>
     <%= render 'shared/error_messages', object: @tag %>
     <div class="input-group">
@@ -9,9 +8,9 @@
         placeholder: "Name *"
       %>
       <span class="input-group-btn">
-        <%= f.button type: "submit", class: "btn btn-info" do %>
+        <%= f.button type: "submit", class: "btn btn-primary" do %>
           <i class="fa fa-save"></i>
-          CREATE
+          Create
         <% end %>
       </span>
     </div>
