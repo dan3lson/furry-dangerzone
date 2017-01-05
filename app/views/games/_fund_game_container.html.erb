@@ -2,25 +2,6 @@
 	<div id="game-started-bool" class="begin-timer"></div>
 <% end %>
 
-<div class="scoreboard text-xs-center bg-faded text-muted">
-	<div class="row">
-		<div class="col-md-4">
-			<div id="progress-bar-container">
-				<progress class="progress game-progress-bar progress-striped"
-									value="0"
-									max="100">
-					0%
-				</progress>
-			</div>
-		</div>
-		<div class="col-md-4">
-			0
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
-</div>
-
 <div class="palabra">
 	<span id="word-name"><%= word.name %></span>
 	<span id="word-part-of-speech"><%= word.part_of_speech %></span>
@@ -28,31 +9,44 @@
 </div>
 
 <div id="game-details">
-	<h1 class="display-3">
+	<p class="lead">
+		<span class="text-primary">Directions:</span>
 		<span id="fundamentals-game-instructions"></span>
-		<strong id="chosen-word-header-container"></strong>
-	</h1>
+	</p>
 </div>
 
 <div>
 	<div class="form-group" id="spell-by-typing-form">
-		<label for="spell-the-word" class="form-control-label sr-only" ></label>
+		<label for="spell-the-word" class="form-control-label sr-only"></label>
 		<input id="spell-the-word"
 					 class="form-control input-lg"
 					 type="text"></input>
 	</div>
 </div>
 
-<div id="fill-in-the-blank-container"></div>
+<div id="spell-by-clicking-letters-div"></div>
 
-<div id="meanings_container">
-	<div class="well lead">
-		<% array_of(word, "definition").each_with_index do |d, i| %>
-			<p class="<%= word.name %>-def" id="<%= word.name %>-def-<%= i %>">
-				&#8605; <%= d %>
-			</p>
-		<% end %>
-	</div>
+<div id="pronunciation-div">
+	<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/"
+				 id="audio"
+				 class="audiooo"
+				 preload="auto">
+	</audio>
+	<small>
+		<i class="fa fa-volume-up pointer hover"></i>
+	</small>
+	<small>
+		<i class="fa fa-volume-up pointer hover text-muted"></i>
+	</small>
+	<small>
+		<i class="fa fa-volume-up pointer hover text-muted"></i>
+	</small>
+	<small>
+		<i class="fa fa-volume-up pointer hover text-muted"></i>
+	</small>
+	<small>
+		<i class="fa fa-volume-up pointer hover text-muted"></i>
+	</small>
 </div>
 
 <div id="meanings-checkpoint-container"></div>

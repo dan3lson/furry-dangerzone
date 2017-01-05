@@ -2,11 +2,11 @@
 <% provide(:header, "All Words") %>
 
 <div class="card-columns">
-<% @words.each_with_index do |word, index| %>
+<% @words.find_each do |word| %>
     <div class="card">
       <div class="card-block">
         <h4 class="card-title">
-          <%= index + 1 %>. <%= link_to word.name, word %>
+          <%= link_to word.name, word %>
           <span class="text-muted"><%= word.part_of_speech %></span>
         </h4>
       </div>

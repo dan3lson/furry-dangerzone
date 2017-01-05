@@ -1,3 +1,26 @@
+<div class="scoreboard text-xs-center  text-muted">
+	<div class="row">
+		<div class="col-xs-4">
+			<div id="progress-bar-container">
+				<progress class="progress game-progress-bar progress-striped"
+									value="0"
+									max="100">
+					0%
+				</progress>
+			</div>
+		</div>
+		<div class="col-xs-4">
+			<i class="fa fa-money"></i>
+			0
+		</div>
+		<div class="col-xs-4">
+			<i class="fa fa-clock-o"></i> 10
+		</div>
+	</div>
+</div>
+<div class="bg-faded">
+	<h1 class="display-2" id="chosen-word-header-container"></h1>
+</div>
 <%= render "games/fund_game_container",
 	word: @chosen_word,
 	record: @record,
