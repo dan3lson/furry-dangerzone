@@ -28,13 +28,13 @@ class GamesController < ApplicationController
         @tag = Tag.find(params[:tag_id])
         get_jeop_words_tag(current_user, @tag, @chosen_word) << @chosen_word
       end
-      
+
       @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
       @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
       @jeopardy_lineup = (@jeopardy_words * 5).shuffle
       @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
       @attributes = (
-        %w(definition example_sentence synonyms antonyms) * 5
+        %w(definition examples synonyms antonyms) * 5
       ).shuffle
       @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
         @attribute = @attributes[i]
@@ -61,7 +61,7 @@ class GamesController < ApplicationController
         if a == "definition"
           "<i class='fa fa-list-ol'></i> ".html_safe <<
           "What word matches the definition below?"
-        elsif a == "example_sentence"
+        elsif a == "examples"
           "<i class='fa fa-newspaper-o'></i> ".html_safe <<
           "What word best fills in the blank(s) below?"
         elsif a == "synonyms"

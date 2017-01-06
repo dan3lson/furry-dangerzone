@@ -173,7 +173,7 @@ $(document).ready(function(){
 
 					setTimeout(function(){
 						$("#game-exit-btn").hide();
-						$("#level_2_container").hide();
+						$("#jeopardy-div").hide();
 						$("#review_level_two_container").fadeIn();
 
 						display_level_2_results(

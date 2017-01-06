@@ -4,46 +4,16 @@
 //*
 //**********
 
-$apple-blue: #097ff0;
-$apple-star-orange: #fd9603;
-$black: #000;
-$bootstrap-green: #5cb85c;
-$dark-gray: #8e8e93;
-$even-darker-gray: darken($dark-gray, 20);
-$game-circle-sizes: 55px;
-$leksi-green: #81CE97;
-$light-leksi-green: lighten($leksi-green, 17);
-$leksi-orange: orange;
-$leksi-red: #ff1300;
-$light-gray: #f2f2f2;
-$white: #fff;
-
-#level_two_back_button, #word_jeapordy_instructions,
+#level_two_back_button,
+#word_jeapordy_instructions,
 #level_two_game_continue_button,
 #review_level_two_container,
 #level_two_complete_continue_button {
 	display: none;
 }
 
-#jeopardy-directions-container {
-	text-align: center;
-}
-
 .progress-bar-custom {
 	background: #FFF !important;
 	border: $light-gray 1px solid;
-}
-
-.jeop-success {
-	border: $light-gray 1px solid;
-	color: $leksi-green;
-}
-
-.progress-text{
-	color: lighten(gray, 25);
-}
-
-.jeopardy-game-instructions {
-	font-size: 25px;
-	font-weight: 400;
+	display: inline-block;
 }

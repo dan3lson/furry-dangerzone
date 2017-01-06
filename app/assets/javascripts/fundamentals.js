@@ -15,7 +15,7 @@ $(document).ready(function() {
 	var $mergedLettersArray = [];
 	var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
 	// Pronunciation
-	var $pronunciationDiv = $("#pronunciation-div");
+	var $pronunciationSpans = $("#pronunciation-spans");
 	// Meanings Checkpoint
 	var meanings_score = 0;
 	// Synonyms
@@ -108,7 +108,8 @@ $(document).ready(function() {
 				word.definition + "</mark>."
 			);
       updateProgressBar(12);
-			boostPoints(100);
+			addPoints(100);
+			flashCorrectPoints();
 			spellByClickingLetters(chosenWordLetters);
     });
   }
@@ -118,13 +119,14 @@ $(document).ready(function() {
 			var numSyllables = word.phonetic_spelling.split("·").length;
       $("#fill-in-the-blank-continue-btn").hide();
       $spellByClickingLettersDiv.hide();
-      $pronunciationDiv.show();
+      $pronunciationSpans.show();
 			giveDirections(
-				"<mark>This word has " + numSyllables + " syllables.</mark> Click " +
+				"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
 				"the volume button to hear its pronunciation."
       );
       updateProgressBar(25);
-			boostPoints(150);
+			addPoints(150);
+			flashCorrectPoints();
       startPronunciationActivity(word);
     });
   }
@@ -133,9 +135,10 @@ $(document).ready(function() {
 		const $pronunciationContinueBtn = $("#pronunciation-continue-btn");
 
     $pronunciationContinueBtn.click(function() {
-      $pronunciationDiv.hide();
+      $pronunciationSpans.hide();
       $pronunciationContinueBtn.hide();
-			boostPoints(200);
+			addPoints(200);
+			flashCorrectPoints();
 			updateProgressBar(37);
 			startMeaningAlternativesActivity(words);
     });
@@ -188,7 +191,7 @@ $(document).ready(function() {
 				update_user_word_games_completed();
 				updateProgressBar(100);
 				updateUserPoints(10);
-				boostPoints(3);
+				addPoints(3);
 				update_num_played();
 				start_review_level_one_activity(chosenWordName);
 			} else if (
@@ -299,7 +302,7 @@ $(document).ready(function() {
         update_num_played();
         updateProgressBar(100);
         updateUserPoints(10);
-        boostPoints(10);
+        addPoints(10);
 
         start_review_level_one_activity(chosenWordName);
       } else {
@@ -427,7 +430,11 @@ $(document).ready(function() {
 				underscores = underscores.replace(/_ /, tappedLetter);
 				$underscoreContainer.text(underscores);
 				chosenWordLetters.shift();
+				addPoints(1);
+				flashCorrectPoints();
 			} else {
+				removePoints(1);
+				flashIncorrectPoints();
 				$tappedLetterBtn.removeClass("animated shake")
 												.addClass("animated shake");
 			}
@@ -443,18 +450,28 @@ $(document).ready(function() {
 	};
 
 	function startPronunciationActivity(word) {
-		const $audioBtn = $pronunciationDiv.find("i");
+		const $audioBtn = $(".funds-audio-btn");
 		const $pronunciationContinueBtn = $("#pronunciation-continue-btn");
-		var phonSpell = word.phonetic_spelling;
 		var attr = $(".audiooo").attr("src") + word.name + ".mp3";
-		$chosenWordHeaderContainer.html(phonSpell);
+		var $btn;
+		$chosenWordHeaderContainer.html(word.phonetic_spelling);
 		$(".audiooo").attr("src", attr);
 
 		$audioBtn.click(function() {
-			boostPoints(1);
-			$pronunciationContinueBtn.fadeIn();
+			$btn = $(this);
+			$btn.addClass("text-success")
+					.removeClass("fa-volume-off")
+					.addClass("fa-volume-up")
+			setTimeout(function() {
+				$btn.removeClass("text-success")
+						.removeClass("fa-volume-up")
+						.addClass("fa-volume-off");
+			}, 500);
 			$chosenWordHeaderContainer.addClass("text-success");
-			$(this).addClass("text-success");
+			addPoints(1);
+			flashCorrectPoints();
+			$pronunciationContinueBtn.fadeIn();
+			// TODO Track this metric
 		});
 	};
 
@@ -523,7 +540,7 @@ $(document).ready(function() {
 			"#syn_ant_checkpoint_container"
 		);
 
-		// Find all of the synonyms for this word and add to the synonyms array
+		// Find all of the synonyms for  and add to the synonyms array
 		$(".synonym_word_container").each(function(index){
 			$syn_ant_checkpoint_synonyms_array.push($(this).html());
 		});
@@ -676,6 +693,14 @@ $(document).ready(function() {
 	*
 	*
 	**/
+
+	function flashCorrectPoints() {
+		$(".fa-arrow-up.text-success").fadeIn().fadeOut();
+	}
+
+	function flashIncorrectPoints() {
+		$(".fa-arrow-down.text-danger").fadeIn().fadeOut();
+	}
 
 	function makeLettersGreen($section, numLetters) {
 		$($section.find("span").splice(0, numLetters)).addClass("text-success");
@@ -903,14 +928,16 @@ $(document).ready(function() {
 		}); // end of the syn_ant_checkpoint buttton fn
 	}; // end of the click fn
 
-	function boostPoints(points) {
+	function addPoints(points) {
 		newPointsTotal += points;
 		$points.html(newPointsTotal);
 	};
 
 	function removePoints(points) {
-		newPointsTotal -= points;
-		$points.html(points);
+		if (newPointsTotal > 0) {
+			newPointsTotal -= points;
+			$points.html(newPointsTotal);
+		}
 	};
 
 	function reset_input_value(id_name) {

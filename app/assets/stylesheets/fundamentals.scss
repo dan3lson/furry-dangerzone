@@ -5,9 +5,11 @@
 //**********
 
 .palabra,
+.fa-arrow-up.text-success,
+.fa-arrow-down.text-danger,
 #spell-by-clicking-letters-div,
 #spell-the-word-continue-btn,
-#pronunciation-div,
+#pronunciation-spans,
 #pronunciation-continue-btn,
 #meaning-alts-div,
 .decisions-feedback,
@@ -70,7 +72,7 @@
 	}
 }
 
-#pronunciation-div {
+#pronunciation-spans {
 	i {
 		font-size: 7rem;
 	}

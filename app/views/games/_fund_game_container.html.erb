@@ -7,14 +7,12 @@
 	<span id="word-part-of-speech"><%= word.part_of_speech %></span>
 	<span class="palabra-id"><%= word.id %></span>
 </div>
-
 <div id="game-details">
 	<p class="lead">
 		<span class="text-primary">Directions:</span>
 		<span id="fundamentals-game-instructions"></span>
 	</p>
 </div>
-
 <div>
 	<div class="form-group" id="spell-by-typing-form">
 		<label for="spell-the-word" class="form-control-label sr-only"></label>
@@ -23,32 +21,19 @@
 					 type="text"></input>
 	</div>
 </div>
-
 <div id="spell-by-clicking-letters-div"></div>
-
-<div id="pronunciation-div">
-	<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/"
-				 id="audio"
-				 class="audiooo"
-				 preload="auto">
-	</audio>
-	<small>
-		<i class="fa fa-volume-up pointer hover"></i>
-	</small>
-	<!-- <small>
-		<i class="fa fa-volume-up pointer hover text-muted"></i>
-	</small>
-	<small>
-		<i class="fa fa-volume-up pointer hover text-muted"></i>
-	</small>
-	<small>
-		<i class="fa fa-volume-up pointer hover text-muted"></i>
-	</small>
-	<small>
-		<i class="fa fa-volume-up pointer hover text-muted"></i>
-	</small> -->
+<div id="pronunciation-spans">
+	<span class="pronunciation-span">
+		<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/"
+					 id="audio"
+					 class="audiooo"
+					 preload="auto">
+		</audio>
+		<span>
+			<i class="fa fa-volume-off hover funds-audio-btn"></i>
+		</span>
+	</span>
 </div>
-
 <div id="meaning-alts-div">
 	<div class="card">
 		<div class="card-block">
@@ -57,12 +42,14 @@
 			</h4>
 			<div class="row text-xs-center">
 				<div class="col-xs-6">
-					<button type="button" class="btn btn-primary btn-block decisions-answer">
+					<button type="button"
+									class="btn btn-primary btn-block decisions-answer">
 						Birthday money
 					</button>
 				</div>
 				<div class="col-xs-6">
-					<button type="button" class="btn btn-primary btn-block decisions-answer">
+					<button type="button"
+									class="btn btn-primary btn-block decisions-answer">
 						Chores
 					</button>
 				</div>
@@ -77,7 +64,6 @@
 		</div>
 	</div>
 </div>
-
 <div id="synonyms_container">
 	<% if word.has_synonyms? %>
 		<% synonyms.each_with_index do |synonym, index| %>
@@ -100,7 +86,6 @@
 		</p>
 	<% end %>
 </div>
-
 <div id="antonyms_container">
 	<% if word.has_antonyms? %>
 		<% antonyms.each_with_index do |antonym, index| %>
@@ -125,7 +110,6 @@
 		</p>
 	<% end %>
 </div>
-
 <div id="syn_ant_checkpoint_container">
 	<% if word.doesnt_have_any_syn_or_ant? %>
 		<div id="syn-ant-no-results" class="lead">
@@ -134,7 +118,6 @@
 		</div>
 	<% end %>
 </div>
-
 <div id="real_world_examples_container">
 	<% if rwe.nil? %>
 		<div id="rwe_no_results" class="lead please-tap-continue">

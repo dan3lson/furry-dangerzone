@@ -1,7 +1,12 @@
-<div id="level_2_container">
+<div id="jeopardy-div">
+	<div class="row">
+		<div class="col-sm-6 offset-sm-3">
+			<%= render "games/jeop_main_display" %>
+		</div>
+	</div>
 	<div class="row">
 		<div id="chosen_word_one_div" class="col-sm-6">
-			<button type="button" class="btn btn-info btn-block btn-lg"
+			<button type="button" class="btn btn-primary btn-block btn-lg"
 							id="chosen_word_one_btn"></button>
 			<div class="progress" id="chosen_word_one_progress_bars_div">
 				<%= render "games/jeop_progress_bar",
@@ -18,7 +23,7 @@
 		</div>
 
 		<div id="chosen_word_two_div" class="col-sm-6">
-			<button type="button" class="btn btn-info btn-block btn-lg"
+			<button type="button" class="btn btn-primary btn-block btn-lg"
 							id="chosen_word_two_btn"></button>
 			<div class="progress" id="chosen_word_two_progress_bars_div">
 				<%= render "games/jeop_progress_bar",
@@ -35,11 +40,9 @@
 		</div>
 	</div>
 
-	<%= render "games/jeop_main_display" %>
-
 	<div class="row">
 		<div id="chosen_word_three_div" class="col-sm-6">
-			<button type="button" class="btn btn-info btn-block btn-lg"
+			<button type="button" class="btn btn-primary btn-block btn-lg"
 							id="chosen_word_three_btn"></button>
 			<div class="progress" id="chosen_word_three_progress_bars_div">
 				<%= render "games/jeop_progress_bar",
@@ -56,7 +59,7 @@
 		</div>
 
 		<div id="chosen_word_four_div" class="col-sm-6">
-			<button type="button" class="btn btn-info btn-block btn-lg"
+			<button type="button" class="btn btn-primary btn-block btn-lg"
 							id="chosen_word_four_btn"></button>
 			<div class="progress" id="chosen_word_four_progress_bars_div">
 				<%= render "games/jeop_progress_bar",
