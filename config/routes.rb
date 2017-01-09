@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   resources :words do
     resources :examples
   end
+  resources :words do
+    resources :meaning_alts, only: [:index]
+  end
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
   resource :reset_fundamentals, only: [:update]

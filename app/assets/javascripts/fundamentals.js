@@ -18,8 +18,6 @@ $(document).ready(function() {
 	var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
 	// Pronunciation
 	var $pronunciationSpans = $("#pronunciation-spans");
-	// Meanings Checkpoint
-	var meanings_score = 0;
 	// Synonyms
 	var $synonym_row;
 	var $synonym_circle_div;
@@ -315,7 +313,7 @@ $(document).ready(function() {
 
 	function getMeaningAlts(wordID) {
 		return $.get(
-			"/school/words/" + wordID + "/meaning_alts", function() {}, "json"
+			"/words/" + wordID + "/meaning_alts", function() {}, "json"
 		);
 	};
 
@@ -487,12 +485,12 @@ $(document).ready(function() {
 
 	function startMeaningAltsActivity(words, meaningAlts) {
 		var chosenWord = words[0];
+		giveDirections("Read the statement(s) below. Decide which one is better.");
 
 		$.each(meaningAlts, function(index) {
 			$("#meaning-alts-div").append(createMeaningAltQues(this, index));
 		})
 
-		giveDirections("Read the statement(s) below. Decide which one is better.");
 		$("#meaning-alts-div").show();
 
 		$(".container").on("click", ".mean-alts-answer", function() {
