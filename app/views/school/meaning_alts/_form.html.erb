@@ -1,7 +1,7 @@
 <%= form_for([:school, word, m_a], remote: true) do |f| %>
 	<p class="form-group">
 		<%= f.label :text, class: "form-control-label" %>
-		<%= f.text_area :text, class: "form-control" %>
+		<%= f.text_area :text, rows: 4, class: "form-control" %>
 	</p>
 	<p class="form-group">
 		<%= f.label :choices, class: "form-control-label" %>
@@ -13,7 +13,7 @@
 	</p>
 	<p class="form-group">
 		<%= f.label :feedback, class: "form-control-label" %>
-		<%= f.text_area :feedback, class: "form-control" %>
+		<%= f.text_area :feedback, rows: 4, class: "form-control" %>
 	</p>
 	<%= f.submit text, class: "btn btn-primary btn-block" %>
 <% end %>

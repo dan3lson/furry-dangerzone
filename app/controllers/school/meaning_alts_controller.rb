@@ -32,7 +32,6 @@ class School::MeaningAltsController < BaseSchoolController
 
   def update
     @m_a = MeaningAlt.find(params[:id])
-    @m_a.user = current_user
     @saved = false
 
     if @m_a.update(meaning_alt_params)

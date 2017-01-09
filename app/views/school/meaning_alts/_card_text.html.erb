@@ -10,6 +10,6 @@
 	<strong>Created by</strong>
 	<%= m_a.user.username %> (<%= time_ago_in_words(m_a.created_at) %> ago)
 	<br>
-	<strong>Updated by</strong>
-	<%= m_a.user.username %> (<%= time_ago_in_words(m_a.updated_at) %> ago)
+	<strong>Last Update </strong>
+	<%= time_ago_in_words(m_a.updated_at) %> ago
 </p>
