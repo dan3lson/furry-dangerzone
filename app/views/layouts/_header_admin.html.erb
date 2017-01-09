@@ -12,7 +12,7 @@
 			<% end %>
 		<% end %>
 
-		<% if controller?("words") %>
+		<% if controller?("admin/words") %>
 			<%= link_to admin_words_path, class: "nav-item nav-link active" do %>
 				<i class="fa fa-book"></i> Words
 			<% end %>
@@ -60,12 +60,12 @@
 			<% end %>
 		<% end %>
 
-		<% if controller?("users") && action?("show") %>
-			<%= link_to current_user, class: "nav-item nav-link active" do %>
+		<% if controller?("admin/admins") && action?("stats") %>
+			<%= link_to admin_stats_path, class: "nav-item nav-link active" do %>
 				<i class="fa fa-line-chart"></i> Stats
 			<% end %>
 		<% else %>
-			<%= link_to current_user, class: "nav-item nav-link" do %>
+			<%= link_to admin_stats_path, class: "nav-item nav-link" do %>
 				<i class="fa fa-line-chart"></i> Stats
 			<% end %>
 		<% end %>
