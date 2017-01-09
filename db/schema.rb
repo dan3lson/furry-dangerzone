@@ -11,18 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109035833) do
+ActiveRecord::Schema.define(version: 20170109042101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "comments", force: :cascade do |t|
-    t.text     "description",  null: false
-    t.integer  "blog_post_id", null: false
-    t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
 
   create_table "example_non_examples", force: :cascade do |t|
     t.string   "text",       null: false
@@ -40,14 +32,6 @@ ActiveRecord::Schema.define(version: 20170109035833) do
   end
 
   add_index "examples", ["word_id"], name: "index_examples_on_word_id", using: :btree
-
-  create_table "feedbacks", force: :cascade do |t|
-    t.text     "description", null: false
-    t.string   "kind",        null: false
-    t.integer  "user_id",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
 
   create_table "freestyle_responses", force: :cascade do |t|
     t.string   "input",        null: false
@@ -91,13 +75,6 @@ ActiveRecord::Schema.define(version: 20170109035833) do
     t.datetime "updated_at",                                   null: false
   end
 
-  create_table "landing_pages", force: :cascade do |t|
-    t.string   "target",     null: false
-    t.string   "email",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "meaning_alts", force: :cascade do |t|
     t.string   "text",       null: false
     t.integer  "word_id",    null: false
@@ -111,20 +88,6 @@ ActiveRecord::Schema.define(version: 20170109035833) do
 
   add_index "meaning_alts", ["word_id", "text"], name: "index_meaning_alts_on_word_id_and_text", unique: true, using: :btree
   add_index "meaning_alts", ["word_id"], name: "index_meaning_alts_on_word_id", using: :btree
-
-  create_table "reviews", force: :cascade do |t|
-    t.integer  "rating",      null: false
-    t.text     "description"
-    t.integer  "user_id",     null: false
-    t.integer  "version_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "reviews", ["rating"], name: "index_reviews_on_rating", using: :btree
-  add_index "reviews", ["user_id", "version_id"], name: "index_reviews_on_user_id_and_version_id", unique: true, using: :btree
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
-  add_index "reviews", ["version_id"], name: "index_reviews_on_version_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name",       null: false
@@ -186,15 +149,6 @@ ActiveRecord::Schema.define(version: 20170109035833) do
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
-
-  create_table "versions", force: :cascade do |t|
-    t.string   "number",      null: false
-    t.text     "description", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "versions", ["number"], name: "index_versions_on_number", unique: true, using: :btree
 
   create_table "word_antonyms", force: :cascade do |t|
     t.integer  "word_id",    null: false

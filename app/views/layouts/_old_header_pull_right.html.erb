@@ -9,18 +9,6 @@
 	%>
 		<%= link_to "Edit", edit_tag_path(@tag), id: "my-tags-edit-btn" %>
 
-	<% elsif params[:controller] == "versions" &&
-					 params[:action] == "index"
-	%>
-		<%= link_to "Add", new_version_path %>
-
-	<% elsif params[:controller] == "versions" &&
-					 params[:action] == "show"
-	%>
-		<% if logged_in? && current_user.is_admin? %>
-			<%= link_to "Edit", edit_version_path(@version) %>
-		<% end %>
-
 	<% elsif params[:controller] == "school/schools" &&
 					 params[:action] == "students"
 	%>

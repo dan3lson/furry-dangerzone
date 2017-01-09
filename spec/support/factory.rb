@@ -45,14 +45,6 @@ FactoryGirl.define do
     sequence(:number) { |n| "1.0.#{n}" }
   end
 
-  factory :review do
-    description "this app is dope and pretty useful!"
-    rating 5
-
-    user
-    version
-  end
-
   factory :game do
     description "Begin to understand a word ..."
     name "Fundamentals"
@@ -66,25 +58,5 @@ FactoryGirl.define do
 
     user_word
     game
-  end
-
-  factory :feedback do
-    description "Leksi could be a little faster."
-    kind "wish"
-
-    user
-  end
-
-  factory :blog_post do
-    title "All About Leksi Part 1"
-    content "Blog content for post numero uno."
-    icon "gamepad"
-    slug "all_about_leksi_part_1"
-  end
-
-  factory :comment do
-    description "Wow, so clever. I really like it!"
-
-    blog_post
   end
 end

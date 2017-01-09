@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "research" => "static_pages#research"
   get "our_approach" => "static_pages#our_approach"
   get "results" => "static_pages#results"
-  get "feedback" => "feedbacks#new"
+  get "feedback" => "static_pages#feedback"
   get "search" => "searches#search"
   get "search_results" => "searches#results"
   get "settings" => "current_users#settings"
@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   post "login" => "sessions#create"
   post "static_pages/contact_us"
   delete "logout" => "sessions#destroy"
-  resources :comments
   resources :users, except: [:index]
   resources :words, only: [:show]
   resources :words do

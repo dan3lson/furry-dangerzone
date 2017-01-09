@@ -5,9 +5,6 @@ class User < ActiveRecord::Base
   has_many :tags, through: :user_tags
   has_many :user_word_tags, dependent: :destroy
   has_many :word_tags, through: :user_word_tags
-  has_many :reviews
-  has_many :feedbacks
-  has_many :comments
   has_many :meaning_alts
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

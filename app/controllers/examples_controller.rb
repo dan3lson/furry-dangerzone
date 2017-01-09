@@ -12,7 +12,7 @@ class ExamplesController < ApplicationController
 
   def create
     @word = Word.find(params[:word_id])
-    @example = params[:review][:rating]
+    @example = params[:word][:example]
     @example = Example.new(example_params)
     @example.word = @word
     @example.user = current_user
@@ -27,7 +27,7 @@ class ExamplesController < ApplicationController
         redirect_to settings_path
       else
         flash.now[:danger] = "Yikes! Something went wrong. Please try again."
-        render "versions/show"
+        render "examples/show"
       end
     end
   end
@@ -37,7 +37,7 @@ class ExamplesController < ApplicationController
 
     if @example.destroy
       flash[:success] = "Example deleted successfully."
-      redirect_to reviews_path
+      redirect_to examples_path
     else
       flash.now[:danger] = "Example not deleted."
       redirect_to example_path(@example)

@@ -144,32 +144,5 @@
 				</tr>
 			</table>
 		</div>
-
-		<div class="panel panel-default">
-			<div class="panel-heading">Testimonials</div>
-			<table class="table table-responsive table-bordered">
-				<th></th>
-				<th>Latest</th>
-				<tr>
-					<td>Reviews</td>
-					<td><%= Review.count %></td>
-				</tr>
-				<tr>
-					<td>Feedbacks</td>
-					<td><%= Feedback.count %></td>
-				</tr>
-			</table>
-		</div>
 	</div>
 </div>
-
-<hr>
-
-<ol reversed>
-	<% @feedbacks.each do |f| %>
-			<li>
-				<%= f.user.username %> submitted
-				'<%= f.description %>' <%= time_ago_in_words(f.created_at) %> ago.
-			</li>
-	<% end %>
-</ol>
