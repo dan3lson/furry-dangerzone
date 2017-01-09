@@ -315,7 +315,7 @@ $(document).ready(function() {
 
 	function getMeaningAlts(wordID) {
 		return $.get(
-			"/words/" + wordID + "/meaning_alts", function() {}, "json"
+			"/school/words/" + wordID + "/meaning_alts", function() {}, "json"
 		);
 	};
 

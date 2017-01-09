@@ -1,6 +1,6 @@
-<%= link_to user_word_path(search_btn: :play, id: word.id),
-						class: "btn btn-outline-primary btn-block",
+<%= link_to user_word_path(search_btn: :play, word_id: word.id),
+						class: "btn btn-primary btn-block",
 						method: :post do
 %>
-	<i class="fa fa-gamepad"></i> PLAY
+	<i class="fa fa-gamepad"></i> Play
 <% end %>

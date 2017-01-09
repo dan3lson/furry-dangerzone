@@ -1,5 +1,4 @@
 <% provide(:header, "Meaning Alternatives (#{@m_a_count})") %>
-
 <div class="text-muted filter-div">
   Filter:
   <%= link_to admin_meaning_alts_path do %>
@@ -30,13 +29,4 @@
   </div>
   <div class="clear"></div>
 </div>
-<%= will_paginate @users %>
-<div class="clear"></div>
-<div class="row">
-  <div class="col-md-6 offset-md-3">
-    <% @meaning_alts.each do |m_a| %>
-      <%= render "admin/meaning_alts/meaning_alt", m_a: m_a, word: m_a.word %>
-    <% end %>
-  </div>
-</div>
-<%= will_paginate @users %>
+<%= render "admin/meaning_alts/meaning_alts", meaning_alts: @meaning_alts %>

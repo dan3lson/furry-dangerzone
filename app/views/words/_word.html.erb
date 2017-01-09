@@ -1,6 +1,6 @@
 <div class="card">
 	<div class="card-block">
-		<% if current_user.already_has_word?(word) %>
+		<% if current_user.has_word?(word) %>
 			<div class="float-xs-right">
 				<%= render "my_leksi/mastery_percentage",
 									 word: word,

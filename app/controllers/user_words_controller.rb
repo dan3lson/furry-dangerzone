@@ -1,24 +1,31 @@
 class UserWordsController < ApplicationController
   def create
-    @word = Word.find(params[:id])
+    @word = Word.find(params[:word_id])
     @user_word = UserWord.new(user: current_user, word: @word)
     @play = params[:search_btn]
+    fund_game_link = "/fundamentals?word_id=#{@word.id}"
+    @created = false
 
-    if @user_word.save
-      Thesaurus.insert_words_for(@word, "syn", @word.part_of_speech)
-      Thesaurus.insert_words_for(@word, "ant", @word.part_of_speech)
+    if current_user.has_word?(@word)
+      redirect_to fund_game_link if @play
+    else
+      if @user_word.save
+        @created = true
+        Thesaurus.insert_words_for(@word, "syn", @word.part_of_speech)
+        Thesaurus.insert_words_for(@word, "ant", @word.part_of_speech)
 
-      if @play
-        redirect_to "/fundamentals?word_id=#{@word.id}"
+        if @play
+          redirect_to fund_game_link
+        else
+          respond_to do |format|
+            format.js
+          end
+        end
       else
-        flash[:success] = "Success! You added \'#{@word.name}\' to your Words."
+        msg = "Adding that word to your Words didn\'t work. Please try again."
+        flash[:danger] = msg
         redirect_to search_path
       end
-    else
-      msg = "Yikes! Adding that word to your Leksi didn\'t work. "
-      msg_2 = "Please try again."
-      flash[:danger] = msg << msg_2
-      redirect_to search_path
     end
   end
 

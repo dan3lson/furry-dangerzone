@@ -17,10 +17,8 @@ class TagsController < ApplicationController
   def create
     @tag = Tag.where(name: tag_params[:name]).first_or_initialize
 
-
-    if current_user.already_has_tag?(@tag)
+    if current_user.has_tag?(@tag)
       flash.now[:warning] = "Whoa there - you already have that tag!"
-
       render :new
     else
       @user_tag = UserTag.new(user: current_user, tag: @tag)

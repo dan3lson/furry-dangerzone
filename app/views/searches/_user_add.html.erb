@@ -1,16 +1,18 @@
-<% if current_user.already_has_word?(word) %>
-	<%= link_to "#",
-							class: "btn btn-outline-secondary btn-block disabled" do
+<% if current_user.has_word?(word) %>
+	<%= button_tag nil,
+								 class: "btn btn-outline-secondary btn-block",
+								 disabled: true do
 	%>
 		<i class="fa fa-save"></i>
 		Already Saved!
 	<% end %>
 <% else %>
-	<%= link_to user_word_path(id: word.id),
+	<%= link_to user_word_path(word_id: word.id),
 							class: "btn btn-outline-primary btn-block",
-							method: :post do
+							method: :post,
+							remote: true do
 	%>
 		<i class="fa fa-save"></i>
-		Save
+		Save for later
 	<% end %>
 <% end %>

@@ -1,0 +1,9 @@
+<%= will_paginate meaning_alts %>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <% meaning_alts.each do |m_a| %>
+      <%= render "admin/meaning_alts/meaning_alt", m_a: m_a, word: m_a.word %>
+    <% end %>
+  </div>
+</div>
+<%= will_paginate meaning_alts %>

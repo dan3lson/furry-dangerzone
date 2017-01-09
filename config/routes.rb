@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     get "messages" => "current_user#messages"
     get "progress" => "current_user#progress"
     get "settings" => "current_user#settings"
-    get "seventh_grade_words" => "meaning_alts#seventh_grade"
+    get "my_meaning_alts" => "current_user#my_meaning_alts"
     resources :words, only: [:new, :create]
     resource :add_words_for_student, only: [:update]
     resources :example_non_examples, only: [:index, :new]

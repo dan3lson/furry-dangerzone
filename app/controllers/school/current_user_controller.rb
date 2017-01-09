@@ -91,4 +91,10 @@ class School::CurrentUserController < BaseSchoolController
 
   def settings
   end
+
+  def my_meaning_alts
+    @my_meaning_alts = current_user.meaning_alts
+                                   .paginate(:page => params[:page],
+                                             per_page: 10)
+  end
 end

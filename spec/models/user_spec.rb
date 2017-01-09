@@ -44,27 +44,15 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#has_words?" do
+  describe "#has_word?" do
     it "returns false" do
-      expect(user.has_words?).to eq(false)
+      expect(user.has_word?(word)).to eq(false)
     end
 
     it "returns true" do
       user.words << word
 
-      expect(user.has_words?).to eq(true)
-    end
-  end
-
-  describe "#already_has_word?" do
-    it "returns false" do
-      expect(user.already_has_word?(word)).to eq(false)
-    end
-
-    it "returns true" do
-      user.words << word
-
-      expect(user.already_has_word?(word)).to eq(true)
+      expect(user.has_word?(word)).to eq(true)
     end
   end
 
@@ -92,15 +80,15 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#already_has_tag?" do
+  describe "#has_tag?" do
     it "returns false" do
-      expect(user.already_has_tag?("foobar")).to eq(false)
+      expect(user.has_tag?("foobar")).to eq(false)
     end
 
     it "returns true" do
       user.tags << tag
 
-      expect(user.already_has_tag?(tag)).to eq(true)
+      expect(user.has_tag?(tag)).to eq(true)
     end
   end
 

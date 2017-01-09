@@ -32,16 +32,6 @@ class Word < ActiveRecord::Base
     !search(name).empty?
   end
 
-  # TODO: Create test
-  def self.myLeksi_words(user, name)
-    user.words.where(name: name)
-  end
-
-  # TODO: Create test
-  def self.found_in_myLeksi?(user, name)
-    myLeksi_words(user, name).any?
-  end
-
   def self.define(name)
     if name
       if word_exists?(name)
@@ -314,6 +304,71 @@ class Word < ActiveRecord::Base
   # TODO Remove once project is complete
   def self.seventh_grade_grouped
     where(name: Word.seventh_grade.take(60)).group_by { |w| w.name }
+  end
+
+  def self.meaning_alts_seventh_grade
+    Word.find([
+      3254,
+      3268,
+      3285,
+      3263,
+      3292,
+      3307,
+      3317,
+      3322,
+      3333,
+      304,
+      3351,
+      3357,
+      3360,
+      3369,
+      3377,
+      3301,
+      2299,
+      3384,
+      3388,
+      3250,
+      3394,
+      3396,
+      3343,
+      3346,
+      3679,
+      3251,
+      3691,
+      3683,
+      401,
+      3397,
+      2935,
+      1898,
+      3257,
+      3267,
+      3270,
+      3278,
+      3308,
+      3305,
+      3314,
+      2615,
+      3338,
+      3391,
+      3680,
+      3290,
+      3345,
+      3354,
+      3368,
+      3371,
+      3347,
+      3358,
+      3376,
+      3380,
+      3386,
+      3243,
+      3274,
+      3310,
+      3372,
+      3299,
+      3332,
+      3383
+    ])
   end
 
   # HEROKU UPDATES

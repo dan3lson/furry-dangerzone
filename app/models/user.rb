@@ -45,10 +45,6 @@ class User < ActiveRecord::Base
     words.any?
   end
 
-  def already_has_word?(word)
-    words.include?(word)
-  end
-
   def has_tags?
     tags.any?
   end
@@ -57,7 +53,7 @@ class User < ActiveRecord::Base
     user_word_tags.any?
   end
 
-  def already_has_tag?(tag)
+  def has_tag?(tag)
     tags.include?(tag)
   end
 
@@ -74,7 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def is_student?
-    role == "student"
+    role == "student" || is_teacher? || is_admin?
   end
 
   # TODO Create test
