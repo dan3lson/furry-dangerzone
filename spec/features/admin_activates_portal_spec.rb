@@ -24,13 +24,13 @@ feature "admin activates admin portal", %{
     scenario "scenario: activates admin portal" do
       log_in_as(admin)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Activate Admin Portal"
 
       expect(page).to have_link("Edit")
       expect(page).to have_link("Stats")
-      expect(page).to have_link("Activate Scholar Edition")
+      expect(page).to have_link("Activate Brainiac Edition")
       expect(page).to have_link("Report a problem")
       expect(page).to have_link("I wish Leksi could...")
       expect(page).to have_link("Rate this app")
@@ -46,7 +46,7 @@ feature "admin activates admin portal", %{
     scenario "scenario: regular users cannot see admin portal link" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       expect(page).not_to have_link("Activate Admin Portal")
     end
@@ -56,13 +56,13 @@ feature "admin activates admin portal", %{
 
       visit admin_root_path
 
-      expect(page).to have_content("Yikes! That\'s not something you can do.")
+      expect(page).to have_content("Access denied.")
     end
 
     scenario "scenario: teachers cannot see admin portal link" do
       log_in_as(teacher)
 
-      visit menu_path
+      visit settings_path
 
       expect(page).not_to have_link("Activate Admin Portal")
     end
@@ -72,7 +72,7 @@ feature "admin activates admin portal", %{
 
       visit admin_root_path
 
-      expect(page).to have_content("Yikes! That\'s not something you can do.")
+      expect(page).to have_content("Access denied.")
     end
   end
 end

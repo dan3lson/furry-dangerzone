@@ -1,0 +1,42 @@
+<% provide(:header, "Meaning Alternatives (#{@m_a_count})") %>
+
+<div class="text-muted filter-div">
+  Filter:
+  <%= link_to admin_meaning_alts_path do %>
+    <span class="text-primary active">
+      <i class="fa fa-sort-alpha-asc"></i> Alphabetical
+    </span>
+  <% end %>
+  |
+  <%= link_to admin_meaning_alts_path(filter: "latest") do %>
+    <span>
+      <i class="fa fa-calendar hover pointer"></i> Created at
+    </span>
+  <% end %>
+  <div class="float-xs-right">
+    <p>
+      Total Meaning Alternatives:
+      <span id="meaning-alts-count">
+        <%= @meaning_alts_count %>
+      </span>
+      <br>
+      <%= link_to new_school_meaning_alt_path,
+                  role: "button",
+                  class: "btn btn-primary btn-block" do
+      %>
+        <i class="fa fa-plus-circle"></i> Create
+      <% end %>
+    </p>
+  </div>
+  <div class="clear"></div>
+</div>
+<%= will_paginate @users %>
+<div class="clear"></div>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <% @meaning_alts.each do |m_a| %>
+      <%= render "admin/meaning_alts/meaning_alt", m_a: m_a, word: m_a.word %>
+    <% end %>
+  </div>
+</div>
+<%= will_paginate @users %>

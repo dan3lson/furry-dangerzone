@@ -1,0 +1,15 @@
+<% if words.class == String %>
+	<div class="alert alert-danger"><%= results %></div>
+<% else %>
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<% words.each do |word| %>
+					<div class="card">
+						<div class="card-block">
+							<%= render "words/basics", word: word %>
+						</div>
+					</div>
+			<% end %>
+		</div>
+	</div>
+<% end %>

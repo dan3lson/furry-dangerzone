@@ -21,7 +21,7 @@ feature "user views the menu", %{
     scenario "scenario: view standard links" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       expect(page).to have_link("Edit")
       expect(page).to have_link("Stats")

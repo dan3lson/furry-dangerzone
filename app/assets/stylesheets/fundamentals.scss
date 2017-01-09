@@ -5,14 +5,12 @@
 //**********
 
 .palabra,
-.fa-arrow-up.text-success,
-.fa-arrow-down.text-danger,
 #spell-by-clicking-letters-div,
 #spell-the-word-continue-btn,
 #pronunciation-spans,
 #pronunciation-continue-btn,
 #meaning-alts-div,
-.decisions-feedback,
+.mean-alts-feedback,
 #meaning-alts-continue-btn,
 #example-non-examples-continue-btn,
 #synonyms_container,
@@ -28,18 +26,30 @@
 	display: none;
 }
 
+.fa-arrow-up.text-success,
+.fa-arrow-down.text-danger {
+	opacity: 0.1;
+}
+
 #chosen-word-header-container {
 	padding: 0.7rem;
 	word-break: break-word;
 }
 
-#continueButtonContainer {
+#continue-btn-div {
 	margin-bottom: 50px;
 
 	& button {
 		font-size: 23px;
 	}
 }
+
+#meaning-alts-div {
+	h4 {
+		font-weight: 200;
+	}
+}
+
 
 #spell-by-typing-form {
 	input {
@@ -58,8 +68,10 @@
 	width: 23%;
 }
 
-.meaning_pos_container, .synonym_word_container, .antonym_word_container,
-.syn_ant_word_container, .rwe_source_container {
+.synonym_word_container,
+.antonym_word_container,
+.syn_ant_word_container,
+.rwe_source_container {
 	vertical-align: 7px;
 	font-size: 20px !important;
 }

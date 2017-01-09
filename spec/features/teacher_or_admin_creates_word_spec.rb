@@ -25,7 +25,7 @@ feature "teacher or admin creates word", %{
     scenario "scenario: guest tries to create word" do
       visit new_school_word_path
 
-      expect(page).to have_content("Yikes! Please log in first to do that.")
+      expect(page).to have_content("Please log in first.")
       expect(page).not_to have_content("New Word")
     end
 
@@ -34,7 +34,7 @@ feature "teacher or admin creates word", %{
 
       visit new_school_word_path
 
-      expect(page).to have_content("Yikes! That\'s not something you can do.")
+      expect(page).to have_content("Access denied.")
       expect(page).not_to have_content("New Word")
     end
 

@@ -136,7 +136,7 @@ feature "two users remove a word", %{
         click_on "remove"
       end
 
-      visit menu_path
+      visit settings_path
 
       click_on "Log out"
 

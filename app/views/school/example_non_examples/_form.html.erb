@@ -1,7 +1,7 @@
-<%= form_for [:school, word, ExampleNonExample.new], id: "new-school-example-non-example",
+<%= form_for [:school, word, e_non_e], id: "new-school-example-non-example",
 	method: :post, remote: true do |f|
 %>
-  <%= render "shared/error_messages", object: ExampleNonExample.new %>
+  <%= render "shared/error_messages", object: e_non_e %>
   <div class="form-group">
     <%= f.label :text,
                 class: "sr-only form-control-label"
@@ -29,7 +29,7 @@
                      placeholder: "Feedback"
     %>
   </div>
-  <%= f.button "Create",
+  <%= f.button text,
 							 type: "button",
 							 class: "btn btn-primary btn-block create-e-non-e-btn"
 	%>

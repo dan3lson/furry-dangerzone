@@ -76,7 +76,7 @@ feature "teacher adds words to student(s) myLeksi", %{
     scenario "scenario: see link to add words for student" do
       log_in_as(teacher)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Activate Teacher Edition"
 

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :feedbacks
   has_many :comments
+  has_many :meaning_alts
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -81,7 +82,7 @@ class User < ActiveRecord::Base
 
   # TODO Create test
   def is_brainiac?
-    role == "brainiac" || is_student?
+    role == "brainiac" || is_student? || is_admin?
   end
 
   def is_not_a_student?
@@ -93,6 +94,12 @@ class User < ActiveRecord::Base
     is_admin_or_teacher?
   end
 
+  # TODO Create test
+  def can_create_meaning_alts?
+    is_admin_or_teacher?
+  end
+
+  # TODO Create test
   def can_create_example_non_examples?
     is_admin_or_teacher?
   end

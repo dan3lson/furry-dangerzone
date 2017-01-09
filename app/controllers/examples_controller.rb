@@ -24,7 +24,7 @@ class ExamplesController < ApplicationController
       if @example.save
         msg = "Thanks for creating an example for word #{@example.word.name}!"
         flash[:success] = msg
-        redirect_to menu_path
+        redirect_to settings_path
       else
         flash.now[:danger] = "Yikes! Something went wrong. Please try again."
         render "versions/show"
@@ -52,7 +52,7 @@ class ExamplesController < ApplicationController
 
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "Yikes! Please log in first to do that."
+      flash[:danger] = "Please log in first."
       redirect_to login_path
     end
   end

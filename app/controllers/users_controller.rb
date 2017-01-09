@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = "You successfully updated your profile."
-      redirect_to menu_path
+      redirect_to settings_path
     else
       flash[:danger] = "Yikes! Profile updates not successfully made."
       render :edit
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash[:danger] = "Yikes! Something went wrong. Please try again."
-      redirect_to menu_path
+      redirect_to settings_path
     end
   end
 
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "Yikes! Please log in first to do that."
+      flash[:danger] = "Please log in first."
       redirect_to login_url
     end
   end
@@ -74,8 +74,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     unless current_user?(@user)
-      flash[:danger] = "Yikes! That\'s not something you can do."
-      redirect_to menu_path
+      flash[:danger] = "Access denied."
+      redirect_to settings_path
     end
   end
 end

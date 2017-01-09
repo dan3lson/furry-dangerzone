@@ -1,0 +1,2 @@
+const partial = "<%= j render(partial: 'school/searches/results', locals: { words: @words, object: @object }) %>";
+$(".search-results-container").hide().html(partial).fadeIn(400);

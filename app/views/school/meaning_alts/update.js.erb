@@ -1,0 +1,29 @@
+var $activeElement = $(document.activeElement);
+var $cardTextPartial = $("<%= j render(partial: 'school/meaning_alts/card_text', locals: { m_a: @m_a }) %>");
+var $btnsPartial = $("<%= j render(partial: 'school/meaning_alts/edit_delete_btns', locals: { m_a: @m_a }) %>");
+var $card = $activeElement.parents(".card");
+var $cardBlock = $card.find(".card-block");
+var $form = $activeElement.parent();
+var $hiddenBtnsDiv = $form.siblings();
+var saved = "<%= @saved %>";
+$footer.find(".alert").remove();
+
+if (saved == "true") {
+	$footer.html($cardTextPartial).fadeIn();
+	$footer.prepend(createFlash("success", "Updated!"));
+	$footer.prepend($btnsPartial);
+} else {
+	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @m_a }) %>");
+	$cardBlock.prepend($errorsPartial);
+}
+
+function createFlash(_class, text) {
+	return createElem("div", "alert alert-" + _class).append(text)
+																									 .attr("role", "alert");
+}
+
+function createElem(elem, elemClass, elemID) {
+	_class = elemClass || null;
+	_id = elemID || null;
+	return $("<" + elem + ">", { class: _class, id: _id });
+}

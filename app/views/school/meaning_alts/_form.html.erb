@@ -1,0 +1,19 @@
+<%= form_for([:school, word, m_a], remote: true) do |f| %>
+	<p class="form-group">
+		<%= f.label :text, class: "form-control-label" %>
+		<%= f.text_field :text, class: "form-control" %>
+	</p>
+	<p class="form-group">
+		<%= f.label :choices, class: "form-control-label" %>
+		<%= f.text_field :choices, class: "form-control" %>
+	</p>
+	<p class="form-group">
+		<%= f.label :answer, class: "form-control-label" %>
+		<%= f.text_field :answer, class: "form-control" %>
+	</p>
+	<p class="form-group">
+		<%= f.label :feedback, class: "form-control-label" %>
+		<%= f.text_field :feedback, class: "form-control" %>
+	</p>
+	<%= f.submit text, class: "btn btn-primary btn-block" %>
+<% end %>

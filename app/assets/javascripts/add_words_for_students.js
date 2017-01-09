@@ -109,7 +109,7 @@ $(document).ready(function() {
 			"<span class='glyphicon glyphicon-" + glyph_1 + "'" +
 			"aria-hidden='true'" + "data-username='" + display_name + "'></span>" +
 			"\xa0" + "\xa0" + display_name + "\xa0" + "\xa0" +	"\xa0" +
-			"<span class='dark-gray glyphicon glyphicon-" + glyph_2 + "'" +
+			"<span class='text-muted fa fa-" + glyph_2 + "'" +
 			"aria-hidden='true'></span>" +
 		"</span>";
 	}

@@ -1,9 +1,0 @@
-<%= render "static_pages/header", icon: "newspaper-o", header: "Leksi Blog" %>
-
-<%= render "blog_posts/breadcrumbs" %>
-
-<div class="thin-white-section">
-	<h2><%= @blog_post.title %></h2>
-</div>
-
-<%= render "blog_posts/comments", blog_post: @blog_post, comment: @comment %>

@@ -1,0 +1,85 @@
+<nav class="navbar navbar-inverse bg-inverse">
+  <div class="nav navbar-nav">
+    <%= render "layouts/leksi_brand", path: admin_root_path %>
+
+		<% if controller?("admin/users") %>
+			<%= link_to admin_users_path, class: "nav-item nav-link active" do %>
+				<i class="fa fa-user"></i> Users
+			<% end %>
+		<% else %>
+			<%= link_to admin_users_path, class: "nav-item nav-link" do %>
+				<i class="fa fa-user"></i> Users
+			<% end %>
+		<% end %>
+
+		<% if controller?("words") %>
+			<%= link_to admin_words_path, class: "nav-item nav-link active" do %>
+				<i class="fa fa-book"></i> Words
+			<% end %>
+		<% else %>
+			<%= link_to admin_words_path, class: "nav-item nav-link" do %>
+				<i class="fa fa-book"></i> Words
+			<% end %>
+		<% end %>
+
+		<% if controller?("admin/meaning_alts") %>
+			<%= link_to admin_meaning_alts_path,
+          class: "nav-item nav-link active" do
+      %>
+				<i class="fa fa-book"></i> Meaning Alts
+			<% end %>
+		<% else %>
+			<%= link_to admin_meaning_alts_path,
+          class: "nav-item nav-link" do
+      %>
+				<i class="fa fa-book"></i> Meaning Alts
+			<% end %>
+		<% end %>
+
+		<% if controller?("admin/example_non_examples") %>
+			<%= link_to admin_example_non_examples_path,
+                  class: "nav-item nav-link active" do
+      %>
+				<i class="fa fa-book"></i> Ex/Non-Exs
+			<% end %>
+		<% else %>
+			<%= link_to admin_example_non_examples_path,
+                  class: "nav-item nav-link" do
+      %>
+				<i class="fa fa-book"></i> Ex/Non-Exs
+			<% end %>
+		<% end %>
+
+		<% if controller?("my_tags") %>
+			<%= link_to myTags_path, class: "nav-item nav-link active" do %>
+				<i class="fa fa-tags"></i> Tags
+			<% end %>
+		<% else %>
+			<%= link_to myTags_path, class: "nav-item nav-link" do %>
+				<i class="fa fa-tags"></i> Tags
+			<% end %>
+		<% end %>
+
+		<% if controller?("users") && action?("show") %>
+			<%= link_to current_user, class: "nav-item nav-link active" do %>
+				<i class="fa fa-line-chart"></i> Stats
+			<% end %>
+		<% else %>
+			<%= link_to current_user, class: "nav-item nav-link" do %>
+				<i class="fa fa-line-chart"></i> Stats
+			<% end %>
+		<% end %>
+
+		<% if controller?("admin/searches") && action?("search") %>
+      <%= link_to admin_search_path, class: "nav-item nav-link active" do %>
+  			<i class="fa fa-search"></i> Explore
+  		<% end %>
+    <% else %>
+      <%= link_to admin_search_path, class: "nav-item nav-link" do %>
+        <i class="fa fa-search"></i> Explore
+      <% end %>
+    <% end %>
+
+    <%= render "layouts/settings", path: admin_settings_path %>
+  </div>
+</nav>

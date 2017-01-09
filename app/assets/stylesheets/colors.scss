@@ -2,14 +2,11 @@ $amber: #F0A30A;
 $apple-blue: #097FF0;
 $apple-star-orange: #FD9603;
 $black: #000;
-$bootstrap-blue: #5BC0DE;
-$bootstrap-green: #5FB760;
-$bootstrap-red: #D9534F;
+$bootstrap-blue: #0275d8;
+$bootstrap-green: #5cb85c;
+$bootstrap-red: #d9534f;
+$bootstrap-orange: #f0ad4e;
 $card-bg: #F8F8F8;
-$dark-gray: #8E8E93;
-$medium-gray: lighten($dark-gray, 30);
-$dark-green: darken($bootstrap-green, 60);
-$even-darker-gray: darken($dark-gray, 20);
 $game-circle-sizes: 35px;
 $home-game-circle-size: 100px;
 $leksi-green: #81CE97;
@@ -30,8 +27,3 @@ $light-sky-blue: lighten($sky-blue, 55);
 $show-game-circle-container-hover-opac: .7;
 $tree-brown: #966A3D;
 $white: #FFF;
-
-.bg-tree-brown {
-	background: $tree-brown;
-	color: $white;
-}

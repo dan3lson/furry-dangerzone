@@ -1,0 +1,9 @@
+<% if action?("settings") %>
+	<%= link_to path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-gear"></i> Settings
+	<% end %>
+<% else %>
+	<%= link_to path, class: "nav-item nav-link" do %>
+		<i class="fa fa-gear"></i> Settings
+	<% end %>
+<% end %>

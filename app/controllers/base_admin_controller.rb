@@ -7,16 +7,14 @@ class BaseAdminController < ApplicationController
 
 	def logged_in_user
 		unless logged_in?
-			flash[:danger] = "Please log in first to do that."
-
+			flash[:danger] = "Please log in first."
 			redirect_to login_url
 		end
 	end
 
 	def correct_user
 		unless current_user.is_admin?
-			flash[:danger] = "That\'s not something you can do."
-
+			flash[:danger] = "Access denied."
 			redirect_to root_path
 		end
 	end

@@ -1,0 +1,46 @@
+<nav class="navbar navbar-inverse bg-primary">
+  <div class="nav navbar-nav">
+    <%= render "layouts/leksi_brand", path: school_root_path %>
+		<% if action?("classes") %>
+			<%= link_to school_classes_path, class: "nav-item nav-link active" do %>
+				<i class="fa fa-users"></i> Classes
+			<% end %>
+		<% else %>
+			<%= link_to school_classes_path, class: "nav-item nav-link" do %>
+				<i class="fa fa-users"></i> Classes
+			<% end %>
+		<% end %>
+
+		<% if false %>
+			<%= link_to "#", class: "nav-item nav-link active" do %>
+				<i class="fa fa-tags"></i> Tags
+			<% end %>
+		<% else %>
+			<%= link_to "#", class: "nav-item nav-link" do %>
+				<i class="fa fa-tags"></i> Tags
+			<% end %>
+		<% end %>
+
+		<% if false %>
+			<%= link_to "#", class: "nav-item nav-link active" do %>
+				<i class="fa fa-line-chart"></i> Stats
+			<% end %>
+		<% else %>
+			<%= link_to "#", class: "nav-item nav-link" do %>
+				<i class="fa fa-line-chart"></i> Stats
+			<% end %>
+		<% end %>
+
+		<% if controller?("school/searches") %>
+      <%= link_to school_search_path, class: "nav-item nav-link active" do %>
+  			<i class="fa fa-search"></i> Explore
+  		<% end %>
+    <% else %>
+      <%= link_to school_search_path, class: "nav-item nav-link" do %>
+        <i class="fa fa-search"></i> Explore
+      <% end %>
+    <% end %>
+
+    <%= render "layouts/settings", path: school_settings_path %>
+  </div>
+</nav>

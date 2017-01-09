@@ -24,7 +24,7 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def self.search(name)
-    where(name: name).limit(3)
+    where(name: name)
   end
 
   # TODO: Create test
@@ -307,7 +307,7 @@ class Word < ActiveRecord::Base
     ]
   end
 
-  def self.seventh_grade_objects
+  def self.seventh_grade_words
     where(name: Word.seventh_grade).limit(30)
   end
 

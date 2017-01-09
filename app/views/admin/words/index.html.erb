@@ -1,0 +1,17 @@
+<% provide(:title, "All Words") %>
+<% provide(:header, "All Words") %>
+
+<%= will_paginate @words %>
+<div class="card-columns">
+  <% @words.each do |word| %>
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">
+            <%= link_to "\(#{word.id}\) #{word.name}", word %>
+            <span class="text-muted"><%= word.part_of_speech %></span>
+          </h4>
+        </div>
+      </div>
+  <% end %>
+</div>
+<%= will_paginate @words %>

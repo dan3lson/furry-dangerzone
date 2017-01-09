@@ -19,9 +19,9 @@ feature "user creates feedback", %{
     let!(:version) { FactoryGirl.create(:version) }
 
     scenario "scenario: guest tries to give app feedback" do
-      visit menu_path
+      visit settings_path
 
-      expect(page).to have_content("Yikes! Please log in first to do that.")
+      expect(page).to have_content("Please log in first.")
       expect(page).to have_link("Log in")
       expect(page).not_to have_content("New Feedback")
       expect(Feedback.count).to eq(0)
@@ -30,7 +30,7 @@ feature "user creates feedback", %{
     scenario "scenario: with valid data" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Report a problem"
 
@@ -47,7 +47,7 @@ feature "user creates feedback", %{
     scenario "scenario: with invalid data" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "I wish Leksi could..."
 

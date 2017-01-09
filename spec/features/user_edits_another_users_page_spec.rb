@@ -23,7 +23,7 @@ feature "user edits another users page", %{
       log_in_as(user)
       visit edit_user_path(user2)
 
-      expect(page).to have_content("Yikes! That\'s not something you can do.")
+      expect(page).to have_content("Access denied.")
     end
   end
 end

@@ -8,6 +8,10 @@ a, a:active {
 	text-decoration: none;
 }
 
+.btn {
+	white-space: normal;
+}
+
 #awfs-step-2-container,
 #awfs-step-3-container,
 #awfs-review-container,
@@ -44,10 +48,6 @@ a, a:active {
 	padding: 5rem;
 }
 
-.dark-gray {
-	color: $dark-gray;
-}
-
 .data-url {
 	cursor: pointer;
 }
@@ -57,18 +57,6 @@ a, a:active {
   float: left;
   margin-top: 45px;
   width: 100%;
-}
-
-#error_explanation {
-  color: $leksi-red;
-  ul {
-    color: $leksi-red;
-    margin: 0 0 30px 0;
-  }
-}
-
-.field_with_errors {
-  // @extend .has-error;
 }
 
 .text-white a {
@@ -99,6 +87,30 @@ a, a:active {
 	display: inline-block;
 }
 
+.navbar.bg-primary {
+	a {
+		color: $white;
+	}
+	a:hover {
+		color: $bootstrap-orange;
+	}
+	.active {
+		color: $bootstrap-orange;
+	}
+}
+
+.navbar.bg-inverse {
+	a {
+		color: $white;
+	}
+	a:hover {
+		color: $bootstrap-red;
+	}
+	.active {
+		color: $bootstrap-red;
+	}
+}
+
 #myLeksi-filter-container {
 	margin-bottom: 20px;
 }
@@ -112,28 +124,13 @@ a, a:active {
 	cursor: pointer;
 }
 
-.radio {
-	border: 1px solid $medium-gray;
-	border-radius: 10px;
-	padding: 5px;
-}
-
-.radio label {
-	font-weight: bold !important;
-}
-
-.radio input[type="radio"],
-.radio-inline input[type="radio"] {
-	margin-left: 0 !important;
-}
-
 .remove-side-margins {
 	margin-left: 0;
 	margin-right: 0;
 }
 
 .spinner {
-	color: $dark-gray;
+	color: gray;
 	font-size: 35px;
 }
 

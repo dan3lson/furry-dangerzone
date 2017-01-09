@@ -23,7 +23,7 @@ feature "user edits their profile", %{
     scenario "scenario: with valid data" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Edit"
 
@@ -40,7 +40,7 @@ feature "user edits their profile", %{
     scenario "scenario: with invalid data" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Edit"
 

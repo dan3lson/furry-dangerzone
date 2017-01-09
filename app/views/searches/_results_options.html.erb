@@ -5,7 +5,7 @@
 %>
 	<%= hidden_field_tag :id, word.id %>
 
-	<% if current_user.is_brainiac? && logged_in? %>
+	<% if logged_in? && current_user.is_brainiac? %>
 		<div class="row">
 			<div class="col-md-6">
 				<%= render "searches/user_add", word: word %>

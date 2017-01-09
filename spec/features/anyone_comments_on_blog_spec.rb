@@ -25,7 +25,7 @@ feature "anyone comments on blog", %{
 
       expect(page).to have_css(".blog-comment-form")
       expect(page).to have_content("Join the conversation")
-      expect(page).not_to have_content("Yikes! Please log in first to do that.")
+      expect(page).not_to have_content("Please log in first.")
     end
 
     scenario "scenario: guest tries with valid data" do

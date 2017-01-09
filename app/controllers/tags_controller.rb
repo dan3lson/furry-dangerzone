@@ -75,7 +75,7 @@ class TagsController < ApplicationController
 
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "Yikes! Please log in first to do that."
+      flash[:danger] = "Please log in first."
 
       redirect_to login_url
     end
@@ -85,7 +85,7 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
 
     unless current_user.tags.include?(@tag)
-      flash[:danger] = "Yikes! That\'s not something you can do."
+      flash[:danger] = "Access denied."
 
       redirect_to myTags_path
     end

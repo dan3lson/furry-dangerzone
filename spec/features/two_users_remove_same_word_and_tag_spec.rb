@@ -43,7 +43,7 @@ feature "two users remove same word and tag", %{
 
       find(".my_tags-remove-btn").click
 
-      visit menu_path
+      visit settings_path
 
       click_on "Log out"
 

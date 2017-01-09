@@ -2,7 +2,10 @@ class MeaningAltsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @meaning_alts = MeaningAlt.all
+    @word = Word.find(params[:word_id])
+    @meaning_alts = @word.meaning_alts
+
+    render json: @meaning_alts
   end
 
   def new
@@ -25,6 +28,12 @@ class MeaningAltsController < ApplicationController
     end
 
     redirect_to seventh_grade_words_path
+  end
+
+  def show
+    @meaning_alt = MeaningAlt.find(params[:id])
+    @word = Word.find(params[:word_id])
+    render json: @word.meaning_alts
   end
 
   def destroy
@@ -57,7 +66,7 @@ class MeaningAltsController < ApplicationController
 
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "Please log in first for that."
+      flash[:danger] = "Please log in first."
       redirect_to login_path
     end
   end

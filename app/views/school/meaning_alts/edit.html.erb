@@ -1,0 +1,15 @@
+<% provide(:title, "Edit Meaning Alternative") %>
+
+<div class="card">
+  <div class="card-block">
+		<h4 class="card-title">
+			Update Meaning Alternative for <mark><%= @m_a.word.name %></mark>
+		</h4>
+    <%= render "shared/error_messages", object: @m_a %>
+    <%= render "school/meaning_alts/form", text: "Update", m_a: @m_a %>
+  </div>
+  <div class="card-footer text-muted text-xs-center">
+    You added this tag <%= time_ago_in_words(@m_a.created_at) %> ago.
+		REMOVE
+  </div>
+</div>

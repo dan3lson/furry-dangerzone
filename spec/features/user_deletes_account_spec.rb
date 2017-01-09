@@ -21,7 +21,7 @@ feature "user deletes (their (duh)) account", %{
 
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Edit"
 
@@ -39,7 +39,7 @@ feature "user deletes (their (duh)) account", %{
 
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Edit"
 
@@ -62,7 +62,7 @@ feature "user deletes (their (duh)) account", %{
 
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Edit"
 

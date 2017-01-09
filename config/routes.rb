@@ -4,11 +4,10 @@ Rails.application.routes.draw do
   get "research" => "static_pages#research"
   get "our_approach" => "static_pages#our_approach"
   get "results" => "static_pages#results"
+  get "feedback" => "feedbacks#new"
   get "search" => "searches#search"
-  get "search_results" => "searches#search_results"
-  get "search_words_for_students" => "searches#student_words"
-  get "search_multi_words" => "searches#multiple_words"
-  get "menu" => "current_users#menu"
+  get "search_results" => "searches#results"
+  get "settings" => "current_users#settings"
   get "progress" => "current_users#progress"
   get "myLeksi" => "my_leksi#index"
   get "myLeksi/:id" => "my_leksi#show"
@@ -23,21 +22,11 @@ Rails.application.routes.draw do
   post "login" => "sessions#create"
   post "static_pages/contact_us"
   delete "logout" => "sessions#destroy"
-  get "blog" => "blog_posts#index"
-  get "all-about-leksi-part-1" => "blog_posts#all_about_leksi_part_1"
-  get "all-about-leksi-part-2" => "blog_posts#all_about_leksi_part_2"
-  get "seventh_grade_words" => "meaning_alts#seventh_grade"
-  resources :blog_posts do
-    resources :comments
-  end
   resources :comments
   resources :users, except: [:index]
-  resources :words, only: [:index, :show]
+  resources :words, only: [:show]
   resources :words do
     resources :examples
-  end
-  resources :words do
-    resources :meaning_alts
   end
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
@@ -52,34 +41,41 @@ Rails.application.routes.draw do
   resource :user_word_tag, only: [:create, :edit, :destroy]
   resource :user_word_tag_word_show_page, only: [:destroy]
   resource :user_word_tag_tag_show_page, only: [:destroy]
-  resource :landing_pages, only: [:create]
-  resources :versions do
-    resources :reviews
-  end
-  resources :reviews
-  resources :feedbacks
   namespace :school do
-    root "schools#classes"
-    get "classes" => "schools#classes"
-    get "words" => "schools#words"
-    get "frayer" => "words#frayer_model"
+    root "current_user#classes"
+    get "classes" => "current_user#classes"
+    get "words" => "current_user#words"
+    get "search" => "searches#search"
+    get "search_results" => "searches#results"
+    get "search_words_for_students" => "searches#student_words"
     get "student_words" => "words#student_words"
-    get "students" => "schools#students"
-    get "student" => "schools#student"
-    get "messages" => "schools#messages"
-    get "progress" => "schools#progress"
-    get "menu" => "schools#menu"
+    get "frayer" => "words#frayer_model"
+    get "students" => "current_user#students"
+    get "student" => "current_user#student"
+    get "messages" => "current_user#messages"
+    get "progress" => "current_user#progress"
+    get "settings" => "current_user#settings"
+    get "seventh_grade_words" => "meaning_alts#seventh_grade"
     resources :words, only: [:new, :create]
     resource :add_words_for_student, only: [:update]
     resources :example_non_examples, only: [:index, :new]
     resources :words do
       resources :example_non_examples
     end
+    resources :meaning_alts
+    resources :words do
+      resources :meaning_alts
+    end
   end
   namespace :admin do
-    root "admins#menu"
+    root "admins#settings"
     get "stats" => "admins#stats"
-    get "menu" => "admins#menu"
-    resources :users, only: [:index]
+    get "search" => "searches#search"
+    get "search_results" => "searches#results"
+    get "settings" => "admins#settings"
+    resources :users
+    resources :words
+    resources :meaning_alts
+    resources :example_non_examples
   end
 end

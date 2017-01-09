@@ -1,7 +1,4 @@
 class School::WordsController < BaseSchoolController
-  before_action :logged_in_user
-  before_action :correct_user, only: [:new, :create, :edit, :update]
-
   def new
     @word = Word.new
   end
@@ -45,19 +42,5 @@ class School::WordsController < BaseSchoolController
       :definition,
       :example_sentence
     )
-  end
-
-  def logged_in_user
-    unless logged_in?
-      flash[:danger] = "Yikes! Please log in first to do that."
-      redirect_to login_url
-    end
-  end
-
-  def correct_user
-    unless current_user.can_create_words?
-      flash[:danger] = "Yikes! That\'s not something you can do."
-      redirect_to menu_path
-    end
   end
 end

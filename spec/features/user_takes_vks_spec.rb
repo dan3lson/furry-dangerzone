@@ -23,7 +23,7 @@ feature "user takes vocabulary knowledge scale (vks)", %{
     scenario "scenario: click get started button" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Knowledge Scale"
 

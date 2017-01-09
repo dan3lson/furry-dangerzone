@@ -18,41 +18,34 @@
 		<% if params[:controller] == "current_users" %>
 			<% if current_user.is_teacher? %>
 				<li class="list-group-item">
-					<%= link_to school_menu_path do %>
+					<%= link_to school_settings_path do %>
 						<i class="fa fa-university fa-fw"></i> Activate Teacher Edition
 					<% end %>
 				</li>
 			<% end %>
 		<% end %>
-		<% if current_user.is_admin? %>
+		<% if current_user.is_admin? && !controller?("admin/admins") %>
 			<li class="list-group-item">
-				<%= link_to admin_menu_path do %>
+				<%= link_to admin_settings_path do %>
 					<i class="fa fa-user-secret fa-fw"></i> Activate Admin Portal
 				<% end %>
 			</li>
 		<% end %>
 		<% if params[:controller] == "school/schools" %>
 			<li class="list-group-item">
-				<%= link_to menu_path do %>
-					<i class="fa fa-gamepad fa-fw"></i> Activate Scholar Edition
+				<%= link_to settings_path do %>
+					<i class="fa fa-gamepad fa-fw"></i> Activate Brainiac Edition
 				<% end %>
 			</li>
-			<% if current_user.is_admin? %>
-				<li class="list-group-item">
-					<%= link_to admin_menu_path do %>
-						<i class="fa fa-user-secret fa-fw"></i> Activate Admin Portal
-					<% end %>
-				</li>
-			<% end %>
 		<% end %>
 		<% if params[:controller] == "admin/admins" %>
 			<li class="list-group-item">
-				<%= link_to menu_path do %>
-					<i class="fa fa-gamepad fa-fw"></i> Activate Scholar Edition
+				<%= link_to settings_path do %>
+					<i class="fa fa-gamepad fa-fw"></i> Activate Brainiac Edition
 				<% end %>
 			</li>
 			<li class="list-group-item">
-				<%= link_to school_menu_path do %>
+				<%= link_to school_settings_path do %>
 					<i class="fa fa-university fa-fw"></i> Activate Teacher Edition
 				<% end %>
 			</li>

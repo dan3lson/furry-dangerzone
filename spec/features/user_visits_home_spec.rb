@@ -24,7 +24,7 @@ feature "user visits home page", %{
     scenario "scenario: myLeksi is displayed" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       visit root_path
 

@@ -3,20 +3,10 @@
 		<div class="card">
 			<div class="card-block">
 				<%= render "words/basics", word: word %>
-
-				<% if current_user.already_has_word?(word) %>
-					<div>
-						<%= render "my_leksi/mastery_percentage",
-											 word: word,
-											 user_word: UserWord.object(current_user, word)
-						%>
-					</div>
-				<% else %>
-					<%= render "searches/results_options",
-										 display_button: "user",
-										 word: word
-					%>
-				<% end %>
+				<%= render "searches/results_options",
+									 display_button: "user",
+									 word: word
+				%>
 			</div>
 		</div>
 	<% end %>

@@ -1,0 +1,29 @@
+<%= form_tag school_search_results_path(form_action: form_action),
+             method: "get",
+             id: "search-form",
+             remote: true do
+%>
+  <div class="input-group input-group-lg">
+    <%= label_tag :'input-search',
+                  "Search",
+                  class: "form-control-label sr-only"
+    %>
+    <%= text_field_tag :search,
+                       params[:search],
+                       type: "search",
+                       class: "form-control",
+                       id: "input_search",
+                       placeholder: "Look up word(s)",
+                       autofocus: true
+    %>
+    <span class="input-group-btn">
+      <%= button_tag type: "submit",
+                     class: "btn btn-primary",
+                     id: "search-btn",
+                     disabled: true do
+      %>
+        <i class="fa fa-search"></i>
+      <% end %>
+    </span>
+  </div>
+<% end %>

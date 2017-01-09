@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
 	$(function() {
     FastClick.attach(document.body);
 	});
@@ -30,8 +30,21 @@ $(document).ready(function(){
 	})
 
 	$("#search-form").focus();
+	$("#input_search").on("input", function() {
+		if (empty($(this))) {
+			$("#search-form button").prop("disabled", true);
+		} else {
+			$("#search-form button").prop("disabled", false);
+		}
+	});
+
+	$(".mean-alt-del-form").parents("form").css("display", "inline-block");
 
 	spinner();
+
+	function empty($field) {
+    return $field.val().trim() == "";
+  }
 
 	function spinner() {
 		$(".spinner").hide();

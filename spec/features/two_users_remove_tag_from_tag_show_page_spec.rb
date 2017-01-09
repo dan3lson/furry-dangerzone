@@ -42,7 +42,7 @@ feature "two users remove tag from tag show page", %{
 
       find(".my_tags-remove-btn").click
 
-      visit menu_path
+      visit settings_path
 
       click_on "Log out"
 
@@ -70,7 +70,7 @@ feature "two users remove tag from tag show page", %{
 
       find(".my_tags-remove-btn").click
 
-      visit menu_path
+      visit settings_path
 
       click_on "Log out"
 
@@ -107,7 +107,7 @@ feature "two users remove tag from tag show page", %{
 
       find(".my_tags-remove-btn").click
 
-      visit menu_path
+      visit settings_path
 
       click_on "Log out"
 

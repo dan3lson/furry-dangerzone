@@ -45,7 +45,7 @@ feature "two users add same word and tag", %{
 
       click_on "add"
 
-      visit menu_path
+      visit settings_path
 
       click_on "Log out"
 

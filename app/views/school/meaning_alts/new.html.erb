@@ -1,0 +1,18 @@
+<% provide(:header, "New Meaning Alternative") %>
+<section>
+  <ol class="lead">
+    <li>
+      Find words by typing one word (or multiple words separated by a comma)
+    </li>
+    <li>
+      Click the <i class="fa fa-search"></i> button
+    </li>
+    <li>
+      Use the corresponding forms that show up to add as many
+      meaning alternatives as you'd like
+    </li>
+  </ol>
+  <%= render "school/searches/form", form_action: "meaning_alt" %>
+  <br>
+  <div class="search-results-container"></div>
+</section>

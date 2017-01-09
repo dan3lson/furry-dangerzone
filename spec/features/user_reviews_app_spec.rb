@@ -22,7 +22,7 @@ feature "user reviews app", %{
     scenario "scenario: guest tries to review app" do
       visit new_version_review_path(version)
 
-      expect(page).to have_content("Yikes! Please log in first to do that.")
+      expect(page).to have_content("Please log in first.")
       expect(page).to have_link("Log in")
       expect(page).not_to have_content("New Review")
     end
@@ -30,7 +30,7 @@ feature "user reviews app", %{
     scenario "scenario: with valid data (both rating and description)" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Rate this app"
 
@@ -49,7 +49,7 @@ feature "user reviews app", %{
     scenario "scenario: with valid data (just rating)" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Rate this app"
 
@@ -66,7 +66,7 @@ feature "user reviews app", %{
     scenario "scenario: with invalid data" do
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Rate this app"
 
@@ -85,7 +85,7 @@ feature "user reviews app", %{
 
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Rate this app"
 
@@ -101,7 +101,7 @@ feature "user reviews app", %{
 
       log_in_as(user)
 
-      visit menu_path
+      visit settings_path
 
       click_on "Rate this app"
 
