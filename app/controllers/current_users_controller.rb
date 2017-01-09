@@ -2,8 +2,6 @@ class CurrentUsersController < ApplicationController
   before_action :logged_in_user
 
   def settings
-    @review = Review.new
-    @feedback = Feedback.new
   end
 
   def progress
