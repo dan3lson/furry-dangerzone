@@ -1,6 +1,13 @@
 <% if logged_in? %>
-	<p>		
+	<p>
 		<%= render "searches/user_add", word: word %>
-		<%= render "searches/user_play", word: word %>
+
+		<% if current_user.has_word?(word) %>
+			<%= render "my_leksi/mastery_percentage",
+								 word: word,
+								 user_word: UserWord.object(current_user, word) %>
+		<% else %>
+			<%= render "searches/user_play", word: word %>
+		<% end %>
 	</p>
 <% end %>
