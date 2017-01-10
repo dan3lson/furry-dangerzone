@@ -19,17 +19,17 @@
     <% else %>
       <%= link_to "Research", research_path, class: "nav-item nav-link" %>
     <% end %>
-    <% if action?("our_approach") %>
-      <%= link_to "Our Approach",
+    <%# if action?("our_approach") %>
+      <%#= link_to "Our Approach",
                   our_approach_path,
                   class: "nav-item nav-link active"
       %>
-    <% else %>
-      <%= link_to "Our Approach",
+    <%# else %>
+      <%#= link_to "Our Approach",
                   our_approach_path,
                   class: "nav-item nav-link"
       %>
-    <% end %>
+    <%# end %>
   </div>
 	<div class="text-xs-right">
 		<%= link_to login_path, class: "btn btn-primary", role: "button" do %>
