@@ -30,6 +30,17 @@
                   class: "nav-item nav-link"
       %>
     <%# end %>
+    <% if action?("results") %>
+      <%= link_to "Results",
+                  results_path,
+                  class: "nav-item nav-link active"
+      %>
+    <% else %>
+      <%= link_to "Results",
+                  results_path,
+                  class: "nav-item nav-link"
+      %>
+    <% end %>
   </div>
 	<div class="text-xs-right">
 		<%= link_to login_path, class: "btn btn-primary", role: "button" do %>
