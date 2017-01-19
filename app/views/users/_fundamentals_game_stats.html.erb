@@ -1,33 +1,13 @@
-<div class="box-shadow-border zero-padding">
-	<h4 class="fundamentals-header">Fundamentals Games</h4>
-
-	<div class="progress-xp-container row remove-side-margins">
-		<div class="col-sm-6" align="center">
-			<div class="prog-header prog-not-started-circle">
-				<%= user.num_incomplete_funds %>
-			</div>
-			<p class="lead">
-				Not started
-			</p>
+<div>
+	<h4>Fundamentals Games</h4>
+	<div class="row">
+		<div class="col-sm-6">
+			<%= user.num_incomplete_funds %>
+			Not started
 		</div>
 		<div class="col-sm-6">
-			<div class="prog-header">
-				<div class="inline-block">
-					<%= image_tag("medal_red_78.png",
-						class: "img-responsive",
-						alt: "You\'ve earned a medal")
-					%>
-				</div>
-				&nbsp;
-				<div class="inline-block">
-					<span class="text-danger">
-						<%= user.num_completed_fundamentals %>
-					</span>
-				</div>
-			</div>
-			<p class="lead">
-				Completed
-			</p>
+			<%= user.num_completed_fundamentals %>
+			Completed
 		</div>
 	</div>
 </div>

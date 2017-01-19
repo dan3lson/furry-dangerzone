@@ -1,46 +1,67 @@
-<nav class="navbar navbar-light bg-faded">
-  <div class="nav navbar-nav">
-    <%= render "layouts/leksi_brand", path: root_path %>
-		<% if params[:controller].include?("my_leksi") %>
-			<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>
-				<i class="fa fa-book"></i> Words
-			<% end %>
-		<% else %>
-			<%= link_to myLeksi_path, class: "nav-item nav-link" do %>
-				<i class="fa fa-book"></i> Words
-			<% end %>
-		<% end %>
-
-		<% if controller?("my_tags") %>
-			<%= link_to myTags_path, class: "nav-item nav-link active" do %>
-				<i class="fa fa-tags"></i> Tags
-			<% end %>
-		<% else %>
-			<%= link_to myTags_path, class: "nav-item nav-link" do %>
-				<i class="fa fa-tags"></i> Tags
-			<% end %>
-		<% end %>
-
-		<% if controller?("users") && action?("show") %>
-			<%= link_to current_user, class: "nav-item nav-link active" do %>
-				<i class="fa fa-line-chart"></i> Stats
-			<% end %>
-		<% else %>
-			<%= link_to current_user, class: "nav-item nav-link" do %>
-				<i class="fa fa-line-chart"></i> Stats
-			<% end %>
-		<% end %>
-
-		<% if controller?("searches") && action?("search") %>
-      <%= link_to search_path, class: "nav-item nav-link active" do %>
-  			<i class="fa fa-search"></i> Explore
+<nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <%= render "layouts/leksi_brand", path: root_path %>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <div class="navbar-nav mr-auto mt-2 mt-md-0">
+      <% if params[:controller].include?("my_leksi") %>
+  			<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>
+  				<i class="fa fa-book"></i> Words
+  			<% end %>
+  		<% else %>
+  			<%= link_to myLeksi_path, class: "nav-item nav-link" do %>
+  				<i class="fa fa-book"></i> Words
+  			<% end %>
   		<% end %>
-    <% else %>
-      <%= link_to search_path, class: "nav-item nav-link" do %>
-        <i class="fa fa-search"></i> Explore
-      <% end %>
-    <% end %>
 
-    <%= render "layouts/settings", path: settings_path %>
+  		<% if action?("gamezone") %>
+  			<%= link_to gamezone_path, class: "nav-item nav-link active" do %>
+  				<i class="fa fa-gamepad"></i> Gamezone
+  			<% end %>
+  		<% else %>
+  			<%= link_to gamezone_path, class: "nav-item nav-link" do %>
+  				<i class="fa fa-gamepad"></i> Gamezone
+  			<% end %>
+  		<% end %>
+
+  		<% if controller?("my_tags") %>
+  			<%= link_to myTags_path, class: "nav-item nav-link active" do %>
+  				<i class="fa fa-tags"></i> Tags
+  			<% end %>
+  		<% else %>
+  			<%= link_to myTags_path, class: "nav-item nav-link" do %>
+  				<i class="fa fa-tags"></i> Tags
+  			<% end %>
+  		<% end %>
+
+  		<% if controller?("users") && action?("show") %>
+  			<%= link_to current_user, class: "nav-item nav-link active" do %>
+  				<i class="fa fa-line-chart"></i> Stats
+  			<% end %>
+  		<% else %>
+  			<%= link_to current_user, class: "nav-item nav-link" do %>
+  				<i class="fa fa-line-chart"></i> Stats
+  			<% end %>
+  		<% end %>
+
+  		<% if controller?("searches") && action?("search") %>
+        <%= link_to search_path, class: "nav-item nav-link active" do %>
+    			<i class="fa fa-search"></i> Explore
+    		<% end %>
+      <% else %>
+        <%= link_to search_path, class: "nav-item nav-link" do %>
+          <i class="fa fa-search"></i> Explore
+        <% end %>
+      <% end %>
+
+      <%= render "layouts/settings", path: settings_path %>
+    </div>
   </div>
 </nav>

@@ -4,10 +4,12 @@ class Word < ActiveRecord::Base
 
   default_scope -> { order('words.name ASC') }
 
-  has_many :examples
-  has_many :meaning_alts
-  has_many :word_example_non_examples
-  has_many :example_non_examples, through: :word_example_non_examples
+  has_many :examples, dependent: :destroy
+  has_many :meaning_alts, dependent: :destroy
+  has_many :word_example_non_examples, dependent: :destroy
+  has_many :example_non_examples,
+           through: :word_example_non_examples,
+           dependent: :destroy
   has_many :user_words, dependent: :destroy
   has_many :users, through: :user_words
   has_many :word_tags, dependent: :destroy
@@ -101,6 +103,11 @@ class Word < ActiveRecord::Base
   # TODO: Create test
   def has_meaning_alts?
     meaning_alts.any?
+  end
+
+  # TODO: Create test
+  def has_ex_non_exs?
+    example_non_examples.any?
   end
 
   # TODO: Create test
@@ -306,7 +313,7 @@ class Word < ActiveRecord::Base
     where(name: Word.seventh_grade.take(60)).group_by { |w| w.name }
   end
 
-  def self.meaning_alts_seventh_grade
+  def self.pilot_for_seventh_grade
     Word.find([
       3254,
       3268,

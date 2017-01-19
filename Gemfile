@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # Bootstrap (http://getbootstrap.com)
-gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 # Bootstrap Tooltips and popovers dependency
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'

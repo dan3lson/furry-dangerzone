@@ -19,7 +19,7 @@
     <span>
       <i class="fa fa-trophy hover pointer"></i> Levels
     </span>
-    <div class="float-xs-right">
+    <div class="float-right">
       <p>
         You have <%= pluralize(@current_user_words_count, "word") %>.
       </p>
@@ -33,7 +33,7 @@
       <%= render "my_leksi/index_word", word: word %>
     <% end %>
   </div>
-  <div class="text-xs-center">
+  <div class="text-center">
     <br>
     <%= render "shared/spinner" %>
     <p id="view-more-link-container"></p>

@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-body">
-		<div class="pull-right">
+		<div class="float-right">
 			<i class="fa fa-question-circle-o pointer fa-2x text-muted"
 				 data-toggle="modal"
 				 data-target="#myTags-show-words-modal"></i>
@@ -13,7 +13,7 @@
 		<div>
 			<% if tag_has_words?(current_user, tag) %>
 				<% words_for(current_user, tag).each do |word| %>
-					<div class="pull-right">
+					<div class="float-right">
 						<%= link_to user_word_tag_tag_show_page_path(
 							word_id: word.id,
 							tag_id: tag.id),

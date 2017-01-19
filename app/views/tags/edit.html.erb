@@ -14,7 +14,7 @@
       <% end %>
     <% end %>
   </div>
-  <div class="card-footer text-muted text-xs-center">
+  <div class="card-footer text-muted text-center">
     You added this tag <%= time_ago_in_words(@tag.created_at) %> ago.
     <%= render "tags/remove_tag_btn_tag_show_page", tag: @tag %>
   </div>

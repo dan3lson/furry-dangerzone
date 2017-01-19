@@ -1,31 +1,17 @@
-<div class="box-shadow-border zero-padding">
-	<h4 class="overview-header">Overview</h4>
-
-	<div class="progress-xp-container row remove-side-margins">
-		<div class="col-xs-4">
-			<div class="prog-header">
-				<%= user.myLeksi_mastery %>%
-			</div>
-			<p class="lead">
-				myLeksi Mastered
-			</p>
+<div>
+	<h4>Overview</h4>
+	<div class="row">
+		<div class="col-sm-4">
+			<%= user.myLeksi_mastery %>%
+			myLeksi Mastered
 		</div>
-		<div class="col-xs-4">
-			<div class="prog-header">
-				<%= user.time_spent_playing %>
-			</div>
-			<p class="lead">
-				Time Spent Playing
-				<small>(minutes)</small>
-			</p>
+		<div class="col-sm-4">
+			<%= user.time_spent_playing %>
+			Time Spent Playing (minutes)
 		</div>
-		<div class="col-xs-4">
-			<div class="prog-header">
-				<%= user.num_logins %>
-			</div>
-			<p class="lead">
-				Time(s) Logged In
-			</p>
+		<div class="col-sm-4">
+			<%= user.num_logins %>
+			Times Logged In
 		</div>
 	</div>
 </div>

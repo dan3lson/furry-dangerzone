@@ -1,4 +1,7 @@
 class GamesController < ApplicationController
+  def gamezone
+  end
+  
   # This action is hit twice because of the respond_to -__-
   def fundamentals
     @chosen_word = Word.find(params[:word_id])

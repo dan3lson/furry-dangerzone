@@ -1,5 +1,7 @@
-<%= form_for [:school, word, e_non_e], id: "new-school-example-non-example",
-	method: :post, remote: true do |f|
+<%= form_for [:school, word, e_non_e],
+						 id: "new-school-example-non-example",
+						 method: :post,
+						 remote: true do |f|
 %>
   <%= render "shared/error_messages", object: e_non_e %>
   <div class="form-group">
@@ -29,7 +31,7 @@
                      placeholder: "Feedback"
     %>
   </div>
-  <%= f.button text,
+  <%= f.button btn_text,
 							 type: "button",
 							 class: "btn btn-primary btn-block create-e-non-e-btn"
 	%>

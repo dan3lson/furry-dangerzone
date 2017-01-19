@@ -124,11 +124,6 @@ a, a:active {
 	cursor: pointer;
 }
 
-.remove-side-margins {
-	margin-left: 0;
-	margin-right: 0;
-}
-
 .spinner {
 	color: gray;
 	font-size: 35px;
@@ -159,14 +154,4 @@ table {
 
 .valign-middle {
 	vertical-align: -webkit-baseline-middle;
-}
-
-// LOGGED OUT HOMEPAGE
-
-.zero-padding {
-	padding: 0;
-}
-
-.zero-padding > * {
-	padding: 10px;
 }

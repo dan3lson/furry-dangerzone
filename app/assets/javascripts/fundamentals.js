@@ -520,7 +520,7 @@ $(document).ready(function() {
 
 			if ($selectedAnswerText == answer) {
 				$selectedAnswer.parents(".card-block")
-											 .find(".float-xs-right")
+											 .find(".float-right")
 											 .append(createFontAweIcon("check fa-2x text-success"));
 				$btnRow.find(".mean-alts-answer").prop("disabled", true)
 																				 .removeClass("btn-outline-primary")
@@ -530,7 +530,7 @@ $(document).ready(function() {
 				addPoints(1);
 			} else {
 				$selectedAnswer.parents(".card-block")
-											 .find(".float-xs-right")
+											 .find(".float-right")
 											 .append(createFontAweIcon("close fa-2x text-danger"));
 				$btnRow.find(".mean-alts-answer").prop("disabled", true)
 																				 .removeClass("btn-outline-primary")
@@ -605,7 +605,7 @@ $(document).ready(function() {
 		// Create a score counter:  0 / X
 		$syn_ant_checkpoint_score_div = $("<div>", {
 			id: "syn_ant_checkpoint_score_div",
-			class: "pull-right" }
+			class: "float-right" }
 		);
 		$($syn_ant_checkpoint_score_div).insertBefore(
 			"#syn_ant_checkpoint_container"
@@ -778,8 +778,8 @@ $(document).ready(function() {
 		$card = createElem("div", "card");
 		$cardBlock = createElem("div", "card-block");
 		$cardTitle = createElem("h4", "card-title");
-		$rightOrWrongIcon = createElem("div", "float-xs-right");
-		$btnsDiv = createElem("div", "row text-xs-center");
+		$rightOrWrongIcon = createElem("div", "float-right");
+		$btnsDiv = createElem("div", "row text-center");
 		$halfCol1 = createElem("div", "col-xs-6");
 		$halfCol2 = createElem("div", "col-xs-6");
 		btnOptions = meaningAlt.choices.split(",");

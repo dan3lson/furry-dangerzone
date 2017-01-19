@@ -70,7 +70,7 @@
         <div class="search-results-container"></div>
       </div>
       <div class="tab-pane" id="random" role="tabpanel">
-        <div class="float-xs-right">
+        <div class="float-right">
           <%= link_to search_path, remote: true do %>
             <i class="fa fa-refresh" id="random-search-btn"></i>
             New Word
@@ -100,7 +100,7 @@
           7th Grade
           |
           <a href="#" class="disabled">8th Grade</a>
-          <div class="float-xs-right">
+          <div class="float-right">
             <p>
               There are <%= pluralize(@seventh_grade_words.count, "word") %>.
             </p>

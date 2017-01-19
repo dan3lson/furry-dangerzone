@@ -44,10 +44,10 @@
 </div>
 
 <div id="awfs-step-2-container">
-	<div class="pull-right">
+	<div class="float-right">
 		<%= button_tag class: "btn btn-success ", id: "select-stu-cont-btn" do %>
 			<span class="valign-middle">Continue</span>
-			<i class="fa fa-arrow-right fa-2x pull-right"></i>
+			<i class="fa fa-arrow-right fa-2x float-right"></i>
 		<% end %>
 	</div>
 
@@ -60,7 +60,7 @@
 		<div class="panel-heading">
 			Number selected: <span id="num-students-added">0</span>
 
-			<div class="pull-right pointer hover" id="select-all">
+			<div class="float-right pointer hover" id="select-all">
 				<i class="fa fa-list" aria-hidden="true"></i>
 				<span>Select all</span>
 			</div>
@@ -72,11 +72,11 @@
 </div>
 
 <div id="awfs-step-3-container">
-	<div class="pull-right">
+	<div class="float-right">
 		<%= button_tag class: "btn btn-success ",
 			id: "select-words-finish-btn" do %>
 			<span class="valign-middle">Finish</span>
-			<i class="fa fa-flag fa-2x pull-right"></i>
+			<i class="fa fa-flag fa-2x float-right"></i>
 		<% end %>
 	</div>
 
@@ -104,7 +104,7 @@
 
 
 <div id="awfs-review-container">
-	<div class="pull-right">
+	<div class="float-right">
 		<%= button_tag class: "btn btn-info reload-page" do %>
 			<i class="fa fa-refresh fa-2x pull-left"></i>
 			<span class="valign-middle">Add more</span>
@@ -122,7 +122,7 @@
 			aria-controls="success-result">
 				<i class="fa fa-check-circle"></i>
 				Successes
-				<div class="pull-right">
+				<div class="float-right">
 					<span id="num-successes">0</span>/<span class="total">0</span>
 				</div>
 			</div>
@@ -136,7 +136,7 @@
 			aria-controls="warning-result">
 				<i class="fa fa-warning"></i>
 				Alerts
-				<div class="pull-right">
+				<div class="float-right">
 					<span id="num-warnings">0</span>/<span class="total">0</span>
 				</div>
 			</div>
@@ -150,7 +150,7 @@
 			aria-controls="error-result">
 				<i class="fa fa-minus-circle"></i>
 				Errors
-				<div class="pull-right">
+				<div class="float-right">
 					<span id="num-errors">0</span>/<span class="total">0</span>
 				</div>
 			</div>

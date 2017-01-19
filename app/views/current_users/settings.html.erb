@@ -1,9 +1,10 @@
 <% provide(:header, "Menu") %>
-
-<div class="card-deck-wrapper">
-  <div class="card-deck">
+<div class="row">
+  <div class="col-sm-6">
     <%= render "current_users/profile" %>
     <%#= render "current_users/assessments" %>
+  </div>
+  <div class="col-sm-6">
     <%= render "current_users/settings" %>
   </div>
 </div>

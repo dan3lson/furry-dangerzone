@@ -4,13 +4,13 @@
 	<div class="card">
 <% end %>
 	<div class="card-block">
-		<div class="float-xs-right">
+		<div class="float-right">
 			<%= render "my_leksi/level_completion",
 								 user_word: UserWord.object(current_user, word)
 			%>
 		</div>
 		<%= render "words/basics", word: word %>
-		<div class="text-xs-center">
+		<div class="text-center">
 			<%= render "my_leksi/mastery_percentage",
 				word: word,
 				user_word: UserWord.object(current_user, word)

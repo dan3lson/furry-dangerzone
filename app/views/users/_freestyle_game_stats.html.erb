@@ -1,32 +1,13 @@
-<div class="box-shadow-border zero-padding">
-	<h4 class="freestyle-header">Freestyle Games</h4>
-
-	<div class="progress-xp-container row remove-side-margins">
-		<div class="col-sm-6" align="center">
-			<div class="prog-header prog-not-started-circle-green">
-				<%= user.num_incomplete_frees %>
-			</div>
-			<p class="lead">
-				Not started
-			</p>
+<div>
+	<h4>Freestyle Games</h4>
+	<div class="row">
+		<div class="col-sm-6">
+			<%= user.num_incomplete_frees %>
+			Not started
 		</div>
 		<div class="col-sm-6">
-			<div class="prog-header">
-				<div class="inline-block">
-					<%= image_tag("medal_green_100.png", class: "img-responsive",
-						alt: "You\'ve earned a medal")
-					%>
-				</div>
-				&nbsp;
-				<div class="inline-block">
-					<span class="leksi-green">
-						<%= user.num_completed_frees %>
-					</span>
-				</div>
-			</div>
-			<p class="lead">
-				Completed
-			</p>
+			<%= user.num_completed_frees %>
+			Completed
 		</div>
 	</div>
 </div>

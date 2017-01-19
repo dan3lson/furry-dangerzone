@@ -1,6 +1,22 @@
 class Admin::ExampleNonExamplesController < BaseAdminController
   def index
-    @example_non_examples = ExampleNonExample.all
+    @filter = params[:filter]
+		@ex_non_ex_count = ExampleNonExample.count
+
+    if @filter
+      if @filter == "latest"
+        @ex_non_exs = ExampleNonExample.order("created_at DESC")
+      																 .paginate(
+      																	 page: params[:page],
+      																	 per_page: 10
+      																 )
+      end
+    else
+      @ex_non_exs = ExampleNonExample.paginate(
+      																 page: params[:page],
+      															   per_page: 10
+      															 )
+    end
   end
 
   def new

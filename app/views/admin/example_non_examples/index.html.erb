@@ -1,9 +1,34 @@
-<% @example_non_examples.each do |e_non_e| %>
-  <div class="card">
-    <div class="card-block">
-      <h4 class="card-title"><% e_non_e.words %></h4>
-      <p class="card-text"><%= e_non_e.text %></p>
-      <%#= render "admin/example_non_examples/e_non_e", e_non_e: e_non_e %>
-    </div>
+<% provide(:header, "Example/Non-Examples (#{@ex_non_ex_count})") %>
+<div class="text-muted filter-div">
+  Filter:
+  <%= link_to admin_example_non_examples_path do %>
+    <span class="text-primary active">
+      <i class="fa fa-sort-alpha-asc"></i> Alphabetical
+    </span>
+  <% end %>
+  |
+  <%= link_to admin_example_non_examples_path(filter: "latest") do %>
+    <span>
+      <i class="fa fa-calendar hover pointer"></i> Created at
+    </span>
+  <% end %>
+  <div class="float-right">
+    <p>
+      Total Example/Non-Examples:
+      <span id="example-non-examples-count">
+        <%= @example_non_examples_count %>
+      </span>
+      <br>
+      <%= link_to new_school_example_non_example_path,
+                  role: "button",
+                  class: "btn btn-primary btn-block" do
+      %>
+        <i class="fa fa-plus-circle"></i> Create
+      <% end %>
+    </p>
   </div>
-<% end %>
+  <div class="clear"></div>
+</div>
+<%= will_paginate @ex_non_exs %>
+<%= render "admin/example_non_examples/example_non_examples", example_non_examples: @ex_non_exs %>
+<%= will_paginate @ex_non_exs %>
