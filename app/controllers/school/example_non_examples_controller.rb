@@ -15,7 +15,6 @@ class School::ExampleNonExamplesController < BaseSchoolController
     else
       @created = false
       @errors = @e_non_e.errors.full_messages
-      binding.pry
     end
 
     @e_non_e_count = @word.example_non_examples.count
