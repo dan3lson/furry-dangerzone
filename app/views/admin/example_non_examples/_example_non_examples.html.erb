@@ -2,7 +2,8 @@
   <div class="col-md-6 offset-md-3">
     <% example_non_examples.each do |e_non_e| %>
       <%= render "admin/example_non_examples/example_non_example",
-          e_non_e: e_non_e
+          e_non_e: e_non_e,
+          word: e_non_e.word
       %>
     <% end %>
   </div>

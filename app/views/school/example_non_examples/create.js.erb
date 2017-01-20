@@ -8,9 +8,11 @@ $card.find(".alert").remove();
 
 if (created == "true") {
 	var count = parseInt("<%= @e_non_e_count %>");
-	var $cardBlockPartial = $("<%= j render(partial: 'school/example_non_examples/card_block', locals: { e_non_e: @e_non_e }) %>");
-	$cardBlock.append($cardBlockPartial).hide().fadeIn();
-	$cardBlock.find("p.card-text:last").prepend(createFlash("success", "Success! Create another one below.")).hide().fadeIn();
+	var $cardBlockPartial = $("<%= j render(partial: 'school/example_non_examples/card_text', locals: { e_non_e: @e_non_e }) %>");
+	$cardBlock.append($cardBlockPartial).append("<hr>").hide().fadeIn();
+	$cardBlock.find("p.card-text:last").prepend(
+		createFlash("success", "Success! You can create another one below.")
+	).hide().fadeIn();
 	$form[0].reset();
 
 	if (count > 1) {

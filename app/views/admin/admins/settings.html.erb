@@ -1,9 +1,11 @@
 <% provide(:title, "Admin Settings") %>
 <% provide(:header, "Admin Settings") %>
 
-<div class="card-deck-wrapper">
-  <div class="card-deck">
+<div class="row">
+  <div class="col-sm-6">
     <%= render "current_users/profile" %>
+  </div>
+  <div class="col-sm-6">
     <%= render "admin/admins/tools" %>
   </div>
 </div>

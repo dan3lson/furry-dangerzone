@@ -1,0 +1,17 @@
+<div class="float-right">
+	<%= button_tag name: nil,
+								 type: "button",
+								 class: "btn btn-warning btn-sm ex-non-ex-edit-btn",
+								 remote: true do
+	%>
+		<i class="fa fa-edit"></i>
+		Edit
+	<% end %>
+	<%= button_to admin_example_non_example_path(e_non_e),
+								class: "btn btn-danger btn-sm ex-non-ex-del-form",
+								method: :delete,
+								remote: true do
+	%>
+		<i class="fa fa-trash"></i> Delete
+	<% end %>
+</div>

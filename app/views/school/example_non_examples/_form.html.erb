@@ -5,27 +5,21 @@
 %>
   <%= render "shared/error_messages", object: e_non_e %>
   <div class="form-group">
-    <%= f.label :text,
-                class: "sr-only form-control-label"
-    %>
+    <%= f.label :text, class: "form-control-label" %>
     <%= f.text_area :text,
                      class: "form-control",
                      placeholder: "Text"
     %>
   </div>
   <div class="form-group">
-    <%= f.label :answer,
-                class: "sr-only form-control-label"
-    %>
+    <%= f.label :answer, class: "form-control-label" %>
     <%= f.text_field :answer,
                      class: "form-control",
                      placeholder: "Answer"
     %>
   </div>
   <div class="form-group">
-    <%= f.label :feedback,
-                class: "sr-only form-control-label"
-    %>
+    <%= f.label :feedback, class: "form-control-label" %>
     <%= f.text_area :feedback,
                      class: "form-control",
                      placeholder: "Feedback"

@@ -5,11 +5,8 @@ class Word < ActiveRecord::Base
   default_scope -> { order('words.name ASC') }
 
   has_many :examples, dependent: :destroy
+  has_many :example_non_examples, dependent: :destroy
   has_many :meaning_alts, dependent: :destroy
-  has_many :word_example_non_examples, dependent: :destroy
-  has_many :example_non_examples,
-           through: :word_example_non_examples,
-           dependent: :destroy
   has_many :user_words, dependent: :destroy
   has_many :users, through: :user_words
   has_many :word_tags, dependent: :destroy
@@ -377,6 +374,4 @@ class Word < ActiveRecord::Base
       3383
     ])
   end
-
-  # HEROKU UPDATES
 end

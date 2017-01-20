@@ -4,28 +4,28 @@
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
 			<% words.each do |word| %>
-					<div class="card mb-3">
-						<div class="card-block">
-							<%= render "words/basics", word: word %>
-						</div>
-						<% if object %>
-							<div class="card-footer">
-								<% if object.is_a?(MeaningAlt) %>
-									<%= render "school/meaning_alts/form",
-														 word: word,
-														 m_a: object,
-														 text: "Create"
-									%>
-								<% elsif object.is_a?(ExampleNonExample) %>
-									<%= render "school/example_non_examples/form",
-														 word: word,
-														 e_non_e: object,
-														 text: "Create"
-									%>
-								<% end %>
-							</div>
-						<% end %>
+				<div class="card mb-3" data-word-id="<%= word.id %>">
+					<div class="card-block">
+						<%= render "words/basics", word: word %>
 					</div>
+					<% if object %>
+						<div class="card-footer">
+							<% if object.is_a?(MeaningAlt) %>
+								<%= render "school/meaning_alts/form",
+													 word: word,
+													 m_a: object,
+													 text: "Create"
+								%>
+							<% elsif object.is_a?(ExampleNonExample) %>
+								<%= render "school/example_non_examples/form",
+													 word: word,
+													 e_non_e: object,
+													 btn_text: "Create"
+								%>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
 			<% end %>
 		</div>
 	</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109042101) do
+ActiveRecord::Schema.define(version: 20170119154624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,15 @@ ActiveRecord::Schema.define(version: 20170109042101) do
     t.string   "feedback",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id",    null: false
+    t.integer  "word_id",    null: false
   end
+
+  add_index "example_non_examples", ["answer"], name: "index_example_non_examples_on_answer", unique: true, using: :btree
+  add_index "example_non_examples", ["feedback"], name: "index_example_non_examples_on_feedback", unique: true, using: :btree
+  add_index "example_non_examples", ["text", "answer", "feedback"], name: "index_example_non_examples_on_text_and_answer_and_feedback", unique: true, using: :btree
+  add_index "example_non_examples", ["text"], name: "index_example_non_examples_on_text", unique: true, using: :btree
+  add_index "example_non_examples", ["user_id"], name: "index_example_non_examples_on_user_id", using: :btree
 
   create_table "examples", force: :cascade do |t|
     t.string   "text",       null: false
@@ -160,17 +168,6 @@ ActiveRecord::Schema.define(version: 20170109042101) do
   add_index "word_antonyms", ["antonym_id"], name: "index_word_antonyms_on_antonym_id", using: :btree
   add_index "word_antonyms", ["word_id", "antonym_id"], name: "index_word_antonyms_on_word_id_and_antonym_id", unique: true, using: :btree
   add_index "word_antonyms", ["word_id"], name: "index_word_antonyms_on_word_id", using: :btree
-
-  create_table "word_example_non_examples", force: :cascade do |t|
-    t.integer  "word_id",                null: false
-    t.integer  "example_non_example_id", null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "word_example_non_examples", ["example_non_example_id"], name: "index_word_example_non_examples_on_example_non_example_id", using: :btree
-  add_index "word_example_non_examples", ["word_id", "example_non_example_id"], name: "index_word_example_non_examples_foreign_keys", using: :btree
-  add_index "word_example_non_examples", ["word_id"], name: "index_word_example_non_examples_on_word_id", using: :btree
 
   create_table "word_synonyms", force: :cascade do |t|
     t.integer  "word_id",    null: false

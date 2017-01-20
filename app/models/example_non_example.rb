@@ -1,8 +1,10 @@
 class ExampleNonExample < ActiveRecord::Base
-  has_many :word_example_non_examples, dependent: :destroy
-  has_many :words, through: :word_example_non_examples
+  belongs_to :user
+  belongs_to :word
 
-  validates :text, presence: true
-  validates :answer, presence: true
-  validates :feedback, presence: true
+  validates :text, presence: true, uniqueness: true
+  validates :answer, presence: true, uniqueness: true
+  validates :feedback, presence: true, uniqueness: true
+  validates :user, presence: true
+  validates :word, presence: true
 end

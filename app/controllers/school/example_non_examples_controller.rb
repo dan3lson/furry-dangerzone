@@ -6,10 +6,11 @@ class School::ExampleNonExamplesController < BaseSchoolController
   def create
     @e_non_e = ExampleNonExample.new(example_non_example_params)
     @word = Word.find(params[:word_id])
+    @e_non_e.user = current_user
+    @e_non_e.word = @word
     @created = false
 
     if @e_non_e.save
-      @e_non_e.words << @word
       @created = true
     else
       @created = false
@@ -17,6 +18,30 @@ class School::ExampleNonExamplesController < BaseSchoolController
     end
 
     @e_non_e_count = @word.example_non_examples.count
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def edit
+    @e_non_e = ExampleNonExample.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def update
+    @e_non_e = ExampleNonExample.find(params[:id])
+    @updated = false
+
+    if @e_non_e.update(example_non_example_params)
+      @updated = true
+    else
+      @updated = false
+    end
 
     respond_to do |format|
       format.js

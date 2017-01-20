@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-3">
 	<div class="card-block"
 			 data-tag-id="<%= tag.id %>"
 			 data-tag-name="<%= tag.name %>">
@@ -7,10 +7,10 @@
 			<br>
 			<small class="text-muted">
 				<%= words_for(current_user, tag).count %>
-				<i class="fa fa-book"></i>
-				|
+				<i class="fa fa-book"></i> Words
+				<br>
 				<%= progress_for(current_user, tag) %>
-				<i class="fa fa-percent"></i>
+				<i class="fa fa-percent"></i> Mastered
 			</small>
 		</h4>
 	</div>

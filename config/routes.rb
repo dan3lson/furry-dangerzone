@@ -62,7 +62,7 @@ Rails.application.routes.draw do
     get "my_meaning_alts" => "current_user#my_meaning_alts"
     resources :words, only: [:new, :create]
     resource :add_words_for_student, only: [:update]
-    resources :example_non_examples, only: [:index, :new]
+    resources :example_non_examples
     resources :words do
       resources :example_non_examples
     end
