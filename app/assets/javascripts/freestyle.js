@@ -212,7 +212,7 @@ $(document).ready(function(){
 		$("#level_3_completed").show();
 
 		$("#freestyle-form").hide();
-		$("#progress-bar-container").hide(); // ("visibility", "hidden");
+		// $(".progress-bar-container").hide(); // ("visibility", "hidden");
 		$("#all_levels_button").show();
 		$("#level-congrats-text").append($chosen_word_show_page);
 
@@ -324,7 +324,7 @@ $(document).ready(function(){
 	};
 
 	function progressBar(value) {
-		$(".game-progress-bar").attr("max", value);
+		$(".progress-bar").attr("max", value);
 	}
 
 	function _(x) {

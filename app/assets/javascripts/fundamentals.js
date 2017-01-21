@@ -98,6 +98,7 @@ $(document).ready(function() {
 
   function pronunciationContinueBtn(words) {
 		const $pronunciationContinueBtn = $("#pronunciation-continue-btn");
+		const targetWord = words[0];
 
     $pronunciationContinueBtn.click(function() {
       $pronunciationSpans.hide();
@@ -105,29 +106,30 @@ $(document).ready(function() {
 			addPoints(200);
 			flashPointsUpdate($arrowSuccess);
 			updateProgressBar(37);
-			$chosenWordHeaderContainer.html(words[0].name)
+			$chosenWordHeaderContainer.html(targetWord.name)
 																.removeClass("text-success");
 
-			getMeaningAlts(words[0].id).done(function(response) {
+			getMeaningAlts(targetWord.id).done(function(response) {
 				if (response.length) {
 					startMeaningAltsActivity(words, response);
 				} else {
-					startExampleNonExamplesActivity(words, response);
+					startExampleNonExamplesActivity(targetWord, response);
 				}
 			})
     });
   }
 
-	function meaningAltsContinueBtn(chosenWord) {
+	function meaningAltsContinueBtn(targetWord) {
 		$("#meaning-alts-continue-btn").click(function () {
 			$("#meaning-alts-div").hide();
 			$("#meaning-alts-continue-btn").hide();
 			addPoints(325);
 			flashPointsUpdate($arrowSuccess);
 			updateProgressBar(50);
-			// getExampleNonExamples(words[0].id).done(function(response) {
-			//   startExampleNonExamplesActivity(words, response);
-			// })
+
+			getExampleNonExamples(targetWord.id).done(function(response) {
+			  startExampleNonExamplesActivity(targetWord, response);
+			});
 
 			// if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
 			// 	$("#synonyms_back_button").show();
@@ -145,7 +147,7 @@ $(document).ready(function() {
 			// 	!$("#antonym_no_results").hasClass("please-tap-continue")
 			// ) {
 			// 	$("#synonyms_back_button").hide();
-			// 	$("#synonyms_continue_button").hide();
+			// 	$("#synonyms-cont-btn").hide();
 			// 	$("#synonyms_container").hide();
 			// 	$("#antonyms_container").show();
 			// 	$("#antonyms_back_button").show();
@@ -163,7 +165,7 @@ $(document).ready(function() {
 			// 	$("#real_world_examples_back_button").hide();
 			// 	$("#real_world_examples_continue_button").hide();
 			// 	$("#real_world_examples_container").hide();
-			// 	$("#game-details").hide();
+			// 	$("#directions").hide();
 			// 	$("#review_level_one_back_button").fadeIn();
 			// 	$("#review_level_one_continue_button").fadeIn();
 			// 	$("#review_level_one_container").fadeIn();
@@ -197,14 +199,14 @@ $(document).ready(function() {
 		});
 	}
 
-  function synonyms_continue_button(chosenWordName) {
-    $("#synonyms_continue_button").click(function(){
+  function synonyms-cont-btn(chosenWordName) {
+    $("#synonyms-cont-btn").click(function(){
       // Start the next activity --> if there are synonyms, but no antonyms
       if ($("#antonym_no_results").hasClass("please-tap-continue")) {
         $("#syn_ant_checkpoint_back_button").show();
         $("#syn_ant_checkpoint_container").show();
 				$(".checkpoint-image").show();
-        $("#synonyms_continue_button").hide();
+        $("#synonyms-cont-btn").hide();
         $("#synonyms_container").hide();
 
         giveDirections(
@@ -220,7 +222,7 @@ $(document).ready(function() {
         // Start the next activity --> if there there are antonyms
       } else {
         $("#synonyms_back_button").hide();
-        $("#synonyms_continue_button").hide();
+        $("#synonyms-cont-btn").hide();
         $("#synonyms_container").hide();
         $("#antonyms_back_button").show();
         $("#antonyms_container").show();
@@ -279,7 +281,7 @@ $(document).ready(function() {
         $("#real_world_examples_back_button").hide();
         $("#real_world_examples_continue_button").hide();
         $("#real_world_examples_container").hide();
-        $("#game-details").hide();
+        $("#directions").hide();
         $("#review_level_one_back_button").fadeIn();
         $("#review_level_one_continue_button").fadeIn();
         $("#review_level_one_container").fadeIn();
@@ -301,7 +303,7 @@ $(document).ready(function() {
       $("#real_world_examples_back_button").hide();
       $("#real_world_examples_continue_button").hide();
       $("#real_world_examples_container").hide();
-      $("#game-details").hide();
+      $("#directions").hide();
       $("#review_level_one_back_button").fadeIn();
       $("#review_level_one_continue_button").fadeIn();
       $("#review_level_one_container").fadeIn();
@@ -333,6 +335,12 @@ $(document).ready(function() {
 		);
 	};
 
+	function getExampleNonExamples(wordID) {
+		return $.get(
+			"/words/" + wordID + "/example_non_examples", function() {}, "json"
+		);
+	};
+
 	function setTheStage() {
 		getGameWords().done(function(response) {
 			var words = response.words;
@@ -344,7 +352,7 @@ $(document).ready(function() {
 			pronunciationContinueBtn(words);
 			exampleNonExamplesContinueBtn(words);
 			meaningAltsContinueBtn(targetWord);
-			synonyms_continue_button(targetWordName);
+			synonyms-cont-btn(targetWordName);
 			antonyms_continue_button(targetWordName);
 			syn_ant_checkpoint_continue_button(targetWordName);
 			real_world_examples_continue_button(targetWordName);
@@ -500,11 +508,13 @@ $(document).ready(function() {
 		});
 	};
 
-	function startMeaningAltsActivity(words, meaningAlts) {
+	function startMeaningAltsActivity(words, meaningAltArray) {
 		var chosenWord = words[0];
-		giveDirections("Read the statement(s) below. Decide which one is better.");
+		giveDirections(
+			"Read the statement(s) below and decide which one is better."
+		);
 
-		$.each(meaningAlts, function(index) {
+		$.each(meaningAltArray, function(index) {
 			$("#meaning-alts-div").append(createMeaningAltQues(this, index));
 		})
 
@@ -515,7 +525,7 @@ $(document).ready(function() {
 			$selectedAnswerText = $selectedAnswer.text().trim();
 			$btnRow = $selectedAnswer.parent().parent();
 			index = $btnRow.data("index");
-			answer = meaningAlts[index].answer.trim();
+			answer = meaningAltArray[index].answer.trim();
 			$feedbackCardText = $btnRow.siblings(".mean-alts-feedback")
 
 			if ($selectedAnswerText == answer) {
@@ -544,26 +554,71 @@ $(document).ready(function() {
 			var numBtnsDisabled = $("#meaning-alts-div .btn:disabled").length;
 
 			if (numBtns == numBtnsDisabled) {
-				$("#ex-non-ex-continue-btn").fadeIn();
+				$("#meaning-alts-continue-btn").fadeIn();
 				scrollToBottom();
 			}
 		});
 	};
 
-	function startExampleNonExamplesActivity(words, exNonExArray) {
-		const targetWord = words[0];
+	function startExampleNonExamplesActivity(targetWord, exNonExArray) {
 		const $eNonEContinueBtn = $("#ex-non-ex-continue-btn");
+		console.log(exNonExArray);
 		$eNonEContinueBtn.hide();
 		giveDirections(
-			"Determine if the statements below are an example or non-example of " +
+			"Are the statements below an example or non-example of " +
 			"the word above, whose definition is <mark>" + targetWord.definition +
 			"</mark>."
 		);
+
+		$.each(exNonExArray, function(index) {
+			$("#ex-non-exs-div").append(createExNonExQues(this, index));
+		})
+
+		$("#ex-non-exs-div").show();
+
+		$(".container").on("click", ".ex-non-exs-answer", function() {
+			$selectedAnswer = $(this);
+			$selectedAnswerText = $selectedAnswer.text().trim();
+			$btnRow = $selectedAnswer.parent().parent();
+			index = $btnRow.data("index");
+			answer = exNonExArray[index].answer.trim();
+			$feedbackCardText = $btnRow.siblings(".ex-non-exs-feedback")
+
+			if ($selectedAnswerText == answer) {
+				$selectedAnswer.parents(".card-block")
+											 .find(".float-right")
+											 .append(createFontAweIcon("check fa-2x text-success"));
+				$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
+																				  .removeClass("btn-outline-primary")
+																				  .addClass("btn-outline-secondary");
+				$feedbackCardText.prepend("<br>").addClass("text-success").fadeIn();
+				$feedbackCardText.find("strong").prepend("Correct! ");
+				addPoints(1);
+			} else {
+				$selectedAnswer.parents(".card-block")
+											 .find(".float-right")
+											 .append(createFontAweIcon("close fa-2x text-danger"));
+				$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
+																				  .removeClass("btn-outline-primary")
+																				  .addClass("btn-outline-secondary");
+				$feedbackCardText.prepend("<br>").addClass("text-danger").fadeIn();
+				$feedbackCardText.find("strong").prepend("Incorrect. ");
+				removePoints(1);
+			}
+
+			var numBtns = $("#ex-non-exs-div .btn").length;
+			var numBtnsDisabled = $("#ex-non-exs-div .btn:disabled").length;
+
+			if (numBtns == numBtnsDisabled) {
+				$("#synonyms-cont-btn").fadeIn();
+				scrollToBottom();
+			}
+		});
 	}
 
 	function start_synonyms_activity() {
 		if ($("#synonym_no_results").hasClass("please-tap-continue")) {
-			$("#synonyms_continue_button").fadeIn();
+			$("#synonyms-cont-btn").fadeIn();
 			$synonym_circle_activity_boolean = true;
 		} else {
 			// Click anywhere (row, circle, or word) to change element features
@@ -574,7 +629,7 @@ $(document).ready(function() {
 				if ($("#synonyms_container .green-circle-background").length ==
             $(".synonym_row").length
           ) {
-					$("#synonyms_continue_button").fadeIn();
+					$("#synonyms-cont-btn").fadeIn();
 					$synonym_circle_activity_boolean = true;
 				};
 			}); // end of the $synonym_row .click fn
@@ -747,7 +802,7 @@ $(document).ready(function() {
 	};
 
 	function start_review_level_one_activity(chosenWordName) {
-		$("#goodies, #games-score, #progress-bar-container").css(
+		$("#goodies, #games-score, .progress-bar-container").css(
 			"visibility", "hidden"
 		);
 		$("#all_levels_button").show();
@@ -775,13 +830,13 @@ $(document).ready(function() {
 	}
 
 	function createMeaningAltQues(meaningAlt, index) {
-		$card = createElem("div", "card");
+		$card = createElem("div", "card mb-3");
 		$cardBlock = createElem("div", "card-block");
 		$cardTitle = createElem("h4", "card-title");
 		$rightOrWrongIcon = createElem("div", "float-right");
 		$btnsDiv = createElem("div", "row text-center");
-		$halfCol1 = createElem("div", "col-xs-6");
-		$halfCol2 = createElem("div", "col-xs-6");
+		$halfCol1 = createElem("div", "col-sm-6");
+		$halfCol2 = createElem("div", "col-sm-6");
 		btnOptions = meaningAlt.choices.split(",");
 		$btn1 = createBtn(
 			"btn-lg btn-outline-primary btn-block mean-alts-answer",
@@ -805,7 +860,41 @@ $(document).ready(function() {
 		$halfCol1.append($btn1);
 		$halfCol2.append($btn2);
 		$feedback.find("strong").append(meaningAlt.feedback);
-		return $card
+		return $card;
+	}
+
+	function createExNonExQues(exNonEx, index) {
+		$card = createElem("div", "card mb-3");
+		$cardBlock = createElem("div", "card-block");
+		$cardTitle = createElem("h4", "card-title");
+		$rightOrWrongIcon = createElem("div", "float-right");
+		$btnsDiv = createElem("div", "row text-center");
+		$halfCol1 = createElem("div", "col-sm-6");
+		$halfCol2 = createElem("div", "col-sm-6");
+		btnOptions = ["example", "non-example"];
+		$btn1 = createBtn(
+			"btn-lg btn-outline-primary btn-block ex-non-exs-answer",
+			btnOptions[0]
+		);
+		$btn2 = createBtn(
+			"btn-lg btn-outline-primary btn-block ex-non-exs-answer",
+			btnOptions[1]
+		);
+		$feedback = createElem(
+			"p", "card-text mean-alts-feedback"
+		).append(createElem("strong"));
+		$card.append($cardBlock);
+		$cardBlock.append($cardTitle);
+		$cardTitle.append($rightOrWrongIcon);
+		$cardTitle.append(exNonEx.text);
+		$cardBlock.append($btnsDiv);
+		$cardBlock.append($feedback);
+		$btnsDiv.attr("data-index", index);
+		$btnsDiv.append($halfCol1).append($halfCol2);
+		$halfCol1.append($btn1);
+		$halfCol2.append($btn2);
+		$feedback.find("strong").append(exNonEx.feedback);
+		return $card;
 	}
 
 	function flashPointsUpdate($arrow) {
@@ -1057,7 +1146,10 @@ $(document).ready(function() {
 	};
 
 	function updateProgressBar(value) {
-		$(".game-progress-bar").attr("value", value).attr("max", "100");
+		var $progressBar = $(".progress-bar");
+		$progressBar.attr("aria-valuenow", value)
+								.attr("style", "width: " + value + "%;")
+								.text(value + "%");
 	};
 
 	function randomRange (x, y) {

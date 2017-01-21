@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   resources :words do
     resources :meaning_alts, only: [:index]
   end
+  resources :words do
+    resources :example_non_examples, only: [:index]
+  end
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
   resource :reset_fundamentals, only: [:update]
@@ -63,13 +66,7 @@ Rails.application.routes.draw do
     resources :words, only: [:new, :create]
     resource :add_words_for_student, only: [:update]
     resources :example_non_examples
-    resources :words do
-      resources :example_non_examples
-    end
     resources :meaning_alts
-    resources :words do
-      resources :meaning_alts
-    end
   end
   namespace :admin do
     root "admins#settings"
