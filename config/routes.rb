@@ -66,7 +66,13 @@ Rails.application.routes.draw do
     resources :words, only: [:new, :create]
     resource :add_words_for_student, only: [:update]
     resources :example_non_examples
+    resources :word do
+      resources :example_non_examples
+    end
     resources :meaning_alts
+    resources :word do
+      resources :meaning_alts
+    end
   end
   namespace :admin do
     root "admins#settings"
