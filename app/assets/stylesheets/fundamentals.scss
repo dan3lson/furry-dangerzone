@@ -12,7 +12,9 @@
 #meaning-alts-div,
 .mean-alts-feedback,
 #meaning-alts-continue-btn,
-#ex-non-ex-continue-btn,
+#ex-non-exs-div,
+.ex-non-exs-feedback,
+#ex-non-exs-cont-btn,
 #synonyms_container,
 #antonyms_container,
 #real_world_examples_container,
@@ -76,4 +78,8 @@
 
 .scoreboard {
 	font-size: 1.5rem;
+
+	.progress-bar {
+		background: #636c72 !important;
+	}
 }
