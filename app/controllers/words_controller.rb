@@ -1,9 +1,12 @@
 class WordsController < ApplicationController
-  def index
-    @words = Word.all
-  end
-
   def show
     @word = Word.find(params[:id])
+  end
+
+  def thesaurus
+    @word_name = params[:word_name]
+    @synonyms = Thesaurus.synonyms(@word_name)
+    @antonyms = Thesaurus.antonyms(@word_name)
+    render json: [@synonyms, @antonyms]
   end
 end

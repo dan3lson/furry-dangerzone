@@ -11,8 +11,6 @@ class UserWordsController < ApplicationController
     else
       if @user_word.save
         @created = true
-        Thesaurus.insert_words_for(@word, "syn", @word.part_of_speech)
-        Thesaurus.insert_words_for(@word, "ant", @word.part_of_speech)
 
         if @play
           redirect_to fund_game_link
@@ -22,7 +20,7 @@ class UserWordsController < ApplicationController
           end
         end
       else
-        msg = "Adding that word to your Words didn\'t work. Please try again."
+        msg = "Saving that word didn\'t work. Please try again."
         flash[:danger] = msg
         redirect_to search_path
       end

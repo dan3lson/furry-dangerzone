@@ -21,6 +21,7 @@ class WordsApi
 			}
 		)
 		words = []
+		
 		if response.success? && response["results"]
 			various_words = response["results"]
 

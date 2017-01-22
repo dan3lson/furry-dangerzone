@@ -72,7 +72,7 @@ $(document).ready(function() {
 				"Tap the letters to spell that same word, whose definition is <mark>" +
 				word.definition + "</mark>."
 			);
-      updateProgressBar(12);
+      updateProgress(12);
 			addPoints(100);
 			flashPointsUpdate($arrowSuccess);
 			spellByClickingLetters(chosenWordLetters);
@@ -89,7 +89,7 @@ $(document).ready(function() {
 				"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
 				"the volume button to hear its pronunciation."
       );
-      updateProgressBar(25);
+      updateProgress(25);
 			addPoints(150);
 			flashPointsUpdate($arrowSuccess);
       startPronunciationActivity(word);
@@ -105,7 +105,7 @@ $(document).ready(function() {
       $pronunciationContinueBtn.hide();
 			addPoints(200);
 			flashPointsUpdate($arrowSuccess);
-			updateProgressBar(37);
+			updateProgress(37);
 			$chosenWordHeaderContainer.html(targetWord.name)
 																.removeClass("text-success");
 
@@ -125,70 +125,11 @@ $(document).ready(function() {
 			$("#meaning-alts-continue-btn").hide();
 			addPoints(325);
 			flashPointsUpdate($arrowSuccess);
-			updateProgressBar(50);
+			updateProgress(50);
 
 			getExampleNonExamples(targetWord.id).done(function(response) {
 			  startExampleNonExamplesActivity(targetWord, response);
 			});
-
-			// if (!$("#synonym_no_results").hasClass("please-tap-continue")) {
-			// 	$("#synonyms_back_button").show();
-			// 	$("#synonyms_container").show();
-			// 	giveDirections(
-			// 		"The words below are similar to " +
-			// 		"<strong>'" +
-			// 		chosenWordName +
-			// 		"'</strong>. Tap and view each one."
-			// 	);
-			// 	updateProgressBar(60);
-			// 	startSynonymsActivity(chosenWordName);
-			// } else if (
-			// 	$("#synonym_no_results").hasClass("please-tap-continue") &&
-			// 	!$("#antonym_no_results").hasClass("please-tap-continue")
-			// ) {
-			// 	$("#synonyms_back_button").hide();
-			// 	$("#synonyms-cont-btn").hide();
-			// 	$("#synonyms_container").hide();
-			// 	$("#antonyms_container").show();
-			// 	$("#antonyms_back_button").show();
-			// 	giveDirections(
-			// 		"The words below are opposite to " + "<strong>'" +
-			// 		chosenWordName + "'</strong>. Tap and view each one."
-			// 	);
-			// 	updateProgressBar(75);
-			// 	start_antonyms_activity(chosenWordName);
-			// }	else if (
-			// 	$("#synonym_no_results").hasClass("please-tap-continue") &&
-			// 	$("#antonym_no_results").hasClass("please-tap-continue") &&
-			// 	$("#rwe_no_results").hasClass("please-tap-continue")
-			// ) {
-			// 	$("#real_world_examples_back_button").hide();
-			// 	$("#real_world_examples_continue_button").hide();
-			// 	$("#real_world_examples_container").hide();
-			// 	$("#directions").hide();
-			// 	$("#review_level_one_back_button").fadeIn();
-			// 	$("#review_level_one_continue_button").fadeIn();
-			// 	$("#review_level_one_container").fadeIn();
-			// 	update_user_word_games_completed();
-			// 	updateProgressBar(100);
-			// 	updateUserPoints(10);
-			// 	addPoints(3);
-			// 	update_num_played();
-			// 	start_review_level_one_activity(chosenWordName);
-			// } else if (
-			// 	$("#synonym_no_results").hasClass("please-tap-continue") &&
-			// 	$("#antonym_no_results").hasClass("please-tap-continue")
-			// ) {
-			// 	$("#real_world_examples_back_button").show();
-			// 	$("#real_world_examples_container").show();
-			// 	giveDirections(
-			// 		"Tap each source to see how <strong>'" +
-			// 		chosenWordName +
-			// 		"'</strong> has been used in everyday life."
-			// 	);
-			// 	updateProgressBar(90);
-			// 	start_real_world_examples_activity(chosenWordName);
-			// }
 		});
 	}
 
@@ -198,126 +139,27 @@ $(document).ready(function() {
 			$("#ex-non-exs-cont-btn").hide();
 			addPoints(500);
 			flashPointsUpdate($arrowSuccess);
-			updateProgressBar(70);
-			startSynonymsActivity(targetWord);
+			updateProgress(70);
+
+			thesaurus(targetWord.name).done(function(response) {
+				const synonyms = response[0];
+				const antonyms = response[1];
+				startSynVersusAntActivity(synonyms, antonyms);
+			});
 		});
 	}
 
-  function synonyms_continue_button(chosenWordName) {
-    $("#synonyms-cont-btn").click(function(){
-      // Start the next activity --> if there are synonyms, but no antonyms
-      if ($("#antonym_no_results").hasClass("please-tap-continue")) {
-        $("#syn_ant_checkpoint_back_button").show();
-        $("#syn_ant_checkpoint_container").show();
-				$(".checkpoint-image").show();
-        $("#synonyms-cont-btn").hide();
-        $("#synonyms_container").hide();
+	function synVersusAntContBtn(targetWord) {
+		$("#syn-vs-ant-cont-btn").click(function () {
+			$("#syn-vs-ant-div").hide();
+			$("#syn-vs-ant-cont-btn").hide();
+			addPoints(1000);
+			flashPointsUpdate($arrowSuccess);
+			updateProgress(100);
+			startReviewActivity(targetWord);
+		});
+	}
 
-        giveDirections(
-					"Is <strong>'" +
-					chosenWordName +
-          "'</strong> a synonym or antonym to:"
-        );
-
-        updateProgressBar(75);
-
-        start_syn_ant_checkpoint_activity();
-
-        // Start the next activity --> if there there are antonyms
-      } else {
-        $("#synonyms_back_button").hide();
-        $("#synonyms-cont-btn").hide();
-        $("#synonyms_container").hide();
-        $("#antonyms_back_button").show();
-        $("#antonyms_container").show();
-
-        giveDirections(
-					"The words below are opposite to <strong>'" +
-          chosenWordName +
-					"'</strong>. Tap and view each one."
-        );
-
-        updateProgressBar(75);
-
-        start_antonyms_activity(chosenWordName);
-      }
-    });
-  }
-
-  function antonyms_continue_button(chosenWordName) {
-    $("#antonyms_continue_button").click(function(){
-      $("#syn_ant_checkpoint_back_button").show();
-      $("#syn_ant_checkpoint_container").show();
-			$(".checkpoint-image").show();
-      $("#antonyms_continue_button").hide();
-      $("#antonyms_container").hide();
-
-      giveDirections(
-				"Is <strong>'" +
-				chosenWordName +
-        "'</strong> a synonym or antonym to:"
-      );
-
-      updateProgressBar(75);
-
-			start_syn_ant_checkpoint_activity();
-    });
-  }
-
-  function syn_ant_checkpoint_continue_button(chosenWordName) {
-    $("#syn_ant_checkpoint_continue_button").click(function(){
-      $(".checkpoint-image").hide();
-      $("#syn_ant_checkpoint_back_button").hide();
-      $("#syn_ant_checkpoint_container").hide();
-      $("#syn_ant_checkpoint_continue_button").hide();
-      $("#syn_ant_checkpoint_score_div").hide();
-      $("#real_world_examples_back_button").show();
-      $("#real_world_examples_container").show();
-      giveDirections(
-				"Tap each source to see how <strong>'" +
-        chosenWordName +
-				"'</strong> has been used in everyday life."
-      );
-      updateProgressBar(90);
-
-      // If all words have been clicked on, show the RWE container
-      if ($("#rwe_no_results").hasClass("please-tap-continue")) {
-        $("#real_world_examples_back_button").hide();
-        $("#real_world_examples_continue_button").hide();
-        $("#real_world_examples_container").hide();
-        $("#directions").hide();
-        $("#review_level_one_back_button").fadeIn();
-        $("#review_level_one_continue_button").fadeIn();
-        $("#review_level_one_container").fadeIn();
-        update_user_word_games_completed();
-        update_num_played();
-        updateProgressBar(100);
-        updateUserPoints(10);
-        addPoints(10);
-
-        start_review_level_one_activity(chosenWordName);
-      } else {
-        start_real_world_examples_activity(chosenWordName);
-      }
-    });
-  }
-
-  function real_world_examples_continue_button(chosenWordName) {
-    $("#real_world_examples_continue_button").click(function(){
-      $("#real_world_examples_back_button").hide();
-      $("#real_world_examples_continue_button").hide();
-      $("#real_world_examples_container").hide();
-      $("#directions").hide();
-      $("#review_level_one_back_button").fadeIn();
-      $("#review_level_one_continue_button").fadeIn();
-      $("#review_level_one_container").fadeIn();
-			start_review_level_one_activity(chosenWordName);
-      update_user_word_games_completed();
-      update_num_played();
-      updateProgressBar(100);
-      updateUserPoints(10);
-    });
-  }
 
 	/***
 	*
@@ -326,18 +168,6 @@ $(document).ready(function() {
 	*
 	*
 	***/
-
-	function getGameWords() {
-		return $.get(
-			"/fundamentals?word_id=" + $chosenWordID, function() {}, "json"
-		);
-	};
-
-	function getMeaningAlts(wordID) {
-		return $.get(
-			"/words/" + wordID + "/meaning_alts", function() {}, "json"
-		);
-	};
 
 	function getExampleNonExamples(wordID) {
 		return $.get(
@@ -354,12 +184,9 @@ $(document).ready(function() {
 			spellTheWordContinueBtn(targetWord);
 			fillInTheBlankContinueBtn(targetWord);
 			pronunciationContinueBtn(words);
-			exampleNonExamplesContinueBtn(words);
+			exampleNonExamplesContinueBtn(targetWord);
 			meaningAltsContinueBtn(targetWord);
-			synonyms_continue_button(targetWordName);
-			antonyms_continue_button(targetWordName);
-			syn_ant_checkpoint_continue_button(targetWordName);
-			real_world_examples_continue_button(targetWordName);
+			synVersusAntContBtn(targetWordName);
 		});
 	}
 
@@ -367,7 +194,7 @@ $(document).ready(function() {
 		if ($("#game-started-bool").hasClass("begin-timer")) {
 			giveDirections("Type the word above.");
 			spellByTyping(targetWordName);
-			updateProgressBar(0);
+			updateProgress(0);
 			startCountup($scoreboardTimer, 0);
 			$timeGameStarted = new Date();
 		}
@@ -437,7 +264,7 @@ $(document).ready(function() {
 		$underscoreContainer.text(underscores);
 
 		for (var i = 0; i < 3; i++) {
-			$randomAlphabet = $alphabets[randomRange(26, 0)];
+			$randomAlphabet = $alphabets[randNumInRange(0, 26)];
 			$alphabetRandLetters.push($randomAlphabet);
 		}
 
@@ -515,7 +342,7 @@ $(document).ready(function() {
 	function startMeaningAltsActivity(words, meaningAltArray) {
 		var chosenWord = words[0];
 		giveDirections(
-			"Read the statement(s) below and decide which one is better."
+			"Read the statements below and decide which one makes more sense."
 		);
 
 		$.each(meaningAltArray, function(index) {
@@ -622,201 +449,14 @@ $(document).ready(function() {
 		});
 	}
 
-	function startSynonymsActivity() {
-		if ($("#synonym_no_results").hasClass("please-tap-continue")) {
-			$("#synonyms-cont-btn").fadeIn();
-			$synonym_circle_activity_boolean = true;
-		} else {
-			giveDirections("Synonyms activity!");
-			// Click anywhere (row, circle, or word) to change element features
-			$(".synonym_row").click(function(){
-				// Fill in the circle
-				$(this).children(":first").addClass("green-circle-background");
-				// If all words have been clicked on, show the continue button
-				if ($("#synonyms_container .green-circle-background").length ==
-            $(".synonym_row").length
-          ) {
-					$("#synonyms-cont-btn").fadeIn();
-					$synonym_circle_activity_boolean = true;
-				};
-			}); // end of the $synonym_row .click fn
-		}
+	function startSynVersusAntActivity(synonyms, antonyms) {
+		giveDirections("Welcome to the Synonym Versus Antonym activity!");
+		console.log(synonyms);
+		console.log(antonyms);
 	};
 
-	function start_antonyms_activity() {
-		if ($("#antonym_no_results").hasClass("please-tap-continue")) {
-			$("#antonyms_continue_button").fadeIn();
-			$antonym_circle_activity_boolean = true;
-		} else {
-			// Click anywhere (row, circle, or word) to change element features
-			$(".antonym_row").click(function(){
-				// Fill in the circle
-				$(this).children(":first").addClass("green-circle-background");
-				// If all words have been clicked on, show the continue button
-				if ($("#antonyms_container .green-circle-background").length ==
-            $(".antonym_row").length
-        ) {
-					$("#antonyms_continue_button").fadeIn();
-					$antonym_circle_activity_boolean = true;
-				};
-			}); // end of the $antonym_row .click fn
-		}
-	}; // end of the start antonyms activity function
-
-	function start_syn_ant_checkpoint_activity() {
-		// Create a score counter:  0 / X
-		$syn_ant_checkpoint_score_div = $("<div>", {
-			id: "syn_ant_checkpoint_score_div",
-			class: "float-right" }
-		);
-		$($syn_ant_checkpoint_score_div).insertBefore(
-			"#syn_ant_checkpoint_container"
-		);
-
-		// Find all of the synonyms for  and add to the synonyms array
-		$(".synonym_word_container").each(function(index){
-			$syn_ant_checkpoint_synonyms_array.push($(this).html());
-		});
-
-		// Find all of the antonyms for this word and add to the antonyms array
-		$(".antonym_word_container").each(function(index){
-			$syn_ant_checkpoint_antonyms_array.push($(this).html());
-		});
-
-		// Display the number correct out of the total number of synonyms and
-		// antonyms available
-		$("#syn_ant_checkpoint_score_div").html(
-			$syn_ant_checkpoint_correct_score +
-			" / " +
-			$shuffled_syn_ant_array.length
-		).show();
-
-		// Merge the synonym and antonym arrays above and then randomize the order
-		$shuffled_syn_ant_array = $.merge($.merge(
-			[], $syn_ant_checkpoint_synonyms_array
-		), $syn_ant_checkpoint_antonyms_array);
-		$shuffled_syn_ant_array = shuffleArray($shuffled_syn_ant_array);
-
-		// Display the synonyms and antonyms for this word
-		for (var i = 0; i < $shuffled_syn_ant_array.length; i++) {
-			// Create a row for the circle and word itself
-			$syn_ant_row = $("<div>", { class: "syn_ant_row" } );
-			$syn_ant_circle_div = $("<div>", {
-				class: "syn_ant_checkpoint_red_circle inline-block"
-			});
-			$syn_ant_word_div = $("<div>", {
-				class: "syn_ant_word_container lead inline-block"
-			});
-
-			// Add the individual row to the syn_ants container
-			$("#syn_ant_checkpoint_container").append($syn_ant_row);
-
-			// Add the circle and word div to the syn_ant row
-			$($syn_ant_row).append($syn_ant_circle_div, $syn_ant_word_div);
-			// Hide the circle temporarily
-			$($syn_ant_circle_div).hide();
-
-			// Add the word itself to the syn_ant_word div so it can be displayed
-			$($syn_ant_word_div).append($shuffled_syn_ant_array[i]);
-		}
-
-		// Hide all of the words except the first one
-		$(".syn_ant_row").not(":first").hide();
-
-		// Highlight the first word to start
-		$(".syn_ant_word_container:first").addClass(
-			"current_syn_ant_checkpoint_word"
-		);
-
-		// Create the synonym and antonym button
-		$syn_ant_checkpoint_synonym_button_div = $("<div>", {
-			class: "col-xs-6",
-			id: "syn_ant_checkpoint_synonym_button_div"
-		});
-
-		$syn_ant_checkpoint_antonym_button_div = $("<div>", {
-			class: "col-xs-6",
-			id: "syn_ant_checkpoint_antonym_button_div"
-		});
-
-		$syn_ant_checkpoint_synonym_button = $("<button/>", {
-			type: "button",
-			text: "SYNONYM",
-			class: "btn btn-lg btn-info btn-block syn_ant_checkpoint_btns",
-			id: "syn_ant_checkpoint_synonym_button"
-		});
-
-		$syn_ant_checkpoint_antonym_button = $("<button/>", {
-			type: "button",
-			text: "ANTONYM",
-			class: "btn btn-lg btn-info btn-block syn_ant_checkpoint_btns",
-			id: "syn_ant_checkpoint_antonym_button"
-		});
-
-		$("#syn_ant_checkpoint_container").append(
-			$syn_ant_checkpoint_synonym_button_div,
-			$syn_ant_checkpoint_antonym_button_div
-		);
-
-		$($syn_ant_checkpoint_synonym_button_div).append(
-			$syn_ant_checkpoint_synonym_button
-		);
-
-		$($syn_ant_checkpoint_antonym_button_div).append(
-			$syn_ant_checkpoint_antonym_button
-		);
-
-		// SYNONYM BUTTON: Check if highlighted word is part of the synonym array.
-		click_syn_or_ant_checkpoint_button(
-			$syn_ant_checkpoint_synonym_button,
-			$syn_ant_checkpoint_synonyms_array
-		);
-
-		// ANTONYM BUTTON: Check if highlighted word is part of the antonym array.
-		click_syn_or_ant_checkpoint_button(
-			$syn_ant_checkpoint_antonym_button,
-			$syn_ant_checkpoint_antonyms_array
-		);
-
-		//Checks if there are any synonyms or antonyms. If not, display a message
-		// and show the continue button
-		$(".no_word_info").remove();
-
-		if ($shuffled_syn_ant_array.length == 0) {
-			$(".syn_ant_checkpoint_btns").hide();
-			$("#syn-ant-no-results").fadeIn();
-			$("#syn_ant_checkpoint_continue_button").fadeIn();
-		}
-	};
-
-	function start_real_world_examples_activity() {
-    if ($("#rwe_no_results").hasClass("please-tap-continue")) {
-			$("#real_world_examples_continue_button").fadeIn();
-			$rwe_circle_activity_boolean = true;
-		} else {
-			// Click anywhere (row, circle, or word) to change element features
-			$(".rwe_row").click(function(){
-				// Fill in the circle
-				$(this).children(":first").addClass("green-circle-background");
-
-				// If all words have been clicked on, show the continue button
-				if ($("#real_world_examples_container .green-circle-background").length == $(".rwe_row").length) {
-					$("#real_world_examples_continue_button").fadeIn();
-					$rwe_circle_activity_boolean = true;
-				};
-			}); // end of the $rwe_row .click fn
-		}
-	};
-
-	function start_review_level_one_activity(chosenWordName) {
-		$("#goodies, #games-score, .progress-bar-container").css(
-			"visibility", "hidden"
-		);
-		$("#all_levels_button").show();
-		$("#level-congrats-text").append(
-			"<strong>'" + chosenWordName + "'</strong>."
-		);
-		$("#goodies_total").html(newPointsTotal);
+	function startReviewActivity(chosenWordName) {
+		// To be re-implemented...
 	};
 
 	/**
@@ -826,6 +466,24 @@ $(document).ready(function() {
 	*
 	*
 	**/
+
+	function thesaurus(targetWordName) {
+		return $.get(
+			"/thesaurus/" + targetWordName, function() {}, "json"
+		);
+	};
+
+	function getGameWords() {
+		return $.get(
+			"/fundamentals?word_id=" + $chosenWordID, function() {}, "json"
+		);
+	};
+
+	function getMeaningAlts(wordID) {
+		return $.get(
+			"/words/" + wordID + "/meaning_alts", function() {}, "json"
+		);
+	};
 
 	function createFontAweIcon(_class) {
 		return createElem("i", "fa fa-" + _class)
@@ -843,7 +501,6 @@ $(document).ready(function() {
 		$btnsDiv = createElem("div", "row text-center");
 		$halfCol1 = createElem("div", "col-sm-6");
 		$halfCol2 = createElem("div", "col-sm-6");
-		console.log(meaningAlt.choices);
 		btnOptions = shuffleArray(meaningAlt.choices.split(","));
 		$btn1 = createBtn(
 			"btn-lg btn-outline-primary btn-block mean-alts-answer",
@@ -951,44 +608,10 @@ $(document).ready(function() {
 		}, 1000);
 	}
 
-	function create_yes_or_no_def_checkpoint_panel(definition) {
-		// buttons need type="button"?
-		var well = createElem("div", "well def-chkpt-panel");
-		$("#meaning-alts-div").append(well);
-		var yes_no_container = createElem("div", "row center");
-		$("#meaning-alts-div").append(yes_no_container);
-		var yes_container = createElem("div", "col-xs-6");
-		var no_container = createElem("div", "col-xs-6");
-		var yes_button = createElem(
-			"button",
-			"btn btn-lg btn-info btn-block def-chkpt-btn"
-		);
-		var no_button = createElem(
-			"button",
-			"btn btn-lg btn-info btn-block def-chkpt-btn"
-		);
-		var yes_emoji = createElem("i","fa fa-thumbs-up");
-		var no_emoji = createElem("i","fa fa-thumbs-down");
-
-		well.append(definition);
-		yes_button.append(yes_emoji);
-		yes_button.append("&nbsp; YES");
-		yes_container.append(yes_button);
-		no_button.append(no_emoji);
-		no_button.append("&nbsp; NO");
-		no_container.append(no_button);
-		yes_no_container.append(yes_container);
-		yes_no_container.append(no_container);
-	}
-
 	function createElem(elem, elemClass, elemID) {
 		_class = elemClass || null;
 		_id = elemID || null;
 		return $("<" + elem + ">", { class: _class, id: _id });
-	}
-
-	function array_of_attributes(string) {
-		return string.split("***");
 	}
 
 	function update_user_word_games_completed() {
@@ -1035,107 +658,6 @@ $(document).ready(function() {
 		});
 	};
 
-	function click_syn_or_ant_checkpoint_button(
-		syn_ant_checkpoint_name_button,
-		syn_ant_checkpoint_names_array
-	) {
-		// SYNONYM BUTTON: Check if the current word is part of the synonym array.
-		$(syn_ant_checkpoint_name_button).click(function() {
-			// Capture the current word in the array
-			$current_syn_ant_checkpoint_word = $shuffled_syn_ant_array[
-				$shuffled_syn_ant_array_counter
-			];
-
-			// Check if the current word is a synonym
-			if (syn_ant_checkpoint_names_array.indexOf(
-				$current_syn_ant_checkpoint_word) != -1
-			) {
-				$shuffled_syn_ant_array_counter++;
-
-				// Put a checkmark in the circle
-				$(".current_syn_ant_checkpoint_word").prev().html("&#10004;");
-
-				// Update and display the score
-				$syn_ant_checkpoint_correct_score++;
-
-				// Display the number correct out of the total number of synonyms and
-				// antonyms available
-				$("#syn_ant_checkpoint_score_div").html(
-					$syn_ant_checkpoint_correct_score +
-					" / " +
-					$shuffled_syn_ant_array.length
-				).show();
-			} else {
-				// Go to the next word
-				$shuffled_syn_ant_array_counter++;
-
-				// Put an X in the circle
-				$(".current_syn_ant_checkpoint_word").prev().html("&#10006;")
-				;
-			}
-
-			// Display the next word
-			$(".current_syn_ant_checkpoint_word").parent().next().fadeIn();
-
-			// Add the active class to the next word
-			$(".current_syn_ant_checkpoint_word")
-				.parent()
-				.next()
-				.children(":last")
-				.addClass("current_syn_ant_checkpoint_word")
-			;
-
-			// Hide the previous word
-			$(".current_syn_ant_checkpoint_word")
-				.parent()
-				.prev()
-				.hide()
-			;
-
-			// Remove the active class from the previous word
-			$(".current_syn_ant_checkpoint_word")
-				.parent()
-				.prev()
-				.children(":last")
-				.removeClass("current_syn_ant_checkpoint_word")
-			;
-
-			// Once all words have been clicked on, hide the synonym and
-			// antonym button
-			if ($shuffled_syn_ant_array_counter == $shuffled_syn_ant_array.length) {
-				// Show the circles and their results
-				$(".syn_ant_checkpoint_red_circle").show();
-
-				// Display the number correct out of the total number of synonyms and
-				// antonyms available
-				$("#syn_ant_checkpoint_score_div").html(
-					$syn_ant_checkpoint_correct_score +
-					" / " +
-					$shuffled_syn_ant_array.length
-				).show();
-
-				// Hide the synonym and antonym buttons
-				$(".syn_ant_checkpoint_btns").hide();
-
-				// Remove the active class from the previous last
-				$(".current_syn_ant_checkpoint_word").removeClass(
-					"current_syn_ant_checkpoint_word"
-				);
-
-				// Show all words to serve as a review
-				$(".syn_ant_row").fadeIn();
-
-				// Show the continue button
-				$("#syn_ant_checkpoint_continue_button").fadeIn();
-			}
-
-			// If all the syn_ant_rows are visible, update the boolean to true
-			if ($(".syn_ant_row:visible").length == $shuffled_syn_ant_array.length) {
-				$syn_ant_circle_activity_boolean = true;
-			}
-		}); // end of the syn_ant_checkpoint buttton fn
-	}; // end of the click fn
-
 	function addPoints(points) {
 		newPointsTotal += points;
 		$points.html(newPointsTotal);
@@ -1152,15 +674,15 @@ $(document).ready(function() {
 		$("#fundamentals-game-instructions").html(instruction);
 	};
 
-	function updateProgressBar(value) {
+	function updateProgress(value) {
 		var $progressBar = $(".progress-bar");
 		$progressBar.attr("aria-valuenow", value)
 								.attr("style", "width: " + value + "%;")
 								.text(value + "%");
 	};
 
-	function randomRange (x, y) {
-		return Math.floor(Math.random()* (x-y) + y);
+	function randNumInRange(start, end) {
+		return Math.floor(Math.random()* (start - end) + end);
 	};
 
 	function scrollTo($section) {

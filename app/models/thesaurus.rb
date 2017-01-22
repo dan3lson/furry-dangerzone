@@ -1,62 +1,32 @@
-class Thesaurus
-  include HTTParty
-  include Nokogiri
+module Thesaurus
+	URL = URI.parse(URI.encode("https://wordsapiv1.p.mashape.com/words"))
 
-  attr_accessor :response
+	def self.synonyms(word)
+    syns_or_ants(word, "synonyms")
+	end
 
-  API_URL = "http://words.bighugelabs.com/api/2"
-  API_KEY = ENV["BIG_HUGE_THESAURUS"]
+	def self.antonyms(word)
+    syns_or_ants(word, "antonyms")
+	end
 
-  def initialize
-    @response
-  end
+  private
 
-  def self.provide(word, syn_or_ant, part_of_speech)
-    connection = HTTParty.get("#{API_URL}/#{API_KEY}/#{word}/json")
+  def self.syns_or_ants(word, type)
+    response = HTTParty.get(
+      "#{URL}/#{word}/#{type}",
+      headers: {
+        "X-Mashape-Key" => "jxec7LMiQymshHsPPG7i86q1rdXNp1Ndvi0jsnTSbYjDIDo0Kk",
+        "Accept" => "application/json"
+      }
+    )
 
-    if connection.success?
-      if !part_of_speech.nil? && part_of_speech.include?(" ")
-        part_of_speech.gsub!(" ", "")
-      end
-
-      response = JSON.parse(connection)
-
-      response_pos = response[part_of_speech]
-      if response_pos.nil?
-        nil
-      else
-        response = if response_pos[syn_or_ant].nil?
-                     nil
-                   else
-                     response_pos[syn_or_ant].take(3)
-                   end
-      end
+    if response.success? && response[type]
+      response[type].map do |w|
+        has_multiple_words = w.split(" ").count > 1
+        WordsApi.define(w) unless has_multiple_words
+      end.flatten
     else
       nil
-    end
-  end
-
-  def self.insert_words_for(word, syn_or_ant, pos)
-    @thesaurus = Thesaurus.provide(word.name, syn_or_ant, pos)
-
-    unless @thesaurus.nil?
-      @thesaurus.each do |w|
-        next if FreeDictionary.define(w).nil?
-
-        palabra = Word.define(w).first
-
-        unless palabra.blank?
-          if syn_or_ant == "syn"
-            if !word.synonyms.pluck(:id).include?(palabra.id)
-              word.synonyms << palabra
-            end
-          else
-            if !word.antonyms.pluck(:id).include?(palabra.id)
-              word.antonyms << palabra
-            end
-          end
-        end
-      end
     end
   end
 end

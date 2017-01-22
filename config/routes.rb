@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :words do
     resources :examples
   end
+  get "thesaurus/:word_name" => "words#thesaurus"
   resources :words do
     resources :meaning_alts, only: [:index]
   end
@@ -36,7 +37,6 @@ Rails.application.routes.draw do
   end
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
-  resource :reset_fundamentals, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]
   resource :freestyle_game, only: [:create, :update]
   resource :game_stat, only: [:update]
