@@ -144,7 +144,15 @@ $(document).ready(function() {
 			thesaurus(targetWord.name).done(function(response) {
 				const synonyms = response[0];
 				const antonyms = response[1];
-				startSynVersusAntActivity(synonyms, antonyms);
+
+				if (isOffline(synonyms) && false) {
+					var $alert = createElem("div", "alert alert-warning");
+					$alert.text(synonyms);
+					$("#syn-vs-ant-div").append($alert);
+					$("#syn-vs-ant-cont-btn").show();
+				} else {
+					startSynVersusAntActivity(synonyms, antonyms);
+				}
 			});
 		});
 	}
@@ -168,12 +176,6 @@ $(document).ready(function() {
 	*
 	*
 	***/
-
-	function getExampleNonExamples(wordID) {
-		return $.get(
-			"/words/" + wordID + "/example_non_examples", function() {}, "json"
-		);
-	};
 
 	function setTheStage() {
 		getGameWords().done(function(response) {
@@ -272,10 +274,10 @@ $(document).ready(function() {
 		$mergedLettersArray = shuffleArray($mergedLettersArray);
 
 		$.each($mergedLettersArray, function(index, letter) {
-			$letter = createElem(
-				"button",
-				"btn btn-lg btn-outline-primary fitb-letter letter_" + letter);
-			$letter.text(letter);
+			$letter = createBtn(
+				"btn-lg btn-outline-primary fitb-letter letter_" + letter,
+				letter
+			);
 			$spellByClickingLettersDiv.append($letter);
 		});
 
@@ -450,9 +452,23 @@ $(document).ready(function() {
 	}
 
 	function startSynVersusAntActivity(synonyms, antonyms) {
-		giveDirections("Welcome to the Synonym Versus Antonym activity!");
-		console.log(synonyms);
-		console.log(antonyms);
+		giveDirections(
+			"The word above has synonyms and antonyms. Click to pair them."
+		);
+		syns = ["syn1", "syn2", "syn3"];
+		ants = ["ant1", "ant2", "ant3"];
+
+		$.each(syns, function() {
+			syns.push("synonym");
+		});
+
+		$.each(ants, function() {
+			syns.push("antonym");
+		});
+
+		array = merge(syns, ants);
+
+		$("#syn-vs-ant-div").append(createMatchingCards(array));
 	};
 
 	function startReviewActivity(chosenWordName) {
@@ -467,6 +483,23 @@ $(document).ready(function() {
 	*
 	**/
 
+	function createMatchingCards(strings) {
+		var $row = createElem("div", "row text-center");
+
+		$.each(strings, function() {
+			var $colSmallThree = createElem("div", "col-sm-3 mb-3");
+			var $btn = createBtn("btn-outline-primary btn-lg btn-block", this);
+			$colSmallThree.append($btn);
+			$row.append($colSmallThree);
+		});
+
+		return $row;
+	}
+
+	function isOffline(string) {
+		return string.indexOf("Looks like you are offline") != -1;
+	}
+
 	function thesaurus(targetWordName) {
 		return $.get(
 			"/thesaurus/" + targetWordName, function() {}, "json"
@@ -476,6 +509,12 @@ $(document).ready(function() {
 	function getGameWords() {
 		return $.get(
 			"/fundamentals?word_id=" + $chosenWordID, function() {}, "json"
+		);
+	};
+
+	function getExampleNonExamples(wordID) {
+		return $.get(
+			"/words/" + wordID + "/example_non_examples", function() {}, "json"
 		);
 	};
 
@@ -558,6 +597,40 @@ $(document).ready(function() {
 		$halfCol1.append($btn1);
 		$halfCol2.append($btn2);
 		$feedback.find("strong").append(exNonEx.feedback);
+		return $card;
+	}
+
+	function createSynsVsAntsGameboard(meaningAlt, index) {
+		$card = createElem("div", "card mb-3");
+		$cardBlock = createElem("div", "card-block");
+		$cardTitle = createElem("h4", "card-title");
+		$rightOrWrongIcon = createElem("div", "float-right");
+		$btnsDiv = createElem("div", "row text-center");
+		$halfCol1 = createElem("div", "col-sm-6");
+		$halfCol2 = createElem("div", "col-sm-6");
+		btnOptions = shuffleArray(meaningAlt.choices.split(","));
+		$btn1 = createBtn(
+			"btn-lg btn-outline-primary btn-block mean-alts-answer",
+			btnOptions[0]
+		);
+		$btn2 = createBtn(
+			"btn-lg btn-outline-primary btn-block mean-alts-answer",
+			btnOptions[1]
+		);
+		$feedback = createElem(
+			"p", "card-text mean-alts-feedback"
+		).append(createElem("strong"));
+		$card.append($cardBlock);
+		$cardBlock.append($cardTitle);
+		$cardTitle.append($rightOrWrongIcon);
+		$cardTitle.append(meaningAlt.text);
+		$cardBlock.append($btnsDiv);
+		$cardBlock.append($feedback);
+		$btnsDiv.attr("data-index", index);
+		$btnsDiv.append($halfCol1).append($halfCol2);
+		$halfCol1.append($btn1);
+		$halfCol2.append($btn2);
+		$feedback.find("strong").append(meaningAlt.feedback);
 		return $card;
 	}
 

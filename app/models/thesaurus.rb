@@ -12,21 +12,27 @@ module Thesaurus
   private
 
   def self.syns_or_ants(word, type)
-    response = HTTParty.get(
-      "#{URL}/#{word}/#{type}",
-      headers: {
-        "X-Mashape-Key" => "jxec7LMiQymshHsPPG7i86q1rdXNp1Ndvi0jsnTSbYjDIDo0Kk",
-        "Accept" => "application/json"
-      }
-    )
+		begin
+			response = HTTParty.get(
+				"#{URL}/#{word}/#{type}",
+				headers: {
+					"X-Mashape-Key" => "jxec7LMiQymshHsPPG7i86q1rdXNp1Ndvi0jsnTSbYjDIDo0Kk",
+					"Accept" => "application/json"
+				}
+			)
 
-    if response.success? && response[type]
-      response[type].map do |w|
-        has_multiple_words = w.split(" ").count > 1
-        WordsApi.define(w) unless has_multiple_words
-      end.flatten
-    else
-      nil
-    end
+			if response.success? && response[type]
+				response[type].map do |w|
+					has_multiple_words = w.split(" ").count > 1
+					WordsApi.define(w) unless has_multiple_words
+				end.flatten
+			else
+				nil
+			end
+		rescue => e
+			if e.message.include?("Failed to open TCP connection")
+				"Looks like you are offline. Come back when you get wifi!"
+			end
+		end
   end
 end
