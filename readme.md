@@ -38,19 +38,26 @@ metrics
 
 Our goal is to close the word gap with an app that not only improves student
 outcomes through vocabulary development, but also is really easy and fun to use.
-Founder Danelson Rosa came up with the original idea out of his own personal
-frustrations when trying to learn new words. Through his research, he realized
-the importance vocabulary truly has and how big of an impact it could have for
-many different groups, especially K-12 students.
+The original idea came out of my own personal
+frustrations when trying to learn new words. Through my research, I realized
+the importance vocabulary truly has and the huge impact it could have for
+many different folks, especially K-12 students.
 
 ## Thought Process
 
-As the product owner, my approach with Leksi has been to develop stronger
-versions of the product with feedback and data...
+Our approach with Leksi has been to try and release iterations quickly with the
+goal of providing an even more engaging and effective app.
+Because there are three different users with their respective use cases, it can
+sometimes be tricky to decide which features should be completed first.
+During a 10-week pilot with a school in Manhattan, the decisions were pretty
+easy to make -- focus on the students, fix any bugs, deliver on feature
+requests and/or enhancements, etc. It's not always this simple and so our
+thought process depends on factors like what the goal is, who it's for, and how
+long it'll likely take.
 
-- Create non-functional prototype with a tool called Axure
-- Developed the first version of Leksi based on this prototype, which went
-through many iterations after doing research, user testing, talking to folks in
-the education community, etc.
-- Iterated on a weekly to bi-weekly basis during a 10-week pilot with a school
-in Manhattan
+If you have any questions, comments, or concepts, I'd be happy to respond to
+them.
+
+Danelson
+
+:smiley:
