@@ -72,7 +72,7 @@ $(document).ready(function() {
 				"Tap the letters to spell that same word, whose definition is <mark>" +
 				word.definition + "</mark>."
 			);
-      updateProgress(12);
+      updateProgress(17);
 			addPoints(100);
 			flashPointsUpdate($arrowSuccess);
 			spellByClickingLetters(chosenWordLetters);
@@ -89,7 +89,7 @@ $(document).ready(function() {
 				"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
 				"the volume button to hear its pronunciation."
       );
-      updateProgress(25);
+      updateProgress(34);
 			addPoints(150);
 			flashPointsUpdate($arrowSuccess);
       startPronunciationActivity(word);
@@ -105,7 +105,7 @@ $(document).ready(function() {
       $pronunciationContinueBtn.hide();
 			addPoints(200);
 			flashPointsUpdate($arrowSuccess);
-			updateProgress(37);
+			updateProgress(51);
 			$chosenWordHeaderContainer.html(targetWord.name)
 																.removeClass("text-success");
 
@@ -125,7 +125,7 @@ $(document).ready(function() {
 			$("#meaning-alts-continue-btn").hide();
 			addPoints(325);
 			flashPointsUpdate($arrowSuccess);
-			updateProgress(50);
+			updateProgress(68);
 
 			getExampleNonExamples(targetWord.id).done(function(response) {
 			  startExampleNonExamplesActivity(targetWord, response);
@@ -139,7 +139,7 @@ $(document).ready(function() {
 			$("#ex-non-exs-cont-btn").hide();
 			addPoints(500);
 			flashPointsUpdate($arrowSuccess);
-			updateProgress(70);
+			updateProgress(85);
 
 			thesaurus(targetWord.name).done(function(response) {
 				const synonyms = response[0];
@@ -408,7 +408,7 @@ $(document).ready(function() {
 		})
 
 		$("#ex-non-exs-div").show();
-
+		// TODO Figure out why the buttons oddly lose their btn-block class
 		$(".container").on("click", ".ex-non-exs-answer", function() {
 			$selAnswer = $(this);
 			$selAnswerText = $selAnswer.text().trim();
@@ -453,22 +453,93 @@ $(document).ready(function() {
 
 	function startSynVersusAntActivity(synonyms, antonyms) {
 		giveDirections(
-			"The word above has synonyms and antonyms. Click to pair them."
+			"Match the synonym and antonym pairs related to the word above."
 		);
-		syns = ["syn1", "syn2", "syn3"];
-		ants = ["ant1", "ant2", "ant3"];
+		var synNames, syns = [], antNames, ants = [];
 
-		$.each(syns, function() {
-			syns.push("synonym");
-		});
+		if (synonyms) {
+			synNames = $.unique($(synonyms).map(function() {
+				return this.name;
+			}));
 
-		$.each(ants, function() {
-			syns.push("antonym");
-		});
+			$.each(synNames, function() {
+				syns.push("synonym");
+			});
 
-		array = merge(syns, ants);
+			syns = merge(synNames, syns);
+		}
 
+		array = shuffleArray(merge(syns, ants));
 		$("#syn-vs-ant-div").append(createMatchingCards(array));
+
+		var $selectedBtn;
+		var $selectedBtns;
+		var selectedBtnArray = [];
+		var twoBtnsAreSelected = false;
+		var btnsAreTheSame = false;
+		var isMatchMade = false;
+		var gameCompleted = false;
+
+		$(".container").on("click", ".match", function() {
+			$selectedBtn = $(this);
+			$selectedBtn.addClass("selected");
+			selectedBtnArray.push($selectedBtn);
+			numSelected = selectedBtnArray.length;
+			twoBtnsAreSelected = numSelected > 1;
+
+			if (twoBtnsAreSelected) {
+				$firstBtn = $(selectedBtnArray[0]);
+				$secondBtn = $(selectedBtnArray[1]);
+				btnsAreTheSame = $firstBtn[0] === $secondBtn[0] && $firstBtn.text() == $secondBtn.text();
+				selectedBtnArray = [];
+
+				if (btnsAreTheSame) {
+					$selectedBtn.removeClass("btn-primary")
+											.addClass("btn-outline-primary")
+											.removeClass("selected");
+				} else {
+					if ($firstBtn.text() == "synonym" || $secondBtn.text() == "synonym") {
+						var $notSynonymBtn = $(".selected").filter(function() {
+							return $(this).text() != "synonym";
+						});
+
+						if ($.inArray($notSynonymBtn.text(), synNames) != -1) {
+							isMatchMade = true;
+						}
+					}
+
+					$selectedBtns = $(".selected");
+
+					if (isMatchMade) {
+						$selectedBtns.removeClass("btn-primary")
+												 .removeClass("btn-outline-primary")
+												 .removeClass("selected")
+												 .addClass("btn-success")
+												 .prop("disabled", true);
+						addPoints(30);
+						gameCompleted = $(".match.btn-success").length == array.length;
+
+						if (gameCompleted) {
+							$("#syn-vs-ant-cont-btn").fadeIn();
+						}
+					} else {
+						$selectedBtns.removeClass("btn-primary")
+												 .removeClass("btn-outline-primary")
+												 .removeClass("selected")
+												 .addClass("btn-outline-primary");
+				    removePoints(10);
+						flashPointsUpdate($arrowDanger);
+					}
+				}
+			} else {
+				// highlight selectedBtn
+				$selectedBtn.removeClass("btn-outline-primary")
+										.addClass("btn-primary")
+				// disable other similar types?, e.g. if synonym is clicked, disable
+					// all other synonym and antonym buttons and only show the words to
+					// be selected
+			}
+		});
 	};
 
 	function startReviewActivity(chosenWordName) {
@@ -487,8 +558,8 @@ $(document).ready(function() {
 		var $row = createElem("div", "row text-center");
 
 		$.each(strings, function() {
-			var $colSmallThree = createElem("div", "col-sm-3 mb-3");
-			var $btn = createBtn("btn-outline-primary btn-lg btn-block", this);
+			var $colSmallThree = createElem("div", "col-sm-4 mb-3");
+			var $btn = createBtn("btn-outline-primary btn-lg btn-block match", this);
 			$colSmallThree.append($btn);
 			$row.append($colSmallThree);
 		});
