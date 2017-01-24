@@ -545,12 +545,6 @@ $(document).ready(function() {
 			} else {
 				$selectedBtn.removeClass("btn-outline-primary")
 										.addClass("btn-primary");
-				// disable other similar types?, e.g. if synonym is clicked, disable
-				// all other synonym and antonym buttons and only show the words to
-				// be selected
-				if ($selectedBtn.text().indexOf("onym") != -1) {
-					$(".match.btn:contains('onym')").prop("disabled", true);
-				}
 			}
 		});
 	};
