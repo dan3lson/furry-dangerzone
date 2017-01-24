@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	// General
 	var $chosenWordID = $(".palabra-id").html();
 	var $chosenWordHeaderContainer = $("#chosen-word-header-container");
 	var $regex = /^[a-zA-Z. ]+$/;
@@ -10,44 +9,6 @@ $(document).ready(function() {
 	var $points = $(".scoreboard-points");
 	const $arrowDanger = $(".fa-arrow-down.text-danger");
 	const $arrowSuccess = $(".fa-arrow-up.text-success");
-	// Spell by Clicking Letters
-	var $alphabets = "abcdefghijklmnopqrstuvwxyz".split('');
-	var	$randomAlphabet;
-	var $alphabetRandLetters = [];
-	var $mergedLettersArray = [];
-	var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
-	// Pronunciation
-	var $pronunciationSpans = $("#pronunciation-spans");
-	// Synonyms
-	var $synonym_row;
-	var $synonym_circle_div;
-	var $synonym_word_div;
-	var $synonym_circle_activity_boolean = false;
-	// Antonyms
-	var $antonym_row;
-	var $antonym_circle_div;
-	var $antonym_word_div;
-	var $antonym_circle_activity_boolean = false;
-	// Synonyms / Antonyms Checkpoint
-	var $syn_ant_row;
-	var $syn_ant_circle_div;
-	var $syn_ant_word_div;
-	var $syn_ant_checkpoint_synonyms_array = [];
-	var $syn_ant_checkpoint_antonyms_array = [];
-	var $shuffled_syn_ant_array = [];
-	var $shuffled_syn_ant_array_counter = 0;
-	var $current_syn_ant_checkpoint_div;
-	var $current_syn_ant_checkpoint_word = "";
-	var $syn_ant_checkpoint_score_div;
-	var $syn_ant_checkpoint_correct_score = 0;
-	var $syn_ant_circle_activity_boolean = false;
-	// Real World Examples
-	var $rwe_row;
-	var $rwe_circle_div;
-	var $rwe_source_div;
-	var $rwe_collapse_header = "";
-	var $rwe_container;
-	var $rwe_circle_activity_boolean = false;
 
 	if ($chosenWordID != undefined) {
 		setTheStage();
@@ -82,6 +43,8 @@ $(document).ready(function() {
   function fillInTheBlankContinueBtn(word) {
     $("#fill-in-the-blank-continue-btn").click(function() {
 			var numSyllables = word.phonetic_spelling.split("·").length;
+			var $pronunciationSpans = $("#pronunciation-spans");
+			var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
       $("#fill-in-the-blank-continue-btn").hide();
       $spellByClickingLettersDiv.hide();
       $pronunciationSpans.show();
@@ -99,6 +62,7 @@ $(document).ready(function() {
   function pronunciationContinueBtn(words) {
 		const $pronunciationContinueBtn = $("#pronunciation-continue-btn");
 		const targetWord = words[0];
+		var $pronunciationSpans = $("#pronunciation-spans");
 
     $pronunciationContinueBtn.click(function() {
       $pronunciationSpans.hide();
@@ -113,7 +77,17 @@ $(document).ready(function() {
 				if (response.length) {
 					startMeaningAltsActivity(words, response);
 				} else {
-					startExampleNonExamplesActivity(targetWord, response);
+					getExampleNonExamples(targetWord.id).done(function(response) {
+						if (response.length) {
+							startExampleNonExamplesActivity(targetWord, response);
+						} else {
+							thesaurus(targetWord.name).done(function(response) {
+								const synonyms = response[0];
+								const antonyms = response[1];
+								startSynVersusAntActivity(synonyms, antonyms);
+							});
+						}
+					});
 				}
 			})
     });
@@ -128,7 +102,15 @@ $(document).ready(function() {
 			updateProgress(68);
 
 			getExampleNonExamples(targetWord.id).done(function(response) {
-			  startExampleNonExamplesActivity(targetWord, response);
+				if (response.length) {
+					startExampleNonExamplesActivity(targetWord, response);
+				} else {
+					thesaurus(targetWord.name).done(function(response) {
+						const synonyms = response[0];
+						const antonyms = response[1];
+						startSynVersusAntActivity(synonyms, antonyms);
+					});
+				}
 			});
 		});
 	}
@@ -145,7 +127,7 @@ $(document).ready(function() {
 				const synonyms = response[0];
 				const antonyms = response[1];
 
-				if (isOffline(synonyms) && false) {
+				if (isOffline(synonyms)) {
 					var $alert = createElem("div", "alert alert-warning");
 					$alert.text(synonyms);
 					$("#syn-vs-ant-div").append($alert);
@@ -255,6 +237,12 @@ $(document).ready(function() {
 		var firstLetter;
 		var underscores = "";
 		var $underscoreContainer = createElem("div", null, "underscore-container");
+		var $alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+		var	$randomAlphabet;
+		var $alphabetRandLetters = [];
+		var $mergedLettersArray = [];
+		var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
+
 		makeLettersDefault($chosenWordHeaderContainer);
 		$spellByClickingLettersDiv.show();
 		$chosenWordHeaderContainer.html($underscoreContainer);
@@ -328,12 +316,14 @@ $(document).ready(function() {
 			$btn = $(this);
 			$btn.addClass("text-success")
 					.removeClass("fa-volume-off")
-					.addClass("fa-volume-up")
+					.addClass("fa-volume-up");
+
 			setTimeout(function() {
 				$btn.removeClass("text-success")
 						.removeClass("fa-volume-up")
 						.addClass("fa-volume-off");
 			}, 500);
+
 			$chosenWordHeaderContainer.addClass("text-success");
 			addPoints(1);
 			flashPointsUpdate($arrowSuccess);
@@ -452,43 +442,19 @@ $(document).ready(function() {
 	}
 
 	function startSynVersusAntActivity(synonyms, antonyms) {
-		giveDirections(
-			"Match the synonym and antonym pairs related to the word above."
-		);
-		var synNames;
-		var syns = [];
-		var antNames;
-		var ants = [];
-		var matches = [];
-		var match;
-
-		if (synonyms) {
-			synNames = $.unique($(synonyms).map(function() {
-				return this.name;
-			}));
-
-			$.each(synNames, function(index, word) {
-				syns.push("synonym");
-				match = new Object();
-				match.id = index;
-				match.word = word;
-				match.type = "synonym";
-				matches.push(match);
-			});
-
-			syns = merge(synNames, syns);
-		}
-
-		array = shuffleArray(merge(syns, ants));
-
-		$("#syn-vs-ant-div").append(createMatchingCards(matches));
-
 		var $selectedBtn;
 		var $selectedBtns;
 		var twoBtnsAreSelected = false;
 		var btnsAreTheSame = false;
-		var isMatchMade = false;
 		var gameCompleted = false;
+		var isMatchMade = false;
+		var matches = [];
+		giveDirections("Match the synonym and antonym pairs for the word above.");
+		matches = shuffleArray(merge(
+			createMatchObjects(synonyms, "synonym"),
+			createMatchObjects(antonyms, "antonym")
+		));
+		$("#syn-vs-ant-div").append(createMatchingCards(matches));
 
 		$(".container").on("click", ".match", function() {
 			$selectedBtn = $(this);
@@ -500,51 +466,49 @@ $(document).ready(function() {
 			if (twoBtnsAreSelected) {
 				$firstBtn = $($selectedBtns[0]);
 				$secondBtn = $($selectedBtns[1]);
-				hasClickedSameBtn = $firstBtn[0] === $secondBtn[0];
-				hasClickedSameBtnTypes = $firstBtn.text() == $secondBtn.text();
-				btnsAreTheSame = hasClickedSameBtn || hasClickedSameBtnTypes;
-				$selectedBtns.removeClass("selected");
+				btnsAreOnyms = $firstBtn.text() == $secondBtn.text();
 
-				if (btnsAreTheSame) {
-					$selectedBtns.removeClass("btn-primary")
-											 .addClass("btn-outline-primary")
+				if (btnsAreOnyms) {
+					$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
+											 .addClass("btn-outline-primary");
+				}
+
+				if ($firstBtn.text() == "synonym" || $secondBtn.text() == "synonym") {
+					var $wordBtn = findBtnNot($selectedBtns, "synonym");
+					var matchIsFound = findMatch(matches, $wordBtn, "synonym").length;
+					if (matchIsFound) { isMatchMade = true; }
 				} else {
-					if ($firstBtn.text() == "synonym" || $secondBtn.text() == "synonym") {
-						var $wordBtn = $selectedBtns.filter(function(btn) {
-							return $(btn).text() != "synonym";
-						});
-						var wordMatch = matches.filter(function(match) {
-							return match.word == $wordBtn.text() && match.type == "synonym";
-						});
+					var $wordBtn = findBtnNot($selectedBtns, "antonym");
+					var matchIsFound = findMatch(matches, $wordBtn, "antonym").length;
+					if (matchIsFound) { isMatchMade = true; }
+				}
 
-						if (wordMatch.length) {
-							isMatchMade = true;
-						}
+				if (isMatchMade) {
+					$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
+											 .addClass("btn-success")
+											 .prop("disabled", true);
+					addPoints(30);
+					flashPointsUpdate($arrowSuccess);
+					isMatchMade = false;
+					gameCompleted = $(".match.btn-success").length == matches.length * 2;
+
+					if (gameCompleted) {
+						$("#syn-vs-ant-cont-btn").fadeIn();
 					}
-
-					if (isMatchMade) {
-						$selectedBtns.removeClass("btn-primary")
-												 .removeClass("btn-outline-primary")
-												 .addClass("btn-success")
-												 .prop("disabled", true);
-						addPoints(30);
-						isMatchMade = false;
-						gameCompleted = $(".match.btn-success").length == array.length;
-
-						if (gameCompleted) {
-							$("#syn-vs-ant-cont-btn").fadeIn();
-						}
-					} else {
-						$selectedBtns.removeClass("btn-primary")
-												 .removeClass("btn-outline-primary")
-												 .addClass("btn-outline-primary");
-				    removePoints(10);
-						flashPointsUpdate($arrowDanger);
-					}
+				} else {
+					$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
+											 .addClass("btn-outline-primary");
+			    removePoints(10);
+					flashPointsUpdate($arrowDanger);
 				}
 			} else {
-				$selectedBtn.removeClass("btn-outline-primary")
-										.addClass("btn-primary");
+				if ($selectedBtn.hasClass("btn-primary")) {
+					$selectedBtn.removeClass("btn-primary selected")
+											.addClass("btn-outline-primary");
+				} else {
+					$selectedBtn.removeClass("btn-outline-primary")
+											.addClass("btn-primary");
+				}
 			}
 		});
 	};
@@ -560,6 +524,36 @@ $(document).ready(function() {
 	*
 	*
 	**/
+
+	function findBtnNot($btns, type) {
+		return $btns.filter(function() {
+			return $(this).text() != type;
+		});
+	}
+
+	function findMatch(matches, $btn, type) {
+		return matches.filter(function(match) {
+			return isMatch(match, $btn, type);
+		});
+	}
+
+	function isMatch(match, $btn, type) {
+		return match.word == $btn.text() && match.type == type;
+	}
+
+	function createMatchObjects(words, type) {
+		matches = [];
+
+		$.each(words, function(index, word) {
+			match = new Object();
+			match.id = index;
+			match.word = word;
+			match.type = type;
+			matches.push(match);
+		});
+
+		return matches;
+	}
 
 	function createMatchingCards(matches) {
 		var $row = createElem("div", "row text-center");
@@ -686,40 +680,6 @@ $(document).ready(function() {
 		$halfCol1.append($btn1);
 		$halfCol2.append($btn2);
 		$feedback.find("strong").append(exNonEx.feedback);
-		return $card;
-	}
-
-	function createSynsVsAntsGameboard(meaningAlt, index) {
-		$card = createElem("div", "card mb-3");
-		$cardBlock = createElem("div", "card-block");
-		$cardTitle = createElem("h4", "card-title");
-		$rightOrWrongIcon = createElem("div", "float-right");
-		$btnsDiv = createElem("div", "row text-center");
-		$halfCol1 = createElem("div", "col-sm-6");
-		$halfCol2 = createElem("div", "col-sm-6");
-		btnOptions = shuffleArray(meaningAlt.choices.split(","));
-		$btn1 = createBtn(
-			"btn-lg btn-outline-primary btn-block mean-alts-answer",
-			btnOptions[0]
-		);
-		$btn2 = createBtn(
-			"btn-lg btn-outline-primary btn-block mean-alts-answer",
-			btnOptions[1]
-		);
-		$feedback = createElem(
-			"p", "card-text mean-alts-feedback"
-		).append(createElem("strong"));
-		$card.append($cardBlock);
-		$cardBlock.append($cardTitle);
-		$cardTitle.append($rightOrWrongIcon);
-		$cardTitle.append(meaningAlt.text);
-		$cardBlock.append($btnsDiv);
-		$cardBlock.append($feedback);
-		$btnsDiv.attr("data-index", index);
-		$btnsDiv.append($halfCol1).append($halfCol2);
-		$halfCol1.append($btn1);
-		$halfCol2.append($btn2);
-		$feedback.find("strong").append(meaningAlt.feedback);
 		return $card;
 	}
 

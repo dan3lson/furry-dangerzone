@@ -22,10 +22,7 @@ module Thesaurus
 			)
 
 			if response.success? && response[type]
-				response[type].map do |w|
-					has_multiple_words = w.split(" ").count > 1
-					WordsApi.define(w) unless has_multiple_words
-				end.flatten
+				response[type]
 			else
 				nil
 			end
