@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def has_words?
-    words.any?
+    !words.empty?
   end
 
   def has_tags?

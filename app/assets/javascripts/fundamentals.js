@@ -455,26 +455,36 @@ $(document).ready(function() {
 		giveDirections(
 			"Match the synonym and antonym pairs related to the word above."
 		);
-		var synNames, syns = [], antNames, ants = [];
+		var synNames;
+		var syns = [];
+		var antNames;
+		var ants = [];
+		var matches = [];
+		var match;
 
 		if (synonyms) {
 			synNames = $.unique($(synonyms).map(function() {
 				return this.name;
 			}));
 
-			$.each(synNames, function() {
+			$.each(synNames, function(index, word) {
 				syns.push("synonym");
+				match = new Object();
+				match.id = index;
+				match.word = word;
+				match.type = "synonym";
+				matches.push(match);
 			});
 
 			syns = merge(synNames, syns);
 		}
 
 		array = shuffleArray(merge(syns, ants));
-		$("#syn-vs-ant-div").append(createMatchingCards(array));
+
+		$("#syn-vs-ant-div").append(createMatchingCards(matches));
 
 		var $selectedBtn;
 		var $selectedBtns;
-		var selectedBtnArray = [];
 		var twoBtnsAreSelected = false;
 		var btnsAreTheSame = false;
 		var isMatchMade = false;
@@ -483,40 +493,42 @@ $(document).ready(function() {
 		$(".container").on("click", ".match", function() {
 			$selectedBtn = $(this);
 			$selectedBtn.addClass("selected");
-			selectedBtnArray.push($selectedBtn);
-			numSelected = selectedBtnArray.length;
+			$selectedBtns = $(".selected");
+			numSelected = $selectedBtns.length;
 			twoBtnsAreSelected = numSelected > 1;
 
 			if (twoBtnsAreSelected) {
-				$firstBtn = $(selectedBtnArray[0]);
-				$secondBtn = $(selectedBtnArray[1]);
-				btnsAreTheSame = $firstBtn[0] === $secondBtn[0] && $firstBtn.text() == $secondBtn.text();
-				selectedBtnArray = [];
+				$firstBtn = $($selectedBtns[0]);
+				$secondBtn = $($selectedBtns[1]);
+				hasClickedSameBtn = $firstBtn[0] === $secondBtn[0];
+				hasClickedSameBtnTypes = $firstBtn.text() == $secondBtn.text();
+				btnsAreTheSame = hasClickedSameBtn || hasClickedSameBtnTypes;
+				$selectedBtns.removeClass("selected");
 
 				if (btnsAreTheSame) {
-					$selectedBtn.removeClass("btn-primary")
-											.addClass("btn-outline-primary")
-											.removeClass("selected");
+					$selectedBtns.removeClass("btn-primary")
+											 .addClass("btn-outline-primary")
 				} else {
 					if ($firstBtn.text() == "synonym" || $secondBtn.text() == "synonym") {
-						var $notSynonymBtn = $(".selected").filter(function() {
-							return $(this).text() != "synonym";
+						var $wordBtn = $selectedBtns.filter(function(btn) {
+							return $(btn).text() != "synonym";
+						});
+						var wordMatch = matches.filter(function(match) {
+							return match.word == $wordBtn.text() && match.type == "synonym";
 						});
 
-						if ($.inArray($notSynonymBtn.text(), synNames) != -1) {
+						if (wordMatch.length) {
 							isMatchMade = true;
 						}
 					}
 
-					$selectedBtns = $(".selected");
-
 					if (isMatchMade) {
 						$selectedBtns.removeClass("btn-primary")
 												 .removeClass("btn-outline-primary")
-												 .removeClass("selected")
 												 .addClass("btn-success")
 												 .prop("disabled", true);
 						addPoints(30);
+						isMatchMade = false;
 						gameCompleted = $(".match.btn-success").length == array.length;
 
 						if (gameCompleted) {
@@ -525,19 +537,20 @@ $(document).ready(function() {
 					} else {
 						$selectedBtns.removeClass("btn-primary")
 												 .removeClass("btn-outline-primary")
-												 .removeClass("selected")
 												 .addClass("btn-outline-primary");
 				    removePoints(10);
 						flashPointsUpdate($arrowDanger);
 					}
 				}
 			} else {
-				// highlight selectedBtn
 				$selectedBtn.removeClass("btn-outline-primary")
-										.addClass("btn-primary")
+										.addClass("btn-primary");
 				// disable other similar types?, e.g. if synonym is clicked, disable
-					// all other synonym and antonym buttons and only show the words to
-					// be selected
+				// all other synonym and antonym buttons and only show the words to
+				// be selected
+				if ($selectedBtn.text().indexOf("onym") != -1) {
+					$(".match.btn:contains('onym')").prop("disabled", true);
+				}
 			}
 		});
 	};
@@ -554,14 +567,25 @@ $(document).ready(function() {
 	*
 	**/
 
-	function createMatchingCards(strings) {
+	function createMatchingCards(matches) {
 		var $row = createElem("div", "row text-center");
+		var $typeBtn;
+		var $wordBtn;
+		var $typeColSmallThree;
+		var $wordColSmallThree;
 
-		$.each(strings, function() {
-			var $colSmallThree = createElem("div", "col-sm-4 mb-3");
-			var $btn = createBtn("btn-outline-primary btn-lg btn-block match", this);
-			$colSmallThree.append($btn);
-			$row.append($colSmallThree);
+		$.each(matches, function(index, match) {
+			$wordColSmallThree = createElem("div", "col-sm-4 mb-3");
+			$typeColSmallThree = createElem("div", "col-sm-4 mb-3");
+			$wordBtn = createBtn(
+				"btn-outline-primary btn-lg btn-block match", match.word
+			)
+			$typeBtn = createBtn(
+				"btn-outline-primary btn-lg btn-block match", match.type
+			);
+			$typeColSmallThree.append($typeBtn);
+			$wordColSmallThree.append($wordBtn);
+			$row.append($wordColSmallThree).append($typeColSmallThree);
 		});
 
 		return $row;
