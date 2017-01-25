@@ -1,21 +1,124 @@
-<%= render "games/jeop_game_container" %>
-<div id="review_level_two_container" class="text-center">
-	<div class="bg-success">
-		<%= image_tag("strength2.png",
-			alt: "Congrats on Intermediate Gold!",
-			title: "Congrats on Intermediate Gold!")
-		%>
-		<h1 class="text-success"><%= random_congrats %>!</h1>
-		<p>
-			<span id="level-congrats-text">
-				You got through the Intermediate game for
-				<strong>'<%= @chosen_word.name %>'</strong>.
-				Check out how you did:
-			</span>
-		</p>
+<div id="directions">
+	<p class="lead">
+		<span class="text-primary">Directions:</span>
+		<span id="fundamentals-game-instructions">
+			Click on any Linero to answer the question displayed below.
+		</span>
+	</p>
+</div>
+<div class="bg-faded">
+	<div class="float-right p-3">0/20</div>
+	<h3 id="chosen-word-header-container">determination</h3>
+</div>
+<table class="table table-bordered table-sm" id="jeop-table">
+	<thead>
+		<tr class="bg-primary text-white">
+			<th class="text-center">Meanings</th>
+			<th class="text-center">Synonyms</th>
+			<th class="text-center">Antonyms</th>
+			<th class="text-center">Examples</th>
+			<th class="text-center">Syllables</th>
+		</tr>
+	</thead>
+	<tbody class="text-center">
+		<tr>
+			<td class="p-2"><i class="fa fa-money"></i> 200</td>
+			<td><i class="fa fa-money"></i> 200</td>
+			<td><i class="fa fa-money"></i> 200</td>
+			<td><i class="fa fa-money"></i> 200</td>
+			<td><i class="fa fa-money"></i> 200</td>
+		</tr>
+		<tr>
+			<td class="p-2"><i class="fa fa-money"></i> 400</td>
+			<td><i class="fa fa-money"></i> 400</td>
+			<td><i class="fa fa-money"></i> 400</td>
+			<td><i class="fa fa-money"></i> 400</td>
+			<td><i class="fa fa-money"></i> 400</td>
+		</tr>
+		<tr>
+			<td class="p-2"><i class="fa fa-money"></i> 600</td>
+			<td><i class="fa fa-money"></i> 600</td>
+			<td><i class="fa fa-money"></i> 600</td>
+			<td><i class="fa fa-money"></i> 600</td>
+			<td><i class="fa fa-money"></i> 600</td>
+		</tr>
+		<tr>
+			<td class="p-2"><i class="fa fa-money"></i> 800</td>
+			<td><i class="fa fa-money"></i> 800</td>
+			<td><i class="fa fa-money"></i> 800</td>
+			<td><i class="fa fa-money"></i> 800</td>
+			<td><i class="fa fa-money"></i> 800</td>
+		</tr>
+		<tr>
+			<td class="p-2"><i class="fa fa-money"></i> 1000</td>
+			<td><i class="fa fa-money"></i> 1000</td>
+			<td><i class="fa fa-money"></i> 1000</td>
+			<td><i class="fa fa-money"></i> 1000</td>
+			<td><i class="fa fa-money"></i> 1000</td>
+		</tr>
+	</tbody>
+</table>
+<div class="row">
+	<div class="col-sm-6 mb-3">
+		<div>
+			<button type="button"
+							class="btn btn-outline-primary btn-block btn-lg"
+							id="chosen_word_one_btn">
+				word
+				<br>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+			</button>
+		</div>
 	</div>
-	<%= render "games/jeop_results" %>
-	<% unless current_user.is_student? %>
-		<%= render "games/share_accomplishment" %>
-	<% end %>
+	<div class="col-sm-6 mb-3">
+		<div>
+			<button type="button"
+							class="btn btn-outline-primary btn-block btn-lg"
+							id="chosen_word_one_btn">
+				word
+				<br>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+			</button>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6 mb-3">
+		<div>
+			<button type="button"
+							class="btn btn-outline-primary btn-block btn-lg"
+							id="chosen_word_one_btn">
+				word
+				<br>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+			</button>
+		</div>
+	</div>
+	<div class="col-sm-6 mb-3">
+		<div>
+			<button type="button"
+							class="btn btn-outline-primary btn-block btn-lg"
+							id="chosen_word_one_btn">
+				word
+				<br>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+				<i class="fa fa-question-circle-o text-muted"></i>
+			</button>
+		</div>
+	</div>
 </div>

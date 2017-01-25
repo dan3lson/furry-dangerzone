@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   def gamezone
   end
-  
+
   # This action is hit twice because of the respond_to -__-
   def fundamentals
     @chosen_word = Word.find(params[:word_id])
@@ -11,10 +11,6 @@ class GamesController < ApplicationController
     @record = true
     @words = [@chosen_word, Word.random(2)].flatten
 
-    # show details?, i.e. results or how many questions there are?
-    # if not correct, keep track of score for overall Fundamentals score
-      # to show if passed or not
-    # when all questions answered, display continue btn
     respond_to do |format|
       format.html
       format.json { render json: { words: @words } }
@@ -24,7 +20,6 @@ class GamesController < ApplicationController
   def jeopardy
     if logged_in?
       @chosen_word = Word.find(params[:word_id])
-
       @jeopardy_words = if params[:tag_id].blank?
         current_user.get_jeop_words(@chosen_word)
       else

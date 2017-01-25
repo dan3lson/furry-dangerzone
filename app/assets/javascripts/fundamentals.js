@@ -7,6 +7,7 @@ $(document).ready(function() {
 	var $scoreboardTimer = $(".scoreboard-timer");
 	var checkmark = "✓";
 	var $points = $(".scoreboard-points");
+	var timerID;
 	const $arrowDanger = $(".fa-arrow-down.text-danger");
 	const $arrowSuccess = $(".fa-arrow-up.text-success");
 
@@ -84,7 +85,12 @@ $(document).ready(function() {
 							thesaurus(targetWord.name).done(function(response) {
 								const synonyms = response[0];
 								const antonyms = response[1];
-								startSynVersusAntActivity(synonyms, antonyms);
+
+								if (synonyms.length) {
+									startSynVersusAntActivity(synonyms, antonyms);
+								} else {
+									startReviewActivity(targetWord);
+								}
 							});
 						}
 					});
@@ -108,7 +114,12 @@ $(document).ready(function() {
 					thesaurus(targetWord.name).done(function(response) {
 						const synonyms = response[0];
 						const antonyms = response[1];
-						startSynVersusAntActivity(synonyms, antonyms);
+
+						if (synonyms.length) {
+							startSynVersusAntActivity(synonyms, antonyms);
+						} else {
+							startReviewActivity(targetWord);
+						}
 					});
 				}
 			});
@@ -179,7 +190,7 @@ $(document).ready(function() {
 			giveDirections("Type the word above.");
 			spellByTyping(targetWordName);
 			updateProgress(0);
-			startCountup($scoreboardTimer, 0);
+			timerID = startCountup($scoreboardTimer, 0);
 			$timeGameStarted = new Date();
 		}
 	}
@@ -513,8 +524,16 @@ $(document).ready(function() {
 		});
 	};
 
-	function startReviewActivity(chosenWordName) {
-		// To be re-implemented...
+	function startReviewActivity(targetWord) {
+		updateProgress(100);
+		addPoints(1000);
+		flashPointsUpdate($arrowSuccess);
+		$("#chosen-word-header-container").hide().addClass("text-center").fadeIn();
+		$("#chosen-word-header-container").prepend(createElem("i", "em em-clap"));
+		$("#chosen-word-header-container").append(createElem("i", "em em-clap"));
+		$("#directions .text-primary").html("Nice job...you finished!");
+		$("#directions span:last").html("Ready for the next challenge?");
+		clearTimeout(timerID);
 	};
 
 	/**
@@ -724,7 +743,7 @@ $(document).ready(function() {
 	}
 
 	function startCountup($section, seconds) {
-		var countdownID = setInterval(function() {
+		return countdownID = setInterval(function() {
 			seconds++;
 			$section.html(seconds);
 		}, 1000);

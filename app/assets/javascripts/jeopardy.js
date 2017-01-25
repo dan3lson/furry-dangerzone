@@ -214,8 +214,10 @@ $(document).ready(function(){
 	};
 
 	/**
-	 * Helper Functions: Support ones that help each activity above
-	 */
+	*
+	* Helper Functions: Support ones that help each activity above
+	*
+	**/
 
 	function createElem(elem, elem_class, elem_id) {
 		elem_class = elem_class ||  null;
