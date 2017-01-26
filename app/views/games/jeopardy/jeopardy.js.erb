@@ -1,0 +1,69 @@
+const $topSectionPartial = $("<%= j render(partial: 'games/jeopardy/top_section', locals: { word: @target_word }) %>");
+const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { word: @target_word }) %>");
+const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { words: @jeopardy_words }) %>");
+const rounds = "<%= @twenty_rounds %>";
+console.log(rounds);
+var lineroCell;
+var amount;
+var linero = 0;
+var quesCounter = 0;
+var $timeGameStarted;
+
+$(".container").empty()
+							 .hide()
+							 .append(
+								 $topSectionPartial,
+								 $lineroTablePartial,
+								 $buttonsPartial
+							 )
+							 .fadeIn("slow");
+
+$(".container").on("click", "#linero-table td", function() {
+	// get the clicked cell
+	$lineroCell = $(this);
+	// display the question for this given cell by adding an index to each cell
+	  // and then retrieving it with rounds[index]
+});
+
+$(".container").on("click", ".jeop-btn", function() {
+	// get the clicked answer
+	$selectedAns = $(this);
+	// start the timer if not already started
+	$timeGameStarted = $timeGameStarted || new Date();
+	// Create reviewObjects array
+	// Instantiate new object called result
+		// Give it a property of questionNum = quesCounter
+		// Give it a property of question = question[quesCounter]
+		// Give it a property of selectedAns = button
+
+	// Remove the first question in the array
+	// Get the first question in the updated array
+	// Display the first question in the updated array
+	// Check if answer is correct
+		// If answerCorrect
+			// Make the lineroCell "disabled" by with lightgray css text
+			// Add a green thumbs up to the button's first available question icon
+			// Update the linero total
+				amount = parseInt($(this).text());
+				linero += amount;
+			// Check if game over
+				// If true, clear table and buttons and show a review
+		// Else
+			// Make the lineroCell "disabled" by with lightgray css text
+			// Add a red thumbs up to the button's first available question icon
+			// Check if game over
+				// If true, clear table and buttons and show a review
+});
+
+function shuffleArray(array) {
+	var m = array.length, t, i;
+
+	while (m) {
+		i = Math.floor(Math.random() * m--);
+		t = array[m];
+		array[m] = array[i];
+		array[i] = t;
+	}
+
+	return array;
+};

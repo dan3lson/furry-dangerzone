@@ -387,7 +387,6 @@ $(document).ready(function(){
 		$(".progress-bar").attr("max", value);
 	};
 
-	// Shuffle an array's contents
 	function shuffle_array(array) {
 		var m = array.length, t, i;
 		// While there remain elements to shuffle…

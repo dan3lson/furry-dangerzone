@@ -200,15 +200,15 @@ class User < ActiveRecord::Base
   # refactor into two methods
   def combine_jeop_words(word)
     my_ids = self.incomplete_jeop_ids_not(word)
+    my_words = Word.find(my_ids);
 
     if num_rands_needed == 2
-      my_words = Word.find(my_ids)
       random_words = Word.random_excluding(num_rands_needed, my_ids)
     elsif num_rands_needed == 1
-      my_words = Word.find(my_ids.sample(2))
+      my_words = my_words.sample(2)
       random_words = Word.random_excluding(num_rands_needed, my_ids)
     else
-      my_words = Word.find(my_ids.sample(3))
+      my_words = my_words.sample(3)
       random_words = []
     end
 
@@ -318,7 +318,7 @@ class User < ActiveRecord::Base
   end
 
   # MOVED AS A RESULT OF SCEC & SCHOOL REFACTOR.
-  # UPDATE TEST FILES/LOCATIONS
+  # TODO UPDATE TEST FILES/LOCATIONS
   def num_incomplete_funds
     incomplete_fundamentals.count
   end
