@@ -19,11 +19,6 @@
 			</span>
 		</p>
 	</div>
-	<%= render "games/play_another",
-		url: "#{jeop_game_link(@chosen_word.id)}",
-		image_src: "strength2.png",
-		game_name: "Intermediate"
-	%>
 	<% if logged_in? && current_user.is_not_a_student? %>
 		<%= render "games/share_accomplishment" %>
 	<% end %>
