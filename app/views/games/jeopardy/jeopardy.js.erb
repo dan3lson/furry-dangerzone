@@ -1,59 +1,66 @@
+const rounds = JSON.parse("<%= j @jeopardy.to_json.html_safe %>").game;
+console.log(rounds);
 const $topSectionPartial = $("<%= j render(partial: 'games/jeopardy/top_section', locals: { word: @target_word }) %>");
 const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { word: @target_word }) %>");
-const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { words: @jeopardy_words }) %>");
-const rounds = "<%= @twenty_rounds %>";
-console.log(rounds);
+const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { words: @words }) %>");
+var $jeopardyDiv = createElem("div", null, "#jeopardy-div");
 var lineroCell;
 var amount;
 var linero = 0;
 var quesCounter = 0;
 var $timeGameStarted;
-
 $(".container").empty()
-							 .hide()
-							 .append(
-								 $topSectionPartial,
-								 $lineroTablePartial,
-								 $buttonsPartial
-							 )
-							 .fadeIn("slow");
+							 .append($jeopardyDiv);
+$jeopardyDiv.append($topSectionPartial, $lineroTablePartial, $buttonsPartial)
+						.hide()
+						.fadeIn("slow");
+$jeopardyDiv.find("h3").html(rounds[0].ques);
 
 $(".container").on("click", "#linero-table td", function() {
-	// get the clicked cell
 	$lineroCell = $(this);
-	// display the question for this given cell by adding an index to each cell
+	// display the question for this given cell maybe by adding an index to each cell
 	  // and then retrieving it with rounds[index]
+	$(".jeop-btn").prop("disabled", false);
 });
 
 $(".container").on("click", ".jeop-btn", function() {
-	// get the clicked answer
-	$selectedAns = $(this);
-	// start the timer if not already started
-	$timeGameStarted = $timeGameStarted || new Date();
-	// Create reviewObjects array
-	// Instantiate new object called result
-		// Give it a property of questionNum = quesCounter
-		// Give it a property of question = question[quesCounter]
-		// Give it a property of selectedAns = button
+	var questionIsDisplayed = $jeopardyDiv.find("h3").text().length;
 
-	// Remove the first question in the array
-	// Get the first question in the updated array
-	// Display the first question in the updated array
-	// Check if answer is correct
-		// If answerCorrect
-			// Make the lineroCell "disabled" by with lightgray css text
-			// Add a green thumbs up to the button's first available question icon
-			// Update the linero total
-				amount = parseInt($(this).text());
-				linero += amount;
-			// Check if game over
-				// If true, clear table and buttons and show a review
-		// Else
-			// Make the lineroCell "disabled" by with lightgray css text
-			// Add a red thumbs up to the button's first available question icon
-			// Check if game over
-				// If true, clear table and buttons and show a review
+	if (questionIsDisplayed) {
+		$selectedAns = $(this);
+		$selectedAnsText = $selectedAns.text();
+		$timeGameStarted = $timeGameStarted || new Date();
+		$jeopardyDiv.find("h3").empty();
+		$(".jeop-btn").prop("disabled", true);
+		// Make the lineroCell "disabled" by with lightgray css text
+		// display the increased counter in the top right corner
+		// Find the rounds[counter] object and update selected_ans to selectedAnsText
+		// Create reviewObjects array
+			// Instantiate new object called result
+				// Give it a property of round = rounds[counter]
+		// Check if answer is correct
+			// If answerCorrect
+				// Give it a new property of answerCorrectly = true
+				// Add a green thumbs up to the button's first available question icon
+				// Update the linero total
+					amount = parseInt($(this).text());
+					linero += amount;
+				// Check if game over
+					// If true, clear table and buttons and show a review
+					// !!! To be pseudo-coded! !!!
+			// Else
+				// Give it a new property of answerCorrectly = false
+				// Add a red thumbs up to the button's first available question icon
+				// Check if game over
+					// If true, clear table and buttons and show a review
+	}
 });
+
+function createElem(elem, elemClass, elemID) {
+	_class = elemClass || null;
+	_id = elemID || null;
+	return $("<" + elem + ">", { class: _class, id: _id });
+}
 
 function shuffleArray(array) {
 	var m = array.length, t, i;

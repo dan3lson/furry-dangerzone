@@ -19,30 +19,13 @@ class GamesController < ApplicationController
 
   def jeopardy
     @target_word = Word.find(params[:word_id])
-    @jeopardy_words = current_user.get_jeop_words(@target_word)
-    @rounds = []
-    @round = Round.new
-    @questions = (
-      %w(hello hola hi yo wassup) * 4
-    ).map { |w| "What is #{w}?" }
+    @words = current_user.get_jeop_words(@target_word)
+    @words_lineup = (@words * 6) << @words.sample
+    @jeopardy = { game: JeopGame.new(@words_lineup).rounds }
 
     respond_to do |format|
       format.js { render template: "games/jeopardy/jeopardy.js.erb" }
     end
-    # @jeopardy_words = if params[:tag_id].blank?
-    # #code used above
-    # else
-    #   @tag = Tag.find(params[:tag_id])
-    #   get_jeop_words_tag(current_user, @tag, @chosen_word) << @chosen_word
-    # end
-    #
-    # @jeopardy_words_ids = @jeopardy_words.map { |w| w.id }
-    # @jeopardy_words_names = @jeopardy_words.map { |w| w.name }
-    # @jeopardy_lineup = (@jeopardy_words * 5).shuffle
-    # @jeopardy_lineup_names = @jeopardy_lineup.map { |w| w.name }
-    # @attributes = (
-    #   %w(definition examples synonyms antonyms) * 5
-    # ).shuffle
     # @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
     #   @attribute = @attributes[i]
     #   @attribute_value = w.send(@attribute)

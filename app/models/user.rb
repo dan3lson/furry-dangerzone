@@ -218,9 +218,9 @@ class User < ActiveRecord::Base
   # TODO: Create test
   def get_jeop_words(word)
     if has_enough_incomplete_jeops?
-      [word] + combine_jeop_words(word)
+      combine_jeop_words(word) << word
     else
-      [word] + Word.random_excluding(3, word.id)
+      Word.random_excluding(3, word.id) << word
     end
   end
 
