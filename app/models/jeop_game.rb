@@ -1,4 +1,7 @@
+# TODO Create tests
 class JeopGame
+	include ActionView::Helpers::TextHelper
+
 	def initialize(words)
 		@words = words
 	end
@@ -7,21 +10,39 @@ class JeopGame
 		create_rounds
 	end
 
+	def self.rows(array, num)
+		array.each_slice(num).to_a
+	end
+
 	private
 
 	attr_reader :words
 
 	def create_rounds
 		rounds = []
+		wordz = words * 5
+		meanings = many_meaning_ques
+		synonyms = many_onym_ques("synonyms", "similar")
+		antonyms = many_onym_ques("antonyms", "opposite")
+		examples = many_examples_ques
+		syllables = many_syllables_ques
+		question_order = []
 
-		words.each_with_index do |w, i|
+		20.times do |i|
+			question_order.push(
+				meanings[i],
+				synonyms[i],
+				antonyms[i],
+				examples[i],
+				syllables[i]
+			)
 			jeop_round = JeopRound.new
 			jeop_round.ques_num = i
 			jeop_round.ques_type = ques_types[i]
-			jeop_round.ques = questions[i]
+			jeop_round.ques = question_order[i]
 			jeop_round.selected_ans = nil
-			jeop_round.correct_ans = w.name
-			jeop_round.word_id = w.id
+			jeop_round.correct_ans = wordz[i].name
+			jeop_round.word = wordz[i]
 			jeop_round.linero = lineros[i]
 			rounds << jeop_round
 		end
@@ -30,14 +51,46 @@ class JeopGame
 	end
 
 	def lineros
-		%w(200 400 600 800 1000) * 5
+		%w(300 600 900 1200) * 5
 	end
 
 	def ques_types
-		%w(meaning synonym antonym example syllable) * 5
+		%w(meanings synonyms antonyms examples syllables) * 5
 	end
 
-	def questions
-		(%w(hey hola hi yo wazzup sup) * 4).map { |w| "What is #{w}?" }
+	def meaning_ques(word)
+		"Which word means #{word.definition}?"
+	end
+
+	def many_meaning_ques
+		words.map { |w| meaning_ques(w) }.shuffle
+	end
+
+	def onym_ques(name, type, keyword)
+		onyms = Thesaurus.send(type, name)
+
+		unless onyms.nil? || onyms.blank?
+			onyms.map { |w| "Which word is #{keyword} to #{w}?" }
+		end
+	end
+
+	def many_onym_ques(type, keyword)
+		words.map { |w| onym_ques(w.name, type, keyword) }.flatten.compact.shuffle
+	end
+
+	def example_ques(word)
+		"Which word fills in the blank: ...TBD for #{word.name}..."
+	end
+
+	def many_examples_ques
+		words.map { |w| example_ques(w) }.shuffle
+	end
+
+	def syllable_ques(word)
+		"Which word has #{pluralize(word.num_syllables, 'syllable')}?"
+	end
+
+	def many_syllables_ques
+		words.map { |w| syllable_ques(w) }.shuffle
 	end
 end

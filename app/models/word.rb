@@ -22,6 +22,11 @@ class Word < ActiveRecord::Base
   before_create { self.name = name.downcase }
 
   # TODO: Create test
+  def num_syllables
+    phonetic_spelling.split("·").count
+  end
+
+  # TODO: Create test
   def self.search(name)
     where(name: name)
   end

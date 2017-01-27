@@ -1,5 +1,11 @@
 <tr>
-	<% 5.times do %>
-		<td class="p-2"><i class="fa fa-money"></i> <%= amount %></td>
+	<% 5.times do |i| %>
+		<% if row[i].has_question? %>
+			<td class="p-2 pointer" data-ques-num="<%= row[i].ques_num %>">
+		<% else %>
+			<td class="p-2 exclude text-muted" data-ques-num="<%= row[i].ques_num %>">
+		<% end %>
+				<i class="fa fa-money"></i> <%= amount %>
+			</td>
 	<% end %>
 </tr>

@@ -3,6 +3,7 @@ class GamesController < ApplicationController
   end
 
   # This action is hit twice because of the respond_to -__-
+  # TODO Make it render as cool as the Jeopardy game
   def fundamentals
     @chosen_word = Word.find(params[:word_id])
     @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
@@ -20,8 +21,10 @@ class GamesController < ApplicationController
   def jeopardy
     @target_word = Word.find(params[:word_id])
     @words = current_user.get_jeop_words(@target_word)
-    @words_lineup = (@words * 6) << @words.sample
-    @jeopardy = { game: JeopGame.new(@words_lineup).rounds }
+    @word_names = @words.map(&:name).shuffle
+    @rounds = JeopGame.new(@words).rounds
+    @jeopardy = { game: @rounds }
+    @rows = JeopGame.rows(@rounds, 5)
 
     respond_to do |format|
       format.js { render template: "games/jeopardy/jeopardy.js.erb" }

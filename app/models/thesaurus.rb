@@ -29,6 +29,8 @@ module Thesaurus
 		rescue => e
 			if e.message.include?("Failed to open TCP connection")
 				"Looks like you are offline. Come back when you get wifi!"
+			else
+				"Error in retrieving Thesaurus. Details: #{e.message}."
 			end
 		end
   end

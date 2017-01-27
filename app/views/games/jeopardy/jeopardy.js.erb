@@ -1,36 +1,54 @@
-const rounds = JSON.parse("<%= j @jeopardy.to_json.html_safe %>").game;
-console.log(rounds);
-const $topSectionPartial = $("<%= j render(partial: 'games/jeopardy/top_section', locals: { word: @target_word }) %>");
-const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { word: @target_word }) %>");
-const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { words: @words }) %>");
+// Get examples from WordAPI
+// Create and execute rake task for syllables
+// Complete pseudocode below
+	// If cell is excluded, respective question mark(s) should also be excluded
+	// Figure out the rules for a word to advance to Freestyle
+
+var rounds = JSON.parse("<%= j @jeopardy.to_json.html_safe %>").game;
+const $directionsPartial = $("<%= j render(partial: 'games/jeopardy/directions') %>");
+const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { rows: @rows }) %>");
+const $headerPartial = $("<%= j render(partial: 'games/jeopardy/header') %>");
+const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { names: @word_names }) %>");
 var $jeopardyDiv = createElem("div", null, "#jeopardy-div");
 var lineroCell;
+var lineroCellNumID;
 var amount;
+var round;
 var linero = 0;
+var question;
 var quesCounter = 0;
 var $timeGameStarted;
 $(".container").empty()
 							 .append($jeopardyDiv);
-$jeopardyDiv.append($topSectionPartial, $lineroTablePartial, $buttonsPartial)
-						.hide()
+$jeopardyDiv.append(
+							$directionsPartial,
+							$lineroTablePartial,
+							$headerPartial,
+							$buttonsPartial
+						).hide()
 						.fadeIn("slow");
-$jeopardyDiv.find("h3").html(rounds[0].ques);
+var validCells = "#linero-table td:not(.exclude)";
 
-$(".container").on("click", "#linero-table td", function() {
-	$lineroCell = $(this);
-	// display the question for this given cell maybe by adding an index to each cell
-	  // and then retrieving it with rounds[index]
+$(".container").on("click", validCells, function() {
+	$selectedCell = $(this);
+	makeActive(validCells, $selectedCell);
+	lineroCellNumID = $(this).data("ques-num");
+	question = findQues(rounds, lineroCellNumID);
+	updateHeader(question.ques);
 	$(".jeop-btn").prop("disabled", false);
 });
 
 $(".container").on("click", ".jeop-btn", function() {
+	// Check if the next two are already available - I'd assume they are :)
+	lineroCellNumID = $("#linero-table td.text-primary").data("ques-num");
+	question = findQues(rounds, lineroCellNumID);
 	var questionIsDisplayed = $jeopardyDiv.find("h3").text().length;
 
 	if (questionIsDisplayed) {
 		$selectedAns = $(this);
 		$selectedAnsText = $selectedAns.text();
 		$timeGameStarted = $timeGameStarted || new Date();
-		$jeopardyDiv.find("h3").empty();
+		updateHeader("");
 		$(".jeop-btn").prop("disabled", true);
 		// Make the lineroCell "disabled" by with lightgray css text
 		// display the increased counter in the top right corner
@@ -55,6 +73,19 @@ $(".container").on("click", ".jeop-btn", function() {
 					// If true, clear table and buttons and show a review
 	}
 });
+
+function makeActive(validCells, $selectedCell) {
+	$(validCells).removeClass("text-primary");
+	$selectedCell.addClass("text-primary");
+}
+
+function findQues(questions, num) {
+	return $(questions).filter(function() { return this.ques_num == num })[0];
+}
+
+function updateHeader(string) {
+	$jeopardyDiv.find("h3").html(string);
+}
 
 function createElem(elem, elemClass, elemID) {
 	_class = elemClass || null;

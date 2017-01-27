@@ -19,6 +19,7 @@
 			</span>
 		</p>
 	</div>
+
 	<% if logged_in? && current_user.is_not_a_student? %>
 		<%= render "games/share_accomplishment" %>
 	<% end %>

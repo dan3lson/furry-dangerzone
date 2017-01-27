@@ -1,5 +1,5 @@
 <div class="row">
-	<%= words.map(&:name).each do |name| %>
+	<% names.each do |name| %>
 		<div class="col-sm-6 mb-3">
 			<%= render "games/jeopardy/button", name: name %>
 		</div>

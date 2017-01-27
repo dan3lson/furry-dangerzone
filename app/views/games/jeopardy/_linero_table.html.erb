@@ -9,10 +9,21 @@
 		</tr>
 	</thead>
 	<tbody class="text-center">
-		<%= render "games/jeopardy/linero_row", amount: 200 %>
-		<%= render "games/jeopardy/linero_row", amount: 400 %>
-		<%= render "games/jeopardy/linero_row", amount: 600 %>
-		<%= render "games/jeopardy/linero_row", amount: 800 %>
-		<%= render "games/jeopardy/linero_row", amount: 1000 %>
+		<%= render "games/jeopardy/linero_row",
+			amount: 300,
+			row: rows[0]
+		%>
+		<%= render "games/jeopardy/linero_row",
+			amount: 600,
+			row: rows[1]
+		%>
+		<%= render "games/jeopardy/linero_row",
+			amount: 900,
+			row: rows[2]
+		%>
+		<%= render "games/jeopardy/linero_row",
+			amount: 1200,
+			row: rows[3]
+		%>
 	</tbody>
 </table>

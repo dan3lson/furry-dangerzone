@@ -1,14 +1,8 @@
-<div>
-	<button type="button"
-					class="btn btn-outline-primary btn-block btn-lg jeop-btn">
-		<%= name %>
-		<br>
-		<span></span>
-		<i class="fa fa-question-circle-o text-muted"></i>
-		<i class="fa fa-question-circle-o text-muted"></i>
-		<i class="fa fa-question-circle-o text-muted"></i>
-		<i class="fa fa-question-circle-o text-muted"></i>
-		<i class="fa fa-question-circle-o text-muted"></i>
-		<i class="fa fa-question-circle-o text-muted"></i>
-	</button>
-</div>
+<button type="button"
+				class="btn btn-outline-primary btn-block btn-lg jeop-btn">
+	<%= name %>
+	<br>
+	<% 5.times do %>
+		<span><i class="fa fa-question-circle-o text-muted"></i></span>
+	<% end %>
+</button>
