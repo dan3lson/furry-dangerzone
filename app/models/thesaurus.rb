@@ -16,7 +16,7 @@ module Thesaurus
 			response = HTTParty.get(
 				"#{URL}/#{word}/#{type}",
 				headers: {
-					"X-Mashape-Key" => "jxec7LMiQymshHsPPG7i86q1rdXNp1Ndvi0jsnTSbYjDIDo0Kk",
+					"X-Mashape-Key" => "Djxec7LMiQymshHsPPG7i86q1rdXNp1Ndvi0jsnTSbYjDIDo0Kk",
 					"Accept" => "application/json"
 				}
 			)

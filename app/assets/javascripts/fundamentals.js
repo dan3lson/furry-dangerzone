@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var $chosenWordID = $(".palabra-id").html();
-	var $chosenWordHeaderContainer = $("#chosen-word-header-container");
+	var $targetWordDiv = $("#chosen-word-header-container");
 	var $regex = /^[a-zA-Z. ]+$/;
 	var newPointsTotal = 0;
   var $timeGameStarted;
@@ -27,7 +27,7 @@ $(document).ready(function() {
     $("#spell-the-word-continue-btn").click(function(event) {
 			var chosenWordName = word.name;
 			var chosenWordLetters = chosenWordName.split('');
-      $("#spell-by-typing-form").hide();
+      $("#spell-by-typing-activity").hide();
       $(".checkpoint-image").show();
       $("#spell-the-word-continue-btn").hide();
       giveDirections(
@@ -71,7 +71,7 @@ $(document).ready(function() {
 			addPoints(200);
 			flashPointsUpdate($arrowSuccess);
 			updateProgress(51);
-			$chosenWordHeaderContainer.html(targetWord.name)
+			$targetWordDiv.html(targetWord.name)
 																.removeClass("text-success");
 
 			getMeaningAlts(targetWord.id).done(function(response) {
@@ -186,57 +186,56 @@ $(document).ready(function() {
 	}
 
 	function startActivity(targetWordName) {
-		if ($("#game-started-bool").hasClass("begin-timer")) {
-			giveDirections("Type the word above.");
-			spellByTyping(targetWordName);
-			updateProgress(0);
-			timerID = startCountup($scoreboardTimer, 0);
-			$timeGameStarted = new Date();
-		}
+		giveDirections(
+			"Type the word above. The more you do it, the more Linero you get!");
+		spellByTyping(targetWordName);
+		updateProgress(0);
+		timerID = startCountup($scoreboardTimer, 0);
+		$timeGameStarted = new Date();
 	}
 
-	function spellByTyping(word) {
-		const $chosenWordDiv = $chosenWordHeaderContainer;
-		var inputText;
-		var wordSubstring;
+	function spellByTyping(targetWord) {
 		var wordLetterSpan;
-		var chosenWordSpanLetters = [];
-		var $input = $("#spell-the-word");
-		var $btn = $("#spell-the-word-continue-btn");
-		var numLettersTyped = 0;
-		var successLetters = 0;
-		$input.focus();
+		var targetWordSpanLetters = [];
 
-		$.each(word.split(""), function() {
+		$.each(targetWord.split(""), function() {
 			wordLetterSpan = $(createElem("span")).append(this);
-			chosenWordSpanLetters.push(wordLetterSpan);
+			targetWordSpanLetters.push(wordLetterSpan);
 		})
 
-		$chosenWordDiv.append(chosenWordSpanLetters);
+		$targetWordDiv.append(targetWordSpanLetters);
 
-		$input.on('input', function() {
-			inputText = $(this).val().trim().toLowerCase();
-			numLettersTyped = inputText.length;
-			wordSubstring = word.substring(0, numLettersTyped);
+		var $lastInput;
+		var lastInputText;
+		var wordSubstring;
+		var numLettersTyped = 0;
+		var successLetters = 0;
+		var $btn = $("#spell-the-word-continue-btn");
 
-			if (inputText == wordSubstring) {
-				makeLettersGreen($chosenWordDiv, numLettersTyped);
-				successLetters = $chosenWordDiv.find("span.text-success").length;
+		$(".container").on("input", ".spell-the-word", function() {
+			$lastInput = $(".spell-the-word:first");
+			lastInputText = $(this).val().trim().toLowerCase();
+			numLettersTyped = lastInputText.length;
+			wordSubstring = targetWord.substring(0, numLettersTyped);
+
+			if (lastInputText == wordSubstring) {
+				makeLettersGreen($targetWordDiv, numLettersTyped);
+				successLetters = $targetWordDiv.find("span.text-success").length;
 
 				if (successLetters != numLettersTyped) {
-					makeLettersDefault($chosenWordDiv);
-					makeLettersGreen($chosenWordDiv, numLettersTyped);
+					makeLettersDefault($targetWordDiv);
+					makeLettersGreen($targetWordDiv, numLettersTyped);
 				}
 			}
 
-			if (inputText == word) {
-				$input.parent().addClass("has-success");
-				$input.addClass("form-control-success");
+			if (lastInputText == targetWord) {
+				$lastInput.parent().addClass("has-success");
+				$lastInput.addClass("form-control-success").prop("disabled", true);
+				addPoints(50);
+				flashPointsUpdate($arrowSuccess);
 				$btn.fadeIn();
-			} else {
-				$input.parent().removeClass("has-success");
-				$input.removeClass("form-control-success");
-				$btn.fadeOut();
+				createAnotherInput().prependTo("#spell-by-typing-activity");
+				$lastInput = $(".spell-the-word:first").focus();
 			}
 		});
 	};
@@ -254,9 +253,9 @@ $(document).ready(function() {
 		var $mergedLettersArray = [];
 		var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
 
-		makeLettersDefault($chosenWordHeaderContainer);
+		makeLettersDefault($targetWordDiv);
 		$spellByClickingLettersDiv.show();
-		$chosenWordHeaderContainer.html($underscoreContainer);
+		$targetWordDiv.html($underscoreContainer);
 
 		$.each(chosenWordLetters, function() {
 			underscores += "_ ";
@@ -319,7 +318,7 @@ $(document).ready(function() {
 		const $pronunciationContinueBtn = $("#pronunciation-continue-btn");
 		var attr = $(".audiooo").attr("src") + targetWord.name + ".mp3";
 		var $btn;
-		$chosenWordHeaderContainer.html(targetWord.phonetic_spelling);
+		$targetWordDiv.html(targetWord.phonetic_spelling);
 		$(".audiooo").attr("src", attr);
 
 		// TODO Track this metric
@@ -335,7 +334,7 @@ $(document).ready(function() {
 						.addClass("fa-volume-off");
 			}, 500);
 
-			$chosenWordHeaderContainer.addClass("text-success");
+			$targetWordDiv.addClass("text-success");
 			addPoints(1);
 			flashPointsUpdate($arrowSuccess);
 			$pronunciationContinueBtn.fadeIn();
@@ -747,6 +746,23 @@ $(document).ready(function() {
 			seconds++;
 			$section.html(seconds);
 		}, 1000);
+	}
+
+	function createAnotherInput() {
+		return createFormGroup().append(createLabel(), createInput());
+	}
+
+	function createInput() {
+		return createElem("input", "form-control input-lg spell-the-word")
+					 .attr("type", "text").attr("autofocus", "true");
+	}
+
+	function createFormGroup() {
+		return createElem("div", "form-group spell-by-typing-form-group");
+	}
+
+	function createLabel() {
+		return createElem("label", "form-control-label sr-only")
 	}
 
 	function createElem(elem, elemClass, elemID) {

@@ -9,7 +9,6 @@ class GamesController < ApplicationController
     @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
     @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
     @real_world_examples = RealWorldExample.for(@chosen_word.name)
-    @record = true
     @words = [@chosen_word, Word.random(2)].flatten
 
     respond_to do |format|
@@ -43,27 +42,6 @@ class GamesController < ApplicationController
     else
       flash[:danger] = "Yikes! Log in first and then play."
       redirect_to root_path
-    end
-  end
-
-  # Display new words to play after any game is completed
-  def play_another
-    game = params[:game]
-    # if logged_in?
-    #   if current_user.has_incomplete_fundamentals?
-    #     @three_fund_words = current_user.incomplete_fundamentals.shuffle.take(
-    #       3
-    #     ).map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
-    #   end
-    #
-    #   if current_user.has_enough_incomplete_jeops?
-    #     @three_j_words = current_user.incomplete_freestyles.shuffle.take(
-    #       3
-    #     ).map { |uw| uw.word }
-    #   end
-    # end
-    respond_to do |format|
-      format.js
     end
   end
 end

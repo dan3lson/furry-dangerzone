@@ -63,7 +63,7 @@ class WordsApi
 	attr_reader :name
 
 	def get_everything(specifically_get = nil)
-		key = "jxec7LMiQymshHsPPG7i86q1rdXNp1Ndvi0jsnTSbYjDIDo0Kk"
+		key = "Djxec7LMiQymshHsPPG7i86q1rdXNp1Ndvi0jsnTSbYjDIDo0Kk"
 
 		begin
 			HTTParty.get(

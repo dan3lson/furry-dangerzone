@@ -1,17 +1,7 @@
-<% if record %>
-	<div id="game-started-bool" class="begin-timer"></div>
-<% end %>
-
 <div class="palabra">
 	<span id="word-name"><%= word.name %></span>
 	<span id="word-part-of-speech"><%= word.part_of_speech %></span>
 	<span class="palabra-id"><%= word.id %></span>
-</div>
-<div id="directions">
-	<p class="lead">
-		<span class="text-primary">Directions:</span>
-		<span id="fundamentals-game-instructions"></span>
-	</p>
 </div>
 <%= render "games/spelling_speedster" %>
 <%= render "games/spelling_jumbler" %>
