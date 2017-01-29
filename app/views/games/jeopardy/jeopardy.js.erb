@@ -18,6 +18,7 @@ var linero = 0;
 var question;
 var quesCounter = 0;
 var $timeGameStarted;
+var $btns = $(".jeop-btn");
 $(".container").empty()
 							 .append($jeopardyDiv);
 $jeopardyDiv.append(
@@ -35,7 +36,7 @@ $(".container").on("click", validCells, function() {
 	lineroCellNumID = $(this).data("ques-num");
 	question = findQues(rounds, lineroCellNumID);
 	updateHeader(question.ques);
-	$(".jeop-btn").prop("disabled", false);
+	$btns.prop("disabled", false);
 });
 
 $(".container").on("click", ".jeop-btn", function() {
@@ -49,7 +50,8 @@ $(".container").on("click", ".jeop-btn", function() {
 		$selectedAnsText = $selectedAns.text();
 		$timeGameStarted = $timeGameStarted || new Date();
 		updateHeader("");
-		$(".jeop-btn").prop("disabled", true);
+		makeInactive(validCells);
+		$btns.prop("disabled", true);
 		// Make the lineroCell "disabled" by with lightgray css text
 		// display the increased counter in the top right corner
 		// Find the rounds[counter] object and update selected_ans to selectedAnsText

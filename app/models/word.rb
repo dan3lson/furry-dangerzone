@@ -41,44 +41,17 @@ class Word < ActiveRecord::Base
       if word_exists?(name)
         search(name)
       else
-        blank_msg = "Type a word and then we'll try to find it."
+        return "Type a word and then we'll try to find it." if name.blank?
+        words_api_search = WordsApi.new(name).define
 
-        return blank_msg if name.blank?
-
-        words_api_search = WordsApi.define(name)
-
-        if words_api_search.nil?
-          "Yikes, we couldn\'t find '#{name}'. Please search again."
+        if words_api_search.class == String
+          words_api_search
         else
-          words = []
+          error_message = "Sorry, saving didn\'t work. Please try again."
 
-          words_api_search.each do |w|
-            word = Word.new(
-                name: name,
-                phonetic_spelling: w.phonetic_spelling,
-                part_of_speech: w.part_of_speech,
-                definition: w.definition
-              )
-
-            if w.examples
-              if w.examples.count > 1
-                text = w.examples.join("***")
-              else
-                text = w.examples.first
-              end
-
-              example = Example.new(text: text, word: word)
-              word.examples << example
-            end
-
-            if word.save
-              words << word
-            else
-              "Yikes, something went wrong :'(. Please search again."
-            end
+          words_api_search.map do |new_word|
+            new_word.save ? new_word : error_message
           end
-
-          words
         end
       end
     end

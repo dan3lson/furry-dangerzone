@@ -29,54 +29,6 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.js { render template: "games/jeopardy/jeopardy.js.erb" }
     end
-    # @attribute_values = @jeopardy_lineup.each_with_index.map do |w, i|
-    #   @attribute = @attributes[i]
-    #   @attribute_value = w.send(@attribute)
-    #
-    #   if word_has_attribute_value?(@attribute_value)
-    #     if attribute_is_example_sentence_or_definition?(@attribute)
-    #       array_of(w, @attribute).join("; ").gsub(
-    #         "#{w.name}", "______"
-    #       )
-    #     elsif attribute_is_synonym_or_antonym?(@attribute)
-    #       @attribute_value.sample.name
-    #     end
-    #   else
-    #     @attributes[i] = "definition"
-    #     @attribute_value = w.send("definition")
-    #     array_of(w, "definition").join("; ").gsub(
-    #       "#{w.name}", "______"
-    #     )
-    #   end
-    # end
-    #
-    # @attributes = @attributes.map do |a|
-    #   if a == "definition"
-    #     "<i class='fa fa-list-ol'></i> ".html_safe <<
-    #     "What word matches the definition below?"
-    #   elsif a == "examples"
-    #     "<i class='fa fa-newspaper-o'></i> ".html_safe <<
-    #     "What word best fills in the blank(s) below?"
-    #   elsif a == "synonyms"
-    #     "<i class='fa fa-object-group'></i> ".html_safe <<
-    #     "What word is most similar to the one below?"
-    #   elsif a == "antonyms"
-    #     "<i class='fa fa-object-ungroup'></i> ".html_safe <<
-    #     "What word is the opposite of the one below?"
-    #   end
-
-    # respond_to do |format|
-    #   format.html
-    #   format.json {
-    #     render json: {
-    #       word_ids: @jeopardy_words_ids,
-    #       word_names: @jeopardy_words_names,
-    #       jeopardy_lineup_names: @jeopardy_lineup_names,
-    #       attributes_array: @attributes,
-    #       attribute_values: @attribute_values
-    #     }
-    #   }
-    # end
   end
 
   def freestyle

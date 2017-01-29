@@ -1,4 +1,4 @@
-<nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
+<nav class="navbar navbar-toggleable navbar-light bg-faded">
   <button class="navbar-toggler navbar-toggler-right"
           type="button"
           data-toggle="collapse"
@@ -10,7 +10,7 @@
   </button>
   <%= render "layouts/leksi_brand", path: root_path %>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <div class="navbar-nav mr-auto mt-2 mt-md-0">
+    <div class="navbar-nav mr-auto mt-2 mt-md-0 text-center">
       <% if params[:controller].include?("my_leksi") %>
   			<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>
   				<i class="fa fa-book"></i> Words

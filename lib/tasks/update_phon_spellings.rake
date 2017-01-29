@@ -1,34 +1,26 @@
-namespace :phon_spellings do
-  desc "Back up all words into a csv"
-  task :update => :environment do
-    # TODO Update all phonetic spellings with WordsAPI
-    # Clearly you have to remove the method; just moved here all to be dealt
-    # with later.
-    def self.update_phonetic_spellings(limit, offset)
-      url = "http://wwww.thefreedictionary.com"
+namespace :update do
+  desc "Update all words with correct phonetic spelling."
+  task :phonetic_spellings => :environment do
+    names = Word.all.group_by(&:name)
 
-      limit(limit).offset(offset).each do |word|
-        page = Nokogiri::HTML(open("#{url}/#{word.name}"))
-        phonetic_spellings = page.xpath(
-          "//*[@id='Definition']/section[3]/h2"
-        )
-
-        next unless phonetic_spellings.any?
-
-        phonetic_spelling = phonetic_spellings.first.text
-
-        if phonetic_spelling =~ /\d/
-          phonetic_spelling = phonetic_spelling.gsub(/\d/, ";").split(";").first
-        end
-
-        word.phonetic_spelling = phonetic_spelling
-
-        if word.save
-          puts "#{word.name} succesfully updated"
-        else
-          puts "ERROR with #{word.name}"
-        end
+    names.each do |name, array|
+      next if name.include?("-") || name.split(" ").count > 1
+      
+      if array.first.phonetic_spelling
+        next if array.first.phonetic_spelling.include?("·")
+        syllable_word = WordsApi.new(name).syllables
+        words = Word.where(name: name)
+        words_count = words.count
+        count = words.update_all(phonetic_spelling: syllable_word)
+        puts words_count == count ? "Success: #{name}" : "ERROR: #{name}"
       end
     end
+
+    Word.where("name like ?", "%-%").update_all(phonetic_spelling: nil)
+    Word.where(phonetic_spelling: nil)
+        .each { |w| w.update_attributes(
+          phonetic_spelling: WordsApi.new(w.name).syllables
+          )
+        }
   end
 end
