@@ -1,3 +1,4 @@
+# TODO Create test
 class JeopRound
 	attr_accessor :ques_num
 	attr_accessor :ques_type

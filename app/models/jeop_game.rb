@@ -59,7 +59,7 @@ class JeopGame
 	end
 
 	def meaning_ques(word)
-		"Which word means #{word.definition}?"
+		askQues("means #{word.definition}")
 	end
 
 	def many_meaning_ques
@@ -70,7 +70,7 @@ class JeopGame
 		onyms = Thesaurus.send(type, name)
 
 		unless onyms.nil? || onyms.blank?
-			onyms.map { |w| "Which word is #{keyword} to #{w}?" }
+			onyms.map { |w| askQues("is #{keyword} to #{w}") }
 		end
 	end
 
@@ -79,7 +79,7 @@ class JeopGame
 	end
 
 	def example_ques(word)
-		"Which word fills in the blank: ...TBD for #{word.name}..."
+		askQues("fills in the blank: ...TBD for #{word.name}...")
 	end
 
 	def many_examples_ques
@@ -87,10 +87,16 @@ class JeopGame
 	end
 
 	def syllable_ques(word)
-		"Which word has #{pluralize(word.num_syllables, 'syllable')}?"
+		if word.has_syllables?
+			askQues("has #{pluralize(word.num_syllables, 'syllable')}")
+		end
 	end
 
 	def many_syllables_ques
 		words.map { |w| syllable_ques(w) }.shuffle
+	end
+
+	def askQues(tion)
+		"Which word #{tion}?"
 	end
 end

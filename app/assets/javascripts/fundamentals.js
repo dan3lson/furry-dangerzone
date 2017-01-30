@@ -185,9 +185,10 @@ $(document).ready(function() {
 		});
 	}
 
+	// TODO Save stats for each macro and perhaps micro activity
 	function startActivity(targetWordName) {
 		giveDirections(
-			"Type the word above. The more you do it, the more Linero you get!");
+			"Type the word above at least once.");
 		spellByTyping(targetWordName);
 		updateProgress(0);
 		timerID = startCountup($scoreboardTimer, 0);
@@ -211,8 +212,11 @@ $(document).ready(function() {
 		var numLettersTyped = 0;
 		var successLetters = 0;
 		var $btn = $("#spell-the-word-continue-btn");
+		var timeStartedTyping;
+		var numInputs = 0;
 
 		$(".container").on("input", ".spell-the-word", function() {
+			timeStartedTyping = timeStartedTyping || $scoreboardTimer.text();
 			$lastInput = $(".spell-the-word:first");
 			lastInputText = $(this).val().trim().toLowerCase();
 			numLettersTyped = lastInputText.length;
@@ -229,8 +233,19 @@ $(document).ready(function() {
 			}
 
 			if (lastInputText == targetWord) {
-				$lastInput.parent().addClass("has-success");
-				$lastInput.addClass("form-control-success").prop("disabled", true);
+				numInputs = $(".spell-the-word.form-control-success").length + 1;
+				$lastInput.parent()
+									.addClass("has-success")
+									.append(
+										createFormText(
+											"(" + numInputs + ") typed in "
+											+ timeDiff(timeStartedTyping)
+											+ " secs"
+										)
+									);
+				timeStartedTyping = null;
+				$lastInput.addClass("form-control-success")
+									.prop("disabled", true);
 				addPoints(50);
 				flashPointsUpdate($arrowSuccess);
 				$btn.fadeIn();
@@ -543,6 +558,7 @@ $(document).ready(function() {
 	*
 	**/
 
+
 	function findBtnNot($btns, type) {
 		return $btns.filter(function() {
 			return $(this).text() != type;
@@ -721,14 +737,8 @@ $(document).ready(function() {
 		return $.merge($.merge([], array1), array2);
 	}
 
-	function displayTimer($section, seconds) {
-		var $timerContainer = createElem("div", null, "timer-container");
-		var $countdown = createElem("span", null, "countdown");
-		var $clockIcon = createElem("i", "fa fa-clock-o");
-		$countdown.append(seconds);
-		$timerContainer.append($clockIcon);
-		$timerContainer.append($countdown);
-		$section.append($timerContainer);
+	function timeDiff(timeStarted) {
+		return $scoreboardTimer.text() - timeStarted;
 	}
 
 	function startCountdown($section, seconds) {
@@ -746,6 +756,11 @@ $(document).ready(function() {
 			seconds++;
 			$section.html(seconds);
 		}, 1000);
+	}
+
+	function createFormText(text) {
+		return createElem("p", "form-text text-muted")
+					 .append(createElem("small").text(text));
 	}
 
 	function createAnotherInput() {

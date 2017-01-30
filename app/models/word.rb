@@ -23,7 +23,7 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def num_syllables
-    phonetic_spelling.split("·").count
+    phonetic_spelling.split("·").count if has_syllables?
   end
 
   # TODO: Create test
@@ -83,6 +83,11 @@ class Word < ActiveRecord::Base
   # TODO: Create test
   def has_ex_non_exs?
     example_non_examples.any?
+  end
+
+  # TODO Create test
+  def has_syllables?
+    !phonetic_spelling.nil?
   end
 
   # TODO: Create test

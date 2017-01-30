@@ -18,7 +18,6 @@ var linero = 0;
 var question;
 var quesCounter = 0;
 var $timeGameStarted;
-var $btns = $(".jeop-btn");
 $(".container").empty()
 							 .append($jeopardyDiv);
 $jeopardyDiv.append(
@@ -28,6 +27,7 @@ $jeopardyDiv.append(
 							$buttonsPartial
 						).hide()
 						.fadeIn("slow");
+var $btns = $(".jeop-btn");
 var validCells = "#linero-table td:not(.exclude)";
 
 $(".container").on("click", validCells, function() {
