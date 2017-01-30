@@ -72,17 +72,17 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def has_examples?
-    examples.any?
+    !examples.blank?
   end
 
   # TODO: Create test
   def has_meaning_alts?
-    meaning_alts.any?
+    !meaning_alts.blank?
   end
 
   # TODO: Create test
   def has_ex_non_exs?
-    example_non_examples.any?
+    !example_non_examples.blank?
   end
 
   # TODO Create test
@@ -112,6 +112,15 @@ class Word < ActiveRecord::Base
     ).map { |word_id| Word.find(word_id) }
 
     user.words - words_with_tags
+  end
+
+  # TODO Create test
+  def sample(type)
+    if type == "definition"
+      send(type).split("***").sample
+    elsif type == "examples"
+      send(type).first.text.split("***").sample
+    end
   end
 
   def self.seventh_grade

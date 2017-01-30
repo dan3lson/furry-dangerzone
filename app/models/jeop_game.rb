@@ -59,7 +59,7 @@ class JeopGame
 	end
 
 	def meaning_ques(word)
-		askQues("means #{word.definition}")
+		askQues("means #{word.sample('definition')}")
 	end
 
 	def many_meaning_ques
@@ -79,7 +79,12 @@ class JeopGame
 	end
 
 	def example_ques(word)
-		askQues("fills in the blank: ...TBD for #{word.name}...")
+		if word.has_examples?
+			blank_word = "_____"
+			askQues(
+				"fills in the blank: #{word.sample('examples')}"
+			).gsub(word.name, blank_word)
+		end
 	end
 
 	def many_examples_ques

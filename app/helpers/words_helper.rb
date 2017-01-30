@@ -104,7 +104,7 @@ module WordsHelper
 
   # TODO: Create test
   def array_of(word, attribute)
-    word.send(attribute).split("***")
+    word.send(attribute).split("***") unless word.send(attribute).empty?
   end
 
   def word_has_attribute_value?(result)
