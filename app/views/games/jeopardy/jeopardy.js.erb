@@ -1,5 +1,4 @@
 // Get examples from WordAPI
-// Create and execute rake task for syllables
 // Complete pseudocode below
 	// If cell is excluded, respective question mark(s) should also be excluded
 	// Figure out the rules for a word to advance to Freestyle
@@ -10,11 +9,10 @@ const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_tabl
 const $headerPartial = $("<%= j render(partial: 'games/jeopardy/header') %>");
 const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { names: @word_names }) %>");
 var $jeopardyDiv = createElem("div", null, "#jeopardy-div");
-var lineroCell;
+var $selectedCell;
 var lineroCellNumID;
-var amount;
 var round;
-var linero = 0;
+var totalLineroEarned = 0;
 var question;
 var quesCounter = 0;
 var $timeGameStarted;
@@ -29,56 +27,116 @@ $jeopardyDiv.append(
 						.fadeIn("slow");
 var $btns = $(".jeop-btn");
 var validCells = "#linero-table td:not(.exclude)";
+updateCounter();
 
 $(".container").on("click", validCells, function() {
 	$selectedCell = $(this);
-	makeActive(validCells, $selectedCell);
+	activtate(validCells, $selectedCell);
 	lineroCellNumID = $(this).data("ques-num");
 	question = findQues(rounds, lineroCellNumID);
 	updateHeader(question.ques);
-	$btns.prop("disabled", false);
+	enableButtons();
 });
 
 $(".container").on("click", ".jeop-btn", function() {
-	// Check if the next two are already available - I'd assume they are :)
-	lineroCellNumID = $("#linero-table td.text-primary").data("ques-num");
-	question = findQues(rounds, lineroCellNumID);
-	var questionIsDisplayed = $jeopardyDiv.find("h3").text().length;
+	var questionIsDisplayed = $jeopardyDiv.find("h4").text().length;
 
 	if (questionIsDisplayed) {
-		$selectedAns = $(this);
-		$selectedAnsText = $selectedAns.text();
+		$selectedBtn = $(this);
+		$selectedBtnText = $selectedBtn.find("span:first").text();
 		$timeGameStarted = $timeGameStarted || new Date();
 		updateHeader("");
-		makeInactive(validCells);
-		$btns.prop("disabled", true);
-		// Make the lineroCell "disabled" by with lightgray css text
-		// display the increased counter in the top right corner
-		// Find the rounds[counter] object and update selected_ans to selectedAnsText
-		// Create reviewObjects array
-			// Instantiate new object called result
-				// Give it a property of round = rounds[counter]
-		// Check if answer is correct
-			// If answerCorrect
-				// Give it a new property of answerCorrectly = true
-				// Add a green thumbs up to the button's first available question icon
-				// Update the linero total
-					amount = parseInt($(this).text());
-					linero += amount;
-				// Check if game over
-					// If true, clear table and buttons and show a review
-					// !!! To be pseudo-coded! !!!
-			// Else
-				// Give it a new property of answerCorrectly = false
-				// Add a red thumbs up to the button's first available question icon
-				// Check if game over
-					// If true, clear table and buttons and show a review
+		deactivate($selectedCell);
+		removeClick($selectedCell);
+		updateCounter();
+		disableButtons();
+		question.selected_ans = $selectedBtnText;
+
+		if (question.selected_ans == question.correct_ans.name) {
+			markResult(question, true);
+			addThumbsUp($selectedBtn);
+			totalLineroEarned += parseInt(question.linero);
+		} else {
+			markResult(question, false);
+			addThumbsDown($selectedBtn);
+			totalLineroEarned -= parseInt(question.linero);
+		}
+
+		if (hasNoMoreAttempts($selectedBtn)) {
+			updateBtnProp($selectedBtn);
+			$selectedBtn.removeClass("btn-outline-primary").addClass("btn-secondary");
+		}
+
+		if (gameIsOver()) {
+			disableButtons();
+			$jeopardyDiv.empty()
+									.html("Finished! Your added Linero is " + totalLineroEarned);
+			// Display results in cards similar to Fundamentals MeanAlt and ExNonEx
+				// activities
+		}
 	}
 });
 
-function makeActive(validCells, $selectedCell) {
+function hasNoMoreAttempts($btn) {
+	return !($btn.find("span .fa-question-circle-o").length);
+}
+
+function markResult(question, result) {
+	question.answered_correctly = result;
+}
+
+function gameIsOver() {
+	return getCounter() == 20;
+}
+
+function addThumbsUp($btn) {
+	markBtn($btn, "success", "up");
+}
+
+function addThumbsDown($btn) {
+	markBtn($btn, "danger", "down");
+}
+
+function markBtn($btn, textColor, finger) {
+	$btn.find("span .fa-question-circle-o.text-muted:first")
+			.removeClass("fa-question-circle-o")
+			.addClass("text-" + textColor + " fa-thumbs-o-" + finger);
+
+}
+
+function disableButtons() {
+	updateBtnProp($btns, true);
+}
+
+function enableButtons() {
+	updateBtnProp($btns, false);
+	updateBtnProp($(".btn.btn-secondary"), true);
+}
+
+function updateBtnProp($btn_selector, boolean) {
+	$btn_selector.prop("disabled", boolean);
+}
+
+function updateCounter() {
+	$jeopardyDiv.find(".float-right")
+							.text(getCounter() + "/20");
+}
+
+function getCounter() {
+	return $jeopardyDiv.find(".exclude").length;
+}
+
+function removeClick($selectedCell) {
+	$selectedCell.removeClass("pointer").addClass("exclude text-muted");
+}
+
+function activtate(validCells, $selectedCell) {
 	$(validCells).removeClass("text-primary");
 	$selectedCell.addClass("text-primary");
+}
+
+function deactivate($selectedCell) {
+	$selectedCell.removeClass("text-primary");
 }
 
 function findQues(questions, num) {
@@ -86,7 +144,7 @@ function findQues(questions, num) {
 }
 
 function updateHeader(string) {
-	$jeopardyDiv.find("h3").html(string);
+	$jeopardyDiv.find("h4").html(string);
 }
 
 function createElem(elem, elemClass, elemID) {

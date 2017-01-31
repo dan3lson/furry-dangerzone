@@ -5,7 +5,7 @@ class JeopRound
 	attr_accessor :ques
 	attr_accessor :selected_ans
 	attr_accessor :correct_ans
-	attr_accessor :word
+	attr_accessor :answered_correctly
 	attr_accessor :linero
 
 	def initialize(
@@ -14,7 +14,7 @@ class JeopRound
 		ques = nil,
 		selected_ans = nil,
 		correct_ans = nil,
-		word = nil,
+		answered_correctly = nil,
 		linero = nil
 	)
 		@ques_num = ques_num
@@ -22,7 +22,7 @@ class JeopRound
 		@ques = ques
 		@selected_ans = selected_ans
 		@correct_ans = correct_ans
-		@word = word
+		@answered_correctly = answered_correctly
 		@linero = linero
 	end
 

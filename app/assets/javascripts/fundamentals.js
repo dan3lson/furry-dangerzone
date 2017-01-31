@@ -71,8 +71,7 @@ $(document).ready(function() {
 			addPoints(200);
 			flashPointsUpdate($arrowSuccess);
 			updateProgress(51);
-			$targetWordDiv.html(targetWord.name)
-																.removeClass("text-success");
+			$targetWordDiv.html(targetWord.name).removeClass("text-success");
 
 			getMeaningAlts(targetWord.id).done(function(response) {
 				if (response.length) {
