@@ -1,0 +1,23 @@
+const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', locals: { target_word: @target_word }) %>");
+const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: @directions }) %>");
+const $sentStemsPartial = $("<%= j render(partial: 'games/freestyle/sent_stems', locals: { sent_stems: @sent_stems }) %>");
+var $activityDiv = createElem("div", null, "activity-div");
+var $timeGameStarted;
+$(".container").empty()
+							 .append($activityDiv);
+$activityDiv.append(
+								$headerPartial,
+								$directionsPartial,
+								$sentStemsPartial
+							).hide()
+							.fadeIn("slow");
+
+/***********************
+		HELPER FUNCTIONS
+************************/
+
+function createElem(elem, elemClass, elemID) {
+	_class = elemClass || null;
+	_id = elemID || null;
+	return $("<" + elem + ">", { class: _class, id: _id });
+}

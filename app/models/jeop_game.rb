@@ -25,21 +25,14 @@ class JeopGame
 	def create_rounds
 		rounds = []
 		meanings = many_meaning_ques.shuffle
-		synonyms = many_onym_ques("synonyms", "similar").shuffle
-		antonyms = many_onym_ques("antonyms", "opposite").shuffle
+		syns = many_onym_ques("synonyms", "similar").shuffle
+		ants = many_onym_ques("antonyms", "opposite").shuffle
 		examples = many_examples_ques.shuffle
 		syllables = many_syllables_ques.shuffle
 		lineup = []
 
 		20.times do |i|
-			lineup.push(
-				meanings[i],
-				synonyms[i],
-				antonyms[i],
-				examples[i],
-				syllables[i]
-			)
-
+			lineup.push(meanings[i], syns[i], ants[i], examples[i], syllables[i])
 			jeop_round = JeopRound.new
 			jeop_round.ques_num = i
 			jeop_round.ques_type = ques_types[i]

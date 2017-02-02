@@ -2,18 +2,14 @@ class GamesController < ApplicationController
   def gamezone
   end
 
-  # This action is hit twice because of the respond_to -__-
-  # TODO Make it render as cool as the Jeopardy game
   def fundamentals
-    @chosen_word = Word.find(params[:word_id])
-    @synonyms = @chosen_word.synonyms if @chosen_word.has_synonyms?
-    @antonyms = @chosen_word.antonyms if @chosen_word.has_antonyms?
-    @real_world_examples = RealWorldExample.for(@chosen_word.name)
-    @words = [@chosen_word, Word.random(2)].flatten
+    @target_word = Word.find(params[:word_id])
+    @synonyms = @target_word.synonyms if @target_word.has_synonyms?
+    @antonyms = @target_word.antonyms if @target_word.has_antonyms?
+    @words = [@target_word, Word.random(2)].flatten
 
     respond_to do |format|
-      format.html
-      format.json { render json: { words: @words } }
+      format.js { render template: "games/fundamentals/fundamentals.js.erb"}
     end
   end
 
@@ -24,6 +20,7 @@ class GamesController < ApplicationController
     @rounds = JeopGame.new(@words).rounds
     @jeopardy = { game: @rounds }
     @rows = JeopGame.rows(@rounds, 5)
+    @directions = "Click on any Linero to answer the question displayed below."
 
     respond_to do |format|
       format.js { render template: "games/jeopardy/jeopardy.js.erb" }
@@ -31,17 +28,12 @@ class GamesController < ApplicationController
   end
 
   def freestyle
-    if logged_in?
-      @chosen_word = Word.find(params[:word_id])
-      @game_started = true
-
-      if current_user.has_incomplete_freestyles?
-        @four_free_words = current_user.incomplete_freestyles.shuffle.take(4).
-          map { |uw| uw.word }.delete_if { |w| w == @chosen_word }
-      end
-    else
-      flash[:danger] = "Yikes! Log in first and then play."
-      redirect_to root_path
+    @target_word = Word.find(params[:word_id])
+    @sent_stems = @target_word.sent_stems
+    @directions = "Complete the sentences below."
+    # respond_to(:js)
+    respond_to do |format|
+      format.js { render template: "games/freestyle/freestyle.js.erb" }
     end
   end
 end

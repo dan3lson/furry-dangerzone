@@ -59,4 +59,11 @@ FactoryGirl.define do
     user_word
     game
   end
+
+  factory :sent_stem do
+    text "Feeling contrite about her actions, she ???."
+
+    word
+    user
+  end
 end

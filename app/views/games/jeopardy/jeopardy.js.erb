@@ -1,14 +1,12 @@
-// Get examples from WordAPI
-// Complete pseudocode below
-	// If cell is excluded, respective question mark(s) should also be excluded
-	// Figure out the rules for a word to advance to Freestyle
+// TODO If cell is excluded, respective question mark(s) should also be excluded
+// TODO Figure out the rules for a word to advance to Freestyle
 
 var rounds = JSON.parse("<%= j @jeopardy.to_json.html_safe %>").game;
-const $directionsPartial = $("<%= j render(partial: 'games/jeopardy/directions') %>");
+const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: @directions }) %>");
 const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { rows: @rows }) %>");
 const $headerPartial = $("<%= j render(partial: 'games/jeopardy/header') %>");
 const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { names: @word_names }) %>");
-var $jeopardyDiv = createElem("div", null, "#jeopardy-div");
+var $jeopardyDiv = createElem("div", null, "jeopardy-div");
 var $selectedCell;
 var lineroCellNumID;
 var round;

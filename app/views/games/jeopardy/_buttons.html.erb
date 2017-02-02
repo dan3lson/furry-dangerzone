@@ -1,6 +1,13 @@
 <div class="row">
-	<% names.each do |name| %>
-		<div class="col-sm-6 mb-3">
+	<% names[0..1].each do |name| %>
+		<div class="col-md-6 mb-3">
+			<%= render "games/jeopardy/button", name: name %>
+		</div>
+	<% end %>
+</div>
+<div class="row">
+	<% names[2..3].each do |name| %>
+		<div class="col-md-6 mb-3">
 			<%= render "games/jeopardy/button", name: name %>
 		</div>
 	<% end %>

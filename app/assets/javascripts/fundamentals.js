@@ -1,19 +1,16 @@
 $(document).ready(function() {
 	var $chosenWordID = $(".palabra-id").html();
-	var $targetWordDiv = $("#chosen-word-header-container");
+	// var $targetWordDiv = $("#chosen-word-header-container");
 	var $regex = /^[a-zA-Z. ]+$/;
-	var newPointsTotal = 0;
-  var $timeGameStarted;
-	var $scoreboardTimer = $(".scoreboard-timer");
-	var checkmark = "✓";
-	var $points = $(".scoreboard-points");
-	var timerID;
-	const $arrowDanger = $(".fa-arrow-down.text-danger");
-	const $arrowSuccess = $(".fa-arrow-up.text-success");
+	// var newPointsTotal = 0;
+  // var $timeGameStarted;
+	// var $scoreboardTimer = $(".scoreboard-timer");
+	// var $points = $(".scoreboard-points");
+	// var timerID;
+	// const $arrowDanger = $(".fa-arrow-down.text-danger");
+	// const $arrowSuccess = $(".fa-arrow-up.text-success");
 
-	if ($chosenWordID != undefined) {
-		setTheStage();
-	}
+	// setTheStage();
 
   /***
 	*
@@ -23,43 +20,44 @@ $(document).ready(function() {
 	*
 	***/
 
-  function spellTheWordContinueBtn(word) {
-    $("#spell-the-word-continue-btn").click(function(event) {
-			var chosenWordName = word.name;
-			var chosenWordLetters = chosenWordName.split('');
-      $("#spell-by-typing-activity").hide();
-      $(".checkpoint-image").show();
-      $("#spell-the-word-continue-btn").hide();
-      giveDirections(
-				"Tap the letters to spell that same word, whose definition is <mark>" +
-				word.definition + "</mark>."
-			);
-      updateProgress(17);
-			addPoints(100);
-			flashPointsUpdate($arrowSuccess);
-			spellByClickingLetters(chosenWordLetters);
-    });
-  }
+  // function spellTheWordContinueBtn(word) {
+  //   $("#spell-the-word-continue-btn").click(function(event) {
+	// 		var chosenWordName = word.name;
+	// 		var chosenWordLetters = chosenWordName.split('');
+  //     $("#spell-by-typing-activity").hide();
+  //     $(".checkpoint-image").show();
+  //     $("#spell-the-word-continue-btn").hide();
+  //     giveDirections(
+	// 			"Tap the letters to spell that same word, whose definition is <mark>" +
+	// 			word.definition + "</mark>."
+	// 		);
+  //     updateProgress(17);
+	// 		addPoints(100);
+	// 		flashPointsUpdate($arrowSuccess);
+	// 		spellByClickingLetters(chosenWordLetters);
+  //   });
+  // }
 
-  function fillInTheBlankContinueBtn(word) {
-    $("#fill-in-the-blank-continue-btn").click(function() {
-			var numSyllables = word.phonetic_spelling.split("·").length;
-			var $pronunciationSpans = $("#pronunciation-spans");
-			var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
-      $("#fill-in-the-blank-continue-btn").hide();
-      $spellByClickingLettersDiv.hide();
-      $pronunciationSpans.show();
-			giveDirections(
-				"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
-				"the volume button to hear its pronunciation."
-      );
-      updateProgress(34);
-			addPoints(150);
-			flashPointsUpdate($arrowSuccess);
-      startPronunciationActivity(word);
-    });
-  }
+  // function fillInTheBlankContinueBtn(word) {
+  //   $("#fill-in-the-blank-continue-btn").click(function() {
+	// 		var numSyllables = word.phonetic_spelling.split("·").length;
+	// 		var $pronunciationSpans = $("#pronunciation-spans");
+	// 		var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
+  //     $("#fill-in-the-blank-continue-btn").hide();
+  //     $spellByClickingLettersDiv.hide();
+  //     $pronunciationSpans.show();
+	// 		giveDirections(
+	// 			"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
+	// 			"the volume button to hear its pronunciation."
+  //     );
+  //     updateProgress(34);
+	// 		addPoints(150);
+	// 		flashPointsUpdate($arrowSuccess);
+  //     startPronunciationActivity(word);
+  //   });
+  // }
 
+	// What if MeaningAlt or ExNonEx or SynAnt doesn't exit?
   function pronunciationContinueBtn(words) {
 		const $pronunciationContinueBtn = $("#pronunciation-continue-btn");
 		const targetWord = words[0];
@@ -98,6 +96,7 @@ $(document).ready(function() {
     });
   }
 
+	// What if ExNonEx or SynAnt doesn't exit?
 	function meaningAltsContinueBtn(targetWord) {
 		$("#meaning-alts-continue-btn").click(function () {
 			$("#meaning-alts-div").hide();
@@ -125,6 +124,7 @@ $(document).ready(function() {
 		});
 	}
 
+	// What if SynAnt doesn't exit?
 	function exampleNonExamplesContinueBtn(targetWord) {
 		$("#ex-non-exs-cont-btn").click(function () {
 			$("#ex-non-exs-div").hide();
@@ -184,370 +184,369 @@ $(document).ready(function() {
 		});
 	}
 
-	// TODO Save stats for each macro and perhaps micro activity
-	function startActivity(targetWordName) {
-		giveDirections(
-			"Type the word above at least once.");
-		spellByTyping(targetWordName);
-		updateProgress(0);
-		timerID = startCountup($scoreboardTimer, 0);
-		$timeGameStarted = new Date();
-	}
+	// function startActivity(targetWordName) {
+	// 	giveDirections(
+	// 		"Type the word above at least once."
+	// 	);
+	// 	spellByTyping(targetWordName);
+	// 	updateProgress(0);
+	// 	timerID = startCountup($scoreboardTimer, 0);
+	// 	$timeGameStarted = new Date();
+	// }
 
-	function spellByTyping(targetWord) {
-		var wordLetterSpan;
-		var targetWordSpanLetters = [];
+	// function spellByTyping(targetWord) {
+	// 	var wordLetterSpan;
+	// 	var targetWordSpanLetters = [];
+	//
+	// 	$.each(targetWord.split(""), function() {
+	// 		wordLetterSpan = $(createElem("span")).append(this);
+	// 		targetWordSpanLetters.push(wordLetterSpan);
+	// 	})
+	//
+	// 	$targetWordDiv.append(targetWordSpanLetters);
+	//
+	// 	var $lastInput;
+	// 	var lastInputText;
+	// 	var wordSubstring;
+	// 	var numLettersTyped = 0;
+	// 	var successLetters = 0;
+	// 	var $btn = $("#spell-the-word-continue-btn");
+	// 	var timeStartedTyping;
+	// 	var numInputs = 0;
+	//
+	// 	$(".container").on("input", ".spell-the-word", function() {
+	// 		timeStartedTyping = timeStartedTyping || $scoreboardTimer.text();
+	// 		$lastInput = $(".spell-the-word:first");
+	// 		lastInputText = $(this).val().trim().toLowerCase();
+	// 		numLettersTyped = lastInputText.length;
+	// 		wordSubstring = targetWord.substring(0, numLettersTyped);
+	//
+	// 		if (lastInputText == wordSubstring) {
+	// 			makeLettersGreen($targetWordDiv, numLettersTyped);
+	// 			successLetters = $targetWordDiv.find("span.text-success").length;
+	//
+	// 			if (successLetters != numLettersTyped) {
+	// 				makeLettersDefault($targetWordDiv);
+	// 				makeLettersGreen($targetWordDiv, numLettersTyped);
+	// 			}
+	// 		}
+	//
+	// 		if (lastInputText == targetWord) {
+	// 			numInputs = $(".spell-the-word.form-control-success").length + 1;
+	// 			$lastInput.parent()
+	// 								.addClass("has-success")
+	// 								.append(
+	// 									createFormText(
+	// 										"(" + numInputs + ") typed in "
+	// 										+ timeDiff(timeStartedTyping)
+	// 										+ " secs"
+	// 									)
+	// 								);
+	// 			timeStartedTyping = null;
+	// 			$lastInput.addClass("form-control-success")
+	// 								.prop("disabled", true);
+	// 			addPoints(50);
+	// 			flashPointsUpdate($arrowSuccess);
+	// 			$btn.fadeIn();
+	// 			createAnotherInput().prependTo("#spell-by-typing-activity");
+	// 			$lastInput = $(".spell-the-word:first").focus();
+	// 		}
+	// 	});
+	// };
 
-		$.each(targetWord.split(""), function() {
-			wordLetterSpan = $(createElem("span")).append(this);
-			targetWordSpanLetters.push(wordLetterSpan);
-		})
+	// function spellByClickingLetters(chosenWordLetters) {
+	// 	var $letter;
+	// 	var $tappedLetterBtn;
+	// 	var tappedLetter;
+	// 	var firstLetter;
+	// 	var underscores = "";
+	// 	var $underscoreContainer = createElem("div", null, "underscore-container");
+	// 	var $alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+	// 	var	$randomAlphabet;
+	// 	var $alphabetRandLetters = [];
+	// 	var $mergedLettersArray = [];
+	// 	var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
+	//
+	// 	makeLettersDefault($targetWordDiv);
+	// 	$spellByClickingLettersDiv.show();
+	// 	$targetWordDiv.html($underscoreContainer);
+	//
+	// 	$.each(chosenWordLetters, function() {
+	// 		underscores += "_ ";
+	// 	});
+	//
+	// 	$underscoreContainer.text(underscores);
+	//
+	// 	for (var i = 0; i < 3; i++) {
+	// 		$randomAlphabet = $alphabets[randNumInRange(0, 26)];
+	// 		$alphabetRandLetters.push($randomAlphabet);
+	// 	}
+	//
+	// 	$mergedLettersArray = merge(chosenWordLetters, $alphabetRandLetters);
+	// 	$mergedLettersArray = shuffleArray($mergedLettersArray);
+	//
+	// 	$.each($mergedLettersArray, function(index, letter) {
+	// 		$letter = createBtn(
+	// 			"btn-lg btn-outline-primary fitb-letter letter_" + letter,
+	// 			letter
+	// 		);
+	// 		$spellByClickingLettersDiv.append($letter);
+	// 	});
+	//
+	// 	$(".fitb-letter").click(function() {
+	// 		$tappedLetterBtn = $(this);
+	// 		tappedLetter = $(this).text();
+	//
+	// 		for (var i = 0; i < chosenWordLetters.length; i++) {
+	// 			firstLetter = chosenWordLetters[0];
+	// 		}
+	//
+	// 		if (firstLetter == tappedLetter) {
+	// 			$tappedLetterBtn.removeClass("btn-outline-primary")
+	// 											.addClass("btn-success");
+	// 			$tappedLetterBtn.prop("disabled", true);
+	// 			underscores = underscores.replace(/_ /, tappedLetter);
+	// 			$underscoreContainer.text(underscores);
+	// 			chosenWordLetters.shift();
+	// 			addPoints(1);
+	// 			flashPointsUpdate($arrowSuccess);
+	// 		} else {
+	// 			removePoints(1);
+	// 			flashPointsUpdate($arrowDanger);
+	// 			$tappedLetterBtn.removeClass("animated shake")
+	// 											.addClass("animated shake");
+	// 		}
+	//
+	// 		if (chosenWordLetters.length == 0) {
+	// 			$underscoreContainer.addClass("text-success");
+	// 			$(".fitb-letter").prop("disabled", true);
+	// 			$("#fill-in-the-blank-continue-btn").fadeIn();
+	// 		} else {
+	// 			$("#fill-in-the-blank-continue-btn").fadeOut();
+	// 		}
+	// 	});
+	// };
+	//
+	// function startPronunciationActivity(targetWord) {
+	// 	const $audioBtn = $(".funds-audio-btn");
+	// 	const $pronunciationContinueBtn = $("#pronunciation-continue-btn");
+	// 	var attr = $(".audiooo").attr("src") + targetWord.name + ".mp3";
+	// 	var $btn;
+	// 	$targetWordDiv.html(targetWord.phonetic_spelling);
+	// 	$(".audiooo").attr("src", attr);
+	//
+	// 	$audioBtn.click(function() {
+	// 		$btn = $(this);
+	// 		$btn.addClass("text-success")
+	// 				.removeClass("fa-volume-off")
+	// 				.addClass("fa-volume-up");
+	//
+	// 		setTimeout(function() {
+	// 			$btn.removeClass("text-success")
+	// 					.removeClass("fa-volume-up")
+	// 					.addClass("fa-volume-off");
+	// 		}, 500);
+	//
+	// 		$targetWordDiv.addClass("text-success");
+	// 		addPoints(1);
+	// 		flashPointsUpdate($arrowSuccess);
+	// 		$pronunciationContinueBtn.fadeIn();
+	// 	});
+	// };
 
-		$targetWordDiv.append(targetWordSpanLetters);
+	// function startMeaningAltsActivity(words, meaningAltArray) {
+	// 	var chosenWord = words[0];
+	// 	giveDirections(
+	// 		"Read the statements below and decide which one makes more sense."
+	// 	);
+	//
+	// 	$.each(meaningAltArray, function(index) {
+	// 		$("#meaning-alts-div").append(createMeaningAltQues(this, index));
+	// 	})
+	//
+	// 	$("#meaning-alts-div").show();
+	//
+	// 	$(".container").on("click", ".mean-alts-answer", function() {
+	// 		$selAnswer = $(this);
+	// 		$selAnswerText = $selAnswer.text().trim();
+	// 		$selAnswerCard = $selAnswer.parents(".card");
+	// 		$selAnswerBlock = $selAnswerCard.find(".card-block");
+	// 		$btnRow = $selAnswer.parent().parent();
+	// 		index = $btnRow.data("index");
+	// 		answer = meaningAltArray[index].answer.trim();
+	// 		$feedbackCardText = $btnRow.siblings(".mean-alts-feedback")
+	//
+	// 		if ($selAnswerText == answer) {
+	// 			$selAnswerCard.addClass("card-outline-success");
+	// 			$selAnswerBlock.find(".float-right")
+	// 										 .append(createFontAweIcon("check fa-2x text-success"));
+	// 			$btnRow.find(".mean-alts-answer").prop("disabled", true)
+	// 																			 .removeClass("btn-outline-primary")
+	// 																			 .addClass("btn-outline-secondary");
+	// 			$feedbackCardText.prepend("<br>").addClass("text-success").fadeIn();
+	// 			$feedbackCardText.find("strong").prepend("Correct! ");
+	// 			addPoints(1);
+	// 		} else {
+	// 			$selAnswerCard.addClass("card-outline-danger");
+	// 			$selAnswerBlock.find(".float-right")
+	// 										 .append(createFontAweIcon("close fa-2x text-danger"));
+	// 			$btnRow.find(".mean-alts-answer").prop("disabled", true)
+	// 																			 .removeClass("btn-outline-primary")
+	// 																		 	 .addClass("btn-outline-secondary");
+ // 			  $feedbackCardText.prepend("<br>").addClass("text-danger").fadeIn();
+	// 			$feedbackCardText.find("strong").prepend("Incorrect. ");
+	// 			removePoints(1);
+	// 		}
+	//
+	// 		var numBtns = $("#meaning-alts-div .btn").length;
+	// 		var numBtnsDisabled = $("#meaning-alts-div .btn:disabled").length;
+	//
+	// 		if (numBtns == numBtnsDisabled) {
+	// 			$("#meaning-alts-continue-btn").fadeIn();
+	// 		}
+	// 	});
+	// };
 
-		var $lastInput;
-		var lastInputText;
-		var wordSubstring;
-		var numLettersTyped = 0;
-		var successLetters = 0;
-		var $btn = $("#spell-the-word-continue-btn");
-		var timeStartedTyping;
-		var numInputs = 0;
+	// function startExampleNonExamplesActivity(targetWord, exNonExArray) {
+	// 	const $eNonEContinueBtn = $("#ex-non-exs-cont-btn");
+	// 	$eNonEContinueBtn.hide();
+	// 	giveDirections(
+	// 		"Are the statements below an example or non-example of " +
+	// 		"the word above, whose definition is <mark>" + targetWord.definition +
+	// 		"</mark>."
+	// 	);
+	//
+	// 	$.each(exNonExArray, function(index) {
+	// 		$("#ex-non-exs-div").append(createExNonExQues(this, index));
+	// 	})
+	//
+	// 	$("#ex-non-exs-div").show();
+	// 	// TODO Figure out why the buttons oddly lose their btn-block class
+	// 	$(".container").on("click", ".ex-non-exs-answer", function() {
+	// 		$selAnswer = $(this);
+	// 		$selAnswerText = $selAnswer.text().trim();
+	// 		$selAnswerCard = $selAnswer.parents(".card");
+	// 		$selAnswerBlock = $selAnswerCard.find(".card-block");
+	// 		$btnRow = $selAnswer.parent().parent();
+	// 		index = $btnRow.data("index");
+	// 		answer = exNonExArray[index].answer.trim();
+	// 		$feedbackCardText = $btnRow.siblings(".ex-non-exs-feedback")
+	//
+	// 		if ($selAnswerText == answer) {
+	// 			$selAnswerCard.addClass("card-outline-success");
+	// 			$selAnswerBlock.find(".float-right")
+	// 										 .append(createFontAweIcon("check fa-2x text-success"));
+	// 			$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
+	// 																			  .removeClass("btn-outline-primary")
+	// 																			  .addClass("btn-outline-secondary");
+	// 			$feedbackCardText.prepend("<br>").addClass("text-success").fadeIn();
+	// 			$feedbackCardText.find("strong").prepend("Correct! ");
+	// 			addPoints(1);
+	// 		} else {
+	// 			$selAnswerCard.addClass("card-outline-danger");
+	// 			$selAnswerBlock.find(".float-right")
+	// 										 .append(createFontAweIcon("close fa-2x text-danger"));
+	// 			$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
+	// 																			  .removeClass("btn-outline-primary")
+	// 																			  .addClass("btn-outline-secondary");
+	// 			$feedbackCardText.prepend("<br>").addClass("text-danger").fadeIn();
+	// 			$feedbackCardText.find("strong").prepend("Incorrect. ");
+	// 			removePoints(1);
+	// 		}
+	//
+	// 		var numBtns = $("#ex-non-exs-div .btn").length;
+	// 		var numBtnsDisabled = $("#ex-non-exs-div .btn:disabled").length;
+	//
+	// 		if (numBtns == numBtnsDisabled) {
+	// 			$("#ex-non-exs-cont-btn").fadeIn();
+	// 			// show an emoji pointing down and when clicked, scrollToBottom();
+	// 		}
+	// 	});
+	// }
 
-		$(".container").on("input", ".spell-the-word", function() {
-			timeStartedTyping = timeStartedTyping || $scoreboardTimer.text();
-			$lastInput = $(".spell-the-word:first");
-			lastInputText = $(this).val().trim().toLowerCase();
-			numLettersTyped = lastInputText.length;
-			wordSubstring = targetWord.substring(0, numLettersTyped);
+	// function startSynVersusAntActivity(synonyms, antonyms) {
+	// 	var $selectedBtn;
+	// 	var $selectedBtns;
+	// 	var twoBtnsAreSelected = false;
+	// 	var btnsAreTheSame = false;
+	// 	var gameCompleted = false;
+	// 	var isMatchMade = false;
+	// 	var matches = [];
+	// 	giveDirections("Match the synonym and antonym pairs for the word above.");
+	// 	matches = shuffleArray(merge(
+	// 		createMatchObjects(synonyms, "synonym"),
+	// 		createMatchObjects(antonyms, "antonym")
+	// 	));
+	// 	$("#syn-vs-ant-div").append(createMatchingCards(matches));
+	//
+	// 	$(".container").on("click", ".match", function() {
+	// 		$selectedBtn = $(this);
+	// 		$selectedBtn.addClass("selected");
+	// 		$selectedBtns = $(".selected");
+	// 		numSelected = $selectedBtns.length;
+	// 		twoBtnsAreSelected = numSelected > 1;
+	//
+	// 		if (twoBtnsAreSelected) {
+	// 			$firstBtn = $($selectedBtns[0]);
+	// 			$secondBtn = $($selectedBtns[1]);
+	// 			btnsAreOnyms = $firstBtn.text() == $secondBtn.text();
+	//
+	// 			if (btnsAreOnyms) {
+	// 				$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
+	// 										 .addClass("btn-outline-primary");
+	// 			}
+	//
+	// 			if ($firstBtn.text() == "synonym" || $secondBtn.text() == "synonym") {
+	// 				var $wordBtn = findBtnNot($selectedBtns, "synonym");
+	// 				var matchIsFound = findMatch(matches, $wordBtn, "synonym").length;
+	// 				if (matchIsFound) { isMatchMade = true; }
+	// 			} else {
+	// 				var $wordBtn = findBtnNot($selectedBtns, "antonym");
+	// 				var matchIsFound = findMatch(matches, $wordBtn, "antonym").length;
+	// 				if (matchIsFound) { isMatchMade = true; }
+	// 			}
+	//
+	// 			if (isMatchMade) {
+	// 				$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
+	// 										 .addClass("btn-success")
+	// 										 .prop("disabled", true);
+	// 				addPoints(30);
+	// 				flashPointsUpdate($arrowSuccess);
+	// 				isMatchMade = false;
+	// 				gameCompleted = $(".match.btn-success").length == matches.length * 2;
+	//
+	// 				if (gameCompleted) {
+	// 					$("#syn-vs-ant-cont-btn").fadeIn();
+	// 				}
+	// 			} else {
+	// 				$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
+	// 										 .addClass("btn-outline-primary");
+	// 		    removePoints(10);
+	// 				flashPointsUpdate($arrowDanger);
+	// 			}
+	// 		} else {
+	// 			if ($selectedBtn.hasClass("btn-primary")) {
+	// 				$selectedBtn.removeClass("btn-primary selected")
+	// 										.addClass("btn-outline-primary");
+	// 			} else {
+	// 				$selectedBtn.removeClass("btn-outline-primary")
+	// 										.addClass("btn-primary");
+	// 			}
+	// 		}
+	// 	});
+	// };
 
-			if (lastInputText == wordSubstring) {
-				makeLettersGreen($targetWordDiv, numLettersTyped);
-				successLetters = $targetWordDiv.find("span.text-success").length;
-
-				if (successLetters != numLettersTyped) {
-					makeLettersDefault($targetWordDiv);
-					makeLettersGreen($targetWordDiv, numLettersTyped);
-				}
-			}
-
-			if (lastInputText == targetWord) {
-				numInputs = $(".spell-the-word.form-control-success").length + 1;
-				$lastInput.parent()
-									.addClass("has-success")
-									.append(
-										createFormText(
-											"(" + numInputs + ") typed in "
-											+ timeDiff(timeStartedTyping)
-											+ " secs"
-										)
-									);
-				timeStartedTyping = null;
-				$lastInput.addClass("form-control-success")
-									.prop("disabled", true);
-				addPoints(50);
-				flashPointsUpdate($arrowSuccess);
-				$btn.fadeIn();
-				createAnotherInput().prependTo("#spell-by-typing-activity");
-				$lastInput = $(".spell-the-word:first").focus();
-			}
-		});
-	};
-
-	function spellByClickingLetters(chosenWordLetters) {
-		var $letter;
-		var $tappedLetterBtn;
-		var tappedLetter;
-		var firstLetter;
-		var underscores = "";
-		var $underscoreContainer = createElem("div", null, "underscore-container");
-		var $alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
-		var	$randomAlphabet;
-		var $alphabetRandLetters = [];
-		var $mergedLettersArray = [];
-		var $spellByClickingLettersDiv = $("#spell-by-clicking-letters-div");
-
-		makeLettersDefault($targetWordDiv);
-		$spellByClickingLettersDiv.show();
-		$targetWordDiv.html($underscoreContainer);
-
-		$.each(chosenWordLetters, function() {
-			underscores += "_ ";
-		});
-
-		$underscoreContainer.text(underscores);
-
-		for (var i = 0; i < 3; i++) {
-			$randomAlphabet = $alphabets[randNumInRange(0, 26)];
-			$alphabetRandLetters.push($randomAlphabet);
-		}
-
-		$mergedLettersArray = merge(chosenWordLetters, $alphabetRandLetters);
-		$mergedLettersArray = shuffleArray($mergedLettersArray);
-
-		$.each($mergedLettersArray, function(index, letter) {
-			$letter = createBtn(
-				"btn-lg btn-outline-primary fitb-letter letter_" + letter,
-				letter
-			);
-			$spellByClickingLettersDiv.append($letter);
-		});
-
-		$(".fitb-letter").click(function() {
-			$tappedLetterBtn = $(this);
-			tappedLetter = $(this).text();
-
-			for (var i = 0; i < chosenWordLetters.length; i++) {
-				firstLetter = chosenWordLetters[0];
-			}
-
-			if (firstLetter == tappedLetter) {
-				$tappedLetterBtn.removeClass("btn-outline-primary")
-												.addClass("btn-success");
-				$tappedLetterBtn.prop("disabled", true);
-				underscores = underscores.replace(/_ /, tappedLetter);
-				$underscoreContainer.text(underscores);
-				chosenWordLetters.shift();
-				addPoints(1);
-				flashPointsUpdate($arrowSuccess);
-			} else {
-				removePoints(1);
-				flashPointsUpdate($arrowDanger);
-				$tappedLetterBtn.removeClass("animated shake")
-												.addClass("animated shake");
-			}
-
-			if (chosenWordLetters.length == 0) {
-				$underscoreContainer.addClass("text-success");
-				$(".fitb-letter").prop("disabled", true);
-				$("#fill-in-the-blank-continue-btn").fadeIn();
-			} else {
-				$("#fill-in-the-blank-continue-btn").fadeOut();
-			}
-		});
-	};
-
-	function startPronunciationActivity(targetWord) {
-		const $audioBtn = $(".funds-audio-btn");
-		const $pronunciationContinueBtn = $("#pronunciation-continue-btn");
-		var attr = $(".audiooo").attr("src") + targetWord.name + ".mp3";
-		var $btn;
-		$targetWordDiv.html(targetWord.phonetic_spelling);
-		$(".audiooo").attr("src", attr);
-
-		// TODO Track this metric
-		$audioBtn.click(function() {
-			$btn = $(this);
-			$btn.addClass("text-success")
-					.removeClass("fa-volume-off")
-					.addClass("fa-volume-up");
-
-			setTimeout(function() {
-				$btn.removeClass("text-success")
-						.removeClass("fa-volume-up")
-						.addClass("fa-volume-off");
-			}, 500);
-
-			$targetWordDiv.addClass("text-success");
-			addPoints(1);
-			flashPointsUpdate($arrowSuccess);
-			$pronunciationContinueBtn.fadeIn();
-		});
-	};
-
-	function startMeaningAltsActivity(words, meaningAltArray) {
-		var chosenWord = words[0];
-		giveDirections(
-			"Read the statements below and decide which one makes more sense."
-		);
-
-		$.each(meaningAltArray, function(index) {
-			$("#meaning-alts-div").append(createMeaningAltQues(this, index));
-		})
-
-		$("#meaning-alts-div").show();
-
-		$(".container").on("click", ".mean-alts-answer", function() {
-			$selAnswer = $(this);
-			$selAnswerText = $selAnswer.text().trim();
-			$selAnswerCard = $selAnswer.parents(".card");
-			$selAnswerBlock = $selAnswerCard.find(".card-block");
-			$btnRow = $selAnswer.parent().parent();
-			index = $btnRow.data("index");
-			answer = meaningAltArray[index].answer.trim();
-			$feedbackCardText = $btnRow.siblings(".mean-alts-feedback")
-
-			if ($selAnswerText == answer) {
-				$selAnswerCard.addClass("card-outline-success");
-				$selAnswerBlock.find(".float-right")
-											 .append(createFontAweIcon("check fa-2x text-success"));
-				$btnRow.find(".mean-alts-answer").prop("disabled", true)
-																				 .removeClass("btn-outline-primary")
-																				 .addClass("btn-outline-secondary");
-				$feedbackCardText.prepend("<br>").addClass("text-success").fadeIn();
-				$feedbackCardText.find("strong").prepend("Correct! ");
-				addPoints(1);
-			} else {
-				$selAnswerCard.addClass("card-outline-danger");
-				$selAnswerBlock.find(".float-right")
-											 .append(createFontAweIcon("close fa-2x text-danger"));
-				$btnRow.find(".mean-alts-answer").prop("disabled", true)
-																				 .removeClass("btn-outline-primary")
-																			 	 .addClass("btn-outline-secondary");
- 			  $feedbackCardText.prepend("<br>").addClass("text-danger").fadeIn();
-				$feedbackCardText.find("strong").prepend("Incorrect. ");
-				removePoints(1);
-			}
-
-			var numBtns = $("#meaning-alts-div .btn").length;
-			var numBtnsDisabled = $("#meaning-alts-div .btn:disabled").length;
-
-			if (numBtns == numBtnsDisabled) {
-				$("#meaning-alts-continue-btn").fadeIn();
-			}
-		});
-	};
-
-	function startExampleNonExamplesActivity(targetWord, exNonExArray) {
-		const $eNonEContinueBtn = $("#ex-non-exs-cont-btn");
-		$eNonEContinueBtn.hide();
-		giveDirections(
-			"Are the statements below an example or non-example of " +
-			"the word above, whose definition is <mark>" + targetWord.definition +
-			"</mark>."
-		);
-
-		$.each(exNonExArray, function(index) {
-			$("#ex-non-exs-div").append(createExNonExQues(this, index));
-		})
-
-		$("#ex-non-exs-div").show();
-		// TODO Figure out why the buttons oddly lose their btn-block class
-		$(".container").on("click", ".ex-non-exs-answer", function() {
-			$selAnswer = $(this);
-			$selAnswerText = $selAnswer.text().trim();
-			$selAnswerCard = $selAnswer.parents(".card");
-			$selAnswerBlock = $selAnswerCard.find(".card-block");
-			$btnRow = $selAnswer.parent().parent();
-			index = $btnRow.data("index");
-			answer = exNonExArray[index].answer.trim();
-			$feedbackCardText = $btnRow.siblings(".ex-non-exs-feedback")
-
-			if ($selAnswerText == answer) {
-				$selAnswerCard.addClass("card-outline-success");
-				$selAnswerBlock.find(".float-right")
-											 .append(createFontAweIcon("check fa-2x text-success"));
-				$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
-																				  .removeClass("btn-outline-primary")
-																				  .addClass("btn-outline-secondary");
-				$feedbackCardText.prepend("<br>").addClass("text-success").fadeIn();
-				$feedbackCardText.find("strong").prepend("Correct! ");
-				addPoints(1);
-			} else {
-				$selAnswerCard.addClass("card-outline-danger");
-				$selAnswerBlock.find(".float-right")
-											 .append(createFontAweIcon("close fa-2x text-danger"));
-				$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
-																				  .removeClass("btn-outline-primary")
-																				  .addClass("btn-outline-secondary");
-				$feedbackCardText.prepend("<br>").addClass("text-danger").fadeIn();
-				$feedbackCardText.find("strong").prepend("Incorrect. ");
-				removePoints(1);
-			}
-
-			var numBtns = $("#ex-non-exs-div .btn").length;
-			var numBtnsDisabled = $("#ex-non-exs-div .btn:disabled").length;
-
-			if (numBtns == numBtnsDisabled) {
-				$("#ex-non-exs-cont-btn").fadeIn();
-				// show an emoji pointing down and when clicked, scrollToBottom();
-			}
-		});
-	}
-
-	function startSynVersusAntActivity(synonyms, antonyms) {
-		var $selectedBtn;
-		var $selectedBtns;
-		var twoBtnsAreSelected = false;
-		var btnsAreTheSame = false;
-		var gameCompleted = false;
-		var isMatchMade = false;
-		var matches = [];
-		giveDirections("Match the synonym and antonym pairs for the word above.");
-		matches = shuffleArray(merge(
-			createMatchObjects(synonyms, "synonym"),
-			createMatchObjects(antonyms, "antonym")
-		));
-		$("#syn-vs-ant-div").append(createMatchingCards(matches));
-
-		$(".container").on("click", ".match", function() {
-			$selectedBtn = $(this);
-			$selectedBtn.addClass("selected");
-			$selectedBtns = $(".selected");
-			numSelected = $selectedBtns.length;
-			twoBtnsAreSelected = numSelected > 1;
-
-			if (twoBtnsAreSelected) {
-				$firstBtn = $($selectedBtns[0]);
-				$secondBtn = $($selectedBtns[1]);
-				btnsAreOnyms = $firstBtn.text() == $secondBtn.text();
-
-				if (btnsAreOnyms) {
-					$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
-											 .addClass("btn-outline-primary");
-				}
-
-				if ($firstBtn.text() == "synonym" || $secondBtn.text() == "synonym") {
-					var $wordBtn = findBtnNot($selectedBtns, "synonym");
-					var matchIsFound = findMatch(matches, $wordBtn, "synonym").length;
-					if (matchIsFound) { isMatchMade = true; }
-				} else {
-					var $wordBtn = findBtnNot($selectedBtns, "antonym");
-					var matchIsFound = findMatch(matches, $wordBtn, "antonym").length;
-					if (matchIsFound) { isMatchMade = true; }
-				}
-
-				if (isMatchMade) {
-					$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
-											 .addClass("btn-success")
-											 .prop("disabled", true);
-					addPoints(30);
-					flashPointsUpdate($arrowSuccess);
-					isMatchMade = false;
-					gameCompleted = $(".match.btn-success").length == matches.length * 2;
-
-					if (gameCompleted) {
-						$("#syn-vs-ant-cont-btn").fadeIn();
-					}
-				} else {
-					$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
-											 .addClass("btn-outline-primary");
-			    removePoints(10);
-					flashPointsUpdate($arrowDanger);
-				}
-			} else {
-				if ($selectedBtn.hasClass("btn-primary")) {
-					$selectedBtn.removeClass("btn-primary selected")
-											.addClass("btn-outline-primary");
-				} else {
-					$selectedBtn.removeClass("btn-outline-primary")
-											.addClass("btn-primary");
-				}
-			}
-		});
-	};
-
-	function startReviewActivity(targetWord) {
-		updateProgress(100);
-		addPoints(1000);
-		flashPointsUpdate($arrowSuccess);
-		$("#chosen-word-header-container").hide().addClass("text-center").fadeIn();
-		$("#chosen-word-header-container").prepend(createElem("i", "em em-clap"));
-		$("#chosen-word-header-container").append(createElem("i", "em em-clap"));
-		$("#directions .text-primary").html("Nice job...you finished!");
-		$("#directions span:last").html("Ready for the next challenge?");
-		clearTimeout(timerID);
-	};
+	// function startReviewActivity(targetWord) {
+	// 	updateProgress(100);
+	// 	addPoints(1000);
+	// 	flashPointsUpdate($arrowSuccess);
+	// 	$("#chosen-word-header-container").hide().addClass("text-center").fadeIn();
+	// 	$("#chosen-word-header-container").prepend(createElem("i", "em em-clap"));
+	// 	$("#chosen-word-header-container").append(createElem("i", "em em-clap"));
+	// 	$("#directions .text-primary").html("Nice job...you finished!");
+	// 	$("#directions span:last").html("Ready for the next challenge?");
+	// 	clearTimeout(timerID);
+	// };
 
 	/**
 	*
@@ -557,188 +556,188 @@ $(document).ready(function() {
 	*
 	**/
 
+	//
+	// function findBtnNot($btns, type) {
+	// 	return $btns.filter(function() {
+	// 		return $(this).text() != type;
+	// 	});
+	// }
+	//
+	// function findMatch(matches, $btn, type) {
+	// 	return matches.filter(function(match) {
+	// 		return isMatch(match, $btn, type);
+	// 	});
+	// }
+	//
+	// function isMatch(match, $btn, type) {
+	// 	return match.word == $btn.text() && match.type == type;
+	// }
+	//
+	// function createMatchObjects(words, type) {
+	// 	matches = [];
+	//
+	// 	$.each(words, function(index, word) {
+	// 		match = new Object();
+	// 		match.id = index;
+	// 		match.word = word;
+	// 		match.type = type;
+	// 		matches.push(match);
+	// 	});
+	//
+	// 	return matches;
+	// }
+	//
+	// function createMatchingCards(matches) {
+	// 	var $row = createElem("div", "row text-center");
+	// 	var $typeBtn;
+	// 	var $wordBtn;
+	// 	var $typeColSmallThree;
+	// 	var $wordColSmallThree;
+	//
+	// 	$.each(matches, function(index, match) {
+	// 		$wordColSmallThree = createElem("div", "col-sm-4 mb-3");
+	// 		$typeColSmallThree = createElem("div", "col-sm-4 mb-3");
+	// 		$wordBtn = createBtn(
+	// 			"btn-outline-primary btn-lg btn-block match", match.word
+	// 		)
+	// 		$typeBtn = createBtn(
+	// 			"btn-outline-primary btn-lg btn-block match", match.type
+	// 		);
+	// 		$typeColSmallThree.append($typeBtn);
+	// 		$wordColSmallThree.append($wordBtn);
+	// 		$row.append($wordColSmallThree).append($typeColSmallThree);
+	// 	});
+	//
+	// 	return $row;
+	// }
+	//
+	// function isOffline(string) {
+	// 	return string.indexOf("Looks like you are offline") != -1;
+	// }
+	//
+	// function thesaurus(targetWordName) {
+	// 	return $.get(
+	// 		"/thesaurus/" + targetWordName, function() {}, "json"
+	// 	);
+	// };
 
-	function findBtnNot($btns, type) {
-		return $btns.filter(function() {
-			return $(this).text() != type;
-		});
-	}
+	// function getGameWords() {
+	// 	return $.get(
+	// 		"/fundamentals?word_id=" + $chosenWordID, function() {}, "json"
+	// 	);
+	// };
 
-	function findMatch(matches, $btn, type) {
-		return matches.filter(function(match) {
-			return isMatch(match, $btn, type);
-		});
-	}
+	// function getExampleNonExamples(wordID) {
+	// 	return $.get(
+	// 		"/words/" + wordID + "/example_non_examples", function() {}, "json"
+	// 	);
+	// };
+	//
+	// function getMeaningAlts(wordID) {
+	// 	return $.get(
+	// 		"/words/" + wordID + "/meaning_alts", function() {}, "json"
+	// 	);
+	// };
 
-	function isMatch(match, $btn, type) {
-		return match.word == $btn.text() && match.type == type;
-	}
+	// function createFontAweIcon(_class) {
+	// 	return createElem("i", "fa fa-" + _class)
+	// }
 
-	function createMatchObjects(words, type) {
-		matches = [];
+	// function createBtn(_class, text) {
+	// 	return createElem("button", "btn " + _class).text(text.trim());
+	// }
+	//
+	// function createMeaningAltQues(meaningAlt, index) {
+	// 	$card = createElem("div", "card mb-3");
+	// 	$cardBlock = createElem("div", "card-block");
+	// 	$cardTitle = createElem("h4", "card-title");
+	// 	$rightOrWrongIcon = createElem("div", "float-right");
+	// 	$btnsDiv = createElem("div", "row text-center");
+	// 	$halfCol1 = createElem("div", "col-sm-6");
+	// 	$halfCol2 = createElem("div", "col-sm-6");
+	// 	btnOptions = shuffleArray(meaningAlt.choices.split(","));
+	// 	$btn1 = createBtn(
+	// 		"btn-lg btn-outline-primary btn-block mean-alts-answer",
+	// 		btnOptions[0]
+	// 	);
+	// 	$btn2 = createBtn(
+	// 		"btn-lg btn-outline-primary btn-block mean-alts-answer",
+	// 		btnOptions[1]
+	// 	);
+	// 	$feedback = createElem(
+	// 		"p", "card-text mean-alts-feedback"
+	// 	).append(createElem("strong"));
+	// 	$card.append($cardBlock);
+	// 	$cardBlock.append($cardTitle);
+	// 	$cardTitle.append($rightOrWrongIcon);
+	// 	$cardTitle.append(meaningAlt.text);
+	// 	$cardBlock.append($btnsDiv);
+	// 	$cardBlock.append($feedback);
+	// 	$btnsDiv.attr("data-index", index);
+	// 	$btnsDiv.append($halfCol1).append($halfCol2);
+	// 	$halfCol1.append($btn1);
+	// 	$halfCol2.append($btn2);
+	// 	$feedback.find("strong").append(meaningAlt.feedback);
+	// 	return $card;
+	// }
 
-		$.each(words, function(index, word) {
-			match = new Object();
-			match.id = index;
-			match.word = word;
-			match.type = type;
-			matches.push(match);
-		});
+	// function createExNonExQues(exNonEx, index) {
+	// 	$card = createElem("div", "card mb-3");
+	// 	$cardBlock = createElem("div", "card-block");
+	// 	$cardTitle = createElem("h4", "card-title");
+	// 	$rightOrWrongIcon = createElem("div", "float-right");
+	// 	$btnsDiv = createElem("div", "row text-center");
+	// 	$halfCol1 = createElem("div", "col-sm-6");
+	// 	$halfCol2 = createElem("div", "col-sm-6");
+	// 	btnOptions = shuffleArray(["example", "non-example"]);
+	// 	$btn1 = createBtn(
+	// 		"btn-lg btn-outline-primary btn-block ex-non-exs-answer",
+	// 		btnOptions[0]
+	// 	);
+	// 	$btn2 = createBtn(
+	// 		"btn-lg btn-outline-primary btn-block ex-non-exs-answer",
+	// 		btnOptions[1]
+	// 	);
+	// 	$feedback = createElem(
+	// 		"p", "card-text ex-non-exs-feedback"
+	// 	).append(createElem("strong"));
+	// 	$card.append($cardBlock);
+	// 	$cardBlock.append($cardTitle);
+	// 	$cardTitle.append($rightOrWrongIcon);
+	// 	$cardTitle.append(exNonEx.text);
+	// 	$cardBlock.append($btnsDiv);
+	// 	$cardBlock.append($feedback);
+	// 	$btnsDiv.attr("data-index", index);
+	// 	$btnsDiv.append($halfCol1).append($halfCol2);
+	// 	$halfCol1.append($btn1);
+	// 	$halfCol2.append($btn2);
+	// 	$feedback.find("strong").append(exNonEx.feedback);
+	// 	return $card;
+	// }
 
-		return matches;
-	}
+	// function flashPointsUpdate($arrow) {
+	// 	$arrow.css("opacity", "1");
+	//
+	// 	setTimeout(function() {
+	// 		$arrow.css("opacity", "0.1");
+	// 	}, 300);
+	// }
+	//
+	// function makeLettersGreen($section, numLetters) {
+	// 	$($section.find("span").splice(0, numLetters)).addClass("text-success");
+	// }
+	//
+	// function makeLettersDefault($section) {
+	// 	$($section.find("span.text-success")).removeClass("text-success");
+	// }
+	// 
+	// function merge(array1, array2) {
+	// 	return $.merge($.merge([], array1), array2);
+	// }
 
-	function createMatchingCards(matches) {
-		var $row = createElem("div", "row text-center");
-		var $typeBtn;
-		var $wordBtn;
-		var $typeColSmallThree;
-		var $wordColSmallThree;
-
-		$.each(matches, function(index, match) {
-			$wordColSmallThree = createElem("div", "col-sm-4 mb-3");
-			$typeColSmallThree = createElem("div", "col-sm-4 mb-3");
-			$wordBtn = createBtn(
-				"btn-outline-primary btn-lg btn-block match", match.word
-			)
-			$typeBtn = createBtn(
-				"btn-outline-primary btn-lg btn-block match", match.type
-			);
-			$typeColSmallThree.append($typeBtn);
-			$wordColSmallThree.append($wordBtn);
-			$row.append($wordColSmallThree).append($typeColSmallThree);
-		});
-
-		return $row;
-	}
-
-	function isOffline(string) {
-		return string.indexOf("Looks like you are offline") != -1;
-	}
-
-	function thesaurus(targetWordName) {
-		return $.get(
-			"/thesaurus/" + targetWordName, function() {}, "json"
-		);
-	};
-
-	function getGameWords() {
-		return $.get(
-			"/fundamentals?word_id=" + $chosenWordID, function() {}, "json"
-		);
-	};
-
-	function getExampleNonExamples(wordID) {
-		return $.get(
-			"/words/" + wordID + "/example_non_examples", function() {}, "json"
-		);
-	};
-
-	function getMeaningAlts(wordID) {
-		return $.get(
-			"/words/" + wordID + "/meaning_alts", function() {}, "json"
-		);
-	};
-
-	function createFontAweIcon(_class) {
-		return createElem("i", "fa fa-" + _class)
-	}
-
-	function createBtn(_class, text) {
-		return createElem("button", "btn " + _class).text(text.trim());
-	}
-
-	function createMeaningAltQues(meaningAlt, index) {
-		$card = createElem("div", "card mb-3");
-		$cardBlock = createElem("div", "card-block");
-		$cardTitle = createElem("h4", "card-title");
-		$rightOrWrongIcon = createElem("div", "float-right");
-		$btnsDiv = createElem("div", "row text-center");
-		$halfCol1 = createElem("div", "col-sm-6");
-		$halfCol2 = createElem("div", "col-sm-6");
-		btnOptions = shuffleArray(meaningAlt.choices.split(","));
-		$btn1 = createBtn(
-			"btn-lg btn-outline-primary btn-block mean-alts-answer",
-			btnOptions[0]
-		);
-		$btn2 = createBtn(
-			"btn-lg btn-outline-primary btn-block mean-alts-answer",
-			btnOptions[1]
-		);
-		$feedback = createElem(
-			"p", "card-text mean-alts-feedback"
-		).append(createElem("strong"));
-		$card.append($cardBlock);
-		$cardBlock.append($cardTitle);
-		$cardTitle.append($rightOrWrongIcon);
-		$cardTitle.append(meaningAlt.text);
-		$cardBlock.append($btnsDiv);
-		$cardBlock.append($feedback);
-		$btnsDiv.attr("data-index", index);
-		$btnsDiv.append($halfCol1).append($halfCol2);
-		$halfCol1.append($btn1);
-		$halfCol2.append($btn2);
-		$feedback.find("strong").append(meaningAlt.feedback);
-		return $card;
-	}
-
-	function createExNonExQues(exNonEx, index) {
-		$card = createElem("div", "card mb-3");
-		$cardBlock = createElem("div", "card-block");
-		$cardTitle = createElem("h4", "card-title");
-		$rightOrWrongIcon = createElem("div", "float-right");
-		$btnsDiv = createElem("div", "row text-center");
-		$halfCol1 = createElem("div", "col-sm-6");
-		$halfCol2 = createElem("div", "col-sm-6");
-		btnOptions = shuffleArray(["example", "non-example"]);
-		$btn1 = createBtn(
-			"btn-lg btn-outline-primary btn-block ex-non-exs-answer",
-			btnOptions[0]
-		);
-		$btn2 = createBtn(
-			"btn-lg btn-outline-primary btn-block ex-non-exs-answer",
-			btnOptions[1]
-		);
-		$feedback = createElem(
-			"p", "card-text ex-non-exs-feedback"
-		).append(createElem("strong"));
-		$card.append($cardBlock);
-		$cardBlock.append($cardTitle);
-		$cardTitle.append($rightOrWrongIcon);
-		$cardTitle.append(exNonEx.text);
-		$cardBlock.append($btnsDiv);
-		$cardBlock.append($feedback);
-		$btnsDiv.attr("data-index", index);
-		$btnsDiv.append($halfCol1).append($halfCol2);
-		$halfCol1.append($btn1);
-		$halfCol2.append($btn2);
-		$feedback.find("strong").append(exNonEx.feedback);
-		return $card;
-	}
-
-	function flashPointsUpdate($arrow) {
-		$arrow.css("opacity", "1");
-
-		setTimeout(function() {
-			$arrow.css("opacity", "0.1");
-		}, 300);
-	}
-
-	function makeLettersGreen($section, numLetters) {
-		$($section.find("span").splice(0, numLetters)).addClass("text-success");
-	}
-
-	function makeLettersDefault($section) {
-		$($section.find("span.text-success")).removeClass("text-success");
-	}
-
-	function merge(array1, array2) {
-		return $.merge($.merge([], array1), array2);
-	}
-
-	function timeDiff(timeStarted) {
-		return $scoreboardTimer.text() - timeStarted;
-	}
+	// function timeDiff(timeStarted) {
+	// 	return $scoreboardTimer.text() - timeStarted;
+	// }
 
 	function startCountdown($section, seconds) {
 		var countdownID = setInterval(function() {
@@ -749,41 +748,41 @@ $(document).ready(function() {
 			}
 		}, 1000);
 	}
+	//
+	// function startCountup($section, seconds) {
+	// 	return countdownID = setInterval(function() {
+	// 		seconds++;
+	// 		$section.html(seconds);
+	// 	}, 1000);
+	// }
 
-	function startCountup($section, seconds) {
-		return countdownID = setInterval(function() {
-			seconds++;
-			$section.html(seconds);
-		}, 1000);
-	}
-
-	function createFormText(text) {
-		return createElem("p", "form-text text-muted")
-					 .append(createElem("small").text(text));
-	}
-
-	function createAnotherInput() {
-		return createFormGroup().append(createLabel(), createInput());
-	}
-
-	function createInput() {
-		return createElem("input", "form-control input-lg spell-the-word")
-					 .attr("type", "text").attr("autofocus", "true");
-	}
-
-	function createFormGroup() {
-		return createElem("div", "form-group spell-by-typing-form-group");
-	}
-
-	function createLabel() {
-		return createElem("label", "form-control-label sr-only")
-	}
-
-	function createElem(elem, elemClass, elemID) {
-		_class = elemClass || null;
-		_id = elemID || null;
-		return $("<" + elem + ">", { class: _class, id: _id });
-	}
+	// function createFormText(text) {
+	// 	return createElem("p", "form-text text-muted")
+	// 				 .append(createElem("small").text(text));
+	// }
+	//
+	// function createAnotherInput() {
+	// 	return createFormGroup().append(createLabel(), createInput());
+	// }
+	//
+	// function createInput() {
+	// 	return createElem("input", "form-control input-lg spell-the-word")
+	// 				 .attr("type", "text").attr("autofocus", "true");
+	// }
+	//
+	// function createFormGroup() {
+	// 	return createElem("div", "form-group spell-by-typing-form-group");
+	// }
+	//
+	// function createLabel() {
+	// 	return createElem("label", "form-control-label sr-only")
+	// }
+	//
+	// function createElem(elem, elemClass, elemID) {
+	// 	_class = elemClass || null;
+	// 	_id = elemID || null;
+	// 	return $("<" + elem + ">", { class: _class, id: _id });
+	// }
 
 	function update_user_word_games_completed() {
 		var game_info = { "word_id": $chosenWordID };
@@ -828,33 +827,33 @@ $(document).ready(function() {
 			console.log(response.errors)
 		});
 	};
+	//
+	// function addPoints(points) {
+	// 	newPointsTotal += points;
+	// 	$points.html(newPointsTotal);
+	// };
+	//
+	// function removePoints(points) {
+	// 	if (newPointsTotal > 0) {
+	// 		newPointsTotal -= points;
+	// 		$points.html(newPointsTotal);
+	// 	}
+	// };
 
-	function addPoints(points) {
-		newPointsTotal += points;
-		$points.html(newPointsTotal);
-	};
+	// function giveDirections(instruction) {
+	// 	$("#game-instructions").html(instruction);
+	// };
+	//
+	// function updateProgress(value) {
+	// 	var $progressBar = $(".progress-bar");
+	// 	$progressBar.attr("aria-valuenow", value)
+	// 							.attr("style", "width: " + value + "%;")
+	// 							.text(value + "%");
+	// };
 
-	function removePoints(points) {
-		if (newPointsTotal > 0) {
-			newPointsTotal -= points;
-			$points.html(newPointsTotal);
-		}
-	};
-
-	function giveDirections(instruction) {
-		$("#fundamentals-game-instructions").html(instruction);
-	};
-
-	function updateProgress(value) {
-		var $progressBar = $(".progress-bar");
-		$progressBar.attr("aria-valuenow", value)
-								.attr("style", "width: " + value + "%;")
-								.text(value + "%");
-	};
-
-	function randNumInRange(start, end) {
-		return Math.floor(Math.random()* (start - end) + end);
-	};
+	// function randNumInRange(start, end) {
+	// 	return Math.floor(Math.random()* (start - end) + end);
+	// };
 
 	function scrollTo($section) {
 		$("html, body").animate({ scrollTop: $section.offset().top - 50 }, 2000);
@@ -864,16 +863,16 @@ $(document).ready(function() {
 		$("html, body").animate({ scrollTop: $(document).height() }, 3000);
 	}
 
-	function shuffleArray(array) {
-		var m = array.length, t, i;
-
-		while (m) {
-			i = Math.floor(Math.random() * m--);
-			t = array[m];
-			array[m] = array[i];
-			array[i] = t;
-		}
-
-		return array;
-	};
+	// function shuffleArray(array) {
+	// 	var m = array.length, t, i;
+	//
+	// 	while (m) {
+	// 		i = Math.floor(Math.random() * m--);
+	// 		t = array[m];
+	// 		array[m] = array[i];
+	// 		array[i] = t;
+	// 	}
+	//
+	// 	return array;
+	// };
 }); // end of document ready fn

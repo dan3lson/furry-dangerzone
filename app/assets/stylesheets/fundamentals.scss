@@ -1,30 +1,7 @@
-//**********
-//*
-//* MIXINS, VARIABLES, ETC.
-//*
-//**********
-
-.palabra,
-#spell-the-word-continue-btn,
-#spell-by-clicking-letters-div,
-#pronunciation-spans,
-#pronunciation-continue-btn,
-#meaning-alts-div,
-.mean-alts-feedback,
-#meaning-alts-continue-btn,
-#ex-non-exs-div,
-.ex-non-exs-feedback,
-#ex-non-exs-cont-btn,
-#synonyms_container,
-#antonyms_container,
-#real_world_examples_container,
-#syn-ant-no-results,
-#fill-in-the-blank-continue-btn,
-#synonyms-cont-btn,
-#antonyms_continue_button,
-#syn-vs-ant-cont-btn,
-#review-funds-game-div {
-	display: none;
+#activity-div {
+	h4 {
+		font-weight: 200;
+	}
 }
 
 .fa-arrow-up.text-success,
@@ -39,7 +16,7 @@
 	font-weight: 200;
 }
 
-#continue-btn-div {
+.continue-btn-div {
 	margin-bottom: 50px;
 
 	& button {
@@ -47,22 +24,11 @@
 	}
 }
 
-#meaning-alts-div, #ex-non-exs-div {
-	h4 {
-		font-weight: 200;
-	}
-}
-
-
 #spell-by-typing-activity {
 	input {
 		font-size: 2.5rem;
 		height: 69px;
 	}
-}
-
-#spell-by-clicking-letters-div {
-	margin: 0px;
 }
 
 .fitb-letter {

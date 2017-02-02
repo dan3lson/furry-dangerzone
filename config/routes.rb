@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   resources :words do
     resources :example_non_examples, only: [:index]
   end
+  resources :words do
+    resources :sent_stems, only: [:index]
+  end
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]

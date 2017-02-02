@@ -1,32 +1,52 @@
-================
-words
-================
-has_many :meaning_alts
-has_many :word_example_non_examples
-has_many :example_non_examples
+Level 1: Speed Speller
 
-================
-meaning_alts
-================
-belongs_to :word
-text: string
-feedback: string
-answer: string
-choices: string <--- Need to generate migration to add column
-word_id: integer
+word_id
+time_spent
 
-================
-word_example_non_examples
-================
-belongs_to :words
-belongs_to :example_non_examples
-text: string
+Level 2: Jumbled Letters
 
-================
-example_non_examples
-================
-has_many :words
-has_many :word_example_non_examples
-text: string
-answer: string
-feedback: string
+word_id
+time_spent
+num_incorrect_tap
+num_correct_tap
+
+Level 3: Hear It
+
+word_id
+time_spent
+num_heard
+
+Level 4: Decisions, Decisions
+
+mean_alt_id
+time_spent
+result (bool)
+
+Level 5: Example/Non-Example
+
+ex_non_ex_id
+time_spent
+result (bool)
+
+Level 6: Syns vs Ants
+
+word_id
+time_spent
+type (syn or ant)
+result
+
+Level 7: Jeopardy (should this be recorded for a round and/or the entire game?)
+
+word_id
+time_spent
+type
+result
+linero
+
+Level 8: Match Em' All
+
+Level 9: Sentence Stems
+
+time_spent
+sent_stem_id
+user_id

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :word_tags, through: :user_word_tags
   has_many :meaning_alts
   has_many :example_non_examples
+  has_many :sent_stems
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

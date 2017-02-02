@@ -1,7 +1,7 @@
 <% if user_word.freestyle_completed? %>
 	<%= link_to "#",
 			class: "btn btn-secondary btn-block disabled",
-			role: "button" do 
+			role: "button" do
 	%>
 		<i class="fa fa-flag-checkered"></i>
 		Practice
@@ -9,13 +9,15 @@
 <% elsif user_word.fundamental_not_completed? %>
 	<%= link_to fund_game_link(word.id),
 			class: "btn btn-danger btn-block",
-			role: "button" do
+			role: "button",
+			remote: true do
 	%>
 		<i class="fa fa-gamepad"></i>
 		Start Playing
 	<% end %>
 <% elsif user_word.jeopardy_not_completed? %>
-	<%= link_to jeop_game_link(word.id), class: "btn btn-warning btn-block",
+	<%= link_to jeop_game_link(word.id),
+			class: "btn btn-warning btn-block",
 			role: "button",
 			remote: true do
 	%>
@@ -25,7 +27,8 @@
 <% elsif user_word.jeopardy_completed? %>
   <%= link_to free_game_link(word.id),
 			class: "btn btn-success btn-block",
-			role: "button" do
+			role: "button",
+			remote: true do
 	%>
 		<i class="fa fa-gamepad"></i>
 		Finish Playing
