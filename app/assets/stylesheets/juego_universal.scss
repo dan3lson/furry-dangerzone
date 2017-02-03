@@ -1,5 +1,28 @@
-.progress-bar {
-	font-size: 1rem;
-	height: 2rem;
-	line-height: 1.8rem;
+#activity-div {
+	input, textarea {
+		font-size: 2.5rem;
+	}
+
+	input {
+		height: 69px;
+	}
+
+	h4 {
+		font-weight: 200;
+	}
+}
+
+
+.fa-arrow-up.text-success,
+.fa-arrow-down.text-danger {
+	opacity: 0.1;
+}
+
+.scoreboard {
+	font-size: 1.5rem;
+
+	.progress-bar {
+		font-size: 1rem;
+		background: #636c72 !important;
+	}
 }

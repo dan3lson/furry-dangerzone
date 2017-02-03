@@ -1,20 +1,179 @@
+const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', locals: { target_word: @target_word }) %>");
-const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: @directions }) %>");
-const $sentStemsPartial = $("<%= j render(partial: 'games/freestyle/sent_stems', locals: { sent_stems: @sent_stems }) %>");
+const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: '' }) %>");
+var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var $activityDiv = createElem("div", null, "activity-div");
-var $timeGameStarted;
 $(".container").empty()
-							 .append($activityDiv);
-$activityDiv.append(
-								$headerPartial,
-								$directionsPartial,
-								$sentStemsPartial
-							).hide()
-							.fadeIn("slow");
+							 .append(
+								 $scoreboardPartial,
+								 $headerPartial,
+								 $directionsPartial,
+								 $activityDiv
+							 ).hide()
+							 .fadeIn("slow");
+var $points = $(".scoreboard-points");
+var $scoreboardTimer = $(".scoreboard-timer");
+var timerID = startCountup($scoreboardTimer, 0);
+var $regex = /^[a-zA-Z0-9 .';,?-]+$/;
+var newPointsTotal = 0;
+startSentenceStemActivity();
+
+$(".container").on("click", ".continue-btn", function() {
+	var $btn = $(this);
+
+	if ($btn.hasClass("start-word-relationship-activity")) {
+		giveDirections("How are the two words above connected or related?");
+		updateProgress(25);
+		addPoints(750);
+		flashPointsUpdate(arrowSuccess());
+		$activityDiv.empty();
+		startWordRelationshipActivity();
+	} else if ($btn.hasClass("start-leksi-tale-activity")) {
+		giveDirections(
+			"Write a very short story, poem, song, etc. using at least three of " +
+			"your words. Be creative!"
+		);
+		updateProgress(50);
+		addPoints(1333);
+		flashPointsUpdate(arrowSuccess());
+		$activityDiv.empty();
+		startLeksiTaleActivity();
+	} else if ($btn.hasClass("review-activity")) {
+		startReviewActivity();
+	}
+
+	$btn.parent().remove();
+});
+
+/***********************
+	 ACTIVITY FUNCTIONS
+************************/
+
+function startSentenceStemActivity() {
+	const $sentStemsPartial = $("<%= j render(partial: 'games/freestyle/sent_stems', locals: { sent_stems: @sent_stems }) %>");
+	$activityDiv.append($sentStemsPartial);
+	giveDirections("Complete the sentences below.");
+	const $textarea = $("#" + targetWord.id).focus();
+	var value, continueBtn;
+
+	$textarea.on("input", function() {
+		value = $(this).val();
+
+		if (value.length > 5 && $regex.test(value)) {
+			continueBtn = showContinueBtn("start-word-relationship-activity");
+		} else {
+			$(".fixed-bottom").remove();
+		}
+	});
+}
+
+function startWordRelationshipActivity() {
+	getAnotherFreestyleWord(targetWord.id).done(function(secondWord) {
+		$(".target-word-header-div").append("+ " + secondWord.name);
+		var $textarea = createTextarea();
+		$activityDiv.append($textarea);
+		$textarea.attr("placeholder", "Type in here...").focus();
+
+		$textarea.on("input", function() {
+			value = $(this).val();
+
+			if (value.length > 5 && $regex.test(value)) {
+				continueBtn = showContinueBtn("start-leksi-tale-activity");
+			} else {
+				$(".fixed-bottom").remove();
+			}
+		});
+	});
+}
+
+function startLeksiTaleActivity() {
+	getMyLeksiNames().done(function(names) {
+		console.log(names);
+	});
+}
 
 /***********************
 		HELPER FUNCTIONS
 ************************/
+
+function addPoints(points) {
+	newPointsTotal += points;
+	$points.html(newPointsTotal);
+};
+
+function removePoints(points) {
+	if (newPointsTotal > 0) {
+		newPointsTotal -= points;
+		$points.html(newPointsTotal);
+	}
+};
+
+function flashPointsUpdate($arrow) {
+	$arrow.css("opacity", "1");
+
+	setTimeout(function() {
+		$arrow.css("opacity", "0.1");
+	}, 300);
+}
+
+function arrowSuccess() {
+	return $(".fa-arrow-up.text-success");
+}
+
+function arrowDanger() {
+	return $(".fa-arrow-down.text-danger");
+}
+
+function updateProgress(value) {
+	var $progressBar = $(".progress-bar");
+	$progressBar.attr("aria-valuenow", value)
+							.attr("style", "width: " + value + "%;")
+							.text(value + "%");
+};
+
+function startCountup($section, seconds) {
+	return setInterval(function() {
+		seconds++;
+		$section.html(seconds);
+	}, 1000);
+}
+
+function createTextarea() {
+	return createElem("textarea", "form-control");
+}
+
+function getMyLeksiNames() {
+	return getData("/myLeksi/names");
+}
+
+function getAnotherFreestyleWord(targetWordID) {
+	return getData("/games/word_relationships?word_id=" + targetWordID);
+}
+
+function getData(path) {
+	return $.get(path, function() {}, "json");
+}
+
+function showContinueBtn(_class) {
+	if (!$(".fixed-bottom").length) {
+		$(".container").append(
+			createElem("div", "fixed-bottom mb-0")
+			.append(
+				createBtn(
+					"btn-primary btn-block btn-lg continue-btn " + _class, "Continue"
+				)
+			)
+		);
+	}
+}
+
+function giveDirections(directions) {
+	$(".game-directions").html(directions);
+};
+
+function createBtn(_class, text) {
+	return createElem("button", "btn " + _class).text(text.trim());
+}
 
 function createElem(elem, elemClass, elemID) {
 	_class = elemClass || null;

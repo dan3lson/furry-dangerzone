@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "settings" => "current_users#settings"
   get "progress" => "current_users#progress"
   get "myLeksi" => "my_leksi#index"
+  get "myLeksi/names" => "my_leksi#names"
   get "myLeksi/:id" => "my_leksi#show"
   get "myTags" => "my_tags#index"
   get "myTags/:id" => "my_tags#show"
@@ -50,6 +51,9 @@ Rails.application.routes.draw do
   resource :user_word_tag, only: [:create, :edit, :destroy]
   resource :user_word_tag_word_show_page, only: [:destroy]
   resource :user_word_tag_tag_show_page, only: [:destroy]
+  namespace :games do
+    resources :word_relationships, only: [:index]
+  end
   namespace :school do
     root "current_user#classes"
     get "classes" => "current_user#classes"

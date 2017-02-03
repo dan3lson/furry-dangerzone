@@ -44,19 +44,19 @@ class User < ActiveRecord::Base
   end
 
   def has_words?
-    !words.empty?
-  end
-
-  def has_tags?
-    tags.any?
-  end
-
-  def has_user_word_tags?
-    user_word_tags.any?
+    !UserWord.where(user: self).empty?
   end
 
   def has_tag?(tag)
-    tags.include?(tag)
+    UserTag.find_by(user: self, tag: tag).nil?
+  end
+
+  def has_tags?
+    !UserTag.where(user: self).empty?
+  end
+
+  def has_user_word_tags?
+    !UserWordTag.where(user: self).empty?
   end
 
   def is_admin?
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   end
 
   def incomplete_fundamentals
-    UserWord.where(user: self).incomplete_freestyles
+    UserWord.where(user: self).incomplete_fundamentals
   end
 
   def incomplete_jeopardys
@@ -119,6 +119,16 @@ class User < ActiveRecord::Base
   # TODO: Create test
   def incomplete_tag_jeop_ids_not(word)
     incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
+  end
+
+  # TODO Create test
+  def incomplete_free_ids_not(word)
+    incomplete_freestyles.where.not(word_id: word.id).pluck(:word_id)
+  end
+
+  # TODO Create test
+  def incomplete_frees_not(word)
+    Word.find(incomplete_free_ids_not(word))
   end
 
   def word_ids_for(tag)

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var $chosenWordID = $(".palabra-id").html();
-	// var $targetWordDiv = $("#chosen-word-header-container");
+	// var $targetWordDiv = $("#target-word-header-div");
 	var $regex = /^[a-zA-Z. ]+$/;
 	// var newPointsTotal = 0;
   // var $timeGameStarted;
@@ -540,9 +540,9 @@ $(document).ready(function() {
 	// 	updateProgress(100);
 	// 	addPoints(1000);
 	// 	flashPointsUpdate($arrowSuccess);
-	// 	$("#chosen-word-header-container").hide().addClass("text-center").fadeIn();
-	// 	$("#chosen-word-header-container").prepend(createElem("i", "em em-clap"));
-	// 	$("#chosen-word-header-container").append(createElem("i", "em em-clap"));
+	// 	$("#target-word-header-div").hide().addClass("text-center").fadeIn();
+	// 	$("#target-word-header-div").prepend(createElem("i", "em em-clap"));
+	// 	$("#target-word-header-div").append(createElem("i", "em em-clap"));
 	// 	$("#directions .text-primary").html("Nice job...you finished!");
 	// 	$("#directions span:last").html("Ready for the next challenge?");
 	// 	clearTimeout(timerID);

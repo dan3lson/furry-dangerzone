@@ -24,6 +24,13 @@ class MyLeksiController < ApplicationController
 		@user_word = UserWord.object(current_user, @word)
 	end
 
+	def names
+		render json: UserWord.where(user: current_user)
+												 .includes(:word)
+												 .map(&:word)
+												 .map(&:name)
+	end
+
 	private
 
 	def logged_in_user

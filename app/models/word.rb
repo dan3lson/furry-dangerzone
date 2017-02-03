@@ -108,11 +108,9 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def self.untagged_for(user)
-    words_with_tags = user.word_tags.pluck(
-      :word_id
-    ).map { |word_id| Word.find(word_id) }
-
-    user.words - words_with_tags
+    words_with_tags = user.word_tags.pluck(:word_id)
+                                    .map { |word_id| Word.find(word_id) }
+    UserWord.where(user: user).includes(:word).map(&:word) - words_with_tags
   end
 
   # TODO Create test

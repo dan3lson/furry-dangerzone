@@ -1,34 +1,8 @@
-#activity-div {
-	h4 {
-		font-weight: 200;
-	}
-}
-
-.fa-arrow-up.text-success,
-.fa-arrow-down.text-danger {
-	opacity: 0.1;
-}
-
-#chosen-word-header-container {
+#target-word-header-div {
 	min-height: 2.9rem;
 	padding: 0.7rem;
 	word-break: break-word;
 	font-weight: 200;
-}
-
-.continue-btn-div {
-	margin-bottom: 50px;
-
-	& button {
-		font-size: 23px;
-	}
-}
-
-#spell-by-typing-activity {
-	input {
-		font-size: 2.5rem;
-		height: 69px;
-	}
 }
 
 .fitb-letter {
@@ -40,13 +14,5 @@
 #pronunciation-spans {
 	i {
 		font-size: 7rem;
-	}
-}
-
-.scoreboard {
-	font-size: 1.5rem;
-
-	.progress-bar {
-		background: #636c72 !important;
 	}
 }

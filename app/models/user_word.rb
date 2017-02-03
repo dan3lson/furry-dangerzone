@@ -17,7 +17,7 @@ class UserWord < ActiveRecord::Base
   scope :incomplete_freestyles, -> { where(games_completed: 2) }
   scope :completed_games, -> { where(games_completed: [1, 2, 3]) }
 
-  # updated -> not tested
+  # TODO: Create test
   def self.search(user, name)
     if name
       if name.blank?
