@@ -30,7 +30,7 @@ class GamesController < ApplicationController
   def freestyle
     @target_word = Word.find(params[:word_id])
     @sent_stems = @target_word.sent_stems
-    
+
     respond_to do |format|
       format.js { render template: "games/freestyle/freestyle.js.erb" }
     end

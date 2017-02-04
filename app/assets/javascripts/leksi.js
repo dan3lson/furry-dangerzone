@@ -12,8 +12,8 @@ $(document).ready(function() {
 	});
 
 	$(function () {
-  	$("[data-toggle='popover']").popover();
-	});
+	  $('[data-toggle="tooltip"]').tooltip();
+	})
 
 	$("#get-started-btn").click(function() {
 		scrollToSection($("#get-started-now").find("h1"));

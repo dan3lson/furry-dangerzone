@@ -1,14 +1,11 @@
 <%= sent_stems.each do |ss| %>
-	<div class="card mb-3">
-		<div class="card-block">
-			<h4 class="card-title"><%= ss.text %></h4>
-			<div class="form-group">
-				<%= text_area_tag ss.word.id,
-													nil,
-													class: "form-control",
-													placeholder: "Type in here..."
-				%>
-			</div>
-		</div>
+	<h4><i class="fa fa-pencil"></i> <%= ss.text %></h4>
+	<div class="form-group">
+		<%= text_area_tag ss.word.id,
+											nil,
+											class: "form-control",
+											placeholder: "Type in here..."
+		%>
 	</div>
+	<hr>
 <% end %>

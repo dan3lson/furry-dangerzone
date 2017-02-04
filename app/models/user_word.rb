@@ -133,7 +133,6 @@ class UserWord < ActiveRecord::Base
       user_word = UserWord.new
       user_word.user = user
       user_word.word = w
-
       words_successfully_added += 1 if user_word.save
     end
 

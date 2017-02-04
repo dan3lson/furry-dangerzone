@@ -180,7 +180,8 @@ class User < ActiveRecord::Base
   end
 
   def has_games_to_play?
-    has_incomplete_fundamentals? || has_incomplete_jeopardys? ||
+    has_incomplete_fundamentals? ||
+    has_incomplete_jeopardys? ||
     has_incomplete_freestyles?
   end
 
@@ -247,7 +248,6 @@ class User < ActiveRecord::Base
   def fundamentals_completed_yesterday
     user_words.select do |uw|
       next unless uw.fundamental_completed?
-
       uw.fundamental_completed_yesterday?
     end
   end
@@ -256,7 +256,6 @@ class User < ActiveRecord::Base
   def jeopardys_completed_yesterday
     user_words.select do |uw|
       next unless uw.jeopardy_completed?
-
       uw.jeopardy_completed_yesterday?
     end
   end
@@ -265,7 +264,6 @@ class User < ActiveRecord::Base
   def freestyles_completed_yesterday
     user_words.select do |uw|
       next unless uw.freestyle_completed?
-
       uw.freestyle_completed_yesterday?
     end
   end
@@ -274,7 +272,6 @@ class User < ActiveRecord::Base
   def freestyles_completed_today
     user_words.select do |uw|
       next unless uw.freestyle_completed?
-
       uw.freestyle_completed_today?
     end
   end
@@ -295,25 +292,23 @@ class User < ActiveRecord::Base
 
   # TODO: Create test
   def completed_freestyle_on?(date)
-    UserWord.where(user: self, games_completed: 3).select { |uw|
-      uw.updated_at.to_date == date
-    }.any?
+    UserWord.where(user: self, games_completed: 3)
+            .select { |uw| uw.updated_at.to_date == date}
+            .any?
   end
 
   # TODO: Create test
   def myLeksi_mastery
     words = self.num_words
-
     return 0 if words == 0
-
     (completed_freestyles.count / words.to_f * 100).round
   end
 
   # TODO: Create test
   def time_spent_playing
     user_words = UserWord.where(user: self)
-
-    user_words.map { |uw| uw.game_stats.sum(:time_spent) }.inject(&:+) || 0
+    user_words.map { |uw| uw.game_stats.sum(:time_spent) }
+              .inject(&:+) || 0
   end
 
   # TODO: Create test

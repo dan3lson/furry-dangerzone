@@ -10,7 +10,7 @@
 		<div>
 			<% if current_user.has_words? %>
 				<% Word.untagged_for(current_user).each do |word| %>
-					<span class="tag tag-pill tag-default">
+					<span class="badge badge-pill badge-default">
 						<%= link_to word.name, "/myLeksi/#{word.id}", class: "text-white" %>
 					</span>
 				<% end %>

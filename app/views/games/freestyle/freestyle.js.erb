@@ -14,7 +14,7 @@ $(".container").empty()
 var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
-var $regex = /^[a-zA-Z0-9 .';,?-]+$/;
+var $regex = /^[a-zA-Z0-9 .';,?!-]+$/;
 var newPointsTotal = 0;
 startSentenceStemActivity();
 
@@ -30,14 +30,18 @@ $(".container").on("click", ".continue-btn", function() {
 		startWordRelationshipActivity();
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
 		giveDirections(
-			"Write a very short story, poem, song, etc. using at least three of " +
-			"your words. Be creative!"
+			"Write a very short story, poem, song, etc. that includes the word " +
+			"above and two of your other words, which are down below. It can be " +
+			"real or fake - be creative and have fun with it!"
 		);
 		updateProgress(50);
 		addPoints(1333);
 		flashPointsUpdate(arrowSuccess());
 		$activityDiv.empty();
 		startLeksiTaleActivity();
+	} else if ($btn.hasClass("describe-me-activity")) {
+		giveDirections("Answer the question below in complete sentences.");
+		startDescribeMeActivity();
 	} else if ($btn.hasClass("review-activity")) {
 		startReviewActivity();
 	}
@@ -54,13 +58,12 @@ function startSentenceStemActivity() {
 	$activityDiv.append($sentStemsPartial);
 	giveDirections("Complete the sentences below.");
 	const $textarea = $("#" + targetWord.id).focus();
-	var value, continueBtn;
 
 	$textarea.on("input", function() {
-		value = $(this).val();
+		var value = $(this).val().trim();
 
-		if (value.length > 5 && $regex.test(value)) {
-			continueBtn = showContinueBtn("start-word-relationship-activity");
+		if (value.length > 0 && $regex.test(value)) {
+			showContinueBtn("start-word-relationship-activity");
 		} else {
 			$(".fixed-bottom").remove();
 		}
@@ -70,15 +73,15 @@ function startSentenceStemActivity() {
 function startWordRelationshipActivity() {
 	getAnotherFreestyleWord(targetWord.id).done(function(secondWord) {
 		$(".target-word-header-div").append("+ " + secondWord.name);
-		var $textarea = createTextarea();
+		const $textarea = createTextarea();
 		$activityDiv.append($textarea);
 		$textarea.attr("placeholder", "Type in here...").focus();
 
 		$textarea.on("input", function() {
-			value = $(this).val();
+			var value = $(this).val().trim();
 
-			if (value.length > 5 && $regex.test(value)) {
-				continueBtn = showContinueBtn("start-leksi-tale-activity");
+			if (value.length > 0 && $regex.test(value)) {
+				 showContinueBtn("start-leksi-tale-activity");
 			} else {
 				$(".fixed-bottom").remove();
 			}
@@ -88,13 +91,64 @@ function startWordRelationshipActivity() {
 
 function startLeksiTaleActivity() {
 	getMyLeksiNames().done(function(names) {
-		console.log(names);
+		$(".target-word-header-div").text(targetWord.name);
+		var $textarea = createTextarea();
+		var limit = names.length - 3;
+		const $wordsPartial = $("<%= j render(partial: 'games/freestyle/words') %>");
+		$activityDiv.append($textarea, $wordsPartial);
+		$textarea.attr("placeholder", "Type in here...").focus();
+
+		$textarea.on("input", function() {
+			var value = $(this).val().trim();
+
+			highlightUsedWord(value);
+
+			if (hasThreeOrMoreWords(value, names, limit) && $regex.test(value)) {
+				 showContinueBtn("start-describe-me-activity");
+			} else {
+				$(".fixed-bottom").remove();
+			}
+		});
+
+		$(".container").on("click", ".badge-default", function() {
+			$badge = $(this);
+			deactivateBadges();
+			activateBadge($badge);
+			console.log("Clicked", $(this).text());
+		});
 	});
+}
+
+function startDescribeMeActivity() {
+	console.log("Starting Describe Me Activity");
 }
 
 /***********************
 		HELPER FUNCTIONS
 ************************/
+
+function activateBadge($badge) {
+	$badge.removeClass("badge-default").addClass("badge-primary");
+}
+
+function deactivateBadges() {
+	$(".badge-primary").removeClass("badge-primary")
+										 .addClass("badge-default");
+}
+
+function highlightUsedWord(value) {
+
+}
+
+function hasThreeOrMoreWords(value, names, limit) {
+	var words = $.unique(value.split(" "));
+	var numWords = names.notIn(words).length
+	return numWords <= limit;
+}
+
+Array.prototype.notIn = function(array) {
+	return $(this).not(array).get();
+};
 
 function addPoints(points) {
 	newPointsTotal += points;
