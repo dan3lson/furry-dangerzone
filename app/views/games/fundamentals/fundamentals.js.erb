@@ -15,19 +15,17 @@ $fundamentalsDiv.append(
 $activityDiv.append($spellingSpeedsterPartial);
 $(".container").empty()
 							 .append($fundamentalsDiv)
-							 .addClass("mb-5")
+							 .css("margin-bottom", "5rem")
 							 .hide()
 							 .fadeIn();
 var $targetWordDiv = $(".target-word-header-div");
 var newPointsTotal = 0;
-var $timeGameStarted;
 var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
 giveDirections("Type the word above at least once.");
 startSpellByTypingActivity(targetWord.name);
 updateProgress(0);
-$timeGameStarted = new Date();
 
 $(".container").on("click", ".continue-btn", function() {
 	var $btn = $(this);

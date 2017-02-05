@@ -3,5 +3,7 @@
 	<smal class="text-muted">Click any word to see more info.</smal>
 </h5>
 <% current_user.words.each do |word| %>
-	<span class="badge badge-pill badge-default"><%= word.name %></span>
+	<%= link_to word_path(word), remote: true do %>
+		<span class="badge badge-pill badge-default"><%= word.name %></span>
+	<% end %>
 <% end %>

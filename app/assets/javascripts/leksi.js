@@ -46,6 +46,8 @@ $(document).ready(function() {
     return $field.val().trim() == "";
   }
 
+	// TODO Make this loading icon be like a modal for the jeopardy activity
+	// or place underneath the play button
 	function spinner() {
 		$(".spinner").hide();
 

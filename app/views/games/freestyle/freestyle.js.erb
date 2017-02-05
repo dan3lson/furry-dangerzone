@@ -10,7 +10,8 @@ $(".container").empty()
 								 $directionsPartial,
 								 $activityDiv
 							 ).hide()
-							 .fadeIn("slow");
+							 .fadeIn("slow")
+							 .css("margin-bottom", "5rem");
 var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
@@ -25,7 +26,7 @@ $(".container").on("click", ".continue-btn", function() {
 		giveDirections("How are the two words above connected or related?");
 		updateProgress(25);
 		addPoints(750);
-		flashPointsUpdate(arrowSuccess());
+		flashPointsUpdate(getArrowSuccess());
 		$activityDiv.empty();
 		startWordRelationshipActivity();
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
@@ -36,11 +37,15 @@ $(".container").on("click", ".continue-btn", function() {
 		);
 		updateProgress(50);
 		addPoints(1333);
-		flashPointsUpdate(arrowSuccess());
+		flashPointsUpdate(getArrowSuccess());
 		$activityDiv.empty();
 		startLeksiTaleActivity();
-	} else if ($btn.hasClass("describe-me-activity")) {
-		giveDirections("Answer the question below in complete sentences.");
+	} else if ($btn.hasClass("start-describe-me-activity")) {
+		giveDirections("Do you want to live a contrite life? Why or why not?");
+		updateProgress(75);
+		addPoints(1691);
+		flashPointsUpdate(getArrowSuccess());
+		$activityDiv.empty();
 		startDescribeMeActivity();
 	} else if ($btn.hasClass("review-activity")) {
 		startReviewActivity();
@@ -93,17 +98,16 @@ function startLeksiTaleActivity() {
 	getMyLeksiNames().done(function(names) {
 		$(".target-word-header-div").text(targetWord.name);
 		var $textarea = createTextarea();
-		var limit = names.length - 3;
 		const $wordsPartial = $("<%= j render(partial: 'games/freestyle/words') %>");
 		$activityDiv.append($textarea, $wordsPartial);
 		$textarea.attr("placeholder", "Type in here...").focus();
 
 		$textarea.on("input", function() {
 			var value = $(this).val().trim();
+			var textareaWords = $.unique(value.split(" "));
+			highlightUsedWords(textareaWords, names);
 
-			highlightUsedWord(value);
-
-			if (hasThreeOrMoreWords(value, names, limit) && $regex.test(value)) {
+			if (wordsLimitReached(textareaWords, names) && $regex.test(value)) {
 				 showContinueBtn("start-describe-me-activity");
 			} else {
 				$(".fixed-bottom").remove();
@@ -114,13 +118,24 @@ function startLeksiTaleActivity() {
 			$badge = $(this);
 			deactivateBadges();
 			activateBadge($badge);
-			console.log("Clicked", $(this).text());
 		});
 	});
 }
 
 function startDescribeMeActivity() {
-	console.log("Starting Describe Me Activity");
+	const $textarea = createTextarea();
+	$activityDiv.append($textarea);
+	$textarea.attr("placeholder", "Type in here...").focus();
+
+	$textarea.on("input", function() {
+		var value = $(this).val().trim();
+
+		if (value.length > 0 && $regex.test(value)) {
+			 showContinueBtn("review-activity");
+		} else {
+			$(".fixed-bottom").remove();
+		}
+	});
 }
 
 /***********************
@@ -136,18 +151,37 @@ function deactivateBadges() {
 										 .addClass("badge-default");
 }
 
-function highlightUsedWord(value) {
+function highlightUsedWords(textareaWords, names) {
+	var words = usedWords(textareaWords, names);
+	$(".badge-success").removeClass("badge-success").addClass("badge-default");
 
+	if (words.length) {
+		$.each(usedWords(textareaWords, names), function() {
+			var usedWord = this;
+			var $badge = $(".badge-default").filter(function() {
+				return $(this).text() == usedWord;
+			});
+			$badge.removeClass("badge-default").addClass("badge-success");
+		});
+	}
 }
 
-function hasThreeOrMoreWords(value, names, limit) {
-	var words = $.unique(value.split(" "));
-	var numWords = names.notIn(words).length
-	return numWords <= limit;
+function wordsLimitReached(textareaWords, names) {
+	var words = usedWords(textareaWords, names);
+	return isTargetWordUsed(words) && words.length > 2;
 }
 
-Array.prototype.notIn = function(array) {
-	return $(this).not(array).get();
+function isTargetWordUsed(words) {
+	return $.inArray(targetWord.name, words) != -1;
+}
+
+function usedWords(textareaWords, names) {
+	var unusedNames = names.notIn(textareaWords);
+	return names.notIn(unusedNames);
+}
+
+Array.prototype.notIn = function(otherArray) {
+	return $(this).not(otherArray).get();
 };
 
 function addPoints(points) {
@@ -170,11 +204,11 @@ function flashPointsUpdate($arrow) {
 	}, 300);
 }
 
-function arrowSuccess() {
+function getArrowSuccess() {
 	return $(".fa-arrow-up.text-success");
 }
 
-function arrowDanger() {
+function getArrowDanger() {
 	return $(".fa-arrow-down.text-danger");
 }
 
@@ -190,10 +224,6 @@ function startCountup($section, seconds) {
 		seconds++;
 		$section.html(seconds);
 	}, 1000);
-}
-
-function createTextarea() {
-	return createElem("textarea", "form-control");
 }
 
 function getMyLeksiNames() {
@@ -224,6 +254,10 @@ function showContinueBtn(_class) {
 function giveDirections(directions) {
 	$(".game-directions").html(directions);
 };
+
+function createTextarea() {
+	return createElem("textarea", "form-control");
+}
 
 function createBtn(_class, text) {
 	return createElem("button", "btn " + _class).text(text.trim());

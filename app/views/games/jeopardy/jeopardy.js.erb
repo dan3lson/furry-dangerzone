@@ -2,6 +2,7 @@
 // TODO Figure out the rules for a word to advance to Freestyle
 
 var rounds = JSON.parse("<%= j @jeopardy.to_json.html_safe %>").game;
+const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: @directions }) %>");
 const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { rows: @rows }) %>");
 const $headerPartial = $("<%= j render(partial: 'games/jeopardy/header') %>");
@@ -13,10 +14,10 @@ var round;
 var totalLineroEarned = 0;
 var question;
 var quesCounter = 0;
-var $timeGameStarted;
 $(".container").empty()
 							 .append($jeopardyDiv);
 $jeopardyDiv.append(
+							$scoreboardPartial,
 							$directionsPartial,
 							$lineroTablePartial,
 							$headerPartial,
@@ -25,7 +26,11 @@ $jeopardyDiv.append(
 						.fadeIn("slow");
 var $btns = $(".jeop-btn");
 var validCells = "#linero-table td:not(.exclude)";
-updateCounter();
+var $scoreboardTimer = $(".scoreboard-timer");
+var timerID = startCountup($scoreboardTimer, 0);
+var newPointsTotal = 0;
+var $points = $(".scoreboard-points");
+updateProgress();
 
 $(".container").on("click", validCells, function() {
 	$selectedCell = $(this);
@@ -42,25 +47,27 @@ $(".container").on("click", ".jeop-btn", function() {
 	if (questionIsDisplayed) {
 		$selectedBtn = $(this);
 		$selectedBtnText = $selectedBtn.find("span:first").text();
-		$timeGameStarted = $timeGameStarted || new Date();
 		updateHeader("");
 		deactivate($selectedCell);
 		removeClick($selectedCell);
-		updateCounter();
+		updateProgress();
 		disableButtons();
 		question.selected_ans = $selectedBtnText;
 
 		if (question.selected_ans == question.correct_ans.name) {
 			markResult(question, true);
 			addThumbsUp($selectedBtn);
-			totalLineroEarned += parseInt(question.linero);
+			// TODO Fix: All questions aren't lined up according to their Linero amount
+			addPoints(parseInt(question.linero));
+			flashPointsUpdate(arrowSuccess());
 		} else {
 			markResult(question, false);
 			addThumbsDown($selectedBtn);
-			totalLineroEarned -= parseInt(question.linero);
+			removePoints(parseInt(question.linero));
+			flashPointsUpdate(arrowDanger());
 		}
 
-		if (hasNoMoreAttempts($selectedBtn)) {
+		if (noMoreQuestions($selectedBtn)) {
 			updateBtnProp($selectedBtn);
 			$selectedBtn.removeClass("btn-outline-primary").addClass("btn-secondary");
 		}
@@ -74,7 +81,7 @@ $(".container").on("click", ".jeop-btn", function() {
 	}
 });
 
-function hasNoMoreAttempts($btn) {
+function noMoreQuestions($btn) {
 	return !($btn.find("span .fa-question-circle-o").length);
 }
 
@@ -114,10 +121,13 @@ function updateBtnProp($btn_selector, boolean) {
 	$btn_selector.prop("disabled", boolean);
 }
 
-function updateCounter() {
-	$jeopardyDiv.find(".float-right")
-							.text(getCounter() + "/20");
-}
+function updateProgress() {
+	var $progressBar = $(".progress-bar");
+	var value = (getCounter() / 20) * 100;
+	$progressBar.attr("aria-valuenow", value)
+							.attr("style", "width: " + value + "%;")
+							.text(value + "%");
+};
 
 function getCounter() {
 	return $jeopardyDiv.find(".exclude").length;
@@ -148,6 +158,42 @@ function createElem(elem, elemClass, elemID) {
 	_class = elemClass || null;
 	_id = elemID || null;
 	return $("<" + elem + ">", { class: _class, id: _id });
+}
+
+
+function arrowSuccess() {
+	return $(".fa-arrow-up.text-success");
+}
+
+function arrowDanger() {
+	return $(".fa-arrow-down.text-danger");
+}
+
+function flashPointsUpdate($arrow) {
+	$arrow.css("opacity", "1");
+
+	setTimeout(function() {
+		$arrow.css("opacity", "0.1");
+	}, 300);
+}
+
+function addPoints(points) {
+	newPointsTotal += points;
+	$points.html(newPointsTotal);
+};
+
+function removePoints(points) {
+	if (newPointsTotal > 0) {
+		newPointsTotal -= points;
+		$points.html(newPointsTotal);
+	}
+};
+
+function startCountup($section, seconds) {
+	return setInterval(function() {
+		seconds++;
+		$section.html(seconds);
+	}, 1000);
 }
 
 function shuffleArray(array) {
