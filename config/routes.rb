@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   resource :user_word_tag_tag_show_page, only: [:destroy]
   namespace :games do
     resources :word_relationships, only: [:index]
+    resources :describe_mes, only: [:index]
   end
   namespace :school do
     root "current_user#classes"

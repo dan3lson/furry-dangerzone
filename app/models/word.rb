@@ -8,6 +8,7 @@ class Word < ActiveRecord::Base
   has_many :example_non_examples, dependent: :destroy
   has_many :meaning_alts, dependent: :destroy
   has_many :sent_stems, dependent: :destroy
+  has_many :describe_mes, dependent: :destroy
   has_many :user_words, dependent: :destroy
   has_many :users, through: :user_words
   has_many :word_tags, dependent: :destroy

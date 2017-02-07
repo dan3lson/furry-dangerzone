@@ -21,33 +21,27 @@ startSentenceStemActivity();
 
 $(".container").on("click", ".continue-btn", function() {
 	var $btn = $(this);
+	$activityDiv.empty();
 
 	if ($btn.hasClass("start-word-relationship-activity")) {
-		giveDirections("How are the two words above connected or related?");
 		updateProgress(25);
 		addPoints(750);
 		flashPointsUpdate(getArrowSuccess());
-		$activityDiv.empty();
 		startWordRelationshipActivity();
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
-		giveDirections(
-			"Write a very short story, poem, song, etc. that includes the word " +
-			"above and two of your other words, which are down below. It can be " +
-			"real or fake - be creative and have fun with it!"
-		);
 		updateProgress(50);
 		addPoints(1333);
 		flashPointsUpdate(getArrowSuccess());
-		$activityDiv.empty();
 		startLeksiTaleActivity();
 	} else if ($btn.hasClass("start-describe-me-activity")) {
-		giveDirections("Do you want to live a contrite life? Why or why not?");
 		updateProgress(75);
 		addPoints(1691);
 		flashPointsUpdate(getArrowSuccess());
-		$activityDiv.empty();
 		startDescribeMeActivity();
-	} else if ($btn.hasClass("review-activity")) {
+	} else if ($btn.hasClass("start-review-activity")) {
+		updateProgress(100);
+		addPoints(2369);
+		flashPointsUpdate(getArrowSuccess());
 		startReviewActivity();
 	}
 
@@ -76,7 +70,9 @@ function startSentenceStemActivity() {
 }
 
 function startWordRelationshipActivity() {
-	getAnotherFreestyleWord(targetWord.id).done(function(secondWord) {
+	giveDirections("How are the two words above connected or related?");
+
+	getAnotherFreestyleWord().done(function(secondWord) {
 		$(".target-word-header-div").append("+ " + secondWord.name);
 		const $textarea = createTextarea();
 		$activityDiv.append($textarea);
@@ -95,6 +91,12 @@ function startWordRelationshipActivity() {
 }
 
 function startLeksiTaleActivity() {
+	giveDirections(
+		"Write a very short story, poem, song, etc. that includes the word " +
+		"above and two of your other words, which are down below. It can be " +
+		"real or fake - be creative and have fun with it!"
+	);
+
 	getMyLeksiNames().done(function(names) {
 		$(".target-word-header-div").text(targetWord.name);
 		var $textarea = createTextarea();
@@ -123,19 +125,26 @@ function startLeksiTaleActivity() {
 }
 
 function startDescribeMeActivity() {
-	const $textarea = createTextarea();
-	$activityDiv.append($textarea);
-	$textarea.attr("placeholder", "Type in here...").focus();
+	getDescribeMeText().done(function(describeMe) {
+		giveDirections(describeMe.text);
+		const $textarea = createTextarea();
+		$activityDiv.append($textarea);
+		$textarea.attr("placeholder", "Type in here...").focus();
 
-	$textarea.on("input", function() {
-		var value = $(this).val().trim();
+		$textarea.on("input", function() {
+			var value = $(this).val().trim();
 
-		if (value.length > 0 && $regex.test(value)) {
-			 showContinueBtn("review-activity");
-		} else {
-			$(".fixed-bottom").remove();
-		}
+			if (value.length > 0 && $regex.test(value)) {
+				 showContinueBtn("start-review-activity");
+			} else {
+				$(".fixed-bottom").remove();
+			}
+		});
 	});
+}
+
+function startReviewActivity() {
+	clearTimeout(timerID);
 }
 
 /***********************
@@ -226,12 +235,16 @@ function startCountup($section, seconds) {
 	}, 1000);
 }
 
+function getDescribeMeText() {
+	return getData("/games/describe_mes?word_id=" + targetWord.id);
+}
+
 function getMyLeksiNames() {
 	return getData("/myLeksi/names");
 }
 
-function getAnotherFreestyleWord(targetWordID) {
-	return getData("/games/word_relationships?word_id=" + targetWordID);
+function getAnotherFreestyleWord() {
+	return getData("/games/word_relationships?word_id=" + targetWord.id);
 }
 
 function getData(path) {
