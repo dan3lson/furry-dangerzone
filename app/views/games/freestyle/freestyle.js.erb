@@ -145,6 +145,8 @@ function startDescribeMeActivity() {
 
 function startReviewActivity() {
 	clearTimeout(timerID);
+	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Freestyle', word_name: @target_word.name }) %>");
+	$(".container").empty().append($reviewPartial);
 }
 
 /***********************

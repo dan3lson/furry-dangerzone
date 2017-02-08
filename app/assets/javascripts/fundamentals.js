@@ -730,7 +730,7 @@ $(document).ready(function() {
 	// function makeLettersDefault($section) {
 	// 	$($section.find("span.text-success")).removeClass("text-success");
 	// }
-	// 
+	//
 	// function merge(array1, array2) {
 	// 	return $.merge($.merge([], array1), array2);
 	// }
@@ -784,19 +784,19 @@ $(document).ready(function() {
 	// 	return $("<" + elem + ">", { class: _class, id: _id });
 	// }
 
-	function update_user_word_games_completed() {
-		var game_info = { "word_id": $chosenWordID };
-
-		$.ajax({
-			type: "PATCH",
-			url: "/user_word",
-			dataType: "json",
-			data: game_info,
-			success: function(response) {
-				console.log(response.errors);
-			}
-		});
-	};
+	// function update_user_word_games_completed() {
+	// 	var game_info = { "word_id": $chosenWordID };
+	//
+	// 	$.ajax({
+	// 		type: "PATCH",
+	// 		url: "/user_word",
+	// 		dataType: "json",
+	// 		data: game_info,
+	// 		success: function(response) {
+	// 			console.log(response.errors);
+	// 		}
+	// 	});
+	// };
 
   function update_num_played() {
     var game_info = {

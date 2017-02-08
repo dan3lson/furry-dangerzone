@@ -5,13 +5,16 @@ class MyLeksiController < ApplicationController
 		# @current_user_words = current_user.sort_words_by_progress("ASC")
 		# 																	.includes(:word)
 		# 																	.map(&:word)
-		@current_user_words = current_user.words
+		@current_user_user_words = UserWord.where(user: current_user)
+																			 .includes(:word)
+																			 .latest
+																			 .alphabetical
 		page = params[:page] ? params[:page].to_i - 1 : 1
-		@current_user_words_pag = @current_user_words.paginate(
+		@current_user_user_words_pag = @current_user_user_words.paginate(
 			page: page,
 			per_page: 12
 		)
-		@current_user_words_count = @current_user_words.count
+		@current_user_words_count = @current_user_user_words.count
 
 		respond_to do |format|
 			format.html

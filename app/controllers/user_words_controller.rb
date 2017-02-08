@@ -29,7 +29,12 @@ class UserWordsController < ApplicationController
 
   def update
     @word = Word.find(params[:word_id])
-    @results = UserWord.mark_fundamentals_completed(current_user, @word)
+    @games_completed = params[:games_completed]
+    @results = UserWord.update_games_completed(
+      current_user,
+      @word,
+      @games_completed
+    )
     render json: { errors: @results }
   end
 

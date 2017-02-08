@@ -38,7 +38,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$(".mean-alt-del-form").parents("form").css("display", "inline-block");
+	$(".mean-alt-del-form").parents("form").css("display", "d-inline");
 
 	spinner();
 

@@ -23,14 +23,19 @@ var newPointsTotal = 0;
 var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
-giveDirections("Type the word above at least once.");
+giveDirections(
+	"Type the word above, at least once. The more you practice spelling it, " +
+	"the more Linero you earn."
+);
 startSpellByTypingActivity(targetWord.name);
 updateProgress(0);
 
 $(".container").on("click", ".continue-btn", function() {
 	var $btn = $(this);
+	$activityDiv.empty();
 
-	if ($btn.hasClass("spell-by-clicking-activity")) {
+	if ($btn.hasClass("start-spell-by-clicking-activity")) {
+		updateUserWordGamesCompleted(1);
 		giveDirections(
 			"Tap the letters to spell that same word, whose definition is <mark>" +
 			targetWord.definition + "</mark>."
@@ -38,9 +43,9 @@ $(".container").on("click", ".continue-btn", function() {
 		updateProgress(17);
 		addPoints(100);
 		flashPointsUpdate(arrowSuccess());
-		$activityDiv.empty();
-		startSpellByClickingLettersActiivty(targetWord);
+		startSpellByClickingLettersActiivty();
 	} else if ($btn.hasClass("start-pronunciation-activity")) {
+		updateUserWordGamesCompleted(2);
 		var numSyllables = targetWord.phonetic_spelling.split("·").length;
 		giveDirections(
 			"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
@@ -49,9 +54,9 @@ $(".container").on("click", ".continue-btn", function() {
 		updateProgress(34);
 		addPoints(150);
 		flashPointsUpdate(arrowSuccess());
-		$activityDiv.empty();
-		startPronunciationActivity(targetWord);
+		startPronunciationActivity();
 	} else if ($btn.hasClass("start-decisions-decisions-activity")) {
+		updateUserWordGamesCompleted(3);
 		giveDirections("Decide which of the statements below makes more sense.");
 		addPoints(200);
 		flashPointsUpdate(arrowSuccess());
@@ -62,6 +67,7 @@ $(".container").on("click", ".continue-btn", function() {
 			startDecisionsDecisionsActivity(response);
 		});
 	} else if ($btn.hasClass("start-ex-non-exs-activity")) {
+		updateUserWordGamesCompleted(4);
 		giveDirections(
 			"Are the statements below an example or non-example of " +
 			"the word above, whose definition is <mark>" + targetWord.definition +
@@ -75,6 +81,7 @@ $(".container").on("click", ".continue-btn", function() {
 			startExampleNonExamplesActivity(response);
 		});
 	} else if ($btn.hasClass("start-syns-vs-ant-activity")) {
+		updateUserWordGamesCompleted(5);
 		giveDirections("Match the synonym and antonym pairs for the word above.");
 		addPoints(500);
 		flashPointsUpdate(arrowSuccess());
@@ -94,7 +101,11 @@ $(".container").on("click", ".continue-btn", function() {
 			}
 		});
 	} else if ($btn.hasClass("review-activity")) {
-		startReviewActivity(targetWord);
+		updateUserWordGamesCompleted(6);
+		updateProgress(100);
+		addPoints(1000);
+		flashPointsUpdate(arrowSuccess());
+		startReviewActivity();
 	}
 
 	$btn.parent().remove();
@@ -104,11 +115,11 @@ $(".container").on("click", ".continue-btn", function() {
 	 ACTIVITY FUNCTIONS
 ************************/
 
-function startSpellByTypingActivity(targetWordName) {
+function startSpellByTypingActivity() {
 	var wordLetterSpan;
 	var targetWordSpanLetters = [];
 
-	$.each(targetWordName.split(""), function() {
+	$.each(targetWord.name.split(""), function() {
 		wordLetterSpan = $(createElem("span")).append(this);
 		targetWordSpanLetters.push(wordLetterSpan);
 	})
@@ -128,7 +139,7 @@ function startSpellByTypingActivity(targetWordName) {
 		$lastInput = $(".spell-the-word:first");
 		lastInputText = $(this).val().trim().toLowerCase();
 		numLettersTyped = lastInputText.length;
-		wordSubstring = targetWordName.substring(0, numLettersTyped);
+		wordSubstring = targetWord.name.substring(0, numLettersTyped);
 
 		if (lastInputText == wordSubstring) {
 			makeLettersGreen($targetWordDiv, numLettersTyped);
@@ -140,7 +151,7 @@ function startSpellByTypingActivity(targetWordName) {
 			}
 		}
 
-		if (lastInputText == targetWordName) {
+		if (lastInputText == targetWord.name) {
 			numInputs = $(".spell-the-word.form-control-success").length + 1;
 			$lastInput.parent()
 								.addClass("has-success")
@@ -156,14 +167,14 @@ function startSpellByTypingActivity(targetWordName) {
 								.prop("disabled", true);
 			addPoints(50);
 			flashPointsUpdate(arrowSuccess());
-			showContinueBtn("spell-by-clicking-activity");
+			showContinueBtn("start-spell-by-clicking-activity");
 			createAnotherInput().prependTo("#spell-by-typing-activity");
 			$lastInput = $(".spell-the-word:first").focus();
 		}
 	});
 };
 
-function startSpellByClickingLettersActiivty(targetWord) {
+function startSpellByClickingLettersActiivty() {
 	var $letter;
 	var targetWordLetters = targetWord.name.split('');
 	var $tappedLetterBtn;
@@ -234,7 +245,7 @@ function startSpellByClickingLettersActiivty(targetWord) {
 	});
 };
 
-function startPronunciationActivity(targetWord) {
+function startPronunciationActivity() {
 	const $sayItRightPartial = $("<%= j render(partial: 'games/fundamentals/say_it_right') %>");
 	$activityDiv.append($sayItRightPartial);
 	const $audioBtn = $(".funds-audio-btn");
@@ -262,8 +273,6 @@ function startPronunciationActivity(targetWord) {
 };
 
 function startDecisionsDecisionsActivity(meaningAltArray) {
-	$activityDiv.empty();
-
 	$.each(meaningAltArray, function(index) {
 		$activityDiv.append(createMeaningAltQues(this, index));
 	})
@@ -314,7 +323,6 @@ function startDecisionsDecisionsActivity(meaningAltArray) {
 };
 
 function startExampleNonExamplesActivity(exNonExArray) {
-	$activityDiv.empty();
 	giveDirections(
 		"Are the statements below an example or non-example of " +
 		"the word above, whose definition is <mark>" + targetWord.definition +
@@ -445,22 +453,28 @@ function startSynVersusAntActivity(synonyms, antonyms) {
 	});
 };
 
-function startReviewActivity(targetWord) {
-	$activityDiv.empty();
-	updateProgress(100);
-	addPoints(1000);
-	flashPointsUpdate(arrowSuccess());
-	$(".target-word-header-div").hide().addClass("text-center").fadeIn();
-	$(".target-word-header-div").prepend(createElem("i", "em em-clap"));
-	$(".target-word-header-div").append(createElem("i", "em em-clap"));
-	$("#directions .text-primary").html("Nice job...you finished!");
-	$("#directions span:last").html("Ready for the next challenge?");
+function startReviewActivity() {
 	clearTimeout(timerID);
+	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Fundamentals', word_name: @target_word.name }) %>");
+	$(".container").empty().append($reviewPartial);
 };
 
 /***********************
 		HELPER FUNCTIONS
 ************************/
+
+function updateUserWordGamesCompleted(gamesCompleted) {
+	$.ajax({
+		type: "PATCH",
+		url: "/user_word",
+		dataType: "json",
+		data: { "word_id": targetWord.id, "games_completed": gamesCompleted }
+	}).done(logAjaxSuccess);
+};
+
+function logAjaxSuccess(response) {
+	console.log("Success", response);
+}
 
 function findBtnNot($btns, type) {
 	return $btns.filter(function() {
@@ -520,8 +534,8 @@ function isOffline(string) {
 	return string.indexOf("Looks like you are offline") != -1;
 }
 
-function getThesaurus(targetWordName) {
-	return getData("/thesaurus/" + targetWordName);
+function getThesaurus() {
+	return getData("/thesaurus/" + targetWord.name);
 };
 
 function getExampleNonExamples(wordID) {
@@ -692,7 +706,7 @@ function createInput() {
 	return createElem("input", "form-control input-lg spell-the-word")
 				 .attr("type", "text")
 				 .attr("autofocus", "true")
-				 .attr("placeholder", "Spell it again for more Linero!");
+				 .attr("placeholder", "Type it again?");
 }
 
 function createFormGroup() {

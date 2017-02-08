@@ -2,15 +2,15 @@
   <button class="navbar-toggler navbar-toggler-right"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02"
+          data-target="#navbar-brainiac"
+          aria-controls="navbar-brainiac"
           aria-expanded="false"
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <%= render "layouts/leksi_brand", path: root_path %>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <div class="navbar-nav mr-auto mt-2 mt-md-0 text-center">
+  <div class="collapse navbar-collapse" id="navbar-brainiac">
+    <div class="navbar-nav mr-auto mt-2 text-center">
       <% if params[:controller].include?("my_leksi") %>
   			<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>
   				<i class="fa fa-book"></i> Words

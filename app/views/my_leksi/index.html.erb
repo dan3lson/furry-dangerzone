@@ -29,8 +29,8 @@
   <div class="card-columns"
        id="myLeksi-words"
        data-total="<%= @current_user_words_count %>">
-    <% @current_user_words_pag.each do |word| %>
-      <%= render "my_leksi/index_word", word: word %>
+    <% @current_user_user_words_pag.each do |user_word| %>
+      <%= render "my_leksi/index_word", user_word: user_word %>
     <% end %>
   </div>
   <div class="text-center">
@@ -40,10 +40,9 @@
     <br>
     <br>
     <div id="myLeksi-pagination">
-      <%= will_paginate @current_user_words_pag,
+      <%= will_paginate @current_user_user_words_pag,
         renderer: BootstrapPagination::Rails
       %>
     </div>
   </div>
-  <%#= render "my_leksi/words", words: @current_user_words_pag %>
 <% end %>

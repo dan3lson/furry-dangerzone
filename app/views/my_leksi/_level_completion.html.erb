@@ -1,21 +1,12 @@
 <% if user_word.freestyle_completed? %>
 	<span class="text-info">
-		<i class="fa fa-trophy"></i>
-		15
-	</span>
 <% elsif user_word.fundamental_not_completed? %>
 	<span class="text-danger">
-		<i class="fa fa-trophy"></i>
-		<%= rand(1..4) %>
-	</span>
 <% elsif user_word.jeopardy_not_completed? %>
 	<span class="text-warning">
-		<i class="fa fa-trophy"></i>
-		<%= rand(5..9) %>
-	</span>
 <% elsif user_word.jeopardy_completed? %>
 	<span class="text-success">
-		<i class="fa fa-trophy"></i>
-		<%= rand(10..14) %>
-	</span>
 <% end %>
+		<%= user_word.current_game %>
+		<i class="fa fa-trophy"></i>
+	</span>

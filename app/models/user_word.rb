@@ -9,6 +9,7 @@ class UserWord < ActiveRecord::Base
   validates :word, presence: true
 
   scope :alphabetical, -> { joins(:word).order("words.name") }
+  scope :latest, -> { order("user_words.created_at DESC") }
   scope :completed_fundamentals, -> { where.not(games_completed: 0) }
   scope :incomplete_fundamentals, -> { where(games_completed: 0) }
   scope :completed_jeopardys, -> { where(games_completed: [2, 3]) }
@@ -40,54 +41,51 @@ class UserWord < ActiveRecord::Base
     find_by(user: user, word: word)
   end
 
-  # TODO: Create test
-  def self.mark_fundamentals_completed(user, word)
-    user_word = UserWord.find_by(user: user, word: word)
-    user_word.games_completed = 1
+  # TODO: Update test
+  def self.update_games_completed(user, word, num)
+    user_word = UserWord.object(user, word)
+    user_word.games_completed = num
 
     if user_word.save
-      "Success: UW #{user_word.id}\'s games_completed now at 1."
+      "Success: UW #{user_word.id}\'s games_completed now at #{num}."
     else
-      "ERROR: UW #{user_word.id}\'s Fundamentals stat not updated."
+      "ERROR: UW #{user_word.id}\'s Fundamentals stat not updated to #{num}."
     end
   end
 
+  # TODO: Update test!
   def current_game
-    if games_completed == 0
-      "one"
-    elsif games_completed == 1
-      "two"
-    elsif games_completed == 2
-      "three"
-    elsif games_completed == 3
-      "all-games-completed"
-    else
-      nil
-    end
+    games_completed + 1
   end
 
+  # TODO: Update test
   def fundamental_completed?
-    current_game != "one" && !current_game.nil?
+    current_game > 6
   end
 
+  # TODO: Update test
   def fundamental_not_completed?
-    current_game == "one"
+    current_game <= 6
   end
 
+  # TODO: Update test
   def jeopardy_completed?
-    current_game == "three" || current_game == "all-games-completed"
+    current_game > 8
   end
 
+  # TODO: Update test
   def jeopardy_not_completed?
-    current_game == "two"
+    current_game == 7 || current_game == 8
   end
 
+  # TODO: Update test
   def freestyle_completed?
-    current_game == "all-games-completed"
+    current_game > 12
   end
 
+  # TODO: Update test
   def freestyle_not_completed?
-    current_game == "three" && !freestyle_completed?
+    current_game >= 9 && current_game <= 12
   end
 
   # TODO: Create test
@@ -95,34 +93,34 @@ class UserWord < ActiveRecord::Base
     date.to_date
   end
 
-  # TODO: Create test
+  # TODO: Create test. Probably shouldn't be here in this class.
   def yesterday
     Date.yesterday
   end
 
-  # TODO: Create test
+  # TODO: Update test. Probably shouldn't be here in this class.
   def today
-    Date.yesterday
+    Date.today
   end
 
-  # TODO: Create test
+  # TODO: Update test
   def fundamental_completed_yesterday?
-    _to_date(updated_at) == yesterday && current_game == "one"
+    _to_date(updated_at) == yesterday && fundamental_completed?
   end
 
-  # TODO: Create test
+  # TODO: Update test
   def jeopardy_completed_yesterday?
-    _to_date(updated_at) == yesterday && current_game == "two"
+    _to_date(updated_at) == yesterday && jeopardy_completed?
   end
 
-  # TODO: Create test
+  # TODO: Update test
   def freestyle_completed_yesterday?
-    _to_date(updated_at) == yesterday && current_game == "three"
+    _to_date(updated_at) == yesterday && freestyle_completed?
   end
 
-  # TODO: Create test
+  # TODO: Update test
   def freestyle_completed_today?
-    _to_date(updated_at) == today && current_game == "three"
+    _to_date(updated_at) == today && freestyle_completed?
   end
 
   # TODO: Create test
