@@ -1,9 +1,9 @@
-// TODO Save stats for each macro and perhaps micro activity
 const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', locals: { target_word: @target_word }) %>");
 const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: '' }) %>");
-const $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
+var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
+var currentGame = parseInt("<%= @current_game %>");
 var $fundamentalsDiv = createElem("div", null, "fundamentals-div");
 var $activityDiv = createElem("div", null, "activity-div");
 $fundamentalsDiv.append(
@@ -11,8 +11,7 @@ $fundamentalsDiv.append(
 									$headerPartial,
 									$directionsPartial,
 									$activityDiv
-								)
-$activityDiv.append($spellingSpeedsterPartial);
+								);
 $(".container").empty()
 							 .append($fundamentalsDiv)
 							 .css("margin-bottom", "5rem")
@@ -23,12 +22,59 @@ var newPointsTotal = 0;
 var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
-giveDirections(
-	"Type the word above, at least once. The more you practice spelling it, " +
-	"the more Linero you earn."
-);
-startSpellByTypingActivity(targetWord.name);
 updateProgress(0);
+
+switch (currentGame) {
+	case 1:
+		startSpellByTypingActivity();
+		break;
+	case 2:
+		startSpellByClickingLettersActiivty();
+		break;
+	case 3:
+		startPronunciationActivity();
+		break;
+	case 4:
+		if (availableGames.dec_dec) {
+			updateProgress(51);
+			startDecisionsDecisionsActivity();
+		} else if (availableGames.ex_non_ex) {
+			updateProgress(68);
+			startExampleNonExamplesActivity();
+		} else if (availableGames.syns_vs_ants) {
+			updateProgress(85);
+			startSynsVsAntsActivity();
+		} else {
+			updateProgress(100);
+			startReviewActivity();
+		}
+
+		break;
+	case 5:
+		if (availableGames.ex_non_ex) {
+			updateProgress(68);
+			startExampleNonExamplesActivity();
+		} else if (availableGames.syns_vs_ants) {
+			updateProgress(85);
+			startSynsVsAntsActivity();
+		} else {
+			updateProgress(100);
+			startReviewActivity();
+		}
+
+		break;
+	case 6:
+		if (availableGames.syns_vs_ants) {
+			updateProgress(85);
+			startSynsVsAntsActivity();
+		} else {
+			updateProgress(100);
+			startReviewActivity();
+		}
+
+		break;
+	default: startSpellByTypingActivity();
+}
 
 $(".container").on("click", ".continue-btn", function() {
 	var $btn = $(this);
@@ -36,70 +82,69 @@ $(".container").on("click", ".continue-btn", function() {
 
 	if ($btn.hasClass("start-spell-by-clicking-activity")) {
 		updateUserWordGamesCompleted(1);
-		giveDirections(
-			"Tap the letters to spell that same word, whose definition is <mark>" +
-			targetWord.definition + "</mark>."
-		);
 		updateProgress(17);
 		addPoints(100);
 		flashPointsUpdate(arrowSuccess());
 		startSpellByClickingLettersActiivty();
 	} else if ($btn.hasClass("start-pronunciation-activity")) {
 		updateUserWordGamesCompleted(2);
-		var numSyllables = targetWord.phonetic_spelling.split("·").length;
-		giveDirections(
-			"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
-			"the volume button to hear its pronunciation."
-		);
 		updateProgress(34);
 		addPoints(150);
 		flashPointsUpdate(arrowSuccess());
 		startPronunciationActivity();
 	} else if ($btn.hasClass("start-decisions-decisions-activity")) {
-		updateUserWordGamesCompleted(3);
-		giveDirections("Decide which of the statements below makes more sense.");
 		addPoints(200);
 		flashPointsUpdate(arrowSuccess());
-		updateProgress(51);
 		$targetWordDiv.html(targetWord.name).removeClass("text-success");
 
-		getMeaningAlts(targetWord.id).done(function(response) {
-			startDecisionsDecisionsActivity(response);
-		});
+		if (availableGames.dec_dec) {
+			updateProgress(51);
+			updateUserWordGamesCompleted(3);
+			startDecisionsDecisionsActivity();
+		} else if (availableGames.ex_non_ex) {
+			updateProgress(68);
+			updateUserWordGamesCompleted(4);
+			startExampleNonExamplesActivity();
+		} else if (availableGames.syns_vs_ants) {
+			updateProgress(85);
+			updateUserWordGamesCompleted(5);
+			startSynsVsAntsActivity();
+		} else {
+			updateProgress(100);
+			updateUserWordGamesCompleted(6);
+			startReviewActivity();
+		}
 	} else if ($btn.hasClass("start-ex-non-exs-activity")) {
-		updateUserWordGamesCompleted(4);
-		giveDirections(
-			"Are the statements below an example or non-example of " +
-			"the word above, whose definition is <mark>" + targetWord.definition +
-			"</mark>."
-		);
 		addPoints(325);
 		flashPointsUpdate(arrowSuccess());
-		updateProgress(68);
 
-		getExampleNonExamples(targetWord.id).done(function(response) {
-			startExampleNonExamplesActivity(response);
-		});
+		if (availableGames.ex_non_ex) {
+			updateProgress(68);
+			updateUserWordGamesCompleted(4);
+			startExampleNonExamplesActivity();
+		} else if (availableGames.syns_vs_ants) {
+			updateProgress(85);
+			updateUserWordGamesCompleted(5);
+			startSynsVsAntsActivity();
+		} else {
+			updateProgress(100);
+			updateUserWordGamesCompleted(6);
+			startReviewActivity();
+		}
 	} else if ($btn.hasClass("start-syns-vs-ant-activity")) {
 		updateUserWordGamesCompleted(5);
-		giveDirections("Match the synonym and antonym pairs for the word above.");
 		addPoints(500);
 		flashPointsUpdate(arrowSuccess());
-		updateProgress(85);
 
-		getThesaurus(targetWord.name).done(function(response) {
-			const synonyms = response[0];
-			const antonyms = response[1];
-
-			if (isOffline(synonyms)) {
-				var $alert = createElem("div", "alert alert-warning");
-				$alert.text(synonyms);
-				$activityDiv.append($alert);
-				showContinueBtn("review-activity");
-			} else {
-				startSynVersusAntActivity(synonyms, antonyms);
-			}
-		});
+		if (availableGames.syns_vs_ants) {
+			updateProgress(85);
+			updateUserWordGamesCompleted(5);
+			startSynsVsAntsActivity();
+		} else {
+			updateProgress(100);
+			updateUserWordGamesCompleted(6);
+			startReviewActivity();
+		}
 	} else if ($btn.hasClass("review-activity")) {
 		updateUserWordGamesCompleted(6);
 		updateProgress(100);
@@ -116,6 +161,12 @@ $(".container").on("click", ".continue-btn", function() {
 ************************/
 
 function startSpellByTypingActivity() {
+	const $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
+	$activityDiv.append($spellingSpeedsterPartial);
+	giveDirections(
+		"Type the word above, at least once. The more you practice spelling it, " +
+		"the more Linero you earn."
+	);
 	var wordLetterSpan;
 	var targetWordSpanLetters = [];
 
@@ -175,6 +226,10 @@ function startSpellByTypingActivity() {
 };
 
 function startSpellByClickingLettersActiivty() {
+	giveDirections(
+		"Tap the letters to spell that same word, whose definition is <mark>" +
+		targetWord.definition + "</mark>."
+	);
 	var $letter;
 	var targetWordLetters = targetWord.name.split('');
 	var $tappedLetterBtn;
@@ -246,6 +301,11 @@ function startSpellByClickingLettersActiivty() {
 };
 
 function startPronunciationActivity() {
+	var numSyllables = targetWord.phonetic_spelling.split("·").length;
+	giveDirections(
+		"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
+		"the volume button to hear its pronunciation."
+	);
 	const $sayItRightPartial = $("<%= j render(partial: 'games/fundamentals/say_it_right') %>");
 	$activityDiv.append($sayItRightPartial);
 	const $audioBtn = $(".funds-audio-btn");
@@ -272,20 +332,29 @@ function startPronunciationActivity() {
 	});
 };
 
-function startDecisionsDecisionsActivity(meaningAltArray) {
-	$.each(meaningAltArray, function(index) {
-		$activityDiv.append(createMeaningAltQues(this, index));
-	})
+function startDecisionsDecisionsActivity() {
+	giveDirections("Decide which of the statements below makes more sense.");
+	var meaningAltArray = [];
+
+	getMeaningAlts(targetWord.id).done(function(response) {
+		meaningAltArray = response;
+
+		$.each(meaningAltArray, function(index) {
+			$activityDiv.append(createMeaningAltQues(this, index));
+		})
+	});
 
 	$(".container").on("click", ".mean-alts-answer", function() {
 		$selAnswer = $(this);
 		$selAnswerText = $selAnswer.text().trim();
 		$selAnswerCard = $selAnswer.parents(".card");
 		$selAnswerBlock = $selAnswerCard.find(".card-block");
+		$selAnswerTitle = $selAnswerCard.find(".card-title");
 		$btnRow = $selAnswer.parent().parent();
 		index = $btnRow.data("index");
 		answer = meaningAltArray[index].answer.trim();
-		$feedbackCardText = $btnRow.siblings(".mean-alts-feedback")
+		$feedbackCardText = $btnRow.siblings(".mean-alts-feedback");
+		createElem("div", "clear").insertAfter($selAnswerTitle);
 
 		if ($selAnswerText == answer) {
 			$selAnswerCard.addClass("card-outline-success");
@@ -322,27 +391,33 @@ function startDecisionsDecisionsActivity(meaningAltArray) {
 	});
 };
 
-function startExampleNonExamplesActivity(exNonExArray) {
+function startExampleNonExamplesActivity() {
 	giveDirections(
 		"Are the statements below an example or non-example of " +
 		"the word above, whose definition is <mark>" + targetWord.definition +
 		"</mark>."
 	);
+	var exNonExArray = [];
 
-	$.each(exNonExArray, function(index) {
-		$activityDiv.append(createExNonExQues(this, index));
-	})
+	getExampleNonExamples(targetWord.id).done(function(response) {
+		exNonExArray = response;
 
-	// TODO Figure out why the buttons oddly lose their btn-block class
+		$.each(exNonExArray, function(index) {
+			$activityDiv.append(createExNonExQues(this, index));
+		});
+	});
+
 	$(".container").on("click", ".ex-non-exs-answer", function() {
 		$selAnswer = $(this);
 		$selAnswerText = $selAnswer.text().trim();
 		$selAnswerCard = $selAnswer.parents(".card");
 		$selAnswerBlock = $selAnswerCard.find(".card-block");
+		$selAnswerTitle = $selAnswerCard.find(".card-title");
 		$btnRow = $selAnswer.parent().parent();
 		index = $btnRow.data("index");
 		answer = exNonExArray[index].answer.trim();
-		$feedbackCardText = $btnRow.siblings(".ex-non-exs-feedback")
+		$feedbackCardText = $btnRow.siblings(".ex-non-exs-feedback");
+		createElem("div", "clear").insertAfter($selAnswerTitle);
 
 		if ($selAnswerText == answer) {
 			$selAnswerCard.addClass("card-outline-success");
@@ -381,7 +456,8 @@ function startExampleNonExamplesActivity(exNonExArray) {
 }
 
 // TODO Include three or four dummy words and a "neither/not applicable" button
-function startSynVersusAntActivity(synonyms, antonyms) {
+function startSynsVsAntsActivity() {
+	giveDirections("Match the synonym and antonym pairs for the word above.");
 	var $selectedBtn;
 	var $selectedBtns;
 	var twoBtnsAreSelected = false;
@@ -389,11 +465,17 @@ function startSynVersusAntActivity(synonyms, antonyms) {
 	var gameCompleted = false;
 	var isMatchMade = false;
 	var matches = [];
-	matches = shuffleArray(merge(
-		createMatchObjects(synonyms, "synonym"),
-		createMatchObjects(antonyms, "antonym")
-	));
-	$activityDiv.empty().append(createMatchingCards(matches));
+
+	getThesaurus(targetWord.name).done(function(response) {
+		const synonyms = response[0];
+		const antonyms = response[1];
+
+		matches = shuffleArray(merge(
+			createMatchObjects(synonyms, "synonym"),
+			createMatchObjects(antonyms, "antonym")
+		));
+		$activityDiv.empty().append(createMatchingCards(matches));
+	});
 
 	$(".container").on("click", ".match", function() {
 		$selectedBtn = $(this);
@@ -463,19 +545,6 @@ function startReviewActivity() {
 		HELPER FUNCTIONS
 ************************/
 
-function updateUserWordGamesCompleted(gamesCompleted) {
-	$.ajax({
-		type: "PATCH",
-		url: "/user_word",
-		dataType: "json",
-		data: { "word_id": targetWord.id, "games_completed": gamesCompleted }
-	}).done(logAjaxSuccess);
-};
-
-function logAjaxSuccess(response) {
-	console.log("Success", response);
-}
-
 function findBtnNot($btns, type) {
 	return $btns.filter(function() {
 		return $(this).text() != type;
@@ -530,8 +599,17 @@ function createMatchingCards(matches) {
 	return $row;
 }
 
-function isOffline(string) {
-	return string.indexOf("Looks like you are offline") != -1;
+function updateUserWordGamesCompleted(gamesCompleted) {
+	$.ajax({
+		type: "PATCH",
+		url: "/user_word",
+		dataType: "json",
+		data: { "word_id": targetWord.id, "games_completed": gamesCompleted }
+	}).done(logResponse);
+};
+
+function logResponse(response) {
+	console.log(response);
 }
 
 function getThesaurus() {

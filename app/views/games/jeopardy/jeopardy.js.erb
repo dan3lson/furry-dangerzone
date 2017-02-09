@@ -138,12 +138,12 @@ function removeClick($selectedCell) {
 }
 
 function activtate(validCells, $selectedCell) {
-	$(validCells).removeClass("text-primary");
-	$selectedCell.addClass("text-primary");
+	$(validCells).removeClass("text-primary mark");
+	$selectedCell.addClass("text-primary mark");
 }
 
 function deactivate($selectedCell) {
-	$selectedCell.removeClass("text-primary");
+	$selectedCell.removeClass("text-primary mark");
 }
 
 function findQues(questions, num) {

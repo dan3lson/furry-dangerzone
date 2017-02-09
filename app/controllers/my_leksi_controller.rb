@@ -2,9 +2,6 @@ class MyLeksiController < ApplicationController
 	before_action :logged_in_user
 
 	def index
-		# @current_user_words = current_user.sort_words_by_progress("ASC")
-		# 																	.includes(:word)
-		# 																	.map(&:word)
 		@current_user_user_words = UserWord.where(user: current_user)
 																			 .includes(:word)
 																			 .latest
@@ -12,9 +9,9 @@ class MyLeksiController < ApplicationController
 		page = params[:page] ? params[:page].to_i - 1 : 1
 		@current_user_user_words_pag = @current_user_user_words.paginate(
 			page: page,
-			per_page: 12
+			per_page: 9
 		)
-		@current_user_words_count = @current_user_user_words.count
+		@current_user_words_count = @current_user.user_words_count
 
 		respond_to do |format|
 			format.html
@@ -38,8 +35,7 @@ class MyLeksiController < ApplicationController
 
 	def logged_in_user
 		unless logged_in?
-			flash[:danger] = "Please log in first to see your words."
-
+			flash[:danger] = "Please log in first."
 			redirect_to login_url
 		end
 	end

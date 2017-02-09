@@ -11,9 +11,11 @@ class User < ActiveRecord::Base
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :username, presence: true, uniqueness: { case_sensitive: false },
+  validates :username, presence: true,
+                       uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 33 }
-  validates :email, format: { with: VALID_EMAIL_REGEX }, allow_nil: true,
+  validates :email, format: { with: VALID_EMAIL_REGEX },
+                    allow_nil: true,
                     uniqueness: { case_sensitive: false }
   validates :points, presence: true
   validates :num_flashcards_played, presence: true
@@ -293,7 +295,7 @@ class User < ActiveRecord::Base
   # TODO: Create test
   def completed_freestyle_on?(date)
     UserWord.where(user: self, games_completed: 3)
-            .select { |uw| uw.updated_at.to_date == date}
+            .select { |uw| uw.updated_at.to_date == date }
             .any?
   end
 
@@ -357,7 +359,6 @@ class User < ActiveRecord::Base
     completed = self.num_completed_fundamentals
     not_started = self.num_incomplete_funds
     total = completed + not_started
-
     (completed / total.to_f * 100).round
   end
 
@@ -365,7 +366,6 @@ class User < ActiveRecord::Base
     completed = self.num_completed_jeops
     not_started = self.num_incomplete_jeops
     total = completed + not_started
-
     (completed / total.to_f * 100).round
   end
 
@@ -373,7 +373,6 @@ class User < ActiveRecord::Base
     completed = self.num_completed_frees
     not_started = self.num_incomplete_frees
     total = completed + not_started
-
     (completed / total.to_f * 100).round
   end
 
@@ -455,60 +454,11 @@ class User < ActiveRecord::Base
     User.fs_class_one + User.fs_class_two
   end
 
-  def self.reset_pwds_in_dev_env
+  def self.reset_dev_pwds
     User.all.each { |u| u.update_attributes(
-        password: "password",
-        password_confirmation: "password"
-      )
-    }
-  end
-
-  def self.create_fs_usernames
-    usernames = %w(
-      22annenberg
-      22bloch
-      22chawla
-      22kellner
-      22musso
-      22nino
-      22parr
-      22pass
-      22riordan
-      22seldman
-      22spencer
-      22sriram
-      22tarta
-      22vail
-      22watts
-      22yamazaki
-      22zenkerc
-      22ball
-      22bugdaycay
-      22caiola
-      22earle
-      22friedman
-      22gott
-      22gund-morrow
-      22halverstadt
-      22juneja
-      22luard
-      22palladino
-      22pratofiorito
-      22ragins
-      22tartj
-      22weber
-      22zenkerm
-    )
-
-    usernames.each do |u|
-      s = User.new
-      s.username = u
-      s.password = "password"
-      s.password_confirmation = "password"
-      s.role = "student"
-      s.email = ""
-      s.save
-    end
+      password: "password",
+      password_confirmation: "password"
+    )}
   end
 
   # SCEC

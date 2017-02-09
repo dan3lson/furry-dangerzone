@@ -1,5 +1,5 @@
 class UserWord < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :word
   has_many :game_stats, dependent: :destroy
   has_many :freestyle_responses, dependent: :destroy
@@ -10,13 +10,12 @@ class UserWord < ActiveRecord::Base
 
   scope :alphabetical, -> { joins(:word).order("words.name") }
   scope :latest, -> { order("user_words.created_at DESC") }
-  scope :completed_fundamentals, -> { where.not(games_completed: 0) }
-  scope :incomplete_fundamentals, -> { where(games_completed: 0) }
-  scope :completed_jeopardys, -> { where(games_completed: [2, 3]) }
-  scope :incomplete_jeopardys, -> { where(games_completed: 1) }
-  scope :completed_freestyles, -> { where(games_completed: 3) }
-  scope :incomplete_freestyles, -> { where(games_completed: 2) }
-  scope :completed_games, -> { where(games_completed: [1, 2, 3]) }
+  scope :completed_fundamentals, -> { where("games_completed > ?", 5) }
+  scope :incomplete_fundamentals, -> { where("games_completed < ?", 6) }
+  scope :completed_jeopardys, -> { where("games_completed > ?", 6) }
+  scope :incomplete_jeopardys, -> { where(games_completed: [6, 7]) }
+  scope :completed_freestyles, -> { where("games_completed > ?", 11) }
+  scope :incomplete_freestyles, -> { where(games_completed: [8, 9, 10, 11]) }
 
   # TODO: Create test
   def self.search(user, name)
@@ -56,6 +55,66 @@ class UserWord < ActiveRecord::Base
   # TODO: Update test!
   def current_game
     games_completed + 1
+  end
+
+  def game
+    word = self.word
+    case current_game
+    when 1
+      "Speed Speller"
+    when 2
+      "Jumbled Spelling"
+    when 3
+      "Say It Right"
+    when 4
+      if word.has_meaning_alts?
+        "Decisions, Decisions"
+      elsif word.has_ex_non_exs?
+        "Examples/Non-Examples"
+      elsif word.has_syns_or_ants?
+        "Syns vs. Ants"
+      else
+        "Jeopardy"
+      end
+    when 5
+      if word.has_ex_non_exs?
+        "Examples/Non-Examples"
+      elsif word.has_syns_or_ants?
+        "Syns vs. Ants"
+      else
+        "Jeopardy"
+      end
+    when 6
+      if word.has_syns_or_ants?
+        "Syns vs. Ants"
+      else
+        "Jeopardy"
+      end
+    when 7
+      "Jeopardy"
+    when 8
+      "Match \'Em All"
+    when 9
+      if word.has_sent_stems?
+        "Sentence Stems"
+      else
+        "Word Relationships"
+      end
+    when 10
+      "Word Relationships"
+    when 11
+      "Leksi Tale"
+    when 12
+      if word.has_describe_mes?
+        "Describe Me, Describe Me Not"
+      else
+        "Practice"
+      end
+    when 13
+      "Practice"
+    else
+      "Not sure: UW ID: #{self.id} #{self.word.name} #{self.user.username}"
+    end
   end
 
   # TODO: Update test

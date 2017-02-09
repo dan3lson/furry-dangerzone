@@ -79,12 +79,12 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def has_meaning_alts?
-    !meaning_alts.blank?
+    !MeaningAlt.where(word: self).blank?
   end
 
   # TODO: Create test
   def has_ex_non_exs?
-    !example_non_examples.blank?
+    !ExampleNonExample.where(word: self).blank?
   end
 
   # TODO Create test
@@ -94,17 +94,32 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def has_synonyms?
-    WordSynonym.where(word: self).any?
+    !WordSynonym.where(word: self).blank?
   end
 
   # TODO: Create test
   def has_antonyms?
-    WordAntonym.where(word: self).any?
+    !WordAntonym.where(word: self).blank?
+  end
+
+  # TODO: Create test
+  def has_syns_or_ants?
+    has_synonyms? || has_antonyms?
   end
 
   # TODO: Create test
   def doesnt_have_any_syn_or_ant?
     !has_synonyms? && !has_antonyms?
+  end
+
+  # TODO: Create test
+  def has_sent_stems?
+    !SentStem.where(word: self).blank?
+  end
+
+  # TODO: Create test
+  def has_describe_mes?
+    !describe_mes.blank?
   end
 
   # TODO: Create test

@@ -6,7 +6,7 @@ class JeopardyResultsController < ApplicationController
 		if @user_word
 			@game = Game.find_by(name: params[:game_name])
 			@game_stat = GameStat.where(
-			game: @game, user_word: @user_word
+				game: @game, user_word: @user_word
 			).first_or_initialize
 			@result = params[:result]
 
@@ -19,12 +19,10 @@ class JeopardyResultsController < ApplicationController
 			if @game_stat.save
 				msg = "Success: GameStat #{@game_stat.id} jeop-result updated for "
 				msg_2 = "#{@user_word.id} -> #{@user_word.word.name}."
-
 				render json: { errors: msg << msg_2	}
 			else
 				msg = "ERROR: GameStat #{@game_stat.id} jeop-result not "
 				msg_2 = "updated for #{@user_word.id} -> #{@user_word.word.name}"
-
 				render json: { errors: msg << msg_2 }
 			end
 		else

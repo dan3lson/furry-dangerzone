@@ -15,11 +15,12 @@ module TagsHelper
     user.tags - tags_for(user, word)
   end
 
-  # TODO: Create test 
+  # TODO: Create test
   def progress_for(user, tag)
     if num_words_for(user, tag) > 0
-      completed_games = user_words(user, tag).map(&:games_completed).inject(:+)
-      total_games = num_words_for(user, tag) * 3
+      completed_games = user_words(user, tag).map(&:completed_freestyles)
+                                             .inject(:+)
+      total_games = num_words_for(user, tag) * 12
       (completed_games / total_games.to_f * 100).round
     else
       0

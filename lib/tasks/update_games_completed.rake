@@ -1,6 +1,6 @@
-namespace :games_completed do
+namespace :update do
   desc "Update UserWord#games_completed given new gamezone structure."
-  task :update => :environment do
+  task :games_completed => :environment do
     UserWord.all.each do |uw|
       next if uw.games_completed == 0
 

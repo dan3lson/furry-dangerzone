@@ -2,7 +2,7 @@
 	<div class="card-block">
 		<% if current_user.has_word?(word) %>
 			<div class="float-right">
-				<%= render "my_leksi/mastery_percentage",
+				<%= render "my_leksi/play_btn",
 									 word: word,
 									 user_word: UserWord.object(current_user, word)
 				%>

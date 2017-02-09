@@ -10,7 +10,13 @@
   |
   <%= link_to admin_users_path(filter: "latest") do %>
     <span>
-      <i class="fa fa-calendar hover pointer"></i> Created by
+      <i class="fa fa-calendar hover pointer"></i> Created at
+    </span>
+  <% end %>
+  |
+  <%= link_to admin_users_path(filter: "num_words") do %>
+    <span>
+      <i class="fa fa-sort-numeric-desc hover pointer"></i> Words
     </span>
   <% end %>
   <div class="float-right">
@@ -34,24 +40,27 @@
     <th>Num Logins</th>
     <th>Last Login</th>
     <th>Joined</th>
+    <th>Num Words</th>
 
     <% @users.each do |u| %>
-    <tr>
-      <td><%= u.id %></td>
-      <td><%= link_to u.username, u %></td>
-      <td><%= u.first_name || "-" %></td>
-      <td><%= u.last_name || "-" %></td>
-      <td><%= u.email || "-" %></td>
-      <td><%= u.num_logins %></td>
-      <td>
-        <% if u.last_login.nil? %>
-        -
-        <% else %>
-        <%= time_ago_in_words(u.last_login) %> ago</td>
-        <% end %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= link_to u.username, u %></td>
+        <td><%= u.first_name || "-" %></td>
+        <td><%= u.last_name || "-" %></td>
+        <td><%= u.email || "-" %></td>
+        <td><%= u.num_logins %></td>
+        <td>
+          <% if u.last_login.nil? %>
+            -
+          <% else %>
+            <%= time_ago_in_words(u.last_login) %> ago
+          <% end %>
+        </td>
         <td><%= time_ago_in_words(u.created_at) %> ago</td>
+        <td><%= u.num_words %></td>
       </tr>
-      <% end %>
+    <% end %>
     </table>
 </div>
 

@@ -3,7 +3,7 @@
 		<%= render "searches/user_add", word: word %>
 
 		<% if current_user.has_word?(word) %>
-			<%= render "my_leksi/mastery_percentage",
+			<%= render "my_leksi/play_btn",
 								 word: word,
 								 user_word: UserWord.object(current_user, word) %>
 		<% else %>

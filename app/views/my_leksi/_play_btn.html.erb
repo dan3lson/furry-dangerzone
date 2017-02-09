@@ -1,0 +1,36 @@
+<% if user_word.freestyle_completed? %>
+	<%= link_to "#",
+		class: "btn btn-secondary btn-block disabled",
+		role: "button" do
+	%>
+		<i class="fa fa-flag-play-circle"></i>
+		<%= user_word.game %>
+	<% end %>
+<% elsif user_word.fundamental_not_completed? %>
+	<%= link_to fund_game_link(word.id),
+		class: "btn btn-danger btn-block",
+		role: "button",
+		remote: true do
+	%>
+		<i class="fa fa-play-circle"></i>
+		<%= user_word.game %>
+	<% end %>
+<% elsif user_word.jeopardy_not_completed? %>
+	<%= link_to jeop_game_link(word.id),
+		class: "btn btn-warning btn-block",
+		role: "button",
+		remote: true do
+	%>
+		<i class="fa fa-play-circle"></i>
+		<%= user_word.game %>
+	<% end %>
+<% elsif user_word.jeopardy_completed? %>
+  <%= link_to free_game_link(word.id),
+		class: "btn btn-success btn-block",
+		role: "button",
+		remote: true do
+	%>
+		<i class="fa fa-play-circle"></i>
+		<%= user_word.game %>
+	<% end %>
+<% end %>

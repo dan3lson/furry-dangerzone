@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 	$("#myLeksi-pagination").hide();
 
-	if (NUM_WORDS > 12) {
+	if (NUM_WORDS > 9) {
 		var url = $('.pagination .next a').attr('href');
 		var $viewMoreLink = $("<a>", {
 			role: "button",
