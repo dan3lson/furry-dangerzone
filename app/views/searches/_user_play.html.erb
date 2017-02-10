@@ -1,6 +1,7 @@
 <%= link_to user_word_path(search_btn: :play, word_id: word.id),
 						class: "btn btn-danger btn-block",
-						method: :post do
+						method: :post,
+						remote: true do
 %>
 	<i class="fa fa-gamepad"></i> Start Playing
 <% end %>

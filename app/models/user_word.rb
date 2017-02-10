@@ -12,7 +12,7 @@ class UserWord < ActiveRecord::Base
   scope :latest, -> { order("user_words.created_at DESC") }
   scope :completed_fundamentals, -> { where("games_completed > ?", 5) }
   scope :incomplete_fundamentals, -> { where("games_completed < ?", 6) }
-  scope :completed_jeopardys, -> { where("games_completed > ?", 6) }
+  scope :completed_jeopardys, -> { where("games_completed > ?", 7) }
   scope :incomplete_jeopardys, -> { where(games_completed: [6, 7]) }
   scope :completed_freestyles, -> { where("games_completed > ?", 11) }
   scope :incomplete_freestyles, -> { where(games_completed: [8, 9, 10, 11]) }
@@ -144,7 +144,7 @@ class UserWord < ActiveRecord::Base
 
   # TODO: Update test
   def freestyle_not_completed?
-    current_game >= 9 && current_game <= 12
+    current_game > 8 && current_game < 13
   end
 
   # TODO: Create test

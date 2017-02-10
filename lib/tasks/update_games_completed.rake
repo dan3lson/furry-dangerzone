@@ -2,14 +2,18 @@ namespace :update do
   desc "Update UserWord#games_completed given new gamezone structure."
   task :games_completed => :environment do
     UserWord.all.each do |uw|
-      next if uw.games_completed == 0
-
-      if uw.games_completed == 1
-        uw.update_attributes(games_completed: 6)
+      if uw.games_completed == 0
+        puts uw.update_attributes(games_completed: 0)
+      elsif uw.games_completed == 1
+        puts uw.update_attributes(games_completed: 6)
       elsif uw.games_completed == 2
-        uw.update_attributes(games_completed: 8)
+        if uw.word.has_sent_stems?
+          puts uw.update_attributes(games_completed: 8)
+        else
+          puts uw.update_attributes(games_completed: 9)
+        end
       elsif uw.games_completed == 3
-        uw.update_attributes(games_completed: 12)
+        puts uw.update_attributes(games_completed: 12)
       end
     end
   end

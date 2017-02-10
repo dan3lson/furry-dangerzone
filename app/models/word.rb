@@ -119,7 +119,7 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def has_describe_mes?
-    !describe_mes.blank?
+    !DescribeMe.where(word: self).blank?
   end
 
   # TODO: Create test
