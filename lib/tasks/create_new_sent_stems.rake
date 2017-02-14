@@ -214,7 +214,7 @@ namespace :create do
     SentStem.create!(
       user: User.first,
       name: "",
-      text:
+      text: ""
     )
   end
 end
