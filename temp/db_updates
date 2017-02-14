@@ -1,52 +1,110 @@
-Level 1: Speed Speller
+To capture new GameStat records, just add new columns and update existing ones
+as necessary. Each record will have nil values, but hopefully not a lot.
 
-word_id
-time_spent
+Ref: http://www.vertabelo.com/blog/technical-articles/mmo-games-and-database-design
+
+Level 1: Speed Spelling
+
+speed_spellings
+type_acts
+act_types
+game_speed_spells
+
+
+time_started
+time_ended
+game_id
+user_word_id
+
+================================
 
 Level 2: Jumbled Letters
 
-word_id
-time_spent
-num_incorrect_tap
-num_correct_tap
+act_jum_lets
+act_click_lets
+
+result (bool)
+letter_order
+
+time_started
+time_ended
+game_id
+user_word_id
+
+================================
 
 Level 3: Hear It
 
-word_id
-time_spent
 num_heard
+
+time_started
+time_ended
+game_id
+user_word_id
+
+================================
 
 Level 4: Decisions, Decisions
 
-mean_alt_id
-time_spent
 result (bool)
+mean_alt_id
+
+time_started
+time_ended
+game_id
+user_word_id
+
+================================
 
 Level 5: Example/Non-Example
 
-ex_non_ex_id
-time_spent
 result (bool)
+ex_non_ex_id
+
+time_started
+time_ended
+game_id
+user_word_id
+
+================================
 
 Level 6: Syns vs Ants
 
-word_id
-time_spent
 type (syn or ant)
 result
+thesaurus_id (aka the word id that's either a syn or ant)
+
+time_started
+time_ended
+game_id
+user_word_id
+
+================================
 
 Level 7: Jeopardy (should this be recorded for a round and/or the entire game?)
 
-word_id
-time_spent
 type
 result
 linero
 
+time_started
+time_ended
+game_id
+user_word_id (what if user doesn't have the word?)
+
+================================
+
 Level 8: Match Em' All
 
-Level 9: Sentence Stems
+================================
 
-time_spent
-sent_stem_id
-user_id
+Level 9: Sentence Stems (not done)
+
+sent_stem_id (has word_id)
+
+time_started
+time_ended
+game_id
+user_word_id
+
+================================

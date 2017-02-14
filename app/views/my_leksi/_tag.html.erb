@@ -1,10 +1,11 @@
-<div class="tag">
-	<%= link_to tag.name, "/myTags/#{tag.id}" %>
-	&nbsp;
-	<span class="tag-on-word-show-page">
-		<%= render "tags/remove_tag_btn_word_show_page",
-			word: word,
-			tag: tag
-		%>
+<%= link_to "/myTags/#{tag.id}" do %>
+	<span class="badge badge-default">
+		<%= tag.name %>
+		<span class="tag-on-word-show-page">
+			<%= render "tags/remove_tag_btn_word_show_page",
+				word: word,
+				tag: tag
+			%>
+		</span>
 	</span>
-</div>
+<% end %>

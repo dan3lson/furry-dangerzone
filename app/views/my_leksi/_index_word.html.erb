@@ -1,7 +1,11 @@
 <% if user_word.freestyle_completed? %>
 	<div class="card card-outline-info mb-3">
+<% elsif user_word.jeopardy_completed? %>
+	<div class="card card-outline-success mb-3">
+<% elsif user_word.fundamental_completed? %>
+	<div class="card card-outline-warning mb-3">
 <% else %>
-	<div class="card mb-3">
+	<div class="card card-outline-danger mb-3">
 <% end %>
 	<div class="card-block">
 		<div class="float-right">

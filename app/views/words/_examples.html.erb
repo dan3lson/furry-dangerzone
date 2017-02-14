@@ -1,0 +1,13 @@
+	<div class="card mb-3">
+		<div class="card-block">
+				<h5 class="card-title">
+					Examples
+				</h5>
+				<% word.examples.each do |example| %>
+					<% example.text.split("***").each do |example| %>
+						&#8605; <%= example %>
+						<br>
+					<% end %>
+				<% end %>
+		</div>
+	</div>

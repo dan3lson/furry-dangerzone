@@ -73,13 +73,18 @@ $(".container").on("click", ".jeop-btn", function() {
 		}
 
 		if (gameIsOver()) {
-			disableButtons();
-			$jeopardyDiv.empty()
-									.html("Finished! Your added Linero is " + totalLineroEarned);
 			// TODO Display results similar to MeanAlt and ExNonEx activities
+			startReviewActivity();
 		}
 	}
 });
+
+function startReviewActivity() {
+	clearTimeout(timerID);
+	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Jeopardy', word_name: @target_word.name }) %>");
+	$(".container").empty().append($reviewPartial);
+};
+
 
 function noMoreQuestions($btn) {
 	return !($btn.find("span .fa-question-circle-o").length);
@@ -159,7 +164,6 @@ function createElem(elem, elemClass, elemID) {
 	_id = elemID || null;
 	return $("<" + elem + ">", { class: _class, id: _id });
 }
-
 
 function arrowSuccess() {
 	return $(".fa-arrow-up.text-success");

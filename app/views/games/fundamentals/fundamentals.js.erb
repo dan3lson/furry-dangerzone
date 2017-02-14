@@ -164,8 +164,7 @@ function startSpellByTypingActivity() {
 	const $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
 	$activityDiv.append($spellingSpeedsterPartial);
 	giveDirections(
-		"Type the word above, at least once. The more you practice spelling it, " +
-		"the more Linero you earn."
+		"Type the word above. Earn more Linero each time you spell it."
 	);
 	var wordLetterSpan;
 	var targetWordSpanLetters = [];
@@ -784,7 +783,7 @@ function createInput() {
 	return createElem("input", "form-control input-lg spell-the-word")
 				 .attr("type", "text")
 				 .attr("autofocus", "true")
-				 .attr("placeholder", "Type it again?");
+				 .attr("placeholder", "Type it again...");
 }
 
 function createFormGroup() {

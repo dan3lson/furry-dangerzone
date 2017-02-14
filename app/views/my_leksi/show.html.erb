@@ -1,40 +1,43 @@
-<% title "View details for your myLeksi word: #{@word.name}." %>
-<% description "Designed with vocabulary academic research and gamification, Leksi helps you learn new words." %>
-<% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research organize dictionary words" %>
+<% title "Words: #{@word.name}" %>
 <% provide(:header, "Words") %>
 
 <div class="row">
-	<div class="col-sm-6 col-sm-offset-3">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="float-right">
-					<% if @user_word.freestyle_completed? %>
-						<%= image_tag(
-							"strength4.png",
-							alt: "100% Mastered",
-							title: "100% Mastered")
-						%>
-					<% end %>
-				</div>
-				<%= render "words/word", word: @word %>
+	<div class="col-md-8">
+		<%= render "my_leksi/index_word", user_word: @user_word %>
+		<div class="row">
+			<div class="col-md-6">
+				<%= render "words/definitions", word: @word %>
+			</div>
+			<div class="col-md-6">
+				<%= render "words/examples", word: @word %>
 			</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="lead">
-					<i class="fa fa-gamepad"></i>
-					Game Zone
+		<div class="row">
+			<div class="col-md-6">
+				<%= render "words/synonyms", word: @word %>
+			</div>
+			<div class="col-md-6">
+				<%= render "words/antonyms", word: @word %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<%= render "my_leksi/tags", word: @word %>
+			</div>
+			<div class="col-md-6">
+				<div class="card text-center mb-3">
+					<div class="card-block">
+						<%= render "my_leksi/remove", word: @word, user_word: @user_word %>
+					</div>
 				</div>
 			</div>
-			<%= render "my_leksi/show_game_zone",
-				user_word: @user_word,
-				word: @word
-			%>
 		</div>
-		<%= render "words/synonyms", word: @word %>
-		<%= render "words/antonyms", word: @word %>
-		<%= render "my_leksi/tags", word: @word %>
 		<%= render "my_leksi/freestyle_responses", user_word: @user_word %>
-		<%= render "my_leksi/remove", word: @word, user_word: @user_word %>
+	</div>
+	<div class="col-md-4">
+		<%= render "my_leksi/show_game_zone",
+			user_word: @user_word,
+			word: @word
+		%>
 	</div>
 </div>

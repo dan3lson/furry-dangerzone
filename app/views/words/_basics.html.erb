@@ -1,5 +1,9 @@
 <h2 class="card-title">
-	<%= word.name %>
+	<% if controller?("my_leksi") && action?("index") %>
+		<%= link_to word.name, "/myLeksi/#{word.id}" %>
+	<% else %>
+		<%= word.name %>
+	<% end %>
 	<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
 				 id="audio"
 				 preload="auto">

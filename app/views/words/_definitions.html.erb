@@ -1,0 +1,11 @@
+	<div class="card mb-3">
+		<div class="card-block">
+				<h5 class="card-title">
+					Definitions
+				</h5>
+				<% array_of(word, "definition").each do |name| %>
+					&#8605; <%= name %>
+					<br>
+				<% end %>
+		</div>
+	</div>

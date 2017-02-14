@@ -1,14 +1,15 @@
-<% if word.has_synonyms? %>
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<div class="lead">
-				<i class="fa fa-book"></i>
-				Synonyms
-			</div>
-			<% thesuarus_names(word, "synonyms").each do |name| %>
-				&#8605; <%= name %>
-				<br>
-			<% end %>
+	<div class="card mb-3">
+		<div class="card-block">
+				<h5 class="card-title">
+					Synonyms
+				</h5>
+				<% if word.has_synonyms? %>
+					<% thesuarus_names(word, "synonyms").each do |name| %>
+						&#8605; <%= name %>
+						<br>
+					<% end %>
+				<% else %>
+					<span class="text-muted">None</span>
+				<% end %>
 		</div>
 	</div>
-<% end %>

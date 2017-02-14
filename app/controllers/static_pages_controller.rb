@@ -12,11 +12,8 @@ class StaticPagesController < ApplicationController
       school_name: params["cf_school_name"],
       comments: params["cf_comments"]
     }
-
     ContactUsMailer.new_message(@form_fields).deliver_later
-
     flash[:success] = "Thanks for reaching out! We\'ll respond shortly :)."
-
     redirect_to root_path
   end
 

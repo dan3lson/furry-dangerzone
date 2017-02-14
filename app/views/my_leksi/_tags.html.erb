@@ -1,9 +1,9 @@
-<div class="panel panel-default">
-	<div class="panel-body">
-		<div class="lead">
+<div class="card mb-3">
+	<div class="card-block">
+		<h5 class="card-title">
 			<i class="fa fa-tag pointer"></i>
 			Tags
-		</div>
+		</h5>
 		<% if current_user.has_tags? %>
 			<% if tags_exist?(current_user, word) %>
 				<% tags_for(current_user, word).each do |tag| %>
@@ -11,14 +11,14 @@
 				<% end %>
 			<% else %>
 				<small class="text-muted">
-					This is where you'll see Tags for this word.
+					There are no Tags for this word.
 				</small>
 			<% end %>
 			<%= render "my_leksi/tags_form", word: word %>
 		<% else %>
 			<small class="text-muted">
-				<%= link_to "Create your first tag", new_tag_path %>
-				to start organizing your words.
+				<%= link_to "Create your first Tag", new_tag_path %>
+				to organize your words.
 			</small>
 		<% end %>
 	</div>

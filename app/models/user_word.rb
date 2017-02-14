@@ -111,7 +111,7 @@ class UserWord < ActiveRecord::Base
         "Practice"
       end
     when 13
-      "Practice"
+      "In My Life"
     else
       "Not sure: UW ID: #{self.id} #{self.word.name} #{self.user.username}"
     end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'static_pages#guest_home'
+  root "static_pages#guest_home"
   get "about_us" => "static_pages#about_us"
   get "research" => "static_pages#research"
   get "our_approach" => "static_pages#our_approach"
