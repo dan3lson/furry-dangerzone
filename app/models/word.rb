@@ -59,10 +59,6 @@ class Word < ActiveRecord::Base
     end
   end
 
-  def self.has_records?
-    count > 0
-  end
-
   def self.random(num)
     find(Word.pluck(:id).sample(num))
   end
@@ -70,6 +66,10 @@ class Word < ActiveRecord::Base
   # TODO: Create test
   def self.random_excluding(num, word_id)
     where.not(id: word_id).random(num)
+  end
+
+  def has_pronunciation?
+    !phonetic_spelling.nil?
   end
 
   # TODO: Create test

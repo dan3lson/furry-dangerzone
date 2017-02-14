@@ -2,6 +2,8 @@ const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', locals: { target_word: @target_word }) %>");
 const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: '' }) %>");
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
+var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
+var currentGame = parseInt("<%= @current_game %>");
 var $activityDiv = createElem("div", null, "activity-div");
 $(".container").empty()
 							 .append(
@@ -17,27 +19,66 @@ var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
 var $regex = /^[a-zA-Z0-9 .';,?!-]+$/;
 var newPointsTotal = 0;
-startSentenceStemActivity();
+
+switch (currentGame) {
+	case 9:
+		if (availableGames.sent_stems) {
+			startSentenceStemActivity();
+		} else {
+			updateUserWordGamesCompleted(9);
+			updateProgress(25);
+			startWordRelationshipActivity();
+		}
+
+		break;
+	case 10:
+		startWordRelationshipActivity();
+		break;
+	case 11:
+		startLeksiTaleActivity();
+		break;
+	case 12:
+		if (availableGames.describe_me) {
+			startDescribeMeActivity();
+		} else {
+			updateUserWordGamesCompleted(12);
+			updateProgress(100);
+			startReviewActivity()
+		}
+		break;
+	default: startWordRelationshipActivity();
+}
 
 $(".container").on("click", ".continue-btn", function() {
 	var $btn = $(this);
 	$activityDiv.empty();
 
 	if ($btn.hasClass("start-word-relationship-activity")) {
+		updateUserWordGamesCompleted(9);
 		updateProgress(25);
 		addPoints(750);
 		flashPointsUpdate(getArrowSuccess());
 		startWordRelationshipActivity();
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
+		updateUserWordGamesCompleted(10);
 		updateProgress(50);
 		addPoints(1333);
 		flashPointsUpdate(getArrowSuccess());
 		startLeksiTaleActivity();
 	} else if ($btn.hasClass("start-describe-me-activity")) {
-		updateProgress(75);
-		addPoints(1691);
+		updateUserWordGamesCompleted(11);
 		flashPointsUpdate(getArrowSuccess());
-		startDescribeMeActivity();
+
+		if (availableGames.describe_me) {
+			addPoints(1691);
+			updateProgress(75);
+			startDescribeMeActivity();
+		} else {
+			updateUserWordGamesCompleted(12);
+			addPoints(2384);
+			updateProgress(100);
+			startReviewActivity();
+		}
 	} else if ($btn.hasClass("start-review-activity")) {
 		updateProgress(100);
 		addPoints(2369);
@@ -152,6 +193,19 @@ function startReviewActivity() {
 /***********************
 		HELPER FUNCTIONS
 ************************/
+
+function updateUserWordGamesCompleted(gamesCompleted) {
+	$.ajax({
+		type: "PATCH",
+		url: "/user_word",
+		dataType: "json",
+		data: { "word_id": targetWord.id, "games_completed": gamesCompleted }
+	}).done(logResponse);
+};
+
+function logResponse(response) {
+	console.log(response);
+}
 
 function activateBadge($badge) {
 	$badge.removeClass("badge-default").addClass("badge-primary");

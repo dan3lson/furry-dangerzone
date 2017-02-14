@@ -211,6 +211,36 @@ namespace :create do
       text: "Imbued by their boss, the employees ???"
     )
 
+     SentStem.create!(
+      user: User.first,
+      name: "chum",
+      text: "With your chum, you decided to ???"
+    )
+
+    SentStem.create!(
+      user: User.first,
+      name: "chum",
+      text: "Your chum asked you to ???"
+    )
+
+    SentStem.create!(
+      user: User.first,
+      name: "stoic",
+      text: "She was stoic after being told ???"
+    )
+
+    SentStem.create!(
+      user: User.first,
+      name: "stoic",
+      text: "He was no longer stoic after hearing the latest news so he ???"
+    )
+
+    SentStem.create!(
+      user: User.first,
+      name: "stoic",
+      text: "They were stoic for so long until ???"
+    )
+
     SentStem.create!(
       user: User.first,
       name: "",

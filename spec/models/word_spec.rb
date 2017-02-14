@@ -39,16 +39,6 @@ RSpec.describe Word, type: :model do
     end
   end
 
-  describe "::has_records?" do
-    it "returns true if more than one record exists" do
-      expect(Word.has_records?).to eq(true)
-    end
-    it "returns false if zero records exists" do
-      word.destroy
-      expect(Word.has_records?).to eq(false)
-    end
-  end
-
   describe "::random" do
     it "returns a random Word object" do
       expect(Word.random(1).first.class).to be(Word)

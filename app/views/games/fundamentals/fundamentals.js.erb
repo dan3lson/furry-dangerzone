@@ -32,7 +32,28 @@ switch (currentGame) {
 		startSpellByClickingLettersActiivty();
 		break;
 	case 3:
-		startPronunciationActivity();
+		if (availableGames.pronun) {
+			console.log(availableGames);
+			updateProgress(34);
+			startPronunciationActivity();
+		} else if (availableGames.dec_dec) {
+			updateUserWordGamesCompleted(3);
+			updateProgress(51);
+			startDecisionsDecisionsActivity();
+		} else if (availableGames.ex_non_ex) {
+			updateUserWordGamesCompleted(4);
+			updateProgress(68);
+			startExampleNonExamplesActivity();
+		} else if (availableGames.syns_vs_ants) {
+			updateUserWordGamesCompleted(5);
+			updateProgress(85);
+			startSynsVsAntsActivity();
+		} else {
+			updateUserWordGamesCompleted(6);
+			updateProgress(100);
+			startReviewActivity();
+		}
+
 		break;
 	case 4:
 		if (availableGames.dec_dec) {
@@ -783,7 +804,7 @@ function createInput() {
 	return createElem("input", "form-control input-lg spell-the-word")
 				 .attr("type", "text")
 				 .attr("autofocus", "true")
-				 .attr("placeholder", "Type it again...");
+				 .attr("placeholder", "Type it again or tap Continue");
 }
 
 function createFormGroup() {

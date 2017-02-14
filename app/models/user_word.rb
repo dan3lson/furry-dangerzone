@@ -65,7 +65,17 @@ class UserWord < ActiveRecord::Base
     when 2
       "Jumbled Spelling"
     when 3
-      "Say It Right"
+      if word.has_pronunciation?
+        "Say It Right"
+      elsif word.has_meaning_alts?
+        "Decisions, Decisions"
+      elsif word.has_ex_non_exs?
+        "Examples/Non-Examples"
+      elsif word.has_syns_or_ants?
+        "Syns vs. Ants"
+      else
+        "Jeopardy"
+      end
     when 4
       if word.has_meaning_alts?
         "Decisions, Decisions"
