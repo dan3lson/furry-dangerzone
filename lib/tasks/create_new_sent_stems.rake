@@ -188,34 +188,33 @@ namespace :create do
     )
 
     SentStem.create!(
-      user: User.first,
-      name: "cordon",
-      text: "The cordon was used to ???"
-    )
+      user: User.first,
+      name: "cordon",
+      text: "The cordon was used to ???"
+    )
 
     SentStem.create!(
-      user: User.first,
-      name: "cordon",
-      text: "Because of the cordon, they couldn't ???"
-    )
+      user: User.first,
+      name: "cordon",
+      text: "Because of the cordon, they couldn't ???"
+    )
 
     SentStem.create!(
-      user: User.first,
-      name: "megalopolis",
-      text: "Coming from a small town, we visited a megalopolis and were ???"
-    )
+      user: User.first,
+      name: "megalopolis",
+      text: "Coming from a small town, we visited a megalopolis and were ???"
+    )
 
     SentStem.create!(
-      user: User.first,
-      name: "imbue",
-      text: "Imbued by their boss, the employees ???"
-    )
+      user: User.first,
+      name: "imbue",
+      text: "Imbued by their boss, the employees ???"
+    )
 
     SentStem.create!(
       user: User.first,
       name: "",
       text:
     )
-
   end
 end
