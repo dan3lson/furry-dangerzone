@@ -15,7 +15,9 @@ class SearchesController < ApplicationController
     begin
       if @search
         @input_words = @search.split(",").map(&:strip)
-        @words = @input_words.map { |w| Word.define(w) }.flatten
+        @word_groups = @input_words.map { |w| Word.define(w) }
+                             .flatten
+                             .group_by { |w| w.name }
 
         respond_to do |format|
           format.js

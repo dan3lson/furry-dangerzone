@@ -1,14 +1,33 @@
-<% if words.nil? %>
+<% if word_groups.nil? %>
 	<div class="alert alert-danger"><%= error %></div>
 <% else %>
-	<div class="card-deck">
-		<% words.each do |word| %>
+	<% word_groups.each do |name, words| %>
+		<div class="card card-outline-primary text-center mb-3">
+			<div class="card-block">
+				<h2 class="card-title">
+					<%= name %>
+					<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= name %>.mp3"
+								 id="audio"
+								 preload="auto">
+					</audio>
+					<small>
+						<i class="fa fa-volume-up hover pointer text-primary"></i>
+					</small>
+				</h2>
+				<span class="text-muted"><%= words.count %> results</span>
+			</div>
+		</div>
+		<div class="search card-columns">
+			<% words.each do |word| %>
 				<div class="card mb-3">
 					<div class="card-block">
-						<%= render "words/basics", word: word %>
+						<h2 class="card-title">
+							<%= render "words/pos_def", word: word %>
+						</h2>
 						<%= render "searches/results_options", word: word %>
 					</div>
 				</div>
-		<% end %>
-	</div>
+			<% end %>
+		</div>
+	<% end %>
 <% end %>

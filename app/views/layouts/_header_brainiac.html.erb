@@ -10,7 +10,7 @@
   </button>
   <%= render "layouts/leksi_brand", path: root_path %>
   <div class="collapse navbar-collapse" id="navbar-brainiac">
-    <div class="navbar-nav mr-auto mt-2 text-center">
+    <div class="navbar-nav mr-auto text-center">
       <% if params[:controller].include?("my_leksi") %>
   			<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>
   				<i class="fa fa-book"></i> Words
