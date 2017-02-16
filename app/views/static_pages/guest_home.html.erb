@@ -17,10 +17,10 @@
 <section class="text-center guest-section-home">
   <h1 class="display-1">Words equal wealth.</h1>
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-8 offset-md-2">
       <p class="lead">
-        Leksi increases vocabulary, which leads to better reading and
-        writing skills as well as lifelong success.
+        Leksi increases vocabulary, which leads to stronger reading and
+        writing skills.
       </p>
       <%= button_tag "Get Started", name: nil,
                                     type: "button",
@@ -159,47 +159,10 @@
                 role: "button" %>
   </p>
 </section>
-<section class="guest-section-home">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <h1 class="display-4">
-        Pricing
-      </h1>
-      <table class="table table-bordered table-condensed">
-        <th>1st Month</th>
-        <th>Monthly</th>
-        <tr>
-          <td>FREE</td>
-          <td>
-            $1.99 per student
-          </td>
-        </tr>
-      </table>
-      <p>
-        For one month, try Leksi for FREE. There is no limit on the number
-        of scholars and teachers who can participate.
-        When the pilot ends, review the collected results and feedback to
-        decide if you want to continue with paid accounts.
-      </p>
-      <p class="text-center">
-        <%= link_to "Add your class",
-                    "#",
-                    class: "btn btn-primary",
-                    role: "button" %>
-        <br>
-        <span class="text-muted">No payment necessary.</span>
-      </p>
-    </div>
-  </div>
-</section>
 <section class="guest-section-home" id="get-started-now">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <h1 class="display-4">Get Started Now</h1>
-      <p>
-        Complete the form below to bring Leksi to your classroom(s).
-      </p>
-
+      <h1 class="display-4">Contact Us</h1>
       <p><small>All fields are required.</small></p>
 
       <%= form_tag(static_pages_contact_us_path, method: "post") do %>

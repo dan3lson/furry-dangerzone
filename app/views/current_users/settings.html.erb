@@ -1,10 +1,13 @@
 <% provide(:header, "Menu") %>
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <%= render "current_users/profile" %>
     <%#= render "current_users/assessments" %>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <%= render "current_users/settings" %>
+  </div>
+  <div class="col-sm-4">
+    <%= render "current_users/help" %>
   </div>
 </div>

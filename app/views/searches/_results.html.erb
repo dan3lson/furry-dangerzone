@@ -1,16 +1,14 @@
 <% if words.nil? %>
 	<div class="alert alert-danger"><%= error %></div>
 <% else %>
-	<div class="row">
-		<div class="col-md-6 offset-md-3">
-			<% words.each do |word| %>
-					<div class="card mb-3">
-						<div class="card-block">
-							<%= render "words/basics", word: word %>
-							<%= render "searches/results_options", word: word %>
-						</div>
+	<div class="card-deck">
+		<% words.each do |word| %>
+				<div class="card mb-3">
+					<div class="card-block">
+						<%= render "words/basics", word: word %>
+						<%= render "searches/results_options", word: word %>
 					</div>
-			<% end %>
-		</div>
+				</div>
+		<% end %>
 	</div>
 <% end %>

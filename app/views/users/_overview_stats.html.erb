@@ -1,15 +1,25 @@
-<div>
-	<h4>Overview</h4>
-	<div class="row">
-		<div class="col-sm-4">
+<h4>Stats Overview</h4>
+<div class="card-deck text-center mb-3">
+	<div class="card">
+		<div class="card-block">
+			<i class="fa fa-trophy"></i>
+			<br>
 			<%= user.myLeksi_mastery %>%
 			myLeksi Mastered
 		</div>
-		<div class="col-sm-4">
+	</div>
+	<div class="card">
+		<div class="card-block">
+			<i class="fa fa-clock-o"></i>
+			<br>
 			<%= user.time_spent_playing %>
 			Time Spent Playing (minutes)
 		</div>
-		<div class="col-sm-4">
+	</div>
+	<div class="card">
+		<div class="card-block">
+			<i class="fa fa-sign-in"></i>
+			<br>
 			<%= user.num_logins %>
 			Times Logged In
 		</div>

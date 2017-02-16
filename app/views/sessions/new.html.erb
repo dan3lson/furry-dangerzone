@@ -29,16 +29,16 @@
     <%= f.password_field :password, class: 'form-control',
       placeholder: "Password" %>
 
-    <%= f.submit "Log in", class: "btn btn-secondary btn-lg btn-block" %>
+    <%= f.submit "Log in", class: "btn btn-primary btn-lg btn-block" %>
   <% end %>
   <br/>
 
   <div class="text-center">
-    <!-- <small>
+    <small>
       New user?
-      <%#= link_to "Sign up now", signup_path %>!</p>
-    </small> -->
-
+      <%= link_to "Sign up now", signup_path %>.
+    </small>
+    <br>
     <small>
       Forgot your password?
       <%= mail_to "help@leksi.education", "Email us",
