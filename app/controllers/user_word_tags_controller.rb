@@ -1,6 +1,5 @@
 class UserWordTagsController < ApplicationController
   def create
-    binding.pry
     @word = Word.find(params[:id])
     @tag_id = params[:user_word_tag][:tag_id]
 

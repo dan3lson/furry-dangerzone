@@ -6,11 +6,11 @@
 			<%= link_to tag.name, "/myTags/#{tag.id}" %>
 			<br>
 			<small class="text-muted">
-				<%= words_for(current_user, tag).count %>
-				<i class="fa fa-book"></i> Words
+				<i class="fa fa-book"></i>
+				<%= words_for(current_user, tag).count %> Words
 				<br>
-				<%= progress_for(current_user, tag) %>
-				<i class="fa fa-percent"></i> Mastered
+				<i class="fa fa-line-chart"></i>
+				<%= progress_for(current_user, tag) %>% Mastered
 			</small>
 		</h4>
 	</div>

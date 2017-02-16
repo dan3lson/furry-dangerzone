@@ -80,7 +80,7 @@ a, a:active {
 	}
 }
 
-.myLeksi.card-columns {
+.myLeksi.card-columns, .myTags.card-columns {
   @include media-breakpoint-only(sm) {
     column-count: 2;
   }

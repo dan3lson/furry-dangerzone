@@ -3,20 +3,17 @@
 <% description "Organize all of your words in groups with Tags." %>
 <% set_meta_tags keywords: "organize words group list notebook wordbook tags" %>
 
-<div class="row">
-  <div class="col-sm-6 offset-sm-3">
-    <div class="text-muted float-right">
-      You have <%= pluralize(@num_current_user_tags, "tag") %>.
-    </div>
-    <div class="clear"></div>
-    <% if current_user.has_tags? %>
-        <% @current_user_tags.each do |tag| %>
-          <%= render "my_tags/tag", tag: tag %>
-        <% end %>
-    <% else %>
-      <%= render "my_tags/no_tags_guide" %>
+<div class="text-muted float-right">
+  You have <%= pluralize(@num_current_user_tags, "tag") %>.
+</div>
+<div class="clear"></div>
+<% if current_user.has_tags? %>
+  <div class="myTags card-columns">
+    <% @current_user_tags.each do |tag| %>
+      <%= render "my_tags/tag", tag: tag %>
     <% end %>
-    <div class="clear"></div>
     <%= render "my_tags/untagged_words" %>
   </div>
-</div>
+<% else %>
+  <%= render "my_tags/no_tags_guide" %>
+<% end %>

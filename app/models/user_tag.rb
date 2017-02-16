@@ -4,4 +4,6 @@ class UserTag < ActiveRecord::Base
 
   validates :user, presence: true
   validates :tag, presence: true
+
+  scope :alphabetical, -> { joins(:tag).order("LOWER(tags.name)") }
 end

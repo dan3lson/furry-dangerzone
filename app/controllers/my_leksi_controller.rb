@@ -3,9 +3,9 @@ class MyLeksiController < ApplicationController
 
 	def index
 		@current_user_user_words = UserWord.where(user: current_user)
+																			 .alphabetical
 																			 .includes(:word)
 																			 .latest
-																			 .alphabetical
 		page = params[:page] ? params[:page].to_i - 1 : 1
 		@current_user_user_words_pag = @current_user_user_words.paginate(
 			page: page,

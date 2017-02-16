@@ -10,9 +10,11 @@
 		<div>
 			<% if current_user.has_words? %>
 				<% Word.untagged_for(current_user).each do |word| %>
-					<span class="badge badge-pill badge-default">
-						<%= link_to word.name, "/myLeksi/#{word.id}", class: "text-white" %>
-					</span>
+					<%= link_to "/myLeksi/#{word.id}", class: "text-white" do %>
+						<span class="badge badge-pill badge-default">
+							<%= word.name %>
+						</span>
+					<% end %>
 				<% end %>
 			<% else %>
 				<small class="text-muted">Empty</small>

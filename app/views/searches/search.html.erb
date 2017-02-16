@@ -1,4 +1,4 @@
-<% provide(:header, "Explore") %>
+<% provide(:header, "Look Up") %>
 
 <% title "Leksi Dictionary" %>
 <% description "Look up words you don\'t know or select ones from a specific list" %>
@@ -15,70 +15,37 @@
   description: "Look up words you don\'t know or select ones from a specific list"
 } %>
 
-<div class="card">
-  <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#look-up" role="tab">
-          <i class="fa fa-search"></i>
-          Look Up
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#random" role="tab">
-          <i class="fa fa-random"></i>
-          Random
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#grades-k-2" role="tab">
-          <i class="fa fa-institution"></i>
-          Grades K-2
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#grades-3-5" role="tab">
-          <i class="fa fa-institution"></i>
-          Grades 3-5
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#grades-6-8" role="tab">
-          <i class="fa fa-institution"></i>
-          Grades 6-8
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#grades-9-12" role="tab">
-          <i class="fa fa-institution"></i>
-          Grades 9-12
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#national-exams" role="tab">
-          <i class="fa fa-folder-open"></i>
-          SAT/ACT
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="card-block">
-    <div class="tab-content">
-      <div class="tab-pane fade show active" id="look-up" role="tabpanel">
-        <%= render "searches/form" %>
-        <br>
-        <div class="search-results-container"></div>
-      </div>
-      <div class="tab-pane" id="random" role="tabpanel">
-        <%= render "searches/random_word", word: @random_word %>
-      </div>
-      <div class="tab-pane fade" id="grades-k-2" role="tabpanel"></div>
-      <div class="tab-pane fade" id="grades-3-5" role="tabpanel"></div>
-      <div class="tab-pane fade show" id="grades-6-8" role="tabpanel">
-        <%= render "searches/words_6_7_8", words: @seventh_grade_words %>
-      </div>
-      <div class="tab-pane fade" id="grades-9-12" role="tabpanel"></div>
-      <div class="tab-pane fade" id="national-exams" role="tabpanel"></div>
-    </div>
-  </div>
+<div class="btn-group text-muted mb-3" role="group" aria-label="Search Categories">
+  <button type="button" class="btn btn-secondary active">
+    <i class="fa fa-search"></i>
+    Look Up
+  </button>
+  <button type="button" class="btn btn-secondary">
+    <i class="fa fa-random"></i>
+    Random
+  </button>
+  <button type="button" class="btn btn-secondary">
+    <i class="fa fa-institution"></i>
+    Grades K-2
+  </button>
+  <button type="button" class="btn btn-secondary">
+    <i class="fa fa-institution"></i>
+    Grades 3-5
+  </button>
+  <button type="button" class="btn btn-secondary">
+    <i class="fa fa-institution"></i>
+    Grades 6-8
+  </button>
+  <button type="button" class="btn btn-secondary">
+    <i class="fa fa-institution"></i>
+    Grades 9-12
+  </button>
+  <button type="button" class="btn btn-secondary">
+    <i class="fa fa-folder-open"></i>
+    SAT
+  </button>
 </div>
+<%= render "searches/form" %>
+<div class="search-results-container"></div>
+<%#= render "searches/random_word", word: @random_word %>
+<%#= render "searches/words_6_7_8", words: @seventh_grade_words %>

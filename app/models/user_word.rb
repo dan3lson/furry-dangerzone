@@ -8,7 +8,7 @@ class UserWord < ActiveRecord::Base
   validates :user, presence: true
   validates :word, presence: true
 
-  scope :alphabetical, -> { joins(:word).order("words.name") }
+  scope :alphabetical, -> { joins(:word).order("LOWER(words.name)") }
   scope :latest, -> { order("user_words.created_at DESC") }
   scope :completed_fundamentals, -> { where("games_completed > ?", 5) }
   scope :incomplete_fundamentals, -> { where("games_completed < ?", 6) }

@@ -2,7 +2,10 @@ class MyTagsController < ApplicationController
 	before_action :logged_in_user
 
 	def index
-		@current_user_tags = UserTag.where(user: current_user).includes(:tag).map(&:tag)
+		@current_user_tags = UserTag.where(user: current_user)
+																.alphabetical
+																.includes(:tag)
+																.map(&:tag)
 		@num_current_user_tags = @current_user_tags.count
 		@tag = Tag.new
 	end
