@@ -1,10 +1,7 @@
 <% if current_user.has_word?(word) %>
-	<%= button_tag nil,
-								 class: "btn btn-outline-secondary btn-block",
-								 disabled: true do
-	%>
-		<i class="fa fa-save"></i>
-		Already Added!
+	<%= link_to "/myLeksi/#{word.id}", class: "btn btn-outline-primary btn-block" do %>
+		<i class="fa fa-eye"></i>
+		Already Saved - See Details
 	<% end %>
 <% else %>
 	<%= link_to user_word_path(word_id: word.id),
@@ -12,7 +9,7 @@
 							method: :post,
 							remote: true do
 	%>
-		<i class="fa fa-save"></i>
+		<i class="fa fa-plus-circle"></i>
 		Add to Words
 	<% end %>
 <% end %>
