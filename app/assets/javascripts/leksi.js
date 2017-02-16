@@ -15,10 +15,6 @@ $(document).ready(function() {
 	  $('[data-toggle="tooltip"]').tooltip();
 	})
 
-	$("#get-started-btn").click(function() {
-		scrollToSection($("#get-started-now").find("h1"));
-	});
-
 	$(".container").on("click", ".fa-volume-up, .fa-volume-off", function() {
 		const audio = $(this).parent().prev()[0];
 		audio.play();
