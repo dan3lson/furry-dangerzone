@@ -1,7 +1,6 @@
 class UserPointsController < ApplicationController
   def update
     @points = params[:points].to_i
-
     current_user.points += @points
 
     if current_user.save

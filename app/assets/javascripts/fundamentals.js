@@ -96,69 +96,67 @@ $(document).ready(function() {
     });
   }
 
-	// What if ExNonEx or SynAnt doesn't exit?
-	function meaningAltsContinueBtn(targetWord) {
-		$("#meaning-alts-continue-btn").click(function () {
-			$("#meaning-alts-div").hide();
-			$("#meaning-alts-continue-btn").hide();
-			addPoints(325);
-			flashPointsUpdate($arrowSuccess);
-			updateProgress(68);
+	// function meaningAltsContinueBtn(targetWord) {
+	// 	$("#meaning-alts-continue-btn").click(function () {
+	// 		$("#meaning-alts-div").hide();
+	// 		$("#meaning-alts-continue-btn").hide();
+	// 		addPoints(325);
+	// 		flashPointsUpdate($arrowSuccess);
+	// 		updateProgress(68);
+	//
+	// 		getExampleNonExamples(targetWord.id).done(function(response) {
+	// 			if (response.length) {
+	// 				startExampleNonExamplesActivity(targetWord, response);
+	// 			} else {
+	// 				thesaurus(targetWord.name).done(function(response) {
+	// 					const synonyms = response[0];
+	// 					const antonyms = response[1];
+	//
+	// 					if (synonyms.length) {
+	// 						startSynVersusAntActivity(synonyms, antonyms);
+	// 					} else {
+	// 						startReviewActivity(targetWord);
+	// 					}
+	// 				});
+	// 			}
+	// 		});
+	// 	});
+	// }
 
-			getExampleNonExamples(targetWord.id).done(function(response) {
-				if (response.length) {
-					startExampleNonExamplesActivity(targetWord, response);
-				} else {
-					thesaurus(targetWord.name).done(function(response) {
-						const synonyms = response[0];
-						const antonyms = response[1];
-
-						if (synonyms.length) {
-							startSynVersusAntActivity(synonyms, antonyms);
-						} else {
-							startReviewActivity(targetWord);
-						}
-					});
-				}
-			});
-		});
-	}
-
-	// What if SynAnt doesn't exit?
-	function exampleNonExamplesContinueBtn(targetWord) {
-		$("#ex-non-exs-cont-btn").click(function () {
-			$("#ex-non-exs-div").hide();
-			$("#ex-non-exs-cont-btn").hide();
-			addPoints(500);
-			flashPointsUpdate($arrowSuccess);
-			updateProgress(85);
-
-			thesaurus(targetWord.name).done(function(response) {
-				const synonyms = response[0];
-				const antonyms = response[1];
-
-				if (isOffline(synonyms)) {
-					var $alert = createElem("div", "alert alert-warning");
-					$alert.text(synonyms);
-					$("#syn-vs-ant-div").append($alert);
-					$("#syn-vs-ant-cont-btn").show();
-				} else {
-					startSynVersusAntActivity(synonyms, antonyms);
-				}
-			});
-		});
-	}
-
-	function synVersusAntContBtn(targetWord) {
-		$("#syn-vs-ant-cont-btn").click(function () {
-			$("#syn-vs-ant-div").hide();
-			$("#syn-vs-ant-cont-btn").hide();
-			addPoints(1000);
-			flashPointsUpdate($arrowSuccess);
-			updateProgress(100);
-			startReviewActivity(targetWord);
-		});
-	}
+	// function exampleNonExamplesContinueBtn(targetWord) {
+	// 	$("#ex-non-exs-cont-btn").click(function () {
+	// 		$("#ex-non-exs-div").hide();
+	// 		$("#ex-non-exs-cont-btn").hide();
+	// 		addPoints(500);
+	// 		flashPointsUpdate($arrowSuccess);
+	// 		updateProgress(85);
+	//
+	// 		thesaurus(targetWord.name).done(function(response) {
+	// 			const synonyms = response[0];
+	// 			const antonyms = response[1];
+	//
+	// 			if (isOffline(synonyms)) {
+	// 				var $alert = createElem("div", "alert alert-warning");
+	// 				$alert.text(synonyms);
+	// 				$("#syn-vs-ant-div").append($alert);
+	// 				$("#syn-vs-ant-cont-btn").show();
+	// 			} else {
+	// 				startSynVersusAntActivity(synonyms, antonyms);
+	// 			}
+	// 		});
+	// 	});
+	// }
+	//
+	// function synVersusAntContBtn(targetWord) {
+	// 	$("#syn-vs-ant-cont-btn").click(function () {
+	// 		$("#syn-vs-ant-div").hide();
+	// 		$("#syn-vs-ant-cont-btn").hide();
+	// 		addPoints(1000);
+	// 		flashPointsUpdate($arrowSuccess);
+	// 		updateProgress(100);
+	// 		startReviewActivity(targetWord);
+	// 	});
+	// }
 
 
 	/***
@@ -169,20 +167,20 @@ $(document).ready(function() {
 	*
 	***/
 
-	function setTheStage() {
-		getGameWords().done(function(response) {
-			var words = response.words;
-			var targetWord = words[0];
-			var targetWordName = targetWord.name
-			startActivity(targetWordName);
-			spellTheWordContinueBtn(targetWord);
-			fillInTheBlankContinueBtn(targetWord);
-			pronunciationContinueBtn(words);
-			exampleNonExamplesContinueBtn(targetWord);
-			meaningAltsContinueBtn(targetWord);
-			synVersusAntContBtn(targetWordName);
-		});
-	}
+	// function setTheStage() {
+	// 	getGameWords().done(function(response) {
+	// 		var words = response.words;
+	// 		var targetWord = words[0];
+	// 		var targetWordName = targetWord.name
+	// 		startActivity(targetWordName);
+	// 		spellTheWordContinueBtn(targetWord);
+	// 		fillInTheBlankContinueBtn(targetWord);
+	// 		pronunciationContinueBtn(words);
+	// 		exampleNonExamplesContinueBtn(targetWord);
+	// 		meaningAltsContinueBtn(targetWord);
+	// 		synVersusAntContBtn(targetWordName);
+	// 	});
+	// }
 
 	// function startActivity(targetWordName) {
 	// 	giveDirections(
@@ -421,7 +419,7 @@ $(document).ready(function() {
 	// 	})
 	//
 	// 	$("#ex-non-exs-div").show();
-	// 	// TODO Figure out why the buttons oddly lose their btn-block class
+
 	// 	$(".container").on("click", ".ex-non-exs-answer", function() {
 	// 		$selAnswer = $(this);
 	// 		$selAnswerText = $selAnswer.text().trim();
@@ -815,18 +813,18 @@ $(document).ready(function() {
       }
     });
   };
-
-	function updateUserPoints(num) {
-		$.ajax({
-			type: "PATCH",
-			url: "/user_points",
-			dataType: "json",
-			data: { "points": num }
-		})
-		.done(function(response) {
-			console.log(response.errors)
-		});
-	};
+	// 
+	// function updateUserPoints(num) {
+	// 	$.ajax({
+	// 		type: "PATCH",
+	// 		url: "/user_points",
+	// 		dataType: "json",
+	// 		data: { "points": num }
+	// 	})
+	// 	.done(function(response) {
+	// 		console.log(response.errors)
+	// 	});
+	// };
 	//
 	// function addPoints(points) {
 	// 	newPointsTotal += points;

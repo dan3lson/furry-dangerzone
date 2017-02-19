@@ -105,16 +105,19 @@ $(".container").on("click", ".continue-btn", function() {
 		updateUserWordGamesCompleted(1);
 		updateProgress(17);
 		addPoints(100);
+		updateUserPoints(100);
 		flashPointsUpdate(arrowSuccess());
 		startSpellByClickingLettersActiivty();
 	} else if ($btn.hasClass("start-pronunciation-activity")) {
 		updateUserWordGamesCompleted(2);
 		updateProgress(34);
+		updateUserPoints(250);
 		addPoints(150);
 		flashPointsUpdate(arrowSuccess());
 		startPronunciationActivity();
 	} else if ($btn.hasClass("start-decisions-decisions-activity")) {
 		addPoints(200);
+		updateUserPoints(200);
 		flashPointsUpdate(arrowSuccess());
 		$targetWordDiv.html(targetWord.name).removeClass("text-success");
 
@@ -137,6 +140,7 @@ $(".container").on("click", ".continue-btn", function() {
 		}
 	} else if ($btn.hasClass("start-ex-non-exs-activity")) {
 		addPoints(325);
+		updateUserPoints(325);
 		flashPointsUpdate(arrowSuccess());
 
 		if (availableGames.ex_non_ex) {
@@ -155,6 +159,7 @@ $(".container").on("click", ".continue-btn", function() {
 	} else if ($btn.hasClass("start-syns-vs-ant-activity")) {
 		updateUserWordGamesCompleted(5);
 		addPoints(500);
+		updateUserPoints(500);
 		flashPointsUpdate(arrowSuccess());
 
 		if (availableGames.syns_vs_ants) {
@@ -170,6 +175,7 @@ $(".container").on("click", ".continue-btn", function() {
 		updateUserWordGamesCompleted(6);
 		updateProgress(100);
 		addPoints(1000);
+		updateUserPoints(1000);
 		flashPointsUpdate(arrowSuccess());
 		startReviewActivity();
 	}
@@ -557,6 +563,7 @@ function startSynsVsAntsActivity() {
 
 function startReviewActivity() {
 	clearTimeout(timerID);
+	console.log($points);
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Fundamentals', word_name: @target_word.name }) %>");
 	$(".container").empty().append($reviewPartial);
 };
@@ -618,6 +625,15 @@ function createMatchingCards(matches) {
 
 	return $row;
 }
+
+function updateUserPoints(linero) {
+	$.ajax({
+		type: "PATCH",
+		url: "/user_points",
+		dataType: "json",
+		data: { "points": linero }
+	}).done(logResponse);
+};
 
 function updateUserWordGamesCompleted(gamesCompleted) {
 	$.ajax({

@@ -1,22 +1,18 @@
 $(document).ready(function() {
 	$random_string_element = "form strong";
-	$($random_string_element).html(create_random_string());
-
+	$($random_string_element).html(createRandomString());
 	var $random_string = $($random_string_element).html();
+	validateTextField("#cf-name");
+	validateTextField("#cf-email");
+	validateTextField("#cf-comments");
+	validateHumanSubmission("#prove-ur-human-field", $random_string);
 
-	validate_text_field_live("#cf-name");
-	validate_text_field_live("#cf-email");
-	validate_text_field_live("#cf-school-name");
-	validate_text_field_live("#cf-comments");
-	validate_submission_by_human("#prove-ur-human-field", $random_string);
-
-	function create_random_string() {
+	function createRandomString() {
 		var $alphabet_lower_array = "abcdefghjkmnpqrstuvwxyz".split('');
 		var $alphabet_upper_array = "ABCDEFGHJKLMNPQRSTUVXYZ".split('');
 		var $merged_alphabet = $.merge($.merge([], $alphabet_lower_array),
       $alphabet_upper_array
     );
-
 		var $numbers_array = "123456789".split('');
 		var $random_characters = [];
 
@@ -34,40 +30,40 @@ $(document).ready(function() {
 		return Math.floor(Math.random() * (x-y) + y);
 	};
 
-	function validate_submission_by_human(input_selector, string) {
+	function validateHumanSubmission(input_selector, string) {
 		var $word_being_spelled;
 
-		$(input_selector).on('input', function() {
+		$(input_selector).on("input", function() {
 			$word_being_spelled = $.trim($(this).val());
 
 			if ($word_being_spelled == string) {
 				inputValidation(input_selector, "success");
-				validate_form_fields("#cf-submit-btn");
+				validateFormFields("#cf-submit-btn");
 			} else {
 				inputValidation(input_selector, "danger");
-				validate_form_fields("#cf-submit-btn");
+				validateFormFields("#cf-submit-btn");
 			}
 		});
 	}
 
-	function validate_text_field_live(field_input_selector) {
-		var $regex = /^[a-zA-Z0-9 .';,?!()@-]+$/;
+	function validateTextField(field_input_selector) {
+		var $regex = /^[a-zA-Z0-9 .';,:?!()@-]+$/;
 
-		$(field_input_selector).on('input', function() {
+		$(field_input_selector).on("input", function() {
 			$text = $.trim($(this).val());
 
 			if ($text != "" && $regex.test($text)) {
 				inputValidation(this, "success");
-				validate_form_fields("#cf-submit-btn");
+				validateFormFields("#cf-submit-btn");
 			} else {
 				inputValidation(this, "danger");
-				validate_form_fields("#cf-submit-btn");
+				validateFormFields("#cf-submit-btn");
 			}
 		});
 	}
 
-	function validate_form_fields(btn_selector) {
-		if($(".has-success").length == 5) {
+	function validateFormFields(btn_selector) {
+		if($(".has-success").length == 4) {
 			$(btn_selector).attr("disabled", false);
 		} else {
 			$(btn_selector).attr("disabled", true);
