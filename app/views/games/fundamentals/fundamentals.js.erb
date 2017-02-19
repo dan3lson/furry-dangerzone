@@ -33,7 +33,6 @@ switch (currentGame) {
 		break;
 	case 3:
 		if (availableGames.pronun) {
-			console.log(availableGames);
 			updateProgress(34);
 			startPronunciationActivity();
 		} else if (availableGames.dec_dec) {
@@ -109,12 +108,30 @@ $(".container").on("click", ".continue-btn", function() {
 		flashPointsUpdate(arrowSuccess());
 		startSpellByClickingLettersActiivty();
 	} else if ($btn.hasClass("start-pronunciation-activity")) {
-		updateUserWordGamesCompleted(2);
-		updateProgress(34);
-		updateUserPoints(250);
-		addPoints(150);
-		flashPointsUpdate(arrowSuccess());
-		startPronunciationActivity();
+		if (availableGames.pronun) {
+			updateUserWordGamesCompleted(2);
+			updateProgress(34);
+			updateUserPoints(250);
+			addPoints(150);
+			flashPointsUpdate(arrowSuccess());
+			startPronunciationActivity();
+		} else if (availableGames.dec_dec) {
+			updateUserWordGamesCompleted(3);
+			updateProgress(51);
+			startDecisionsDecisionsActivity();
+		} else if (availableGames.ex_non_ex) {
+			updateUserWordGamesCompleted(4);
+			updateProgress(68);
+			startExampleNonExamplesActivity();
+		} else if (availableGames.syns_vs_ants) {
+			updateUserWordGamesCompleted(5);
+			updateProgress(85);
+			startSynsVsAntsActivity();
+		} else {
+			updateUserWordGamesCompleted(6);
+			updateProgress(100);
+			startReviewActivity();
+		}
 	} else if ($btn.hasClass("start-decisions-decisions-activity")) {
 		addPoints(200);
 		updateUserPoints(200);

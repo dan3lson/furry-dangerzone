@@ -20,11 +20,6 @@ $(document).ready(function() {
 		audio.play();
 	});
 
-	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-		$('a[data-toggle="tab"]').removeClass("active");
-	  $(e.target).addClass("active");
-	})
-
 	$("#search-form").focus();
 	$("#input_search").on("input", function() {
 		if (empty($(this))) {
@@ -35,7 +30,6 @@ $(document).ready(function() {
 	});
 
 	$(".mean-alt-del-form").parents("form").css("display", "d-inline");
-
 	spinner();
 
 	function empty($field) {

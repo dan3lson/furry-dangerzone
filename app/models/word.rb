@@ -68,8 +68,13 @@ class Word < ActiveRecord::Base
     where.not(id: word_id).random(num)
   end
 
+  # TODO: Create test
   def has_pronunciation?
-    !phonetic_spelling.nil?
+    url = "https://ssl.gstatic.com/dictionary/static/sounds/de/0"
+    src = "#{url}/#{self.name}.mp3"
+    response = HTTParty.get(src)
+    audio_not_found = response.code == 404
+    !audio_not_found
   end
 
   # TODO: Create test

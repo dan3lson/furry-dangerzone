@@ -6,13 +6,15 @@
 			<div class="card-block">
 				<h2 class="card-title">
 					<%= name %>
-					<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= name %>.mp3"
-								 id="audio"
-								 preload="auto">
-					</audio>
-					<small>
-						<i class="fa fa-volume-up hover pointer text-primary"></i>
-					</small>
+					<% if words.first.has_pronunciation? %>
+						<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= name %>.mp3"
+									 id="audio"
+									 preload="auto">
+						</audio>
+						<small>
+							<i class="fa fa-volume-up hover pointer text-primary"></i>
+						</small>
+					<% end %>
 				</h2>
 				<span class="text-muted"><%= pluralize(words.count, "result") %></span>
 			</div>
