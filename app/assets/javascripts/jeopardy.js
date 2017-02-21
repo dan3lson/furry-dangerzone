@@ -1,21 +1,20 @@
 $(document).ready(function(){
-
 	/**
 	 * Initiating variables and arrays
 	 */
-
-	var $chosen_word_id = $(".palabra").data("word-id");
-	var $chosen_words_array = [
-		"#chosen_word_one_div",
-		"#chosen_word_two_div",
-		"#chosen_word_three_div",
-		"#chosen_word_four_div"
-	];
-	var $counter = 0;
-	var $correct_word_proggress_bar_without_pbc_class = "";
-	var $time_game_started;
-	var $up_arrow = createElem("i", "fa fa-long-arrow-up");
-	var $down_arrow = createElem("i", "fa fa-long-arrow-down");
+	//
+	// var $chosen_word_id = $(".palabra").data("word-id");
+	// var $chosen_words_array = [
+	// 	"#chosen_word_one_div",
+	// 	"#chosen_word_two_div",
+	// 	"#chosen_word_three_div",
+	// 	"#chosen_word_four_div"
+	// ];
+	// var $counter = 0;
+	// var $correct_word_proggress_bar_without_pbc_class = "";
+	// var $time_game_started;
+	// var $up_arrow = createElem("i", "fa fa-long-arrow-up");
+	// var $down_arrow = createElem("i", "fa fa-long-arrow-down");
 
 	// Start the main activity
 	$(".jeopardy-begin-game").click(function(){
@@ -29,11 +28,11 @@ $(document).ready(function(){
 		// } else {
 		// 	// $controller_url = "/jeopardy?word_id=" + $chosen_word_id;
 		// };
-		var $controller_url = "/jeopardy?word_id=" + $chosen_word_id + ";tag_id=" +
-													$("#jeop-controller").data("tag-id");
-
-		load_game_info($controller_url);
-
+		// var $controller_url = "/jeopardy?word_id=" + $chosen_word_id + ";tag_id=" +
+		// 											$("#jeop-controller").data("tag-id");
+		//
+		// load_game_info($controller_url);
+		//
 		$time_game_started = new Date();
 	});
 
@@ -41,40 +40,40 @@ $(document).ready(function(){
 	 * Starter Functions: Main ones that initiate each activity
 	 */
 
-	function load_game_info(controller_url) {
-		$.ajax({
-			type: "GET",
-			url: controller_url,
-			dataType: "json",
-			success: function (response) {
-				var $chosen_word = response.word_names[0];
-				var $chosen_word_id = response.word_ids[0];
-				var $second_word = response.word_names[1];
-				var $second_word_id = response.word_ids[1];
-				var $third_word = response.word_names[2];
-				var $third_word_id = response.word_ids[2];
-				var $fourth_word = response.word_names[3];
-				var $fourth_word_id = response.word_ids[3];
-				var $jeopardy_lineup_names = response.jeopardy_lineup_names;
-				var $attributes_array = response.attributes_array;
-				var $attribute_values = response.attribute_values;
-
-				start_game_2(
-					$chosen_word,
-					$second_word,
-					$third_word,
-					$fourth_word,
-					$chosen_word_id,
-					$second_word_id,
-					$third_word_id,
-					$fourth_word_id,
-					$jeopardy_lineup_names,
-					$attributes_array,
-					$attribute_values
-				);
-			}
-		});
-	};
+	// function load_game_info(controller_url) {
+	// 	$.ajax({
+	// 		type: "GET",
+	// 		url: controller_url,
+	// 		dataType: "json",
+	// 		success: function (response) {
+	// 			var $chosen_word = response.word_names[0];
+	// 			var $chosen_word_id = response.word_ids[0];
+	// 			var $second_word = response.word_names[1];
+	// 			var $second_word_id = response.word_ids[1];
+	// 			var $third_word = response.word_names[2];
+	// 			var $third_word_id = response.word_ids[2];
+	// 			var $fourth_word = response.word_names[3];
+	// 			var $fourth_word_id = response.word_ids[3];
+	// 			var $jeopardy_lineup_names = response.jeopardy_lineup_names;
+	// 			var $attributes_array = response.attributes_array;
+	// 			var $attribute_values = response.attribute_values;
+	//
+	// 			start_game_2(
+	// 				$chosen_word,
+	// 				$second_word,
+	// 				$third_word,
+	// 				$fourth_word,
+	// 				$chosen_word_id,
+	// 				$second_word_id,
+	// 				$third_word_id,
+	// 				$fourth_word_id,
+	// 				$jeopardy_lineup_names,
+	// 				$attributes_array,
+	// 				$attribute_values
+	// 			);
+	// 		}
+	// 	});
+	// };
 
 	function start_game_2(
 		w1,
@@ -219,46 +218,46 @@ $(document).ready(function(){
 	*
 	**/
 
-	function createElem(elem, elem_class, elem_id) {
-		elem_class = elem_class ||  null;
-		elem_id = elem_id || null;
-
-		return $("<" + elem + ">", { class: elem_class, id: elem_id });
-	}
+	// function createElem(elem, elem_class, elem_id) {
+	// 	elem_class = elem_class ||  null;
+	// 	elem_id = elem_id || null;
+	//
+	// 	return $("<" + elem + ">", { class: elem_class, id: elem_id });
+	// }
 
 	// Update user_word status
-	function update_jeopardy_status_as_complete(word_id) {
-		var game_info = {
-			"game_name": "Jeopardy",
-			"word_id": word_id
-		};
-
-		$.ajax({
-			type: "PATCH",
-			url: "/jeopardy_game",
-			dataType: "json",
-			data: game_info,
-			success: function(response) {
-			 console.log(response.errors);
-			}
-		});
-	};
-
-	function reset_uw_fund_status_from_1_to_0(word_id) {
-		var game_info = {
-			"word_id": word_id
-		};
-
-		$.ajax({
-			type: "DELETE",
-			url: "/jeopardy_game",
-			dataType: "json",
-			data: game_info,
-			success: function(response) {
-				console.log(response.errors);
-			}
-		});
-	};
+	// function update_jeopardy_status_as_complete(word_id) {
+	// 	var game_info = {
+	// 		"game_name": "Jeopardy",
+	// 		"word_id": word_id
+	// 	};
+	//
+	// 	$.ajax({
+	// 		type: "PATCH",
+	// 		url: "/jeopardy_game",
+	// 		dataType: "json",
+	// 		data: game_info,
+	// 		success: function(response) {
+	// 		 console.log(response.errors);
+	// 		}
+	// 	});
+	// };
+	//
+	// function reset_uw_fund_status_from_1_to_0(word_id) {
+	// 	var game_info = {
+	// 		"word_id": word_id
+	// 	};
+	//
+	// 	$.ajax({
+	// 		type: "DELETE",
+	// 		url: "/jeopardy_game",
+	// 		dataType: "json",
+	// 		data: game_info,
+	// 		success: function(response) {
+	// 			console.log(response.errors);
+	// 		}
+	// 	});
+	// };
 
 	// Update the game_stat num_played for this word
 	function update_num_played(word_id) {
@@ -300,17 +299,17 @@ $(document).ready(function(){
 
 
 	// Update user_word status
-	function update_user_points(num) {
-		 $.ajax({
-			 type: "PATCH",
-			 url: "/user_points",
-			 dataType: "json",
-			 data: { "points": num }
-		 })
-		 .done(function(response) {
-			 console.log(response.errors)
-		 });
-	 };
+	// function update_user_points(num) {
+	// 	 $.ajax({
+	// 		 type: "PATCH",
+	// 		 url: "/user_points",
+	// 		 dataType: "json",
+	// 		 data: { "points": num }
+	// 	 })
+	// 	 .done(function(response) {
+	// 		 console.log(response.errors)
+	// 	 });
+	//  };
 
 	// Display which words move up or down
 	function display_level_2_results(
@@ -362,47 +361,47 @@ $(document).ready(function(){
 	};
 
 	// Computes the goodies
-	function get_goodies() {
-		$('.progress-bar-success').each(function(){
-			$all_the_goodies += parseInt($(this).text());
-			$("#goodies_total").html($all_the_goodies);
-		});
-	};
+	// function get_goodies() {
+	// 	$('.progress-bar-success').each(function(){
+	// 		$all_the_goodies += parseInt($(this).text());
+	// 		$("#goodies_total").html($all_the_goodies);
+	// 	});
+	// };
 
 	// Display the button-text for the chosen words
-	function update_button_text(chosen_word_num_btn, name) {
-		$(chosen_word_num_btn).text(name);
-	};
+	// function update_button_text(chosen_word_num_btn, name) {
+	// 	$(chosen_word_num_btn).text(name);
+	// };
 
 	// Global fns
 
 	//Change the activity name and specific directions depending on current state
-	function display_activity_instruction(activity_name, specific_instruction) {
-		$("#activity_name").html(activity_name);
-		$("#jeopardy-specific-instruction").html(specific_instruction);
-	};
+	// function display_activity_instruction(activity_name, specific_instruction) {
+	// 	$("#activity_name").html(activity_name);
+	// 	$("#jeopardy-specific-instruction").html(specific_instruction);
+	// };
 
 	// Set the value for the progress bar
-	function progressBar(value) {
-		$(".progress-bar").attr("max", value);
-	};
-
-	function shuffle_array(array) {
-		var m = array.length, t, i;
-		// While there remain elements to shuffle…
-		while (m) {
-			// Pick a remaining element…
-			i = Math.floor(Math.random() * m--);
-			// And swap it with the current element.
-			t = array[m];
-			array[m] = array[i];
-			array[i] = t;
-		}
-		return array;
-	};
+	// function progressBar(value) {
+	// 	$(".progress-bar").attr("max", value);
+	// };
+	//
+	// function shuffle_array(array) {
+	// 	var m = array.length, t, i;
+	// 	// While there remain elements to shuffle…
+	// 	while (m) {
+	// 		// Pick a remaining element…
+	// 		i = Math.floor(Math.random() * m--);
+	// 		// And swap it with the current element.
+	// 		t = array[m];
+	// 		array[m] = array[i];
+	// 		array[i] = t;
+	// 	}
+	// 	return array;
+	// };
 
 	// Shortcut for retrieving an element's ID
-	function _(x) {
-		return document.getElementById(x);
-	};
+	// function _(x) {
+	// 	return document.getElementById(x);
+	// };
 }); // end of document ready fn

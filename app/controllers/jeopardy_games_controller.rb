@@ -1,35 +1,43 @@
 class JeopardyGamesController < ApplicationController
   def update
-    @word_params = Word.find(params[:word_id])
-    @word = Rails.env.test? ? @word_params.gsub("=", "") : @word_params
+    @word = Word.find(params[:word_id])
     @user_word = UserWord.object(current_user, @word)
 
     if @user_word
       if @user_word.jeopardy_completed?
-        msg = "Okay: Jeopardy updates not needed for UW #{@user_word.id} ->"
-        msg_2 = " #{@user_word.word.name}"
-        render json: { errors: msg << msg_2 }
+        msg = [
+          "Okay: Jeopardy updates not needed for UW #{@user_word.id} ->",
+          " #{@user_word.word.name}"
+        ].join
+        render json: { errors: msg }
       else
-        @user_word.games_completed = 2
+        if @word.has_sent_stems?
+          @user_word.games_completed = 8
+        else
+          @user_word.games_completed = 9
+        end
 
         if @user_word.save
-          msg = "Success: Jeopardy updated as complete for UW"
-          msg_2 = " #{@user_word.id} -> #{@user_word.word.name}"
-          render json: { errors: msg << msg_2 }
+          msg = [
+            "Success: UW #{@user_word.id}/#{@user_word.word.name} ",
+            "games_completed now at #{@user_word.games_completed} "
+          ].join
+          render json: { errors: msg }
         else
-          msg = "ERROR: Jeopardy NOT successfully updated as complete for"
-          msg_2 = " UW #{@user_word.id} -> #{@user_word.word.name}"
-          render json: { errors: msg << msg_2 }
+          msg = [
+            "ERROR: Jeopardy NOT successfully updated as complete for" ,
+            "UW #{@user_word.id}/#{@user_word.word.name}"
+          ].join
+          render json: { errors: msg }
         end
       end
     else
-      render json: { errors: "Update not needed for random word." }
+      render json: { errors: "Okay: word is random. Update not needed." }
     end
   end
 
   def destroy
-    @word_params = Word.find(params[:word_id])
-    @word = Rails.env.test? ? @word_params.gsub("=", "") : @word_params
+    @word = Word.find(params[:word_id])
     @user_word = UserWord.object(current_user, @word)
 
     if @user_word
@@ -49,7 +57,7 @@ class JeopardyGamesController < ApplicationController
         end
       end
     else
-      render json: { errors: "Word is random. Deletion not necessary."}
+      render json: { errors: "Okay: word is random. Demotion not needed."}
     end
   end
 end

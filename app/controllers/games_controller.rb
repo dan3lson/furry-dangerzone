@@ -22,8 +22,7 @@ class GamesController < ApplicationController
 
   def jeopardy
     @target_word = Word.find(params[:word_id])
-    @words = current_user.get_jeop_words(@target_word)
-    @word_names = @words.map(&:name).shuffle
+    @words = current_user.get_jeop_words(@target_word).shuffle
     @rounds = JeopGame.new(@words).rounds
     @jeopardy = { game: @rounds }
     @rows = JeopGame.rows(@rounds, 5)

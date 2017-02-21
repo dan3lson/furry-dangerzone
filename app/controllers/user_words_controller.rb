@@ -27,6 +27,8 @@ class UserWordsController < ApplicationController
     end
   end
 
+  # If only Fundamentals uses this, maybe create specific controller just for
+  # this.
   def update
     @word = Word.find(params[:word_id])
     @games_completed = params[:games_completed]

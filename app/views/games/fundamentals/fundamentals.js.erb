@@ -139,20 +139,20 @@ $(".container").on("click", ".continue-btn", function() {
 		$targetWordDiv.html(targetWord.name).removeClass("text-success");
 
 		if (availableGames.dec_dec) {
-			updateProgress(51);
 			updateUserWordGamesCompleted(3);
+			updateProgress(51);
 			startDecisionsDecisionsActivity();
 		} else if (availableGames.ex_non_ex) {
-			updateProgress(68);
 			updateUserWordGamesCompleted(4);
+			updateProgress(68);
 			startExampleNonExamplesActivity();
 		} else if (availableGames.syns_vs_ants) {
-			updateProgress(85);
 			updateUserWordGamesCompleted(5);
+			updateProgress(85);
 			startSynsVsAntsActivity();
 		} else {
-			updateProgress(100);
 			updateUserWordGamesCompleted(6);
+			updateProgress(100);
 			startReviewActivity();
 		}
 	} else if ($btn.hasClass("start-ex-non-exs-activity")) {
@@ -161,16 +161,16 @@ $(".container").on("click", ".continue-btn", function() {
 		flashPointsUpdate(arrowSuccess());
 
 		if (availableGames.ex_non_ex) {
-			updateProgress(68);
 			updateUserWordGamesCompleted(4);
+			updateProgress(68);
 			startExampleNonExamplesActivity();
 		} else if (availableGames.syns_vs_ants) {
-			updateProgress(85);
 			updateUserWordGamesCompleted(5);
+			updateProgress(85);
 			startSynsVsAntsActivity();
 		} else {
-			updateProgress(100);
 			updateUserWordGamesCompleted(6);
+			updateProgress(100);
 			startReviewActivity();
 		}
 	} else if ($btn.hasClass("start-syns-vs-ant-activity")) {
@@ -180,12 +180,12 @@ $(".container").on("click", ".continue-btn", function() {
 		flashPointsUpdate(arrowSuccess());
 
 		if (availableGames.syns_vs_ants) {
-			updateProgress(85);
 			updateUserWordGamesCompleted(5);
+			updateProgress(85);
 			startSynsVsAntsActivity();
 		} else {
-			updateProgress(100);
 			updateUserWordGamesCompleted(6);
+			updateProgress(100);
 			startReviewActivity();
 		}
 	} else if ($btn.hasClass("review-activity")) {

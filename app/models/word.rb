@@ -99,12 +99,14 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def has_synonyms?
-    !WordSynonym.where(word: self).blank?
+    !Thesaurus.send("synonyms", name).nil?
+    # !WordSynonym.where(word: self).blank?
   end
 
   # TODO: Create test
   def has_antonyms?
-    !WordAntonym.where(word: self).blank?
+    !Thesaurus.send("antonyms", name).nil?
+    # !WordAntonym.where(word: self).blank?
   end
 
   # TODO: Create test

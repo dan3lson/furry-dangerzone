@@ -1,9 +1,20 @@
 <button type="button"
 				class="btn btn-outline-primary btn-block btn-lg jeop-btn"
+				data-word-id="<%= word.id %>"
 				disabled>
-	<span><%= name %></span>
+	<span><%= word.name %></span>
 	<br>
-	<% 5.times do %>
-		<span><i class="fa fa-question-circle-o text-muted"></i></span>
+	<span><i class="fa fa-question-circle-o text-muted"></i>(def)</span>
+	<% if word.has_synonyms? %>
+		<span><i class="fa fa-question-circle-o text-muted"></i>(syn)</span>
+	<% end %>
+	<% if word.has_antonyms? %>
+		<span><i class="fa fa-question-circle-o text-muted"></i>(ant)</span>
+	<% end %>
+	<% if word.has_examples? %>
+		<span><i class="fa fa-question-circle-o text-muted"></i>(ex)</span>
+	<% end %>
+	<% if word.has_syllables? %>
+		<span><i class="fa fa-question-circle-o text-muted"></i>(syll)</span>
 	<% end %>
 </button>

@@ -1,21 +1,17 @@
-// TODO If cell is excluded, respective question mark(s) should also be excluded
-// TODO Figure out the rules for a word to advance to Freestyle
-
+var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
+var jeopWords = JSON.parse("<%= j @words.to_json.html_safe %>");
 var rounds = JSON.parse("<%= j @jeopardy.to_json.html_safe %>").game;
 const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: @directions }) %>");
 const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { rows: @rows }) %>");
 const $headerPartial = $("<%= j render(partial: 'games/jeopardy/header') %>");
-const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { names: @word_names }) %>");
+const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { words: @words }) %>");
 var $jeopardyDiv = createElem("div", null, "jeopardy-div");
 var $selectedCell;
 var lineroCellNumID;
 var round;
-var totalLineroEarned = 0;
 var question;
-var quesCounter = 0;
-$(".container").empty()
-							 .append($jeopardyDiv);
+$(".container").empty().append($jeopardyDiv);
 $jeopardyDiv.append(
 							$scoreboardPartial,
 							$directionsPartial,
@@ -28,7 +24,7 @@ var $btns = $(".jeop-btn");
 var validCells = "#linero-table td:not(.exclude)";
 var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
-var newPointsTotal = 0;
+var totalLinero = 0;
 var $points = $(".scoreboard-points");
 updateProgress();
 
@@ -37,7 +33,7 @@ $(".container").on("click", validCells, function() {
 	activtate(validCells, $selectedCell);
 	lineroCellNumID = $(this).data("ques-num");
 	question = findQues(rounds, lineroCellNumID);
-	updateHeader(question.ques);
+	updateHeader(question.ques + " " + question.correct_ans.name);
 	enableButtons();
 });
 
@@ -57,7 +53,6 @@ $(".container").on("click", ".jeop-btn", function() {
 		if (question.selected_ans == question.correct_ans.name) {
 			markResult(question, true);
 			addThumbsUp($selectedBtn);
-			// TODO Fix: All questions aren't lined up according to their Linero amount
 			addPoints(parseInt(question.linero));
 			flashPointsUpdate(arrowSuccess());
 		} else {
@@ -70,9 +65,17 @@ $(".container").on("click", ".jeop-btn", function() {
 		if (noMoreQuestions($selectedBtn)) {
 			updateBtnProp($selectedBtn);
 			$selectedBtn.removeClass("btn-outline-primary").addClass("btn-secondary");
+			var wordID = $selectedBtn.data("word-id");
+
+			if (wordGetsPromoted($selectedBtn)) {
+				promoteToFreestyle(wordID);
+			} else {
+				demoteToFundamentals(wordID);
+			}
 		}
 
 		if (gameIsOver()) {
+			updateUserPoints(totalLinero);
 			// TODO Display results similar to MeanAlt and ExNonEx activities
 			startReviewActivity();
 		}
@@ -85,9 +88,61 @@ function startReviewActivity() {
 	$(".container").empty().append($reviewPartial);
 };
 
-
 function noMoreQuestions($btn) {
 	return !($btn.find("span .fa-question-circle-o").length);
+}
+
+function wordGetsPromoted($btn) {
+	var total = $btn.find("span .fa").length;
+	var numCorrect = $btn.find("span .fa-thumbs-o-up").length;
+	var percentageCorrect = Math.floor((numCorrect / total) * 100);
+
+	switch (total) {
+		case 1:
+			return percentageCorrect == 100;
+			break;
+		case 2:
+			return percentageCorrect == 100;
+			break;
+		case 3:
+			return percentageCorrect > 65;
+			break;
+		case 4:
+			return percentageCorrect >= 75;
+			break;
+		case 5:
+			return percentageCorrect >= 80;
+			break;
+		default: false;
+	}
+}
+
+function promoteToFreestyle(wordID) {
+	var data = { "word_id": wordID };
+	makeAjaxCall("PATCH", "/jeopardy_game", data);
+};
+
+function demoteToFundamentals(wordID) {
+	var data = { "word_id": wordID };
+	makeAjaxCall("DELETE", "/jeopardy_game", data);
+};
+
+function updateUserPoints(linero) {
+	var data = { "points": linero };
+	makeAjaxCall("PATCH", "/user_points", data);
+};
+
+function makeAjaxCall(type, url, data) {
+	$.ajax({
+		type: type,
+		url: url,
+		dataType: "json",
+		data: data
+	}).done(logResponse);
+}
+
+function logResponse(response) {
+	console.log(response);
 }
 
 function markResult(question, result) {
@@ -128,7 +183,7 @@ function updateBtnProp($btn_selector, boolean) {
 
 function updateProgress() {
 	var $progressBar = $(".progress-bar");
-	var value = (getCounter() / 20) * 100;
+	var value = Math.floor((getCounter() / 20) * 100);
 	$progressBar.attr("aria-valuenow", value)
 							.attr("style", "width: " + value + "%;")
 							.text(value + "%");
@@ -182,15 +237,13 @@ function flashPointsUpdate($arrow) {
 }
 
 function addPoints(points) {
-	newPointsTotal += points;
-	$points.html(newPointsTotal);
+	totalLinero += points;
+	$points.html(totalLinero);
 };
 
 function removePoints(points) {
-	if (newPointsTotal > 0) {
-		newPointsTotal -= points;
-		$points.html(newPointsTotal);
-	}
+	totalLinero -= points;
+	$points.html(totalLinero);
 };
 
 function startCountup($section, seconds) {
