@@ -2,7 +2,12 @@
 	color: #DDD !important;
 }
 
+#jeopardy-div {
+	h4 {
+		font-weight: 200;
+	}
+}
+
 #linero-table td:hover {
 	color: $bootstrap-blue;
-
 }

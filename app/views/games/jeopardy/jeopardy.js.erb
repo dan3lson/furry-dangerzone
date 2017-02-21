@@ -76,7 +76,6 @@ $(".container").on("click", ".jeop-btn", function() {
 
 		if (gameIsOver()) {
 			updateUserPoints(totalLinero);
-			// TODO Display results similar to MeanAlt and ExNonEx activities
 			startReviewActivity();
 		}
 	}
@@ -85,8 +84,27 @@ $(".container").on("click", ".jeop-btn", function() {
 function startReviewActivity() {
 	clearTimeout(timerID);
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Jeopardy', word_name: @target_word.name }) %>");
-	$(".container").empty().append($reviewPartial);
+	$jeopardyDiv.empty().append($reviewPartial);
+	showResults();
 };
+
+function showResults() {
+	var actualRounds = rounds.filter(function(round) {
+		return round.ques != null;
+	});
+	var $userWordBtns = $btns.filter(function() {
+		return $(this).data("has-word") == true;
+	});
+
+	$.each($userWordBtns, function() {
+		var $btn = $(this);
+		$jeopardyDiv.append(createMotionCard($btn, wordGetsPromoted($btn)));
+	});
+
+	$.each(actualRounds, function() {
+		$jeopardyDiv.append(createResultCard(this));
+	});
+}
 
 function noMoreQuestions($btn) {
 	return !($btn.find("span .fa-question-circle-o").length);
@@ -212,6 +230,64 @@ function findQues(questions, num) {
 
 function updateHeader(string) {
 	$jeopardyDiv.find("h4").html(string);
+}
+
+function createMotionCard($btn, promoted) {
+	var $card = createElem("div", "card mb-3");
+	var $cardBlock = createElem("div", "card-block");
+	$card.append($cardBlock);
+	var word = "<mark>" + $btn.text() + "</mark>";
+
+	if (promoted) {
+		$cardBlock.append(
+			word + " gets promoted to the Freestyle activities!"
+		);
+	} else {
+		$cardBlock.append(
+			word + " gets demoted to the Fundamentals game."
+		);
+	}
+
+	return $card;
+}
+
+function createResultCard(round) {
+	var $card = createElem("div", "card mb-3");
+	var $cardBlock = createElem("div", "card-block");
+	var $cardTitle = createElem("h4", "card-title");
+	var correctString = "Correct answer: " + round.correct_ans.name;
+	var urAnswerString = "Your Answer: " + round.selected_ans;
+	var questionTypeString = "Question Type: " + round.ques_type;
+
+	if (round.answered_correctly) {
+		var lineroString = "Linero Earned: " + round.linero;
+		var $icon = createElem("div", "float-right")
+								.append(createFontAweIcon("check fa-2x text-success"));
+		$card.addClass("card-outline-success");
+	} else {
+		var lineroString = "Linero Lost: " + round.linero;
+		var $icon = createElem("div", "float-right")
+								.append(createFontAweIcon("close fa-2x text-danger"));
+		$card.addClass("card-outline-danger");
+	}
+
+	$card.append($cardBlock);
+	$cardBlock.append($cardTitle);
+	$cardTitle.append($icon);
+	$cardTitle.append(round.ques_num + 1 + ") ");
+	$cardTitle.append(round.ques);
+	$cardBlock.append(questionTypeString);
+	$cardBlock.append(createElem("br"));
+	$cardBlock.append(correctString);
+	$cardBlock.append(createElem("br"));
+	$cardBlock.append(urAnswerString);
+	$cardBlock.append(createElem("br"));
+	$cardBlock.append(lineroString);
+	return $card;
+}
+
+function createFontAweIcon(_class) {
+	return createElem("i", "fa fa-" + _class);
 }
 
 function createElem(elem, elemClass, elemID) {
