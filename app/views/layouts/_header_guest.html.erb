@@ -1,56 +1,45 @@
-<nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="nav flex-column flex-sm-row p-2 bg-faded mb-3">
   <%= render "layouts/leksi_brand", path: root_path %>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <div class="navbar-nav mr-auto">
-      <% if action?("about_us") %>
-        <%= link_to "About Us",
-                    about_us_path,
-                    class: "nav-item nav-link active"
-        %>
-      <% else %>
-        <%= link_to "About Us", about_us_path, class: "nav-item nav-link" %>
-      <% end %>
-      <% if action?("our_approach") %>
-        <%= link_to "Our Approach",
-                    our_approach_path,
-                    class: "nav-item nav-link active"
-        %>
-      <% else %>
-        <%= link_to "Our Approach",
-                    our_approach_path,
-                    class: "nav-item nav-link"
-        %>
-      <% end %>
-      <% if action?("results") %>
-        <%= link_to "Results",
-                    results_path,
-                    class: "nav-item nav-link active"
-        %>
-      <% else %>
-        <%= link_to "Results",
-                    results_path,
-                    class: "nav-item nav-link"
-        %>
-      <% end %>
-      <% if action?("research") %>
-        <%= link_to "Research",
-                    research_path,
-                    class: "nav-item nav-link active"
-        %>
-      <% else %>
-        <%= link_to "Research", research_path, class: "nav-item nav-link" %>
-      <% end %>
-    </div>
-	<div class="text-xs-right">
+  <% if action?("about_us") %>
+    <%= link_to "About Us",
+                about_us_path,
+                class: "flex-sm-fill text-sm-center nav-link active"
+    %>
+  <% else %>
+    <%= link_to "About Us", about_us_path, class: "flex-sm-fill text-sm-center nav-link" %>
+  <% end %>
+  <% if action?("our_approach") %>
+    <%= link_to "Our Approach",
+                our_approach_path,
+                class: "flex-sm-fill text-sm-center nav-link active"
+    %>
+  <% else %>
+    <%= link_to "Our Approach",
+                our_approach_path,
+                class: "flex-sm-fill text-sm-center nav-link"
+    %>
+  <% end %>
+  <% if action?("results") %>
+    <%= link_to "Results",
+                results_path,
+                class: "flex-sm-fill text-sm-center nav-link active"
+    %>
+  <% else %>
+    <%= link_to "Results",
+                results_path,
+                class: "flex-sm-fill text-sm-center nav-link"
+    %>
+  <% end %>
+  <% if action?("research") %>
+    <%= link_to "Research",
+                research_path,
+                class: "flex-sm-fill text-sm-center nav-link active"
+    %>
+  <% else %>
+    <%= link_to "Research", research_path, class: "flex-sm-fill text-sm-center nav-link" %>
+  <% end %>
+
+	<div class="text-sm-right">
 		<%= link_to login_path, class: "btn btn-outline-primary", role: "button" do %>
       Log In
 		<% end %>
@@ -58,7 +47,4 @@
       Sign Up
 		<% end %>
 	</div>
-
 </nav>
-<div class="clear">
-</div>

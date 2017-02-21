@@ -33,7 +33,7 @@ $(".container").on("click", validCells, function() {
 	activtate(validCells, $selectedCell);
 	lineroCellNumID = $(this).data("ques-num");
 	question = findQues(rounds, lineroCellNumID);
-	updateHeader(question.ques + " " + question.correct_ans.name);
+	updateHeader(question.ques);
 	enableButtons();
 });
 

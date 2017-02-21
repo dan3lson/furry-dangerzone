@@ -4,17 +4,17 @@
 				disabled>
 	<span><%= word.name %></span>
 	<br>
-	<span><i class="fa fa-question-circle-o text-muted"></i>(def)</span>
+	<span><i class="fa fa-question-circle-o text-muted"></i></span>
 	<% if word.has_synonyms? %>
-		<span><i class="fa fa-question-circle-o text-muted"></i>(syn)</span>
+		<span><i class="fa fa-question-circle-o text-muted"></i></span>
 	<% end %>
 	<% if word.has_antonyms? %>
-		<span><i class="fa fa-question-circle-o text-muted"></i>(ant)</span>
+		<span><i class="fa fa-question-circle-o text-muted"></i></span>
 	<% end %>
 	<% if word.has_examples? %>
-		<span><i class="fa fa-question-circle-o text-muted"></i>(ex)</span>
+		<span><i class="fa fa-question-circle-o text-muted"></i></span>
 	<% end %>
 	<% if word.has_syllables? %>
-		<span><i class="fa fa-question-circle-o text-muted"></i>(syll)</span>
+		<span><i class="fa fa-question-circle-o text-muted"></i></span>
 	<% end %>
 </button>

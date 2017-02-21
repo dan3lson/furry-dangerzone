@@ -75,142 +75,142 @@ $(document).ready(function(){
 	// 	});
 	// };
 
-	function start_game_2(
-		w1,
-		w2,
-		w3,
-		w4,
-		w1_id,
-		w2_id,
-		w3_id,
-		w4_id,
-		lineup_names,
-		attributes_array,
-		attribute_values
-	) {
-
-		// Display the text for the remaining three buttons
-		update_button_text("#chosen_word_one_btn", w1);
-		update_button_text("#chosen_word_two_btn", w2);
-		update_button_text("#chosen_word_three_btn", w3);
-		update_button_text("#chosen_word_four_btn", w4);
-
-		var $current_word = lineup_names[$counter];
-
-		display_activity_instruction(
-			attributes_array[$counter],
-			attribute_values[$counter]
-		);
-
-		answer_the_question(
-			"#chosen_word_one_btn",
-			"#chosen_word_one_progress_bars_div .progress-bar-custom:first"
-		);
-		answer_the_question(
-			"#chosen_word_two_btn",
-			"#chosen_word_two_progress_bars_div .progress-bar-custom:first"
-		);
-		answer_the_question(
-			"#chosen_word_three_btn",
-			"#chosen_word_three_progress_bars_div .progress-bar-custom:first"
-		);
-		answer_the_question(
-			"#chosen_word_four_btn",
-			"#chosen_word_four_progress_bars_div .progress-bar-custom:first"
-		);
+	// function start_game_2(
+	// 	w1,
+	// 	w2,
+	// 	w3,
+	// 	w4,
+	// 	w1_id,
+	// 	w2_id,
+	// 	w3_id,
+	// 	w4_id,
+	// 	lineup_names,
+	// 	attributes_array,
+	// 	attribute_values
+	// ) {
+	//
+	// 	// Display the text for the remaining three buttons
+	// 	update_button_text("#chosen_word_one_btn", w1);
+	// 	update_button_text("#chosen_word_two_btn", w2);
+	// 	update_button_text("#chosen_word_three_btn", w3);
+	// 	update_button_text("#chosen_word_four_btn", w4);
+	//
+	// 	var $current_word = lineup_names[$counter];
+	//
+	// 	display_activity_instruction(
+	// 		attributes_array[$counter],
+	// 		attribute_values[$counter]
+	// 	);
+	//
+	// 	answer_the_question(
+	// 		"#chosen_word_one_btn",
+	// 		"#chosen_word_one_progress_bars_div .progress-bar-custom:first"
+	// 	);
+	// 	answer_the_question(
+	// 		"#chosen_word_two_btn",
+	// 		"#chosen_word_two_progress_bars_div .progress-bar-custom:first"
+	// 	);
+	// 	answer_the_question(
+	// 		"#chosen_word_three_btn",
+	// 		"#chosen_word_three_progress_bars_div .progress-bar-custom:first"
+	// 	);
+	// 	answer_the_question(
+	// 		"#chosen_word_four_btn",
+	// 		"#chosen_word_four_progress_bars_div .progress-bar-custom:first"
+	// 	);
 
 		// Handles what happens when user answers correctly and incorrectly
-		function answer_the_question(
-			button_id_name,
-			first_mini_progress_bar_without_pbc_class
-		) {
-			$(button_id_name).click(function() {
-				// If the user's guess is correct
-				if ($(this).text() == lineup_names[$counter]) {
-					$(first_mini_progress_bar_without_pbc_class)
-						.children()
-						.first()
-						.html("&#10084;")
-						.css("color", "#fff");
-					$(first_mini_progress_bar_without_pbc_class)
-						.removeClass("progress-bar-custom")
-						.addClass("progress-bar-default");
-				// If the user's guess is incorrect
-				} else {
-					$correct_word_proggress_bar_without_pbc_class =
-						"#" +
-						$("button:contains('" + lineup_names[$counter] + "')")
-						.next()
-						.attr("id") +
-						" .progress-bar-custom:first";
-					$($correct_word_proggress_bar_without_pbc_class)
-						.html("&#10006;")
-						.css("color", "#ccc")
-						.css("background", "#fff");
-					$($correct_word_proggress_bar_without_pbc_class)
-						.removeClass("progress-bar-custom")
-						.addClass("progress-bar-danger");
-				}
-
-				$counter++;
-
-				display_activity_instruction(
-					attributes_array[$counter],
-					attribute_values[$counter]
-				);
-
-				// When the game is over, display "complete" message
-				if ($counter == 20) {
-					$("#chosen_word_one_btn").prop("disabled", true);
-					$("#chosen_word_two_btn").prop("disabled", true);
-					$("#chosen_word_three_btn").prop("disabled", true);
-					$("#chosen_word_four_btn").prop("disabled", true);
-
-					display_activity_instruction(
-						"Ready for the results?", "3...2...1..."
-					);
-
-					setTimeout(function(){
-						$("#game-exit-btn").hide();
-						$("#jeopardy-div").hide();
-						$("#review_level_two_container").fadeIn();
-
-						display_level_2_results(
-							"#chosen_word_one_progress_bars_div",
-							"#level_two_results_first_circle",
-							"#level_two_results_first_word",
-							w1,
-							w1_id
-						);
-
-						display_level_2_results(
-							"#chosen_word_two_progress_bars_div",
-							"#level_two_results_second_circle",
-							"#level_two_results_second_word",
-							w2,
-							w2_id
-						);
-
-						display_level_2_results(
-							"#chosen_word_three_progress_bars_div",
-							"#level_two_results_third_circle",
-							"#level_two_results_third_word",
-							w3,
-							w3_id
-						);
-
-						display_level_2_results(
-							"#chosen_word_four_progress_bars_div",
-							"#level_two_results_fourth_circle",
-							"#level_two_results_fourth_word",
-							w4,
-							w4_id
-						);
-					}, 3000);
-				}
-			});
-		}; // end of answer the question fn
-	};
+	// 	function answer_the_question(
+	// 		button_id_name,
+	// 		first_mini_progress_bar_without_pbc_class
+	// 	) {
+	// 		$(button_id_name).click(function() {
+	// 			// If the user's guess is correct
+	// 			if ($(this).text() == lineup_names[$counter]) {
+	// 				$(first_mini_progress_bar_without_pbc_class)
+	// 					.children()
+	// 					.first()
+	// 					.html("&#10084;")
+	// 					.css("color", "#fff");
+	// 				$(first_mini_progress_bar_without_pbc_class)
+	// 					.removeClass("progress-bar-custom")
+	// 					.addClass("progress-bar-default");
+	// 			// If the user's guess is incorrect
+	// 			} else {
+	// 				$correct_word_proggress_bar_without_pbc_class =
+	// 					"#" +
+	// 					$("button:contains('" + lineup_names[$counter] + "')")
+	// 					.next()
+	// 					.attr("id") +
+	// 					" .progress-bar-custom:first";
+	// 				$($correct_word_proggress_bar_without_pbc_class)
+	// 					.html("&#10006;")
+	// 					.css("color", "#ccc")
+	// 					.css("background", "#fff");
+	// 				$($correct_word_proggress_bar_without_pbc_class)
+	// 					.removeClass("progress-bar-custom")
+	// 					.addClass("progress-bar-danger");
+	// 			}
+	//
+	// 			$counter++;
+	//
+	// 			display_activity_instruction(
+	// 				attributes_array[$counter],
+	// 				attribute_values[$counter]
+	// 			);
+	//
+	// 			// When the game is over, display "complete" message
+	// 			if ($counter == 20) {
+	// 				$("#chosen_word_one_btn").prop("disabled", true);
+	// 				$("#chosen_word_two_btn").prop("disabled", true);
+	// 				$("#chosen_word_three_btn").prop("disabled", true);
+	// 				$("#chosen_word_four_btn").prop("disabled", true);
+	//
+	// 				display_activity_instruction(
+	// 					"Ready for the results?", "3...2...1..."
+	// 				);
+	//
+	// 				setTimeout(function(){
+	// 					$("#game-exit-btn").hide();
+	// 					$("#jeopardy-div").hide();
+	// 					$("#review_level_two_container").fadeIn();
+	//
+	// 					display_level_2_results(
+	// 						"#chosen_word_one_progress_bars_div",
+	// 						"#level_two_results_first_circle",
+	// 						"#level_two_results_first_word",
+	// 						w1,
+	// 						w1_id
+	// 					);
+	//
+	// 					display_level_2_results(
+	// 						"#chosen_word_two_progress_bars_div",
+	// 						"#level_two_results_second_circle",
+	// 						"#level_two_results_second_word",
+	// 						w2,
+	// 						w2_id
+	// 					);
+	//
+	// 					display_level_2_results(
+	// 						"#chosen_word_three_progress_bars_div",
+	// 						"#level_two_results_third_circle",
+	// 						"#level_two_results_third_word",
+	// 						w3,
+	// 						w3_id
+	// 					);
+	//
+	// 					display_level_2_results(
+	// 						"#chosen_word_four_progress_bars_div",
+	// 						"#level_two_results_fourth_circle",
+	// 						"#level_two_results_fourth_word",
+	// 						w4,
+	// 						w4_id
+	// 					);
+	// 				}, 3000);
+	// 			}
+	// 		});
+	// 	}; // end of answer the question fn
+	// };
 
 	/**
 	*
