@@ -11,10 +11,6 @@ $(document).ready(function() {
 		location.reload();
 	});
 
-	$(function () {
-	  $('[data-toggle="tooltip"]').tooltip();
-	})
-
 	$(".container").on("click", ".fa-volume-up, .fa-volume-off", function() {
 		const audio = $(this).parent().prev()[0];
 		audio.play();

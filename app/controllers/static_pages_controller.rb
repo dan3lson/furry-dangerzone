@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   layout "application_guest"
 
-  def guest_home
+  def home
     redirect_to myLeksi_path if logged_in?
   end
 
@@ -27,5 +27,8 @@ class StaticPagesController < ApplicationController
   end
 
   def feedback
+  end
+
+  def spelling_bee
   end
 end

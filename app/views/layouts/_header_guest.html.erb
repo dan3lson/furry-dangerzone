@@ -1,13 +1,18 @@
 <nav class="nav flex-column flex-sm-row p-2 bg-faded mb-3">
   <%= render "layouts/leksi_brand", path: root_path %>
+
   <% if action?("about_us") %>
     <%= link_to "About Us",
                 about_us_path,
                 class: "flex-sm-fill text-sm-center nav-link active"
     %>
   <% else %>
-    <%= link_to "About Us", about_us_path, class: "flex-sm-fill text-sm-center nav-link" %>
+    <%= link_to "About Us",
+                about_us_path,
+                class: "flex-sm-fill text-sm-center nav-link"
+    %>
   <% end %>
+
   <% if action?("our_approach") %>
     <%= link_to "Our Approach",
                 our_approach_path,
@@ -19,6 +24,7 @@
                 class: "flex-sm-fill text-sm-center nav-link"
     %>
   <% end %>
+
   <% if action?("results") %>
     <%= link_to "Results",
                 results_path,
@@ -30,20 +36,42 @@
                 class: "flex-sm-fill text-sm-center nav-link"
     %>
   <% end %>
+
   <% if action?("research") %>
     <%= link_to "Research",
                 research_path,
                 class: "flex-sm-fill text-sm-center nav-link active"
     %>
   <% else %>
-    <%= link_to "Research", research_path, class: "flex-sm-fill text-sm-center nav-link" %>
+    <%= link_to "Research",
+                research_path,
+                class: "flex-sm-fill text-sm-center nav-link"
+    %>
   <% end %>
 
+  <%# if action?("spelling_bee") %>
+    <%#= link_to "Spelling Bee",
+                spelling_bee_path,
+                class: "flex-sm-fill text-sm-center nav-link active"
+    %>
+  <%# else %>
+    <%#= link_to "Spelling Bee",
+                spelling_bee_path,
+                class: "flex-sm-fill text-sm-center nav-link"
+    %>
+  <%# end %>
+
 	<div class="text-sm-right">
-		<%= link_to login_path, class: "btn btn-outline-primary", role: "button" do %>
+		<%= link_to login_path,
+                class: "btn btn-outline-primary",
+                role: "button" do
+    %>
       Log In
 		<% end %>
-		<%= link_to new_user_path, class: "btn btn-primary", role: "button" do %>
+		<%= link_to new_user_path,
+                class: "btn btn-primary",
+                role: "button" do
+    %>
       Sign Up
 		<% end %>
 	</div>

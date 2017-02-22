@@ -1,0 +1,184 @@
+<% title "2017 Spelling Bee Competition" %>
+<% description "Learn more about the very exciting, first Harlem Spelling Bee competition." %>
+<% set_meta_tags keywords: %w[harlem spelling bee competition fun schools education vocabulary vocab literacy english language study dictionary words flashcards games list notebook] %>
+
+<% set_meta_tags og: {
+  title: "Learn more about the very exciting, first Harlem Spelling Bee competition.",
+	description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Which Harlem schools will become spelling bee champs?",
+  title: "Learn more about the very exciting, first Harlem Spelling Bee competition.",
+  description: "Learn more about the very exciting, first Harlem Spelling Bee competition."
+} %>
+
+<section class="guest-section-home text-center spe-bee-yellow">
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag(
+        "spelling-bee.png",
+        class: "mx-auto d-block",
+        width: 300,
+        height: 300
+      ) %>
+    </div>
+    <div class="col-md-9">
+      <h4>Leksi Presents</h4>
+      <h1 class="display-2">1<sup>st</sup> Annual <br>Harlem Spelling Bee</h1>
+      <p class="lead">
+        Learn more below about this exciting event. If you're a school/teacher,
+        use the button below to register; spots are limited!
+      </p>
+      <%= link_to "Register", "#", class: "btn btn-lg btn-primary" %>
+      <%= link_to "Stay Updated", "#", class: "btn btn-lg btn-outline-primary" %>
+    </div>
+  </div>
+</section>
+<section class="spee-bee-trail">
+  <div class="row text-center spe-bee-redange">
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-block">
+          <h2><i class="fa fa-calendar"></i>
+             When
+             <br>
+             <small>Thursday, April 7th, 2017</small>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-block">
+          <h2><i class="fa fa-globe"></i>
+             Where
+             <br>
+             <small>
+               Apollo Theatre
+               <%= link_to "#" do %>
+                 <i class="fa fa-map-marker"></i>
+               <% end %>
+             </small>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-block">
+          <h2><i class="fa fa-money"></i>
+             Cost
+             <br>
+             <small>Free</small>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="guest-section-home spelling-bee-section">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4"><i class="fa fa-users"></i> Students</h1>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "How do I sign up?"
+      %>
+      <p>
+        Coming soon...
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "Where are the words that will be used?"
+      %>
+      <p>
+        Coming soon...
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "How can I practice my spelling?"
+      %>
+      <p>
+        Coming soon...
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "What are some spelling tips and tricks?"
+      %>
+      <p>
+        Coming soon...
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "If I win, do I get anything?"
+      %>
+      <p>
+        Coming soon...
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "What if I have a question or comment?"
+      %>
+      <p>
+        Feel free to use the contact form below to reach out to us or ask
+        your teacher.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="guest-section-home">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">
+        <i class="fa fa-institution"></i> Schools/Teachers
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="guest-section-home">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4"><i class="fa fa-handshake-o"></i> Sponsors</h1>
+    </div>
+  </div>
+</section>
+<section class="guest-section-home" id="get-started-now">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4"><i class="fa fa-envelope"></i> Contact Us</h1>
+
+      <%= form_tag(static_pages_contact_us_path, method: "post") do %>
+        <div class="form-group">
+          <label for="cf-name">Name *</label>
+          <input type="text" value="" name="cf_name"
+                 class="form-control" id="cf-name"
+                 required>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email *</label>
+          <input type="email" value="" name="cf_email"
+                 class="form-control"  id="cf-email"
+                 required>
+        </div>
+        <div class="form-group">
+          <label for="cf-comments">Message *</label>
+          <textarea class="form-control" name="cf_comments" rows="3"
+                    id="cf-comments"     required>
+          </textarea>
+        </div>
+        <div class="form-group">
+          <i class="fa fa-lock"></i>
+          <label for="prove_ur_human" class="form-control-label">
+            Security Check * - please type:
+            <strong>L3ks!</strong>
+          </label>
+          <input type="text" name="prove_ur_human"
+                 class="form-control" id="prove-ur-human-field"
+                 required>
+        </div>
+        <div class="form-group">
+          <button type="submit" value="Send" id="cf-submit-btn"
+                  class="btn btn-primary btn-lg btn-block" disabled>
+            <i class="fa fa-send-o"></i>
+            Send
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
