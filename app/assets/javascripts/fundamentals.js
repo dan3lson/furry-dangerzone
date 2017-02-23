@@ -737,15 +737,6 @@ $(document).ready(function() {
 	// 	return $scoreboardTimer.text() - timeStarted;
 	// }
 
-	function startCountdown($section, seconds) {
-		var countdownID = setInterval(function() {
-			seconds--;
-			$section.html(seconds);
-			if (seconds == 0) {
-				clearInterval(countdownID);
-			}
-		}, 1000);
-	}
 	//
 	// function startCountup($section, seconds) {
 	// 	return countdownID = setInterval(function() {
@@ -813,7 +804,7 @@ $(document).ready(function() {
       }
     });
   };
-	// 
+	//
 	// function updateUserPoints(num) {
 	// 	$.ajax({
 	// 		type: "PATCH",

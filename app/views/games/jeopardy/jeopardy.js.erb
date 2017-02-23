@@ -83,9 +83,22 @@ $(".container").on("click", ".jeop-btn", function() {
 
 function startReviewActivity() {
 	clearTimeout(timerID);
+	var $targetWordBtn = $btns.filter(function() {
+		return $(this).text().trim() == targetWord.name;
+	});
+	var getsPromoted = wordGetsPromoted($targetWordBtn);
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Jeopardy', word_name: @target_word.name }) %>");
-	$jeopardyDiv.empty().append($reviewPartial);
+
+	if (getsPromoted) {
+		var $nextGamePartial = $("<%= j render(partial: 'games/next', locals: { next_game: 'Freestyle', color: 'success', seconds: '30' }) %>");
+	} else {
+		var $nextGamePartial = $("<%= j render(partial: 'games/next', locals: { next_game: 'Fundamentals', color: 'danger', seconds: '30' }) %>");
+	}
+
+	$jeopardyDiv.empty().append($reviewPartial, $nextGamePartial);
+	var $gameCountdown = $(".game-countdown");
 	showResults();
+	startCountdown($gameCountdown, 30, getsPromoted);
 };
 
 function showResults() {
@@ -270,7 +283,7 @@ function createResultCard(round) {
 								.append(createFontAweIcon("close fa-2x text-danger"));
 		$card.addClass("card-outline-danger");
 	}
-
+	console.log($icon);
 	$card.append($cardBlock);
 	$cardBlock.append($cardTitle);
 	$cardTitle.append($icon);
@@ -326,6 +339,23 @@ function startCountup($section, seconds) {
 	return setInterval(function() {
 		seconds++;
 		$section.html(seconds);
+	}, 1000);
+}
+
+function startCountdown($selector, seconds, getsPromoted) {
+	var countdownID = setInterval(function() {
+		seconds--;
+		$selector.html(seconds);
+
+		if (seconds == 0) {
+			clearInterval(countdownID);
+
+			if (getsPromoted) {
+				$.getScript("/freestyle?word_id=" + targetWord.id);
+			} else {
+				$.getScript("/fundamentals?word_id=" + targetWord.id);
+			}
+		}
 	}, 1000);
 }
 

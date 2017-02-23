@@ -72,9 +72,14 @@ class Word < ActiveRecord::Base
   def has_pronunciation?
     url = "https://ssl.gstatic.com/dictionary/static/sounds/de/0"
     src = "#{url}/#{self.name}.mp3"
-    response = HTTParty.get(src)
-    audio_not_found = response.code == 404
-    !audio_not_found
+
+    begin
+      response = HTTParty.get(src)
+      audio_not_found = response.code == 404
+      !audio_not_found
+    rescue => e
+      false
+    end
   end
 
   # TODO: Create test

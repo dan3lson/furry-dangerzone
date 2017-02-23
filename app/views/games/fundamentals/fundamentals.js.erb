@@ -59,12 +59,15 @@ switch (currentGame) {
 			updateProgress(51);
 			startDecisionsDecisionsActivity();
 		} else if (availableGames.ex_non_ex) {
+			updateUserWordGamesCompleted(4);
 			updateProgress(68);
 			startExampleNonExamplesActivity();
 		} else if (availableGames.syns_vs_ants) {
+			updateUserWordGamesCompleted(5);
 			updateProgress(85);
 			startSynsVsAntsActivity();
 		} else {
+			updateUserWordGamesCompleted(6);
 			updateProgress(100);
 			startReviewActivity();
 		}
@@ -75,9 +78,11 @@ switch (currentGame) {
 			updateProgress(68);
 			startExampleNonExamplesActivity();
 		} else if (availableGames.syns_vs_ants) {
+			updateUserWordGamesCompleted(5);
 			updateProgress(85);
 			startSynsVsAntsActivity();
 		} else {
+			updateUserWordGamesCompleted(6);
 			updateProgress(100);
 			startReviewActivity();
 		}
@@ -88,6 +93,7 @@ switch (currentGame) {
 			updateProgress(85);
 			startSynsVsAntsActivity();
 		} else {
+			updateUserWordGamesCompleted(6);
 			updateProgress(100);
 			startReviewActivity();
 		}
@@ -205,7 +211,7 @@ $(".container").on("click", ".continue-btn", function() {
 ************************/
 
 function startSpellByTypingActivity() {
-	const $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
+	var $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
 	$activityDiv.append($spellingSpeedsterPartial);
 	giveDirections(
 		"Type the word above. Earn more Linero each time you spell it."
@@ -220,8 +226,8 @@ function startSpellByTypingActivity() {
 
 	$targetWordDiv.html(targetWordSpanLetters);
 
-	var $lastInput;
-	var lastInputText;
+	var $firstInput;
+	var firstInputText;
 	var wordSubstring;
 	var numLettersTyped = 0;
 	var successLetters = 0;
@@ -230,12 +236,12 @@ function startSpellByTypingActivity() {
 
 	$(".container").on("input", ".spell-the-word", function() {
 		timeStartedTyping = timeStartedTyping || $scoreboardTimer.text();
-		$lastInput = $(".spell-the-word:first");
-		lastInputText = $(this).val().trim().toLowerCase();
-		numLettersTyped = lastInputText.length;
+		$firstInput = $(".spell-the-word:first");
+		firstInputText = $(this).val().trim().toLowerCase();
+		numLettersTyped = firstInputText.length;
 		wordSubstring = targetWord.name.substring(0, numLettersTyped);
 
-		if (lastInputText == wordSubstring) {
+		if (firstInputText == wordSubstring) {
 			makeLettersGreen($targetWordDiv, numLettersTyped);
 			successLetters = $targetWordDiv.find("span.text-success").length;
 
@@ -245,25 +251,27 @@ function startSpellByTypingActivity() {
 			}
 		}
 
-		if (lastInputText == targetWord.name) {
+		if (firstInputText == targetWord.name) {
+			var $spellingSpeedsterInputPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
 			numInputs = $(".spell-the-word.form-control-success").length + 1;
-			$lastInput.parent()
-								.addClass("has-success")
-								.append(
-									createFormText(
-										"(" + numInputs + ") typed in "
-										+ timeDiff(timeStartedTyping)
-										+ " secs"
-									)
-								);
+			$firstInput.parent()
+								 .addClass("has-success")
+								 .append(
+								   createFormText(
+									   "(" + numInputs + ") typed in "
+										 + timeDiff(timeStartedTyping)
+										 + " secs"
+								   )
+							   );
 			timeStartedTyping = null;
-			$lastInput.addClass("form-control-success")
-								.prop("disabled", true);
+			$firstInput.addClass("form-control-success")
+								 .prop("disabled", true);
 			addPoints(50);
 			flashPointsUpdate(arrowSuccess());
 			showContinueBtn("start-spell-by-clicking-activity");
-			createAnotherInput().prependTo("#spell-by-typing-activity");
-			$lastInput = $(".spell-the-word:first").focus();
+			// createInputGroup().prependTo($activityDiv);
+			$spellingSpeedsterInputPartial.prependTo($activityDiv);
+			$firstInput = $(".spell-the-word:first").focus();
 		}
 	});
 };
@@ -580,9 +588,11 @@ function startSynsVsAntsActivity() {
 
 function startReviewActivity() {
 	clearTimeout(timerID);
-	console.log($points);
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Fundamentals', word_name: @target_word.name }) %>");
-	$(".container").empty().append($reviewPartial);
+	const $nextGamePartial = $("<%= j render(partial: 'games/next', locals: { next_game: 'Jeopardy', color: 'warning', seconds: '7' }) %>");
+	$(".container").empty().append($reviewPartial, $nextGamePartial);
+	var $gameCountdown = $(".game-countdown");
+	startCountdown($gameCountdown, 7);
 };
 
 /***********************
@@ -728,6 +738,18 @@ function startCountup($section, seconds) {
 	}, 1000);
 }
 
+function startCountdown($selector, seconds) {
+	var countdownID = setInterval(function() {
+		seconds--;
+		$selector.html(seconds);
+
+		if (seconds == 0) {
+			clearInterval(countdownID);
+			$.getScript("/jeopardy?word_id=" + targetWord.id);
+		}
+	}, 1000);
+}
+
 function updateProgress(value) {
 	var $progressBar = $(".progress-bar");
 	$progressBar.attr("aria-valuenow", value)
@@ -829,7 +851,7 @@ function createFormText(text) {
 				 .append(createElem("small").text(text));
 }
 
-function createAnotherInput() {
+function createInputGroup() {
 	return createFormGroup().append(createLabel(), createInput());
 }
 
@@ -841,7 +863,7 @@ function createInput() {
 }
 
 function createFormGroup() {
-	return createElem("div", "form-group spell-by-typing-form-group");
+	return createElem("div", "form-group");
 }
 
 function createLabel() {

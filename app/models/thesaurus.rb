@@ -32,6 +32,8 @@ module Thesaurus
 			else
 				"Error in retrieving Thesaurus. Details: #{e.message}."
 			end
+
+			nil
 		end
   end
 end
