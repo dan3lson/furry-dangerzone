@@ -9,5 +9,57 @@ $(document).ready(function() {
 		} else {
 			$fa.removeClass("fa-minus").addClass("fa-plus");
 		}
+
 	});
+
+	$(".spe-bee-nav").click(function(e) {
+		e.preventDefault();
+		var sectionName = $(this).text().trim();
+		var section = $(".spe-bee-section").filter(function() {
+			return $(this).find("h1").text().trim() == sectionName;
+		});
+
+		switch (sectionName) {
+			case "Students":
+				scrollToSection(section);
+				break;
+			case "Teachers":
+				scrollToSection(section);
+				break;
+			case "Sponsors":
+				scrollToSection(section);
+				break;
+			default: "Students"
+		}
+	});
+
+	$(".spe-bee-contact-us").click(function(e) {
+		e.preventDefault();
+		var sectionName = $("#spe-bee-contact-us");
+		var dataSubject = $(this).data("sub");
+
+		if (dataSubject == "stu") {
+			updateValue("Question/Comment from a Student");
+		} else if (dataSubject == "tea-reg") {
+			updateValue("School Registration");
+		} else if (dataSubject == "tea") {
+			updateValue("Question/Comment from a Teacher");
+		} else if (dataSubject == "spo-his") {
+			updateValue("Sponsoring Your Event");
+		} else if (dataSubject == "spo") {
+			updateValue("Question/Comment from a Sponsor");
+		} else {
+			updateValue("");
+		}
+
+		scrollToSection(sectionName);
+	});
+
+	function updateValue(text) {
+		$("#cf-subject").val(text);
+	}
+
+	function scrollToSection(section) {
+		$("html, body").animate({ scrollTop: section.offset().top + 50 }, 1000);
+	};
 });

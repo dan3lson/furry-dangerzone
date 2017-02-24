@@ -1,0 +1,29 @@
+.spe-bee-top-section {
+	border-bottom: 1px solid black;
+	padding-top: 5rem;
+	margin-bottom: 2rem;
+
+	[role="button"] {
+		margin-top: 1rem;
+	}
+}
+
+.spe-bee-section p {
+	display: none;
+}
+
+.spe-bee-redange {
+	color: #E03C1D;
+}
+
+.spe-bee-yellow {
+	background: #FFFF00;
+}
+
+.spee-bee-trail {
+	background-image: url(image-path("bee-trail.png"));
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 88px 0;
+}

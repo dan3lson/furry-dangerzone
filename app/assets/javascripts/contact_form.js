@@ -4,7 +4,8 @@ $(document).ready(function() {
 	var $random_string = $($random_string_element).html();
 	validateTextField("#cf-name");
 	validateTextField("#cf-email");
-	validateTextField("#cf-comments");
+	validateTextField("#cf-subject");
+	validateTextField("#cf-message");
 	validateHumanSubmission("#prove-ur-human-field", $random_string);
 
 	function createRandomString() {
@@ -63,7 +64,7 @@ $(document).ready(function() {
 	}
 
 	function validateFormFields(btn_selector) {
-		if($(".has-success").length == 4) {
+		if($(".has-success").length == 5) {
 			$(btn_selector).attr("disabled", false);
 		} else {
 			$(btn_selector).attr("disabled", true);

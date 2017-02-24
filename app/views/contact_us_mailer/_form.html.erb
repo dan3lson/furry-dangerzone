@@ -1,0 +1,50 @@
+<%= form_tag(static_pages_contact_us_path, method: "post") do %>
+	<div class="form-group">
+		<label for="cf-name">Name *</label>
+		<input type="text" value="" name="cf_name"
+					 class="form-control" id="cf-name"
+					 required>
+	</div>
+	<div class="form-group">
+		<label for="cf-email">Email *</label>
+		<input type="email" value="" name="cf_email"
+					 class="form-control"  id="cf-email"
+					 required>
+	</div>
+	<div class="form-group">
+		<label for="cf-subject">Subject *</label>
+		<input type="text" value="" name="cf_subject"
+					 class="form-control"  id="cf-subject"
+					 required>
+	</div>
+	<div class="form-group">
+		<label for="cf-message">Message *</label>
+		<textarea class="form-control"
+							name="cf_message"
+							rows="3"
+							id="cf-message"
+							required></textarea>
+		<p class="form-text text-muted">
+			Please be as detailed as possible. For example, if you're a student or
+			teacher, include your school name. If you're a sponsor, include your
+			business/organization name.
+		</p>
+	</div>
+	<div class="form-group">
+		<i class="fa fa-lock"></i>
+		<label for="prove_ur_human" class="form-control-label">
+			Security Check * - please type:
+			<strong>L3ks!</strong>
+		</label>
+		<input type="text" name="prove_ur_human"
+					 class="form-control" id="prove-ur-human-field"
+					 required>
+	</div>
+	<div class="form-group">
+		<button type="submit" value="Send" id="cf-submit-btn"
+						class="btn btn-primary btn-lg btn-block" disabled>
+			<i class="fa fa-send-o"></i>
+			Send
+		</button>
+	</div>
+<% end %>
