@@ -12,7 +12,7 @@ namespace :define do
     	"dub",
     	"bizarre",
     	"durable",
-    	"blase",
+    	"blasé",
     	"bonanza",
     	"eccentric",
     	"bountiful",
@@ -61,6 +61,7 @@ namespace :define do
     	"accord",
     	"conscientious",
     	"adept",
+    	"￼￼abet",
     	"conservative",
     	"advocate",
     	"contagious",
@@ -143,6 +144,8 @@ namespace :define do
     	"mien",
     	"shackle",
     	"millennium",
+    	"slmien",
+    	"shacize",
     	"spontaneous",
     	"modify",
     	"stamina",
@@ -179,46 +182,47 @@ namespace :define do
     	"embargo",
     	"incense"
     ]
-    num_errors = 0
-
-    eigth_grade_words.each do |name|
-      puts name
-      new_words = WordsApi.define(name)
-
-      if new_words.nil?
-        puts "NOT FOUND: #{name}"
-      else
-        words = []
-
-        new_words.each do |w|
-          word = Word.new(
-              name: name,
-              phonetic_spelling: w.phonetic_spelling,
-              part_of_speech: w.part_of_speech,
-              definition: w.definition
-            )
-
-          if w.examples
-            if w.examples.count > 1
-              text = w.examples.join("***")
-            else
-              text = w.examples.first
-            end
-
-            example = Example.new(text: text, word: word)
-            word.examples << example
-          end
-
-          if word.save
-            puts "Success for word #{name}(#{word.id})"
-          else
-            num_errors += 1
-            puts "ERROR for word #{name}."
-          end
-        end
-      end
-    end
-    puts
-    puts "TOTAL ERRORS: #{num_errors}"
+    puts eigth_grade_words.shuffle.sort
+    # num_errors = 0
+    #
+    # eigth_grade_words.each do |name|
+    #   puts name
+    #   new_words = WordsApi.define(name)
+    #
+    #   if new_words.nil?
+    #     puts "NOT FOUND: #{name}"
+    #   else
+    #     words = []
+    #
+    #     new_words.each do |w|
+    #       word = Word.new(
+    #           name: name,
+    #           phonetic_spelling: w.phonetic_spelling,
+    #           part_of_speech: w.part_of_speech,
+    #           definition: w.definition
+    #         )
+    #
+    #       if w.examples
+    #         if w.examples.count > 1
+    #           text = w.examples.join("***")
+    #         else
+    #           text = w.examples.first
+    #         end
+    #
+    #         example = Example.new(text: text, word: word)
+    #         word.examples << example
+    #       end
+    #
+    #       if word.save
+    #         puts "Success for word #{name}(#{word.id})"
+    #       else
+    #         num_errors += 1
+    #         puts "ERROR for word #{name}."
+    #       end
+    #     end
+    #   end
+    # end
+    # puts
+    # puts "TOTAL ERRORS: #{num_errors}"
   end
 end

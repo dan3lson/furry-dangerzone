@@ -23,7 +23,7 @@ $jeopardyDiv.append(
 var $btns = $(".jeop-btn");
 var validCells = "#linero-table td:not(.exclude)";
 var $scoreboardTimer = $(".scoreboard-timer");
-var timerID = startCountup($scoreboardTimer, 0);
+var scoreboardTimerID = startCountup($scoreboardTimer, 0);
 var totalLinero = 0;
 var $points = $(".scoreboard-points");
 updateProgress();
@@ -82,7 +82,7 @@ $(".container").on("click", ".jeop-btn", function() {
 });
 
 function startReviewActivity() {
-	clearTimeout(timerID);
+	clearTimeout(scoreboardTimerID);
 	var $targetWordBtn = $btns.filter(function() {
 		return $(this).text().trim() == targetWord.name;
 	});
@@ -90,15 +90,15 @@ function startReviewActivity() {
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Jeopardy', word_name: @target_word.name }) %>");
 
 	if (getsPromoted) {
-		var $nextGamePartial = $("<%= j render(partial: 'games/next', locals: { next_game: 'Freestyle', color: 'success', seconds: '30' }) %>");
+		var $nextGamePartial = $("<%= j render(partial: 'games/next_game', locals: { next_game: 'Freestyle', color: 'success', seconds: '5' }) %>");
 	} else {
-		var $nextGamePartial = $("<%= j render(partial: 'games/next', locals: { next_game: 'Fundamentals', color: 'danger', seconds: '30' }) %>");
+		var $nextGamePartial = $("<%= j render(partial: 'games/next_game', locals: { next_game: 'Fundamentals', color: 'danger', seconds: '5' }) %>");
 	}
 
 	$jeopardyDiv.empty().append($reviewPartial, $nextGamePartial);
 	var $gameCountdown = $(".game-countdown");
 	showResults();
-	startCountdown($gameCountdown, 30, getsPromoted);
+	startCountdown($gameCountdown, 5, getsPromoted);
 };
 
 function showResults() {
@@ -351,10 +351,12 @@ function startCountdown($selector, seconds, getsPromoted) {
 			clearInterval(countdownID);
 
 			if (getsPromoted) {
-				$.getScript("/freestyle?word_id=" + targetWord.id);
+				var url = "/freestyle?word_id=" + targetWord.id;
 			} else {
-				$.getScript("/fundamentals?word_id=" + targetWord.id);
+				var url = "/fundamentals?word_id=" + targetWord.id;
 			}
+
+			$.getScript(url);
 		}
 	}, 1000);
 }

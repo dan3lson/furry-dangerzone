@@ -21,7 +21,7 @@ var $targetWordDiv = $(".target-word-header-div");
 var newPointsTotal = 0;
 var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
-var timerID = startCountup($scoreboardTimer, 0);
+var scoreboardTimerID = startCountup($scoreboardTimer, 0);
 updateProgress(0);
 
 switch (currentGame) {
@@ -269,8 +269,8 @@ function startSpellByTypingActivity() {
 			addPoints(50);
 			flashPointsUpdate(arrowSuccess());
 			showContinueBtn("start-spell-by-clicking-activity");
-			// createInputGroup().prependTo($activityDiv);
-			$spellingSpeedsterInputPartial.prependTo($activityDiv);
+			createInputGroup().prependTo($activityDiv);
+			// $spellingSpeedsterInputPartial.prependTo($activityDiv);
 			$firstInput = $(".spell-the-word:first").focus();
 		}
 	});
@@ -587,12 +587,12 @@ function startSynsVsAntsActivity() {
 };
 
 function startReviewActivity() {
-	clearTimeout(timerID);
+	clearTimeout(scoreboardTimerID);
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Fundamentals', word_name: @target_word.name }) %>");
-	const $nextGamePartial = $("<%= j render(partial: 'games/next', locals: { next_game: 'Jeopardy', color: 'warning', seconds: '7' }) %>");
+	const $nextGamePartial = $("<%= j render(partial: 'games/next_game', locals: { next_game: 'Jeopardy', color: 'warning', seconds: '5' }) %>");
 	$(".container").empty().append($reviewPartial, $nextGamePartial);
 	var $gameCountdown = $(".game-countdown");
-	startCountdown($gameCountdown, 7);
+	startCountdown($gameCountdown, 5);
 };
 
 /***********************
@@ -654,22 +654,25 @@ function createMatchingCards(matches) {
 }
 
 function updateUserPoints(linero) {
-	$.ajax({
-		type: "PATCH",
-		url: "/user_points",
-		dataType: "json",
-		data: { "points": linero }
-	}).done(logResponse);
+	var url = "/user_points";
+	var data = { "points": linero };
+	makeAjaxCall("PATCH", url, data);
 };
 
 function updateUserWordGamesCompleted(gamesCompleted) {
-	$.ajax({
-		type: "PATCH",
-		url: "/user_word",
-		dataType: "json",
-		data: { "word_id": targetWord.id, "games_completed": gamesCompleted }
-	}).done(logResponse);
+	var url = "/user_word";
+	var data = { "word_id": targetWord.id, "games_completed": gamesCompleted };
+	makeAjaxCall("PATCH", url, data);
 };
+
+function makeAjaxCall(type, url, data) {
+	$.ajax({
+		type: type,
+		url: url,
+		dataType: "json",
+		data: data
+	}).done(logResponse);
+}
 
 function logResponse(response) {
 	console.log(response);
@@ -732,7 +735,7 @@ function timeDiff(timeStarted) {
 }
 
 function startCountup($section, seconds) {
-	return countdownID = setInterval(function() {
+	return setInterval(function() {
 		seconds++;
 		$section.html(seconds);
 	}, 1000);
@@ -745,7 +748,9 @@ function startCountdown($selector, seconds) {
 
 		if (seconds == 0) {
 			clearInterval(countdownID);
-			$.getScript("/jeopardy?word_id=" + targetWord.id);
+			var url = "/jeopardy?word_id=" + targetWord.id;
+			console.log("LOADING SCRIPT FROM END OF FUNDS GAME");
+			$.getScript(url);
 		}
 	}, 1000);
 }

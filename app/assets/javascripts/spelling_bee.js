@@ -38,6 +38,8 @@ $(document).ready(function() {
 		var sectionName = $("#spe-bee-contact-us");
 		var dataSubject = $(this).data("sub");
 
+		// TODO: also add has-success class in order to validate
+		// field count
 		if (dataSubject == "stu") {
 			updateValue("Question/Comment from a Student");
 		} else if (dataSubject == "tea-reg") {

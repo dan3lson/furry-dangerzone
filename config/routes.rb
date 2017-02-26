@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
   get "freestyle" => "games#freestyle"
+  get "next_game" => "games#next_game"
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"

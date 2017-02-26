@@ -4,7 +4,8 @@ class GamesController < ApplicationController
 
   def fundamentals
     @target_word = Word.find(params[:word_id])
-    @current_game = UserWord.object(current_user, @target_word).current_game
+    @user_word = UserWord.object(current_user, @target_word)
+    @current_game = @user_word.current_game
     @available_games = {
       "pronun": false, # @target_word.has_pronunciation?,
       "dec_dec": @target_word.has_meaning_alts?,

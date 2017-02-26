@@ -84,7 +84,7 @@ class Word < ActiveRecord::Base
 
   # TODO: Create test
   def has_examples?
-    !examples.blank?
+    !Example.where(word: self).blank?
   end
 
   # TODO: Create test
