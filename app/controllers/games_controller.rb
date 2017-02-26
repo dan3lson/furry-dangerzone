@@ -7,10 +7,10 @@ class GamesController < ApplicationController
     @user_word = UserWord.object(current_user, @target_word)
     @current_game = @user_word.current_game
     @available_games = {
-      "pronun": false, # @target_word.has_pronunciation?,
+      "pronun": @target_word.has_pronunciation?, # false,
       "dec_dec": @target_word.has_meaning_alts?,
       "ex_non_ex": @target_word.has_ex_non_exs?,
-      "syns_vs_ants": false # @target_word.has_syns_or_ants?
+      "syns_vs_ants": @target_word.has_syns_or_ants? # false
     }
 
     respond_to do |format|

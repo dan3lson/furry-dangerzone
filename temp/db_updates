@@ -5,12 +5,6 @@ Ref: http://www.vertabelo.com/blog/technical-articles/mmo-games-and-database-des
 
 Level 1: Speed Spelling
 
-speed_spellings
-type_acts
-act_types
-game_speed_spells
-
-
 time_started
 time_ended
 game_id
