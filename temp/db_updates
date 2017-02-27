@@ -3,12 +3,14 @@ as necessary. Each record will have nil values, but hopefully not a lot.
 
 Ref: http://www.vertabelo.com/blog/technical-articles/mmo-games-and-database-design
 
-Level 1: Speed Spelling
+Level 1: Speed Spelling [DONE]
 
+num_typed
+
+user_word_id
+game_id
 time_started
 time_ended
-game_id
-user_word_id
 
 ================================
 
@@ -20,10 +22,10 @@ act_click_lets
 result (bool)
 letter_order
 
-time_started
-time_ended
 game_id
 user_word_id
+time_started
+time_ended
 
 ================================
 
@@ -43,10 +45,10 @@ Level 4: Decisions, Decisions
 result (bool)
 mean_alt_id
 
-time_started
-time_ended
 game_id
 user_word_id
+time_started
+time_ended
 
 ================================
 
