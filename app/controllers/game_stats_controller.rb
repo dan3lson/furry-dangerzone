@@ -16,7 +16,7 @@ class GameStatsController < ApplicationController
 			if @game_stat.save
 				render json: { errors: "Success: GameStat #{@game_stat.id} updated." }
 			else
-				render json: { errors: @game_stat.errors.full_messages) }
+				render json: { errors: @game_stat.errors.full_messages }
 			end
 		else
 			render json: { errors: "No GameStatController update needed." }
