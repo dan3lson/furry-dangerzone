@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227031905) do
+ActiveRecord::Schema.define(version: 20170227145934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,18 +57,28 @@ ActiveRecord::Schema.define(version: 20170227031905) do
     t.string   "focus"
   end
 
+  create_table "game_stat_meaning_alts", force: :cascade do |t|
+    t.integer  "game_stat_id",   null: false
+    t.integer  "meaning_alt_id", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "game_stats", force: :cascade do |t|
-    t.integer  "user_word_id",                                        null: false
-    t.integer  "game_id",                                             null: false
-    t.integer  "num_played",                            default: 0
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
-    t.integer  "num_jeop_won",                          default: 0,   null: false
-    t.integer  "num_jeop_lost",                         default: 0,   null: false
-    t.decimal  "time_spent",    precision: 5, scale: 2, default: 0.0
+    t.integer  "user_word_id",                           null: false
+    t.integer  "game_id",                                null: false
+    t.integer  "num_played"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "num_jeop_won"
+    t.integer  "num_jeop_lost"
+    t.decimal  "time_spent",     precision: 5, scale: 2
     t.datetime "time_started"
     t.datetime "time_ended"
     t.integer  "num_typed"
+    t.integer  "num_bad_clicks"
+    t.integer  "num_heard"
+    t.boolean  "result"
   end
 
   create_table "games", force: :cascade do |t|

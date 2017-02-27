@@ -23,6 +23,9 @@ var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
 var scoreboardTimerID = startCountup($scoreboardTimer, 0);
 var timeGameStarted;
+var numBadClicks = 0;
+var numHeard = 0;
+var quesAnsweredCorrectly = false;
 updateProgress(0);
 
 switch (currentGame) {
@@ -105,18 +108,23 @@ switch (currentGame) {
 
 $(".container").on("click", ".continue-btn", function() {
 	var $btn = $(this);
-	var numTyped = {
+	var dataOne = {
 		"num_typed": $(".spell-the-word.form-control-success").length
 	};
-	console.log(numTyped);
+	var dataTwo = {
+		"num_bad_clicks": numBadClicks
+	};
+	var dataThree = {
+		"num_heard": numHeard
+	};
 	$activityDiv.empty();
 
 	if ($btn.hasClass("start-spell-by-clicking-activity")) {
 		updateUserWordGamesCompleted(1);
-		updateGameStat("funds_one", timeGameStarted, numTyped);
 		updateProgress(17);
 		addPoints(100);
 		updateUserPoints(100);
+		updateGameStat("funds_one", timeGameStarted, dataOne);
 		flashPointsUpdate(arrowSuccess());
 		startSpellByClickingLettersActiivty();
 	} else if ($btn.hasClass("start-pronunciation-activity")) {
@@ -124,6 +132,7 @@ $(".container").on("click", ".continue-btn", function() {
 			updateUserWordGamesCompleted(2);
 			updateProgress(34);
 			updateUserPoints(250);
+			updateGameStat("funds_two", timeGameStarted, dataTwo);
 			addPoints(150);
 			flashPointsUpdate(arrowSuccess());
 			startPronunciationActivity();
@@ -147,6 +156,7 @@ $(".container").on("click", ".continue-btn", function() {
 	} else if ($btn.hasClass("start-decisions-decisions-activity")) {
 		addPoints(200);
 		updateUserPoints(200);
+		updateGameStat("funds_three", timeGameStarted, dataThree);
 		flashPointsUpdate(arrowSuccess());
 		$targetWordDiv.html(targetWord.name).removeClass("text-success");
 
@@ -344,6 +354,7 @@ function startSpellByClickingLettersActiivty() {
 			addPoints(1);
 			flashPointsUpdate(arrowSuccess());
 		} else {
+			numBadClicks += 1;
 			removePoints(1);
 			flashPointsUpdate(arrowDanger());
 			$tappedLetterBtn.removeClass("animated shake")
@@ -388,6 +399,7 @@ function startPronunciationActivity() {
 		$targetWordDiv.addClass("text-success");
 		addPoints(1);
 		flashPointsUpdate(arrowSuccess());
+		numHeard += 1;
 		showContinueBtn("start-decisions-decisions-activity");
 	});
 };
@@ -413,11 +425,13 @@ function startDecisionsDecisionsActivity() {
 		$selAnswerTitle = $selAnswerCard.find(".card-title");
 		$btnRow = $selAnswer.parent().parent();
 		index = $btnRow.data("index");
-		answer = meaningAltArray[index].answer.trim();
+		var meaningAlt = meaningAltArray[index];
+		answer = meaningAlt.answer.trim();
 		$feedbackCardText = $btnRow.siblings(".mean-alts-feedback");
 		createElem("div", "clear").insertAfter($selAnswerTitle);
 
 		if ($selAnswerText == answer) {
+			quesAnsweredCorrectly = true;
 			$selAnswerCard.addClass("card-outline-success");
 			$selAnswerBlock.find(".float-right")
 										 .append(createFontAweIcon("check fa-2x text-success"));
@@ -429,7 +443,13 @@ function startDecisionsDecisionsActivity() {
 											 .removeClass("d-none");
 			$feedbackCardText.find("strong").prepend("Correct! ");
 			addPoints(30);
+			var data = {
+				"meaning_alt_id": meaningAlt.id,
+				"result": quesAnsweredCorrectly
+			};
+			updateGameStat("funds_four", timeGameStarted, data);
 		} else {
+			quesAnsweredCorrectly = false;
 			$selAnswerCard.addClass("card-outline-danger");
 			$selAnswerBlock.find(".float-right")
 										 .append(createFontAweIcon("close fa-2x text-danger"));
@@ -441,6 +461,11 @@ function startDecisionsDecisionsActivity() {
 											 .removeClass("d-none");
 			$feedbackCardText.find("strong").prepend("Incorrect. ");
 			removePoints(20);
+			var data = {
+				"meaning_alt_id": meaningAlt.id,
+				"result": quesAnsweredCorrectly
+			};
+			updateGameStat("funds_four", timeGameStarted, data);
 		}
 
 		var numBtns = $("#meaning-alts-div .btn").length;
@@ -677,7 +702,6 @@ function updateGameStat(route, timeStarted, uniqData) {
 		"time_ended": getDate(),
 		"uniq_data": uniqData
 	}
-	console.log(data);
 	makeAjaxCall("PATCH", url, data);
 }
 

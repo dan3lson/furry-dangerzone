@@ -3,7 +3,7 @@ as necessary. Each record will have nil values, but hopefully not a lot.
 
 Ref: http://www.vertabelo.com/blog/technical-articles/mmo-games-and-database-design
 
-Level 1: Speed Spelling [DONE]
+Level 1: Speed Spelling [COMPLETE]
 
 num_typed
 
@@ -14,22 +14,18 @@ time_ended
 
 ================================
 
-Level 2: Jumbled Letters
+Level 2: Jumbled Letters [COMPLETE]
 
-act_jum_lets
-act_click_lets
+num_bad_clicks
 
-result (bool)
-letter_order
-
-game_id
 user_word_id
+game_id
 time_started
 time_ended
 
 ================================
 
-Level 3: Hear It
+Level 3: Hear It [COMPLETED]
 
 num_heard
 
@@ -42,11 +38,15 @@ user_word_id
 
 Level 4: Decisions, Decisions
 
+game_stat_meaning_alts
+game_stat_id
+mean_alt_id
+
 result (bool)
 mean_alt_id
 
-game_id
 user_word_id
+game_id
 time_started
 time_ended
 
@@ -57,10 +57,10 @@ Level 5: Example/Non-Example
 result (bool)
 ex_non_ex_id
 
+user_word_id
+game_id
 time_started
 time_ended
-game_id
-user_word_id
 
 ================================
 
@@ -70,10 +70,10 @@ type (syn or ant)
 result
 thesaurus_id (aka the word id that's either a syn or ant)
 
+user_word_id
+game_id
 time_started
 time_ended
-game_id
-user_word_id
 
 ================================
 
@@ -83,10 +83,10 @@ type
 result
 linero
 
+user_word_id (what if user doesn't have the word?)
+game_id
 time_started
 time_ended
-game_id
-user_word_id (what if user doesn't have the word?)
 
 ================================
 
@@ -98,9 +98,9 @@ Level 9: Sentence Stems (not done)
 
 sent_stem_id (has word_id)
 
+user_word_id
+game_id
 time_started
 time_ended
-game_id
-user_word_id
 
 ================================
