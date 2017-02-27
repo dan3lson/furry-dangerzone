@@ -1,18 +1,23 @@
 class GameStatsController < ApplicationController
-	def update
+	def funds_one
+		@game = Game.find_by(name: "Speed Spelling")
 		@word = Word.find(params[:word_id])
 		@user_word = UserWord.object(current_user, @word)
 
 		if @user_word
-			@game = Game.find_by(name: params[:game_name])
-			@time_spent = params[:time_spent_in_min]
-			@gs_results = GameStat.update_user_word_game_stats(
-				current_user,
-				@word,
+			@game_stat = GameStat.universal(
+				@user_word,
 				@game,
-				@time_spent
+				params[:time_started],
+				params[:time_ended]
 			)
-			render json: { errors: @gs_results }
+			@game_stat.num_typed = params[:uniq_data][:num_typed]
+
+			if @game_stat.save
+				render json: { errors: "Success: GameStat #{@game_stat.id} updated." }
+			else
+				render json: { errors: @game_stat.errors.full_messages) }
+			end
 		else
 			render json: { errors: "No GameStatController update needed." }
 		end

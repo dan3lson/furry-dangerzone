@@ -45,7 +45,16 @@ Rails.application.routes.draw do
   resource :user_points, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]
   resource :freestyle_game, only: [:create, :update]
-  resource :game_stat, only: [:update]
+  resource :game_stat do
+    member do
+      patch "funds_one"
+      patch "funds_two"
+      patch "funds_three"
+      patch "funds_four"
+      patch "funds_five"
+      patch "funds_six"
+    end
+  end
   resource :jeopardy_result, only: [:update]
   resources :tags, except: [:destroy]
   resource :user_tag, only: [:create, :edit, :destroy]
