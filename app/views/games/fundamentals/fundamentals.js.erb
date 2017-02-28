@@ -604,7 +604,7 @@ function startSynsVsAntsActivity() {
 				addPoints(30);
 				flashPointsUpdate(arrowSuccess());
 				var data = {
-					"type": $selectedBtns.not($wordBtn).text(),
+					"category": $selectedBtns.not($wordBtn).text(),
 					"word_name": $wordBtn.text(),
 					"result": true
 				};
@@ -623,13 +623,13 @@ function startSynsVsAntsActivity() {
 				var wordName = $wordBtn.text() || "n/a";
 
 				if (wordName == "n/a") {
-					var type = $firstBtn.text();
+					var category = $firstBtn.text();
 				} else {
-					var type = $selectedBtns.not($wordBtn).text();
+					var category = $selectedBtns.not($wordBtn).text();
 				}
 
 				var data = {
-					"type": type,
+					"category": category,
 					"word_name": wordName,
 					"result": false
 				};

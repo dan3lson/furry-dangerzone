@@ -160,7 +160,7 @@ class GameStatsController < ApplicationController
 				params[:time_started],
 				params[:time_ended]
 			)
-			@game_stat.type = params[:uniq_data][:type]
+			@game_stat.category = params[:uniq_data][:category]
 			@game_stat.result = params[:uniq_data][:result]
 			@game_stat.word_name = params[:uniq_data][:word_name]
 

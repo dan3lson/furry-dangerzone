@@ -64,9 +64,9 @@ time_ended
 
 ================================
 
-Level 6: Syns vs Ants
+Level 6: Syns vs Ants [COMPLETED]
 
-type (syn or ant)
+category (syn or ant)
 result
 word_name (aka the word name that's either a syn or ant)
 
@@ -79,7 +79,7 @@ time_ended
 
 Level 7: Jeopardy (should this be recorded for a round and/or the entire game?)
 
-type
+category
 result
 linero
 
