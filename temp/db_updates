@@ -83,7 +83,7 @@ category
 result
 linero
 
-user_word_id (what if user doesn't have the word?)
+user_word_id (only for the ones that have user_words)
 game_id
 time_started
 time_ended

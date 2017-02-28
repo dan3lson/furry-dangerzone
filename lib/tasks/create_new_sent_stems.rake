@@ -9,7 +9,7 @@ namespace :create do
 
     SentStem.create!(
       user: User.first,
-      name: "abate",
+      name: "contrite",
       text: "Feeling contrite about her actions, she ???"
     )
 

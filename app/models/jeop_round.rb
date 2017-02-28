@@ -1,7 +1,7 @@
 # TODO Create test
 class JeopRound
 	attr_accessor :ques_num
-	attr_accessor :ques_type
+	attr_accessor :category
 	attr_accessor :ques
 	attr_accessor :selected_ans
 	attr_accessor :correct_ans
@@ -10,7 +10,7 @@ class JeopRound
 
 	def initialize(
 		ques_num = nil,
-		ques_type = nil,
+		category = nil,
 		ques = nil,
 		selected_ans = nil,
 		correct_ans = nil,
@@ -18,7 +18,7 @@ class JeopRound
 		linero = nil
 	)
 		@ques_num = ques_num
-		@ques_type = ques_type
+		@category = category
 		@ques = ques
 		@selected_ans = selected_ans
 		@correct_ans = correct_ans

@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       post "funds_four"
       post "funds_five"
       post "funds_six"
+      post "jeopardy"
     end
   end
   resource :jeopardy_result, only: [:update]

@@ -35,7 +35,7 @@ class JeopGame
 			lineup.push(meanings[i], syns[i], ants[i], examples[i], syllables[i])
 			jeop_round = JeopRound.new
 			jeop_round.ques_num = i
-			jeop_round.ques_type = ques_types[i]
+			jeop_round.category = categories[i]
 			jeop_round.ques = lineup[i].values.first if lineup[i]
 			jeop_round.correct_ans = lineup[i].keys.first if lineup[i]
 			jeop_round.linero = lineros[i]
@@ -51,7 +51,7 @@ class JeopGame
 		%w(300 600 900 1200) * 5
 	end
 
-	def ques_types
+	def categories
 		%w(meanings synonyms antonyms examples syllables) * 4
 	end
 
