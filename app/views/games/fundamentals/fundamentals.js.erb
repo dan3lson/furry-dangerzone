@@ -25,7 +25,6 @@ var scoreboardTimerID = startCountup($scoreboardTimer, 0);
 var timeGameStarted;
 var numBadClicks = 0;
 var numHeard = 0;
-var quesAnsweredCorrectly = false;
 updateProgress(0);
 
 switch (currentGame) {
@@ -431,7 +430,6 @@ function startDecisionsDecisionsActivity() {
 		createElem("div", "clear").insertAfter($selAnswerTitle);
 
 		if ($selAnswerText == answer) {
-			quesAnsweredCorrectly = true;
 			$selAnswerCard.addClass("card-outline-success");
 			$selAnswerBlock.find(".float-right")
 										 .append(createFontAweIcon("check fa-2x text-success"));
@@ -445,11 +443,10 @@ function startDecisionsDecisionsActivity() {
 			addPoints(30);
 			var data = {
 				"meaning_alt_id": meaningAlt.id,
-				"result": quesAnsweredCorrectly
+				"result": true
 			};
 			updateGameStat("funds_four", timeGameStarted, data);
 		} else {
-			quesAnsweredCorrectly = false;
 			$selAnswerCard.addClass("card-outline-danger");
 			$selAnswerBlock.find(".float-right")
 										 .append(createFontAweIcon("close fa-2x text-danger"));
@@ -463,7 +460,7 @@ function startDecisionsDecisionsActivity() {
 			removePoints(20);
 			var data = {
 				"meaning_alt_id": meaningAlt.id,
-				"result": quesAnsweredCorrectly
+				"result": false
 			};
 			updateGameStat("funds_four", timeGameStarted, data);
 		}
@@ -502,7 +499,8 @@ function startExampleNonExamplesActivity() {
 		$selAnswerTitle = $selAnswerCard.find(".card-title");
 		$btnRow = $selAnswer.parent().parent();
 		index = $btnRow.data("index");
-		answer = exNonExArray[index].answer.trim();
+		exNonEx = exNonExArray[index];
+		answer = exNonEx.answer.trim();
 		$feedbackCardText = $btnRow.siblings(".ex-non-exs-feedback");
 		createElem("div", "clear").insertAfter($selAnswerTitle);
 
@@ -518,6 +516,11 @@ function startExampleNonExamplesActivity() {
 											 .removeClass("d-none");
 			$feedbackCardText.find("strong").prepend("Correct! ");
 			addPoints(1);
+			var data = {
+				"ex_non_ex_id": exNonEx.id,
+				"result": true
+			};
+			updateGameStat("funds_five", timeGameStarted, data);
 		} else {
 			$selAnswerCard.addClass("card-outline-danger");
 			$selAnswerBlock.find(".float-right")
@@ -530,6 +533,11 @@ function startExampleNonExamplesActivity() {
 											 .removeClass("d-none");
 			$feedbackCardText.find("strong").prepend("Incorrect. ");
 			removePoints(1);
+			var data = {
+				"ex_non_ex_id": exNonEx.id,
+				"result": false
+			};
+			updateGameStat("funds_five", timeGameStarted, data);
 		}
 
 		var numBtns = $activityDiv.find(".btn").length;

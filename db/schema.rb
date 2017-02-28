@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227145934) do
+ActiveRecord::Schema.define(version: 20170228002211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,13 @@ ActiveRecord::Schema.define(version: 20170227145934) do
     t.datetime "updated_at",   null: false
     t.integer  "user_word_id"
     t.string   "focus"
+  end
+
+  create_table "game_stat_example_non_examples", force: :cascade do |t|
+    t.integer  "game_stat_id",           null: false
+    t.integer  "example_non_example_id", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "game_stat_meaning_alts", force: :cascade do |t|

@@ -2,7 +2,8 @@ class GameStat < ActiveRecord::Base
   belongs_to :user_word
   belongs_to :game
   has_many :game_stat_meaning_alts, dependent: :destroy
-  has_many :meaning_alts, through: :game_stat_meaning_alts
+  has_many :game_stat_example_non_examples, dependent: :destroy
+  has_many :game_stat_syn_ants, dependent: :destroy
 
   validates :user_word, presence: true
   validates :game, presence: true

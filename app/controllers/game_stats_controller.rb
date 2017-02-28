@@ -108,4 +108,43 @@ class GameStatsController < ApplicationController
 			render json: { errors: "No GameStatController update needed." }
 		end
 	end
+
+	def funds_five
+		@game = Game.find_by(name: "Decisions, Decisions")
+		@word = Word.find(params[:word_id])
+		@user_word = UserWord.object(current_user, @word)
+		@example_non_example = ExampleNonExample.find(
+			params[:uniq_data][:ex_non_ex_id]
+		)
+
+		if @user_word
+			@game_stat = GameStat.universal(
+				@user_word,
+				@game,
+				params[:time_started],
+				params[:time_ended]
+			)
+			@game_stat.result = params[:uniq_data][:result]
+			@game_stat_ex_non_ex = GameStatExampleNonExample.new(
+				game_stat: @game_stat,
+				example_non_example: @example_non_example
+			)
+
+			if @game_stat_ex_non_ex.save
+				if @game_stat.save
+					render json: { errors: [
+						"Success: GSExNonEx #{@game_stat_ex_non_ex.id} saved.",
+						"Success: GameStat #{@game_stat.id} updated."
+						]
+					}
+				else
+					render json: { errors: @game_stat.errors.full_messages }
+				end
+			else
+				render json: { errors: @game_stat_ex_non_ex.errors.full_messages }
+			end
+		else
+			render json: { errors: "No GameStatController update needed." }
+		end
+	end
 end
