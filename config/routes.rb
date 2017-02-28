@@ -47,12 +47,12 @@ Rails.application.routes.draw do
   resource :freestyle_game, only: [:create, :update]
   resource :game_stat do
     member do
-      patch "funds_one"
-      patch "funds_two"
-      patch "funds_three"
-      patch "funds_four"
-      patch "funds_five"
-      patch "funds_six"
+      post "funds_one"
+      post "funds_two"
+      post "funds_three"
+      post "funds_four"
+      post "funds_five"
+      post "funds_six"
     end
   end
   resource :jeopardy_result, only: [:update]

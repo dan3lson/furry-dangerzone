@@ -558,7 +558,7 @@ function startSynsVsAntsActivity() {
 	var twoBtnsAreSelected = false;
 	var btnsAreTheSame = false;
 	var gameCompleted = false;
-	var isMatchMade = false;
+	var matchIsFound = false;
 	var matches = [];
 
 	getThesaurus(targetWord.name).done(function(response) {
@@ -582,30 +582,33 @@ function startSynsVsAntsActivity() {
 		if (twoBtnsAreSelected) {
 			$firstBtn = $($selectedBtns[0]);
 			$secondBtn = $($selectedBtns[1]);
-			btnsAreOnyms = $firstBtn.text() == $secondBtn.text();
+			btnsAreTheSame = $firstBtn.text() == $secondBtn.text();
 
-			if (btnsAreOnyms) {
+			if (btnsAreTheSame) {
 				$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
 										 .addClass("btn-outline-primary");
 			}
 
 			if ($firstBtn.text() == "synonym" || $secondBtn.text() == "synonym") {
 				var $wordBtn = findBtnNot($selectedBtns, "synonym");
-				var matchIsFound = findMatch(matches, $wordBtn, "synonym").length;
-				if (matchIsFound) { isMatchMade = true; }
+				matchIsFound = findMatch(matches, $wordBtn, "synonym").length;
 			} else {
 				var $wordBtn = findBtnNot($selectedBtns, "antonym");
-				var matchIsFound = findMatch(matches, $wordBtn, "antonym").length;
-				if (matchIsFound) { isMatchMade = true; }
+				matchIsFound = findMatch(matches, $wordBtn, "antonym").length;
 			}
 
-			if (isMatchMade) {
+			if (matchIsFound) {
 				$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
 										 .addClass("btn-success")
 										 .prop("disabled", true);
 				addPoints(30);
 				flashPointsUpdate(arrowSuccess());
-				isMatchMade = false;
+				var data = {
+					"type": $selectedBtns.not($wordBtn).text(),
+					"word_name": $wordBtn.text(),
+					"result": true
+				};
+				updateGameStat("funds_six", timeGameStarted, data);
 				gameCompleted = $(".match.btn-success").length == matches.length * 2;
 
 				if (gameCompleted) {
@@ -617,6 +620,20 @@ function startSynsVsAntsActivity() {
 										 .addClass("btn-outline-primary");
 				removePoints(10);
 				flashPointsUpdate(arrowDanger());
+				var wordName = $wordBtn.text() || "n/a";
+
+				if (wordName == "n/a") {
+					var type = $firstBtn.text();
+				} else {
+					var type = $selectedBtns.not($wordBtn).text();
+				}
+
+				var data = {
+					"type": type,
+					"word_name": wordName,
+					"result": false
+				};
+				updateGameStat("funds_six", timeGameStarted, data);
 			}
 		} else {
 			if ($selectedBtn.hasClass("btn-primary")) {
@@ -710,7 +727,7 @@ function updateGameStat(route, timeStarted, uniqData) {
 		"time_ended": getDate(),
 		"uniq_data": uniqData
 	}
-	makeAjaxCall("PATCH", url, data);
+	makeAjaxCall("POST", url, data);
 }
 
 function updateUserPoints(linero) {

@@ -36,7 +36,7 @@ user_word_id
 
 ================================
 
-Level 4: Decisions, Decisions
+Level 4: Decisions, Decisions [COMPLETED]
 
 game_stat_meaning_alts
 game_stat_id
@@ -52,7 +52,7 @@ time_ended
 
 ================================
 
-Level 5: Example/Non-Example
+Level 5: Example/Non-Example [COMPLETED]
 
 result (bool)
 ex_non_ex_id
@@ -68,7 +68,7 @@ Level 6: Syns vs Ants
 
 type (syn or ant)
 result
-thesaurus_id (aka the word id that's either a syn or ant)
+word_name (aka the word name that's either a syn or ant)
 
 user_word_id
 game_id
