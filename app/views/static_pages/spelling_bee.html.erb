@@ -25,7 +25,7 @@
     </div>
     <div class="col-lg-9">
       <h4>* Leksi Presents *</h4>
-      <h1 class="display-2">1<sup>st</sup> Annual <br>Harlem Spelling Bee</h1>
+      <h1 class="display-3">1<sup>st</sup> Annual <br>Harlem Spelling Bee</h1>
       <p class="lead">
         Learn more below about this unique and exciting event that benefits
         everyone in the Harlem communtiy.
@@ -64,7 +64,9 @@
           <h2><i class="fa fa-calendar"></i>
              When
              <br>
-             <small>day, xx/yy/zz starting at aa:bb pm</small>
+             <small>
+               Thursday, June 1<sup>st</sup>, 2017 starting at 4:30pm
+             </small>
           </h2>
         </div>
       </div>
@@ -80,7 +82,7 @@
                <br>
                <%= link_to "#" do %>
                  Directions
-                 <i class="fa fa-map-marker"></i>
+                 <%= icon("map-marker") %>
                <% end %>
              </small>
           </h2>
@@ -194,6 +196,12 @@
         After you do this, you'll receive an email from us with further
         instructions/guides. For example, this will lead to free Leksi accounts
         for yourself and all of your students.
+        <span class="text-danger">
+        Schools enroll with the national office to ensure their students are
+        eligible to participate and to receive the materials needed to conduct
+        classroom and school bees. During enrollment, school bee coordinators
+        receive their local sponsor's program-specific information—local dates,
+        deadlines, and participation guidelines.</span>
       </p>
       <%= render "static_pages/spelling_bee/question",
                  q: "Is this free?"

@@ -14,12 +14,12 @@ class GameStatsController < ApplicationController
 			@game_stat.num_typed = params[:uniq_data][:num_typed]
 
 			if @game_stat.save
-				render json: { errors: "Success: GameStat #{@game_stat.id} updated." }
+				render json: { response: "Success: GameStat #{@game_stat.id} updated." }
 			else
-				render json: { errors: @game_stat.errors.full_messages }
+				render json: { response: @game_stat.errors.full_messages }
 			end
 		else
-			render json: { errors: "No GameStatController update needed." }
+			render json: { response: "No GameStatController update needed." }
 		end
 	end
 
@@ -38,12 +38,12 @@ class GameStatsController < ApplicationController
 			@game_stat.num_bad_clicks = params[:uniq_data][:num_bad_clicks]
 
 			if @game_stat.save
-				render json: { errors: "Success: GameStat #{@game_stat.id} updated." }
+				render json: { response: "Success: GameStat #{@game_stat.id} updated." }
 			else
-				render json: { errors: @game_stat.errors.full_messages }
+				render json: { response: @game_stat.errors.full_messages }
 			end
 		else
-			render json: { errors: "No GameStatController update needed." }
+			render json: { response: "No GameStatController update needed." }
 		end
 	end
 
@@ -62,12 +62,12 @@ class GameStatsController < ApplicationController
 			@game_stat.num_heard = params[:uniq_data][:num_heard]
 
 			if @game_stat.save
-				render json: { errors: "Success: GameStat #{@game_stat.id} updated." }
+				render json: { response: "Success: GameStat #{@game_stat.id} updated." }
 			else
-				render json: { errors: @game_stat.errors.full_messages }
+				render json: { response: @game_stat.errors.full_messages }
 			end
 		else
-			render json: { errors: "No GameStatController update needed." }
+			render json: { response: "No GameStatController update needed." }
 		end
 	end
 
@@ -92,20 +92,20 @@ class GameStatsController < ApplicationController
 
 			if @game_stat_meaning_alt.save
 				if @game_stat.save
-					render json: { errors:
+					render json: { response:
 						[
 							"Success: GameStatMeaningAlt #{@game_stat_meaning_alt.id} saved.",
 							"Success: GameStat #{@game_stat.id} updated."
 						]
 					}
 				else
-					render json: { errors: @game_stat.errors.full_messages }
+					render json: { response: @game_stat.errors.full_messages }
 				end
 			else
-				render json: { errors: @game_stat_meaning_alt.errors.full_messages }
+				render json: { response: @game_stat_meaning_alt.errors.full_messages }
 			end
 		else
-			render json: { errors: "No GameStatController update needed." }
+			render json: { response: "No GameStatController update needed." }
 		end
 	end
 
@@ -132,19 +132,19 @@ class GameStatsController < ApplicationController
 
 			if @game_stat_ex_non_ex.save
 				if @game_stat.save
-					render json: { errors: [
+					render json: { response: [
 						"Success: GSExNonEx #{@game_stat_ex_non_ex.id} saved.",
 						"Success: GameStat #{@game_stat.id} updated."
 						]
 					}
 				else
-					render json: { errors: @game_stat.errors.full_messages }
+					render json: { response: @game_stat.errors.full_messages }
 				end
 			else
-				render json: { errors: @game_stat_ex_non_ex.errors.full_messages }
+				render json: { response: @game_stat_ex_non_ex.errors.full_messages }
 			end
 		else
-			render json: { errors: "No GameStatController update needed." }
+			render json: { response: "No GameStatController update needed." }
 		end
 	end
 
@@ -165,12 +165,12 @@ class GameStatsController < ApplicationController
 			@game_stat.word_name = params[:uniq_data][:word_name]
 
 			if @game_stat.save
-				render json: { errors: "Success: GameStat #{@game_stat.id} updated." }
+				render json: { response: "Success: GameStat #{@game_stat.id} updated." }
 			else
-				render json: { errors: @game_stat.errors.full_messages }
+				render json: { response: @game_stat.errors.full_messages }
 			end
 		else
-			render json: { errors: "No GameStatController update needed." }
+			render json: { response: "No GameStatController update needed." }
 		end
 	end
 
@@ -191,12 +191,12 @@ class GameStatsController < ApplicationController
 			@game_stat.result = params[:uniq_data][:result]
 
 			if @game_stat.save
-				render json: { errors: "Success: GameStat #{@game_stat.id} updated." }
+				render json: { response: "Success: GameStat #{@game_stat.id} updated." }
 			else
-				render json: { errors: @game_stat.errors.full_messages }
+				render json: { response: @game_stat.errors.full_messages }
 			end
 		else
-			render json: { errors: "No GameStatController update needed." }
+			render json: { response: "No GameStatController update needed." }
 		end
 	end
 end

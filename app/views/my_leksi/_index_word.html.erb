@@ -13,10 +13,7 @@
 		</div>
 		<%= render "words/basics", word: user_word.word %>
 		<div class="text-center">
-			<%= render "my_leksi/play_btn",
-				word: user_word.word,
-				user_word: user_word
-			%>
+			<%= play_btn_small(user_word, user_word.word.id) %>
 		</div>
 	</div>
 </div>

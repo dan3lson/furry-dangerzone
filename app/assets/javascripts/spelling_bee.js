@@ -58,7 +58,10 @@ $(document).ready(function() {
 	});
 
 	function updateValue(text) {
-		$("#cf-subject").val(text);
+		var $subjectInput = $("#cf-subject");
+		$subjectInput.val(text);
+		$subjectInput.addClass("form-control-success");
+		$subjectInput.parent().addClass("has-success");
 	}
 
 	function scrollToSection(section) {

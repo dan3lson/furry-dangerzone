@@ -14,4 +14,8 @@ module ApplicationHelper
   def controller?(params_controller)
     params[:controller] == params_controller
   end
+
+  def icon(name)
+    content_tag(:i, nil, class: "fa fa-#{name}")
+  end
 end

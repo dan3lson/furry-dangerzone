@@ -3,7 +3,7 @@ namespace :create do
   task :new_sent_stems => :environment do
     SentStem.create!(
       user: User.first,
-      name: "abate",
+      word: Word.find(3243), # "abate",
       text: "When the storm abated, the kids were finally able to ???"
     )
 

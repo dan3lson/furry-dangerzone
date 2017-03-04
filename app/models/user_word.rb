@@ -2,7 +2,7 @@ class UserWord < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   belongs_to :word
   has_many :game_stats, dependent: :destroy
-  has_many :freestyle_responses, dependent: :destroy
+  has_many :freestyles, dependent: :destroy
 
   validates :games_completed, presence: true
   validates :user, presence: true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228200003) do
+ActiveRecord::Schema.define(version: 20170304210455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,12 +49,22 @@ ActiveRecord::Schema.define(version: 20170228200003) do
 
   add_index "examples", ["word_id"], name: "index_examples_on_word_id", using: :btree
 
-  create_table "freestyle_responses", force: :cascade do |t|
-    t.string   "input",        null: false
+  create_table "freestyle_sent_stems", force: :cascade do |t|
+    t.integer  "freestyle_id", null: false
+    t.integer  "sent_stem_id", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "user_word_id"
-    t.string   "focus"
+  end
+
+  add_index "freestyle_sent_stems", ["freestyle_id"], name: "index_freestyle_sent_stems_on_freestyle_id", using: :btree
+  add_index "freestyle_sent_stems", ["sent_stem_id"], name: "index_freestyle_sent_stems_on_sent_stem_id", using: :btree
+
+  create_table "freestyles", force: :cascade do |t|
+    t.text     "input",                                 null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "user_word_id",                          null: false
+    t.string   "status",       default: "not reviewed", null: false
   end
 
   create_table "game_stat_example_non_examples", force: :cascade do |t|
@@ -63,6 +73,23 @@ ActiveRecord::Schema.define(version: 20170228200003) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "game_stat_freestyle_sent_stems", force: :cascade do |t|
+    t.integer  "game_stat_id",           null: false
+    t.integer  "freestyle_sent_stem_id", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "game_stat_freestyles", force: :cascade do |t|
+    t.integer  "game_stat_id", null: false
+    t.integer  "freestyle_id", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "game_stat_freestyles", ["freestyle_id"], name: "index_game_stat_freestyles_on_freestyle_id", using: :btree
+  add_index "game_stat_freestyles", ["game_stat_id"], name: "index_game_stat_freestyles_on_game_stat_id", using: :btree
 
   create_table "game_stat_meaning_alts", force: :cascade do |t|
     t.integer  "game_stat_id",   null: false
@@ -97,6 +124,8 @@ ActiveRecord::Schema.define(version: 20170228200003) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "games", ["name"], name: "index_games_on_name", using: :btree
 
   create_table "get_started_stats", force: :cascade do |t|
     t.integer  "get_started_top_btn",              default: 0
@@ -241,4 +270,6 @@ ActiveRecord::Schema.define(version: 20170228200003) do
   add_index "words", ["name", "definition"], name: "index_words_on_name_and_definition", using: :btree
   add_index "words", ["name"], name: "index_words_on_name", using: :btree
 
+  add_foreign_key "game_stat_freestyles", "freestyles"
+  add_foreign_key "game_stat_freestyles", "game_stats"
 end

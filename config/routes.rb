@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "feedback" => "static_pages#feedback"
   get "search" => "searches#search"
   get "search_results" => "searches#results"
+  get "home" => "current_users#home"
   get "settings" => "current_users#settings"
   get "progress" => "current_users#progress"
   get "myLeksi" => "my_leksi#index"
@@ -44,7 +45,14 @@ Rails.application.routes.draw do
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]
-  resource :freestyle_game, only: [:create, :update]
+  resource :freestyle do
+    member do
+      post "sent_stem"
+      post "word_rel"
+      post "leksi_tale"
+      post "describe_me"
+    end
+  end
   resource :game_stat do
     member do
       post "funds_one"
@@ -76,7 +84,6 @@ Rails.application.routes.draw do
     get "search_results" => "searches#results"
     get "search_words_for_students" => "searches#student_words"
     get "student_words" => "words#student_words"
-    get "frayer" => "words#frayer_model"
     get "students" => "current_user#students"
     get "student" => "current_user#student"
     get "messages" => "current_user#messages"

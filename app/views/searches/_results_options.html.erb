@@ -1,13 +1,9 @@
 <% if logged_in? %>
-	<p>
-		<%= render "searches/user_add", word: word %>
+	<%= render "searches/user_add", word: word %>
 
-		<% if current_user.has_word?(word) %>
-			<%= render "my_leksi/play_btn",
-								 word: word,
-								 user_word: UserWord.object(current_user, word) %>
-		<% else %>
-			<%= render "searches/user_play", word: word %>
-		<% end %>
-	</p>
+	<% if current_user.has_word?(word) %>
+		<%= play_btn_small(UserWord.object(current_user, word), word.id) %>
+	<% else %>
+		<%= render "searches/user_play", word: word %>
+	<% end %>
 <% end %>

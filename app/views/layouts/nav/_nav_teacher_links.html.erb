@@ -1,0 +1,41 @@
+<% if action?("classes") %>
+	<%= link_to school_classes_path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-users"></i> Classes
+	<% end %>
+<% else %>
+	<%= link_to school_classes_path, class: "nav-item nav-link" do %>
+		<i class="fa fa-users"></i> Classes
+	<% end %>
+<% end %>
+
+<% if false %>
+	<%= link_to "#", class: "nav-item nav-link active" do %>
+		<i class="fa fa-tags"></i> Tags
+	<% end %>
+<% else %>
+	<%= link_to "#", class: "nav-item nav-link" do %>
+		<i class="fa fa-tags"></i> Tags
+	<% end %>
+<% end %>
+
+<% if false %>
+	<%= link_to "#", class: "nav-item nav-link active" do %>
+		<i class="fa fa-line-chart"></i> Stats
+	<% end %>
+<% else %>
+	<%= link_to "#", class: "nav-item nav-link" do %>
+		<i class="fa fa-line-chart"></i> Stats
+	<% end %>
+<% end %>
+
+<% if controller?("school/searches") %>
+	<%= link_to school_search_path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-search"></i> Look Up
+	<% end %>
+<% else %>
+	<%= link_to school_search_path, class: "nav-item nav-link" do %>
+		<i class="fa fa-search"></i> Look Up
+	<% end %>
+<% end %>
+
+<%= render "layouts/nav/settings", path: school_settings_path %>

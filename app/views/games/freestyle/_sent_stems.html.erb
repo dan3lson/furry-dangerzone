@@ -1,5 +1,7 @@
 <%= sent_stems.each do |ss| %>
-	<h4><i class="fa fa-pencil"></i> <%= ss.text %></h4>
+	<h4 data-sent-stem-id="<%= ss.id %>">
+		<i class="fa fa-pencil"></i> <%= ss.text %>
+	</h4>
 	<div class="form-group">
 		<%= text_area_tag ss.word.id,
 											nil,

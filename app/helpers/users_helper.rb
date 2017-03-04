@@ -5,7 +5,6 @@ module UsersHelper
     num_freestyles_completed = user.completed_freestyles.count
     today = Date.today
     yesterday = Date.yesterday
-
     date = user.completed_freestyle_on?(today) ? today : yesterday
 
     num_freestyles_completed.times do
@@ -25,7 +24,6 @@ module UsersHelper
   # TODO: Create test
   def display_average_values(students, method)
     array_values = students.map { |s| s.send(method) }
-
     array_values.inject(&:+) / array_values.count
   end
 

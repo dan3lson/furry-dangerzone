@@ -1,0 +1,53 @@
+<% if action?("home") %>
+	<%= link_to root_path,
+							class: "nav-item nav-link active" do %>
+		<i class="fa fa-home"></i> Home
+	<% end %>
+<% else %>
+	<%= link_to root_path,
+							class: "nav-item nav-link" do %>
+		<i class="fa fa-home"></i> Home
+	<% end %>
+<% end %>
+
+<% if params[:controller].include?("my_leksi") %>
+	<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-book"></i> Words
+	<% end %>
+<% else %>
+	<%= link_to myLeksi_path, class: "nav-item nav-link" do %>
+		<i class="fa fa-book"></i> Words
+	<% end %>
+<% end %>
+
+<% if controller?("my_tags") %>
+	<%= link_to myTags_path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-tags"></i> Tags
+	<% end %>
+<% else %>
+	<%= link_to myTags_path, class: "nav-item nav-link" do %>
+		<i class="fa fa-tags"></i> Tags
+	<% end %>
+<% end %>
+
+<% if controller?("users") && action?("show") %>
+	<%= link_to current_user, class: "nav-item nav-link active" do %>
+		<i class="fa fa-line-chart"></i> Stats
+	<% end %>
+<% else %>
+	<%= link_to current_user, class: "nav-item nav-link" do %>
+		<i class="fa fa-line-chart"></i> Stats
+	<% end %>
+<% end %>
+
+<% if controller?("searches") && action?("search") %>
+	<%= link_to search_path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-search"></i> Look Up
+	<% end %>
+<% else %>
+	<%= link_to search_path, class: "nav-item nav-link" do %>
+		<i class="fa fa-search"></i> Look Up
+	<% end %>
+<% end %>
+
+<%= render "layouts/nav/settings", path: settings_path %>

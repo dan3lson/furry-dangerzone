@@ -1,0 +1,31 @@
+<nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <h1 class="navbar-brand mb-0">Leksi</h1>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="navbar-nav mr-auto">
+      <%= render "layouts/nav/nav_guest_links" %>
+    </div>
+    <div>
+    	<%= link_to login_path,
+    							class: "btn btn-primary",
+    							role: "button" do
+    	%>
+    		Log In
+    	<% end %>
+    	<%#= link_to new_user_path,
+    							class: "btn btn-primary",
+    							role: "button" do
+    	%>
+    		<!-- Sign Up -->
+    	<%# end %>
+    </div>
+  </div>
+</nav>

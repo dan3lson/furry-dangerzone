@@ -9,7 +9,7 @@ class JeopardyGamesController < ApplicationController
           "Okay: Jeopardy updates not needed for UW #{@user_word.id} ->",
           " #{@user_word.word.name}"
         ].join
-        render json: { errors: msg }
+        render json: { response: msg }
       else
         if @word.has_sent_stems?
           @user_word.games_completed = 8
@@ -22,7 +22,7 @@ class JeopardyGamesController < ApplicationController
             "Success: UW #{@user_word.id}/#{@user_word.word.name} ",
             "games_completed now at #{@user_word.games_completed} "
           ].join
-          render json: { errors: msg }
+          render json: { response: msg }
         else
           msg = [
             "ERROR: Jeopardy NOT successfully updated as complete for" ,
@@ -32,7 +32,7 @@ class JeopardyGamesController < ApplicationController
         end
       end
     else
-      render json: { errors: "Okay: word is random. Update not needed." }
+      render json: { response: "Okay: word is random. Update not needed." }
     end
   end
 
@@ -44,20 +44,20 @@ class JeopardyGamesController < ApplicationController
       if @user_word.jeopardy_completed? || @user_word.freestyle_completed?
         msg = "Okay: UW #{@user_word.id}\'s Fundamentals untouched for "
         msg_2 = "UW #{@user_word.id} -> #{@user_word.word.name}."
-        render json: { errors: msg << msg_2 }
+        render json: { response: msg << msg_2 }
       else
         @user_word.games_completed = 0
 
         if @user_word.save
           msg = "Success: UW #{@user_word.id}\'s games_completed reset to 0."
-          render json: { errors: msg }
+          render json: { response: msg }
         else
           msg = "ERROR: UW #{@user_word.id}\'s games_completed not reset to 0."
           render json: { errors: msg }
         end
       end
     else
-      render json: { errors: "Okay: word is random. Demotion not needed."}
+      render json: { response: "Okay: word is random. Demotion not needed."}
     end
   end
 end

@@ -1,18 +1,18 @@
 class GameStat < ActiveRecord::Base
   belongs_to :user_word
   belongs_to :game
-  has_many :game_stat_meaning_alts, dependent: :destroy
-  has_many :game_stat_example_non_examples, dependent: :destroy
+  has_one :game_stat_freestyle, dependent: :destroy
+  has_one :freestyle, through: :game_stat_freestyle
 
   validates :user_word, presence: true
   validates :game, presence: true
 
-  def self.universal(u_w, g, t_s, t_e)
+  def self.universal(user_word, game, time_started, time_ended)
     GameStat.new(
-      user_word: u_w,
-      game: g,
-      time_started: t_s,
-      time_ended: t_e
+      user_word: user_word,
+      game: game,
+      time_started: time_started,
+      time_ended: time_ended
     )
   end
 end

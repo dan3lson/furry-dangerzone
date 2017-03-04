@@ -19,6 +19,8 @@ var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
 var $regex = /^[a-zA-Z0-9 .';,?!-]+$/;
 var newPointsTotal = 0;
+var timeStarted;
+updateProgress(10);
 
 switch (currentGame) {
 	case 9:
@@ -51,13 +53,14 @@ switch (currentGame) {
 
 $(".container").on("click", ".continue-btn", function() {
 	var $btn = $(this);
-	$activityDiv.empty();
 
 	if ($btn.hasClass("start-word-relationship-activity")) {
 		updateUserWordGamesCompleted(9);
 		updateProgress(25);
 		addPoints(750);
 		flashPointsUpdate(getArrowSuccess());
+		saveSentStemResponse(timeStarted);
+		$activityDiv.empty();
 		startWordRelationshipActivity();
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
 		updateUserWordGamesCompleted(10);
@@ -94,6 +97,7 @@ $(".container").on("click", ".continue-btn", function() {
 ************************/
 
 function startSentenceStemActivity() {
+	beginTimeStarted();
 	const $sentStemsPartial = $("<%= j render(partial: 'games/freestyle/sent_stems', locals: { sent_stems: @sent_stems }) %>");
 	$activityDiv.append($sentStemsPartial);
 	giveDirections("Complete the sentences below.");
@@ -111,6 +115,7 @@ function startSentenceStemActivity() {
 }
 
 function startWordRelationshipActivity() {
+	beginTimeStarted();
 	giveDirections("How are the two words above connected or related?");
 
 	getAnotherFreestyleWord().done(function(secondWord) {
@@ -132,6 +137,7 @@ function startWordRelationshipActivity() {
 }
 
 function startLeksiTaleActivity() {
+	beginTimeStarted();
 	giveDirections(
 		"Write a very short story, poem, song, etc. that includes the word " +
 		"above and two of your other words, which are down below. It can be " +
@@ -166,6 +172,8 @@ function startLeksiTaleActivity() {
 }
 
 function startDescribeMeActivity() {
+	beginTimeStarted();
+
 	getDescribeMeText().done(function(describeMe) {
 		giveDirections(describeMe.text);
 		const $textarea = createTextarea();
@@ -194,14 +202,51 @@ function startReviewActivity() {
 		HELPER FUNCTIONS
 ************************/
 
+function beginTimeStarted() {
+	timeStarted = getDate();
+}
+
+function getDate() {
+	return new Date();
+}
+
+function saveSentStemResponse(timeStarted) {
+	var data = {};
+
+	$.each($("h4"), function() {
+    var sentStemID = $(this).data("sent-stem-id");
+    var input = $(this).next().find("textarea").val();
+		data[sentStemID] = input;
+	});
+
+	createFreestyle("sent_stem", timeStarted, data);
+}
+
+function createFreestyle(route, timeStarted, uniqData) {
+	uniqData = uniqData || null;
+	var url = "/freestyle/" + route;
+	var data = {
+		"word_id": targetWord.id,
+		"time_started": timeStarted,
+		"time_ended": getDate(),
+		"uniq_data": uniqData
+	}
+	makeAjaxCall("POST", url, data);
+}
+
 function updateUserWordGamesCompleted(gamesCompleted) {
-	$.ajax({
-		type: "PATCH",
-		url: "/user_word",
-		dataType: "json",
-		data: { "word_id": targetWord.id, "games_completed": gamesCompleted }
-	}).done(logResponse);
+	var data = { "word_id": targetWord.id, "games_completed": gamesCompleted };
+	makeAjaxCall("PATCH", "/user_word", data);
 };
+
+function makeAjaxCall(type, url, data) {
+	$.ajax({
+		type: type,
+		url: url,
+		dataType: "json",
+		data: data
+	}).done(logResponse);
+}
 
 function logResponse(response) {
 	console.log(response);
@@ -280,8 +325,7 @@ function getArrowDanger() {
 function updateProgress(value) {
 	var $progressBar = $(".progress-bar");
 	$progressBar.attr("aria-valuenow", value)
-							.attr("style", "width: " + value + "%;")
-							.text(value + "%");
+							.attr("style", "width: " + value + "%;");
 };
 
 function startCountup($section, seconds) {

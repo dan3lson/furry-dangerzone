@@ -25,14 +25,16 @@ var scoreboardTimerID = startCountup($scoreboardTimer, 0);
 var timeGameStarted;
 var numBadClicks = 0;
 var numHeard = 0;
-updateProgress(0);
+var $regex = /^[a-zA-Z. ]+$/;
 
 switch (currentGame) {
 	case 1:
 		startSpellByTypingActivity();
+		updateProgress(10);
 		break;
 	case 2:
 		startSpellByClickingLettersActiivty();
+		updateProgress(17);
 		break;
 	case 3:
 		if (availableGames.pronun) {
@@ -105,7 +107,7 @@ switch (currentGame) {
 	default: startSpellByTypingActivity();
 }
 
-$(".container").on("click", ".continue-btn", function() {
+$(".container").off().on("click", ".continue-btn", function() {
 	var $btn = $(this);
 	var dataOne = {
 		"num_typed": $(".spell-the-word.form-control-success").length
@@ -250,7 +252,7 @@ function startSpellByTypingActivity() {
 	var timeStartedTyping;
 	var numInputs = 0;
 
-	$(".container").on("input", ".spell-the-word", function() {
+	$("#activity-div").off().on("input", ".spell-the-word", function() {
 		timeStartedTyping = timeStartedTyping || $scoreboardTimer.text();
 		$firstInput = $(".spell-the-word:first");
 		firstInputText = $(this).val().trim().toLowerCase();
@@ -416,7 +418,7 @@ function startDecisionsDecisionsActivity() {
 		})
 	});
 
-	$(".container").on("click", ".mean-alts-answer", function() {
+	$("#activity-div").off().on("click", ".mean-alts-answer", function() {
 		$selAnswer = $(this);
 		$selAnswerText = $selAnswer.text().trim();
 		$selAnswerCard = $selAnswer.parents(".card");
@@ -491,7 +493,7 @@ function startExampleNonExamplesActivity() {
 		});
 	});
 
-	$(".container").on("click", ".ex-non-exs-answer", function() {
+	$("#activity-div").off().on("click", ".ex-non-exs-answer", function() {
 		$selAnswer = $(this);
 		$selAnswerText = $selAnswer.text().trim();
 		$selAnswerCard = $selAnswer.parents(".card");
@@ -572,7 +574,7 @@ function startSynsVsAntsActivity() {
 		$activityDiv.empty().append(createMatchingCards(matches));
 	});
 
-	$(".container").on("click", ".match", function() {
+	$("#activity-div").off().on("click", ".match", function() {
 		$selectedBtn = $(this);
 		$selectedBtn.addClass("selected");
 		$selectedBtns = $(".selected");
@@ -826,7 +828,6 @@ function startCountdown($selector, seconds) {
 		if (seconds == 0) {
 			clearInterval(countdownID);
 			var url = "/jeopardy?word_id=" + targetWord.id;
-			console.log("LOADING SCRIPT FROM END OF FUNDS GAME");
 			$.getScript(url);
 		}
 	}, 1000);
@@ -835,8 +836,7 @@ function startCountdown($selector, seconds) {
 function updateProgress(value) {
 	var $progressBar = $(".progress-bar");
 	$progressBar.attr("aria-valuenow", value)
-							.attr("style", "width: " + value + "%;")
-							.text(value + "%");
+							.attr("style", "width: " + value + "%;");
 };
 
 function giveDirections(directions) {

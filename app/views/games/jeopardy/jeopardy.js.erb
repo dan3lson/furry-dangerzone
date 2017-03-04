@@ -27,9 +27,9 @@ var scoreboardTimerID = startCountup($scoreboardTimer, 0);
 var totalLinero = 0;
 var $points = $(".scoreboard-points");
 var category;
-updateProgress();
+updateProgress(10);
 
-$(".container").on("click", validCells, function() {
+$("#jeopardy-div").on("click", validCells, function() {
 	$selectedCell = $(this);
 	activtate(validCells, $selectedCell);
 	lineroCellNumID = $(this).data("ques-num");
@@ -40,7 +40,7 @@ $(".container").on("click", validCells, function() {
 	category = question.category;
 });
 
-$(".container").on("click", ".jeop-btn", function() {
+$("#jeopardy-div").on("click", ".jeop-btn", function() {
 	var questionIsDisplayed = $jeopardyDiv.find("h4").text().length;
 
 	if (questionIsDisplayed) {
@@ -262,8 +262,7 @@ function updateProgress() {
 	var $progressBar = $(".progress-bar");
 	var value = Math.floor((getCounter() / 20) * 100);
 	$progressBar.attr("aria-valuenow", value)
-							.attr("style", "width: " + value + "%;")
-							.text(value + "%");
+							.attr("style", "width: " + value + "%;");
 };
 
 function getCounter() {
@@ -329,7 +328,6 @@ function createResultCard(round) {
 								.append(createFontAweIcon("close fa-2x text-danger"));
 		$card.addClass("card-outline-danger");
 	}
-	console.log($icon);
 	$card.append($cardBlock);
 	$cardBlock.append($cardTitle);
 	$cardTitle.append($icon);

@@ -77,7 +77,7 @@ time_ended
 
 ================================
 
-Level 7: Jeopardy (should this be recorded for a round and/or the entire game?)
+Level 7: Jeopardy [COMPLETED]
 
 category
 result
@@ -104,3 +104,15 @@ time_started
 time_ended
 
 ================================
+
+Level 9: Freestyle Sent Stem
+
+================================
+
+create_table "freestyles", force: :cascade do |t|
+	t.text     "input",                                 null: false
+	t.datetime "created_at",                            null: false
+	t.datetime "updated_at",                            null: false
+	t.integer  "user_word_id"
+	t.string   "status",       default: "not reviewed"
+end

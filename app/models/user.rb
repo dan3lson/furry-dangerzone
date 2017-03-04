@@ -114,6 +114,19 @@ class User < ActiveRecord::Base
   end
 
   # TODO Create test
+  def incomplete_words
+    incomplete_fundamentals +
+    incomplete_jeopardys +
+    incomplete_freestyles
+  end
+
+  # TODO Create test
+  def rand_incomplete_word
+    incomplete_words.sample
+  end
+
+
+  # TODO Create test
   def incomplete_jeop_ids_not(word)
     incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
   end
