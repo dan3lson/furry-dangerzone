@@ -4,7 +4,7 @@ class GameStat < ActiveRecord::Base
   has_one :game_stat_example_non_example, dependent: :destroy
   has_one :game_stat_meaning_alt, dependent: :destroy
   has_one :game_stat_freestyle_sent_stem, dependent: :destroy
-  has_one :game_stat_freestyle_word_rel, dependent: :destroy
+  has_one :game_stat_freestyle_rel_word, dependent: :destroy
 
   validates :user_word, presence: true
   validates :game, presence: true
