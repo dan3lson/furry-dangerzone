@@ -1,8 +1,10 @@
 class GameStat < ActiveRecord::Base
   belongs_to :user_word
   belongs_to :game
-  has_one :game_stat_freestyle, dependent: :destroy
-  has_one :freestyle, through: :game_stat_freestyle
+  has_one :game_stat_example_non_example, dependent: :destroy
+  has_one :game_stat_meaning_alt, dependent: :destroy
+  has_one :game_stat_freestyle_sent_stem, dependent: :destroy
+  has_one :game_stat_freestyle_word_rel, dependent: :destroy
 
   validates :user_word, presence: true
   validates :game, presence: true

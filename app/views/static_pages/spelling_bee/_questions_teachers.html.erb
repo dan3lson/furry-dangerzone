@@ -1,0 +1,112 @@
+<section class="guest-section-home spe-bee-section">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">
+        <i class="fa fa-user-circle"></i> Teachers
+      </h1>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "How do I register my school?"
+      %>
+      <p>
+        <%= link_to "Click here to submit the registration form",
+                    "#",
+                    class: "spe-bee-contact-us",
+                    "data-sub": "tea-reg"
+        %> by the deadline to ensure your school is on our official list.
+        After you do this, you'll receive an email from us with further
+        instructions/guides. For example, this will lead to free Leksi accounts
+        for yourself and all of your students.
+        <span class="text-danger">
+        Schools enroll with the national office to ensure their students are
+        eligible to participate and to receive the materials needed to conduct
+        classroom and school bees. During enrollment, school bee coordinators
+        receive their local sponsor's program-specific information—local dates,
+        deadlines, and participation guidelines.</span>
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "Is this free?"
+      %>
+      <p>
+        This spelling bee competition is indeed free! If you haven't signed your
+        school up yet before the deadline,
+        <%= link_to "please do so here",
+                    "#",
+                    class: "spe-bee-contact-us",
+                    "data-sub": "tea-reg"
+        %>. This will ensure your school is participating and also give you and
+        your students free accounts to use Leksi. With a Leksi account, students
+        can practice their words in a fun way and you can track and support
+        their progress along the way.
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "How many students from my school can compete?"
+      %>
+      <p>
+        At every school, two (2) students will be selected from grades 1
+        through 8. To determine how these 16
+        students are selected, you must run a "local" spelling bee at your
+        school. The winners from these local school competitions will then be
+        set up to spell it out on the big stage.
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "How can my students practice for this competition?"
+      %>
+      <p>
+        One way your students can prepare for this spelling bee competition is
+        by letting them use our online app, Leksi, which is free for you and
+        your students after you
+        <%= link_to "register your school",
+                    "#",
+                    class: "spe-bee-contact-us",
+                    "data-sub": "tea-reg"
+        %>.
+        With an account, they can easily learn and practice any of the words on
+        the spelling bee list.
+        <%= link_to "Here\'s a guide to get started.", "#" %>
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "What are the important dates I should know?"
+      %>
+      <ul>
+      	<li>
+					Monday, March 20th, 2017 - Friday, March 31st, 2017:
+					<mark>School registration opens</mark>
+				</li>
+				<li>
+					Monday, April 3rd: Official start of the Leksi Spelling Bee. Also
+					is when all students and teachers can begin to use
+					<mark>Leksi</mark>.
+				</li>
+				<li>
+					Monday, April 24th, 2017 - Friday, April 28th, 2017:
+					<mark>Local School Competitions </mark>
+					occur.
+				</li>
+				<li>
+					May 5th, 2017: Finalists, i.e. top two scorers from each grade from
+					each school, will be announced
+				</li>
+				<li>
+					Thursday, June 1st, 2017: The main event!
+				</li>
+      </ul>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "What are the rules?"
+      %>
+      <p>
+        <%= link_to "Here are the rules", "#" %> to this spelling bee.
+      </p>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "What if I have a question or comment?"
+      %>
+      <p>
+        If you have any questions, comments, or concerns, please
+        <%= link_to "contact us",
+                    "#",
+                    class: "spe-bee-contact-us",
+                    "data-sub": "tea"
+        %>.
+      </p>
+    </div>
+  </div>
+</section>

@@ -60,13 +60,15 @@ $(".container").on("click", ".continue-btn", function() {
 		addPoints(750);
 		flashPointsUpdate(getArrowSuccess());
 		saveSentStemResponse(timeStarted);
-		$activityDiv.empty();
+		emptyActivityDiv();
 		startWordRelationshipActivity();
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
 		updateUserWordGamesCompleted(10);
 		updateProgress(50);
 		addPoints(1333);
 		flashPointsUpdate(getArrowSuccess());
+		saveWordRelResponse(timeStarted);
+		emptyActivityDiv();
 		startLeksiTaleActivity();
 	} else if ($btn.hasClass("start-describe-me-activity")) {
 		updateUserWordGamesCompleted(11);
@@ -119,7 +121,10 @@ function startWordRelationshipActivity() {
 	giveDirections("How are the two words above connected or related?");
 
 	getAnotherFreestyleWord().done(function(secondWord) {
-		$(".target-word-header-div").append("+ " + secondWord.name);
+		var $span = createElem("span")
+								.attr("data-rel-word-id", secondWord.id)
+								.append(" " + secondWord.name);
+		$(".target-word-header-div").append($span);
 		const $textarea = createTextarea();
 		$activityDiv.append($textarea);
 		$textarea.attr("placeholder", "Type in here...").focus();
@@ -202,12 +207,28 @@ function startReviewActivity() {
 		HELPER FUNCTIONS
 ************************/
 
+function emptyActivityDiv() {
+	$activityDiv.empty();
+}
+
 function beginTimeStarted() {
 	timeStarted = getDate();
 }
 
 function getDate() {
 	return new Date();
+}
+
+function saveWordRelResponse(timeStarted) {
+	var input = $activityDiv.find("textarea").val().trim();
+	var relatedWordID = $(".container .bg-faded")
+											.find("span")
+											.data("rel-word-id");
+	var data = {
+		"rel_word_id": relatedWordID,
+		"input": input
+	};
+	createFreestyle("word_rel", timeStarted, data);
 }
 
 function saveSentStemResponse(timeStarted) {
