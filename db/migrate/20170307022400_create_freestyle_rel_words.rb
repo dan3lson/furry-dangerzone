@@ -1,6 +1,6 @@
-class CreateFreestyleWordRel < ActiveRecord::Migration
+class CreateFreestyleRelWords < ActiveRecord::Migration
   def change
-    create_table :freestyle_word_rels do |t|
+    create_table :freestyle_rel_words do |t|
       t.integer :freestyle_id, null: false
       t.integer :rel_word_id, null: false
       t.timestamps null: false

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307001225) do
+ActiveRecord::Schema.define(version: 20170307022504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20170307001225) do
 
   add_index "examples", ["word_id"], name: "index_examples_on_word_id", using: :btree
 
+  create_table "freestyle_rel_words", force: :cascade do |t|
+    t.integer  "freestyle_id", null: false
+    t.integer  "rel_word_id",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "freestyle_sent_stems", force: :cascade do |t|
     t.integer  "freestyle_id", null: false
     t.integer  "sent_stem_id", null: false
@@ -58,13 +65,6 @@ ActiveRecord::Schema.define(version: 20170307001225) do
 
   add_index "freestyle_sent_stems", ["freestyle_id"], name: "index_freestyle_sent_stems_on_freestyle_id", using: :btree
   add_index "freestyle_sent_stems", ["sent_stem_id"], name: "index_freestyle_sent_stems_on_sent_stem_id", using: :btree
-
-  create_table "freestyle_word_rels", force: :cascade do |t|
-    t.integer  "freestyle_id", null: false
-    t.integer  "rel_word_id",  null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
 
   create_table "freestyles", force: :cascade do |t|
     t.text     "input",                                 null: false
@@ -81,18 +81,18 @@ ActiveRecord::Schema.define(version: 20170307001225) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "game_stat_freestyle_rel_words", force: :cascade do |t|
+    t.integer  "game_stat_id",          null: false
+    t.integer  "freestyle_rel_word_id", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
   create_table "game_stat_freestyle_sent_stems", force: :cascade do |t|
     t.integer  "game_stat_id",           null: false
     t.integer  "freestyle_sent_stem_id", null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-  end
-
-  create_table "game_stat_freestyle_word_rels", force: :cascade do |t|
-    t.integer  "game_stat_id",          null: false
-    t.integer  "freestyle_word_rel_id", null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
   end
 
   create_table "game_stat_freestyles", force: :cascade do |t|
