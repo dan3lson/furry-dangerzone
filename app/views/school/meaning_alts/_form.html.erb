@@ -1,4 +1,6 @@
-<%= form_for([:school, word, m_a], remote: true) do |f| %>
+<%= form_for [:school, word, m_a],
+						 method: :post,
+						 remote: true do |f| %>
 	<p class="form-group">
 		<%= f.label :text, class: "form-control-label" %>
 		<%= f.text_area :text, rows: 4, class: "form-control" %>
@@ -15,5 +17,7 @@
 		<%= f.label :feedback, class: "form-control-label" %>
 		<%= f.text_area :feedback, rows: 4, class: "form-control" %>
 	</p>
-	<%= f.submit text, class: "btn btn-primary btn-block" %>
+	<%= f.submit btn_text,
+							 type: "button",
+							 class: "btn btn-primary btn-block create-mean-alt-btn" %>
 <% end %>

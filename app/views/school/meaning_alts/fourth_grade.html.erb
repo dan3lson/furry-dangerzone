@@ -1,0 +1,115 @@
+<h1>
+	Decisions, Decisions
+	<br>
+	<small class="text-muted">4th Grade</small>
+</h1>
+<div class="card card-primary text-white mb-3">
+	<div class="card-block">
+		<h4 class="card-title">Instructions</h4>
+		<p class="card-text">
+			Create 3-5 questions around each target word by asking students which
+			they would prefer between the given alternatives. As you see
+			down below, there are four fields to fill in:
+			<em>text</em>, <em>choices</em>, <em>answer</em> and <em>feedback</em>.
+		</p>
+		<p class="card-text">
+			Here is an example:
+		</p>
+		<ol>
+			<li>
+				<h5>Anticipate</h5>
+				<p class="card-text">
+					<p class="form-group">
+						<%= label_tag "Text", nil, class: "form-control-label" %>
+						<%= text_field_tag :text,
+															 nil,
+															 class: "form-control",
+															 placeholder: "Which would you rather anticipate - your birthday or a dentist appointment?",
+															 readonly: true %>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Choices", nil, class: "form-control-label" %>
+						<%= text_field_tag :choices,
+															 nil,
+															 class: "form-control",
+															 placeholder: "birthday, dentist appointment",
+															 readonly: true %>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Answer", nil, class: "form-control-label" %>
+						<%= text_field_tag :answer,
+															 nil,
+															 class: "form-control",
+															 placeholder: "birthday",
+															 readonly: true %>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Feedback", nil, class: "form-control-label" %>
+						<%= text_area_tag :textarea,
+															 nil,
+															 class: "form-control",
+															 placeholder: "Birthdays are events where people have fun and celebrate someone they care about. A dentist appointment, though, usually isn’t something people look forward to because it likely involves discomfort and dealing with bad news like having a cavity.",
+															 rows: 6,
+															 readonly: true %>
+					</p>
+				</p>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<% @fourth_grade_words.each do |word| %>
+	<div class="card mb-3" data-word-id="<%= word.id %>">
+		<div class="card-block">
+			<div class="float-right">
+				<% if word.meaning_alts.count > 1 %>
+					<i class="fa fa-check fa-3x text-success"></i>
+				<% else %>
+					<i class="fa fa-check fa-3x text-muted"></i>
+				<% end %>
+			</div>
+			<h2 class="card-title">
+				<%= word.name %>
+			</h2>
+			<p class="card-text">
+				<strong>Part of Speech</strong> <%= word.part_of_speech %>
+				<br>
+				<strong>Definition</strong> <%= word.definition %>
+				<br>
+				<strong>Examples</strong>
+				<% if word.examples.any? %>
+					<%= word.examples.first.text.gsub("***", "; ") %>
+				<% else %>
+					<span class="text-muted">none</span>
+				<% end %>
+			</p>
+			<% if word.has_meaning_alts? %>
+				<p class="text-primary">
+					Decisions, Decisions for <mark><%= word.name %></mark>:
+				</p>
+
+				<% word.meaning_alts.each do |meaning_alt| %>
+					<p class="card-text">
+						<strong>Text</strong> <%= meaning_alt.text %>
+						<br>
+						<strong>Choices</strong> <%= meaning_alt.choices %>
+						<br>
+						<strong>Answer</strong> <%= meaning_alt.answer %>
+						<br>
+						<strong>Feedback</strong> <%= meaning_alt.feedback %>
+					</p>
+					<hr>
+				<% end %>
+			<% end %>
+		</div>
+		<% unless word.meaning_alts.count > 1 %>
+			<div class="card-footer">
+				<%= render "school/meaning_alts/form",
+									 word: word,
+									 m_a: @meaning_alt,
+									 btn_text: "Create"
+				%>
+			</div>
+		<% end %>
+	</div>
+<% end %>

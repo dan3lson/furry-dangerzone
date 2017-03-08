@@ -48,9 +48,9 @@ class School::ExampleNonExamplesController < BaseSchoolController
     end
   end
 
-  def seventh_grade
+  def fourth_grade
     @e_non_e = ExampleNonExample.new
-    @example_non_examples = Word.pilot_for_seventh_grade
+    @fourth_grade_words = Word.fourth_grade
   end
 
   private

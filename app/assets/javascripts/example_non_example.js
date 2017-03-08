@@ -4,6 +4,13 @@ $(document).ready(function() {
 	var $inputAnswer;
 	var $inputFeedback;
 
+	$(".container").on("click", ".ex-non-ex-edit-btn", function() {
+		var $card = $(this).parents(".card");
+		var $cardText = $card.find(".card-text");
+		var exNonExID = $cardText.data("ex-non-ex-id");
+		$.getScript("/school/example_non_examples/" + exNonExID + "/edit");
+	});
+
 	$(".container").on("click", ".create-e-non-e-btn", function() {
 		$form = $(this).parent();
 		$btn = $form.find("button");
@@ -25,7 +32,6 @@ $(document).ready(function() {
 				showValidation($inputFeedback, "Cannot be empty", "danger");
 			}
 		} else {
-			// Add data-attribute, e.g. "submitted-form", to locate after result?
 			$form.submit();
 		}
 	});

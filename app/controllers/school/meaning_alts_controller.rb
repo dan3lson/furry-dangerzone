@@ -16,6 +16,8 @@ class School::MeaningAltsController < BaseSchoolController
       @created = false
     end
 
+    @meaning_alt_count = @word.meaning_alts.count
+
     respond_to do |format|
       format.js
     end
@@ -61,14 +63,9 @@ class School::MeaningAltsController < BaseSchoolController
     end
   end
 
-  def seventh_grade
-    @seventh_grade_grouped_words = Word.seventh_grade_grouped
+  def fourth_grade
     @meaning_alt = MeaningAlt.new
-  end
-
-  def eigth_grade
-    @seventh_grade_words = Word.eighth_grade
-    @meaning_alt = MeaningAlt.new
+    @fourth_grade_words = Word.fourth_grade
   end
 
   private

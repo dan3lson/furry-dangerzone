@@ -1,15 +1,17 @@
-<p>
-	<strong>Text</strong> <%= m_a.text %>
-	<br>
-	<strong>Choices</strong> <%= m_a.choices %>
-	<br>
-	<strong>Answer</strong> <%= m_a.answer %>
-	<br>
-	<strong>Feedback</strong> <%= m_a.feedback %>
-	<br>
-	<strong>Created by</strong>
-	<%= m_a.user.username %> (<%= time_ago_in_words(m_a.created_at) %> ago)
-	<br>
-	<strong>Last Update</strong>
-	<%= time_ago_in_words(m_a.updated_at) %> ago
-</p>
+<% if m_a %>
+	<p>
+		<strong>Text</strong> <%= m_a.text %>
+		<br>
+		<strong>Choices</strong> <%= m_a.choices %>
+		<br>
+		<strong>Answer</strong> <%= m_a.answer %>
+		<br>
+		<strong>Feedback</strong> <%= m_a.feedback %>
+		<br>
+		<strong>Created by</strong>
+		<%= m_a.user.username %> (<%= time_ago_in_words(m_a.created_at) %> ago)
+		<br>
+		<strong>Last Update</strong>
+		<%= time_ago_in_words(m_a.updated_at) %> ago
+	</p>
+<% end %>

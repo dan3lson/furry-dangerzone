@@ -1,13 +1,11 @@
 <h1>
-	7th Grade Words
-	<br>
-	<span class="text-muted">Example/Non-Examples</span>
+	Example/Non-Examples
 </h1>
 <div class="card card-primary text-white mb-3">
 	<div class="card-block">
 		<h4 class="card-title">Instructions</h4>
 		<p class="card-text">
-			Create two to four "example/non-exampels" for each word. As you see
+			Create two to four "example/non-examples" for each word. As you see
 			down below, there are three fields to fill in:
 			<em>text</em>, <em>answer (either "example" or "non-example")</em>,
 			and <em>feedback</em>.
@@ -92,7 +90,7 @@
 	</div>
 </div>
 
-<% @example_non_examples.each do |word| %>
+<% @fourth_grade_words.each do |word| %>
 	<div class="card mb-3" data-word-id="<%= word.id %>">
 		<div class="card-block">
 			<div class="float-right">
@@ -118,7 +116,9 @@
 				<% end %>
 			</p>
 			<% if word.has_ex_non_exs? %>
-				<p class="text-primary">Example/Non-Examples</p>
+				<p class="text-primary">
+					Example/Non-Examples for <mark><%= word.name %></mark>:
+				</p>
 
 				<% word.example_non_examples.each do |e_non_e| %>
 					<p class="card-text">
@@ -132,14 +132,14 @@
 				<% end %>
 			<% end %>
 		</div>
-		<div class="card-footer">
-			<%# unless word.example_non_examples.count > 2 %>
+		<% unless word.example_non_examples.count > 1 %>
+			<div class="card-footer">
 				<%= render "school/example_non_examples/form",
 									 word: word,
 									 e_non_e: @e_non_e,
 									 btn_text: "Create"
 				%>
-			<%# end %>
-		</div>
+			</div>
+		<% end %>
 	</div>
 <% end %>

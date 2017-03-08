@@ -121,6 +121,7 @@ module WordsHelper
   end
 
   def thesuarus_names(word, syn_or_ant)
-    word.send(syn_or_ant).pluck(:name).uniq
+    # word.send(syn_or_ant).pluck(:name).uniq
+    Thesaurus.send(syn_or_ant, word.name)
   end
 end

@@ -24,13 +24,6 @@
 			<div class="col-md-6">
 				<%= render "my_leksi/tags", word: @word %>
 			</div>
-			<div class="col-md-6">
-				<div class="card text-center mb-3">
-					<div class="card-block">
-						<%= render "my_leksi/remove", word: @word, user_word: @user_word %>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -38,5 +31,10 @@
 			user_word: @user_word,
 			word: @word
 		%>
+	</div>
+</div>
+<div class="card text-center mb-3">
+	<div class="card-block">
+		<%= render "my_leksi/remove", word: @word, user_word: @user_word %>
 	</div>
 </div>

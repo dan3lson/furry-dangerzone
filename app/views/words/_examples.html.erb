@@ -3,11 +3,15 @@
 				<h5 class="card-title">
 					Examples
 				</h5>
-				<% word.examples.each do |example| %>
-					<% example.text.split("***").each do |example| %>
-						&#8605; <%= example %>
-						<br>
+				<% if word.has_examples? %>
+					<% word.examples.each do |example| %>
+						<% example.text.split("***").each do |example| %>
+							&#8605; <%= example %>
+							<br>
+						<% end %>
 					<% end %>
+				<% else %>
+					<small class="text-muted">None</small>
 				<% end %>
 		</div>
 	</div>

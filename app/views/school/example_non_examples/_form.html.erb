@@ -1,13 +1,11 @@
 <%= form_for [:school, word, e_non_e],
-						 id: "new-school-example-non-example",
 						 method: :post,
 						 remote: true do |f|
 %>
   <%= render "shared/error_messages", object: e_non_e %>
   <div class="form-group">
     <%= f.label :text, class: "form-control-label" %>
-    <%= f.text_area :text,
-                     class: "form-control"
+    <%= f.text_area :text, class: "form-control"
     %>
   </div>
   <div class="form-group">
@@ -20,7 +18,8 @@
   <div class="form-group">
     <%= f.label :feedback, class: "form-control-label" %>
     <%= f.text_area :feedback,
-                     class: "form-control"
+										rows: 4,
+                    class: "form-control"
     %>
   </div>
   <%= f.button btn_text,
