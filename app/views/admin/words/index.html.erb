@@ -1,7 +1,7 @@
 <% provide(:title, "All Words") %>
 <% provide(:header, "All Words") %>
 
-<%= will_paginate @words %>
+<%= paginate @words %>
 <div class="card-columns">
   <% @words.each do |word| %>
       <div class="card">
@@ -14,4 +14,4 @@
       </div>
   <% end %>
 </div>
-<%= will_paginate @words %>
+<%= paginate @words %>

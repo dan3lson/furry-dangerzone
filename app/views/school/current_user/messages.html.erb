@@ -2,7 +2,7 @@
 <% provide(:header, "Review") %>
 
 <% if @responses.any? %>
-	<%= will_paginate @sliced_responses, renderer: BootstrapPagination::Rails %>
+	<%= paginate @sliced_responses, renderer: BootstrapPagination::Rails %>
 
 	<% @sliced_responses.each do |batch| %>
 		<div class="box-shadow-border">
@@ -45,4 +45,4 @@
 	<% end %>
 <% end %>
 
-<%= will_paginate @sliced_responses, renderer: BootstrapPagination::Rails %>
+<%= paginate @sliced_responses, renderer: BootstrapPagination::Rails %>

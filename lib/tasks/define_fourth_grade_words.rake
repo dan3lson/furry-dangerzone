@@ -143,48 +143,47 @@ namespace :define do
     	"venture",
     	"weary"
     ]
-    puts fourth_grade_words.shuffle.take(50).sort
+    num_errors = 0
+
+    Word.fourth_grade_word_names.each do |name|
+      puts name
+      new_words = WordsApi.new(name).define
+
+      if new_words.nil?
+        puts "NOT FOUND: #{name}"
+      else
+        new_words.each do |w|
+          word = Word.new(
+            name: name,
+            phonetic_spelling: w.phonetic_spelling,
+            part_of_speech: w.part_of_speech,
+            definition: w.definition
+          )
+
+          # unless w.examples.blank?
+          #   if w.examples.count > 1
+          #     text = w.examples.join("***")
+          #   else
+          #     text = w.examples.first
+          #   end
+          #
+          #   example = Example.new(text: text, word: word)
+          #   word.examples << example
+          # end
+
+          if word.save
+            puts "Success for word #{name}(#{word.id})"
+          else
+            num_errors += 1
+            puts "ERROR for word #{name}: #{word.errors.full_messages}."
+          end
+
+          puts
+        end
+      end
+    end
+
+    puts
+    puts "TOTAL ERRORS: #{num_errors}"
   end
-  #   num_errors = 0
-  #
-  #   first_grade_words.each do |name|
-  #     puts name
-  #     new_words = WordsApi.define(name)
-  #
-  #     if new_words.nil?
-  #       puts "NOT FOUND: #{name}"
-  #     else
-  #       words = []
-  #
-  #       new_words.each do |w|
-  #         word = Word.new(
-  #             name: name,
-  #             phonetic_spelling: w.phonetic_spelling,
-  #             part_of_speech: w.part_of_speech,
-  #             definition: w.definition
-  #           )
-  #
-  #         if w.examples
-  #           if w.examples.count > 1
-  #             text = w.examples.join("***")
-  #           else
-  #             text = w.examples.first
-  #           end
-  #
-  #           example = Example.new(text: text, word: word)
-  #           word.examples << example
-  #         end
-  #
-  #         if word.save
-  #           puts "Success for word #{name}(#{word.id})"
-  #         else
-  #           num_errors += 1
-  #           puts "ERROR for word #{name}."
-  #         end
-  #       end
-  #     end
-  #   end
-  #   puts
-  #   puts "TOTAL ERRORS: #{num_errors}"
-  # end
 end

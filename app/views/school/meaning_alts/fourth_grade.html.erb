@@ -58,7 +58,8 @@
 	</div>
 </div>
 
-<% @fourth_grade_words.each do |word| %>
+<% @fourth_grade_words.each do |name, words| %>
+	<% word = words[0] %>
 	<div class="card mb-3" data-word-id="<%= word.id %>">
 		<div class="card-block">
 			<div class="float-right">
@@ -75,13 +76,6 @@
 				<strong>Part of Speech</strong> <%= word.part_of_speech %>
 				<br>
 				<strong>Definition</strong> <%= word.definition %>
-				<br>
-				<strong>Examples</strong>
-				<% if word.examples.any? %>
-					<%= word.examples.first.text.gsub("***", "; ") %>
-				<% else %>
-					<span class="text-muted">none</span>
-				<% end %>
 			</p>
 			<% if word.has_meaning_alts? %>
 				<p class="text-primary">

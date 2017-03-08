@@ -299,6 +299,11 @@ class Word < ActiveRecord::Base
     where(name: Word.fourth_grade_word_names)
   end
 
+  def self.fourth_grade_grouped
+    fourth_grade.group_by(&:name)
+    # fourth_grade.select("distinct on (name) *")
+  end
+
   def self.seventh_grade
     [
       "abate",
@@ -475,7 +480,7 @@ class Word < ActiveRecord::Base
 
   # TODO Remove once project is complete
   def self.seventh_grade_grouped
-    where(name: Word.seventh_grade.take(60)).group_by { |w| w.name }
+    words = where(name: Word.seventh_grade.take(60)).group_by(&:name)
   end
 
   def self.pilot_for_seventh_grade

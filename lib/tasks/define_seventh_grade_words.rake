@@ -176,8 +176,6 @@ namespace :define do
       if new_words.nil?
         puts "NOT FOUND: #{name}"
       else
-        words = []
-
         new_words.each do |w|
           word = Word.new(
               name: name,

@@ -28,10 +28,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Pagination part one
-gem 'will_paginate', '~> 3.0.6'
-# Pagination part two
-gem 'will_paginate-bootstrap'
+# Pagination
+gem 'kaminari'
 # Adds cool, scalable fonts (mainly to replace glyphicons)
 gem "font-awesome-rails"
 # Removes the 300ms delay on mobile devices
