@@ -26,7 +26,6 @@ class School::CurrentUserController < BaseSchoolController
 
   def student
     @student = User.find(params[:id])
-
     @words_added_last_day = @student.words_added_last_day
     @funds_completed_last_day = @student.fundamentals_completed_yesterday
     @jeops_completed_last_day = @student.jeopardys_completed_yesterday
@@ -34,16 +33,7 @@ class School::CurrentUserController < BaseSchoolController
   end
 
   def messages
-    @fs_students = User.fs_class_one + User.fs_class_two
-    @user_words = @fs_students.map { |s| s.user_words }.flatten
-    @mastered_words = @user_words.keep_if { |uw| uw.freestyle_completed? }
-    @responses = @mastered_words.map { |uw|
-      uw.freestyle_responses
-    }.flatten.sort_by { |fr| fr.updated_at }.reverse
-    @sliced_responses = @responses.each_slice(3).to_a.paginate(
-      page: params[:page],
-      per_page: 12
-    )
+    # Removed all - have to redo
   end
 
   def progress
@@ -94,7 +84,6 @@ class School::CurrentUserController < BaseSchoolController
 
   def my_meaning_alts
     @my_meaning_alts = current_user.meaning_alts
-                                   .paginate(:page => params[:page],
-                                             per_page: 10)
+                                   .page(params[:page])
   end
 end

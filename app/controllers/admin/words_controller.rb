@@ -1,6 +1,6 @@
 class Admin::WordsController < BaseAdminController
   def index
-    @words = Word.paginate(:page => params[:page], per_page: 100)
+    @words = Word.page(params[:page])
   end
 
   def show

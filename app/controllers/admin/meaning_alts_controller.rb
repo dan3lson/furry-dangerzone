@@ -7,18 +7,12 @@ class Admin::MeaningAltsController < BaseAdminController
       if @filter == "latest"
         @meaning_alts = MeaningAlt.includes(:word, :user)
 																	.order("created_at DESC")
-																	.paginate(
-																		page: params[:page],
-																		per_page: 10
-																	)
+																	.page(params[:page])
       end
     else
       @meaning_alts = MeaningAlt.includes(:word, :user)
 																.order("words.name ASC")
-																.paginate(
-																	page: params[:page],
-																	per_page: 10
-																)
+																.page(arams[:page])
     end
   end
 end

@@ -6,16 +6,10 @@ class Admin::ExampleNonExamplesController < BaseAdminController
     if @filter
       if @filter == "latest"
         @ex_non_exs = ExampleNonExample.order("created_at DESC")
-      																 .paginate(
-      																	 page: params[:page],
-      																	 per_page: 10
-      																 )
+      																 .page(params[:page])
       end
     else
-      @ex_non_exs = ExampleNonExample.paginate(
-      																 page: params[:page],
-      															   per_page: 10
-      															 )
+      @ex_non_exs = ExampleNonExample.page(params[:page])
     end
   end
 
