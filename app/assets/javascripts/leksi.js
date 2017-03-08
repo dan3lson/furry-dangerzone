@@ -15,15 +15,15 @@ $(document).ready(function() {
 		const audio = $(this).parent().prev()[0];
 		audio.play();
 	});
-
-	$("#search-form").focus();
-	$("#input_search").on("input", function() {
-		if (empty($(this))) {
-			$("#search-form button").prop("disabled", true);
-		} else {
-			$("#search-form button").prop("disabled", false);
-		}
-	});
+	// 
+	// $(".filter-div").off().on("input", "#input_search", function() {
+	// 	$("#search-form").focus();
+	// 	if (empty($(this))) {
+	// 		$("#search-form button").prop("disabled", true);
+	// 	} else {
+	// 		$("#search-form button").prop("disabled", false);
+	// 	}
+	// });
 
 	$(".mean-alt-del-form").parents("form").css("display", "d-inline");
 	spinner();

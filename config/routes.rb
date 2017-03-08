@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "feedback" => "static_pages#feedback"
   get "search" => "searches#search"
   get "search_results" => "searches#results"
+  get "searches/random"
   get "home" => "current_users#home"
   get "settings" => "current_users#settings"
   get "progress" => "current_users#progress"

@@ -1,0 +1,2 @@
+const randomPartial = "<%= j render(partial: 'searches/words/random', locals: { word: @word} ) %>";
+$(".search-container").hide().html(randomPartial).fadeIn(400);

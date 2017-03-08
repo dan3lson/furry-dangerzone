@@ -1,2 +1,2 @@
 const partial = "<%= j render(partial: 'searches/results', locals: { word_groups: @word_groups, error: @error }) %>";
-$(".search-results-container").hide().html(partial).fadeIn(400);
+$(".search-container").hide().html(partial).fadeIn(400).append(partial);

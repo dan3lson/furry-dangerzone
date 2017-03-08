@@ -1,11 +1,16 @@
 class SearchesController < ApplicationController
   def search
-    @random_word = Word.random(1).first
-    @seventh_grade_words = Word.pilot_for_seventh_grade
-
     respond_to do |format|
       format.html
       format.js
+    end
+  end
+
+  def random
+    @word = Word.random(1).first
+
+    respond_to do |format|
+      format.js { render template: "searches/words/random.js.erb" }
     end
   end
 
