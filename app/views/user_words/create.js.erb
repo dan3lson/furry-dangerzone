@@ -1,13 +1,18 @@
 var created = "<%= @created %>";
-var $activeElement = $(document.activeElement);
-var $card = $($activeElement.parents(".card")[0]);
-var $cardBlock = $($activeElement.parents(".card-block")[0]);
-var $btnsP = $activeElement.parents("p");
+var wordID = "<%= @word.id %>";
+var $card = $("div").find("[data-word-id='" + wordID + "']");
+var $cardBlock = $card.find(".card-block");
+var $btnsP = $card.find("p");
 $card.find(".alert").remove();
 
 if (created == "true") {
 	var $resultsOptions = $("<%= j render(partial: 'searches/results_options', locals: { word: @word }) %>");
-	$cardBlock.prepend(createFlash("success", "Success!"));
+	var $linero = createElem("span").append(
+		"Success! You earned ",
+		createElem("i", "fa fa-money"),
+		" 100 Linero."
+	);
+	$cardBlock.prepend(createFlash("success", $linero));
 	$btnsP.html($resultsOptions);
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @user_word }) %>");
@@ -15,8 +20,9 @@ if (created == "true") {
 }
 
 function createFlash(_class, text) {
-	return createElem("div", "alert alert-" + _class).append(text)
-																									 .attr("role", "alert");
+	return createElem("div", "alert alert-" + _class)
+				 .append(text)
+				 .attr("role", "alert");
 }
 
 function createElem(elem, elemClass, elemID) {

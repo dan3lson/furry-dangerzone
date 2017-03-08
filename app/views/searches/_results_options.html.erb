@@ -1,9 +1,11 @@
-<% if logged_in? %>
-	<%= render "searches/user_add", word: word %>
+<p>
+	<% if logged_in? %>
+		<%= render "searches/user_add", word: word %>
 
-	<% if current_user.has_word?(word) %>
-		<%= play_btn_small(UserWord.object(current_user, word), word.id) %>
-	<% else %>
-		<%= render "searches/user_play", word: word %>
-	<% end %>
-<% end %>
+		<% if current_user.has_word?(word) %>
+			<%= play_btn_small(UserWord.object(current_user, word), word.id) %>
+		<% else %>
+			<%= render "searches/user_play", word: word %>
+		<% end %>
+	<% end %>	
+</p>

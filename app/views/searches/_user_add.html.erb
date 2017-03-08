@@ -1,5 +1,7 @@
 <% if current_user.has_word?(word) %>
-	<%= link_to "/myLeksi/#{word.id}", class: "btn btn-outline-primary btn-block" do %>
+	<%= link_to "/myLeksi/#{word.id}",
+							class: "btn btn-outline-secondary btn-block" do
+	%>
 		<i class="fa fa-eye"></i>
 		Already Saved - See Details
 	<% end %>

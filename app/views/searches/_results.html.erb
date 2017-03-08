@@ -21,7 +21,7 @@
 		</div>
 		<div class="search card-columns">
 			<% words.each do |word| %>
-				<div class="card mb-3">
+				<div class="card mb-3" data-word-id="<%= word.id %>">
 					<div class="card-block">
 						<h2 class="card-title">
 							<%= render "words/pos_def", word: word %>

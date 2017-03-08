@@ -15,22 +15,9 @@ $(document).ready(function() {
 		const audio = $(this).parent().prev()[0];
 		audio.play();
 	});
-	// 
-	// $(".filter-div").off().on("input", "#input_search", function() {
-	// 	$("#search-form").focus();
-	// 	if (empty($(this))) {
-	// 		$("#search-form button").prop("disabled", true);
-	// 	} else {
-	// 		$("#search-form button").prop("disabled", false);
-	// 	}
-	// });
 
 	$(".mean-alt-del-form").parents("form").css("display", "d-inline");
 	spinner();
-
-	function empty($field) {
-    return $field.val().trim() == "";
-  }
 
 	// TODO Make this loading icon be like a modal for the jeopardy activity
 	// or place underneath the play button
