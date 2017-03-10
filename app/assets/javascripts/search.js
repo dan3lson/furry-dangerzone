@@ -1,14 +1,19 @@
 $(document).ready(function() {
+	var $searchBtn = $("#search-form button");
+
 	$(".container").on("input", "#input_search", function() {
-		$("#search-form").focus();
 		if (empty($(this))) {
-			$("#search-form button").prop("disabled", true);
+			updateBtnProp($searchBtn, true);
 		} else {
-			$("#search-form button").prop("disabled", false);
+			updateBtnProp($searchBtn, false);
 		}
 	});
 
 	function empty($field) {
 		return $field.val().trim() == "";
+	}
+
+	function updateBtnProp($btn_selector, boolean) {
+		$btn_selector.prop("disabled", boolean);
 	}
 });

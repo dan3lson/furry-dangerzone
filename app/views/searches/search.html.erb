@@ -1,14 +1,10 @@
-<% provide(:header, "Look Up") %>
-
-<% title "Leksi Dictionary" %>
+<% title "Dictionary: Look up words or choose one randomly or from a list." %>
 <% description "Look up words you don\'t know or select ones from a specific list" %>
 <% set_meta_tags keywords: "learn education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook" %>
-
 <% set_meta_tags og: {
-  title:    "Leksi Dictionary",
+  title:    "Dictionary: Look up words or choose one randomly or from a list.",
 	description: "Look up words you don\'t know or select ones from a specific list"
 } %>
-
 <% set_meta_tags twitter: {
   card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun, and works.",
   title: "Leksi Dictionary",
@@ -16,66 +12,49 @@
 } %>
 
 <h1><%= icon("search") %> Explore</h1>
-<div class="text-muted filter-div mb-3 card">
+<div class="explore filter-div mb-3 card">
   <div class="card-block">
     <div class="btn-group pr-2">
       <%= link_to search_path, remote: true do %>
-        <span class="text-primary active">
-          <%= icon("search") %> Dictionary
-        </span>
+        <%= icon("book") %> Dictionary
       <% end %>
     </div>
     <div class="btn-group pr-2">
       <%= link_to searches_random_path, remote: true do %>
-        <span class="text-primary active">
-          <%= icon("random") %> Random Word
-        </span>
+        <%= icon("random") %> Random Word
       <% end %>
     </div>
     <div class="btn-group pr-2">
       <div class="dropdown">
-        <a class="dropdown-toggle disabled text-muted"
-           href="#"
-           id="dropdownMenuLink"
-           data-toggle="dropdown"
-           aria-haspopup="true"
-           aria-expanded="false">
+        <%= link_to "#", class: "dropdown-toggle",
+                         id: "dropdownMenuLink",
+                         "data-toggle": "dropdown",
+                         "aria-haspopup": "true",
+                         "aria-expanded": "false" do
+        %>
           <%= icon("institution") %> Grades 1-12
-        </a>
+        <% end %>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">1st Grade</a>
-          <a class="dropdown-item" href="#">2nd Grade</a>
-          <a class="dropdown-item" href="#">3rd Grade</a>
-          <a class="dropdown-item" href="#">4th Grade</a>
-          <a class="dropdown-item" href="#">5th Grade</a>
-          <a class="dropdown-item" href="#">6th Grade</a>
-          <a class="dropdown-item" href="#">7th Grade</a>
-          <a class="dropdown-item" href="#">8th Grade</a>
-          <a class="dropdown-item" href="#">9th Grade</a>
-          <a class="dropdown-item" href="#">10th Grade</a>
-          <a class="dropdown-item" href="#">11th Grade</a>
-          <a class="dropdown-item" href="#">12th Grade</a>
-        </div>
-      </div>
-    </div>
-    <div class="btn-group pr-2">
-      <div class="dropdown">
-        <a class="dropdown-toggle disabled text-muted"
-           href="#"
-           id="dropdownMenuLink"
-           data-toggle="dropdown"
-           aria-haspopup="true"
-           aria-expanded="false">
-          <%= icon("folder") %> Exams
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">SAT</a>
+          <a class="dropdown-item disabled" href="#">1st Grade</a>
+          <a class="dropdown-item disabled" href="#">2nd Grade</a>
+          <a class="dropdown-item disabled" href="#">3rd Grade</a>
+          <%= link_to "4th Grade", search_grades_path(
+              grade: "fourth_grade_grouped"
+            ), class: "dropdown-item", remote: true
+          %>
+          <a class="dropdown-item disabled" href="#">5th Grade</a>
+          <a class="dropdown-item disabled" href="#">6th Grade</a>
+          <a class="dropdown-item disabled" href="#">7th Grade</a>
+          <a class="dropdown-item disabled" href="#">8th Grade</a>
+          <a class="dropdown-item disabled" href="#">9th Grade</a>
+          <a class="dropdown-item disabled" href="#">10th Grade</a>
+          <a class="dropdown-item disabled" href="#">11th Grade</a>
+          <a class="dropdown-item disabled" href="#">12th Grade</a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <div class="search-container mb-5">
   <%= render "searches/form" %>
 </div>

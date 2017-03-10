@@ -12,7 +12,7 @@ class Admin::MeaningAltsController < BaseAdminController
     else
       @meaning_alts = MeaningAlt.includes(:word, :user)
 																.order("words.name ASC")
-																.page(arams[:page])
+																.page(params[:page])
     end
   end
 end

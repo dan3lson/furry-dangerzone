@@ -296,7 +296,7 @@ class Word < ActiveRecord::Base
   end
 
   def self.fourth_grade
-    where(name: Word.fourth_grade_word_names)
+    where(name: Word.fourth_grade_word_names).limit(250)
   end
 
   def self.fourth_grade_grouped
@@ -483,7 +483,7 @@ class Word < ActiveRecord::Base
     words = where(name: Word.seventh_grade.take(60)).group_by(&:name)
   end
 
-  def self.pilot_for_seventh_grade
+  def self.explore_seventh_grade
     Word.find([
       3254,
       3268,

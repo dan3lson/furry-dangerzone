@@ -1,3 +1,4 @@
+<small>
 <% if user_word.freestyle_completed? %>
 	<span class="text-info">
 <% elsif user_word.fundamental_not_completed? %>
@@ -7,6 +8,7 @@
 <% elsif user_word.jeopardy_completed? %>
 	<span class="text-success">
 <% end %>
-	<i class="fa fa-trophy"></i>
+	Level
 		<%= user_word.current_game %>
 	</span>
+</small>

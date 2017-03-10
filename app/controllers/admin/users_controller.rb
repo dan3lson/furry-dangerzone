@@ -8,7 +8,7 @@ class Admin::UsersController < BaseAdminController
         @users = User.order("created_at DESC").page(params[:page])
 			elsif @filter == "num_words"
 				@users = User.order("user_words_count DESC")
-										 .paginate(:page => params[:page])
+										 .page(params[:page])
       end
     else
       @users = User.order("username ASC").page(params[:page])

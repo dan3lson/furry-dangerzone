@@ -3,9 +3,7 @@
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
 <% provide(:header, "Words") %>
 
-<% if !current_user.has_words? %>
-  <%= render "my_leksi/no_words_guide" %>
-<% else %>
+<% if current_user.has_words? %>
   <div class="text-muted filter-div">
     Filter:
     <span class="text-primary active">
@@ -25,18 +23,10 @@
   <div class="myLeksi card-columns"
        id="myLeksi-words"
        data-total="<%= @current_user_words_count %>">
-    <% @current_user_user_words_pag.each do |user_word| %>
+    <% @user_words.each do |user_word| %>
       <%= render "my_leksi/index_word", user_word: user_word %>
     <% end %>
   </div>
-  <div class="text-center">
-    <br>
-    <%= render "shared/spinner" %>
-    <p id="view-more-link-container"></p>
-    <br>
-    <br>
-    <div id="myLeksi-pagination">
-      <%= paginate @current_user_user_words_pag %>
-    </div>
-  </div>
+<% else %>
+  <%= render "my_leksi/no_words_guide" %>
 <% end %>

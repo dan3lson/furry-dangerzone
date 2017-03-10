@@ -2,11 +2,12 @@
 	<div class="alert alert-danger"><%= error %></div>
 <% else %>
 	<% word_groups.each do |name, words| %>
-		<div class="card card-outline-primary text-center mb-3">
+		<div class="card card-inverse text-center mb-3" style="background-color: #333; border-color: #333;">
 			<div class="card-block">
 				<h2 class="card-title">
 					<%= name %>
-					<% if words.first.has_pronunciation? %>
+					<%# if words.first.has_pronunciation? %>
+					<% if false %>
 						<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= name %>.mp3"
 									 id="audio"
 									 preload="auto">
@@ -16,7 +17,7 @@
 						</small>
 					<% end %>
 				</h2>
-				<span class="text-muted"><%= pluralize(words.count, "result") %></span>
+				<small><%= pluralize(words.count, "result") %></small>
 			</div>
 		</div>
 		<div class="search card-columns">

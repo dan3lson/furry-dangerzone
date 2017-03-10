@@ -6,8 +6,7 @@ class MyLeksiController < ApplicationController
 																			 .alphabetical
 																			 .includes(:word)
 																			 .latest
-		page = params[:page] ? params[:page].to_i - 1 : 1
-		@current_user_user_words_pag = @current_user_user_words.page(page)
+		@user_words = @current_user_user_words
 		@current_user_words_count = @current_user.user_words_count
 
 		respond_to do |format|
