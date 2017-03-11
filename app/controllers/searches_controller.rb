@@ -28,10 +28,15 @@ class SearchesController < ApplicationController
 
     begin
       if @search
-        @input_words = @search.split(",").map(&:strip)
-        @word_groups = @input_words.map { |w| Word.define(w) }
-                                   .flatten
-                                   .group_by { |w| w.name }
+        if @search.empty?
+          @word_groups = nil
+          @error = "Please click \'Dictionary\' and type in a word."
+        else
+          @input_words = @search.split(",").map(&:strip)
+          @word_groups = @input_words.map { |w| Word.define(w) }
+                                     .flatten
+                                     .group_by { |w| w.name }
+        end
 
         respond_to do |format|
           format.js

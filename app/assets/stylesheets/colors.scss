@@ -27,3 +27,8 @@ $light-sky-blue: lighten($sky-blue, 55);
 $show-game-circle-container-hover-opac: .7;
 $tree-brown: #966A3D;
 $white: #FFF;
+
+.card-inverse.dark {
+	background-color: #333;
+	border-color: #333;
+}

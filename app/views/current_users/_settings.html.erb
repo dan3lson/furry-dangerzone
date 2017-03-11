@@ -6,12 +6,12 @@
 	</div>
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">
-			<%= link_to feedback_path do %>
+			<%= link_to feedback_path(type: "bug") do %>
 				<i class="fa fa-bug fa-fw"></i> Report a problem
 			<% end %>
 		</li>
 		<li class="list-group-item">
-			<%= link_to feedback_path do %>
+			<%= link_to feedback_path, type: "wish" do %>
 				<i class="fa fa-magic fa-fw"></i> I wish Leksi could...
 			<% end %>
 		</li>

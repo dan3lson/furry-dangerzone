@@ -25,10 +25,7 @@ class StaticPagesController < ApplicationController
 
   def results
   end
-
-  def feedback
-  end
-
+  
   def spelling_bee
   end
 end

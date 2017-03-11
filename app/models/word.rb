@@ -43,7 +43,6 @@ class Word < ActiveRecord::Base
       if word_exists?(name)
         search(name)
       else
-        return "Type a word and then we'll try to find it." if name.blank?
         words_api_search = WordsApi.new(name).define
 
         if words_api_search.class == String

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "spelling-bee" => "static_pages#spelling_bee"
   get "our_approach" => "static_pages#our_approach"
   get "results" => "static_pages#results"
-  get "feedback" => "static_pages#feedback"
+  get "feedback" => "current_users#feedback"
   get "search" => "searches#search"
   get "search_grades" => "searches#grades"
   get "search_results" => "searches#results"

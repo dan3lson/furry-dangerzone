@@ -11,6 +11,11 @@ class CurrentUsersController < ApplicationController
   def progress
   end
 
+  def feedback
+    @type = params[:type]
+    @icon = @type == "bug" ? "bug" : "magic"
+  end
+
   private
 
   def logged_in_user
