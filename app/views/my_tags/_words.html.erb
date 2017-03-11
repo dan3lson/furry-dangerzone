@@ -1,39 +1,28 @@
-<div class="panel panel-default">
-	<div class="panel-body">
-		<div class="float-right">
-			<i class="fa fa-question-circle-o pointer fa-2x text-muted"
-				 data-toggle="modal"
-				 data-target="#myTags-show-words-modal"></i>
-		</div>
-		<%= render "my_tags/show_words_modal" %>
-		<div class="lead">
-			<i class="fa fa-book"></i>
-			Words
-		</div>
+<div class="card mb-3">
+	<div class="card-block">
+		<h5 class="card-title">
+			<%= icon "book" %> Words
+		</h5>
 		<div>
 			<% if tag_has_words?(current_user, tag) %>
 				<% words_for(current_user, tag).each do |word| %>
-					<div class="float-right">
+					<% user_word = UserWord.object(current_user, word) %>
+					<div class="mb-3">
+						<h2>
+							<small>
+								<%= link_to word.name, "/myLeksi/#{word.id}" %>
+							</small>
+						</h2>
+						<%= play_btn_small(user_word, user_word.word.id) %>
 						<%= link_to user_word_tag_tag_show_page_path(
 							word_id: word.id,
 							tag_id: tag.id),
-							class: "word-on-tag-show-page-remove-btn",
+							class: "word-on-tag-show-page-remove-btn btn btn-outline-secondary btn-sm btn-block",
 							method: :delete do
 						%>
-							<i class="fa fa-remove medium-gray"></i>
+							<i class="fa fa-trash"></i> Remove Word From Tag
 						<% end %>
 					</div>
-					<span class="word-name-size">
-						<%= link_to word.name, "/myLeksi/#{word.id}" %>
-					</span>
-					<div class="clear"></div>
-					<br>
-					<%= render "my_tags/game_zone",
-						tag: @tag,
-						word: word,
-						user_word: UserWord.object(current_user, word)
-					%>
-					<hr>
 				<% end %>
 			<% else %>
 				<div class="alert alert-warning">

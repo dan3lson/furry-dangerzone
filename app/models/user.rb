@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   end
 
   def has_tag?(tag)
-    UserTag.find_by(user: self, tag: tag).nil?
+    !tags.where(name: tag.name).empty?
   end
 
   def has_tags?
@@ -336,6 +336,11 @@ class User < ActiveRecord::Base
   # TODO: Create test
   def num_words
     words.count
+  end
+
+  # TODO: Create test
+  def num_tags
+    tags.count
   end
 
   # MOVED AS A RESULT OF SCEC & SCHOOL REFACTOR.

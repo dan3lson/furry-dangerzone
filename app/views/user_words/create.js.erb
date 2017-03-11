@@ -1,8 +1,8 @@
 var created = "<%= @created %>";
 var wordID = "<%= @word.id %>";
-var $card = $("div").find("[data-word-id='" + wordID + "']");
-var $cardBlock = $card.find(".card-block");
-var $btnsP = $card.find("p");
+var $cardBlock = $("div").find("[data-word-id='" + wordID + "']");
+var $card = $cardBlock.parent();
+var $btnsP = $cardBlock.find("p");
 $card.find(".alert").remove();
 
 if (created == "true") {

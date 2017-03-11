@@ -1,8 +1,6 @@
-<% provide(:title, "New Tag") %>
-<% provide(:header, "New Tag") %>
-
-<div class="panel panel-default">
-	<div class="panel-body">
-		<%= render "tags/form" %>
+<h1><%= icon "tag" %> Create a New Tag</h1>
+<div class="card">
+	<div class="card-block">
+		<%= render "tags/form", btn_text: "Create" %>
 	</div>
 </div>

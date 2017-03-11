@@ -1,7 +1,6 @@
 <%= form_for :user_word_tag,
-	url: user_word_tag_path,
-	html: { class: "mt-3" },
-	method: :post do |f|
+						 url: user_word_tag_path,
+						 method: :post do |f|
 %>
 	<%= hidden_field_tag :id, word.id %>
 	<%= f.label :tag_id, "Tags", class: "sr-only" %>
@@ -9,11 +8,11 @@
 													unused_tags(current_user, word),
 													:id,
 													:name,
-													{ prompt: "Add a new tag" },
+													{ prompt: "Select one" },
 													{ class: "form-control" }
 	%>
-	<%= f.button class: "btn btn-outline-primary btn-block" do %>
+	<%= f.button class: "btn btn-primary btn-block" do %>
 		<i class="fa fa-save"></i>
-		Save
+		Tag This Word
 	<% end %>
 <% end %>

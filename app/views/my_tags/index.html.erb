@@ -3,8 +3,16 @@
 <% description "Organize all of your words in groups with Tags." %>
 <% set_meta_tags keywords: "organize words group list notebook wordbook tags" %>
 
-<div class="text-muted float-right">
-  You have <%= pluralize(@num_current_user_tags, "tag") %>.
+<div>
+  <div class="text-muted float-right mb-3">
+    <%= link_to new_tag_path,
+                role: "button",
+                class: "btn btn-primary btn-block" do
+    %>
+      <%= icon("plus-circle") %> Create New Tag
+    <% end %>
+  </div>
+  <h1><%= icon "tags" %> Tags</h1>
 </div>
 <div class="clear"></div>
 <% if current_user.has_tags? %>

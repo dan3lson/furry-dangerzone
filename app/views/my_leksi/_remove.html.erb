@@ -1,13 +1,12 @@
-<br>
-<div class="center">
+<div>
   <p class="text-muted">
     You added this word <%= time_ago_in_words(user_word.created_at) %> ago.
   </p>
   <%= button_to user_word_path(id: user_word.id),
-    class: "btn btn-outline-danger btn-sm",
+    class: "btn btn-outline-secondary btn-sm",
     method: :delete do
   %>
     <i class="fa fa-trash"></i>
-    Remove This Word
+    Remove Word
   <% end %>
 </div>

@@ -1,14 +1,21 @@
-<h4>Stats Overview</h4>
 <div class="card-deck text-center mb-3">
-	<div class="card">
+	<div class="card mb-3">
+		<div class="card-block">
+			<%= icon "book" %>
+			<br>
+			<%= user.num_words %>
+			Words
+		</div>
+	</div>
+	<div class="card mb-3">
 		<div class="card-block">
 			<i class="fa fa-trophy"></i>
 			<br>
 			<%= user.myLeksi_mastery %>%
-			myLeksi Mastered
+			Words Mastered
 		</div>
 	</div>
-	<div class="card">
+	<div class="card mb-3">
 		<div class="card-block">
 			<i class="fa fa-clock-o"></i>
 			<br>
@@ -16,12 +23,22 @@
 			Time Spent Playing (minutes)
 		</div>
 	</div>
-	<div class="card">
+</div>
+<div class="card-deck text-center mb-3">
+	<div class="card mb-3">
 		<div class="card-block">
 			<i class="fa fa-sign-in"></i>
 			<br>
 			<%= user.num_logins %>
 			Times Logged In
+		</div>
+	</div>
+	<div class="card mb-3">
+		<div class="card-block">
+			<%= icon "tags" %>
+			<br>
+			<%= user.num_tags %>
+			Tags
 		</div>
 	</div>
 </div>

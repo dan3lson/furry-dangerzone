@@ -15,18 +15,20 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.where(name: tag_params[:name]).first_or_initialize
+    @tag = Tag.new(tag_params)
 
     if current_user.has_tag?(@tag)
-      flash.now[:warning] = "Whoa there - you already have that tag!"
+      msg = [
+        "Hey #{current_user.username}, you already have a tag named ",
+        "\'#{@tag.name}\'. Change the name and then try creating it again."
+      ].join
+      flash.now[:warning] = msg
       render :new
     else
-      @user_tag = UserTag.new(user: current_user, tag: @tag)
-
-      if @tag.save && @user_tag.save && current_user.save
-        flash[:success] = "Success!"
-
-        redirect_to myTags_path
+      if @tag.save
+        current_user.tags << @tag
+        flash[:success] = "Success! Now add words to this tag below."
+        redirect_to "/myTags/#{@tag.id}"
       else
         render :new
       end
@@ -38,15 +40,13 @@ class TagsController < ApplicationController
   end
 
   def update
+    binding.pry
     @tag = Tag.find(params[:id])
 
     if @tag.update(tag_params)
-      flash[:success] = "Changes successfully made."
-
+      flash[:success] = "Success - tag updated!"
       redirect_to "/myTags/#{@tag.id}"
     else
-      flash[:danger] = "Changes not successfully made."
-
       render :edit
     end
   end
@@ -55,12 +55,10 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
 
     if @tag.destroy
-      flash[:success] = "Tag deleted."
-
+      flash[:success] = "That tag was successfully deleted."
       redirect_to myTags_path
     else
-      flash[:danger] = "Yikes! Something went wrong. Please try again."
-
+      flash[:danger] = "Sorry, something went wrong. Please try again."
       redirect_to myTags_path
     end
   end
@@ -74,7 +72,6 @@ class TagsController < ApplicationController
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Please log in first."
-
       redirect_to login_url
     end
   end
@@ -84,7 +81,6 @@ class TagsController < ApplicationController
 
     unless current_user.tags.include?(@tag)
       flash[:danger] = "Access denied."
-
       redirect_to myTags_path
     end
   end

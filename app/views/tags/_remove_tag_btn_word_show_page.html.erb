@@ -1,7 +1,9 @@
 <%= link_to user_word_tag_word_show_page_path(
     word_id: word,
-    tag_name: tag.name
-  ), method: :delete do
+    tag_name: tag.name,
+  ),
+  class: "btn btn-outline-secondary btn-sm btn-block tag-on-word-show-page",
+  method: :delete do
 %>
-  <i class="fa fa-remove text-danger"></i>
+  <i class="fa fa-trash"></i> Remove Tag From Word
 <% end %>

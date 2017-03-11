@@ -17,7 +17,7 @@
 					 role="tabpanel"
 					 aria-labelledby="heading-word-<%= name %>">
 				<% words.take(3).each do |word| %>
-		      <div class="card-block">
+		      <div class="card-block" data-word-id="<%= word.id %>">
 						<h2 class="card-title">
 							<%= render "words/pos_def", word: word %>
 						</h2>

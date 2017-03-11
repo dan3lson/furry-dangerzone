@@ -1,10 +1,12 @@
 <div class="card mb-3">
 	<div class="card-block">
 		<h5 class="card-title">
-			<i class="fa fa-tag pointer"></i>
+			<i class="fa fa-tag"></i>
 			Tags
 		</h5>
 		<% if current_user.has_tags? %>
+			<%= render "my_leksi/tags_form", word: word %>
+			<hr>
 			<% if tags_exist?(current_user, word) %>
 				<% tags_for(current_user, word).each do |tag| %>
 					<%= render "my_leksi/tag", tag: tag, word: word %>
@@ -14,7 +16,6 @@
 					None
 				</small>
 			<% end %>
-			<%= render "my_leksi/tags_form", word: word %>
 		<% else %>
 			<small class="text-muted">
 				<%= link_to "Create your first Tag", new_tag_path %>

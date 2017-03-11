@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   get "myLeksi/:id" => "my_leksi#show"
   get "myTags" => "my_tags#index"
   get "myTags/:id" => "my_tags#show"
-  get "jeopardy_tag" => "tag_games#jeopardy"
   get "gamezone" => "games#gamezone"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"

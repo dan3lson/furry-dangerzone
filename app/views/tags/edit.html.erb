@@ -1,21 +1,12 @@
-<% provide(:title, "Edit Tag") %>
-<% provide(:header, "Edit Tag") %>
-
+<h1><%= icon "tag" %> Edit Tag</h1>
 <div class="card">
   <div class="card-block">
     <p class="lead">Use the form below to update this tag.</p>
-    <%= render 'shared/error_messages', object: @tag %>
-    <%= form_for(@tag) do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control", placeholder: "Name *"  %>
-      <%= f.button type:"submit", class: "btn btn-info btn-block" do %>
-        <i class="fa fa-save"></i>
-        Update
-      <% end %>
-    <% end %>
+    <%= render "tags/form", btn_text: "Update" %>
   </div>
   <div class="card-footer text-muted text-center">
     You added this tag <%= time_ago_in_words(@tag.created_at) %> ago.
+    <br>
     <%= render "tags/remove_tag_btn_tag_show_page", tag: @tag %>
   </div>
 </div>
