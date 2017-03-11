@@ -15,11 +15,6 @@
 				<i class="fa fa-edit fa-fw"></i> Edit my profile
 			<% end %>
 		</li>
-		<li class="list-group-item">
-			<%= link_to progress_path do %>
-				<i class="fa fa-line-chart fa-fw"></i> View my stats
-			<% end %>
-		</li>
 		<% unless controller?("current_users") && action?("settings") %>
 			<li class="list-group-item">
 				<%= link_to settings_path do %>

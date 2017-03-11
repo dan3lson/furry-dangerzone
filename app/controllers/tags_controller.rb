@@ -27,7 +27,7 @@ class TagsController < ApplicationController
     else
       if @tag.save
         current_user.tags << @tag
-        flash[:success] = "Success! Now add words to this tag below."
+        flash[:success] = "Success! Add words here for better organization."
         redirect_to "/myTags/#{@tag.id}"
       else
         render :new
