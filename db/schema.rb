@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307023314) do
+ActiveRecord::Schema.define(version: 20170312025138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20170307023314) do
 
   add_index "examples", ["word_id"], name: "index_examples_on_word_id", using: :btree
 
+  create_table "freestyle_lek_tales", force: :cascade do |t|
+    t.integer  "freestyle_id", null: false
+    t.text     "word_ids",     null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "freestyle_rel_words", force: :cascade do |t|
     t.integer  "freestyle_id", null: false
     t.integer  "rel_word_id",  null: false
@@ -79,6 +86,13 @@ ActiveRecord::Schema.define(version: 20170307023314) do
     t.integer  "example_non_example_id", null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "game_stat_freestyle_lek_tales", force: :cascade do |t|
+    t.integer  "game_stat_id",          null: false
+    t.integer  "freestyle_lek_tale_id", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "game_stat_freestyle_rel_words", force: :cascade do |t|

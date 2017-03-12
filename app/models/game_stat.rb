@@ -5,6 +5,7 @@ class GameStat < ActiveRecord::Base
   has_one :game_stat_meaning_alt, dependent: :destroy
   has_one :game_stat_freestyle_sent_stem, dependent: :destroy
   has_one :game_stat_freestyle_rel_word, dependent: :destroy
+  has_one :game_stat_freestyle_lek_tale, dependent: :destroy
 
   validates :user_word, presence: true
   validates :game, presence: true

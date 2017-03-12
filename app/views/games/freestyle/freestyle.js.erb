@@ -71,10 +71,12 @@ $(".container").on("click", ".continue-btn", function() {
 		emptyActivityDiv();
 		startLeksiTaleActivity();
 	} else if ($btn.hasClass("start-describe-me-activity")) {
-		updateUserWordGamesCompleted(11);
 		flashPointsUpdate(getArrowSuccess());
+		saveLeksiTaleResponse(timeStarted);
+		emptyActivityDiv();
 
 		if (availableGames.describe_me) {
+			updateUserWordGamesCompleted(11);
 			addPoints(1691);
 			updateProgress(75);
 			startDescribeMeActivity();
@@ -123,7 +125,7 @@ function startWordRelationshipActivity() {
 	getAnotherFreestyleWord().done(function(secondWord) {
 		var $span = createElem("span")
 								.attr("data-rel-word-id", secondWord.id)
-								.append(" " + secondWord.name);
+								.append("+ " + secondWord.name);
 		$(".target-word-header-div").append($span);
 		const $textarea = createTextarea();
 		$activityDiv.append($textarea);
@@ -219,6 +221,19 @@ function getDate() {
 	return new Date();
 }
 
+function saveLeksiTaleResponse(timeStarted) {
+	var input = $activityDiv.find("textarea").val().trim();
+	var wordIDs = [];
+	var selectedWordIDs = $.each($(".badge-success"), function() {
+    wordIDs.push($(this).data("word-id"));
+	});
+	var data = {
+		"word_ids": wordIDs,
+		"input": input
+	};
+	createFreestyle("leksi_tale", timeStarted, data);
+}
+
 function saveWordRelResponse(timeStarted) {
 	var input = $activityDiv.find("textarea").val().trim();
 	var relatedWordID = $(".container .bg-faded")
@@ -287,10 +302,10 @@ function highlightUsedWords(textareaWords, names) {
 	$(".badge-success").removeClass("badge-success").addClass("badge-default");
 
 	if (words.length) {
-		$.each(usedWords(textareaWords, names), function() {
+		$.each(words, function() {
 			var usedWord = this;
 			var $badge = $(".badge-default").filter(function() {
-				return $(this).text() == usedWord;
+				return $(this).text().trim() == usedWord;
 			});
 			$badge.removeClass("badge-default").addClass("badge-success");
 		});

@@ -1,7 +1,6 @@
-<% provide(:title, "Stats") %>
-<% provide(:header, "Stats") %>
-
-<div class="my-stats-container">
+<% title "View your General and Game Zone stats." %>
+<h1><%= icon "line-chart" %> Stats</h1>
+<div>
   <%= render "users/overview_stats", user: current_user %>
   <%= render "users/fundamentals_game_stats", user: current_user %>
   <%= render "users/jeopardy_game_stats", user: current_user %>

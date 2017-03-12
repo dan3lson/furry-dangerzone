@@ -30,12 +30,12 @@
 	<% end %>
 <% end %>
 
-<% if controller?("users") && action?("show") %>
-	<%= link_to progress_path, class: "nav-item nav-link active" do %>
+<% if action?("progress") %>
+	<%= link_to stats_path, class: "nav-item nav-link active" do %>
 		<i class="fa fa-line-chart"></i> Stats
 	<% end %>
 <% else %>
-	<%= link_to progress_path, class: "nav-item nav-link" do %>
+	<%= link_to stats_path, class: "nav-item nav-link" do %>
 		<i class="fa fa-line-chart"></i> Stats
 	<% end %>
 <% end %>
