@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get "searches/random"
   get "home" => "current_users#home"
   get "settings" => "current_users#settings"
-  get "stats" => "current_users#progress"
+  get "stats" => "current_users#stats"
   get "myLeksi" => "my_leksi#index"
   get "myLeksi/names" => "my_leksi#names"
   get "myLeksi/:id" => "my_leksi#show"

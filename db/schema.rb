@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170312025138) do
+ActiveRecord::Schema.define(version: 20170312050735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 20170312025138) do
   end
 
   add_index "examples", ["word_id"], name: "index_examples_on_word_id", using: :btree
+
+  create_table "freestyle_desc_mes", force: :cascade do |t|
+    t.integer  "freestyle_id",   null: false
+    t.integer  "describe_me_id", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "freestyle_desc_mes", ["describe_me_id"], name: "index_freestyle_desc_mes_on_describe_me_id", using: :btree
+  add_index "freestyle_desc_mes", ["freestyle_id"], name: "index_freestyle_desc_mes_on_freestyle_id", using: :btree
 
   create_table "freestyle_lek_tales", force: :cascade do |t|
     t.integer  "freestyle_id", null: false
@@ -87,6 +97,16 @@ ActiveRecord::Schema.define(version: 20170312025138) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "game_stat_freestyle_desc_mes", force: :cascade do |t|
+    t.integer  "game_stat_id",         null: false
+    t.integer  "freestyle_desc_me_id", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "game_stat_freestyle_desc_mes", ["freestyle_desc_me_id"], name: "index_game_stat_freestyle_desc_mes_on_freestyle_desc_me_id", using: :btree
+  add_index "game_stat_freestyle_desc_mes", ["game_stat_id"], name: "index_game_stat_freestyle_desc_mes_on_game_stat_id", using: :btree
 
   create_table "game_stat_freestyle_lek_tales", force: :cascade do |t|
     t.integer  "game_stat_id",          null: false

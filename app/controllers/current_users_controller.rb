@@ -8,7 +8,7 @@ class CurrentUsersController < ApplicationController
   def settings
   end
 
-  def progress
+  def stats
   end
 
   def feedback

@@ -1,6 +1,6 @@
 class SentStem < ActiveRecord::Base
   belongs_to :word
-  belongs_to :creator, class_name: "User"
+  belongs_to :creator, class_name: "User", foreign_key: "user_id"
   has_many :freestyle_sent_stems, dependent: :destroy
   has_many :freestyles, through: :freestyle_sent_stems
   has_many :game_stat_freestyle_sent_stems, dependent: :destroy

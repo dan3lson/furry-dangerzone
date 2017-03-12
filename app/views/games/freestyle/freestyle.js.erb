@@ -17,7 +17,7 @@ $(".container").empty()
 var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
-var $regex = /^[a-zA-Z0-9 .';,?!-]+$/;
+var $regex = /^[a-zA-Z0-9 .';,?!-:]+$/;
 var newPointsTotal = 0;
 var timeStarted;
 updateProgress(10);
@@ -87,9 +87,12 @@ $(".container").on("click", ".continue-btn", function() {
 			startReviewActivity();
 		}
 	} else if ($btn.hasClass("start-review-activity")) {
+		updateUserWordGamesCompleted(12);
 		updateProgress(100);
 		addPoints(2369);
 		flashPointsUpdate(getArrowSuccess());
+		saveDescMeResponse(timeStarted);
+		emptyActivityDiv();
 		startReviewActivity();
 	}
 
@@ -185,6 +188,7 @@ function startDescribeMeActivity() {
 		giveDirections(describeMe.text);
 		const $textarea = createTextarea();
 		$activityDiv.append($textarea);
+		$activityDiv.attr("data-desc-me-id", describeMe.id);
 		$textarea.attr("placeholder", "Type in here...").focus();
 
 		$textarea.on("input", function() {
@@ -219,6 +223,16 @@ function beginTimeStarted() {
 
 function getDate() {
 	return new Date();
+}
+
+function saveDescMeResponse(timeStarted) {
+	var input = $activityDiv.find("textarea").val().trim();
+	var describeMeID = $activityDiv.data("desc-me-id");
+	var data = {
+		"desc_me_id": describeMeID,
+		"input": input
+	};
+	createFreestyle("describe_me", timeStarted, data);
 }
 
 function saveLeksiTaleResponse(timeStarted) {
