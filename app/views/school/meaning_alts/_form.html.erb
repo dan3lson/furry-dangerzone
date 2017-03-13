@@ -1,23 +1,22 @@
-<%= form_for [:school, word, m_a],
-						 method: :post,
-						 remote: true do |f| %>
-	<p class="form-group">
+<%= form_for [:school, word, m_a], method: method, remote: true do |f| %>
+	<div class="form-group">
 		<%= f.label :text, class: "form-control-label" %>
 		<%= f.text_area :text, rows: 4, class: "form-control" %>
-	</p>
-	<p class="form-group">
+	</div>
+	<div class="form-group">
 		<%= f.label :choices, class: "form-control-label" %>
 		<%= f.text_field :choices, class: "form-control" %>
-	</p>
-	<p class="form-group">
+	</div>
+	<div class="form-group">
 		<%= f.label :answer, class: "form-control-label" %>
 		<%= f.text_field :answer, class: "form-control" %>
-	</p>
-	<p class="form-group">
+	</div>
+	<div class="form-group">
 		<%= f.label :feedback, class: "form-control-label" %>
 		<%= f.text_area :feedback, rows: 4, class: "form-control" %>
-	</p>
+	</div>
 	<%= f.submit btn_text,
 							 type: "button",
-							 class: "btn btn-primary btn-block create-mean-alt-btn" %>
+							 class: "btn btn-primary btn-block create-mean-alt-btn"
+  %>
 <% end %>

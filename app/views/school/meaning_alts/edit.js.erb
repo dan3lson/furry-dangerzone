@@ -1,11 +1,13 @@
-var $activeElement = $(document.activeElement);
-var $partial = $("<%= j render(partial: 'school/meaning_alts/form', locals: { m_a: @m_a, text: 'Update', word: @word }) %>");
-var $card = $activeElement.parents(".card");
-var $cardBlock = $activeElement.parents(".card");
-var $buttons = $card.find(".float-right");
-var $form = $activeElement.parent();
-var $footer = $form.parent();
+var meaningAltID = "<%= @m_a.id %>";
+var $cardBlock = $("div").find("[data-meaning-alt-id='" + meaningAltID + "']");
+var $buttons = $cardBlock.find("p:last");
+var $formPartial = $("<%= j render(partial: 'school/meaning_alts/form', locals: { m_a: @m_a, method: :patch, btn_text: 'Update', word: @word }) %>");
+var $deleteBtnPartial = $("<%= j render(partial: 'school/meaning_alts/delete_btn', locals: { m_a: @m_a, word: @word }) %>");
 $buttons.hide();
-$footer.find("p").remove();
-$footer.append($partial);
-$footer.find(".alert").remove();
+$cardBlock.find("p").remove();
+$cardBlock.append($formPartial, $deleteBtnPartial);
+removeAlerts();
+
+function removeAlerts() {
+	$(".alert").remove();
+}

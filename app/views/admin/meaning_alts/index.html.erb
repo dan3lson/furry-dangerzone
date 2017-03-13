@@ -9,7 +9,7 @@
   |
   <%= link_to admin_meaning_alts_path(filter: "latest") do %>
     <span>
-      <i class="fa fa-calendar hover pointer"></i> Created at
+      <i class="fa fa-calendar hover pointer"></i> Latest
     </span>
   <% end %>
   <div class="float-right">
@@ -29,4 +29,4 @@
   </div>
   <div class="clear"></div>
 </div>
-<%= render "admin/meaning_alts/meaning_alts", meaning_alts: @meaning_alts %>
+<%= render "admin/meaning_alts/meaning_alts", m_a_groups: @m_a_groups %>

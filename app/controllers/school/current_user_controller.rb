@@ -83,7 +83,9 @@ class School::CurrentUserController < BaseSchoolController
   end
 
   def my_meaning_alts
-    @my_meaning_alts = current_user.meaning_alts
-                                   .page(params[:page])
+    @m_a_groups = current_user.meaning_alts.includes(:word, :creator)
+                            .order("created_at DESC")
+                            .group_by { |m_a| m_a.word.id }
+
   end
 end

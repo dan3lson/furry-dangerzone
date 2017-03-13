@@ -7,7 +7,7 @@ class School::MeaningAltsController < BaseSchoolController
     @m_a = MeaningAlt.new(meaning_alt_params)
     @word = Word.find(params[:word_id])
     @m_a.word = @word
-    @m_a.user = current_user
+    @m_a.creator = current_user
     @created = false
 
     if @m_a.save
@@ -25,6 +25,7 @@ class School::MeaningAltsController < BaseSchoolController
 
   def edit
     @m_a = MeaningAlt.find(params[:id])
+    @word = @m_a.word
 
     respond_to do |format|
       format.html
@@ -34,6 +35,7 @@ class School::MeaningAltsController < BaseSchoolController
 
   def update
     @m_a = MeaningAlt.find(params[:id])
+    @word = @m_a.word
     @saved = false
 
     if @m_a.update(meaning_alt_params)

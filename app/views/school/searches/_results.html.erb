@@ -5,8 +5,8 @@
 		<div class="col-md-6 offset-md-3">
 			<% word_groups.each do |name, words| %>
 				<% words.each do |word| %>
-					<div class="card mb-3" data-word-id="<%= word.id %>">
-						<div class="card-block">
+					<div class="card mb-3">
+						<div class="card-block" data-word-id="<%= word.id %>">
 							<%= render "words/basics", word: word %>
 						</div>
 						<% if object %>
@@ -15,6 +15,7 @@
 									<%= render "school/meaning_alts/form",
 														 word: word,
 														 m_a: object,
+														 method: :post,
 														 btn_text: "Create"
 									%>
 								<% elsif object.is_a?(ExampleNonExample) %>

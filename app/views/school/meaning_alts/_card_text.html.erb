@@ -9,7 +9,7 @@
 		<strong>Feedback</strong> <%= m_a.feedback %>
 		<br>
 		<strong>Created by</strong>
-		<%= m_a.user.username %> (<%= time_ago_in_words(m_a.created_at) %> ago)
+		<%= m_a.creator.username %> (<%= time_ago_in_words(m_a.created_at) %> ago)
 		<br>
 		<strong>Last Update</strong>
 		<%= time_ago_in_words(m_a.updated_at) %> ago

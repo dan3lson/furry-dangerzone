@@ -1,18 +1,25 @@
 var created = "<%= @created %>";
 var wordID = "<%= @word.id %>";
-var $card = $("div").find("[data-word-id='" + wordID + "']");
-var $cardBlock = $card.find(".card-block");
+var $cardBlock = $("div").find("[data-word-id='" + wordID + "']");
+var $card = $cardBlock.parent();
 var $footer = $card.find(".card-footer");
 var $form = $card.find("form");
-$card.find(".alert").remove();
+removeAlerts();
 
 if (created == "true") {
 	var count = parseInt("<%= @meaning_alt_count %>");
-	var $cardBlockPartial = $("<%= j render(partial: 'school/meaning_alts/card_text', locals: { m_a: @m_a }) %>");
-	$cardBlock.append($cardBlockPartial).append("<hr>").hide().fadeIn();
-	$cardBlock.find("p.card-text:last").prepend(
-		createFlash("success", "Success! You can create another one below.")
-	).hide().fadeIn();
+	var $cardTextPartial = $("<%= j render(partial: 'school/meaning_alts/card_text', locals: { m_a: @m_a }) %>");
+	var $editPartial = $("<%= j render(partial: 'school/meaning_alts/edit_btn', locals: { m_a: @m_a }) %>");
+	var $newCardBlock = createElem("div", "card-block")
+											.attr("data-meaning-alt-id", "<%= @m_a.id %>");
+  var $flash = createFlash(
+		"success", "Success; thanks! You can create another one below."
+	);
+	$newCardBlock.append($cardTextPartial, $editPartial)
+							 .prepend($flash)
+							 .insertBefore($footer)
+							 .hide()
+							 .fadeIn();
 	$form[0].reset();
 
 	if (count > 1) {
@@ -21,6 +28,10 @@ if (created == "true") {
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @m_a }) %>");
 	$footer.prepend($errorsPartial);
+}
+
+function removeAlerts() {
+	$(".alert").remove();
 }
 
 function createFlash(_class, text) {

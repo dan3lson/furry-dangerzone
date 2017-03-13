@@ -16,7 +16,6 @@ $(document).ready(function() {
 		audio.play();
 	});
 
-	$(".mean-alt-del-form").parents("form").css("display", "d-inline");
 	spinner();
 
 	// TODO Make this loading icon be like a modal for the jeopardy activity

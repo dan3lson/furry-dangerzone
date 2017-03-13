@@ -1,25 +1,27 @@
-var $activeElement = $(document.activeElement);
+var meaningAltID = "<%= @m_a.id %>";
+var $cardBlock = $("div").find("[data-meaning-alt-id='" + meaningAltID + "']");
 var $cardTextPartial = $("<%= j render(partial: 'school/meaning_alts/card_text', locals: { m_a: @m_a }) %>");
-var $btnsPartial = $("<%= j render(partial: 'school/meaning_alts/edit_delete_btns', locals: { m_a: @m_a }) %>");
-var $card = $activeElement.parents(".card");
-var $cardBlock = $card.find(".card-block");
-var $form = $activeElement.parent();
-var $hiddenBtnsDiv = $form.siblings();
+var $editPartial = $("<%= j render(partial: 'school/meaning_alts/edit_btn', locals: { m_a: @m_a }) %>");
 var saved = "<%= @saved %>";
-$footer.find(".alert").remove();
+removeAlerts();
 
 if (saved == "true") {
-	$footer.html($cardTextPartial).fadeIn();
-	$footer.prepend(createFlash("success", "Updated!"));
-	$footer.prepend($btnsPartial);
+	$cardBlock.html($cardTextPartial).fadeIn();
+	$cardBlock.prepend(createFlash("success", "Updated!"));
+	$cardBlock.append($editPartial);
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @m_a }) %>");
 	$cardBlock.prepend($errorsPartial);
 }
 
+function removeAlerts() {
+	$(".alert").remove();
+}
+
 function createFlash(_class, text) {
-	return createElem("div", "alert alert-" + _class).append(text)
-																									 .attr("role", "alert");
+	return createElem("div", "alert alert-" + _class)
+				 .append(text)
+				 .attr("role", "alert");
 }
 
 function createElem(elem, elemClass, elemID) {

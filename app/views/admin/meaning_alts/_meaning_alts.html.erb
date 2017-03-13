@@ -1,9 +1,19 @@
-<%= paginate meaning_alts %>
 <div class="row">
   <div class="col-md-6 offset-md-3">
-    <% meaning_alts.each do |m_a| %>
-      <%= render "admin/meaning_alts/meaning_alt", m_a: m_a, word: m_a.word %>
+    <% m_a_groups.each do |id, array| %>
+      <div class="card mb-3">
+        <div class="card-block" data-word-id="<%= id %>">
+
+          <%= render "words/basics", word: Word.find(id) %>
+        </div>
+        <% array.each do |m_a| %>
+          <% word = m_a.word %>
+          <%= render "admin/meaning_alts/meaning_alt",
+              m_a: m_a,
+              word: m_a.word
+          %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
-<%= paginate meaning_alts %>

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :meaning_alts
   has_many :example_non_examples
   has_many :sent_stems
+  has_many :describe_mes
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

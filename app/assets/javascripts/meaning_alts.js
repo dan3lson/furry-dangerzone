@@ -5,13 +5,6 @@ $(document).ready(function() {
 	var $inputAnswer;
 	var $inputFeedback;
 
-	$(".container").on("click", ".mean-alt-edit-btn", function() {
-		var $card = $(this).parents(".card");
-		var $cardText = $card.find(".card-text");
-		var meaningAltID = $cardText.data("mean-alt-id");
-		$.getScript("/school/meaning_alts/" + meaningAltID + "/edit");
-	});
-
 	$(".container").on("click", ".create-mean-alt-btn", function() {
 		$form = $(this).parent();
 		$btn = $form.find("button");

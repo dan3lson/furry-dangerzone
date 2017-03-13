@@ -1,5 +1,5 @@
-var $activeElement = $(document.activeElement);
-var $card = $activeElement.parents(".card");
+var meaningAltID = "<%= @m_a.id %>";
+var $cardBlock = $("div").find("[data-meaning-alt-id='" + meaningAltID + "']");
 var destroyed = "<%= @destroyed %>";
 var totalMeaningAlts = "<%= @meaning_alts_count %>";
 removeAlerts();
@@ -7,12 +7,12 @@ removeAlerts();
 if (destroyed == "true") {
 	$("#meaning-alts-count").html(totalMeaningAlts);
 	var $flash = createFlash("success", "Successfully deleted.");
-	$flash.insertBefore($card);
-	$card.remove();
+	$cardBlock.prepend($flash);
+	$cardBlock.find("form").slideUp("slow");
 
 	setTimeout(function() {
-		removeAlerts();
-	}, 1000);
+		$cardBlock.remove();
+	}, 4000);
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @m_a }) %>");
 	$cardBlock.prepend($errorsPartial);
@@ -23,8 +23,9 @@ function removeAlerts() {
 }
 
 function createFlash(_class, text) {
-	return createElem("div", "alert alert-" + _class).append(text)
-																									 .attr("role", "alert");
+	return createElem("div", "alert alert-" + _class)
+				 .append(text)
+				 .attr("role", "alert");
 }
 
 function createElem(elem, elemClass, elemID) {

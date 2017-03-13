@@ -60,8 +60,8 @@
 
 <% @fourth_grade_words.each do |name, words| %>
 	<% word = words[0] %>
-	<div class="card mb-3" data-word-id="<%= word.id %>">
-		<div class="card-block">
+	<div class="card mb-3">
+		<div class="card-block" data-word-id="<%= word.id %>">
 			<div class="float-right">
 				<% if word.meaning_alts.count > 1 %>
 					<i class="fa fa-check fa-3x text-success"></i>
@@ -77,30 +77,21 @@
 				<br>
 				<strong>Definition</strong> <%= word.definition %>
 			</p>
-			<% if word.has_meaning_alts? %>
-				<p class="text-primary">
-					Decisions, Decisions for <mark><%= word.name %></mark>:
-				</p>
-
-				<% word.meaning_alts.each do |meaning_alt| %>
-					<p class="card-text">
-						<strong>Text</strong> <%= meaning_alt.text %>
-						<br>
-						<strong>Choices</strong> <%= meaning_alt.choices %>
-						<br>
-						<strong>Answer</strong> <%= meaning_alt.answer %>
-						<br>
-						<strong>Feedback</strong> <%= meaning_alt.feedback %>
-					</p>
-					<hr>
-				<% end %>
-			<% end %>
 		</div>
+		<% if word.has_meaning_alts? %>
+			<% word.meaning_alts.each do |meaning_alt| %>
+				<div class="card-block" data-meaning-alt-id="<%= meaning_alt.id %>">
+					<%= render "school/meaning_alts/card_text", m_a: meaning_alt %>
+					<%= render "school/meaning_alts/edit_btn", m_a: meaning_alt %>
+				</div>
+			<% end %>
+		<% end %>
 		<% unless word.meaning_alts.count > 1 %>
 			<div class="card-footer">
 				<%= render "school/meaning_alts/form",
 									 word: word,
 									 m_a: @meaning_alt,
+									 method: :post,
 									 btn_text: "Create"
 				%>
 			</div>
