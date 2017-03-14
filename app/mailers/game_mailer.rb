@@ -3,7 +3,7 @@ class GameMailer < ApplicationMailer
 		@free = free
 		@user = user
 		@game = game
-		mail to: "danelson.rosa@leksi.education",
+		mail to: "danelson@leksi.education",
 				 subject: "New #{@game.name} Freestyle Response from #{@user.username}"
 	end
 end
