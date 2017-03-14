@@ -2,26 +2,18 @@
 	Hello Danelson,
 </p>
 <p>
-	There's a new Freestyle response! Here it is:
+	There's a new Freestyle response:
 </p>
+<hr>
+<p><strong>From:</strong> <%= @user.username %></p>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Game: <%= @game.name %></strong></p>
+<p><strong>Response: <%= @free.input %></strong></p>
 <hr>
 <p>
-	<strong>From:</strong> (<%= @user.id %>) <%= @user.username %>
+	Please verify their response and, if you can, provide feedback, which
+	students eagerly look forward to.
 </p>
-<p><strong>Email:</strong> <%= @user.email %></p>
-<p><strong>Response:</strong></p>
-
-<div class="card">
-	<div class="card-block">
-		<h4 class="card-title"><%= @game.name %></h4>
-		<p class="card-text"><%= @free.input %></p>
-	</div>
-	<div class="card-footer">
-		Please verify their response and, if you can, provide feedback, which
-		students eagerly look forward to.
-	</div>
-</div>
-<hr>
 <p>
 	If you have any questions or comments, we're always here for you.
 </p>

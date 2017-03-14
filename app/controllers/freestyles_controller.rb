@@ -20,6 +20,7 @@ class FreestylesController < ApplicationController
 
 				if @free.save
 					@msgs[:successes] << "Free created for UW #{@user_word.id}."
+					GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 					@sent_stem = SentStem.find(id)
 					@fss = FreestyleSentStem.new(freestyle: @free, sent_stem: @sent_stem)
 
@@ -95,6 +96,7 @@ class FreestylesController < ApplicationController
 
 		if @free.save
 			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
+			GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 			@word_ids = params[:uniq_data][:word_ids]
 			@free_l_t = FreestyleLekTale.new(freestyle: @free, word_ids: @word_ids)
 			@game_stat = GameStat.universal(
@@ -136,6 +138,7 @@ class FreestylesController < ApplicationController
 
 		if @free.save
 			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
+			GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 			@desc_me = DescribeMe.find(params[:uniq_data][:desc_me_id])
 			@f_desc_me = FreestyleDescMe.new(freestyle: @free, describe_me: @desc_me)
 			@game_stat = GameStat.universal(
