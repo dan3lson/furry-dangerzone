@@ -22,12 +22,12 @@ class MyLeksiController < ApplicationController
 
 	def words
 		@target_word = Word.find(params[:word_id])
-		@words = if current_user.num_words > 4
+		@words = if current_user.num_words > 3
 			UserWord.where(user: current_user)
 							.includes(:word)
 							.map(&:word)
 		else
-			Word.random(10)
+			Word.random(4)
 		end
 
 		render json: @words << @target_word

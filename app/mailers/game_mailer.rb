@@ -1,6 +1,9 @@
 class GameMailer < ApplicationMailer
-	def new_freestyle(uw)
+	def new_freestyle(free, user, game)
+		@free = free
+		@user = user
+		@game = game
 		mail to: "danelson.rosa@leksi.education",
-				 subject: "New Freestyle Response (#{uw.username} | #{uw.word.name})"
+				 subject: "New #{@game.name} Freestyle Response from #{@user.username}"
 	end
 end

@@ -53,7 +53,7 @@ class FreestylesController < ApplicationController
 
 		if @free.save
 			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
-			GameMailer.new_freestyle(@free).deliver_later
+			GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 			@rel_word = Word.find(params[:uniq_data][:rel_word_id])
 			@free_w_r = FreestyleRelWord.new(freestyle: @free, rel_word: @rel_word)
 			@game_stat = GameStat.universal(

@@ -6,13 +6,14 @@
 </p>
 <hr>
 <p>
-	<strong>From:</strong> (<%= current_user.id %>) <%= current_user.username %>
+	<strong>From:</strong> (<%= @user.id %>) <%= @user.username %>
 </p>
-<p><strong>Email:</strong> <%= current_user.email %></p>
+<p><strong>Email:</strong> <%= @user.email %></p>
 <p><strong>Response:</strong></p>
+
 <div class="card">
 	<div class="card-block">
-		<h4 class="card-title"><%= @free.game.name %></h4>
+		<h4 class="card-title"><%= @game.name %></h4>
 		<p class="card-text"><%= @free.input %></p>
 	</div>
 	<div class="card-footer">
