@@ -3,44 +3,98 @@
 		<h5 class="card-title"><i class="fa fa-gamepad"></i> Game Zone</h5>
 	</div>
 	<ul class="list-group list-group-flush">
-		<li class="list-group-item text-danger">
-			Level 1: Spelling Speed
+		<li class="list-group-item">
+			<%= link_to "Level 1: Spelling Speed",
+									fund_game_link(word_id),
+									class: "text-danger",
+									remote: true
+			%>
 		</li>
-		<li class="list-group-item text-danger">
-			Level 2: Jumbled Letters
+		<li class="list-group-item">
+			<%= link_to "Level 2: Jumbled Letters",
+									fund_game_link(word_id),
+									class: "text-danger",
+									remote: true
+			%>
 		</li>
-		<li class="list-group-item text-danger">
-			Level 3: Say It Right
+		<li class="list-group-item">
+			<%= link_to "Level 3: Say It Right",
+									fund_game_link(word_id),
+									class: "text-danger",
+									remote: true
+			%>
 		</li>
-		<li class="list-group-item text-danger">
-			Level 4: Decisions, Decisions
+		<li class="list-group-item">
+			<%= link_to "Level 4: Decisions, Decisions",
+									fund_game_link(word_id),
+									class: "text-danger",
+									remote: true
+			%>
 		</li>
-		<li class="list-group-item text-danger">
-			Level 5: Examples/Non-Examples
+		<li class="list-group-item">
+			<%= link_to "Level 5: Examples/Non-Examples",
+									fund_game_link(word_id),
+									class: "text-danger",
+									remote: true
+			%>
 		</li>
-		<li class="list-group-item text-danger">
-			Level 6: Syns vs Ants
+		<li class="list-group-item">
+			<%= link_to "Level 6: Syns vs Ants",
+									fund_game_link(word_id),
+									class: "text-danger",
+									remote: true
+			%>
 		</li>
-		<li class="list-group-item text-warning">
-			Level 7: Jeopardy
+		<li class="list-group-item">
+			<%= link_to "Level 7: Jeopardy",
+									jeop_game_link(word_id),
+									class: "text-warning",
+									remote: true
+			%>
 		</li>
-		<li class="list-group-item text-warning">
-			Level 8: Match 'Em All
+		<li class="list-group-item text-muted">
+			Match 'Em All
+			<%#= link_to "Level 8: Match \'Em All",
+									jeop_game_link(word_id),
+									class: "text-warning",
+									remote: true
+			%>
 		</li>
-	  <li class="list-group-item text-success">
-			Level 9: Sentence Stems
+	  <li class="list-group-item">
+			<%= link_to "Level 9: Sentence Stems",
+									free_game_link(word_id),
+									class: "text-success",
+									remote: true
+			%>
 		</li>
-	  <li class="list-group-item text-success">
-			Level 10: Word Relationships
+	  <li class="list-group-item">
+			<%= link_to "Level 10: Word Relationships",
+									free_game_link(word_id),
+									class: "text-success",
+									remote: true
+			%>
 		</li>
-	  <li class="list-group-item text-success">
-			Level 11: Leksi Tale
+	  <li class="list-group-item">
+			<%= link_to "Level 11: Leksi Tale",
+									free_game_link(word_id),
+									class: "text-success",
+									remote: true
+			%>
 		</li>
-	  <li class="list-group-item text-success">
-			Level 12: Describe Me, Describe Me Not
+	  <li class="list-group-item">
+			<%= link_to "Level 12: Describe Me, Describe Me Not",
+									free_game_link(word_id),
+									class: "text-success",
+									remote: true
+			%>
 		</li>
-	  <li class="list-group-item text-info">
+	  <li class="list-group-item text-muted">
 			Level X: In My Life
+			<%#= link_to "Level X: In My Life",
+									"#",
+									class: "text-muted",
+									remote: true
+			%>
 		</li>
 	</ul>
 </div>

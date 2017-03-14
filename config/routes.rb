@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get "settings" => "current_users#settings"
   get "stats" => "current_users#stats"
   get "myLeksi" => "my_leksi#index"
-  get "myLeksi/names" => "my_leksi#names"
+  get "my_leksi/words"
   get "myLeksi/:id" => "my_leksi#show"
   get "myTags" => "my_tags#index"
   get "myTags/:id" => "my_tags#show"
@@ -22,11 +22,12 @@ Rails.application.routes.draw do
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
   get "freestyle" => "games#freestyle"
-  get "next_game" => "games#next_game"
+  get "games/new"
   get "signup" => "users#new"
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   post "static_pages/contact_us"
+  post "games/email_freestyle"
   delete "logout" => "sessions#destroy"
   resources :users, except: [:index]
   resources :words, only: [:show]

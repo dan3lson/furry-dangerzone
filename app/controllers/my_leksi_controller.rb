@@ -20,11 +20,17 @@ class MyLeksiController < ApplicationController
 		@user_word = UserWord.object(current_user, @word)
 	end
 
-	def names
-		render json: UserWord.where(user: current_user)
-												 .includes(:word)
-												 .map(&:word)
-												 .map(&:name)
+	def words
+		@target_word = Word.find(params[:word_id])
+		@words = if current_user.num_words > 4
+			UserWord.where(user: current_user)
+							.includes(:word)
+							.map(&:word)
+		else
+			Word.random(10)
+		end
+
+		render json: @words << @target_word
 	end
 
 	private

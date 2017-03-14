@@ -1,8 +1,8 @@
 class FreestylesController < ApplicationController
 	def sent_stem
 		@game = Game.find_by(name: "Sentence Stems")
-		@word = Word.find(params[:word_id])
-		@user_word = UserWord.object(current_user, @word)
+		@target_word = Word.find(params[:word_id])
+		@user_word = UserWord.object(current_user, @target_word)
 		@game_stat = GameStat.universal(
 			@user_word,
 			@game,
@@ -45,14 +45,15 @@ class FreestylesController < ApplicationController
 
 	def word_rel
 		@game = Game.find_by(name: "Word Relationships")
-		@word = Word.find(params[:word_id])
-		@user_word = UserWord.object(current_user, @word)
+		@target_word = Word.find(params[:word_id])
+		@user_word = UserWord.object(current_user, @target_word)
 		@input = params[:uniq_data][:input]
 		@free = Freestyle.new(input: @input, user_word: @user_word)
 		@msgs = { successes: [], errors: [] }
 
 		if @free.save
 			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
+			GameMailer.new_freestyle(@free).deliver_later
 			@rel_word = Word.find(params[:uniq_data][:rel_word_id])
 			@free_w_r = FreestyleRelWord.new(freestyle: @free, rel_word: @rel_word)
 			@game_stat = GameStat.universal(
@@ -86,8 +87,8 @@ class FreestylesController < ApplicationController
 
 	def leksi_tale
 		@game = Game.find_by(name: "Leksi Tale")
-		@word = Word.find(params[:word_id])
-		@user_word = UserWord.object(current_user, @word)
+		@target_word = Word.find(params[:word_id])
+		@user_word = UserWord.object(current_user, @target_word)
 		@input = params[:uniq_data][:input]
 		@free = Freestyle.new(input: @input, user_word: @user_word)
 		@msgs = { successes: [], errors: [] }
@@ -127,8 +128,8 @@ class FreestylesController < ApplicationController
 
 	def describe_me
 		@game = Game.find_by(name: "Describe Me, Describe Me Not")
-		@word = Word.find(params[:word_id])
-		@user_word = UserWord.object(current_user, @word)
+		@target_word = Word.find(params[:word_id])
+		@user_word = UserWord.object(current_user, @target_word)
 		@input = params[:uniq_data][:input]
 		@free = Freestyle.new(input: @input, user_word: @user_word)
 		@msgs = { successes: [], errors: [] }

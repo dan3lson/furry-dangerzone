@@ -45,7 +45,7 @@ switch (currentGame) {
 		} else {
 			updateUserWordGamesCompleted(12);
 			updateProgress(100);
-			startReviewActivity()
+			startReviewActivity();
 		}
 		break;
 	default: startWordRelationshipActivity();
@@ -154,14 +154,33 @@ function startLeksiTaleActivity() {
 		"real or fake - be creative and have fun with it!"
 	);
 
-	getMyLeksiNames().done(function(names) {
+	getLeksiTaleWords().done(function(words) {
 		$(".target-word-header-div").text(targetWord.name);
-		var $textarea = createTextarea();
-		const $wordsPartial = $("<%= j render(partial: 'games/freestyle/words') %>");
-		$activityDiv.append($textarea, $wordsPartial);
+		var $textarea = createTextarea().attr("id", "lek-tale-textarea");
+		$activityDiv.append($textarea);
 		$textarea.attr("placeholder", "Type in here...").focus();
+		var names = words.map(function(word) { return word.name });
+		var $h5 = createElem("h5", "mt-3 mb-3");
+		var $bookIcon = createElem("i", "fa fa-book");
+		var $directions = createElem("small", "text-muted").append(" Click any word to see more info.");
+		var $links = createElem("div", null, "lek-tale-words");
+		$h5.append($bookIcon, " Words", $directions);
+		$activityDiv.append($h5, $links);
 
-		$textarea.on("input", function() {
+		$.each(words, function() {
+			word = this;
+			var $link = $("<a>", {
+				"data-remote": "true",
+				href: "/words/" + word.id
+			});
+			var $span = createElem("span", "badge badge-pill badge-default")
+									.attr("data-word-id", word.id)
+									.append(word.name);
+		  $link.append($span);
+			$links.append($link);
+		});
+
+		$("#activity-div").on("input", "#lek-tale-textarea", function() {
 			var value = $(this).val().trim();
 			var textareaWords = $.unique(value.split(" "));
 			highlightUsedWords(textareaWords, names);
@@ -206,7 +225,8 @@ function startDescribeMeActivity() {
 function startReviewActivity() {
 	clearTimeout(timerID);
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Freestyle', word_name: @target_word.name }) %>");
-	$(".container").empty().append($reviewPartial);
+	const $teacherReviewPartial = $("<%= j render(partial: 'games/freestyle/teacher_review', locals: { uw: @user_word }) %>");
+	$(".container").empty().append($reviewPartial, $teacherReviewPartial);
 }
 
 /***********************
@@ -385,12 +405,16 @@ function startCountup($section, seconds) {
 	}, 1000);
 }
 
+function getNextGame() {
+	return getData("/games/next");
+}
+
 function getDescribeMeText() {
 	return getData("/games/describe_mes?word_id=" + targetWord.id);
 }
 
-function getMyLeksiNames() {
-	return getData("/myLeksi/names");
+function getLeksiTaleWords() {
+	return getData("/my_leksi/words?word_id=" + targetWord.id);
 }
 
 function getAnotherFreestyleWord() {

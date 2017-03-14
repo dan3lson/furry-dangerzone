@@ -116,9 +116,17 @@ class User < ActiveRecord::Base
 
   # TODO Create test
   def incomplete_words
-    incomplete_fundamentals +
-    incomplete_jeopardys +
-    incomplete_freestyles
+    incomplete_fundamentals + incomplete_jeopardys + incomplete_freestyles
+  end
+
+  # TODO Create test
+  def has_incomplete_word?
+    incomplete_words.any?
+  end
+
+  # TODO Create test
+  def has_incomplete_not?(word)
+    incomplete_words.delete_if { |uw| uw.word.id == word.id  }.any?
   end
 
   # TODO Create test
@@ -126,6 +134,10 @@ class User < ActiveRecord::Base
     incomplete_words.sample
   end
 
+  # TODO Create test
+  def rand_incomplete_not(word)
+    incomplete_words.delete_if  {|uw| uw.word.id == word.id }.sample
+  end
 
   # TODO Create test
   def incomplete_jeop_ids_not(word)

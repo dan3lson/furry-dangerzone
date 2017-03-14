@@ -33,6 +33,7 @@ class GamesController < ApplicationController
 
   def freestyle
     @target_word = Word.find(params[:word_id])
+    @user_word = UserWord.object(current_user, @target_word)
     @sent_stems = @target_word.sent_stems
     @current_game = UserWord.object(current_user, @target_word).current_game
     @available_games = {
