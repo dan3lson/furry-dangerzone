@@ -7,38 +7,55 @@
       %>
       <p>
         It's great to hear you want to compete in this spelling bee! To sign
-        up, first tell your teacher about this spelling bee competition. Your
-        teacher has to be the one to register your school and the students -
-        hopefully including you! - who will then go at it to become the spelling
-        champ for your grade.
+        up, tell your teacher about this competition and to register on this
+        website (www.harlemSpellingBee.com). Your
+        teacher has to be the one to register your class/school by Friday,
+        March 31st and then they will receive more information.
       </p>
       <%= render "static_pages/spelling_bee/question",
-                 q: "Where are the words that will be used?"
+                 q: "How do I win?"
+      %>
+      <div>
+        <p>
+          To win this spelling bee competition, you have to beat students in two
+          rounds:
+        </p>
+        <ul>
+          <li>
+            <strong>Round One</strong> From April 3rd - April 27th, you will be
+            preparing for your Local School Competition, which is an online exam
+            that tests your spelling AND vocabulary. The two students who score
+            the highest from each grade from each school will become Finalists.
+          </li>
+          <li>
+            <strong>Round Two</strong> From May 3rd - May 25th, Finalists will
+            be preparing for the Main Event, which is the actual spelling bee on
+            stage. To win, you have to be the last one(s) standing.
+          </li>
+        </ul>
+      </div>
+      <%= render "static_pages/spelling_bee/question",
+                 q: "What words will be used?"
       %>
       <p>
-        Each grade from one through eight has 50 spelling bee words. All of the
-        words are grouped by their grade level:
-        <%= link_to "click here to view and/or print the words.", "#" %>
-        Also, after your teacher registers your school, you will be given
-        information to log into Leksi so that
-        you can easily learn and practice all of these words. After you log in,
-        just go to the "<i class="fa fa-search"></i> Look Up" page and
-        add the words from any grade to your personal word list. Then complete
-        all of the activities for each word.
+        Each grade from one (1) through eight (8) has 75 spelling bee words
+        though not all of them will be used.
+        <%= link_to "Click here to view and/or print the words.", "#" %>, which
+        are all grouped by their grade level.
       </p>
       <%= render "static_pages/spelling_bee/question",
-                 q: "How can I practice my spelling?"
+                 q: "How can I prepare for this competition?"
       %>
       <p>
         One way you can prepare for this spelling bee competition is by using
-        Leksi, which is free. After your teacher registers your school,
-        you should get information allowing you to log in and use Leksi.
-        Once you have access to Leksi,
-        you can easily learn and practice all of these words.
-        Just go to the "<i class="fa fa-search"></i> Look Up" page and
-        add the words from any grade to your personal word list. Then complete
-        all of the activities for each word. The more time you put in, the
-        better chances you'll have at winning. If you want to win, prove it.
+        Leksi, an online app that will help you improve your vocabulary and
+        spelling. After your teacher registers your class/school,
+        you will receive information allowing you to
+        <%= link_to "log in and use Leksi", login_path %>.
+        Once you log in, you can learn and practice all of the words by
+        completing both the vocabulary and spelling games. By completing
+        all of the activities for each word and putting the time in to prepare,
+        you'll have better chances at winning. If you want to win, prove it.
       </p>
       <%= render "static_pages/spelling_bee/question",
                  q: "What are some spelling tips and tricks?"
@@ -46,8 +63,9 @@
       <p>
         The
         <%= link_to "National Spelling Bee", "http://nationalspellingbee.com" %>
-        has a great guide. Click the following link to check it out:
-        <%= link_to "How to Study for a Speling Bee",
+        has a great guide. Click the following link to check out some spelling
+        tips and tricks:
+        <%= link_to "How to Study for a Spelling Bee",
                     "http://spellingbee.com/sites/default/files/inline-files/How%20to%20Study%20for%20a%20Spelling%20Bee.pdf",
                     target: "_blank"
         %>.
@@ -56,8 +74,8 @@
                  q: "If I win, do I get anything?"
       %>
       <p>
-        The winners for each grade level will receive trophies and prizes.
-        All participants will receive medals for their effort and courage
+        The winners for each grade level will indeed receive prizes.
+        All active participants will receive medals for their effort and courage
         in preparing for and competing in this big event.
       </p>
       <%= render "static_pages/spelling_bee/question",

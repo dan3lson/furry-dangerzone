@@ -2,7 +2,6 @@ $(document).ready(function() {
 	$(".spe-bee-q-a").click(function() {
 		$btn = $(this);
 		$fa = $btn.find(".fa");
-		$btn.next().slideToggle("fast");
 
 		if ($fa.hasClass("fa-plus")) {
 			$fa.removeClass("fa-plus").addClass("fa-minus");
@@ -41,6 +40,8 @@ $(document).ready(function() {
 			updateValue("Question/Comment from a Student");
 		} else if (dataSubject == "tea-reg") {
 			updateValue("School Registration");
+		} else if (dataSubject == "tea-cal") {
+			updateValue("Teacher Calendar Invites");
 		} else if (dataSubject == "tea") {
 			updateValue("Question/Comment from a Teacher");
 		} else if (dataSubject == "spo-his") {
