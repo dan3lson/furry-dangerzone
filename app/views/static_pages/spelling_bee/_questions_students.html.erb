@@ -5,19 +5,19 @@
       <%= render "static_pages/spelling_bee/question",
                  q: "How do I sign up?"
       %>
-      <p>
-        It's great to hear you want to compete in this spelling bee! To sign
-        up, tell your teacher about this competition and to register on this
-        website (www.harlemSpellingBee.com). Your
+      <p class="mb-4">
+        To sign up, tell your teacher about this competition and to register
+        on this website (www.harlemSpellingBee.com). Your
         teacher has to be the one to register your class/school by Friday,
-        March 31st and then they will receive more information.
+        March 31st and then they will receive more information to get you
+        going.
       </p>
       <%= render "static_pages/spelling_bee/question",
                  q: "How do I win?"
       %>
-      <div>
+      <div class="mb-4">
         <p>
-          To win this spelling bee competition, you have to beat students in two
+          To win the Harlem Spelling Bee, you have to beat students in two
           rounds:
         </p>
         <ul>
@@ -28,7 +28,7 @@
             the highest from each grade from each school will become Finalists.
           </li>
           <li>
-            <strong>Round Two</strong> From May 3rd - May 25th, Finalists will
+            <strong>Round Two</strong> From May 5th - May 25th, Finalists will
             be preparing for the Main Event, which is the actual spelling bee on
             stage. To win, you have to be the last one(s) standing.
           </li>
@@ -37,21 +37,23 @@
       <%= render "static_pages/spelling_bee/question",
                  q: "What words will be used?"
       %>
-      <p>
-        Each grade from one (1) through eight (8) has 75 spelling bee words
+      <p class="mb-4">
+        Each grade from one (1) through eight (8) has 75 spelling bee words,
         though not all of them will be used.
-        <%= link_to "Click here to view and/or print the words.", "#" %>, which
-        are all grouped by their grade level.
+        <%= link_to "Click here to view a sample of the words",
+                    "#"
+        %>, which are all grouped by their grade level. The actual word list
+        will be available when this competition officially starts on Monday,
+        April 3rd, 2017.
       </p>
       <%= render "static_pages/spelling_bee/question",
                  q: "How can I prepare for this competition?"
       %>
-      <p>
+      <p class="mb-4">
         One way you can prepare for this spelling bee competition is by using
         Leksi, an online app that will help you improve your vocabulary and
         spelling. After your teacher registers your class/school,
-        you will receive information allowing you to
-        <%= link_to "log in and use Leksi", login_path %>.
+        you will receive information allowing you to log in and use Leksi.
         Once you log in, you can learn and practice all of the words by
         completing both the vocabulary and spelling games. By completing
         all of the activities for each word and putting the time in to prepare,
@@ -60,7 +62,7 @@
       <%= render "static_pages/spelling_bee/question",
                  q: "What are some spelling tips and tricks?"
       %>
-      <p>
+      <p class="mb-4">
         The
         <%= link_to "National Spelling Bee", "http://nationalspellingbee.com" %>
         has a great guide. Click the following link to check out some spelling
@@ -73,7 +75,7 @@
       <%= render "static_pages/spelling_bee/question",
                  q: "If I win, do I get anything?"
       %>
-      <p>
+      <p class="mb-4">
         The winners for each grade level will indeed receive prizes.
         All active participants will receive medals for their effort and courage
         in preparing for and competing in this big event.
@@ -81,7 +83,7 @@
       <%= render "static_pages/spelling_bee/question",
                  q: "What if I have a question or comment?"
       %>
-      <p>
+      <p class="mb-4">
         If you have any questions, comments, or concerns, please
         <%= link_to "contact us",
                     "#",

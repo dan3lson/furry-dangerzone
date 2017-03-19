@@ -58,14 +58,14 @@
 	%>
 <% end %>
 
-<%# if action?("spelling_bee") %>
-	<%#= link_to "Spelling Bee",
+<% if action?("spelling_bee") %>
+	<%= link_to "Spelling Bee",
 							spelling_bee_path,
 							class: "nav-item nav-link active"
 	%>
-<%# else %>
-	<%#= link_to "Spelling Bee",
+<% else %>
+	<%= link_to "Spelling Bee",
 							spelling_bee_path,
 							class: "nav-item nav-link"
 	%>
-<%# end %>
+<% end %>

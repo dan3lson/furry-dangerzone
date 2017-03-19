@@ -4,18 +4,4 @@
 				data-has-word="<%= current_user.has_word?(word) %>"
 				disabled>
 	<span><%= word.name %></span>
-	<br>
-	<span><i class="fa fa-question-circle-o text-muted"></i></span>
-	<% if word.has_synonyms? %>
-		<span><i class="fa fa-question-circle-o text-muted"></i></span>
-	<% end %>
-	<% if word.has_antonyms? %>
-		<span><i class="fa fa-question-circle-o text-muted"></i></span>
-	<% end %>
-	<% if word.has_examples? %>
-		<span><i class="fa fa-question-circle-o text-muted"></i></span>
-	<% end %>
-	<% if word.has_syllables? %>
-		<span><i class="fa fa-question-circle-o text-muted"></i></span>
-	<% end %>
 </button>

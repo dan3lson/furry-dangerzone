@@ -7,7 +7,7 @@
       <%= render "static_pages/spelling_bee/question",
                  q: "How do I register my school?"
       %>
-      <p>
+      <p class="mb-4">
         To register your school,
         <%= link_to "click here to submit the registration form",
                     "#",
@@ -29,7 +29,7 @@
       <%= render "static_pages/spelling_bee/question",
                  q: "Is this free?"
       %>
-      <p>
+      <p class="mb-4">
         This is indeed free! If you haven't registered your
         school yet before the Friday, March 31st deadline,
         <%= link_to "please do so here",
@@ -41,68 +41,69 @@
       <%= render "static_pages/spelling_bee/question",
                  q: "How many students from my school can compete?"
       %>
-      <p>
+      <p class="mb-4">
         At every school, two (2) students will be selected from grades 1
         through 8 as Finalists to compete in the Main Event in May. To
         determine how students become Finalists, there will be Local School
-        Competitions from Monday, April 24th - Friday, April 28th
-        school. A "Local School Competition" is an online spelling and
-        vocabulary assessment that will be available via Leksi.
-        All students must complete this assessment at some point during the
-        final week in April. The two students who score the highest from
-        each grade are deemed "Finalists".
+        Competitions from Monday, April 24th - Friday, April 28th.
+        A "Local School Competition" is an online spelling and
+        vocabulary assessment that will be made available via the online Leksi
+        application. All students must complete this assessment at some point
+        during the final week in April. The two students who score the highest
+        from each grade are deemed "Finalists".
       </p>
       <%= render "static_pages/spelling_bee/question",
                  q: "How can my students practice for this competition?"
       %>
-      <p>
+      <p class="mb-4">
         One way your students can prepare for this spelling bee competition is
-        by letting them and encouraging them to use the Leksi online app.
-        Leksi is free for you and your students after you register your
-        class/school.
+        by letting and encouraging them to use the online Leksi
+        application. Leksi is free for you and your students after you register
+        your class/school.
         With an account, students can study any of the words on
         the spelling bee list and you, as the teacher, can support their
         learning via built-in tools made just for you.
-        <%= link_to "Here\'s a guide to get started", "#" %>.
       </p>
       <%= render "static_pages/spelling_bee/question",
                  q: "What are the important dates to know?"
       %>
-      <ul>
-      	<li>
-					<strong>
-					  Monday, March 20th, 2017 - Friday, March 31st, 2017
-					</strong>
-					School Registration
-				</li>
-				<li>
-					<strong>Monday, April 3rd, 2017</strong> Official start of the Harlem
-					Spelling Bee. Also is when all students and teachers can begin to use
-					Leksi
-				</li>
-				<li>
-					<strong>Monday, April 24th, 2017 - Friday, April 28th, 2017</strong>
-					Local School Competitions
-				</li>
-				<li>
-					<strong>Monday, May 5th, 2017</strong> Announcement of Finalists
-				</li>
-				<li>
-					<strong>Thursday, May 25th, 2017:</strong> The Main Event!
-				</li>
-      </ul>
-      <p>
-        If you would like calendar invites for the dates above,
-        <%= link_to "please let us know",
-                    "#",
-                    class: "spe-bee-contact-us",
-                    "data-sub": "tea-cal"
-        %>
-      </p>
+      <div class="mb-4">
+        <ul>
+        	<li>
+  					<strong>
+  					  Monday, March 20th, 2017 - Friday, March 31st, 2017
+  					</strong>
+  					School Registration
+  				</li>
+  				<li>
+  					<strong>Monday, April 3rd, 2017</strong> Official start of the Harlem
+  					Spelling Bee. Also is when all students and teachers can begin to use
+  					Leksi
+  				</li>
+  				<li>
+  					<strong>Monday, April 24th, 2017 - Friday, April 28th, 2017</strong>
+  					Local School Competitions
+  				</li>
+  				<li>
+  					<strong>Friday, May 5th, 2017</strong> Announcement of Finalists
+  				</li>
+  				<li>
+  					<strong>Thursday, May 25th, 2017:</strong> The Main Event!
+  				</li>
+        </ul>
+        <p>
+          If you would like calendar invites for the dates above,
+          <%= link_to "please let us know",
+                      "#",
+                      class: "spe-bee-contact-us",
+                      "data-sub": "tea-cal"
+          %>.
+        </p>
+      </div>
       <%= render "static_pages/spelling_bee/question",
                  q: "What if I have a question or comment?"
       %>
-      <p>
+      <p class="mb-4">
         If you have any questions, comments, or concerns, please
         <%= link_to "contact us",
                     "#",

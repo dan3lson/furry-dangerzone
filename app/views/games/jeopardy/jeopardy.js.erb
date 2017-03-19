@@ -1,6 +1,9 @@
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var jeopWords = JSON.parse("<%= j @words.to_json.html_safe %>");
 var rounds = JSON.parse("<%= j @jeopardy.to_json.html_safe %>").game;
+var nonNullRounds = rounds.filter(function(round) {
+    return round.correct_ans != null;
+});
 const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: @directions }) %>");
 const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { rows: @rows }) %>");
@@ -29,6 +32,16 @@ var $points = $(".scoreboard-points");
 var category;
 updateProgress(10);
 
+$.each(jeopWords, function() {
+	var word = this;
+	var numQues = nonNullRounds.filter(function(round) {
+		return round.correct_ans.name == word.name;
+	}).length;
+	word.numQues = numQues;
+	word.numCorrect = 0;
+	word.numIncorrect = 0;
+});
+
 $("#jeopardy-div").on("click", validCells, function() {
 	$selectedCell = $(this);
 	activtate(validCells, $selectedCell);
@@ -45,15 +58,19 @@ $("#jeopardy-div").on("click", ".jeop-btn", function() {
 
 	if (questionIsDisplayed) {
 		$selectedBtn = $(this);
-		$selectedBtnText = $selectedBtn.find("span:first").text();
+		$selectedBtnName = $selectedBtn.find("span:first").text();
 		updateHeader("");
 		deactivate($selectedCell);
 		removeClick($selectedCell);
 		updateProgress();
 		disableButtons();
-		question.selected_ans = $selectedBtnText;
+		question.selected_ans = $selectedBtnName;
+		var word = jeopWords.filter(function(word) {
+			return word.name == $selectedBtnName;
+		})[0];
 
 		if (question.selected_ans == question.correct_ans.name) {
+			word.numCorrect += 1;
 			markResult(question, true);
 			addThumbsUp($selectedBtn);
 			addPoints(parseInt(question.linero));
@@ -65,6 +82,7 @@ $("#jeopardy-div").on("click", ".jeop-btn", function() {
 				true
 			);
 		} else {
+			word.numIncorrect += 1;
 			markResult(question, false);
 			addThumbsDown($selectedBtn);
 			removePoints(parseInt(question.linero));
@@ -77,12 +95,10 @@ $("#jeopardy-div").on("click", ".jeop-btn", function() {
 			);
 		}
 
-		if (noMoreQuestions($selectedBtn)) {
-			updateBtnProp($selectedBtn);
-			$selectedBtn.removeClass("btn-outline-primary").addClass("btn-secondary");
+		if (noMoreQuestions($selectedBtnName)) {
 			var wordID = $selectedBtn.data("word-id");
 
-			if (wordGetsPromoted($selectedBtn)) {
+			if (wordGetsPromoted($selectedBtnName)) {
 				promoteToFreestyle(wordID);
 			} else {
 				demoteToFundamentals(wordID);
@@ -98,22 +114,19 @@ $("#jeopardy-div").on("click", ".jeop-btn", function() {
 
 function startReviewActivity() {
 	clearTimeout(scoreboardTimerID);
-	var $targetWordBtn = $btns.filter(function() {
-		return $(this).text().trim() == targetWord.name;
-	});
-	var getsPromoted = wordGetsPromoted($targetWordBtn);
+	var getsPromoted = wordGetsPromoted(targetWord.name);
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Jeopardy', word_name: @target_word.name }) %>");
 
 	if (getsPromoted) {
-		var $nextGamePartial = $("<%= j render(partial: 'games/next_game', locals: { next_game: 'Freestyle', color: 'success', seconds: '5' }) %>");
+		var $nextGamePartial = $("<%= j render(partial: 'games/next_game', locals: { next_game: 'Freestyle', color: 'success', seconds: '30' }) %>");
 	} else {
-		var $nextGamePartial = $("<%= j render(partial: 'games/next_game', locals: { next_game: 'Fundamentals', color: 'danger', seconds: '5' }) %>");
+		var $nextGamePartial = $("<%= j render(partial: 'games/next_game', locals: { next_game: 'Fundamentals', color: 'danger', seconds: '30' }) %>");
 	}
 
 	$jeopardyDiv.empty().append($reviewPartial, $nextGamePartial);
 	var $gameCountdown = $(".game-countdown");
 	showResults();
-	startCountdown($gameCountdown, 5, getsPromoted);
+	startCountdown($gameCountdown, 30, getsPromoted);
 };
 
 /***********************
@@ -145,7 +158,8 @@ function showResults() {
 
 	$.each($userWordBtns, function() {
 		var $btn = $(this);
-		$jeopardyDiv.append(createMotionCard($btn, wordGetsPromoted($btn)));
+		var $btnName = $btn.text().trim();
+		$jeopardyDiv.append(createMotionCard($btn, wordGetsPromoted($btnName)));
 	});
 
 	$.each(actualRounds, function() {
@@ -153,16 +167,21 @@ function showResults() {
 	});
 }
 
-function noMoreQuestions($btn) {
-	return !($btn.find("span .fa-question-circle-o").length);
+function noMoreQuestions($btnName) {
+	var word = jeopWords.filter(function(word) {
+		return word.name == $btnName;
+	})[0];
+	var numAnswered = word.numCorrect + word.numIncorrect;
+	return word.numQues == numAnswered;
 }
 
-function wordGetsPromoted($btn) {
-	var total = $btn.find("span .fa").length;
-	var numCorrect = $btn.find("span .fa-thumbs-o-up").length;
-	var percentageCorrect = Math.floor((numCorrect / total) * 100);
+function wordGetsPromoted($btnName) {
+	var word = jeopWords.filter(function(word) {
+		return word.name == $btnName;
+	})[0];
+	var percentageCorrect = Math.floor((word.numCorrect / word.numQues) * 100);
 
-	switch (total) {
+	switch (word.numQues) {
 		case 1:
 			return percentageCorrect == 100;
 			break;
@@ -231,18 +250,22 @@ function gameIsOver() {
 }
 
 function addThumbsUp($btn) {
-	markBtn($btn, "success", "up");
+	markBtn($btn, "success", "up", "success");
 }
 
 function addThumbsDown($btn) {
-	markBtn($btn, "danger", "down");
+	markBtn($btn, "danger", "down", "danger");
 }
 
-function markBtn($btn, textColor, finger) {
-	$btn.find("span .fa-question-circle-o.text-muted:first")
-			.removeClass("fa-question-circle-o")
-			.addClass("text-" + textColor + " fa-thumbs-o-" + finger);
+function markBtn($btn, textColor, finger, btnColor) {
+	var $finger = createElem("i", "fa fa-thumbs-o-" + finger);
+	$btn.append($finger);
+	$btn.removeClass("btn-outline-primary").addClass("btn-" + btnColor);
 
+	setTimeout(function() {
+		$finger.remove();
+		$btn.removeClass("btn-" + btnColor).addClass("btn-outline-primary");
+	}, 750);
 }
 
 function disableButtons() {
