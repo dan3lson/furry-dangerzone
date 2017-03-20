@@ -29,6 +29,11 @@
       <p class="lead">
         Learn more below about this exciting event for the Harlem community.
       </p>
+      <div id="row">
+        <div class="col-md-6 offset-md-3">
+          <%= render "static_pages/spelling_bee/mailchimp" %>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -78,21 +83,21 @@
     <div class="col-md-4 mb-3 mt-3">
       <%= link_to "#",
           role: "button",
-          class: "btn btn-lg btn-block btn-primary spe-bee-nav" do %>
+          class: "btn btn-lg btn-block btn-outline-primary spe-bee-nav" do %>
         <i class="fa fa-users"></i> Students
       <% end %>
     </div>
     <div class="col-md-4 mb-3 mt-3">
       <%= link_to "#",
           role: "button",
-          class: "btn btn-lg btn-block btn-primary spe-bee-nav" do %>
+          class: "btn btn-lg btn-block btn-outline-primary spe-bee-nav" do %>
         <i class="fa fa-user-circle"></i> Teachers
       <% end %>
     </div>
     <div class="col-md-4 mb-3 mt-3">
       <%= link_to "#",
           role: "button",
-          class: "btn btn-lg btn-block btn-primary spe-bee-nav" do %>
+          class: "btn btn-lg btn-block btn-outline-primary spe-bee-nav" do %>
         <i class="fa fa-handshake-o"></i> Sponsors
       <% end %>
     </div>
