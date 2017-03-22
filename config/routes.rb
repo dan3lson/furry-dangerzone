@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       post "word_rel"
       post "leksi_tale"
       post "describe_me"
+      post "in_my_life"
     end
   end
   resource :game_stat do

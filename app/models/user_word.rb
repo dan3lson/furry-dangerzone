@@ -59,12 +59,12 @@ class UserWord < ActiveRecord::Base
 
   def game
     word = self.word
-    case current_game
-    when 1
+
+    if current_game == 1
       "Speed Speller"
-    when 2
+    elsif current_game == 2
       "Jumbled Spelling"
-    when 3
+    elsif current_game == 3
       if word.has_pronunciation?
         "Say It Right"
       elsif word.has_meaning_alts?
@@ -76,7 +76,7 @@ class UserWord < ActiveRecord::Base
       else
         "Jeopardy"
       end
-    when 4
+    elsif current_game == 4
       if word.has_meaning_alts?
         "Decisions, Decisions"
       elsif word.has_ex_non_exs?
@@ -86,7 +86,7 @@ class UserWord < ActiveRecord::Base
       else
         "Jeopardy"
       end
-    when 5
+    elsif current_game == 5
       if word.has_ex_non_exs?
         "Examples/Non-Examples"
       elsif word.has_syns_or_ants?
@@ -94,36 +94,36 @@ class UserWord < ActiveRecord::Base
       else
         "Jeopardy"
       end
-    when 6
+    elsif current_game == 6
       if word.has_syns_or_ants?
         "Syns vs. Ants"
       else
         "Jeopardy"
       end
-    when 7
+    elsif current_game == 7
       "Jeopardy"
-    when 8
+    elsif current_game == 8
       "Match \'Em All"
-    when 9
+    elsif current_game == 9
       if word.has_sent_stems?
         "Sentence Stems"
       else
         "Word Relationships"
       end
-    when 10
+    elsif current_game == 10
       "Word Relationships"
-    when 11
+    elsif current_game == 11
       "Leksi Tale"
-    when 12
+    elsif current_game == 12
       if word.has_describe_mes?
         "Describe Me, Describe Me Not"
       else
         "Practice"
       end
-    when 13
+    elsif current_game > 12
       "In My Life"
     else
-      "Not sure: UW ID: #{self.id} #{self.word.name} #{self.user.username}"
+      "Not sure of Game Name: UW ID: #{self.id} #{self.word.name}"
     end
   end
 

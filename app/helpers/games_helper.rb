@@ -25,7 +25,7 @@ module GamesHelper
 
   def play_btn_small(user_word, word_id)
     if user_word.freestyle_completed?
-      link_to_small_btn("#", "info", user_word)
+      link_to_small_btn(free_game_link(word_id), "info", user_word)
     elsif user_word.fundamental_not_completed?
       link_to_small_btn(fund_game_link(word_id), "danger", user_word)
     elsif user_word.jeopardy_not_completed?

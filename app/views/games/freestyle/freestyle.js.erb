@@ -22,33 +22,29 @@ var newPointsTotal = 0;
 var timeStarted;
 updateProgress(10);
 
-switch (currentGame) {
-	case 9:
-		if (availableGames.sent_stems) {
-			startSentenceStemActivity();
-		} else {
-			updateUserWordGamesCompleted(9);
-			updateProgress(25);
-			startWordRelationshipActivity();
-		}
-
-		break;
-	case 10:
+if (currentGame == 9) {
+	if (availableGames.sent_stems) {
+		startSentenceStemActivity();
+	} else {
+		updateUserWordGamesCompleted(9);
+		updateProgress(25);
 		startWordRelationshipActivity();
-		break;
-	case 11:
-		startLeksiTaleActivity();
-		break;
-	case 12:
-		if (availableGames.describe_me) {
-			startDescribeMeActivity();
-		} else {
-			updateUserWordGamesCompleted(12);
-			updateProgress(100);
-			startReviewActivity();
-		}
-		break;
-	default: startWordRelationshipActivity();
+	}
+} else if (currentGame == 10) {
+	startWordRelationshipActivity();
+} else if (currentGame == 11) {
+	startLeksiTaleActivity();
+} else if (currentGame == 12) {
+	if (availableGames.describe_me) {
+		startDescribeMeActivity();
+	} else {
+		updateUserWordGamesCompleted(12);
+		updateProgress(100);
+		startReviewActivity();
+	}
+} else if (currentGame > 12) {
+	updateProgress(65);
+	startInMyLifeActivity();
 }
 
 $(".container").on("click", ".continue-btn", function() {
@@ -65,7 +61,7 @@ $(".container").on("click", ".continue-btn", function() {
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
 		updateUserWordGamesCompleted(10);
 		updateProgress(50);
-		addPoints(1333);
+		addPoints(1330);
 		flashPointsUpdate(getArrowSuccess());
 		saveWordRelResponse(timeStarted);
 		emptyActivityDiv();
@@ -77,21 +73,29 @@ $(".container").on("click", ".continue-btn", function() {
 
 		if (availableGames.describe_me) {
 			updateUserWordGamesCompleted(11);
-			addPoints(1691);
+			addPoints(1690);
 			updateProgress(75);
 			startDescribeMeActivity();
 		} else {
 			updateUserWordGamesCompleted(12);
-			addPoints(2384);
+			addPoints(2380);
 			updateProgress(100);
 			startReviewActivity();
 		}
 	} else if ($btn.hasClass("start-review-activity")) {
 		updateUserWordGamesCompleted(12);
 		updateProgress(100);
-		addPoints(2369);
+		addPoints(2360);
 		flashPointsUpdate(getArrowSuccess());
 		saveDescMeResponse(timeStarted);
+		emptyActivityDiv();
+		startReviewActivity();
+	} else if ($btn.hasClass("start-review-in-my-life-activity")) {
+		updateUserWordGamesCompleted(currentGame);
+		updateProgress(100);
+		addPoints(4310);
+		flashPointsUpdate(getArrowSuccess());
+		saveInMyLifeResponse(timeStarted);
 		emptyActivityDiv();
 		startReviewActivity();
 	}
@@ -116,7 +120,7 @@ function startSentenceStemActivity() {
 		if (value.length > 0 && $regex.test(value)) {
 			showContinueBtn("start-word-relationship-activity");
 		} else {
-			$(".fixed-bottom").remove();
+			hideContinueBtn();
 		}
 	});
 }
@@ -140,7 +144,7 @@ function startWordRelationshipActivity() {
 			if (value.length > 0 && $regex.test(value)) {
 				 showContinueBtn("start-leksi-tale-activity");
 			} else {
-				$(".fixed-bottom").remove();
+				hideContinueBtn();
 			}
 		});
 	});
@@ -162,7 +166,8 @@ function startLeksiTaleActivity() {
 		var names = words.map(function(word) { return word.name });
 		var $h5 = createElem("h5", "mt-3 mb-3");
 		var $bookIcon = createElem("i", "fa fa-book");
-		var $directions = createElem("small", "text-muted").append(" Click any word to see more info.");
+		var $directions = createElem("small", "text-muted")
+											.append(" Click any word to see more info.");
 		var $links = createElem("div", null, "lek-tale-words");
 		$h5.append($bookIcon, " Words", $directions);
 		$activityDiv.append($h5, $links);
@@ -188,7 +193,7 @@ function startLeksiTaleActivity() {
 			if (wordsLimitReached(textareaWords, names) && $regex.test(value)) {
 				 showContinueBtn("start-describe-me-activity");
 			} else {
-				$(".fixed-bottom").remove();
+				hideContinueBtn();
 			}
 		});
 
@@ -216,9 +221,28 @@ function startDescribeMeActivity() {
 			if (value.length > 0 && $regex.test(value)) {
 				 showContinueBtn("start-review-activity");
 			} else {
-				$(".fixed-bottom").remove();
+				hideContinueBtn();
 			}
 		});
+	});
+}
+
+function startInMyLifeActivity() {
+	beginTimeStarted();
+	const $wordsPartial = $("<%= j render(partial: 'games/freestyle/in_my_life') %>");
+	$activityDiv.append($wordsPartial);
+	giveDirections("Respond to the prompt below.");
+	const $textarea = $("#in_my_life").focus();
+
+	$textarea.on("input", function() {
+		var value = $(this).val().trim();
+		var numWords = value.split(" ").length;
+
+		if (numWords > 6) {
+			showContinueBtn("start-review-in-my-life-activity");
+		} else {
+			hideContinueBtn();
+		}
 	});
 }
 
@@ -243,6 +267,12 @@ function beginTimeStarted() {
 
 function getDate() {
 	return new Date();
+}
+
+function saveInMyLifeResponse(timeStarted) {
+	var input = $activityDiv.find("textarea").val().trim();
+	var data = { "input": input };
+	createFreestyle("in_my_life", timeStarted, data);
 }
 
 function saveDescMeResponse(timeStarted) {
@@ -436,6 +466,10 @@ function showContinueBtn(_class) {
 			)
 		);
 	}
+}
+
+function hideContinueBtn() {
+	$(".fixed-bottom").remove();
 }
 
 function giveDirections(directions) {

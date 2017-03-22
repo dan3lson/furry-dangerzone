@@ -169,4 +169,36 @@ class FreestylesController < ApplicationController
 
 		render json: { response: @msgs }
 	end
+
+	def in_my_life
+		@game = Game.find_by(name: "In My Life")
+		@target_word = Word.find(params[:word_id])
+		@user_word = UserWord.object(current_user, @target_word)
+		@input = params[:uniq_data][:input]
+		@free = Freestyle.new(input: @input, user_word: @user_word)
+		@msgs = { successes: [], errors: [] }
+
+		if @free.save
+			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
+			GameMailer.new_freestyle(@free, current_user, @game).deliver_later
+			@game_stat = GameStat.universal(
+				@user_word,
+				@game,
+				params[:time_started],
+				params[:time_ended]
+			)
+
+			if @game_stat.save
+				@msgs[:successes] << "GameStat #{@game_stat.id} created."
+			else
+				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."
+				@msgs[:errors] << @game_stat.errors.full_messages
+			end
+		else
+			@msgs[:errors] << "Freestyle not created for UW #{@user_word.id}."
+			@msgs[:errors] << @free.errors.full_messages
+		end
+
+		render json: { response: @msgs }
+	end
 end
