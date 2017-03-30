@@ -1,30 +1,10 @@
-<% if action?("classes") %>
-	<%= link_to school_classes_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-users"></i> Classes
+<% if controller?("school/classrooms") %>
+	<%= link_to school_classrooms_path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-users"></i> Classrooms
 	<% end %>
 <% else %>
-	<%= link_to school_classes_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-users"></i> Classes
-	<% end %>
-<% end %>
-
-<% if false %>
-	<%= link_to "#", class: "nav-item nav-link active" do %>
-		<i class="fa fa-tags"></i> Tags
-	<% end %>
-<% else %>
-	<%= link_to "#", class: "nav-item nav-link" do %>
-		<i class="fa fa-tags"></i> Tags
-	<% end %>
-<% end %>
-
-<% if false %>
-	<%= link_to "#", class: "nav-item nav-link active" do %>
-		<i class="fa fa-line-chart"></i> Stats
-	<% end %>
-<% else %>
-	<%= link_to "#", class: "nav-item nav-link" do %>
-		<i class="fa fa-line-chart"></i> Stats
+	<%= link_to school_classrooms_path, class: "nav-item nav-link" do %>
+		<i class="fa fa-users"></i> Classrooms
 	<% end %>
 <% end %>
 

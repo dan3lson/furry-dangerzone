@@ -1,0 +1,51 @@
+<% provide(:title, "Classroom") %>
+<% provide(:header, "Classroom #{@classroom.name}") %>
+<div class="mb-3">
+	<div class="float-right">
+		<%= link_to new_school_classroom_student_path(@classroom),
+		role: "button",
+		class: "btn btn-primary btn-block" do
+			%>
+			<i class="fa fa-plus-circle"></i> Add Students
+			<% end %>
+		</div>
+		<div class="clear"></div>
+</div>
+<% if @classroom.has_students? %>
+	<div class="table-responsive">
+	  <table class="table table-bordered table-hover">
+	    <th>ID</th>
+	    <th>Username</th>
+	    <th>First Name</th>
+	    <th>Last Name</th>
+	    <th>Email</th>
+	    <th>Num Logins</th>
+	    <th>Last Login</th>
+	    <th>Num Words</th>
+
+	    <% @classroom.students.each do |student| %>
+	      <tr>
+	        <td><%= student.id %></td>
+	        <td><%= link_to student.username, student %></td>
+	        <td><%= student.first_name || "-" %></td>
+	        <td><%= student.last_name || "-" %></td>
+	        <td><%= student.email || "-" %></td>
+	        <td><%= student.num_logins %></td>
+	        <td>
+	          <% if student.last_login.nil? %>
+	            -
+	          <% else %>
+	            <%= time_ago_in_words(student.last_login) %> ago
+	          <% end %>
+	        </td>
+	        <td><%= student.num_words %></td>
+	      </tr>
+	    <% end %>
+    </table>
+	</div>
+<% else %>
+	<div class="alert alert-info">
+		<%= icon "info-circle" %> This classroom doesn't have any students yet.
+		Click the blue button above to add students.
+	</div>
+<% end %>

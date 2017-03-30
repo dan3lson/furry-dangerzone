@@ -15,9 +15,10 @@ class User < ActiveRecord::Base
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 33 }
-  validates :email, format: { with: VALID_EMAIL_REGEX },
-                    allow_nil: true,
-                    uniqueness: { case_sensitive: false }
+  validates :email, presence: true,
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false },
+                    unless: :is_student?
   validates :points, presence: true
   validates :num_flashcards_played, presence: true
   validates :first_name, length: { maximum: 50 }
@@ -48,6 +49,10 @@ class User < ActiveRecord::Base
 
   def has_words?
     !UserWord.where(user: self).empty?
+  end
+
+  def has_classroom?(classroom)
+    !classrooms.where(name: classroom.name).empty?
   end
 
   def has_tag?(tag)

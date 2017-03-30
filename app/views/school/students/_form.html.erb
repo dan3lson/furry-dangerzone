@@ -1,0 +1,15 @@
+<%= form_tag(school_classroom_students_path(classroom)) do |f| %>
+  <div class="form-group">
+    <%= label_tag :username, class: "sr-only form-control-label" %>
+    <%= text_area_tag :username,
+                      nil,
+                      class: "form-control",
+                      placeholder: "Username(s) *",
+                      autofocus: "true"
+    %>
+  </div>
+  <%= button_tag type: "submit", class: "btn btn-primary btn-block" do %>
+    <%= icon "plus-circle" %>
+    <%= btn_text %>
+  <% end %>
+<% end %>

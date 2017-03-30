@@ -1,6 +1,6 @@
-<h1><%= icon "tag" %> Create a New Tag</h1>
+<h1><%= icon "tag" %> Create New Tag</h1>
 <div class="card">
 	<div class="card-block">
-		<%= render "tags/form", btn_text: "Create" %>
+		<%= render "tags/form", path: @tag, object: @tag, btn_text: "Create" %>
 	</div>
 </div>

@@ -30,7 +30,7 @@ class UserWordsController < ApplicationController
   # TODO If only for Fundamentals, create specific controller just for this.
   def update
     @word = Word.find(params[:word_id])
-    @games_completed = params[:games_completed]
+    @games_completed = params[:games_completed].to_i
     @results = UserWord.update_games_completed(
       current_user,
       @word,

@@ -1,0 +1,27 @@
+<% provide(:title, "Classrooms") %>
+<% provide(:header, "Classrooms") %>
+<div class="mb-3">
+	<div class="float-right">
+			<%= link_to new_school_classroom_path,
+									role: "button",
+									class: "btn btn-primary btn-block" do
+			%>
+				<i class="fa fa-plus-circle"></i> Create New Classroom
+			<% end %>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="card-deck">
+	<% @classrooms.each do |classroom| %>
+		<div class="card">
+			<div class="card-block">
+				<h4 class="card-title">
+					<%= link_to classroom.name, school_classroom_path(classroom) %>
+				</h4>
+				<p class="card-text text-muted">
+					<small><%= pluralize(classroom.students.count, "student") %></small>
+				</p>
+			</div>
+		</div>
+	<% end %>
+</div>

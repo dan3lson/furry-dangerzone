@@ -1,0 +1,25 @@
+<% provide(:title, "Classrooms") %>
+<% provide(:header, "Classroom #{@classroom.name}: New Student") %>
+<ul class="lead">
+	<li>
+		To add a new student to this classroom, create a new username that they
+		can then use to log into Leksi
+	</li>
+	<li>
+		To create more than one user at a time, separate each username with a comma,
+		for example: <em>username1, username2, username3</em>
+	</li>
+	<li>
+		Please note that each respective
+		Password will be the same as the Username. Tell your student
+		to change their password upon logging in for the first time.
+	</li>
+</ul>
+<p>
+
+</p>
+<%= render "school/students/form",
+					 classroom: @classroom,
+					 student: @student,
+					 btn_text: "Create"
+%>

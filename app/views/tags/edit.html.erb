@@ -2,7 +2,7 @@
 <div class="card">
   <div class="card-block">
     <p class="lead">Use the form below to update this tag.</p>
-    <%= render "tags/form", btn_text: "Update" %>
+    <%= render "tags/form", path: @tag, object: @tag, btn_text: "Update" %>
   </div>
   <div class="card-footer text-muted text-center">
     You added this tag <%= time_ago_in_words(@tag.created_at) %> ago.

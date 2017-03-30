@@ -43,12 +43,17 @@ class UserWord < ActiveRecord::Base
   # TODO: Update test
   def self.update_games_completed(user, word, num)
     user_word = UserWord.object(user, word)
-    user_word.games_completed = num
 
-    if user_word.save
-      "Success: UW #{user_word.id}\'s games_completed now at #{num}."
+    if user_word.played_before?(num)
+      "Okay: no games_completed updates needed for UW #{user_word.id}."
     else
-      "ERROR: UW #{user_word.id}\'s Fundamentals stat not updated to #{num}."
+      user_word.games_completed = num
+
+      if user_word.save
+        "Success: UW #{user_word.id}\'s games_completed now at #{num}."
+      else
+        "ERROR: UW #{user_word.id}\'s Fundamentals stat not updated to #{num}."
+      end
     end
   end
 
@@ -125,6 +130,10 @@ class UserWord < ActiveRecord::Base
     else
       "Not sure of Game Name: UW ID: #{self.id} #{self.word.name}"
     end
+  end
+
+  def played_before?(updated_games_completed)
+    games_completed > updated_games_completed
   end
 
   # TODO: Update test

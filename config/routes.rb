@@ -79,21 +79,20 @@ Rails.application.routes.draw do
     resources :describe_mes, only: [:index]
   end
   namespace :school do
-    root "current_user#classes"
-    get "classes" => "current_user#classes"
-    get "words" => "current_user#words"
+    root "classrooms#index"
+    get "settings" => "current_user#settings"
     get "example_non_examples/fourth" => "example_non_examples#fourth_grade"
     get "decisions_decisions/fourth" => "meaning_alts#fourth_grade"
     get "search" => "searches#search"
     get "search_results" => "searches#results"
     get "search_words_for_students" => "searches#student_words"
     get "student_words" => "words#student_words"
-    get "students" => "current_user#students"
-    get "student" => "current_user#student"
-    get "messages" => "current_user#messages"
-    get "progress" => "current_user#progress"
-    get "settings" => "current_user#settings"
+    get "progress" => "classrooms#progress"
     get "my_meaning_alts" => "current_user#my_meaning_alts"
+    get "words" => "classrooms#words"
+    resources :classrooms do
+      resources :students
+    end
     resources :words, only: [:new, :create]
     resource :add_words_for_student, only: [:update]
     resources :example_non_examples

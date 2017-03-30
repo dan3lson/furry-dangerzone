@@ -115,21 +115,6 @@ a, a:active {
 	font-size: 35px;
 }
 
-.stu-pic {
-	background-image: url(image-path("pup2_small.png"));
-	background-position: center;
-	background-repeat: no-repeat;
-	border: 1px solid $light-sky-blue;
-	border-radius: 70px;
-	height: 70px;
-	width: 70px;
-}
-
-.stu-pic-container:hover {
-	background: $light-sky-blue;
-	color: $sky-blue;
-}
-
 table {
 	border: none;
 

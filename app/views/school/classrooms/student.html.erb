@@ -1,23 +1,9 @@
 <% provide(:title, "Student") %>
-
-
-
-
-<% if current_user.is_demo_teacher? %>
-	<% provide(:header, "#{User.demo_random_username}") %>
-<% else %>
-	<% provide(:header, "#{@student.username}") %>
-<% end %>
-
-
+<% provide(:header, "#{@student.username}") %>
 
 
 <%= render "users/overview_stats", user: @student %>
-
 <%= render "users/recent_activity", user: @student %>
-
 <%= render "users/fundamentals_game_stats", user: @student %>
-
 <%= render "users/jeopardy_game_stats", user: @student %>
-
 <%= render "users/freestyle_game_stats", user: @student %>
