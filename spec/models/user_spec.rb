@@ -98,7 +98,7 @@ RSpec.describe User, type: :model do
     end
 
     it "returns true" do
-      user.role = "admin"
+      user.type = "admin"
 
       expect(user.is_admin?).to eq(true)
     end
@@ -110,13 +110,13 @@ RSpec.describe User, type: :model do
     end
 
     it "returns true" do
-      user.role = "admin"
+      user.type = "admin"
 
       expect(user.is_teacher?).to eq(true)
     end
 
     it "returns true" do
-      user.role = "teacher"
+      user.type = "teacher"
 
       expect(user.is_teacher?).to eq(true)
     end
@@ -128,19 +128,19 @@ RSpec.describe User, type: :model do
     end
 
     it "returns true" do
-      user.role = "admin"
+      user.type = "admin"
 
       expect(user.is_student?).to eq(false)
     end
 
     it "returns true" do
-      user.role = "teacher"
+      user.type = "teacher"
 
       expect(user.is_student?).to eq(false)
     end
 
     it "returns true" do
-      user.role = "student"
+      user.type = "student"
 
       expect(user.is_student?).to eq(true)
     end
@@ -152,13 +152,13 @@ RSpec.describe User, type: :model do
     end
 
     it "returns true" do
-      user.role = "admin"
+      user.type = "admin"
 
       expect(user.can_create_words?).to eq(true)
     end
 
     it "returns true" do
-      user.role = "teacher"
+      user.type = "teacher"
 
       expect(user.can_create_words?).to eq(true)
     end

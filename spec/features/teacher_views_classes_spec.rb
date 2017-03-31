@@ -57,11 +57,11 @@ feature "teacher views Classes", %{
       )
 
       usernames.each do |u|
-        s = User.new
+        s = Student.new
         s.username = u
         s.password = "password"
         s.password_confirmation = "password"
-        s.role = "student"
+        s.type = "student"
         s.email = ""
         s.save
       end

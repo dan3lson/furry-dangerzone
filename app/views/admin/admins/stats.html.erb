@@ -138,10 +138,6 @@
 					<td>Freestyles Not Completed</td>
 					<td><%= UserWord.select { |uw| uw.freestyle_not_completed? }.count %></td>
 				</tr>
-				<tr>
-					<td>Num Flashcards Played</td>
-					<td><%= User.sum(:num_flashcards_played) %></td>
-				</tr>
 			</table>
 		</div>
 	</div>

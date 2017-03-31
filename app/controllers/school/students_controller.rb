@@ -13,14 +13,13 @@ class School::StudentsController < BaseSchoolController
     @usernames = params[:username].split(",").map(&:strip)
 
     @usernames.each do |username|
-      @student = @classroom.students.new(teacher: current_user, user: @user)
-      binding.pry
-      @user = User.new(
-        role: "student",
+      @student = @classroom.students.new(
         username: username,
         password: username,
         password_confirmation: username
       )
+      @student.teacher = current_user
+      binding.pry
     end
   end
 

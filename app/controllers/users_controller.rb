@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = Brainiac.new
     render layout: "application_guest"
   end
 
   def create
-    @user = User.new(user_params)
+    @user = Brainiac.new(user_params)
     User.set_up_login_data(@user)
 
     if @user.save

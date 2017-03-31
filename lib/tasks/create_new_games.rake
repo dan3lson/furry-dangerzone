@@ -1,3 +1,4 @@
+# TODO Update description so it's a regular string without the new line characters
 namespace :create do
   desc "Create new games for a total of twelve."
   task :new_games => :environment do

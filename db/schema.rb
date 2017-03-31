@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329144344) do
+ActiveRecord::Schema.define(version: 20170331020208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "classrooms", force: :cascade do |t|
     t.string   "name",       null: false
-    t.integer  "user_id",    null: false
+    t.integer  "teacher_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -218,16 +218,6 @@ ActiveRecord::Schema.define(version: 20170329144344) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "students", force: :cascade do |t|
-    t.integer  "user_id",      null: false
-    t.integer  "classroom_id", null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "students", ["classroom_id"], name: "index_students_on_classroom_id", using: :btree
-  add_index "students", ["user_id"], name: "index_students_on_user_id", using: :btree
-
   create_table "tags", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -271,22 +261,21 @@ ActiveRecord::Schema.define(version: 20170329144344) do
   add_index "user_words", ["word_id"], name: "index_user_words_on_word_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",                                   null: false
+    t.string   "username",                      null: false
     t.string   "password_digest"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.string   "role",                  default: "brainiac", null: false
-    t.integer  "points",                default: 0,          null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "type",                          null: false
+    t.integer  "points",           default: 0,  null: false
     t.datetime "last_login"
     t.integer  "goal"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.integer  "num_logins",            default: 0,          null: false
-    t.string   "login_history",         default: "",         null: false
-    t.integer  "num_flashcards_played", default: 0,          null: false
-    t.integer  "user_words_count",      default: 0
-    t.string   "type"
+    t.integer  "num_logins",       default: 0,  null: false
+    t.string   "login_history",    default: "", null: false
+    t.integer  "user_words_count", default: 0
+    t.integer  "classroom_id"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
