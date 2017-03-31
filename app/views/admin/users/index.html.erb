@@ -45,7 +45,7 @@
     <% @users.each do |u| %>
       <tr>
         <td><%= u.id %></td>
-        <td><%= link_to u.username, u %></td>
+        <td><%= link_to u.username, user_path(u) %></td>
         <td><%= u.first_name || "-" %></td>
         <td><%= u.last_name || "-" %></td>
         <td><%= u.email || "-" %></td>
