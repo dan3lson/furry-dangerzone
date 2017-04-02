@@ -88,6 +88,4 @@ class School::AddWordsForStudentsController < BaseSchoolController
       num_errors: @num_errors
     }
   end
-
-  private
 end

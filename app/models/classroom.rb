@@ -1,6 +1,6 @@
 class Classroom < ActiveRecord::Base
   belongs_to :teacher
-  has_many :students
+  has_many :students, dependent: :destroy
 
   validates :name, presence: true
   validates :teacher, presence: true

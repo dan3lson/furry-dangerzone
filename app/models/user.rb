@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
   before_create { self.username = username.downcase }
 
   # TODO: Create test
+  def exists?
+    !User.find_by(username: self.username).nil?
+  end
+
+  # TODO: Create test
   def self.set_up_login_data(user)
     datetime_now = DateTime.now
     user.last_login = datetime_now

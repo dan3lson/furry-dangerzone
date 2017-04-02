@@ -10,16 +10,26 @@ class School::StudentsController < BaseSchoolController
 
   def create
     @classroom = Classroom.find(params[:classroom_id])
-    @usernames = params[:username].split(",").map(&:strip)
+    @usernames = params[:username].split(",").map(&:strip).reject(&:empty?)
+    @msgs = { successes: [], errors: [] }
 
     @usernames.each do |username|
       @student = @classroom.students.new(
         username: username,
-        password: username,
-        password_confirmation: username
+        password: "#{username}2017",
+        password_confirmation: "#{username}2017"
       )
       @student.teacher = current_user
-      binding.pry
+
+      if @student.save
+        @msgs[:successes] << @student
+      else
+        @msgs[:errors] << @student
+      end
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
 

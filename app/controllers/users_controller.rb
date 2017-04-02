@@ -42,10 +42,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.destroy
-      flash[:success] = "Account deleted; it\'s sad to see you go."
-      redirect_to root_path
+      flash[:success] = "Account deleted for username: #{@user.username}."
+
+      if current_user.is_teacher?
+        redirect_to :back
+      else
+        flash[:success] = "Your account was successfully deleted :'("
+        redirect_to root_path
+      end
     else
-      flash[:danger] = "Yikes! Something went wrong. Please try again."
+      flash[:danger] = "Sorry, something went wrong. Please try again."
       redirect_to settings_path
     end
   end

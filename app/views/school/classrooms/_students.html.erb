@@ -1,0 +1,44 @@
+<% if classroom.has_students? %>
+	<div class="table-responsive">
+	  <table class="table table-bordered table-hover">
+	    <th>ID</th>
+	    <th>Username</th>
+	    <th>Num Logins</th>
+	    <th>Last Login</th>
+	    <th>Num Words</th>
+	    <td>Total: <%= pluralize(@classroom_stu_count, "student") %></td>
+
+	    <% classroom.students.each do |student| %>
+	      <tr>
+	        <td><%= student.id %></td>
+	        <td><%= link_to student.username, user_path(student) %></td>
+	        <td><%= student.num_logins %></td>
+	        <td>
+	          <% if student.last_login.nil? %>
+	            -
+	          <% else %>
+	            <%= time_ago_in_words(student.last_login) %> ago
+	          <% end %>
+	        </td>
+	        <td><%= student.num_words %></td>
+	        <td>
+						<%= link_to user_path(student),
+							role: "button",
+							method: :delete, data: { confirm: @del_account_msg },
+							class: "btn btn-sm btn-secondary",
+							method: :delete do
+						%>
+							<i class="fa fa-trash"></i>
+							Remove
+						<% end %>
+					</td>
+	      </tr>
+	    <% end %>
+    </table>
+	</div>
+<% else %>
+	<div class="alert alert-info">
+		<%= icon "info-circle" %> This classroom doesn't have any students yet.
+		Click the blue button above to add students.
+	</div>
+<% end %>

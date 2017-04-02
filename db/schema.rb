@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331145220) do
+ActiveRecord::Schema.define(version: 20170401024541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -276,6 +276,7 @@ ActiveRecord::Schema.define(version: 20170331145220) do
     t.string   "login_history",    default: "", null: false
     t.integer  "user_words_count", default: 0
     t.integer  "classroom_id"
+    t.integer  "teacher_id"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree

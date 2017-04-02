@@ -30,6 +30,7 @@ class School::ClassroomsController < BaseSchoolController
 
   def show
     @classroom = Classroom.find(params[:id])
+    @classroom_stu_count = @classroom.students.count
   end
 
   def recent_activity

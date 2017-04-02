@@ -51,10 +51,10 @@
   <br/>
   <br/>
 
-  <div class="center">
+  <div class="text-center">
     <p>
       <%=
-        link_to "delete my account", user_path(current_user),
+        link_to "Delete my account", user_path(current_user),
         method: :delete, data: { confirm: @del_account_msg },
         class: "btn btn-danger form-control"
       %>

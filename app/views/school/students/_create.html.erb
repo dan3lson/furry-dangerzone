@@ -1,0 +1,103 @@
+<% if results[:successes].empty? && results[:errors].empty? %>
+	<div class="alert alert-info">
+		<%= icon "info-circle" %> Nothing was done. This is likely because only
+		blank usernames were submitted. Please try again or contact
+		<%= mail_to "help@leksi.education",
+								nil,
+								subject: "Help Me Create Usernames",
+								class: "alert-link"
+		%>.
+	</div>
+	<%= render "school/students/form",
+						 classroom: @classroom,
+						 student: @student,
+						 btn_text: "Create"
+	%>
+<% else %>
+	<% unless results[:successes].empty? %>
+		<div class="card card-outline-success mb-3">
+			<div class="card-block">
+				<h4 class="card-title text-success">
+					<%= pluralize(results[:successes].count, "Username") %> Created
+				</h4>
+				<p class="card-text small">
+					Please note that each respective
+					Password will be the same as the Username with "2017" appended to it.
+					Your new students can now log into Leksi
+					<span class="text-primary">(Leksi.education/login)</span> and
+					should change their passwords upon logging in for the first time.
+				</p>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<th>ID</th>
+						<th>Username</th>
+						<th>Password</th>
+
+						<% results[:successes].each do |student| %>
+							<tr>
+								<td><%= student.id %></td>
+								<td><%= student.username %></td>
+								<td><%= "#{student.username}2017" %></td>
+								<td>
+									<%= link_to user_path(student),
+										role: "button",
+										method: :delete, data: { confirm: @del_account_msg },
+										class: "btn btn-sm btn-secondary",
+										method: :delete do
+									%>
+										<i class="fa fa-trash"></i>
+										Remove
+									<% end %>
+								</td>
+							</tr>
+						<% end %>
+					</table>
+				</div>
+			</div>
+			<div class="card-block">
+				<h4 class="card-title">You can create more below.</h4>
+				<%= render "school/students/form",
+									 classroom: @classroom,
+									 student: @student,
+									 btn_text: "Create"
+				%>
+			</div>
+		</div>
+	<% end %>
+	<% unless results[:errors].empty? %>
+		<div class="card card-outline-danger">
+			<div class="card-block">
+				<h4 class="card-title text-danger">
+					<%= pluralize(results[:errors].count, "Username") %> Not Created
+				</h4>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<th>Username</th>
+						<th>Messages</th>
+
+						<% results[:errors].each do |student| %>
+							<tr>
+								<td><%= student.username %></td>
+								<td>
+									<ul>
+										<% student.errors.full_messages.each do |msg| %>
+											<li><%= msg %></li>
+										<% end %>
+									</ul>
+								</td>
+							</tr>
+						<% end %>
+					</table>
+				</div>
+			</div>
+			<div class="card-block">
+				<h4 class="card-title">You can try again below.</h4>
+				<%= render "school/students/form",
+									 classroom: @classroom,
+									 student: @student,
+									 btn_text: "Create"
+				%>
+			</div>
+		</div>
+	<% end %>
+<% end %>
