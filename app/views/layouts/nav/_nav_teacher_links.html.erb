@@ -1,4 +1,4 @@
-<% if controller?("school/classrooms") %>
+<% if controller?("school/classrooms") || controller?("school/students") %>
 	<%= link_to school_classrooms_path, class: "nav-item nav-link active" do %>
 		<i class="fa fa-users"></i> Classrooms
 	<% end %>
@@ -8,14 +8,14 @@
 	<% end %>
 <% end %>
 
-<% if controller?("school/searches") %>
-	<%= link_to school_search_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-search"></i> Look Up
-	<% end %>
-<% else %>
-	<%= link_to school_search_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-search"></i> Look Up
-	<% end %>
-<% end %>
+<%# if controller?("school/searches") %>
+	<%#= link_to school_search_path, class: "nav-item nav-link active" do %>
+		<!-- <i class="fa fa-search"></i> Look Up -->
+	<%# end %>
+<%# else %>
+	<%#= link_to school_search_path, class: "nav-item nav-link" do %>
+		<!-- <i class="fa fa-search"></i> Look Up -->
+	<%# end %>
+<%# end %>
 
 <%= render "layouts/nav/settings", path: school_settings_path %>

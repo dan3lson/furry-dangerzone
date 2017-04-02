@@ -3,24 +3,29 @@
 	  <table class="table table-bordered table-hover">
 	    <th>ID</th>
 	    <th>Username</th>
-	    <th>Num Logins</th>
-	    <th>Last Login</th>
-	    <th>Num Words</th>
+	    <th>Logins</th>
+	    <th>Words</th>
 	    <td>Total: <%= pluralize(@classroom_stu_count, "student") %></td>
 
 	    <% classroom.students.each do |student| %>
 	      <tr>
 	        <td><%= student.id %></td>
-	        <td><%= link_to student.username, user_path(student) %></td>
-	        <td><%= student.num_logins %></td>
+	        <td><%= student.username %></td>
 	        <td>
+						Number of Logins: <%= student.num_logins %>
+						<br>
+						Last Login Time:
 	          <% if student.last_login.nil? %>
-	            -
+							<span class="text-danger">Never</span>
 	          <% else %>
 	            <%= time_ago_in_words(student.last_login) %> ago
 	          <% end %>
 	        </td>
-	        <td><%= student.num_words %></td>
+	        <td>
+						Number of Words: <%= student.num_words %>
+						<br>
+						Words Mastered: <%= student.myLeksi_mastery %>%
+					</td>
 	        <td>
 						<%= link_to user_path(student),
 							role: "button",

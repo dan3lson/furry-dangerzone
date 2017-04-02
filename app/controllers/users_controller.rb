@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -25,7 +24,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     @del_account_msg = "Are you sure? All of your Leksi progress will be lost."
   end
 
@@ -40,8 +38,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
-
     if @user.destroy
       flash[:success] = "Account deleted for username: #{@user.username}."
 
@@ -60,7 +56,14 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(
+    @symbol = if @user.is_admin?
+                :admin
+              elsif @user.is_teacher?
+                :teacher
+              else
+                :student
+              end
+    params.require(@symbol).permit(
       :first_name,
       :last_name,
       :username,
