@@ -18,7 +18,13 @@
 		<% unless controller?("current_users") && action?("settings") %>
 			<li class="list-group-item">
 				<%= link_to settings_path do %>
-					<i class="fa fa-gamepad fa-fw"></i> Activate Brainiac Edition
+					<i class="fa fa-gamepad fa-fw"></i> Activate
+					<% if current_user.is_teacher? %>
+						Student
+					<% else %>
+						Brainiac
+					<% end %>
+						Edition
 				<% end %>
 			</li>
 		<% end %>

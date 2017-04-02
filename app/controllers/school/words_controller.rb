@@ -10,7 +10,6 @@ class School::WordsController < BaseSchoolController
       flash[:success] = "Success! You created \'#{@word.name}\'."
       redirect_to new_school_word_path
     else
-      flash.now[:danger] = "Yikes! Something went wrong. Please try again."
       render :new
     end
   end

@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
     @del_account_msg = "Are you sure? All of your Leksi progress will be lost."
   end
 

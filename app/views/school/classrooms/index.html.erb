@@ -11,17 +11,24 @@
 	</div>
 	<div class="clear"></div>
 </div>
-<div class="card-deck">
-	<% @classrooms.each do |classroom| %>
-		<div class="card">
-			<div class="card-block">
-				<h4 class="card-title">
-					<%= link_to classroom.name, school_classroom_path(classroom) %>
-				</h4>
-				<p class="card-text text-muted">
-					<small><%= pluralize(classroom.students.count, "student") %></small>
-				</p>
+<% if current_user.has_classrooms? %>
+	<div class="card-deck">
+		<% @classrooms.each do |classroom| %>
+			<div class="card">
+				<div class="card-block">
+					<h4 class="card-title">
+						<%= link_to classroom.name, school_classroom_path(classroom) %>
+					</h4>
+					<p class="card-text text-muted">
+						<small><%= pluralize(classroom.students.count, "student") %></small>
+					</p>
+				</div>
 			</div>
-		</div>
-	<% end %>
-</div>
+		<% end %>
+	</div>
+<% else %>
+	<div class="alert alert-info" role="alert">
+		<%= icon "info-circle" %> You haven't added any classrooms yet.
+		Click the blue button above to create your first one.
+	</div>
+<% end %>

@@ -19,11 +19,11 @@
 				<div>
 					<% @funds_completed_last_day.each do |uw| %>
 						<div>
-							<div class="inline-block">
+							<div class="d-inline">
 								<%= image_tag("medal_red_32.png") %>
 							</div>
 							&nbsp;
-							<div class="inline-block">
+							<div class="d-inline">
 								Completed the Fundamentals for <em><%= uw.word.name %></em>
 							</div>
 						</div>
@@ -36,11 +36,11 @@
 				<div>
 					<% @jeops_completed_last_day.each do |uw| %>
 						<div>
-							<div class="inline-block">
+							<div class="d-inline">
 								<%= image_tag("medal_orange_32.png") %>
 							</div>
 							&nbsp;
-							<div class="inline-block">
+							<div class="d-inline">
 								Completed Jeopardy for <em><%= uw.word.name %></em>
 							</div>
 						</div>
@@ -53,11 +53,11 @@
 				<div>
 					<% @frees_completed_last_day.each do |uw| %>
 						<div>
-							<div class="inline-block">
+							<div class="d-inline">
 								<%= image_tag("medal_green_32.png") %>
 							</div>
 							&nbsp;
-							<div class="inline-block">
+							<div class="d-inline">
 								Completed Freestyle for <em><%= uw.word.name %></em>
 							</div>
 						</div>

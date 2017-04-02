@@ -23,5 +23,5 @@
     <%= render "my_tags/untagged_words" %>
   </div>
 <% else %>
-  <%= render "my_tags/no_tags_guide" %>
+  <%= render "my_tags/no_tags_guide", path: @tag, tag: @tag, btn_text: "Create" %>
 <% end %>

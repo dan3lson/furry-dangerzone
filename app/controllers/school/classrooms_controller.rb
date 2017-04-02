@@ -13,7 +13,7 @@ class School::ClassroomsController < BaseSchoolController
 
     if current_user.has_classroom?(@classroom)
       msg = [
-        "Hey #{current_user.username}, that classroom already exists. ",
+        "Hey #{current_user.username}, you already have that classroom. ",
         " Change the name and then try creating it again."
       ].join
       flash.now[:warning] = msg
