@@ -35,7 +35,10 @@
           <%= icon("institution") %> Grades 1-12
         <% end %>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item disabled" href="#">1st Grade</a>
+          <%= link_to "1st Grade", search_grades_path(
+              grade: "first_grade"
+            ), class: "dropdown-item", remote: true
+          %>
           <%= link_to "2nd Grade", search_grades_path(
               grade: "second_grade"
             ), class: "dropdown-item", remote: true
