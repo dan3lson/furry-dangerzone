@@ -1,4 +1,4 @@
-<h4><%= grade %></h4>
+<h4><%= grade.split("_").map(&:capitalize).join(" ") %></h4>
 <div id="accordion" role="tablist" aria-multiselectable="true">
 	<% word_groups.each_with_index do |(name, words), i| %>
 	  <div class="card">
