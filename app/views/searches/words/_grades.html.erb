@@ -1,5 +1,5 @@
 <div id="accordion" role="tablist" aria-multiselectable="true">
-	<% word_groups.each do |name, words| %>
+	<% word_groups.each_with_index do |(name, words), i| %>
 	  <div class="card">
 	    <div class="card-header" role="tab" id="heading-word-<%= name %>">
 	      <h5 class="mb-0">
@@ -8,7 +8,7 @@
 						 href="#collapse-word-<%= name %>"
 						 aria-expanded="true"
 						 aria-controls="collapse-word-<%= name %>">
-	          <%= name %>
+	          <%= i + 1 %>. <%= name %>
 	        </a>
 	      </h5>
 	    </div>

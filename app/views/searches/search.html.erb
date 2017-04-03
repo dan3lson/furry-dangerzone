@@ -36,10 +36,13 @@
         <% end %>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item disabled" href="#">1st Grade</a>
-          <a class="dropdown-item disabled" href="#">2nd Grade</a>
+          <%= link_to "2nd Grade", search_grades_path(
+              grade: "second_grade_word_names"
+            ), class: "dropdown-item", remote: true
+          %>
           <a class="dropdown-item disabled" href="#">3rd Grade</a>
           <%= link_to "4th Grade", search_grades_path(
-              grade: "fourth_grade_grouped"
+              grade: "fourth_grade_word_names"
             ), class: "dropdown-item", remote: true
           %>
           <a class="dropdown-item disabled" href="#">5th Grade</a>

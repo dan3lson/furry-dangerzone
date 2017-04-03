@@ -32,7 +32,6 @@ class UsersController < ApplicationController
       flash[:success] = "You successfully updated your profile."
       redirect_to settings_path
     else
-      flash[:danger] = "Yikes! Profile updates not successfully made."
       render :edit
     end
   end

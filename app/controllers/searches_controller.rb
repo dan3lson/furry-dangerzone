@@ -15,8 +15,8 @@ class SearchesController < ApplicationController
   end
 
   def grades
-    @grade = params[:grade]
-    @word_groups = Word.send(@grade)
+    @grade_word_names = params[:grade]
+    @word_groups = Word.explore(@grade_word_names)
 
     respond_to do |format|
       format.js { render template: "searches/words/grades.js.erb" }

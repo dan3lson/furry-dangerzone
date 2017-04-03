@@ -36,6 +36,7 @@ class WordsApi
 		rescue
 			msg = "Sorry, we couldn\'t find '#{name}'. Please try again."
 			raise WordsApi::NoWordError, msg
+			nil
 	end
 
 	def everything
