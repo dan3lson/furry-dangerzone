@@ -530,7 +530,7 @@ class Word < ActiveRecord::Base
     	"dart",
     	"decorate",
     	"delighted",
-    	"denied",
+    	"deny",
     	"deserve",
     	"divide",
     	"dodge",
