@@ -1,9 +1,9 @@
 namespace :define do
-  desc "Define 4th grade words from list"
-  task :fourth_grade_words => :environment do
-    puts "Starting to define 4th Grade Words:"
+  desc "Define 6th grade words from list"
+  task :sixth_grade_words => :environment do
+    puts "Starting to define 6th Grade Words:"
     puts
-    rand_word_names = Word.fourth_grade_word_names.shuffle.take(75).sort
+    rand_word_names = Word.sixth_grade_word_names.shuffle.take(75).sort
     num_errors = 0
     new_word_ids = []
     error_ids = []
