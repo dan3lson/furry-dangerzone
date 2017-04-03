@@ -20,7 +20,10 @@ class School::ClassroomsController < BaseSchoolController
       render :new
     else
       if @classroom.save
-        flash[:success] = "Success! You can add students to this classroom now."
+        flash[:success] = [
+          "Success! You can add students to this classroom now by clicking ",
+          "the blue Add Students button below."
+        ].join
         redirect_to school_classroom_path(@classroom)
       else
         render :new
@@ -98,6 +101,6 @@ class School::ClassroomsController < BaseSchoolController
   private
 
   def classroom_params
-    params.require(:classroom).permit(:name)
+    params.require(:classroom).permit(:name, :grade)
   end
 end

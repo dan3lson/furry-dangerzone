@@ -44,10 +44,6 @@ class User < ActiveRecord::Base
     !UserWord.where(user: self).empty?
   end
 
-  def has_classroom?(classroom)
-    !classrooms.where(name: classroom.name).empty?
-  end
-
   def has_tag?(tag)
     !tags.where(name: tag.name).empty?
   end

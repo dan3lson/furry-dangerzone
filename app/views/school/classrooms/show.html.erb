@@ -1,5 +1,8 @@
 <% provide(:title, "Classroom") %>
-<% provide(:header, "Classroom #{@classroom.name}") %>
+<h1>
+	Classroom <%= @classroom.name %>
+	<small class="text-muted">Grade <%= @classroom.grade %></small>
+</h1>
 <nav class="breadcrumb">
 	<%= link_to "Classrooms",
 							school_classrooms_path,

@@ -4,6 +4,7 @@ class Classroom < ActiveRecord::Base
 
   validates :name, presence: true
   validates :teacher, presence: true
+  validates :grade, presence: true
 
   # TODO Create test
   def has_students?

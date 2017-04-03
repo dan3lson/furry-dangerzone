@@ -18,13 +18,15 @@
 		<div class="card card-outline-success mb-3">
 			<div class="card-block">
 				<h4 class="card-title text-success">
+					Success!
 					<%= pluralize(results[:successes].count, "Username") %> Created
 				</h4>
-				<p class="card-text small">
-					Please note that each respective
+				<p class="card-text small text-muted">
+					<%= icon "sticky-note-o" %>
+					Note: Each respective
 					Password will be the same as the Username with "2017" appended to it.
 					Your new students can now log into Leksi
-					<span class="text-primary">(Leksi.education/login)</span> and
+					(Leksi.education/login) and
 					should change their passwords upon logging in for the first time.
 				</p>
 				<div class="table-responsive">
@@ -55,7 +57,28 @@
 				</div>
 			</div>
 			<div class="card-block">
-				<h4 class="card-title">You can create more below.</h4>
+				<h4 class="card-title">
+					Add Words for These Students (Optional)
+				</h4>
+				<p class="card-text">
+					Since this classroom is for Grade <%= @classroom.grade %>,
+					do you want to add the words from this grade-list to the
+					<%= pluralize(results[:successes].count, "student") %> above?
+				</p>
+				<%= link_to by_grade_school_add_words_for_student_path(
+											classroom_id: @classroom,
+											new_student_ids: results[:successes].map(&:id)
+										), class: "btn btn-primary btn-block",
+										method: :post do
+				%>
+					<%= icon "book" %> Add Grade <%= @classroom.grade %> Words
+				<% end %>
+			</div>
+			<div class="card-block">
+				<h4 class="card-title">
+					Create More Usernames (Optional)
+				</h4>
+				<p class="card-text">You can create more usernames below.</p>
 				<%= render "school/students/form",
 									 classroom: @classroom,
 									 student: @student,

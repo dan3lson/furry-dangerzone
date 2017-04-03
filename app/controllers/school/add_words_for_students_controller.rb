@@ -1,4 +1,44 @@
 class School::AddWordsForStudentsController < BaseSchoolController
+  def by_grade
+    @classroom = Classroom.find(params[:classroom_id])
+    @new_students = Student.find(params[:new_student_ids])
+    @results = []
+
+    if @classroom.grade == 1
+      @words = Word.first_grade
+    elsif @classroom.grade == 2
+      @words = Word.second_grade
+    elsif @classroom.grade == 3
+      @words = Word.third_grade
+    elsif @classroom.grade == 4
+      @words = Word.fourth_grade
+    elsif @classroom.grade == 5
+      @words = Word.fifth_grade
+    elsif @classroom.grade == 6
+      @words = Word.sixth_grade
+    elsif @classroom.grade == 7
+      @words = Word.seventh_grade
+    elsif @classroom.grade == 8
+      @words = Word.eigth_grade
+    end
+
+    @new_students.each do |student|
+      @num_words_added = student.words << @words
+      @results << @num_words_added == @words.count
+    end
+
+    @successfully_added = !@results.include?(false)
+
+    if @successfully_added
+      msg = [
+        "Success! Those students now have the Grade #{@classroom.grade} words",
+        " added to their personal word-list."
+      ].join
+      flash[:success] = msg
+      redirect_to school_classroom_path(@classroom)
+    end
+  end
+
   def update
     @students = params[:usernames].map { |s| User.find_by(username: s) }
     @words = params[:word_ids].split(",").uniq.map { |w| Word.find(w) }

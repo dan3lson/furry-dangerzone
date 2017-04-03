@@ -39,9 +39,9 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    
+
     if @user.destroy
-      flash[:success] = "Account deleted for username: #{@user.username}."
+      flash[:success] = "Success: account deleted for \'#{@user.username}\'."
 
       if current_user.is_teacher?
         redirect_to :back

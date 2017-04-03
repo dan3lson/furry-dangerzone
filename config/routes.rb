@@ -94,7 +94,11 @@ Rails.application.routes.draw do
       resources :students
     end
     resources :words, only: [:new, :create]
-    resource :add_words_for_student, only: [:update]
+    resource :add_words_for_student, only: [:update] do
+      member do
+        post "by_grade"
+      end
+    end
     resources :example_non_examples
     resources :word do
       resources :example_non_examples
