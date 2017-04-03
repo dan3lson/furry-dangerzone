@@ -161,15 +161,6 @@ class Word < ActiveRecord::Base
   #
   ####################
 
-  def self.find_for(grade_word_names)
-    where(name: Word.send(grade_word_names)).limit(250)
-  end
-
-  def self.explore(grade_word_names)
-    find_for(grade_word_names).group_by(&:name)
-    # grade.select("distinct on (name) *")
-  end
-
   def self.second_grade_word_names
     [
     	"accident",
@@ -315,8 +306,30 @@ class Word < ActiveRecord::Base
     ]
   end
 
-  def self.second_grade_spe_bee
-
+  def self.second_grade
+    # names = [
+    #   "accident", "astronomy", "atlas", "award", "aware", "banner", "beach",
+    #   "besides", "blast", "board", "branch", "bright", "cage", "career",
+    #   "cheer", "chew", "cliff", "club", "core", "curious", "dangerous", "dash",
+    #   "design", "discard", "doubt", "excess", "fair", "flap", "float", "flood",
+    #   "fold", "frighten", "fuel", "gap", "gift", "gravity", "greedy", "harm",
+    #   "herd", "idea", "insect", "instrument", "invent", "leader", "lizard",
+    #   "luxury", "mention", "motor", "nervous", "nibble", "notice", "ocean",
+    #   "pack", "past", "peak", "planet", "proof", "rumor", "search", "settle",
+    #   "share", "smooth", "soil", "steady", "strand", "support", "team",
+    #   "telescope", "travel", "tremble", "village", "weak", "wealthy", "worry",
+    #   "zigzag"
+    # ]
+    ids = [
+      4413, 4415, 4416, 4420, 4425, 4427, 4431, 4433, 4435, 4451, 4464, 4472,
+      4483, 4489, 4492, 4499, 4502, 4503, 4514, 4525, 4527, 4529, 4541, 4555,
+      4559, 4563, 4568, 4585, 4596, 4612, 4622, 4634, 4635, 4640, 4647, 4652,
+      4655, 4659, 4665, 4670, 4672, 4681, 4683, 4685, 4687, 4690, 4696, 4701,
+      4706, 4711, 4722, 4724, 4746, 4752, 4760, 4763, 4775, 4777, 4786, 4809,
+      4819, 4831, 4836, 4846, 4855, 4877, 4880, 4883, 4892, 4894, 4897, 4909,
+      4910, 4918
+    ]
+    Word.find(ids)
   end
 
   def self.fourth_grade_word_names
