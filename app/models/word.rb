@@ -307,19 +307,6 @@ class Word < ActiveRecord::Base
   end
 
   def self.second_grade
-    # names = [
-    #   "accident", "astronomy", "atlas", "award", "aware", "banner", "beach",
-    #   "besides", "blast", "board", "branch", "bright", "cage", "career",
-    #   "cheer", "chew", "cliff", "club", "core", "curious", "dangerous", "dash",
-    #   "design", "discard", "doubt", "excess", "fair", "flap", "float", "flood",
-    #   "fold", "frighten", "fuel", "gap", "gift", "gravity", "greedy", "harm",
-    #   "herd", "idea", "insect", "instrument", "invent", "leader", "lizard",
-    #   "luxury", "mention", "motor", "nervous", "nibble", "notice", "ocean",
-    #   "pack", "past", "peak", "planet", "proof", "rumor", "search", "settle",
-    #   "share", "smooth", "soil", "steady", "strand", "support", "team",
-    #   "telescope", "travel", "tremble", "village", "weak", "wealthy", "worry",
-    #   "zigzag"
-    # ]
     ids = [
       4413, 4415, 4416, 4420, 4425, 4427, 4431, 4433, 4435, 4451, 4464, 4472,
       4483, 4489, 4492, 4499, 4502, 4503, 4514, 4525, 4527, 4529, 4541, 4555,
@@ -478,13 +465,15 @@ class Word < ActiveRecord::Base
   end
 
   def self.fourth_grade
-    ids = [3903, 3907, 3914, 3917, 3921, 3927, 3940, 3944, 3949, 3955, 3958,
-       3969, 3987, 3992, 3994, 3996, 3998, 4004, 4029, 4057, 4067, 4071, 4072,
-       4082, 4087, 4101, 4107, 4129, 4134, 4136, 4142, 4144, 4146, 4155, 4178,
-       4186, 4201, 4203, 4210, 4213, 4215, 4223, 4232, 4243, 4262, 4273, 4280,
-       4282, 4284, 4290, 5115, 5163, 4924, 4941, 4945, 4954, 4979, 5119, 5127,
-        4983, 4986, 5167, 5077, 5000, 5019, 5138, 5149, 5187, 5159, 5101, 5105,
-        5109, 5191, 5193, 5114]
+    ids = [
+      3903, 3907, 3908, 3912, 3914, 3917, 3921, 3927, 3935, 3944, 3949, 3955,
+      3975, 3979, 3992, 3996, 3998, 4004, 4009, 4018, 4039, 4062, 4067, 4072,
+      4082, 4087, 4093, 4101, 4107, 4132, 4142, 4144, 4146, 4155, 4158, 4163,
+      4168, 4172, 4178, 4181, 4201, 4215, 4226, 4249, 4267, 4278, 4282, 4284,
+      4295, 4301, 4921, 4926, 4930, 4933, 4936, 4944, 4954, 4959, 4962, 4965,
+      4980, 4985, 4991, 4997, 5003, 5010, 5021, 5025, 5029, 5034, 5038, 5040,
+      5042, 5043, 5044
+    ]
     Word.find(ids)
   end
 end
