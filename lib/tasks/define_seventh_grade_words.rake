@@ -1,12 +1,11 @@
 namespace :define do
-  desc "Define 6th grade words from list"
-  task :sixth_grade_words => :environment do
-    puts "Starting to define 6th Grade Words:"
+  desc "Define 7th grade words from list"
+  task :seventh_grade_words => :environment do
+    puts "Starting to define 7th Grade Words:"
     puts
-    rand_word_names = Word.sixth_grade_word_names.shuffle.take(75).sort
-    num_errors = 0
+    rand_word_names = Word.seventh_grade_word_names.shuffle.take(75).sort
+    num_warnings = 0
     new_word_ids = []
-    error_ids = []
 
     rand_word_names.each do |name|
       words_api_search = WordsApi.new(name).define
@@ -19,12 +18,12 @@ namespace :define do
             new_word_ids << new_word.id if index == 0
             puts "Success for word #{name}(#{new_word.id})"
           else
-            num_errors += 1
+            num_warnings += 1
             new_word_ids << Word.find_by(
               name: new_word.name,
               definition: new_word.definition
             ).id if index == 0
-            puts "ERROR for word #{name}: #{new_word.errors.full_messages}."
+            puts "WARNING for word #{name}: #{new_word.errors.full_messages}."
           end
         end
       end
@@ -37,6 +36,6 @@ namespace :define do
     print rand_word_names
     puts
     puts
-    puts "TOTAL ERRORS: #{num_errors}"
+    puts "TOTAL WARNINGS: #{num_warnings}"
   end
 end

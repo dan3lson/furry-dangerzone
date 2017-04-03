@@ -50,12 +50,11 @@
               grade: "sixth_grade"
             ), class: "dropdown-item", remote: true
           %>
-          <a class="dropdown-item disabled" href="#">7th Grade</a>
+          <%= link_to "7th Grade", search_grades_path(
+              grade: "seventh_grade"
+            ), class: "dropdown-item", remote: true
+          %>
           <a class="dropdown-item disabled" href="#">8th Grade</a>
-          <a class="dropdown-item disabled" href="#">9th Grade</a>
-          <a class="dropdown-item disabled" href="#">10th Grade</a>
-          <a class="dropdown-item disabled" href="#">11th Grade</a>
-          <a class="dropdown-item disabled" href="#">12th Grade</a>
         </div>
       </div>
     </div>
