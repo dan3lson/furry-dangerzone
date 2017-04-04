@@ -1,8 +1,10 @@
-<% provide(:header, "Users (#{@user_count})") %>
-
+<h1 class="mb-3">
+  <%= icon "users" %> Users
+  <small class="text-muted"><%= @user_count %></small>
+</h1>
 <div class="text-muted filter-div">
   Filter:
-  <%= link_to admin_users_path do %>
+  <%= link_to admin_users_path(filter: "alpha") do %>
     <span class="text-primary active">
       <i class="fa fa-sort-alpha-asc"></i> Alphabetical
     </span>
@@ -10,7 +12,7 @@
   |
   <%= link_to admin_users_path(filter: "latest") do %>
     <span>
-      <i class="fa fa-calendar hover pointer"></i> Created at
+      <i class="fa fa-sort-amount-desc"></i> Joined
     </span>
   <% end %>
   |
@@ -19,18 +21,9 @@
       <i class="fa fa-sort-numeric-desc hover pointer"></i> Words
     </span>
   <% end %>
-  <div class="float-right">
-    <p>
-      Total Users: <%= @user_count %>
-    </p>
-  </div>
-  <div class="clear"></div>
 </div>
-
-<%= paginate @users %>
-
-<div class="clear"></div>
-<div class="table-responsive">
+<div class="table-responsive mt-3">
+  <%= paginate @users %>
   <table class="table table-bordered table-hover">
     <th>ID</th>
     <th>Username</th>

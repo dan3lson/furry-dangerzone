@@ -116,7 +116,9 @@ Rails.application.routes.draw do
     get "settings" => "admins#settings"
     resources :users
     resources :words
+    resources :classrooms
     resources :meaning_alts
     resources :example_non_examples
+    resources :tags
   end
 end

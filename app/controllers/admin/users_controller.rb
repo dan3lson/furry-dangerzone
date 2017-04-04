@@ -9,9 +9,12 @@ class Admin::UsersController < BaseAdminController
 			elsif @filter == "num_words"
 				@users = User.order("user_words_count DESC")
 										 .page(params[:page])
+			elsif @filter == "alpha"
+				@users = User.order("username ASC")
+										 .page(params[:page])
       end
     else
-      @users = User.order("username ASC").page(params[:page])
+      @users = User.order("created_at DESC").page(params[:page])
     end
   end
 end

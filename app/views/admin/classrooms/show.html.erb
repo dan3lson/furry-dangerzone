@@ -1,0 +1,21 @@
+<h1>
+  <%= icon "building" %> Classroom <%= @classroom.name %>
+  <small class="text-muted">
+		<%= @classroom.teacher.username %>
+	</small>
+</h1>
+<div class="card mb-3">
+	<div class="card-block">
+		<h4>
+			Students
+			<small class="text-muted"><%= @classroom.students.count %></h4>
+		</small>
+		<%= render "school/classrooms/students", classroom: @classroom %>
+	</div>
+</div>
+<div class="card">
+	<div class="card-block">
+		<%= icon "calendar" %> Created:
+		<%= time_ago_in_words(@classroom.created_at) %> ago
+	</div>
+</div>

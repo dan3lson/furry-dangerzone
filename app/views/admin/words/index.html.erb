@@ -1,6 +1,7 @@
-<% provide(:title, "All Words") %>
-<% provide(:header, "All Words") %>
-
+<h1 class="mb-3">
+  <%= icon "book" %> Words
+  <small class="text-muted"><%= @word_count %></small>
+</h1>
 <%= paginate @words %>
 <div class="card-columns">
   <% @words.each do |word| %>

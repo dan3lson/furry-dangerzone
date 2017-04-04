@@ -1,0 +1,32 @@
+<h1>
+  <%= icon "building" %> Classrooms
+  <small class="text-muted"><%= @classrooms_count %></small>
+</h1>
+<%= paginate @classrooms %>
+<div class="card-columns">
+  <% @classrooms.each do |classroom| %>
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">
+            <%= link_to classroom.name, admin_classroom_path(classroom) %>
+            <br>
+            <small class="text-muted">
+              <%= icon "hashtag" %>
+              Students: <%= classroom.num_students %>
+            </small>
+            <br>
+            <small class="text-muted">
+              <%= icon "user" %> Teacher:
+              <%= classroom.teacher.username %>
+            </small>
+            <br>
+            <small class="text-muted">
+              <%= icon "calendar" %> Created:
+              <%= time_ago_in_words(classroom.created_at) %> ago
+            </small>
+          </h4>
+        </div>
+      </div>
+  <% end %>
+</div>
+<%= paginate @classrooms %>

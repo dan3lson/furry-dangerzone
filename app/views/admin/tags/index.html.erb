@@ -1,0 +1,32 @@
+<h1 class="mb-3">
+  <%= icon "tags" %> Tags
+  <small class="text-muted"><%= @tag_count %></small>
+</h1>
+<%= paginate @tags %>
+<div class="card-columns">
+  <% @tags.each do |tag| %>
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">
+            <%= tag.name %>
+            <br>
+            <small class="text-muted">
+              <%= icon "hashtag" %>
+              Words: <%= tag.words.count %>
+            </small>
+            <br>
+            <small class="text-muted">
+              <%= icon "users" %> Users:
+              <%= tag.users.map(&:username).join(", ") %>
+            </small>
+            <br>
+            <small class="text-muted">
+              <%= icon "calendar" %> Created:
+              <%= time_ago_in_words(tag.created_at) %> ago
+            </small>
+          </h4>
+        </div>
+      </div>
+  <% end %>
+</div>
+<%= paginate @tags %>

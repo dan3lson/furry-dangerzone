@@ -10,4 +10,9 @@ class Classroom < ActiveRecord::Base
   def has_students?
     !Student.where(classroom: self).empty?
   end
+
+  # TODO Create test
+  def num_students
+    students.count
+  end
 end

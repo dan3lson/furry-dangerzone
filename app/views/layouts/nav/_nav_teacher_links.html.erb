@@ -1,10 +1,10 @@
 <% if controller?("school/classrooms") || controller?("school/students") %>
 	<%= link_to school_classrooms_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-users"></i> Classrooms
+		<i class="fa fa-building"></i> Classrooms
 	<% end %>
 <% else %>
 	<%= link_to school_classrooms_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-users"></i> Classrooms
+		<i class="fa fa-building"></i> Classrooms
 	<% end %>
 <% end %>
 
