@@ -3,7 +3,7 @@ const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', loc
 const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: '' }) %>");
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
-var currentGame = parseInt("<%= @current_game %>");
+var gameToPlay = parseInt("<%= @game_to_play %>");
 var $fundamentalsDiv = createElem("div", null, "fundamentals-div");
 var $activityDiv = createElem("div", null, "activity-div");
 $fundamentalsDiv.append(
@@ -27,7 +27,7 @@ var numBadClicks = 0;
 var numHeard = 0;
 var $regex = /^[a-zA-Z. ]+$/;
 
-switch (currentGame) {
+switch (gameToPlay) {
 	case 1:
 		startSpellByTypingActivity();
 		updateProgress(10);

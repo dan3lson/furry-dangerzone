@@ -16,8 +16,12 @@ class Classroom < ActiveRecord::Base
     students.count
   end
 
-  def self.puts_pwds(class_id)
-    find(class_id).students.each do |s|
+  def self.puts_pwds(classroom_id)
+    classroom = self.find(classroom_id)
+    puts "Classroom: #{classroom.name}"
+    puts
+    
+    classroom.students.each do |s|
       puts "Username: #{s.username}, Password: #{s.username}2017"
     end
   end

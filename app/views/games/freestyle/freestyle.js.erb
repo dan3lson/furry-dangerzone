@@ -4,6 +4,7 @@ const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: 
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
 var currentGame = parseInt("<%= @current_game %>");
+var gameToPlay = parseInt("<%= @game_to_play %>");
 var $activityDiv = createElem("div", null, "activity-div");
 $(".container").empty()
 							 .append(
@@ -22,7 +23,7 @@ var newPointsTotal = 0;
 var timeStarted;
 updateProgress(10);
 
-if (currentGame == 9) {
+if (gameToPlay == 9) {
 	if (availableGames.sent_stems) {
 		startSentenceStemActivity();
 	} else {
@@ -30,11 +31,11 @@ if (currentGame == 9) {
 		updateProgress(25);
 		startWordRelationshipActivity();
 	}
-} else if (currentGame == 10) {
+} else if (gameToPlay == 10) {
 	startWordRelationshipActivity();
-} else if (currentGame == 11) {
+} else if (gameToPlay == 11) {
 	startLeksiTaleActivity();
-} else if (currentGame == 12) {
+} else if (gameToPlay == 12) {
 	if (availableGames.describe_me) {
 		startDescribeMeActivity();
 	} else {
@@ -42,7 +43,7 @@ if (currentGame == 9) {
 		updateProgress(100);
 		startReviewActivity();
 	}
-} else if (currentGame > 12) {
+} else if (gameToPlay > 12) {
 	updateProgress(65);
 	startInMyLifeActivity();
 }

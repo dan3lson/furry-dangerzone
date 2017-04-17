@@ -418,7 +418,7 @@ function startCountdown($selector, seconds, getsPromoted) {
 			clearInterval(countdownID);
 
 			if (getsPromoted) {
-				var url = "/freestyle?word_id=" + targetWord.id;
+				var url = "/freestyle?word_id=" + targetWord.id + "&game=9";
 			} else {
 				var url = "/fundamentals?word_id=" + targetWord.id;
 			}

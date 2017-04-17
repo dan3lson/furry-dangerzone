@@ -21,6 +21,11 @@
             </small>
             <br>
             <small class="text-muted">
+              <%= icon "hashtag" %> Grade:
+              <%= classroom.grade %>
+            </small>
+            <br>
+            <small class="text-muted">
               <%= icon "calendar" %> Created:
               <%= time_ago_in_words(classroom.created_at) %> ago
             </small>

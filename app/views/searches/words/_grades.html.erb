@@ -1,31 +1,18 @@
-<h4><%= grade.split("_").map(&:capitalize).join(" ") %></h4>
-<div id="accordion" role="tablist" aria-multiselectable="true">
+<h4 class="mb-3"><%= grade.split("_").map(&:capitalize).join(" ") %></h4>
+<div class="card-columns">
 	<% word_groups.each_with_index do |(name, words), i| %>
 	  <div class="card">
-	    <div class="card-header" role="tab" id="heading-word-<%= name %>">
-	      <h5 class="mb-0">
-	        <a data-toggle="collapse"
-						 data-parent="#accordion"
-						 href="#collapse-word-<%= name %>"
-						 aria-expanded="true"
-						 aria-controls="collapse-word-<%= name %>">
-	          <%= i + 1 %>. <%= name %>
-	        </a>
-	      </h5>
-	    </div>
-	    <div id="collapse-word-<%= name %>"
-					 class="collapse"
-					 role="tabpanel"
-					 aria-labelledby="heading-word-<%= name %>">
-				<% words.take(3).each do |word| %>
-		      <div class="card-block" data-word-id="<%= word.id %>">
-						<h2 class="card-title">
-							<%= render "words/pos_def", word: word %>
-						</h2>
-						<%= render "searches/results_options", word: word %>
-		      </div>
-				<% end %>
-	    </div>
+			<% words.take(3).each do |word| %>
+				<div class="card-block" data-word-id="<%= word.id %>">
+					<h4 class="card-title">
+						<%= name %>
+					</h4>
+					<h2 class="card-title">
+						<%= render "words/pos_def", word: word %>
+					</h2>
+					<%= render "searches/results_options", word: word %>
+				</div>
+			<% end %>
 	  </div>
 	<% end %>
 </div>

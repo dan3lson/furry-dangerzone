@@ -1,0 +1,29 @@
+<% word_groups.each_with_index do |(name, words), i| %>
+	<div class="mb-3">
+		<p class="lead"><%= name %></p>
+		<% words.take(3).each do |word| %>
+			<p>
+				<strong>Part of Speech:</strong> <%= word.part_of_speech %>
+				<br>
+				<strong>Syllables:</strong> <%= word.phonetic_spelling %>
+				(<%= word.num_syllables %>)
+				<br>
+				<strong>Definition:</strong> <%= word.definition %>
+				<br>
+				<strong>Synonyms:</strong>
+				<% if Thesaurus.synonyms(name) %>
+					<% Thesaurus.synonyms(name).take(3).each do |name| %>
+						<%= name %>;
+					<% end %>
+				<% end %>
+				<% if Thesaurus.antonyms(name) %>
+					<br>
+					<strong>Antonyms:</strong>
+					<% Thesaurus.antonyms(name).take(3).each do |name| %>
+						<%= name %>;
+					<% end %>
+				<% end %>
+			</p>
+		<% end %>
+	</div>
+<% end %>

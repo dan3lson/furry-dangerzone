@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   def fundamentals
     @target_word = Word.find(params[:word_id])
     @user_word = UserWord.object(current_user, @target_word)
-    @current_game = @user_word.current_game
+    @game_to_play = params[:game] || @user_word.current_game
     @available_games = {
       "pronun": @target_word.has_pronunciation?,
       "dec_dec": @target_word.has_meaning_alts?,
@@ -36,6 +36,7 @@ class GamesController < ApplicationController
     @user_word = UserWord.object(current_user, @target_word)
     @sent_stems = @target_word.sent_stems
     @current_game = UserWord.object(current_user, @target_word).current_game
+    @game_to_play = params[:game]
     @available_games = {
       "sent_stems": @target_word.has_sent_stems?,
       "describe_me": @target_word.has_describe_mes?,
