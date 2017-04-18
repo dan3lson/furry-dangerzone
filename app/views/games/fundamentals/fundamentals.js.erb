@@ -386,10 +386,12 @@ function startPronunciationActivity() {
 	$(".audiooo").attr("src", attr);
 
 	$audioBtn.click(function() {
+		var audio = $(this).parent().prev()[0];
+		audio.play();
 		$volumeBtn = $(this);
 		$volumeBtn.addClass("text-success")
-						 .removeClass("fa-volume-off")
-						 .addClass("fa-volume-up");
+						  .removeClass("fa-volume-off")
+						  .addClass("fa-volume-up");
 
 		setTimeout(function() {
 			$volumeBtn.removeClass("text-success")
