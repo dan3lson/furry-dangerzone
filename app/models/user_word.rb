@@ -171,29 +171,44 @@ class UserWord < ActiveRecord::Base
     date.to_date
   end
 
-  # TODO: Create test. Probably shouldn't be here in this class.
+  # TODO: Move; definitely shouldn't be here in this class.
   def yesterday
     Date.yesterday
   end
 
-  # TODO: Update test. Probably shouldn't be here in this class.
+  # TODO: Move; definitely shouldn't be here in this class.
   def today
     Date.today
   end
 
   # TODO: Update test
+  def fundamental_completed_today?
+    _to_date(updated_at) == today && fundamental_completed?
+  end
+
+  # TODO: Update test
   def fundamental_completed_yesterday?
-    _to_date(updated_at) == yesterday && fundamental_completed?
+    _to_date(updated_at) <= yesterday && fundamental_completed?
+  end
+
+  # TODO: Create test
+  def fundamental_completed_few_days_ago?
+    updated_at >= 1.days.ago && updated_at < Time.now
   end
 
   # TODO: Update test
+  def jeopardy_completed_today?
+    _to_date(updated_at) == today && jeopardy_completed?
+  end
+
+  # TODO: Update test; Make the range found within last week and change name
   def jeopardy_completed_yesterday?
-    _to_date(updated_at) == yesterday && jeopardy_completed?
+    _to_date(updated_at) <= yesterday && jeopardy_completed?
   end
 
-  # TODO: Update test
+  # TODO: Update test; Make the range found within last week and change name
   def freestyle_completed_yesterday?
-    _to_date(updated_at) == yesterday && freestyle_completed?
+    _to_date(updated_at) <= yesterday && freestyle_completed?
   end
 
   # TODO: Update test

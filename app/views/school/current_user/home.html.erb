@@ -1,6 +1,13 @@
 <% provide(:title, "Home") %>
 <% provide(:header, "Home") %>
-
-Coming soon!
-
-*Thinks to self: what was supposed to be here?*
+<div class="card mb-3">
+	<div class="card-header">
+		<%= icon "clock-o" %>
+		Recent Activity
+	</div>
+	<div class="card-block">
+		<% current_user.students.alphabetical.each do |user| %>
+				<%= render "users/recent_activity", user: user %>
+		<% end %>
+	</div>
+</div>

@@ -130,7 +130,7 @@ class User < ActiveRecord::Base
 
   # TODO Create test
   def rand_incomplete_not(word)
-    incomplete_words.delete_if  {|uw| uw.word.id == word.id }.sample
+    incomplete_words.delete_if  { |uw| uw.word.id == word.id }.sample
   end
 
   # TODO Create test
@@ -153,6 +153,7 @@ class User < ActiveRecord::Base
     Word.find(incomplete_free_ids_not(word))
   end
 
+  # TODO Create test
   def word_ids_for(tag)
     word_tags.joins(:word)
              .order("words.name ASC")
@@ -263,47 +264,36 @@ class User < ActiveRecord::Base
   end
 
   def words_added_last_day
-    user_words.where(created_at: 1.days.ago..Time.now)
+    user_words.where(created_at: 1.days.ago..Time.now).order(updated_at: :desc)
   end
 
   # TODO: Create test
-  def fundamentals_completed_yesterday
-    user_words.select do |uw|
-      next unless uw.fundamental_completed?
-      uw.fundamental_completed_yesterday?
-    end
+  def fundamentals_completed_today
+    user_words.where("games_completed > ?", 6)
+              .order(updated_at: :desc)
+              .select { |uw| uw.fundamental_completed_today? }
   end
 
   # TODO: Create test
-  def jeopardys_completed_yesterday
-    user_words.select do |uw|
-      next unless uw.jeopardy_completed?
-      uw.jeopardy_completed_yesterday?
-    end
-  end
-
-  # TODO: Create test
-  def freestyles_completed_yesterday
-    user_words.select do |uw|
-      next unless uw.freestyle_completed?
-      uw.freestyle_completed_yesterday?
-    end
+  def jeopardys_completed_today
+    user_words.where("games_completed > ?", 8)
+              .order(updated_at: :desc)
+              .select { |uw| uw.jeopardy_completed_today? }
   end
 
   # TODO: Create test
   def freestyles_completed_today
-    user_words.select do |uw|
-      next unless uw.freestyle_completed?
-      uw.freestyle_completed_today?
-    end
+    user_words.where("games_completed > ?", 8)
+              .order(updated_at: :desc)
+              .select { |uw| uw.freestyle_completed_today? }
   end
 
   # TODO: Create test
   def has_recent_activity?
     words_added_last_day.any? ||
-    fundamentals_completed_yesterday.any? ||
-    jeopardys_completed_yesterday.any? ||
-    freestyles_completed_yesterday.any?
+    fundamentals_completed_today.any?
+    jeopardys_completed_today.any? ||
+    freestyles_completed_today.any?
   end
 
   # TODO: Create test

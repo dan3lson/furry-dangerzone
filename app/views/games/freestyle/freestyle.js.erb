@@ -60,11 +60,12 @@ $(".container").on("click", ".continue-btn", function() {
 		emptyActivityDiv();
 		startWordRelationshipActivity();
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
+		debugger;
+		saveWordRelResponse(timeStarted);
 		updateUserWordGamesCompleted(10);
 		updateProgress(50);
 		addPoints(1330);
 		flashPointsUpdate(getArrowSuccess());
-		saveWordRelResponse(timeStarted);
 		emptyActivityDiv();
 		startLeksiTaleActivity();
 	} else if ($btn.hasClass("start-describe-me-activity")) {
@@ -259,6 +260,7 @@ function startReviewActivity() {
 ************************/
 
 function emptyActivityDiv() {
+	debugger;
 	$activityDiv.empty();
 }
 
@@ -458,18 +460,22 @@ function getData(path) {
 
 function showContinueBtn(_class) {
 	if (!$(".fixed-bottom").length) {
+		var $infoIcon = createElem("i", "fa fa-info-circle");
+		var msg = " Your teacher will see your response and may provide feedback.";
+		var $contBtn = createBtn(
+			"btn-primary btn-block btn-lg continue-btn " + _class, "Continue"
+		);
 		$(".container").append(
-			createElem("div", "fixed-bottom mb-0")
-			.append(
-				createBtn(
-					"btn-primary btn-block btn-lg continue-btn " + _class, "Continue"
-				)
+			createElem("div", "fixed-bottom mb-0").append(
+				createElem("p", "text-muted text-center").append($infoIcon, msg),
+				$contBtn
 			)
 		);
 	}
 }
 
 function hideContinueBtn() {
+	debugger;
 	$(".fixed-bottom").remove();
 }
 

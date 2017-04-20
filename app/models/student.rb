@@ -4,4 +4,8 @@ class Student < User
 
   validates :teacher, presence: true
   validates :classroom, presence: true
+
+  def self.alphabetical
+    order(:username)
+  end
 end

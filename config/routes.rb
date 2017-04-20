@@ -79,7 +79,8 @@ Rails.application.routes.draw do
     resources :describe_mes, only: [:index]
   end
   namespace :school do
-    root "classrooms#index"
+    root "current_user#home"
+    get "home" => "current_user#home"
     get "settings" => "current_user#settings"
     get "example_non_examples/fourth" => "example_non_examples#fourth_grade"
     get "decisions_decisions/fourth" => "meaning_alts#fourth_grade"
