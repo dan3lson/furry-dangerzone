@@ -37,6 +37,7 @@ class GamesController < ApplicationController
     @sent_stems = @target_word.sent_stems
     @current_game = UserWord.object(current_user, @target_word).current_game
     @game_to_play = params[:game]
+    @is_student = current_user.is_student?
     @available_games = {
       "sent_stems": @target_word.has_sent_stems?,
       "describe_me": @target_word.has_describe_mes?,

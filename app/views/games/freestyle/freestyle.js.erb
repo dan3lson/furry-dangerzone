@@ -5,6 +5,7 @@ var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
 var currentGame = parseInt("<%= @current_game %>");
 var gameToPlay = parseInt("<%= @game_to_play %>");
+var isStudent = "<%= @is_student %>";
 var $activityDiv = createElem("div", null, "activity-div");
 $(".container").empty()
 							 .append(
@@ -60,7 +61,6 @@ $(".container").on("click", ".continue-btn", function() {
 		emptyActivityDiv();
 		startWordRelationshipActivity();
 	} else if ($btn.hasClass("start-leksi-tale-activity")) {
-		debugger;
 		saveWordRelResponse(timeStarted);
 		updateUserWordGamesCompleted(10);
 		updateProgress(50);
@@ -187,7 +187,7 @@ function startLeksiTaleActivity() {
 			$links.append($link);
 		});
 
-		$("#activity-div").on("input", "#lek-tale-textarea", function() {
+		$("#activity-div").off().on("input", "#lek-tale-textarea", function() {
 			var value = $(this).val().trim();
 			var textareaWords = $.unique(value.split(" "));
 			highlightUsedWords(textareaWords, names);
@@ -260,7 +260,6 @@ function startReviewActivity() {
 ************************/
 
 function emptyActivityDiv() {
-	debugger;
 	$activityDiv.empty();
 }
 
@@ -460,22 +459,24 @@ function getData(path) {
 
 function showContinueBtn(_class) {
 	if (!$(".fixed-bottom").length) {
-		var $infoIcon = createElem("i", "fa fa-info-circle");
-		var msg = " Your teacher will see your response and may provide feedback.";
+		var $fixedBottom = createElem("div", "fixed-bottom mb-0");
 		var $contBtn = createBtn(
 			"btn-primary btn-block btn-lg continue-btn " + _class, "Continue"
 		);
-		$(".container").append(
-			createElem("div", "fixed-bottom mb-0").append(
-				createElem("p", "text-muted text-center").append($infoIcon, msg),
-				$contBtn
-			)
-		);
+
+		if (isStudent == "true") {
+			var $infoIcon = createElem("i", "fa fa-info-circle");
+			var msg = " Your teacher will see your response and may provide feedback.";
+			var $notice = createElem("p", "text-muted text-center")
+										.append($infoIcon, msg);
+			$(".container").append($fixedBottom.append($notice, $contBtn));
+		} else {
+			$(".container").append($fixedBottom.append($contBtn));
+		}
 	}
 }
 
 function hideContinueBtn() {
-	debugger;
 	$(".fixed-bottom").remove();
 }
 
