@@ -1,14 +1,16 @@
-<div class="card mb-3">
-  <div class="card-block">
-    <h4 class="card-title">
-      <%= icon "commenting-o" %> Teacher Review
-    </h4>
-    <p class="card-text">
-      A Teacher will verify the work you did just now and may provide
-      feedback. Make sure to come back and check!
-    </p>
+<% if current_user.is_student? %>
+  <div class="card mb-3">
+    <div class="card-block">
+      <h4 class="card-title">
+        <%= icon "commenting-o" %> Teacher Review
+      </h4>
+      <p class="card-text">
+        A Teacher may check your responses and provide
+        feedback. Make sure to come back to Leksi to see their feedback!
+      </p>
+    </div>
   </div>
-</div>
+<% end %>
 <div class="card mb-3">
   <div class="card-block">
     <h4 class="card-title">

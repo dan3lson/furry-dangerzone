@@ -129,13 +129,18 @@ function startSentenceStemActivity() {
 
 function startWordRelationshipActivity() {
 	beginTimeStarted();
-	giveDirections("How are the two words above connected or related?");
+	var $examplesPartial = $("<%= j render(partial: 'games/freestyle/examples_word_rel') %>");
+	giveDirections(
+		"Answer with a complete sentence: How are the two " +
+		"words above connected or related to each other?",
+		$examplesPartial
+	);
 
 	getAnotherFreestyleWord().done(function(secondWord) {
-		var $span = createElem("span")
+		var $secondWord = createElem("span")
 								.attr("data-rel-word-id", secondWord.id)
 								.append("+ " + secondWord.name);
-		$(".target-word-header-div").append($span);
+		$(".target-word-header-div").append($secondWord);
 		const $textarea = createTextarea();
 		$activityDiv.append($textarea);
 		$textarea.attr("placeholder", "Type in here...").focus();
@@ -155,9 +160,9 @@ function startWordRelationshipActivity() {
 function startLeksiTaleActivity() {
 	beginTimeStarted();
 	giveDirections(
-		"Write a very short story, poem, song, etc. that includes the word " +
-		"above and two of your other words, which are down below. It can be " +
-		"real or fake - be creative and have fun with it!"
+		"Use complete sentences to write a very short story, poem, song, etc. that " +
+		"includes the word above and two of your other words, which are " +
+		"down below. It can be real or fake; be creative and have fun with it!"
 	);
 
 	getLeksiTaleWords().done(function(words) {
@@ -466,7 +471,7 @@ function showContinueBtn(_class) {
 
 		if (isStudent == "true") {
 			var $infoIcon = createElem("i", "fa fa-info-circle");
-			var msg = " Your teacher will see your response and may provide feedback.";
+			var msg = " Your teacher may check your work and provide feedback.";
 			var $notice = createElem("p", "text-muted text-center")
 										.append($infoIcon, msg);
 			$(".container").append($fixedBottom.append($notice, $contBtn));
@@ -480,8 +485,16 @@ function hideContinueBtn() {
 	$(".fixed-bottom").remove();
 }
 
-function giveDirections(directions) {
+function giveDirections(directions, $examplesPartial) {
+	var $partial = $examplesPartial || null;
 	$(".game-directions").html(directions);
+	var $directionsPara = $("#directions p");
+
+	if ($(".modal-examples-div").length) {
+		$directionsPara.find(".modal-examples-div").remove().append($partial);
+	} else {
+		$directionsPara.append($partial);
+	}
 };
 
 function createTextarea() {
