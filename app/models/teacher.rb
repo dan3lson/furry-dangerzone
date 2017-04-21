@@ -16,4 +16,9 @@ class Teacher < User
   def has_classrooms?
     !Classroom.where(teacher: self).empty?
   end
+
+  # TODO Create test
+  def has_classroom_activity?
+    has_classrooms? ? students.any? { |s| s.has_recent_activity? } : false
+  end
 end

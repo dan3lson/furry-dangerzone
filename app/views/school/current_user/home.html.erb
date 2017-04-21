@@ -2,12 +2,16 @@
 <% provide(:header, "Home") %>
 <div class="card mb-3">
 	<div class="card-header">
-		<%= icon "clock-o" %>
-		Recent Activity
+		<%= icon "clock-o" %> Recent Activity
+		<small class="text-muted">Last 24 Hours</small>
 	</div>
 	<div class="card-block">
-		<% current_user.students.alphabetical.each do |user| %>
-				<%= render "users/recent_activity", user: user %>
+		<% if current_user.has_classroom_activity? %>
+			<% current_user.students.alphabetical.each do |user| %>
+					<%= render "users/recent_activity", user: user %>
+			<% end %>
+		<% else %>
+			<small class="text-muted">None</small>
 		<% end %>
 	</div>
 </div>
