@@ -18,6 +18,12 @@ class Teacher < User
 
   # TODO Create test
   def has_classroom_activity?
+    students = Student.where(teacher: self)
     has_classrooms? ? students.any? { |s| s.has_recent_activity? } : false
+  end
+
+  def has_unreviewed_frees?
+    students = Student.where(teacher: self)
+    has_classrooms? ? students.any? { |s| !s.open_freestyles.empty? } : false
   end
 end
