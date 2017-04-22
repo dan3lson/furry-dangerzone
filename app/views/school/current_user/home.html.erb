@@ -1,7 +1,7 @@
 <% provide(:title, "Home") %>
 <% provide(:header, "Home") %>
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<div class="card mb-3">
 			<div class="card-header">
 				<%= icon "clock-o" %> Recent Activity
@@ -9,9 +9,24 @@
 			</div>
 			<div class="card-block">
 				<% if current_user.has_classroom_activity? %>
-					<% current_user.students.alphabetical.each do |user| %>
-						<%= render "users/recent_activity", user: user %>
+					<% current_user.students.alphabetical.each do |student| %>
+						<%= render "users/recent_activity", user: student %>
 					<% end %>
+				<% else %>
+					<small class="text-muted">None</small>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">
+				<%= icon "quote-left" %> Freestyle Responses
+				<small class="text-muted">Not Reviewed</small>
+			</div>
+			<div class="card-block">
+				<% if current_user.has_unreviewed_frees? %>
+					<%= render "school/students/open_frees" %>
 				<% else %>
 					<small class="text-muted">None</small>
 				<% end %>

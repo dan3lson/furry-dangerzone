@@ -16,7 +16,9 @@ class UserWord < ActiveRecord::Base
   scope :incomplete_jeopardys, -> { where(games_completed: [6, 7]) }
   scope :completed_freestyles, -> { where("games_completed > ?", 11) }
   scope :incomplete_freestyles, -> { where(games_completed: [8, 9, 10, 11]) }
-  scope :last_24_hours, -> { where("updated_at > ?", 24.hours.ago) }
+  scope :last_24_hours, -> (time = "updated_at") {
+    where("#{time} > ?", 24.hours.ago)
+  }
 
   # TODO: Create test
   def self.search(user, name)
@@ -64,6 +66,7 @@ class UserWord < ActiveRecord::Base
   end
 
   def game
+    # word = UserWord.includes(:word).find(self.id)
     word = self.word
 
     if current_game == 1

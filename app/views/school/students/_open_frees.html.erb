@@ -1,0 +1,76 @@
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<th>Student</th>
+		<th>Number</th>
+		<td></td>
+		<!-- TODO Only pull students with open freestyles -->
+		<% current_user.students.alphabetical.each do |stu| %>
+			<% stu.open_freestyles.group_by(&:user).each do |user, frees| %>
+				<tr>
+					<td>
+						<%= stu.username %>
+					</td>
+					<td>
+						<%= frees.count %>
+					</td>
+					<td>
+						<%= link_to "#",
+								"data-toggle": "modal",
+								"data-target": "#see-free-#{stu.id}" do
+						%>
+							<%= icon "eye" %> See More
+						<% end %>
+						<div class="modal fade"
+								 id="see-free-<%= stu.id %>"
+								 tabindex="-1" role="dialog"
+								 aria-labelledby="exampleModalLongTitle"
+								 aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">
+											<%= stu.username %>'s Freestyle Responses
+										</h5>
+										<button type="button"
+														class="close"
+														data-dismiss="modal"
+														aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<% frees.each do |f| %>
+											<div class="card mb-3">
+												<div class="card-block">
+													<h4 class="card-title"><%= f.game %></h4>
+													<p class="card-text">
+														<small><%= icon "quote-left" %></small>
+														<%= highlight(
+															f.input,
+															f.user_word.word.name
+														) %>
+														<small><%= icon "quote-right" %></small>
+													</p>
+													<p class="card-text small text-muted">
+														written <%= time_ago_in_words(f.created_at) %> ago
+													</p>
+												</div>
+											</div>
+										<% end %>
+									</div>
+									<div class="modal-footer">
+										<button type="button"
+														class="btn btn-secondary"
+														data-dismiss="modal">
+											Close
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+</div>

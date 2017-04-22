@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :tags, through: :user_tags
   has_many :user_word_tags, dependent: :destroy
   has_many :word_tags, through: :user_word_tags
+  has_many :freestyles, through: :user_words
 
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
@@ -190,6 +191,11 @@ class User < ActiveRecord::Base
     UserWord.where(user: self).completed_freestyles
   end
 
+  # TODO Create test
+  def open_freestyles
+    freestyles.unreviewed.includes(:user_word)
+  end
+
   def has_completed_fundamentals?
     completed_fundamentals.any?
   end
@@ -264,7 +270,10 @@ class User < ActiveRecord::Base
   end
 
   def words_added_last_day
-    UserWord.where(user: self).last_24_hours.order(updated_at: :desc)
+    UserWord.includes(:word)
+            .where(user: self)
+            .last_24_hours(:created_at)
+            .order(updated_at: :desc)
   end
 
   # TODO: Create test
@@ -283,9 +292,7 @@ class User < ActiveRecord::Base
 
   # TODO: Create test
   def frees_compl_last_24_hrs
-    user_words.completed_freestyles
-              .last_24_hours
-              .order(updated_at: :desc)
+    completed_freestyles.last_24_hours.order(updated_at: :desc)
   end
 
   # TODO: Create test

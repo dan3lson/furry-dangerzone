@@ -7,10 +7,18 @@ class Freestyle < ActiveRecord::Base
   has_one :freestyle_desc_me, dependent: :destroy
   has_one :describe_me, through: :freestyle_desc_me
   has_one :game_stat_freestyle, dependent: :destroy
-  has_one :game_stat, through: :game_stat_freestyle
-  has_one :game, through: :game_stat
 
   validates :input, presence: true
   validates :status, presence: true
   validates :user_word, presence: true
+
+  scope :unreviewed, -> { where(status: "not reviewed") }
+
+  def game
+    user_word.game
+  end
+
+  def user
+    user_word.user
+  end
 end
