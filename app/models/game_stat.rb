@@ -18,4 +18,8 @@ class GameStat < ActiveRecord::Base
       time_ended: time_ended
     )
   end
+
+  def self.freestyles
+    where(game: [12, 13, 14, 15, 16])
+  end
 end

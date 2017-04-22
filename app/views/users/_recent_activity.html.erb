@@ -4,27 +4,27 @@
 <% if user.has_recent_activity? %>
 	<% if user.words_added_last_day.any? %>
 		<% user.words_added_last_day.each do |uw| %>
-			<i class="fa fa-plus-circle text-primary"></i>
-			<strong><%= user.username %></strong> (Classroom <%= user.classroom.name %>)
-			Added the word <mark><%= uw.word.name %></mark>
-			<small class="text-muted">
-				<%= time_ago_in_words(uw.updated_at) %> ago
-			</small>
-			<br>
+			<div class="mb-2">
+				<i class="fa fa-plus-circle text-primary"></i>
+				<strong><%= user.username %></strong> (<%= user.classroom.name %>)
+				Added the word <mark><%= uw.word.name %></mark>
+				<small class="text-muted">
+					<%= time_ago_in_words(uw.updated_at) %> ago
+				</small>
+			</div>
 		<% end %>
 	<% end %>
 
 	<% if user.fundamentals_completed_today.any? %>
 		<% user.fundamentals_completed_today.each do |uw| %>
-			<div>
-				<span class="text-danger">
-					<%= icon "gamepad" %>
-				</span>
+			<div class="mb-2">
+				<span class="text-danger"><%= icon "gamepad" %></span>
 				<strong><%= user.username %></strong>
-				(Classroom <%= user.classroom.name %>)
-				Completed the Fundamentals for <mark><%= uw.word.name %></mark>
+				completed the Fundamentals for <mark><%= uw.word.name %></mark>
+				<br>
 				<small class="text-muted">
-					<%= time_ago_in_words(uw.updated_at) %> ago
+					<%= time_ago_in_words(uw.updated_at) %> ago |
+					<%= user.classroom.name %>
 				</small>
 			</div>
 		<% end %>
@@ -32,15 +32,14 @@
 
 	<% if user.jeopardys_completed_today.any? %>
 		<% user.jeopardys_completed_today.each do |uw| %>
-			<div>
-				<span class="text-warning">
-					<%= icon "gamepad" %>
-				</span>
+			<div class="mb-2">
+				<span class="text-warning"><%= icon "gamepad" %></span>
 				<strong><%= user.username %></strong>
-				(Classroom <%= user.classroom.name %>)
-				Completed Jeopardy for <mark><%= uw.word.name %></mark>
+				completed Jeopardy for <mark><%= uw.word.name %></mark>
+				<br>
 				<small class="text-muted">
-					<%= time_ago_in_words(uw.updated_at) %> ago
+					<%= time_ago_in_words(uw.updated_at) %> ago |
+					<%= user.classroom.name %>
 				</small>
 			</div>
 		<% end %>
@@ -48,18 +47,35 @@
 
 	<% if user.freestyles_completed_today.any? %>
 		<% user.freestyles_completed_today.each do |uw| %>
-			<div>
-				<span class="text-success">
-					<%= icon "gamepad" %>
-				</span>
-				<strong><%= user.username %></strong>
-				(Classroom <%= user.classroom.name %>)
-				Completed a Freestyle activity for <mark><%= uw.word.name %></mark>
-				<small class="text-muted">
-					<%= time_ago_in_words(uw.updated_at) %> ago
-				</small>
-			</div>
+			<% uw.game_stats.freestyles.each do |game_stat| %>
+				<div class="mb-2">
+					<% if game_stat.game_stat_freestyle_sent_stem %>
+					<% end %>
+
+					<% if game_stat.game_stat_freestyle_rel_word %>
+						<span class="text-success"><%= icon "gamepad" %></span>
+						<strong><%= user.username %></strong>
+						completed the Freestyle activity "<%= game_stat.game.name %>"
+						for <mark><%= uw.word.name %></mark>
+						<%= icon "long-arrow-right" %>
+						"<%= game_stat.game_stat_freestyle_rel_word
+												 .freestyle_rel_word
+												 .freestyle
+												 .input
+						%>"
+						<br>
+						<small class="text-muted">
+							<%= time_ago_in_words(uw.updated_at) %> ago |
+							<%= user.classroom.name %>
+						</small>
+					<% end %>
+
+					<% if game_stat.game_stat_freestyle_lek_tale %>
+					<% end %>
+				</div>
+			<% end %>
 		<% end %>
 	<% end %>
+
 	<hr>
 <% end %>

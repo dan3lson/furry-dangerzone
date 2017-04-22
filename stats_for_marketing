@@ -10,5 +10,5 @@ User.fs_class_one.map { |u| u.user_words }.flatten.select { |uw| uw.jeopardy_com
 User.fs_class_two.map { |u| u.user_words }.flatten.select { |uw| uw.jeopardy_completed? && (uw.created_at > start && uw.created_at < finish) }.count
 
 // Student Freestyle Completed During Pilot = 163 (142 + 21)
-User.fs_class_one.map { |u| u.user_words }.flatten.select { |uw| uw.freestyle_completed? && (uw.created_at > start && uw.created_at < finish) }.count
-User.fs_class_two.map { |u| u.user_words }.flatten.select { |uw| uw.freestyle_completed? && (uw.created_at > start && uw.created_at < finish) }.count
+User.fs_class_one.map { |u| u.user_words }.flatten.select { |uw| uw.all_freestyles_completed? && (uw.created_at > start && uw.created_at < finish) }.count
+User.fs_class_two.map { |u| u.user_words }.flatten.select { |uw| uw.all_freestyles_completed? && (uw.created_at > start && uw.created_at < finish) }.count

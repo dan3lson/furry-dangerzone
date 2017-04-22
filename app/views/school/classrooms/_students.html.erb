@@ -7,7 +7,7 @@
 	    <th>Words</th>
 	    <td>Total: <%= pluralize(@classroom_stu_count, "student") %></td>
 
-	    <% classroom.students.each do |student| %>
+	    <% classroom.students.alphabetical.each do |student| %>
 	      <tr>
 	        <td><%= student.id %></td>
 	        <td><%= student.username %></td>

@@ -157,8 +157,13 @@ class UserWord < ActiveRecord::Base
   end
 
   # TODO: Update test
-  def freestyle_completed?
+  def all_freestyles_completed?
     current_game > 12
+  end
+
+  # TODO: Update test
+  def any_freestyle_completed?
+    current_game > 8
   end
 
   # TODO: Update test
@@ -206,14 +211,9 @@ class UserWord < ActiveRecord::Base
     _to_date(updated_at) <= yesterday && jeopardy_completed?
   end
 
-  # TODO: Update test; Make the range found within last week and change name
-  def freestyle_completed_yesterday?
-    _to_date(updated_at) <= yesterday && freestyle_completed?
-  end
-
   # TODO: Update test
   def freestyle_completed_today?
-    _to_date(updated_at) == today && freestyle_completed?
+    _to_date(updated_at) == today && any_freestyle_completed?
   end
 
   # TODO: Create test

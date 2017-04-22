@@ -6,7 +6,6 @@ class Teacher < User
   has_many :sent_stems, dependent: :destroy
   has_many :describe_mes, dependent: :destroy
 
-
   # TODO Create test
   def has_classroom?(classroom)
     !classrooms.where(name: classroom.name).empty?

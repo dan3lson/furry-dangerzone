@@ -152,27 +152,27 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
-  describe "#freestyle_completed?" do
+  describe "#all_freestyles_completed?" do
     it "returns true, i.e. Freestyle game has been completed for UW" do
       user_word.games_completed = 3
 
-      expect(user_word.freestyle_completed?).to eq(true)
+      expect(user_word.all_freestyles_completed?).to eq(true)
     end
 
     it "returns false, i.e. Freestyle game has not been completed for UW" do
-      expect(user_word.freestyle_completed?).to eq(false)
+      expect(user_word.all_freestyles_completed?).to eq(false)
     end
 
     it "returns false, i.e. Freestyle game has not been completed for UW" do
       user_word.games_completed = 1
 
-      expect(user_word.freestyle_completed?).to eq(false)
+      expect(user_word.all_freestyles_completed?).to eq(false)
     end
 
     it "returns false, i.e. Freestyle game has not been completed for UW" do
       user_word.games_completed = 2
 
-      expect(user_word.freestyle_completed?).to eq(false)
+      expect(user_word.all_freestyles_completed?).to eq(false)
     end
   end
 
@@ -211,14 +211,6 @@ RSpec.describe UserWord, type: :model do
   end
 
   skip "#jeopardy_completed_yesterday?" do
-    it "returns true" do
-    end
-
-    it "returns false" do
-    end
-  end
-
-  skip "#freestyle_completed_yesterday?" do
     it "returns true" do
     end
 

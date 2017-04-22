@@ -41,7 +41,7 @@ class JeopardyGamesController < ApplicationController
     @user_word = UserWord.object(current_user, @word)
 
     if @user_word
-      if @user_word.jeopardy_completed? || @user_word.freestyle_completed?
+      if @user_word.jeopardy_completed? || @user_word.all_freestyles_completed?
         msg = "Okay: UW #{@user_word.id}\'s Fundamentals untouched for "
         msg_2 = "UW #{@user_word.id} -> #{@user_word.word.name}."
         render json: { response: msg << msg_2 }

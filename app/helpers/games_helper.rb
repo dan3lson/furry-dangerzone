@@ -20,7 +20,7 @@ module GamesHelper
   end
 
   def play_btn_big(user_word, word_id)
-    if user_word.freestyle_completed?
+    if user_word.all_freestyles_completed?
       link_to_big_btn(free_game_link(word_id, nil), "info", user_word)
     elsif user_word.fundamental_not_completed?
       link_to_big_btn(fund_game_link(word_id, nil), "danger", user_word)
@@ -32,7 +32,7 @@ module GamesHelper
   end
 
   def play_btn_small(user_word, word_id, game = nil)
-    if user_word.freestyle_completed?
+    if user_word.all_freestyles_completed?
       link_to_small_btn(free_game_link(word_id, 13), "info", user_word)
     elsif user_word.fundamental_not_completed?
       link_to_small_btn(fund_game_link(word_id, game), "danger", user_word)
