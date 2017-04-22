@@ -736,21 +736,21 @@ RSpec.describe User, type: :model do
     end
   end
 
-  pending "#freestyles_completed_today" do
+  pending "#frees_compl_last_24_hrs" do
     it "returns 0 UW objects" do
-      expect(user.freestyles_completed_today).to eq(0)
+      expect(user.frees_compl_last_24_hrs).to eq(0)
     end
 
     it "returns 1 UW object" do
-      expect(user.freestyles_completed_today).to eq(1)
+      expect(user.frees_compl_last_24_hrs).to eq(1)
     end
 
     it "returns 2 UW objects" do
-      expect(user.freestyles_completed_today).to eq(2)
+      expect(user.frees_compl_last_24_hrs).to eq(2)
     end
 
     it "returns 3 UW objects" do
-      expect(user.freestyles_completed_today).to eq(3)
+      expect(user.frees_compl_last_24_hrs).to eq(3)
     end
   end
 
@@ -761,16 +761,6 @@ RSpec.describe User, type: :model do
 
     it "returns false" do
       expect(user.has_recent_activity?).to eq(false)
-    end
-  end
-
-  pending "#has_completed_freestyle_yesterday_or_today?" do
-    it "returns true" do
-      expect(user.has_completed_freestyle_yesterday_or_today?).to eq(true)
-    end
-
-    it "returns false" do
-      expect(user.has_completed_freestyle_yesterday_or_today?).to eq(false)
     end
   end
 

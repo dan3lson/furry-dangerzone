@@ -16,6 +16,7 @@ class UserWord < ActiveRecord::Base
   scope :incomplete_jeopardys, -> { where(games_completed: [6, 7]) }
   scope :completed_freestyles, -> { where("games_completed > ?", 11) }
   scope :incomplete_freestyles, -> { where(games_completed: [8, 9, 10, 11]) }
+  scope :last_24_hours, -> { where("updated_at > ?", 24.hours.ago) }
 
   # TODO: Create test
   def self.search(user, name)
@@ -158,62 +159,12 @@ class UserWord < ActiveRecord::Base
 
   # TODO: Update test
   def all_freestyles_completed?
-    current_game > 12
-  end
-
-  # TODO: Update test
-  def any_freestyle_completed?
-    current_game > 8
+    games_completed > 12
   end
 
   # TODO: Update test
   def freestyle_not_completed?
     current_game > 8 && current_game < 13
-  end
-
-  # TODO: Create test
-  def _to_date(date)
-    date.to_date
-  end
-
-  # TODO: Move; definitely shouldn't be here in this class.
-  def yesterday
-    Date.yesterday
-  end
-
-  # TODO: Move; definitely shouldn't be here in this class.
-  def today
-    Date.today
-  end
-
-  # TODO: Update test
-  def fundamental_completed_today?
-    _to_date(updated_at) == today && fundamental_completed?
-  end
-
-  # TODO: Update test
-  def fundamental_completed_yesterday?
-    _to_date(updated_at) <= yesterday && fundamental_completed?
-  end
-
-  # TODO: Create test
-  def fundamental_completed_few_days_ago?
-    updated_at >= 1.days.ago && updated_at < Time.now
-  end
-
-  # TODO: Update test
-  def jeopardy_completed_today?
-    _to_date(updated_at) == today && jeopardy_completed?
-  end
-
-  # TODO: Update test; Make the range found within last week and change name
-  def jeopardy_completed_yesterday?
-    _to_date(updated_at) <= yesterday && jeopardy_completed?
-  end
-
-  # TODO: Update test
-  def freestyle_completed_today?
-    _to_date(updated_at) == today && any_freestyle_completed?
   end
 
   # TODO: Create test

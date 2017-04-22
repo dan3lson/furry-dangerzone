@@ -202,15 +202,7 @@ RSpec.describe UserWord, type: :model do
     end
   end
 
-  skip "#fundamental_completed_yesterday?" do
-    it "returns true" do
-    end
-
-    it "returns false" do
-    end
-  end
-
-  skip "#jeopardy_completed_yesterday?" do
+  skip "#template" do
     it "returns true" do
     end
 

@@ -6,17 +6,19 @@
 		<% user.words_added_last_day.each do |uw| %>
 			<div class="mb-2">
 				<i class="fa fa-plus-circle text-primary"></i>
-				<strong><%= user.username %></strong> (<%= user.classroom.name %>)
-				Added the word <mark><%= uw.word.name %></mark>
+				<strong><%= user.username %></strong>
+				added the word <mark><%= uw.word.name %></mark>
+				<br>
 				<small class="text-muted">
-					<%= time_ago_in_words(uw.updated_at) %> ago
+					<%= time_ago_in_words(uw.updated_at) %> ago |
+					<%= user.classroom.name %>
 				</small>
 			</div>
 		<% end %>
 	<% end %>
 
-	<% if user.fundamentals_completed_today.any? %>
-		<% user.fundamentals_completed_today.each do |uw| %>
+	<% if user.funds_compl_last_24_hrs.any? %>
+		<% user.funds_compl_last_24_hrs.each do |uw| %>
 			<div class="mb-2">
 				<span class="text-danger"><%= icon "gamepad" %></span>
 				<strong><%= user.username %></strong>
@@ -30,8 +32,8 @@
 		<% end %>
 	<% end %>
 
-	<% if user.jeopardys_completed_today.any? %>
-		<% user.jeopardys_completed_today.each do |uw| %>
+	<% if user.jeops_compl_last_24_hrs.any? %>
+		<% user.jeops_compl_last_24_hrs.each do |uw| %>
 			<div class="mb-2">
 				<span class="text-warning"><%= icon "gamepad" %></span>
 				<strong><%= user.username %></strong>
@@ -45,14 +47,14 @@
 		<% end %>
 	<% end %>
 
-	<% if user.freestyles_completed_today.any? %>
-		<% user.freestyles_completed_today.each do |uw| %>
+	<% if user.frees_compl_last_24_hrs.any? %>
+		<% user.frees_compl_last_24_hrs.each do |uw| %>
 			<% uw.game_stats.freestyles.each do |game_stat| %>
-				<div class="mb-2">
-					<% if game_stat.game_stat_freestyle_sent_stem %>
-					<% end %>
+				<% if game_stat.game_stat_freestyle_sent_stem %>
+				<% end %>
 
-					<% if game_stat.game_stat_freestyle_rel_word %>
+				<% if game_stat.game_stat_freestyle_rel_word %>
+					<div class="mb-2">
 						<span class="text-success"><%= icon "gamepad" %></span>
 						<strong><%= user.username %></strong>
 						completed the Freestyle activity "<%= game_stat.game.name %>"
@@ -68,14 +70,31 @@
 							<%= time_ago_in_words(uw.updated_at) %> ago |
 							<%= user.classroom.name %>
 						</small>
-					<% end %>
+					</div>
+				<% end %>
 
-					<% if game_stat.game_stat_freestyle_lek_tale %>
-					<% end %>
-				</div>
+				<% if game_stat.game_stat_freestyle_lek_tale %>
+					<div class="mb-2">
+						<span class="text-success"><%= icon "gamepad" %></span>
+						<strong><%= user.username %></strong>
+						completed the Freestyle activity "<%= game_stat.game.name %>"
+						for <mark><%= uw.word.name %></mark>. They wrote:
+						<%= icon "quote-left" %>
+						<%= game_stat.game_stat_freestyle_lek_tale
+												 .freestyle_lek_tale
+												 .freestyle
+												 .input
+						%>
+						<%= icon "quote-right" %>
+						<br>
+						<small class="text-muted">
+							<%= time_ago_in_words(uw.updated_at) %> ago |
+							<%= user.classroom.name %>
+						</small>
+					</div>
+				<% end %>
 			<% end %>
 		<% end %>
+		<hr>
 	<% end %>
-
-	<hr>
 <% end %>

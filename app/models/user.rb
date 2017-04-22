@@ -264,45 +264,36 @@ class User < ActiveRecord::Base
   end
 
   def words_added_last_day
-    user_words.where(created_at: 1.days.ago..Time.now).order(updated_at: :desc)
+    UserWord.where(user: self).last_24_hours.order(updated_at: :desc)
   end
 
   # TODO: Create test
-  def fundamentals_completed_today
-    user_words.where("games_completed > ?", 6)
+  def funds_compl_last_24_hrs
+    user_words.completed_fundamentals
+              .last_24_hours
               .order(updated_at: :desc)
-              .select { |uw| uw.fundamental_completed_today? }
   end
 
   # TODO: Create test
-  def jeopardys_completed_today
-    user_words.where("games_completed > ?", 8)
+  def jeops_compl_last_24_hrs
+    user_words.completed_jeopardys
+              .last_24_hours
               .order(updated_at: :desc)
-              .select { |uw| uw.jeopardy_completed_today? }
   end
 
   # TODO: Create test
-  def freestyles_completed_today
-    user_words.where("games_completed > ?", 8)
+  def frees_compl_last_24_hrs
+    user_words.completed_freestyles
+              .last_24_hours
               .order(updated_at: :desc)
-              .select { |uw| uw.freestyle_completed_today? }
   end
 
   # TODO: Create test
   def has_recent_activity?
-    words_added_last_day.any? ||
-    fundamentals_completed_today.any?
-    jeopardys_completed_today.any? ||
-    freestyles_completed_today.any?
+    !UserWord.where(user: self).last_24_hours.empty?
   end
 
-  # TODO: Create test
-  def has_completed_freestyle_yesterday_or_today?
-    freestyles_completed_yesterday.count > 0 ||
-    freestyles_completed_today.count > 0
-  end
-
-  # TODO: Create test
+  # TODO: Create test (used to calculate streak in UserHelper)
   def completed_freestyle_on?(date)
     UserWord.where(user: self, games_completed: 3)
             .select { |uw| uw.updated_at.to_date == date }

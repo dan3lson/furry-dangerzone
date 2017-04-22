@@ -40,7 +40,6 @@ class TagsController < ApplicationController
   end
 
   def update
-    binding.pry
     @tag = Tag.find(params[:id])
 
     if @tag.update(tag_params)
