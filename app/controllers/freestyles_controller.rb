@@ -1,4 +1,22 @@
 class FreestylesController < ApplicationController
+	def update
+		@freestyle = Freestyle.find(params[:id])
+		@new_status = params[:new_status]
+		@freestyle.status = @new_status
+		@updated = false
+		@comment = Comment.new
+
+		if @freestyle.save
+			@updated = true
+		else
+			@updated = false
+		end
+
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	def sent_stem
 		@game = Game.find_by(name: "Sentence Stems")
 		@target_word = Word.find(params[:word_id])

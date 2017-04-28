@@ -1,7 +1,7 @@
 <div class="table-responsive">
 	<table class="table table-bordered">
 		<th>Student</th>
-		<th>Number</th>
+		<th>Total</th>
 		<td></td>
 		<!-- TODO Only pull students with open freestyles -->
 		<% current_user.students.alphabetical.each do |stu| %>
@@ -30,6 +30,11 @@
 									<div class="modal-header">
 										<h5 class="modal-title">
 											<%= stu.username %>'s Freestyle Responses
+											<br>
+											<small class="text-muted">
+													Any target words that your students used in their
+													response are highlighted.
+											</small>
 										</h5>
 										<button type="button"
 														class="close"
@@ -41,7 +46,7 @@
 									<div class="modal-body">
 										<% frees.each do |f| %>
 											<div class="card mb-3">
-												<div class="card-block">
+												<div class="card-block" data-free-id="<%= f.id %>">
 													<h4 class="card-title"><%= f.game %></h4>
 													<p class="card-text">
 														<small><%= icon "quote-left" %></small>
@@ -51,9 +56,33 @@
 														) %>
 														<small><%= icon "quote-right" %></small>
 													</p>
-													<p class="card-text small text-muted">
-														written <%= time_ago_in_words(f.created_at) %> ago
-													</p>
+													<div class="mb-3">
+														<%= link_to freestyle_path(
+																id: f.id,
+																new_status: "redo"
+															),
+															role: "button",
+															class: "btn btn-danger",
+															method: :patch,
+															remote: true do
+														%>
+															<%= icon "thumbs-down" %> Request Redo
+														<% end %>
+														<%= link_to freestyle_path(
+																id: f.id,
+																new_status: "pass"
+															),
+															role: "button",
+															class: "btn btn-success",
+															method: :patch,
+															remote: true do
+														%>
+															<%= icon "thumbs-up" %> Pass
+														<% end %>
+													</div>
+												</div>
+												<div class="card-footer text-center text-muted">
+													written <%= time_ago_in_words(f.created_at) %> ago
 												</div>
 											</div>
 										<% end %>

@@ -52,14 +52,7 @@
 						<span class="text-success"><%= icon "gamepad" %></span>
 						<strong><%= user.username %></strong>
 						completed the Freestyle activity "<%= game_stat.game.name %>"
-						for <mark><%= uw.word.name %></mark>. They wrote:
-						<small><%= icon "quote-left" %></small>
-						<%= game_stat.game_stat_freestyle_rel_word
-												 .freestyle_rel_word
-												 .freestyle
-												 .input
-						%>
-						<small><%= icon "quote-right" %></small>
+						for <mark><%= uw.word.name %></mark>
 						<br>
 						<small class="text-muted">
 							<%= time_ago_in_words(uw.updated_at) %> ago |
@@ -73,14 +66,7 @@
 						<span class="text-success"><%= icon "gamepad" %></span>
 						<strong><%= user.username %></strong>
 						completed the Freestyle activity "<%= game_stat.game.name %>"
-						for <mark><%= uw.word.name %></mark>. They wrote:
-						<small><%= icon "quote-left" %></small>
-						<%= game_stat.game_stat_freestyle_lek_tale
-												 .freestyle_lek_tale
-												 .freestyle
-												 .input
-						%>
-						<small><%= icon "quote-right" %></small>
+						for <mark><%= uw.word.name %></mark>.
 						<br>
 						<small class="text-muted">
 							<%= time_ago_in_words(uw.updated_at) %> ago |

@@ -1,4 +1,4 @@
-<% if controller?("school/classrooms") || action?("home") %>
+<% if controller?("school/current_user") && action?("home") %>
 	<%= link_to school_home_path, class: "nav-item nav-link active" do %>
 		<i class="fa fa-home"></i> Home
 	<% end %>

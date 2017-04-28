@@ -1,0 +1,16 @@
+<%= form_for([:school, freestyle, object], remote: true) do |f| %>
+  <%= render "shared/error_messages", object: object %>
+  <div class="form-group">
+  	<%= f.label :body,
+								"Send Feedback (Optional)",
+								class: "form-control-label font-weight-bold" %>
+    <%= f.text_area :body,
+                    class: "form-control",
+                    autofocus: "true"
+    %>
+  </div>
+  <%= f.button type: "submit", class: "btn btn-primary btn-block" do %>
+    <%= icon "plus-circle" %>
+    <%= btn_text %>
+  <% end %>
+<% end %>

@@ -100,6 +100,9 @@ Rails.application.routes.draw do
         post "by_grade"
       end
     end
+    resources :freestyles do
+      resources :comments
+    end
     resources :example_non_examples
     resources :word do
       resources :example_non_examples
