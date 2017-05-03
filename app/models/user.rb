@@ -226,7 +226,7 @@ class User < ActiveRecord::Base
 
   # TODO Create test
   def has_reviewed_frees?
-    has_completed_freestyles? ? !freestyles.empty? : false
+    !freestyles.reviewed.empty?
   end
 
   def has_games_to_play?

@@ -3,7 +3,7 @@
 		<th>Word</th>
 		<th>Game</th>
 		<th>Grade</th>
-		<th></th>
+		<th><%= icon "commenting-o" %></th>
 		<th></th>
 		<% current_user.freestyles.reviewed.limit(30).each do |free| %>
 			<tr>
@@ -59,6 +59,7 @@
 									<div class="card mb-3">
 										<div class="card-block" data-free-id="<%= free.id %>">
 											<h4 class="card-title">
+												<%= icon "gamepad" %>
 												<%= free.game %>
 												<div class="float-right">
 													<% if free.status == "pass" %>
@@ -87,7 +88,9 @@
 									</div>
 									<div class="card mb-3">
 										<div class="card-block" data-free-id="<%= free.id %>">
-											<h4 class="card-title">Teacher Comments</h4>
+											<h4 class="card-title">
+												<%= icon "commenting-o" %> Teacher Comments
+											</h4>
 											<p class="card-text">
 												<% if free.has_comments? %>
 													<% free.comments.each do |comment| %>
