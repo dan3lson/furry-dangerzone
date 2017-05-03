@@ -5,12 +5,7 @@ class FreestylesController < ApplicationController
 		@freestyle.status = @new_status
 		@updated = false
 		@comment = Comment.new
-
-		if @freestyle.save
-			@updated = true
-		else
-			@updated = false
-		end
+		@updated = true if @freestyle.save
 
 		respond_to do |format|
 			format.js

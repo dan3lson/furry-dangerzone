@@ -1,0 +1,52 @@
+<h1 class="mb-3">
+  <%= icon "book" %> Freestyle Responses
+  <small class="text-muted"><%= @freestyle_count %></small>
+</h1>
+<%= paginate @freestyles %>
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<th>Student</th>
+		<th>Word</th>
+		<th>Game</th>
+		<td>Response</td>
+		<td>Action</td>
+		<td>Written</td>
+		<% @freestyles.each do |frees| %>
+			<tr>
+				<td><%= frees.user.username %></td>
+				<td><%= frees.word.name %></td>
+				<td><%= frees.game %></td>
+				<td>
+					<small><%= icon "quote-left" %></small>
+					<%= highlight(truncate(frees.input, length: 300), frees.word.name) %>
+					<small><%= icon "quote-right" %></small>
+				</td>
+				<td>
+					<%= link_to freestyle_path(
+							id: frees.id,
+							new_status: "redo"
+						),
+						role: "button",
+						class: "btn btn-danger",
+						method: :patch,
+						remote: true do
+					%>
+						<%= icon "thumbs-down" %> Request Redo
+					<% end %>
+					<%= link_to freestyle_path(
+							id: frees.id,
+							new_status: "pass"
+						),
+						role: "button",
+						class: "btn btn-success",
+						method: :patch,
+						remote: true do
+					%>
+						<%= icon "thumbs-up" %> Pass
+					<% end %>
+				</td>
+				<td><%= time_ago_in_words(frees.created_at) %> ago</td>
+			</tr>
+		<% end %>
+	</table>
+</div>

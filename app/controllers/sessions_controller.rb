@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
         redirect_to root_path
       end
     else
-      msg = "That info didn\'t work. Please try again."
+      msg = "That username and/or password didn\'t work. Please try again."
       flash.now[:danger] = msg
       render :new
     end

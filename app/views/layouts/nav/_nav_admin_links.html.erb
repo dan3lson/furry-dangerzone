@@ -28,6 +28,16 @@
 	<% end %>
 <% end %>
 
+<% if controller?("admin/freestyles") %>
+	<%= link_to admin_freestyles_path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-book"></i> Freestyles
+	<% end %>
+<% else %>
+	<%= link_to admin_freestyles_path, class: "nav-item nav-link" do %>
+		<i class="fa fa-book"></i> Freestyles
+	<% end %>
+<% end %>
+
 <% if controller?("admin/meaning_alts") %>
 	<%= link_to admin_meaning_alts_path,
 			class: "nav-item nav-link active" do

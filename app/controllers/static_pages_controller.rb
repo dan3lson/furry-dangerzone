@@ -2,7 +2,13 @@ class StaticPagesController < ApplicationController
   layout "application_guest"
 
   def home
-    redirect_to home_path if logged_in?
+    if logged_in?
+      if current_user.is_admin?
+        redirect_to admin_settings_path
+      else
+        redirect_to home_path
+      end
+    end
   end
 
   def contact_us

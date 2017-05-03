@@ -124,5 +124,6 @@ Rails.application.routes.draw do
     resources :meaning_alts
     resources :example_non_examples
     resources :tags
+    resources :freestyles
   end
 end

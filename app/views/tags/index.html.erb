@@ -1,6 +1,5 @@
 <% provide(:title, "All tags") %>
 <% provide(:header, "All tags") %>
-
 <div>
   <% @tags.each do |tag| %>
     <h1><%= link_to tag.name, tag %></h1>

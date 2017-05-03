@@ -17,6 +17,7 @@ class Freestyle < ActiveRecord::Base
   scope :reviewed, -> { where(status: ["pass", "redo"]) }
   scope :pass, -> { where(status: "pass") }
   scope :redo, -> { where(status: "redo") }
+  scope :latest, -> { order("created_at DESC") }
 
   def game
     user_word.game
@@ -24,6 +25,10 @@ class Freestyle < ActiveRecord::Base
 
   def user
     user_word.user
+  end
+
+  def word
+    user_word.word
   end
 
   def has_comments?
