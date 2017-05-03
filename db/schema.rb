@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427215841) do
+ActiveRecord::Schema.define(version: 20170430174444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "action",         null: false
+    t.integer  "user_id",        null: false
+    t.integer  "trackable_id",   null: false
+    t.string   "trackable_type", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
+  add_index "activities", ["trackable_id"], name: "index_activities_on_trackable_id", using: :btree
+  add_index "activities", ["trackable_type"], name: "index_activities_on_trackable_type", using: :btree
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "classrooms", force: :cascade do |t|
     t.string   "name",       null: false

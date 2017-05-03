@@ -18,4 +18,15 @@ module ApplicationHelper
   def icon(name)
     content_tag(:i, nil, class: "fa fa-#{name}")
   end
+
+  def emoji(name)
+    content_tag(:i, nil, class: "em em-#{name}")
+  end
+
+  def track_activity(trackable)
+    current_user.activities.create!(
+      action: params[:action],
+      trackable: trackable
+    )
+  end
 end

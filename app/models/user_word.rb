@@ -66,7 +66,6 @@ class UserWord < ActiveRecord::Base
   end
 
   def game
-    # word = UserWord.includes(:word).find(self.id)
     word = self.word
 
     if current_game == 1
@@ -134,6 +133,10 @@ class UserWord < ActiveRecord::Base
     else
       "Not sure of Game Name: UW ID: #{self.id} #{self.word.name}"
     end
+  end
+
+  def is_freestyle?
+    current_game > 8
   end
 
   def played_before?(updated_games_completed)

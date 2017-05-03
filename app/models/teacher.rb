@@ -22,8 +22,9 @@ class Teacher < User
     has_classrooms? ? students.any? { |s| s.has_recent_activity? } : false
   end
 
+  # TODO Create test
   def has_unreviewed_frees?
     students = Student.where(teacher: self)
-    has_classrooms? ? students.any? { |s| !s.open_freestyles.empty? } : false
+    has_classrooms? ? students.any? { |s| !s.unreviewed_frees.empty? } : false
   end
 end

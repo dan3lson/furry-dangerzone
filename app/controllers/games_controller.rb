@@ -35,13 +35,14 @@ class GamesController < ApplicationController
     @target_word = Word.find(params[:word_id])
     @user_word = UserWord.object(current_user, @target_word)
     @sent_stems = @target_word.sent_stems
-    @current_game = UserWord.object(current_user, @target_word).current_game
+    @current_game = @user_word.current_game
     @game_to_play = params[:game]
     @is_student = current_user.is_student?
     @available_games = {
       "sent_stems": @target_word.has_sent_stems?,
       "describe_me": @target_word.has_describe_mes?,
     }
+    @redo_freestyle_id = params[:freestyle_id]
 
     respond_to do |format|
       format.js { render template: "games/freestyle/freestyle.js.erb" }

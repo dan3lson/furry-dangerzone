@@ -1,3 +1,4 @@
+<!-- https://www.youtube.com/watch?v=RHXASH7b9_o -->
 <% if user.has_recent_activity? %>
 	<% unless user.words_added_last_day.empty? %>
 		<% user.words_added_last_day.each do |uw| %>
@@ -5,76 +6,19 @@
 				<i class="fa fa-plus-circle text-primary"></i>
 				<strong><%= user.username %></strong>
 				added the word <mark><%= uw.word.name %></mark>
-				<br>
-				<small class="text-muted">
-					<%= time_ago_in_words(uw.updated_at) %> ago |
-					<%= user.classroom.name %>
-				</small>
-			</div>
-		<% end %>
-	<% end %>
-
-	<% unless user.funds_compl_last_24_hrs.empty? %>
-		<% user.funds_compl_last_24_hrs.each do |uw| %>
-			<div class="mb-2">
-				<span class="text-danger"><%= icon "gamepad" %></span>
-				<strong><%= user.username %></strong>
-				completed the Fundamentals for <mark><%= uw.word.name %></mark>
-				<br>
-				<small class="text-muted">
-					<%= time_ago_in_words(uw.updated_at) %> ago |
-					<%= user.classroom.name %>
-				</small>
-			</div>
-		<% end %>
-	<% end %>
-
-	<% unless user.jeops_compl_last_24_hrs.empty? %>
-		<% user.jeops_compl_last_24_hrs.each do |uw| %>
-			<div class="mb-2">
-				<span class="text-warning"><%= icon "gamepad" %></span>
-				<strong><%= user.username %></strong>
-				completed Jeopardy for <mark><%= uw.word.name %></mark>
-				<br>
-				<small class="text-muted">
-					<%= time_ago_in_words(uw.updated_at) %> ago |
-					<%= user.classroom.name %>
-				</small>
-			</div>
-		<% end %>
-	<% end %>
-
-	<% unless user.frees_compl_last_24_hrs.empty? %>
-		<% user.frees_compl_last_24_hrs.each do |uw| %>
-			<% uw.game_stats.freestyles.each do |game_stat| %>
-				<% if game_stat.game_stat_freestyle_rel_word %>
-					<div class="mb-2">
-						<span class="text-success"><%= icon "gamepad" %></span>
-						<strong><%= user.username %></strong>
-						completed the Freestyle activity "<%= game_stat.game.name %>"
-						for <mark><%= uw.word.name %></mark>
-						<br>
-						<small class="text-muted">
-							<%= time_ago_in_words(uw.updated_at) %> ago |
-							<%= user.classroom.name %>
-						</small>
-					</div>
+				<% if meta %>
+					<small class="text-muted">
+						<%= time_ago_in_words(uw.updated_at) %> ago |
+						<%= user.classroom.name %>
+					</small>
 				<% end %>
-
-				<% if game_stat.game_stat_freestyle_lek_tale %>
-					<div class="mb-2">
-						<span class="text-success"><%= icon "gamepad" %></span>
-						<strong><%= user.username %></strong>
-						completed the Freestyle activity "<%= game_stat.game.name %>"
-						for <mark><%= uw.word.name %></mark>.
-						<br>
-						<small class="text-muted">
-							<%= time_ago_in_words(uw.updated_at) %> ago |
-							<%= user.classroom.name %>
-						</small>
-					</div>
-				<% end %>
-			<% end %>
+			</div>
 		<% end %>
+	<% end %>
+	<% user.activities.select("distinct on (action) *").each do |act| %>
+		<%= render "activities/#{act.trackable_type.underscore}/#{act.action}",
+				activity: act,
+				meta: meta
+		%>
 	<% end %>
 <% end %>

@@ -30,6 +30,7 @@ class FreestylesController < ApplicationController
 		@msgs = { successes: [], errors: [] }
 
 		if @game_stat.save
+			track_activity(@game_stat)
 			@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			@sent_stems = params[:uniq_data]
 
@@ -37,6 +38,7 @@ class FreestylesController < ApplicationController
 				@free = Freestyle.new(input: input, user_word: @user_word)
 
 				if @free.save
+					Freestyle.update_status_redone(params[:redo_freestyle_id])
 					@msgs[:successes] << "Free created for UW #{@user_word.id}."
 					GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 					@sent_stem = SentStem.find(id)
@@ -71,6 +73,7 @@ class FreestylesController < ApplicationController
 		@msgs = { successes: [], errors: [] }
 
 		if @free.save
+			Freestyle.update_status_redone(params[:redo_freestyle_id])
 			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
 			GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 			@rel_word = Word.find(params[:uniq_data][:rel_word_id])
@@ -83,6 +86,7 @@ class FreestylesController < ApplicationController
 			)
 
 			if @game_stat.save
+				track_activity(@game_stat)
 				@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			else
 				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."
@@ -113,6 +117,7 @@ class FreestylesController < ApplicationController
 		@msgs = { successes: [], errors: [] }
 
 		if @free.save
+			Freestyle.update_status_redone(params[:redo_freestyle_id])
 			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
 			GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 			@word_ids = params[:uniq_data][:word_ids]
@@ -125,6 +130,7 @@ class FreestylesController < ApplicationController
 			)
 
 			if @game_stat.save
+				track_activity(@game_stat)
 				@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			else
 				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."
@@ -155,6 +161,7 @@ class FreestylesController < ApplicationController
 		@msgs = { successes: [], errors: [] }
 
 		if @free.save
+			Freestyle.update_status_redone(params[:redo_freestyle_id])
 			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
 			GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 			@desc_me = DescribeMe.find(params[:uniq_data][:desc_me_id])
@@ -167,6 +174,7 @@ class FreestylesController < ApplicationController
 			)
 
 			if @game_stat.save
+				track_activity(@game_stat)
 				@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			else
 				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."
@@ -197,6 +205,7 @@ class FreestylesController < ApplicationController
 		@msgs = { successes: [], errors: [] }
 
 		if @free.save
+			Freestyle.update_status_redone(params[:redo_freestyle_id])
 			@msgs[:successes] << "Free (#{@free.id}) created for UW #{@user_word.id}."
 			GameMailer.new_freestyle(@free, current_user, @game).deliver_later
 			@game_stat = GameStat.universal(
@@ -207,6 +216,7 @@ class FreestylesController < ApplicationController
 			)
 
 			if @game_stat.save
+				track_activity(@game_stat)
 				@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			else
 				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."

@@ -1,14 +1,14 @@
-<%# if action?("home") %>
-	<%#= link_to root_path,
+<% if controller?("current_users") && action?("home") %>
+	<%= link_to root_path,
 							class: "nav-item nav-link active" do %>
-		<!-- <i class="fa fa-home"></i> Home -->
-	<%# end %>
-<%# else %>
-	<%#= link_to root_path,
+		<i class="fa fa-home"></i> Home
+	<% end %>
+<% else %>
+	<%= link_to root_path,
 							class: "nav-item nav-link" do %>
-		<!-- <i class="fa fa-home"></i> Home -->
-	<%# end %>
-<%# end %>
+		<i class="fa fa-home"></i> Home
+	<% end %>
+<% end %>
 
 <% if params[:controller].include?("my_leksi") %>
 	<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>

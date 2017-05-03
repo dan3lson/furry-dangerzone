@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_secure_password
+
   has_many :user_words, dependent: :destroy
   has_many :words, through: :user_words
   has_many :user_tags, dependent: :destroy
@@ -6,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :user_word_tags, dependent: :destroy
   has_many :word_tags, through: :user_word_tags
   has_many :freestyles, through: :user_words
+  has_many :activities, dependent: :destroy
 
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
@@ -13,8 +16,6 @@ class User < ActiveRecord::Base
   # validates :points, presence: true
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
-
-  has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   before_create { self.username = username.downcase }
@@ -192,8 +193,23 @@ class User < ActiveRecord::Base
   end
 
   # TODO Create test
-  def open_freestyles
+  def unreviewed_frees
     freestyles.unreviewed.includes(:user_word)
+  end
+
+  # TODO Create test
+  def reviewed_frees
+    freestyles.reviewed.includes(:user_word)
+  end
+
+  # TODO Create test
+  def passed_frees
+    freestyles.pass.includes(:user_word)
+  end
+
+  # TODO Create test
+  def redo_frees
+    freestyles.redo.includes(:user_word)
   end
 
   def has_completed_fundamentals?
@@ -206,6 +222,11 @@ class User < ActiveRecord::Base
 
   def has_completed_freestyles?
     completed_freestyles.any?
+  end
+
+  # TODO Create test
+  def has_reviewed_frees?
+    has_completed_freestyles? ? !freestyles.empty? : false
   end
 
   def has_games_to_play?
@@ -269,6 +290,7 @@ class User < ActiveRecord::Base
     last_login.nil?
   end
 
+  # TODO: Create test
   def words_added_last_day
     UserWord.includes(:word)
             .where(user: self)
@@ -297,7 +319,7 @@ class User < ActiveRecord::Base
 
   # TODO: Create test
   def has_recent_activity?
-    !UserWord.where(user: self).last_24_hours.empty?
+    !Activity.where(user: self).last_24_hours.empty?
   end
 
   # TODO: Create test (used to calculate streak in UserHelper)

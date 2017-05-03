@@ -10,7 +10,7 @@
 					<div class="mb-3">
 						<h2>
 							<small>
-								<%= link_to word.name, "/myLeksi/#{word.id}" %>
+								<%= link_to word.name, myLeksi_show_path(word) %>
 							</small>
 						</h2>
 						<%= play_btn_small(user_word, user_word.word.id) %>

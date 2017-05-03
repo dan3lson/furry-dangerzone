@@ -3,7 +3,7 @@ class JeopardyGamesController < ApplicationController
     @word = Word.find(params[:word_id])
     @user_word = UserWord.object(current_user, @word)
 
-    if @user_word
+    if @user_word      
       if @user_word.jeopardy_completed?
         msg = [
           "Okay: Jeopardy updates not needed for UW #{@user_word.id} ->",

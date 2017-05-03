@@ -238,14 +238,14 @@ function startInMyLifeActivity() {
 	beginTimeStarted();
 	const $wordsPartial = $("<%= j render(partial: 'games/freestyle/in_my_life') %>");
 	$activityDiv.append($wordsPartial);
-	giveDirections("Respond to the prompt below.");
+	giveDirections("Use at least five (5) words to complete the prompt below.");
 	const $textarea = $("#in_my_life").focus();
 
 	$textarea.on("input", function() {
 		var value = $(this).val().trim();
 		var numWords = value.split(" ").length;
 
-		if (numWords > 6) {
+		if (numWords > 5) {
 			showContinueBtn("start-review-in-my-life-activity");
 		} else {
 			hideContinueBtn();
@@ -332,11 +332,13 @@ function saveSentStemResponse(timeStarted) {
 function createFreestyle(route, timeStarted, uniqData) {
 	uniqData = uniqData || null;
 	var url = "/freestyle/" + route;
+	var redoFreestyleID = "<%= @redo_freestyle_id %>"
 	var data = {
 		"word_id": targetWord.id,
 		"time_started": timeStarted,
 		"time_ended": getDate(),
-		"uniq_data": uniqData
+		"uniq_data": uniqData,
+		"redo_freestyle_id": redoFreestyleID
 	}
 	makeAjaxCall("POST", url, data);
 }

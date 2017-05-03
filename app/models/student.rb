@@ -8,4 +8,14 @@ class Student < User
   def self.alphabetical
     order(:username)
   end
+
+  # TODO Create test
+  def has_classmates?
+    !classroom.students.empty?
+  end
+
+  # TODO Create test
+  def classmates
+    classroom.students if has_classmates?
+  end
 end

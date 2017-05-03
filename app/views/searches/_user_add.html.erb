@@ -1,5 +1,5 @@
 <% if current_user.has_word?(word) %>
-	<%= link_to "/myLeksi/#{word.id}",
+	<%= link_to myLeksi_show_path(word),
 							class: "btn btn-outline-secondary btn-block" do
 	%>
 		<i class="fa fa-eye"></i>

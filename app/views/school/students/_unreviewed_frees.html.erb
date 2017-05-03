@@ -5,7 +5,7 @@
 		<td></td>
 		<!-- TODO Only pull students with open freestyles -->
 		<% current_user.students.alphabetical.each do |stu| %>
-			<% stu.open_freestyles.group_by(&:user).each do |user, frees| %>
+			<% stu.unreviewed_frees.group_by(&:user).each do |user, frees| %>
 				<tr>
 					<td>
 						<%= stu.username %>

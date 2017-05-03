@@ -1,6 +1,6 @@
 <h2 class="card-title">
 	<% if controller?("my_leksi") && action?("index") %>
-		<%= link_to word.name, "/myLeksi/#{word.id}" %>
+		<%= link_to word.name, myLeksi_show_path(word) %>
 	<% else %>
 		<%= word.name %>
 	<% end %>

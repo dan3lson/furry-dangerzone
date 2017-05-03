@@ -1,0 +1,13 @@
+<div class="mb-2">
+	<span class="text-<%= color %>"><%= icon "gamepad" %></span>
+	<strong><%= activity.user.username %></strong> &nbsp;
+	played the <%= game_type %> game <%= activity.trackable.game.name %> for
+	<mark><%= activity.trackable.user_word.word.name %></mark>
+	<br>
+	<% if meta %>
+		<small class="text-muted">
+			<%= time_ago_in_words(activity.created_at) %> ago |
+			<%= activity.user.classroom.name %>
+		</small>
+	<% end %>
+</div>

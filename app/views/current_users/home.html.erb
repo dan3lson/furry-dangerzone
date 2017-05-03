@@ -1,16 +1,37 @@
-<div class="card mb-3">
-	<div class="card-block">
-		<h4 class="card-title">
-			Master Today's Challenge
-		</h4>
-		<div class="clear"></div>
-		<%= play_btn_big(@user_word, @user_word.word.id) %>
+<%= play_btn_big(@user_word, @user_word.word.id, @user_word.current_game) %>
+<div class="row mt-3">
+	<div class="col-md-6">
+		<div class="card mb-3">
+			<div class="card-header">
+				<%= icon "clock-o" %> Recent Activity
+				Classroom Activity
+				<small class="text-muted">Last 24 hours</small>
+			</div>
+			<div class="card-block">
+				<% if current_user.has_classmates? &&
+							current_user.teacher.has_classroom_activity?
+				%>
+					<% current_user.classmates.alphabetical.each do |classmate| %>
+						<%= render "users/recent_activity", user: classmate, meta: false %>
+					<% end %>
+				<% else %>
+					<small class="text-muted">None</small>
+				<% end %>
+			</div>
+		</div>
 	</div>
-	<div class="card-footer">
-		<div class="text-center text-muted">
-			M T W Th F
-			<div class="float-left">
-				<%= icon("calendar") %>
+	<div class="col-md-6">
+		<div class="card mb-3">
+			<div class="card-header">
+				<%= icon "quote-left" %> Freestyle Responses
+				<small class="text-muted">Teacher Reviews</small>
+			</div>
+			<div class="card-block">
+				<% if current_user.has_reviewed_frees? %>
+					<%= render "school/students/reviewed_frees" %>
+				<% else %>
+					<small class="text-muted">None</small>
+				<% end %>
 			</div>
 		</div>
 	</div>

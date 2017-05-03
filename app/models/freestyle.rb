@@ -14,6 +14,9 @@ class Freestyle < ActiveRecord::Base
   validates :user_word, presence: true
 
   scope :unreviewed, -> { where(status: "not reviewed") }
+  scope :reviewed, -> { where(status: ["pass", "redo"]) }
+  scope :pass, -> { where(status: "pass") }
+  scope :redo, -> { where(status: "redo") }
 
   def game
     user_word.game
@@ -21,5 +24,15 @@ class Freestyle < ActiveRecord::Base
 
   def user
     user_word.user
+  end
+
+  def has_comments?
+    !Comment.where(commentable_id: self.id).empty?
+  end
+
+  def self.update_status_redone(params)
+    unless params.empty?
+      Freestyle.find(params).update_attributes(status: "redone")
+    end
   end
 end
