@@ -8,6 +8,7 @@ class School::ExampleNonExamplesController < BaseSchoolController
     @word = Word.find(params[:word_id])
     @e_non_e.user = current_user
     @e_non_e.word = @word
+    # TODO Refactor - look at FreestylesController for example
     @created = false
 
     if @e_non_e.save

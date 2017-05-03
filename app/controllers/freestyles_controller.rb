@@ -3,12 +3,15 @@ class FreestylesController < ApplicationController
 		@freestyle = Freestyle.find(params[:id])
 		@new_status = params[:new_status]
 		@freestyle.status = @new_status
-		@updated = false
 		@comment = Comment.new
-		@updated = true if @freestyle.save
+		@updated = @freestyle.save
 
 		respond_to do |format|
-			format.js
+			if current_user.is_admin?
+				format.js { render template: "freestyles/update_admin.js.erb"}
+			else
+				format.js
+			end
 		end
 	end
 

@@ -16,7 +16,7 @@
 				<td><%= frees.user.username %></td>
 				<td><%= frees.word.name %></td>
 				<td><%= frees.game %></td>
-				<td>
+				<td data-free-id="<%= frees.id %>">
 					<small><%= icon "quote-left" %></small>
 					<%= highlight(truncate(frees.input, length: 300), frees.word.name) %>
 					<small><%= icon "quote-right" %></small>
