@@ -5,10 +5,15 @@
   <div class="card-block">
     <%= form_for(@user, url: user_path(@user)) do |f| %>
       <%= render 'shared/error_messages', object: @user %>
-      <div class="form-group">
-        <%= f.label :username %>
-        <%= f.text_field :username, class: "form-control" %>
-      </div>
+      <% if @user.is_student? %>
+        <fieldset disabled>
+          <div class="form-group">
+            <%= f.label :username %>
+            <%= f.text_field :username, class: "form-control" %>
+          </div>
+        </fieldset>
+      <% else %>
+      <% end %>
       <div class="form-group">
         <%= f.label :password %>
         <%= f.password_field :password, class: "form-control" %>

@@ -7,16 +7,14 @@
 				<small class="text-muted">Last 24 hours</small>
 			</div>
 			<div class="card-block">
-				<% if current_user.is_student? %>
-					<% if current_user.has_classmates? &&
-						current_user.teacher.has_classroom_activity?
-					%>
-						<% current_user.classmates.alphabetical.each do |classmate| %>
-							<%= render "users/recent_activity",
-												 user: classmate,
-												 meta: false
-							%>
-						<% end %>
+				<% if current_user.has_classmates? &&
+					current_user.teacher.has_classroom_activity?
+				%>
+					<% current_user.classmates.alphabetical.each do |classmate| %>
+						<%= render "users/recent_activity",
+											 user: classmate,
+											 meta: false
+						%>
 					<% end %>
 				<% else %>
 					<small class="text-muted">None</small>
