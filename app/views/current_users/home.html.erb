@@ -1,3 +1,23 @@
+<div class="alert alert-info">
+	<h1>
+		<%= icon "info-circle" %> 2017 Harlem Spelling Bee: Local School Competition
+	</h1>
+	<p>
+		You will need to include your Leksi Username and Special Leksi Number,
+		after you click the link below.
+	</p>
+	<p>
+		<strong>Leksi Username:</strong>&nbsp; <%= current_user.username %>
+		<br>
+		<strong>Special Leksi Number:</strong>&nbsp; <%= current_user.id %>
+		<br>
+		<strong>Quiz:</strong>&nbsp;
+		<%= link_to "Click here to take the quiz",
+								"https://goo.gl/forms/UXCIOsr6UPQrGKD63",
+								target: "_blank"
+    %>.
+	</p>
+</div>
 <%= play_btn_big(@user_word, @user_word.word.id, @user_word.current_game) %>
 <div class="row mt-3">
 	<div class="col-md-6">
