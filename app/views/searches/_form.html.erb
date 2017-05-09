@@ -1,8 +1,4 @@
-<%= form_tag search_results_path,
-             method: "get",
-             id: "search-form",
-             remote: true do
-%>
+
   <div class="input-group input-group-lg">
     <%= label_tag :'input-search',
                   "Search",
@@ -19,8 +15,7 @@
     <span class="input-group-btn">
       <%= button_tag type: "submit",
                      class: "btn btn-primary",
-                     id: "search-btn",
-                     disabled: false do
+                     id: "search-btn" do
       %>
         <i class="fa fa-search"></i>
       <% end %>
@@ -32,4 +27,3 @@
       separating them with commas, for example: <em>one, two, three</em>
     </small>
   </p>
-<% end %>
