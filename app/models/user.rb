@@ -130,6 +130,10 @@ class User < ActiveRecord::Base
     incomplete_words.sample
   end
 
+  def has_rand_incomplete_word?
+    !rand_incomplete_word.nil?
+  end
+
   # TODO Create test
   def rand_incomplete_not(word)
     incomplete_words.delete_if  { |uw| uw.word.id == word.id }.sample

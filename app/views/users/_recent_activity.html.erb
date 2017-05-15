@@ -16,6 +16,7 @@
 		<% end %>
 	<% end %>
 	<% user.activities.select("distinct on (action) *").each do |act| %>
+		<% next unless act.trackable.present? %>
 		<%= render "activities/#{act.trackable_type.underscore}/#{act.action}",
 				activity: act,
 				meta: meta
