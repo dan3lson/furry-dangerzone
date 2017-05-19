@@ -25,11 +25,13 @@
 				<th>Latest</th>
 				<tr>
 					<td>Users w/o Words</td>
-					<td><%= User.select { |u| u.num_words == 0 }.count %></td>
+					<td>
+						<%= User.where.not(id: UserWord.select(:user_id).uniq).count %>
+					</td>
 				</tr>
 				<tr>
 					<td>Users w/ Words</td>
-					<td><%= User.select { |u| u.num_words > 0 }.count %></td>
+					<td><%= User.where(id: UserWord.select(:user_id).uniq).count %></td>
 				</tr>
 				<tr>
 					<td># UserWords</td>
@@ -45,11 +47,15 @@
 				<th>Latest</th>
 				<tr>
 					<td>Users w/o Tags</td>
-					<td><%= User.select { |u| u.tags.count == 0 }.count %></td>
+					<td>
+						<%= User.where.not(id: UserTag.select(:user_id).uniq).count %>
+					</td>
 				</tr>
 				<tr>
 					<td>Users w/Tags</td>
-					<td><%= User.select { |u| u.tags.count > 0 }.count %></td>
+					<td>
+						<%= User.where(id: UserTag.select(:user_id).uniq).count %>
+					</td>
 				</tr>
 				<tr>
 					<td>UserTags</td>

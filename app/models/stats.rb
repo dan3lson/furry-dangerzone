@@ -7,15 +7,19 @@ User.sum(:num_logins)
 
 # Users Without Words
 User.select { |u| u.num_words == 0 }.count
+User.where.not(id: UserWord.select(:user_id).uniq).count
 
 # Users With Words
 User.select { |u| u.num_words > 0 }.count
+User.where(id: UserWord.select(:user_id).uniq).count
 
 # Users Without Tags
 User.select { |u| u.tags.count == 0 }.count
+User.where.not(id: UserTag.select(:user_id).uniq).count
 
 # Users With Tags
 User.select { |u| u.tags.count > 0 }.count
+User.where(id: UserTag.select(:user_id).uniq).count
 
 # Fundamentals Completed
 UserWord.where.not(games_completed: 0).count

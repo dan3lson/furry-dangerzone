@@ -1,15 +1,39 @@
-<footer class="footer text-center mt-5">
-	<p>
+<footer class="footer static text-center mt-5 bg-faded">
+	<div class="row text-muted mt-5">
+		<div class="col-md-4 mb-3">
+			<div>
+				<h5 class="mb-5">As featured in...</h5>
+				<div>
+					<%= image_tag("ed-tech-times.png",
+												class: "img-fluid",
+												alt: "EdTech Times",
+												title: "EdTech Times")
+					%>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<h5 class="mb-5">Socialize with us on...</h5>
+			<%= link_to "https://www.facebook.com/LeksiEducation",
+									target: "_blank",
+									alt: "Leksi on Facebook",
+									title: "Leksi on Facebook" do
+			%>
+				<i class="fa fa-facebook fa-3x"></i>
+			<% end %>
+			&nbsp;
+			<%= link_to "https://twitter.com/LeksiEducation", target: "_blank" do %>
+				<i class="fa fa-twitter fa-3x"></i>
+			<% end %>
+		</div>
+	</div>
+	<div class="mb-5">
+	</div>
+	<div>
+
+	</div>
+	<div class="pb-3">
 		&copy; <%= Date.today.year %>
 		Leksi&#8482; Education
-	</p>
-	<p>
-		<%= link_to "https://www.facebook.com/LeksiEducation", target: "_blank" do %>
-			<i class="fa fa-facebook fa-3x"></i>
-		<% end %>
-		&nbsp;
-		<%= link_to "https://twitter.com/LeksiEducation", target: "_blank" do %>
-			<i class="fa fa-twitter fa-3x"></i>
-		<% end %>
-	</p>
+	</div>
 </footer>

@@ -1,6 +1,6 @@
 <ol>
 	<% students.each do |u| %>
-		<li class="basic-apple-blue-link">
+		<li>
 			<%= link_to u.username, "student?id=#{u.id}" %>
 			<small>(<%= u.send(stat) %><%= "%" if stat.include?("perc") %>)</small>
 		</li>
