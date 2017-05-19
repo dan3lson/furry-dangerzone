@@ -4,10 +4,12 @@
 			<div>
 				<h5 class="mb-5">As featured in...</h5>
 				<div>
-					<%= image_tag("ed-tech-times.png",
-												class: "img-fluid",
-												alt: "EdTech Times",
-												title: "EdTech Times")
+					<%= link_to image_tag("ed-tech-times.png",
+												class: "img-fluid hover",
+												alt: "EdTech Times Leksi Feature",
+												title: "EdTech Times Leksi Feature"),
+												"https://edtechtimes.com/2016/03/17/vocabulary-app-leksi-helps-students-improve-literacy/",
+												target: "_blank"
 					%>
 				</div>
 			</div>
@@ -26,11 +28,6 @@
 				<i class="fa fa-twitter fa-3x"></i>
 			<% end %>
 		</div>
-	</div>
-	<div class="mb-5">
-	</div>
-	<div>
-
 	</div>
 	<div class="pb-3">
 		&copy; <%= Date.today.year %>
