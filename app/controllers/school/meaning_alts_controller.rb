@@ -67,7 +67,7 @@ class School::MeaningAltsController < BaseSchoolController
 
   def fourth_grade
     @meaning_alt = MeaningAlt.new
-    @fourth_grade_words = Word.explore_fourth_grade
+    @fourth_grade_words = Word.fourth_grade
   end
 
   private

@@ -58,8 +58,7 @@
 	</div>
 </div>
 
-<% @fourth_grade_words.each do |name, words| %>
-	<% word = words[0] %>
+<% @fourth_grade_words.each do |word| %>
 	<div class="card mb-3">
 		<div class="card-block" data-word-id="<%= word.id %>">
 			<div class="float-right">
