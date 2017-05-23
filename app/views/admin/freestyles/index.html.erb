@@ -11,19 +11,20 @@
 		<td>Response</td>
 		<td>Action</td>
 		<td>Written</td>
-		<% @freestyles.each do |frees| %>
+		<td></td>
+		<% @freestyles.each do |free| %>
 			<tr>
-				<td><%= frees.user.username %></td>
-				<td><%= frees.word.name %></td>
-				<td><%= frees.game %></td>
-				<td data-free-id="<%= frees.id %>">
+				<td><%= free.user.username %></td>
+				<td><%= free.word.name %></td>
+				<td><%= free.game %></td>
+				<td data-free-id="<%= free.id %>">
 					<small><%= icon "quote-left" %></small>
-					<%= highlight(truncate(frees.input, length: 300), frees.word.name) %>
+					<%= highlight(truncate(free.input, length: 300), free.word.name) %>
 					<small><%= icon "quote-right" %></small>
 				</td>
 				<td>
 					<%= link_to freestyle_path(
-							id: frees.id,
+							id: free.id,
 							new_status: "redo"
 						),
 						role: "button",
@@ -34,7 +35,7 @@
 						<%= icon "thumbs-down" %> Request Redo
 					<% end %>
 					<%= link_to freestyle_path(
-							id: frees.id,
+							id: free.id,
 							new_status: "pass"
 						),
 						role: "button",
@@ -45,7 +46,18 @@
 						<%= icon "thumbs-up" %> Pass
 					<% end %>
 				</td>
-				<td><%= time_ago_in_words(frees.created_at) %> ago</td>
+				<td><%= time_ago_in_words(free.created_at) %> ago</td>
+				<td>
+          <%= link_to admin_freestyle_path(free),
+            role: "button",
+            method: :delete, data: { confirm: "Are you sure?" },
+            class: "btn btn-sm btn-secondary",
+            method: :delete do
+          %>
+            <i class="fa fa-trash"></i>
+            Delete
+          <% end %>
+        </td>
 			</tr>
 		<% end %>
 	</table>

@@ -17,7 +17,10 @@ class Freestyle < ActiveRecord::Base
   scope :reviewed, -> { where(status: ["pass", "redo"]) }
   scope :pass, -> { where(status: "pass") }
   scope :redo, -> { where(status: "redo") }
-  scope :latest, -> { order("created_at DESC") }
+  scope :latest, -> { order("freestyles.created_at DESC") }
+  scope :last_24_hours, -> (time = "freestyles.updated_at") {
+    where("#{time} > ?", 24.hours.ago)
+  }
 
   def game
     user_word.game

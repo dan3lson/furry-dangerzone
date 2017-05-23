@@ -16,6 +16,10 @@ class CurrentUsersController < ApplicationController
     @icon = @type == "bug" ? "bug" : "magic"
   end
 
+  def freestyles
+    @frees = current_user.freestyles
+  end
+
   private
 
   def logged_in_user

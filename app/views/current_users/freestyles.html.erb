@@ -1,0 +1,13 @@
+<h1 class="mb-5">
+	<%= icon "quote-left" %> My Freestyle Responses
+	<p class="text-muted small">
+		You have
+		<%= current_user.freestyles.reviewed.redo.count %> activities to redo.
+		Click any of the blue buttons to try again.
+	</p>
+</h1>
+<% if current_user.has_completed_freestyles? %>
+	<%= render "school/students/freestyles", freestyles: @frees %>
+<% else %>
+	<small class="text-muted">None</small>
+<% end %>

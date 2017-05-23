@@ -5,7 +5,7 @@
 		<th>Grade</th>
 		<th><%= icon "commenting-o" %></th>
 		<th></th>
-		<% current_user.freestyles.reviewed.limit(30).each do |free| %>
+		<% freestyles.each do |free| %>
 			<tr>
 				<td>
 					<%= free.user_word.word.name %>
@@ -18,7 +18,7 @@
 													free.user_word.word.id,
 													free_game_num(free.game),
 													free.id
-												), class: "btn btn-secondary",
+												), class: "btn btn-primary btn-block",
 												remote: true do
 						%>
 							<%= icon "play-circle" %> Play Again (<%= free.game %>)
@@ -28,7 +28,7 @@
 				<td><%= icon_and_status(free) %></td>
 				<td><%= icon "commenting-o" if free.has_comments? %></td>
 				<td>
-					<%= link_to "See more", "#",
+					<%= link_to "Read comments", "#",
 							"data-toggle": "modal",
 							"data-target": "#see-free-#{free.id}"
 					%>
@@ -44,8 +44,8 @@
 										Freestyle Response
 										<br>
 										<small class="text-muted">
-											You can see what you wrote below and there may be
-											Teacher comments, too.
+											See what you wrote, your grade, and any
+											Teacher comments below.
 										</small>
 									</h5>
 									<button type="button"
@@ -60,18 +60,7 @@
 										<div class="card-block" data-free-id="<%= free.id %>">
 											<h4 class="card-title">
 												<%= icon "gamepad" %>
-												<%= free.game %>
-												<div class="float-right">
-													<% if free.status == "pass" %>
-														<span class="text-success">
-															<%= emoji "--1" %> pass
-														</span>
-													<% else %>
-														<span class="text-danger">
-															<%= emoji "-1" %> redo
-														</span>
-													<% end %>
-												</div>
+												Game: <%= free.game %>
 											</h4>
 											<p class="card-text">
 												<small><%= icon "quote-left" %></small>
@@ -81,9 +70,22 @@
 												) %>
 												<small><%= icon "quote-right" %></small>
 											</p>
+											<p>
+												Your Grade:
+												<% if free.status == "pass" %>
+													<span class="text-success">
+														<%= icon "--1" %> pass
+													</span>
+												<% else %>
+													<span class="text-danger">
+														<%= emoji "-1" %> redo
+													</span>
+												<% end %>
+											</p>
 										</div>
 										<div class="card-footer text-center text-muted">
-											written <%= time_ago_in_words(free.created_at) %> ago
+											You wrote this <%= time_ago_in_words(free.created_at) %>
+											ago
 										</div>
 									</div>
 									<div class="card mb-3">
@@ -102,10 +104,23 @@
 													<small class="text-muted">None</small>
 												<% end %>
 											</p>
+											<% if free.status == "redo" %>
+												<%= link_to free_game_link(
+																			free.user_word.word.id,
+																			free_game_num(free.game),
+																			free.id
+																		), class: "btn btn-primary btn-block",
+																		remote: true do
+												%>
+													<%= icon "play-circle" %>
+													Play Again (<%= free.game %>)
+												<% end %>
+											<% end %>
 										</div>
 										<% if free.has_comments? %>
 											<div class="card-footer text-center text-muted">
-												last reviewed <%= time_ago_in_words(free.updated_at) %>
+												Your teacher made this comment
+												<%= time_ago_in_words(free.updated_at) %>
 												ago
 											</div>
 										<% end %>

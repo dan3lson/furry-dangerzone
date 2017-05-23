@@ -4,8 +4,8 @@ class Activity < ActiveRecord::Base
 
   validates :user, presence: true
 
-  scope :latest, -> { order("created_at DESC") }
-  scope :last_24_hours, -> (time = "created_at") {
+  scope :latest, -> { order("activities.created_at DESC") }
+  scope :last_24_hours, -> (time = "activities.created_at") {
     where("#{time} > ?", 24.hours.ago)
   }
 end

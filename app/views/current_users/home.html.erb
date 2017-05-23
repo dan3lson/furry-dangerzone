@@ -47,12 +47,19 @@
 	<div class="col-md-6">
 		<div class="card mb-3">
 			<div class="card-header">
-				<%= icon "quote-left" %> Freestyle Responses
-				<small class="text-muted">Teacher Reviews</small>
+				<%= icon "quote-left" %> Teacher Reviews
+				<small class="text-muted">Freestyle Responses</small>
 			</div>
 			<div class="card-block">
 				<% if current_user.has_reviewed_frees? %>
-					<%= render "school/students/reviewed_frees" %>
+					<%= render "school/students/freestyles",
+										 freestyles: current_user.freestyles.reviewed.last_24_hours
+					%>
+					<%= link_to "See all of my Freestyle responses",
+											freestyles_path,
+											role: "button",
+											class: "btn btn-outline-primary btn-block"
+					%>
 				<% else %>
 					<small class="text-muted">None</small>
 				<% end %>

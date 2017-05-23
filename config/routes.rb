@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "home" => "current_users#home"
   get "settings" => "current_users#settings"
   get "stats" => "current_users#stats"
+  get "freestyles" => "current_users#freestyles"
   get "myLeksi" => "my_leksi#index"
   get "my_leksi/words"
   get "myLeksi/:id" => "my_leksi#show"
