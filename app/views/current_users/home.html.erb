@@ -48,10 +48,10 @@
 		<div class="card mb-3">
 			<div class="card-header">
 				<%= icon "quote-left" %> Teacher Reviews
-				<small class="text-muted">Freestyle Responses</small>
+				<small class="text-muted">Last 24 hours</small>
 			</div>
 			<div class="card-block">
-				<% if current_user.has_reviewed_frees? %>
+				<% if current_user.has_reviewed_frees_last_24_hrs? %>
 					<%= render "school/students/freestyles",
 										 freestyles: current_user.freestyles.reviewed.last_24_hours
 					%>

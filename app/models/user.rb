@@ -229,8 +229,8 @@ class User < ActiveRecord::Base
   end
 
   # TODO Create test
-  def has_reviewed_frees?
-    !freestyles.reviewed.empty?
+  def has_reviewed_frees_last_24_hrs?
+    !freestyles.reviewed.last_24_hours.empty?
   end
 
   def has_games_to_play?
