@@ -1,0 +1,147 @@
+<h1>
+	Example/Non-Examples
+	<br>
+	<small class="text-muted">5th Grade</small>
+</h1>
+<div class="card card-primary text-white mb-3">
+	<div class="card-block">
+		<h4 class="card-title">Instructions</h4>
+		<p class="card-text">
+			Create two to four "example/non-examples" for each word. As you see
+			down below, there are three fields to fill in:
+			<em>text</em>, <em>answer (either "example" or "non-example")</em>,
+			and <em>feedback</em>.
+		</p>
+		<p class="card-text">
+			Here are two examples:
+		</p>
+		<ol>
+			<li>
+				<h5>Abate</h5>
+				<strong>Part of Speech</strong> verb
+				<br>
+				<strong>Definition</strong> become less in amount or intensity
+				<br>
+				<strong>Examples</strong> The storm abated
+				<p class="card-text">
+					<p class="form-group">
+						<%= label_tag "Text", nil, class: "form-control-label" %>
+						<%= text_field_tag :text,
+															 nil,
+															 class: "form-control",
+															 placeholder: "The heavy storm turns into a light drizzle.",
+															 readonly: true %>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Answer", nil, class: "form-control-label" %>
+						<%= text_field_tag :answer,
+															 nil,
+															 class: "form-control",
+															 placeholder: "example",
+															 readonly: true %>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Feedback", nil, class: "form-control-label" %>
+						<%= text_area_tag :textarea,
+															 nil,
+															 class: "form-control",
+															 placeholder: "If a heavy storm abated, then umbrellas might actually keep people dry since the rain has died down.",
+															 readonly: true %>
+					</p>
+				</p>
+			</li>
+			<li>
+				<h5>Abate</h5>
+				<strong>Part of Speech</strong> verb
+				<br>
+				<strong>Definition</strong> become less in amount or intensity
+				<br>
+				<strong>Examples</strong> The storm abated
+				<p class="card-text">
+					<p class="form-group">
+						<%= label_tag "Text", nil, class: "form-control-label" %>
+						<%= text_area_tag :text,
+															 nil,
+															 class: "form-control",
+															 placeholder: "A sports stadium that gets louder and fiercer",
+															 readonly: true
+						%>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Answer", nil, class: "form-control-label" %>
+						<%= text_area_tag :answer,
+															 nil,
+															 class: "form-control",
+															 placeholder: "non-example",
+															 readonly: true
+						%>
+					</p>
+					<p class="form-group">
+						<%= label_tag "Feedback", nil, class: "form-control-label" %>
+						<%= text_area_tag :textarea,
+															 nil,
+															 class: "form-control",
+															 placeholder: "If the volume and atmosphere at a sports stadium increases, then that's the opposite of something abating.",
+															 readonly: true,
+															 rows: 4
+						%>
+					</p>
+				</p>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<% @fifth_grade_words.each do |word| %>
+	<div class="card mb-3" data-word-id="<%= word.id %>">
+		<div class="card-block">
+			<div class="float-right">
+				<% if word.example_non_examples.count > 1 %>
+					<i class="fa fa-check fa-3x text-success"></i>
+				<% else %>
+					<i class="fa fa-check fa-3x text-muted"></i>
+				<% end %>
+			</div>
+			<h2 class="card-title">
+				<%= word.name %>
+			</h2>
+			<p class="card-text">
+				<strong>Part of Speech</strong> <%= word.part_of_speech %>
+				<br>
+				<strong>Definition</strong> <%= word.definition %>
+				<br>
+				<strong>Examples</strong>
+				<% if word.examples.any? %>
+					<%= word.examples.first.text.gsub("***", "; ") %>
+				<% else %>
+					<span class="text-muted">none</span>
+				<% end %>
+			</p>
+			<% if word.has_ex_non_exs? %>
+				<p class="text-primary">
+					Example/Non-Examples for <mark><%= word.name %></mark>:
+				</p>
+
+				<% word.example_non_examples.each do |e_non_e| %>
+					<p class="card-text">
+						<strong>Text</strong> <%= e_non_e.text %>
+						<br>
+						<strong>Answer</strong> <%= e_non_e.answer %>
+						<br>
+						<strong>Feedback</strong> <%= e_non_e.feedback %>
+					</p>
+					<hr>
+				<% end %>
+			<% end %>
+		</div>
+		<% unless word.example_non_examples.count > 1 %>
+			<div class="card-footer">
+				<%= render "school/example_non_examples/form",
+									 word: word,
+									 e_non_e: @e_non_e,
+									 btn_text: "Create"
+				%>
+			</div>
+		<% end %>
+	</div>
+<% end %>

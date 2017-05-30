@@ -85,6 +85,7 @@ Rails.application.routes.draw do
     get "settings" => "current_user#settings"
     get "example_non_examples/fourth" => "example_non_examples#fourth_grade"
     get "decisions_decisions/fourth" => "meaning_alts#fourth_grade"
+    get "example_non_examples/fifth" => "example_non_examples#fifth_grade"
     get "search" => "searches#search"
     get "search_results" => "searches#results"
     get "search_words_for_students" => "searches#student_words"

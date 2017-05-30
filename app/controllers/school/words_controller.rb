@@ -38,8 +38,7 @@ class School::WordsController < BaseSchoolController
       :name,
       :phonetic_spelling,
       :part_of_speech,
-      :definition,
-      :example_sentence
+      :definition
     )
   end
 end

@@ -51,6 +51,8 @@ group :test do
   gem 'database_cleaner'
   # Headless driver for capybara testing based on PhantomJS
   gem 'poltergeist'
+  # Aids in unit testing relationships (https://github.com/thoughtbot/shoulda-matchers)
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development, :test do
@@ -66,8 +68,6 @@ group :development, :test do
   gem 'pry-rails'
   # Rspec is used for Bheavior Driven Development (http://rspec.info, https://github.com/rspec/rspec)
   gem 'rspec-rails', '~> 3.0'
-  # Aids in unit testing relationships (https://github.com/thoughtbot/shoulda-matchers)
-  gem "shoulda-matchers"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

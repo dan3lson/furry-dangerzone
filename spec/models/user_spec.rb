@@ -18,21 +18,19 @@ RSpec.describe User, type: :model do
 
   describe "validations" do
     it { should validate_presence_of(:username) }
-    it { should validate_uniqueness_of(:username) }
+    it { should validate_uniqueness_of(:username).case_insensitive }
     it { should validate_length_of(:username).is_at_least(3) }
     it { should validate_length_of(:username).is_at_most(33) }
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(6) }
-    it { should validate_presence_of(:points) }
-    it { should validate_presence_of(:num_flashcards_played) }
+    it { should have_secure_password }
     it { should validate_length_of(:first_name).is_at_most(50) }
     it { should validate_length_of(:last_name).is_at_most(50) }
-    xit { should validate_uniqueness_of(:email).case_insensitive.allow_blank }
   end
 
   describe "#initialization" do
     it "returns a username string" do
-      expect(user.username).to include("foobar")
+      expect(user.username).to include("user")
     end
 
     it "returns a password string" do
@@ -82,7 +80,7 @@ RSpec.describe User, type: :model do
 
   describe "#has_tag?" do
     it "returns false" do
-      expect(user.has_tag?("foobar")).to eq(false)
+      expect(user.has_tag?(tag)).to eq(false)
     end
 
     it "returns true" do
@@ -98,7 +96,7 @@ RSpec.describe User, type: :model do
     end
 
     it "returns true" do
-      user.type = "admin"
+      user.type = "Admin"
 
       expect(user.is_admin?).to eq(true)
     end
@@ -110,37 +108,37 @@ RSpec.describe User, type: :model do
     end
 
     it "returns true" do
-      user.type = "admin"
+      user.type = "Admin"
 
       expect(user.is_teacher?).to eq(true)
     end
 
     it "returns true" do
-      user.type = "teacher"
+      user.type = "Teacher"
 
       expect(user.is_teacher?).to eq(true)
     end
   end
 
   describe "#is_student?" do
-    it "returns false" do
-      expect(user.is_student?).to eq(false)
+    it "returns false given :type default" do
+      expect(user.is_student?).to eq(true)
     end
 
-    it "returns true" do
-      user.type = "admin"
+    it "returns true if :type is Admin" do
+      user.type = "Admin"
 
-      expect(user.is_student?).to eq(false)
+      expect(user.is_student?).to eq(true)
     end
 
-    it "returns true" do
-      user.type = "teacher"
+    it "returns true if :type is Teacher" do
+      user.type = "Teacher"
 
-      expect(user.is_student?).to eq(false)
+      expect(user.is_student?).to eq(true)
     end
 
-    it "returns true" do
-      user.type = "student"
+    it "returns true given :type is Student" do
+      user.type = "Student"
 
       expect(user.is_student?).to eq(true)
     end
@@ -152,13 +150,13 @@ RSpec.describe User, type: :model do
     end
 
     it "returns true" do
-      user.type = "admin"
+      user.type = "Admin"
 
       expect(user.can_create_words?).to eq(true)
     end
 
     it "returns true" do
-      user.type = "teacher"
+      user.type = "Teacher"
 
       expect(user.can_create_words?).to eq(true)
     end

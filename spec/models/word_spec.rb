@@ -28,9 +28,6 @@ RSpec.describe Word, type: :model do
     it "returns a word definition" do
       expect(word.definition).to eq("a game for two people, played on a board")
     end
-    it "returns a word example sentence" do
-      expect(word.example_sentence).to eq("Do you play chess?")
-    end
   end
 
   describe "::define" do

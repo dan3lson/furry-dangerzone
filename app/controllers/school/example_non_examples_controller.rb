@@ -54,6 +54,11 @@ class School::ExampleNonExamplesController < BaseSchoolController
     @fourth_grade_words = Word.fourth_grade
   end
 
+  def fifth_grade
+    @e_non_e = ExampleNonExample.new
+    @fifth_grade_words = Word.fifth_grade
+  end
+
   private
 
   def example_non_example_params

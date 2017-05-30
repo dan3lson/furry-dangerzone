@@ -115,10 +115,6 @@ module WordsHelper
     result.class == String ? !result.empty? : result.any?
   end
 
-  def attribute_is_example_sentence_or_definition?(attribute)
-    attribute == "example_sentence" || attribute == "definition"
-  end
-
   def attribute_is_synonym_or_antonym?(attribute)
     attribute.end_with?("onyms")
   end

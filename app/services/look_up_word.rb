@@ -20,8 +20,7 @@ class LookUpWord
 			name: query,
 			phonetic_spelling: api_word.phonetic_spelling,
 			part_of_speech: api_word.part_of_speech,
-			definition: api_word.definition,
-			example_sentence: api_word.example_sentence
+			definition: api_word.definition
 		)
 	end
 

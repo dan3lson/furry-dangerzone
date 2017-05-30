@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :user do
-    sequence(:username) { |n| "foobar#{n}" }
+    sequence(:username) { |n| "user#{n}" }
+    type "Student"
     password "password"
     password_confirmation "password"
-    sequence(:email) { |n| "foo#{n}@bar.com" }
+    sequence(:email) { |n| "user#{n}@foo.com" }
     num_logins 1
     login_history "Sat, 06 Aug 1988 00:00:00 +0000"
   end
@@ -13,7 +14,6 @@ FactoryGirl.define do
     phonetic_spelling "/tʃes/"
     definition "a game for two people, played on a board"
     part_of_speech "noun"
-    example_sentence "Do you play chess?"
   end
 
   factory :user_word do
@@ -38,11 +38,6 @@ FactoryGirl.define do
   factory :user_word_tag do
     user
     word_tag
-  end
-
-  factory :version do
-    description "Awesome new feature"
-    sequence(:number) { |n| "1.0.#{n}" }
   end
 
   factory :game do

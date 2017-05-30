@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 33 }
-  # validates :points, presence: true
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
