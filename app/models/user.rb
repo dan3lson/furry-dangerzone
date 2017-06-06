@@ -19,12 +19,7 @@ class User < ActiveRecord::Base
 
   before_create { self.username = username.downcase }
 
-  # TODO: Create test
-  def exists?
-    !User.find_by(username: self.username).nil?
-  end
-
-  # TODO: Create test
+  # TODO: Create test. Serialize like FreestyleLekTale.rb
   def self.set_up_login_data(user)
     datetime_now = DateTime.now
     user.last_login = datetime_now
@@ -53,10 +48,6 @@ class User < ActiveRecord::Base
     !UserTag.where(user: self).empty?
   end
 
-  def has_user_word_tags?
-    !UserWordTag.where(user: self).empty?
-  end
-
   def is_admin?
     type == "Admin"
   end
@@ -65,36 +56,8 @@ class User < ActiveRecord::Base
     type == "Teacher" || type == "Admin"
   end
 
-  def is_admin_or_teacher?
-    is_admin? || is_teacher?
-  end
-
   def is_student?
     type == "Student" || is_teacher? || is_admin?
-  end
-
-  # TODO Create test
-  def is_brainiac?
-    type == "Brainiac" || is_student? || is_admin?
-  end
-
-  def is_not_a_student?
-    !is_student?
-  end
-
-  # TODO Create test
-  def can_create_words?
-    is_admin_or_teacher?
-  end
-
-  # TODO Create test
-  def can_create_meaning_alts?
-    is_admin_or_teacher?
-  end
-
-  # TODO Create test
-  def can_create_example_non_examples?
-    is_admin_or_teacher?
   end
 
   def incomplete_fundamentals
@@ -105,26 +68,23 @@ class User < ActiveRecord::Base
     UserWord.where(user: self).incomplete_jeopardys
   end
 
-  def complete_jeopardys
-    UserWord.where(user: self).completed_jeopardys
+  def incomplete_freestyles
+    UserWord.where(user: self).incomplete_freestyles
   end
 
-  # TODO Create test
   def incomplete_words
     incomplete_fundamentals + incomplete_jeopardys + incomplete_freestyles
   end
 
-  # TODO Create test
   def has_incomplete_word?
     incomplete_words.any?
   end
 
-  # TODO Create test
-  def has_incomplete_not?(word)
-    incomplete_words.delete_if { |uw| uw.word.id == word.id  }.any?
+  # TODO Delete method/test case and render JS after user_word is updated
+  def has_incomplete_words_not?(word)
+    incomplete_words.delete_if { |uw| uw.word.id == word.id }.any?
   end
 
-  # TODO Create test
   def rand_incomplete_word
     incomplete_words.sample
   end
@@ -135,7 +95,7 @@ class User < ActiveRecord::Base
 
   # TODO Create test
   def rand_incomplete_not(word)
-    incomplete_words.delete_if  { |uw| uw.word.id == word.id }.sample
+    incomplete_words.delete_if { |uw| uw.word.id == word.id }.sample
   end
 
   # TODO Create test
@@ -165,10 +125,6 @@ class User < ActiveRecord::Base
              .includes(:word)
              .where(tag: tag)
              .pluck(:word_id)
-  end
-
-  def incomplete_freestyles
-    UserWord.where(user: self).incomplete_freestyles
   end
 
   def has_incomplete_fundamentals?
@@ -219,10 +175,6 @@ class User < ActiveRecord::Base
     completed_fundamentals.any?
   end
 
-  def has_completed_jeopardys?
-    completed_jeopardys.any?
-  end
-
   def has_completed_freestyles?
     completed_freestyles.any?
   end
@@ -230,12 +182,6 @@ class User < ActiveRecord::Base
   # TODO Create test
   def has_reviewed_frees_last_24_hrs?
     !freestyles.reviewed.last_24_hours.empty?
-  end
-
-  def has_games_to_play?
-    has_incomplete_fundamentals? ||
-    has_incomplete_jeopardys? ||
-    has_incomplete_freestyles?
   end
 
   def has_enough_incomplete_jeops?
@@ -287,10 +233,6 @@ class User < ActiveRecord::Base
     else
       Word.random_excluding(3, word.id) << word
     end
-  end
-
-  def last_login_nil?
-    last_login.nil?
   end
 
   # TODO: Create test
@@ -414,36 +356,12 @@ class User < ActiveRecord::Base
     (completed / total.to_f * 100).round
   end
 
-  # Eventually will be deleted
-
-  def self.baseline_gamification
-    all.each do |u|
-      u.points = 0
-
-      if u.has_words?
-        u.points += u.num_words
-      end
-
-      if u.has_tags?
-        u.points += u.tags.count
-      end
-
-      if u.has_user_word_tags?
-        u.points += u.user_word_tags.count * 2
-      end
-
-      if u.has_completed_fundamentals?
-        u.points += u.completed_fundamentals.count * 3
-      end
-
-      u.save
-    end
-  end
-
   def self.reset_dev_pwds
-    User.all.each { |u| u.update_attributes(
-      password: "password",
-      password_confirmation: "password"
-    )}
+    if Rails.env == "development"
+      User.all.each { |u| u.update_attributes(
+        password: "password",
+        password_confirmation: "password"
+      )}
+    end
   end
 end

@@ -16,7 +16,7 @@
     <h4 class="card-title">
       <%= icon "gamepad" %> Next Game
     </h4>
-    <% if current_user.has_incomplete_not?(uw.word) %>
+    <% if current_user.has_incomplete_words_not?(uw.word) %>
       <% uw = current_user.rand_incomplete_not(uw.word) %>
       <% if uw.is_freestyle? %>
         <%= play_btn_big(uw, uw.word.id, uw.current_game) %>
