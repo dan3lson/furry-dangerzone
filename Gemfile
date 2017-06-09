@@ -8,10 +8,14 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
+# Disable stats in a nice way
+gem "chartkick"
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # Solves the problems of setting project-specific environment vars
 gem 'dotenv-rails'
+# The simplest way to group temporal data
+gem 'groupdate'
 # Makes http fun again
 gem 'httparty'
 # Use jquery as the JavaScript library

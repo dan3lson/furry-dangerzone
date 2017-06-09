@@ -10,6 +10,9 @@ class GameStat < ActiveRecord::Base
   validates :user_word, presence: true
   validates :game, presence: true
 
+  scope :funds, -> { where(game: (1..6).to_a) }
+  scope :jeops, -> { where(game: ([5, 6])) }
+  scope :frees, -> { where(game: (12..30).to_a) }
   scope :last_24_hours, -> (time = "updated_at") {
     where("#{time} > ?", 24.hours.ago)
   }
@@ -22,9 +25,5 @@ class GameStat < ActiveRecord::Base
       time_started: time_started,
       time_ended: time_ended
     )
-  end
-
-  def self.freestyles
-    where(game: [12, 13, 14, 15, 16])
   end
 end

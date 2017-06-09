@@ -60,6 +60,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    chartkick (2.2.4)
     cliver (0.3.2)
     coderay (1.1.1)
     coffee-rails (4.1.1)
@@ -89,6 +90,8 @@ GEM
     git-version-bump (0.15.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    groupdate (3.2.0)
+      activesupport (>= 3)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
@@ -252,6 +255,7 @@ DEPENDENCIES
   bootstrap (~> 4.0.0.alpha6)
   bullet
   capybara
+  chartkick
   coffee-rails (~> 4.1.0)
   database_cleaner
   dotenv-rails
@@ -259,6 +263,7 @@ DEPENDENCIES
   faker
   fastclick-rails
   font-awesome-rails
+  groupdate
   httparty
   jbuilder (~> 2.0)
   jquery-rails
