@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   validates :last_name, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  scope :most_logins, -> { order("users.num_logins DESC") }
+  scope :least_logins, -> { order("users.num_logins ASC") }
+
   before_create { self.username = username.downcase }
 
   # TODO: Create test. Serialize like FreestyleLekTale.rb
@@ -283,9 +286,16 @@ class User < ActiveRecord::Base
 
   # TODO: Create test
   def time_spent_playing
-    user_words = UserWord.where(user: self)
-    user_words.map { |uw| uw.game_stats.sum(:time_spent) }
-              .inject(&:+) || 0
+    if has_words?
+      uw_ids = UserWord.where(user: self).pluck(:id)
+      game_stats = GameStat.where(user_word: uw_ids)
+                           .where.not(time_ended: nil, time_started: nil)
+      game_stats.map do |gs|
+        (gs.time_ended - gs.time_started) / 1.hour
+      end.sum.round
+    else
+      0
+    end
   end
 
   # TODO: Create test

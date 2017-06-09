@@ -18,6 +18,16 @@
 	<% end %>
 <% end %>
 
+<% if controller?("school/stats") %>
+	<%= link_to school_stats_path, class: "nav-item nav-link active" do %>
+		<%= icon "line-chart" %> Stats
+	<% end %>
+<% else %>
+	<%= link_to school_stats_path, class: "nav-item nav-link" do %>
+		<%= icon "line-chart" %> Stats
+	<% end %>
+<% end %>
+
 <%# if controller?("school/searches") %>
 	<%#= link_to school_search_path, class: "nav-item nav-link active" do %>
 		<!-- <i class="fa fa-search"></i> Look Up -->

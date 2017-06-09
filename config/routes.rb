@@ -90,7 +90,7 @@ Rails.application.routes.draw do
     get "search_results" => "searches#results"
     get "search_words_for_students" => "searches#student_words"
     get "student_words" => "words#student_words"
-    get "progress" => "classrooms#progress"
+    get "stats" => "stats#index"
     get "my_meaning_alts" => "current_user#my_meaning_alts"
     get "words" => "classrooms#words"
     resources :classrooms do
