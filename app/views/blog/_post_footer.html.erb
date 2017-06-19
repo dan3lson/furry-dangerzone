@@ -1,26 +1,30 @@
-<hr>
-<p>
-	Thanks for reading!
-	We'd love to hear from you be it any questions, comments, or concerns you have
-	via email
-	(<%= mail_to "info@harlemspellingbee.com",
-							nil,
-							subject: "Harlem Spelling Bee"
-	%>) and/or on
-	<%= link_to "Facebook",
-								"https://www.facebook.com/LeksiEducation",
+<div class="card card-outline-primary">
+	<div class="card-header">
+		<h4>Stay In Touch</h4>
+	</div>
+	<div class="card-block">
+		Thanks for reading!
+		We'd love to hear from you be it any questions, comments, or concerns you have
+		via email
+		(<%= mail_to "hello@leksi.education",
+								nil,
+								subject: "Harlem Spelling Bee"
+		%>) and/or on
+		<%= link_to "Facebook",
+									"https://www.facebook.com/LeksiEducation",
+									target: "_blank",
+									title: "Connect with the Leksi page on Facebook!",
+									alt: "Connect with the Leksi page on Facebook!"
+		%>
+		or
+		<%= link_to "Twitter", "https://twitter.com/LeksiEducation",
 								target: "_blank",
-								title: "Connect with the Leksi page on Facebook!",
-								alt: "Connect with the Leksi page on Facebook!"
-	%>
-	or
-	<%= link_to "Twitter", "https://twitter.com/LeksiEducation",
-							target: "_blank",
-							title: "Send Leksi a tweet!",
-							alt: "Send Leksi a tweet!"
-	%>.
-	Also, be in the know
-	with the latest Leksi news and announcements by
-	joining our official email list (we don't spam).
-	<%= render "static_pages/spelling_bee/mailchimp" %>
-</p>
+								title: "Send Leksi a tweet!",
+								alt: "Send Leksi a tweet!"
+		%>.
+		Also, be in the know
+		with the latest Leksi news and announcements by
+		joining our official email list (we don't spam).
+		<%= render "static_pages/spelling_bee/mailchimp" %>
+	</div>
+</div>
