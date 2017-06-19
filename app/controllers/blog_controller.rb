@@ -4,12 +4,12 @@ class BlogController < ApplicationController
 	def index
 	end
 
-	def first_harlem_spelling_bee
+	def june_19_2017_first_harlem_spelling_bee
 	end
 
-	def six_words_that_dont_mean_what_you_think
+	def june_19_2017_six_words_that_dont_mean_what_you_think
 	end
 
-	def about_our_name
+	def june_19_2017_about_our_name
 	end
 end

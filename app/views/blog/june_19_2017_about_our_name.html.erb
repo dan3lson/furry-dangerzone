@@ -1,0 +1,137 @@
+<% title "Blog: About Our Name" %>
+<% description "<description>" %>
+<% set_meta_tags keywords: %w[blog education vocabulary vocab name literacy english language dictionary words] %>
+
+<% set_meta_tags og: {
+  title: "Blog: About Our Name",
+	description: "<description>"
+} %>
+
+<% set_meta_tags twitter: {
+  card: "All the latest Leksi news, announcements, posts, and more!",
+  title: "Blog: About Our Name",
+  description: "<description>"
+} %>
+<nav class="breadcrumb mb-5">
+  <%= link_to "Home",
+              root_path,
+              class: "breadcrumb-item",
+              alt: "Go to the Home page",
+              title: "Go to the Home page"
+  %>
+  <%= link_to "Blog",
+              blog_path,
+              class: "breadcrumb-item",
+              alt: "Go to the main Blog page",
+              title: "Go to the main Blog page"
+  %>
+  <span class="breadcrumb-item active">
+    About Our Name
+  </span>
+</nav>
+<div id="blog-body">
+	<div class="blog-header">
+		<div class="container">
+			<h1 class="blog-title">The Leksi Blog</h1>
+			<p class="lead blog-description">
+				Catch up and connect with us over all things Leksi related - latest news,
+				announcements, posts, and more.
+			</p>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 blog-main">
+				<div class="blog-post">
+					<h2 class="blog-post-title">
+            <div class="float-left pr-3">
+              <%= image_tag "blog/emoji_thinking.png",
+                            class: "img-fluid img-thumbnail",
+                            width: 150,
+                            height: 150,
+                            alt: "Thinking Emoji",
+                            title: "Thinking Emoji"
+              %>
+            </div>
+						About Our Name
+					</h2>
+					<p class="blog-post-meta">June 19, 2017</p>
+          <div class="clear mb-3"></div>
+					<p>
+            So from where exactly does our name <em>Leksi</em> come?
+            As with many things in life, sometimes the answer to our question
+            is right in front of us. Take a look at the image
+            below; see anything familiar?
+					</p>
+          <p>
+            <%= image_tag "blog/leksi-about-our-name.png",
+                          class: "img-fluid img-thumbnail",
+                          alt: "Leksi Blog: About Our Name",
+                          title: "Leksi Blog: About Our Name"
+            %>
+          </p>
+          <p>
+            .
+            <br>
+            .
+            <br>
+            .
+            <br>
+            .
+            <br>
+            .
+            <br>
+            .
+            <br>
+            .
+            <br>
+            .
+            <br>
+            .
+          </p>
+          <p>
+            SPOILER ALERT: If you haven't figured it out yet, look at the
+            pronunciation of the word above, which is "lexicon". What are its
+            first five letters?
+          </p>
+          <p>
+            Yep, it's <em>leksi</em>! We wanted a name that is short
+            and catchy, but more importantly relates to vocabulary. What
+            do you think?
+          </p>
+          <%= render "blog/post_footer" %>
+				</div>
+			</div>
+			<div class="col-sm-3 offset-sm-1 blog-sidebar">
+				<div class="sidebar-module sidebar-module-inset">
+					<h4>About</h4>
+					<p>
+						We believe students should be able to
+						<em>define their future</em>. With our online Leksi app, students
+						will be able to become stronger readers and writers by completing
+						evidenced-based vocabulary activities that are highly engaging.
+				</div>
+				<div class="sidebar-module">
+					<h4>Say Hello</h4>
+					<ol class="list-unstyled">
+						<li>
+							<%= link_to "Facebook",
+														"https://www.facebook.com/LeksiEducation",
+														target: "_blank",
+														title: "Connect with the Leksi page on Facebook!",
+														alt: "Connect with the Leksi page on Facebook!"
+							%>
+						</li>
+						<li>
+							<%= link_to "Twitter", "https://twitter.com/LeksiEducation",
+													target: "_blank",
+													title: "Send Leksi a tweet!",
+													alt: "Send Leksi a tweet!"
+							%>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

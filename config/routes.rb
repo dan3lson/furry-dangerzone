@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   get "results" => "static_pages#results"
   controller :blog do
     get "blog" => :index
-    get "blog/first-harlem-spelling-bee" => :first_harlem_spelling_bee
-    get "blog/six-words-that-dont-mean-what-you-think" => :six_words_that_dont_mean_what_you_think
-    get "blog/about-our-name" => :about_our_name
+    get "blog/first-harlem-spelling-bee" => :june_19_2017_first_harlem_spelling_bee
+    get "blog/six-words-that-dont-mean-what-you-think" => :june_19_2017_six_words_that_dont_mean_what_you_think
+    get "blog/about-our-name" => :june_19_2017_about_our_name
   end
   get "feedback" => "current_users#feedback"
   get "search" => "searches#search"

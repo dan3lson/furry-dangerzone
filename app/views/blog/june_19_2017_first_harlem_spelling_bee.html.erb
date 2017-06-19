@@ -1,0 +1,218 @@
+<% title "Blog: 1st Harlem Spelling Bee on June 12, 2017 at KIPP NYC" %>
+<% description "Designed with vocabulary academic research and gamification, Leksi helps you master new words." %>
+<% set_meta_tags keywords: %w[blog kipp education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
+
+<% set_meta_tags og: {
+  title: "Blog: 1st Harlem Spelling Bee on June 12, 2017 at KIPP NYC",
+	description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "All the latest Leksi news, announcements, posts, and more!",
+  title: "Blog: 1st Harlem Spelling Bee on June 12, 2017 at KIPP NYC",
+  description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
+<nav class="breadcrumb mb-5">
+  <%= link_to "Home",
+              root_path,
+              class: "breadcrumb-item",
+              alt: "Go to the Home page",
+              title: "Go to the Home page"
+  %>
+  <%= link_to "Blog",
+              blog_path,
+              class: "breadcrumb-item",
+              alt: "Go to the main Blog page",
+              title: "Go to the main Blog page"
+  %>
+  <span class="breadcrumb-item active">
+    Recapping the First Ever Harlem Spelling Bee
+  </span>
+</nav>
+<div id="blog-body">
+	<div class="blog-header">
+		<div class="container">
+			<h1 class="blog-title">The Leksi Blog</h1>
+			<p class="lead blog-description">
+				Catch up and connect with us over all things Leksi related - latest news,
+				announcements, posts, and more.
+			</p>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 blog-main">
+				<div class="blog-post">
+					<h2 class="blog-post-title">
+            <div class="float-left pr-3">
+              <%= image_tag "blog/emoji_bee.png",
+                            class: "img-fluid img-thumbnail",
+                            width: 150,
+                            height: 150,
+                            alt: "Bee Emoji",
+                            title: "Bee Emoji"
+              %>
+            </div>
+						Recapping the First Ever Harlem Spelling Bee
+					</h2>
+					<p class="blog-post-meta">June 19, 2017</p>
+          <div class="clear mb-3"></div>
+					<p>
+						On Monday, June 12th, 2017 at the KIPP NYC Infinity Elementary school
+						located in West Harlem, we excitedly hosted the first ever Harlem
+						Spelling Bee. Because our mission is to improve students' reading and
+						writing skills specifically through vocabulary, a core piece to our
+						spelling bee competition is focused on vocabulary. We split our bee
+						into two rounds: a preliminary, qualifying round that focuses on a
+						vocabulary assessment and the Final round. The top 10
+						students who scored the highest on this vocabulary quiz became
+						Finalists, who then compete on the big stage during the actual
+						spelling portion of the competition.
+					</p>
+					<p>
+						After a nerve-wracking and thrilling competition, we'd like to once
+						again send our huge congratulations to the 2nd grade winners: Nevaeh,
+						Elim, and
+						Silver. With that said, we also applaud the other participants who
+						put forth the effort and showed their desire to compete and do their
+						best. This 1st Harlem Spelling Bee was very special and one for the
+						books; check out some pictures below.
+					</p>
+					<h2>The 2nd Harlem Spelling Bee</h2>
+					<p>
+						With that said, everyone is very much looking forward to the 2nd
+						Harlem Spelling Bee taking place Fall 2017. We'll be updating
+            the
+            <%= link_to "Harlem Spelling Bee website",
+                        spelling_bee_path,
+                        target: "_blank",
+                        title: "Leksi Harlem Spelling Bee",
+                        alt: "Leksi Harlem Spelling Bee"
+            %> soon with complete details on the 2nd Harlem Spelling Bee so
+            be sure to check back often and/or join our mailing list down below.
+            Before moving on,
+						special thanks to you, Ms. Urato, KIPP NYC Infinity Elementary, as
+						well as Ms. Hargrove and Ms. Caban from East Harlem Scholars
+						Academy, the Bee Judge Mr. Osei (a graduate from the Frederick
+            Douglass Academy high school in West Harlem),
+            Mr. Benitez/Ms. Perez, and Ms. Jacques.
+					</p>
+          <hr>
+					<div class="card mb-2">
+						<%= image_tag "blog/2017-06-19-recapping-the-first-harlem-spelling-bee/leksi-1st-HSB-1.jpg",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: Our Founder starts the Main Event.",
+													title: "1st HSB: Our Founder starts the Main Event."
+						%>
+					  <div class="card-block">
+					    <p class="card-text">
+								Our Founder walks across the stage to start our first ever
+								Harlem Spelling Bee with the eager ten Finalists ready to get
+								going.
+							</p>
+					  </div>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/2017-06-19-recapping-the-first-harlem-spelling-bee/leksi-1st-HSB-2.jpg",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: All eyes glued to the stage",
+													title: "1st HSB: All eyes glued to the stage"
+						%>
+					  <div class="card-block">
+					    <p class="card-text">
+								All eyes are glued to the stage. Some students and teachers
+								send shine towards the speller's way to cheer them on.
+							</p>
+					  </div>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/2017-06-19-recapping-the-first-harlem-spelling-bee/leksi-1st-HSB-3.jpg",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: 1st Place Winner, Nevaeh",
+													title: "1st HSB: 1st Place Winner, Nevaeh"
+						%>
+					  <div class="card-block">
+					    <p class="card-text">
+								Congratulations, Nevaeh, on your first place finish!
+							</p>
+					  </div>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/2017-06-19-recapping-the-first-harlem-spelling-bee/leksi-1st-HSB-4.jpg",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: 2nd Place Winner, Elim",
+													title: "1st HSB: 2nd Place Winner, Elim"
+						%>
+					  <div class="card-block">
+					    <p class="card-text">
+								Congratulations, Elim, on your second place finish!
+							</p>
+					  </div>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/2017-06-19-recapping-the-first-harlem-spelling-bee/leksi-1st-HSB-5.jpg",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: 3rd Place Winner, Silver",
+													title: "1st HSB: 3rd Place Winner, Silver"
+						%>
+					  <div class="card-block">
+					    <p class="card-text">
+								Congratulations, Silver, on your third place finish!
+							</p>
+					  </div>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/2017-06-19-recapping-the-first-harlem-spelling-bee/leksi-1st-HSB-6.jpg",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: Harlem, a Proud Community",
+													title: "1st HSB: Harlem, a Proud Community"
+						%>
+					</div>
+          <%= render "blog/post_footer" %>
+				</div>
+			</div>
+			<div class="col-sm-3 offset-sm-1 blog-sidebar">
+				<div class="sidebar-module sidebar-module-inset mb-3">
+					<h4>About</h4>
+					<p>
+						We believe students should be able to
+						<em>define their future</em>. With our online Leksi app, students
+						will be able to become stronger readers and writers by completing
+						evidenced-based vocabulary activities that are highly engaging.
+				</div>
+				<div class="sidebar-module sidebar-module-inset mb-3 bg-outline-success">
+					<h4><%= icon "handshake-o" %> Become a Sponsor</h4>
+					<p>
+            Whether through in-kind donations or financial contributions,
+            your support goes a long way in promoting literacy and vocabulary
+            development in the Harlem community. Please email us at
+            <%= mail_to "sponsor@harlemspellingbee.com",
+                        nil,
+                        subject: "Harlem Spelling Bee: Becoming a Sponsor"
+            %> to get started and become part of Harlem history.
+				</div>
+				<div class="sidebar-module">
+					<h4>Say Hello</h4>
+					<ol class="list-unstyled">
+						<li>
+							<%= link_to "Facebook",
+													"https://www.facebook.com/LeksiEducation",
+													target: "_blank",
+													title: "Connect with the Leksi page on Facebook!",
+													alt: "Connect with the Leksi page on Facebook!"
+							%>
+						</li>
+						<li>
+							<%= link_to "Twitter", "https://twitter.com/LeksiEducation",
+													target: "_blank",
+													title: "Send Leksi a tweet!",
+													alt: "Send Leksi a tweet!"
+							%>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
