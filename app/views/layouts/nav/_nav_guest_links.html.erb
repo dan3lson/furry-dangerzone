@@ -69,3 +69,15 @@
 							class: "nav-item nav-link"
 	%>
 <% end %>
+
+<% if controller?("blog") %>
+	<%= link_to "Blog",
+							blog_path,
+							class: "nav-item nav-link active"
+	%>
+<% else %>
+	<%= link_to "Blog",
+							blog_path,
+							class: "nav-item nav-link"
+	%>
+<% end %>

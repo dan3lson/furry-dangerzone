@@ -40,11 +40,22 @@ class School::StatsController < BaseSchoolController
                  else
                    current_user.classrooms.first
                 end
-    @most_logins = @classroom.students.most_logins.limit(10).map { |u| [u.username, u.num_logins] }
-    @least_logins = @classroom.students.least_logins.limit(10).map { |u| [u.username, u.num_logins] }
-    @sorted_time_spent = @classroom.students.sort_by { |u| u.time_spent_playing }
-    @least_time_spent = @sorted_time_spent.take(5).map { |u| [u.username, u.time_spent_playing] }
-    @most_time_spent = @sorted_time_spent.reverse.take(5).map { |u| [u.username, u.time_spent_playing] }
+    @most_logins = @classroom.students
+                             .most_logins
+                             .limit(10)
+                             .map { |u| [u.username, u.num_logins] }
+    @least_logins = @classroom.students
+                              .least_logins
+                              .limit(10)
+                              .map { |u| [u.username, u.num_logins] }
+    @sorted_time_spent = @classroom.students
+                                   .sort_by { |u| u.time_spent_playing }
+    @least_time_spent = @sorted_time_spent.take(5).map do |u|
+      [u.username, u.time_spent_playing]
+    end
+    @most_time_spent = @sorted_time_spent.reverse.take(5).map do |u|
+      [u.username, u.time_spent_playing]
+    end
 
     respond_to do |format|
       format.html

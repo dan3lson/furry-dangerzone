@@ -1,0 +1,140 @@
+<% title "Blog: Catch up and connect with us over all things Leksi related." %>
+<% description "Designed with vocabulary academic research and gamification, Leksi helps you master new words." %>
+<% set_meta_tags keywords: %w[blog education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
+
+<% set_meta_tags og: {
+  title: "Blog: Catch up and connect with us over all things Leksi related.",
+	description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "All the latest Leksi news, announcements, posts, and more!",
+  title: "Blog: Catch up and connect with us over all things Leksi related.",
+  description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
+
+<div id="blog-body">
+
+	<div class="blog-header">
+		<div class="container">
+			<h1 class="blog-title">The Leksi Blog</h1>
+			<p class="lead blog-description">
+				Catch up and connect with us over all things Leksi related - latest news,
+				announcements, posts, and more.
+			</p>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 blog-main">
+				<div class="blog-post">
+					<h2 class="blog-post-title">
+						<div class="float-left pr-3">
+							<%= image_tag "blog/emoji_bee.png",
+														class: "img-fluid img-thumbnail",
+														width: 150,
+														height: 150,
+														alt: "Bee Emoji",
+														title: "Bee Emoji"
+							%>
+						</div>
+						<%= link_to "Recapping the First Ever Harlem Spelling Bee",
+												blog_first_harlem_spelling_bee_path,
+												alt: "Recapping the First Ever Harlem Spelling Bee",
+												title: "Recapping the First Ever Harlem Spelling Bee"
+						%>
+					</h2>
+					<p class="blog-post-meta">June 20, 2017</p>
+					<p>
+						Over 150 enrolled students. 10 Finalists. 9 classrooms. 5 registered
+						schools. 3 winners. Our first Harlem Spelling Bee was very special
+						and one for the books.
+					</p>
+				</div>
+				<div class="blog-post">
+					<h2 class="blog-post-title">
+						<div class="float-left pr-3">
+							<%= image_tag "blog/word_misconceptions.png",
+														class: "img-fluid img-thumbnail",
+														width: 150,
+														height: 150,
+														alt: "Leksi Word Misconceptions",
+														title: "Leksi Word Misconceptions"
+							%>
+						</div>
+						<%= link_to "6 Words That Don\'t Mean What You Think",
+												blog_six_words_that_dont_mean_what_you_think_path,
+												alt: "6 Words That Don't Mean What You Think",
+												title: "6 Words That Don't Mean What You Think"
+						%>
+					</h2>
+					<p class="blog-post-meta">June 20, 2017</p>
+					<p>
+						How confident are you with the words you speak and write? Have
+						you used any of these six words lately and innocently done so
+						<em>incorrectly</em>? You may be surprised by what you find.
+					</p>
+				</div>
+				<div class="blog-post">
+					<h2 class="blog-post-title">
+						<div class="float-left pr-3">
+							<%= image_tag "blog/emoji_thinking.png",
+														class: "img-fluid img-thumbnail",
+														width: 150,
+														height: 150,
+														alt: "Thinking Emoji",
+														title: "Thinking Emoji"
+							%>
+						</div>
+						<%= link_to "About Our Name",
+												blog_about_our_name_path,
+												alt: "Blog: About Our Name",
+												title: "Blog: About Our Name"
+						%>
+					</h2>
+					<p class="blog-post-meta">June 20, 2017</p>
+					<p>
+						Many people have asked us, "What does the name <em>Leksi</em> mean?"
+						and "How did you come up with the name <em>Leksi</em>?" Wonder no
+						more as we spill the beans in this post.
+					</p>
+				</div>
+				<nav class="blog-pagination">
+					<a class="btn btn-outline-secondary disabled" href="#">Older</a>
+					<a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+				</nav>
+			</div>
+			<div class="col-sm-3 offset-sm-1 blog-sidebar">
+				<div class="sidebar-module sidebar-module-inset">
+					<h4>About</h4>
+					<p>
+						We believe students should be able to
+						<em>define their future</em>. With our online Leksi app, students
+						will be able to become stronger readers and writers by completing
+						evidenced-based vocabulary activities that are highly engaging.
+				</div>
+				<div class="sidebar-module">
+					<h4>Say Hello</h4>
+					<ol class="list-unstyled">
+						<li>
+							<%= link_to "Facebook",
+														"https://www.facebook.com/LeksiEducation",
+														target: "_blank",
+														title: "Connect with the Leksi page on Facebook!",
+														alt: "Connect with the Leksi page on Facebook!"
+							%>
+						</li>
+						<li>
+							<%= link_to "Twitter", "https://twitter.com/LeksiEducation",
+													target: "_blank",
+													title: "Send Leksi a tweet!",
+													alt: "Send Leksi a tweet!"
+							%>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

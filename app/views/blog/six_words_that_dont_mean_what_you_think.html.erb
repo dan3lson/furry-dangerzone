@@ -1,0 +1,139 @@
+<% title "Blog: Six Words That Dont Mean What You Think" %>
+<% description "Designed with vocabulary academic research and gamification, Leksi helps you master new words." %>
+<% set_meta_tags keywords: %w[blog education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
+
+<% set_meta_tags og: {
+  title: "Blog: Six Words That Dont Mean What You Think",
+	description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "All the latest Leksi news, announcements, posts, and more!",
+  title: "Blog: Six Words That Dont Mean What You Think",
+  description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+} %>
+<nav class="breadcrumb mb-5">
+  <%= link_to "Home",
+              root_path,
+              class: "breadcrumb-item",
+              alt: "Go to the Home page",
+              title: "Go to the Home page"
+  %>
+  <%= link_to "Blog",
+              blog_path,
+              class: "breadcrumb-item",
+              alt: "Go to the main Blog page",
+              title: "Go to the main Blog page"
+  %>
+  <span class="breadcrumb-item active">
+    6 Words That Don't Mean What You Think
+  </span>
+</nav>
+<div id="blog-body">
+	<div class="blog-header">
+		<div class="container">
+			<h1 class="blog-title">The Leksi Blog</h1>
+			<p class="lead blog-description">
+				Catch up and connect with us over all things Leksi related - latest news,
+				announcements, posts, and more.
+			</p>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 blog-main">
+				<div class="blog-post">
+					<h2 class="blog-post-title">
+						6 Words That Don't Mean What You Think
+					</h2>
+					<p class="blog-post-meta">June 20, 2017</p>
+					<p>
+						Don't worry, you're not the only one. From family members and
+            friends to co-workers and celebrities, many people incorrectly use
+            words because they think it means one thing when it actually means
+            another. Check out the six images below that we originally posted
+            as a series on our
+            Facebook
+            and
+            Twitter
+            social media pages.
+					</p>
+					<div class="card mb-2">
+						<%= image_tag "blog/leksi-word-misconception1.png",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: Our Founder starts the Main Event.",
+													title: "1st HSB: Our Founder starts the Main Event."
+						%>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/leksi-word-misconception2.png",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: All eyes glued to the stage",
+													title: "1st HSB: All eyes glued to the stage"
+						%>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/leksi-word-misconception3.png",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: 1st Place Winner, Nevaeh",
+													title: "1st HSB: 1st Place Winner, Nevaeh"
+						%>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/leksi-word-misconception4.png",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: 2nd Place Winner, Elim",
+													title: "1st HSB: 2nd Place Winner, Elim"
+						%>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/leksi-word-misconception5.png",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: 3rd Place Winner, Silver",
+													title: "1st HSB: 3rd Place Winner, Silver"
+						%>
+					</div>
+					<div class="card mb-2">
+						<%= image_tag "blog/leksi-word-misconception6.png",
+													class: "card-img-top img-fluid",
+													alt: "1st HSB: Harlem, a Proud Community",
+													title: "1st HSB: Harlem, a Proud Community"
+						%>
+					</div>
+          <%= render "blog/post_footer" %>
+				</div>
+			</div>
+			<div class="col-sm-3 offset-sm-1 blog-sidebar">
+				<div class="sidebar-module sidebar-module-inset">
+					<h4>About</h4>
+					<p>
+						We believe students should be able to
+						<em>define their future</em>. With our online Leksi app, students
+						will be able to become stronger readers and writers by completing
+						evidenced-based vocabulary activities that are highly engaging.
+				</div>
+				<div class="sidebar-module">
+					<h4>Say Hello</h4>
+					<ol class="list-unstyled">
+						<li>
+							<%= link_to "Facebook",
+														"https://www.facebook.com/LeksiEducation",
+														target: "_blank",
+														title: "Connect with the Leksi page on Facebook!",
+														alt: "Connect with the Leksi page on Facebook!"
+							%>
+						</li>
+						<li>
+							<%= link_to "Twitter", "https://twitter.com/LeksiEducation",
+													target: "_blank",
+													title: "Send Leksi a tweet!",
+													alt: "Send Leksi a tweet!"
+							%>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
