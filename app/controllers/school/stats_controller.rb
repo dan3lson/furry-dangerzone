@@ -35,26 +35,28 @@ class School::StatsController < BaseSchoolController
   # end
 
   def index
-    @classroom = if params[:classroom_id]
-                   Classroom.find(params[:classroom_id])
-                 else
-                   current_user.classrooms.first
-                end
-    @most_logins = @classroom.students
-                             .most_logins
-                             .limit(10)
-                             .map { |u| [u.username, u.num_logins] }
-    @least_logins = @classroom.students
-                              .least_logins
-                              .limit(10)
-                              .map { |u| [u.username, u.num_logins] }
-    @sorted_time_spent = @classroom.students
-                                   .sort_by { |u| u.time_spent_playing }
-    @least_time_spent = @sorted_time_spent.take(5).map do |u|
-      [u.username, u.time_spent_playing]
-    end
-    @most_time_spent = @sorted_time_spent.reverse.take(5).map do |u|
-      [u.username, u.time_spent_playing]
+    if current_user.has_students?
+      @classroom = if params[:classroom_id]
+                     Classroom.find(params[:classroom_id])
+                   else
+                     current_user.classrooms.first
+                  end
+      @most_logins = @classroom.students
+                               .most_logins
+                               .limit(10)
+                               .map { |u| [u.username, u.num_logins] }
+      @least_logins = @classroom.students
+                                .least_logins
+                                .limit(10)
+                                .map { |u| [u.username, u.num_logins] }
+      @sorted_time_spent = @classroom.students
+                                     .sort_by { |u| u.time_spent_playing }
+      @least_time_spent = @sorted_time_spent.take(5).map do |u|
+        [u.username, u.time_spent_playing]
+      end
+      @most_time_spent = @sorted_time_spent.reverse.take(5).map do |u|
+        [u.username, u.time_spent_playing]
+      end
     end
 
     respond_to do |format|

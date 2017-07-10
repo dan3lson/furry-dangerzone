@@ -1,18 +1,31 @@
 <% provide(:title, "Stats") %>
 <% provide(:header, "Stats") %>
-<div class="text-muted mb-5">
-  Filter by Classroom:
-	<% current_user.classrooms.each do |classroom| %>
-		<%= link_to school_stats_path(classroom_id: classroom.id),
-								remote: true do
-		%>
-			<span class="text-primary active">
-				<%= classroom.name %>
-			</span>
-		<% end %>
-		|
-	<% end %>
-</div>
-<div id="classroom-stats-div">
-	<%= render "school/stats/stats", classroom: @classroom %>
-</div>
+
+<% if current_user.has_students? %>
+  <div class="text-muted mb-5">
+    Filter by Classroom:
+    <% current_user.classrooms.each do |classroom| %>
+      <%= link_to school_stats_path(classroom_id: classroom.id),
+                  remote: true do
+      %>
+        <span class="text-primary active">
+          <%= classroom.name %>
+        </span>
+      <% end %>
+      |
+    <% end %>
+  </div>
+  <div id="classroom-stats-div">
+    <%= render "school/stats/stats", classroom: @classroom %>
+  </div>
+<% else %>
+  <div class="alert alert-info">
+    <%= icon "info-circle" %> Various charts and graphs will be shown here
+    once you
+    <%= link_to "create a Classroom",
+                new_school_classroom_path,
+                title: "Create a new Classroom",
+                alt: "Create a new Classroom"
+    %> and add students.
+  </div>
+<% end %>
