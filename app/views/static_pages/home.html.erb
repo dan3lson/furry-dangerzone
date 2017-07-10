@@ -24,7 +24,8 @@
       <div class="embed-responsive embed-responsive-16by9">
       	<iframe src="https://player.vimeo.com/video/213363688"
       					class="embed-responsive-item"
-      					webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      					webkitallowfullscreen mozallowfullscreen allowfullscreen>
+				</iframe>
       </div>
     </div>
   </div>
@@ -122,7 +123,7 @@
   </div>
   <p class="text-center">
     <%= link_to "Learn more",
-                "#",
+                our_approach_path,
                 class: "btn btn-outline-primary btn-lg",
                 role: "button" %>
   </p>
@@ -172,6 +173,31 @@
                 class: "btn btn-outline-primary btn-lg",
                 role: "button" %>
   </p>
+</section>
+<section class="spe-bee-top-section text-center spe-bee-yellow-bg">
+  <div class="row">
+    <div class="col-lg-3">
+      <%= image_tag(
+        "spelling-bee.png",
+        class: "mx-auto d-block",
+        width: 300,
+        height: 300
+      ) %>
+    </div>
+    <div class="col-lg-9">
+      <h4>* Leksi Presents *</h4>
+      <h1 class="display-3">2nd Harlem <br> Spelling Bee</h1>
+      <p class="lead">
+        Learn more below about this exciting event for the Harlem community.
+      </p>
+      <p class="text-center">
+        <%= link_to "Bee part of the competition",
+                    spelling_bee_path,
+                    class: "btn btn-outline-primary btn-lg",
+                    role: "button" %>
+      </p>
+    </div>
+  </div>
 </section>
 <section class="guest-section-home">
   <div class="row">

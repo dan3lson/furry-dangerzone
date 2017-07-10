@@ -4,7 +4,7 @@
 	<div class="col-md-6">
 		<div class="card mb-3">
 			<div class="card-header">
-				<%= icon "clock-o" %> Recent Activity
+				<%= icon "clock-o" %> Recent Activity Feed
 				<small class="text-muted">Last 24 Hours</small>
 			</div>
 			<div class="card-block">
@@ -13,7 +13,12 @@
 						<%= render "users/recent_activity", user: student, meta: true %>
 					<% end %>
 				<% else %>
-					<small class="text-muted">None</small>
+					<div class="alert alert-info" role="alert">
+						<%= icon "info-circle" %>
+						There isn't any recent activity. When your students add words to
+						their word list or complete any of the activities, you'll see all
+						of that here.
+					</div>
 				<% end %>
 			</div>
 		</div>
@@ -28,7 +33,12 @@
 				<% if current_user.has_unreviewed_frees? %>
 					<%= render "school/students/unreviewed_frees" %>
 				<% else %>
-					<small class="text-muted">None</small>
+					<div class="alert alert-info" role="alert">
+						<%= icon "info-circle" %>
+						There aren't any Freestyle Responses for you to review. When your
+						students complete any of the open-ended activities, you'll see their
+						responses here and be able to provide feedback.
+					</div>
 				<% end %>
 			</div>
 		</div>

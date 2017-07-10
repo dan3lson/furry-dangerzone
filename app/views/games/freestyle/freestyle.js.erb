@@ -474,7 +474,7 @@ function showContinueBtn(_class) {
 		if (isStudent == "true") {
 			var $infoIcon = createElem("i", "fa fa-info-circle");
 			var msg = " Your teacher may check your work and provide feedback.";
-			var $notice = createElem("p", "text-muted text-center")
+			var $notice = createElem("div", "alert alert-info text-center")
 										.append($infoIcon, msg);
 			$(".container").append($fixedBottom.append($notice, $contBtn));
 		} else {

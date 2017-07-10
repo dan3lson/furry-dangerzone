@@ -23,17 +23,17 @@ class Word < ActiveRecord::Base
 
   before_create { self.name = name.downcase }
 
-  # TODO: Create test
+  # TODO: Create shell test
   def num_syllables
     phonetic_spelling.split("·").count if has_syllables?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def self.search(name)
     where(name: name)
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def self.word_exists?(name)
     !search(name).empty?
   end
@@ -62,12 +62,12 @@ class Word < ActiveRecord::Base
     find(Word.pluck(:id).sample(num))
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def self.random_excluding(num, word_id)
     where.not(id: word_id).random(num)
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_pronunciation?
     url = "https://ssl.gstatic.com/dictionary/static/sounds/de/0"
     src = "#{url}/#{self.name}.mp3"
@@ -81,17 +81,17 @@ class Word < ActiveRecord::Base
     end
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_examples?
     !Example.where(word: self).blank?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_meaning_alts?
     !MeaningAlt.where(word: self).blank?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_ex_non_exs?
     !ExampleNonExample.where(word: self).blank?
   end
@@ -101,39 +101,39 @@ class Word < ActiveRecord::Base
     !phonetic_spelling.nil?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_synonyms?
     !Thesaurus.send("synonyms", name).nil?
     # !WordSynonym.where(word: self).blank?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_antonyms?
     !Thesaurus.send("antonyms", name).nil?
     # !WordAntonym.where(word: self).blank?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_syns_or_ants?
     has_synonyms? || has_antonyms?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def doesnt_have_any_syn_or_ant?
     !has_synonyms? && !has_antonyms?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_sent_stems?
     !SentStem.where(word: self).blank?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def has_describe_mes?
     !DescribeMe.where(word: self).blank?
   end
 
-  # TODO: Create test
+  # TODO: Create shell test
   def self.untagged_for(user)
     words_with_tags = user.word_tags.pluck(:word_id)
                                     .map { |word_id| Word.find(word_id) }

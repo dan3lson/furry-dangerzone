@@ -1,5 +1,5 @@
-<% provide(:title, "Classrooms") %>
-<% provide(:header, "Classrooms") %>
+<% provide(:title, "Classrooms (#{@classrooms_count})") %>
+<% provide(:header, "Classrooms (#{@classrooms_count})") %>
 <div class="mb-3">
 	<div class="float-right">
 			<%= link_to new_school_classroom_path,
@@ -20,6 +20,8 @@
 						<%= link_to classroom.name, school_classroom_path(classroom) %>
 					</h4>
 					<p class="card-text text-muted">
+						<small>Grade <%= classroom.grade %></small>
+						<br>
 						<small><%= pluralize(classroom.students.count, "student") %></small>
 					</p>
 				</div>
@@ -28,7 +30,7 @@
 	</div>
 <% else %>
 	<div class="alert alert-info" role="alert">
-		<%= icon "info-circle" %> You haven't added any classrooms yet.
-		Click the blue button above to create your first one.
+		<%= icon "info-circle" %> You haven't created any Classrooms yet.
+		Click the blue button above to get started on your first one.
 	</div>
 <% end %>

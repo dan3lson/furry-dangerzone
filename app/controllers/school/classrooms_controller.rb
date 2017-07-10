@@ -1,7 +1,7 @@
 class School::ClassroomsController < BaseSchoolController
   def index
     @classrooms = current_user.classrooms
-    @classrooms_count= @classrooms.count
+    @classrooms_count = @classrooms.count
   end
 
   def new

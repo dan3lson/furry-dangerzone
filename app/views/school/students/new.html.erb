@@ -14,9 +14,12 @@
 <div id="new-classroom-student-div">
 	<div class="card">
 		<div class="card-block">
-			<p class="card-text">
+			<div class="alert alert-info" role="alert">
+				<%= icon "info-circle" %> 
 				Use the form below to add one or more students to this class.
-			</p>
+				To create more than one user at a time, separate each username with a
+				comma, for example: <em>username1, username2, username3</em>
+			</div>
 			<%= render "school/students/form",
 								 classroom: @classroom,
 								 student: @student,

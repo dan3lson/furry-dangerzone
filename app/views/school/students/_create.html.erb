@@ -20,14 +20,14 @@
 					Success!
 					<%= pluralize(results[:successes].count, "Username") %> Created
 				</h4>
-				<p class="card-text small text-muted">
-					<%= icon "sticky-note-o" %>
-					Note: Each respective
+				<div class="alert alert-success" role="alert">
+					<%= icon "info-circle" %>
+					Each respective
 					Password will be the same as the Username with "2017" appended to it.
-					Your new students can now log into Leksi
-					(Leksi.education/login) and
+					Your new students can now log into Leksi with the link
+					<em>Leksi.education/login</em> and
 					should change their passwords upon logging in for the first time.
-				</p>
+				</div>
 				<div class="table-responsive">
 					<table class="table table-bordered table-hover">
 						<th>ID</th>
@@ -59,11 +59,12 @@
 				<h4 class="card-title">
 					Add Words for These Students (Optional)
 				</h4>
-				<p class="card-text">
+				<div class="alert alert-info" role="alert">
+					<%= icon "info-circle" %>
 					Since this classroom is for Grade <%= @classroom.grade %>,
 					do you want to add the words from this grade-list to the
 					<%= pluralize(results[:successes].count, "student") %> above?
-				</p>
+				</div>
 				<%= link_to by_grade_school_add_words_for_student_path(
 											classroom_id: @classroom,
 											new_student_ids: results[:successes].map(&:id)
@@ -77,7 +78,12 @@
 				<h4 class="card-title">
 					Create More Usernames (Optional)
 				</h4>
-				<p class="card-text">You can create more usernames below.</p>
+				<div class="alert alert-info" role="alert">
+					<%= icon "info-circle" %>
+					If you forgot to add a student to this classroom, no worries!
+					You can create more usernames below.
+				</div>
+				<p class="card-text"></p>
 				<%= render "school/students/form",
 									 classroom: @classroom,
 									 student: @student,
@@ -113,7 +119,11 @@
 				</div>
 			</div>
 			<div class="card-block">
-				<h4 class="card-title">You can try again below.</h4>
+				<div class="alert alert-danger" role="alert">
+					<%= icon "warning" %>
+					Since there was an issue creating the username above, please try again
+					below.
+				</div>
 				<%= render "school/students/form",
 									 classroom: @classroom,
 									 student: @student,

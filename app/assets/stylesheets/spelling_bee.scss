@@ -1,10 +1,43 @@
+#home-hero {
+	background: url(image-path("spelling-bee/leksi-spelling-bee-home.jpg"));
+	background-color: #000;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 40rem;
+	margin-top: -4rem;
+
+	div {
+		color: $white;
+		padding-top: 8rem;
+		text-align: center;
+	}
+}
+
 .spe-bee-top-section {
-	border-bottom: 1px solid black;
+	background-image: url(image-path("spelling-bee/leksi-mini-bee.png"));
+	background-image: url(image-path("spelling-bee/bee-trail-home.png"));
+	background-color: #FFFF00;
+	background-position: left bottom;
+	background-repeat: no-repeat;
 	padding-top: 5rem;
 	margin-bottom: 2rem;
 
 	[role="button"] {
 		margin-top: 1rem;
+	}
+
+	h2 {
+		div {
+			border-bottom: 3px solid $black;
+			margin: 0 auto;
+	    margin-bottom: 1.2rem;
+			padding-top: 0.7rem;
+			width: 4rem;
+		}
 	}
 }
 
@@ -12,12 +45,20 @@
 	color: #E03C1D;
 }
 
-.spe-bee-yellow {
+.spe-bee-yellow-bg {
 	background: #FFFF00;
 }
 
 .spee-bee-trail {
-	background-image: url(image-path("bee-trail.png"));
+	background-image: url(image-path("spelling-bee/bee-trail.png"));
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 0 0 38px 0;
+}
+
+#spe-bee-home-teachers-div {
+	background-image: url(image-path("spelling-bee/bee-trail.png"));
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;

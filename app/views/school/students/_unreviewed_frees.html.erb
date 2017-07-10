@@ -30,11 +30,6 @@
 									<div class="modal-header">
 										<h5 class="modal-title">
 											<%= stu.username %>'s Freestyle Responses
-											<br>
-											<small class="text-muted">
-													Any target words that your students used in their
-													response are highlighted.
-											</small>
 										</h5>
 										<button type="button"
 														class="close"
@@ -44,6 +39,11 @@
 										</button>
 									</div>
 									<div class="modal-body">
+										<div class="alert alert-info">
+											<%= icon "info-circle" %>
+											Any target words that your students used in their
+											response are highlighted.
+										</div>
 										<% frees.each do |f| %>
 											<div class="card mb-3">
 												<div class="card-block" data-free-id="<%= f.id %>">
@@ -62,7 +62,7 @@
 																new_status: "redo"
 															),
 															role: "button",
-															class: "btn btn-danger",
+															class: "btn btn-danger btn-block",
 															method: :patch,
 															remote: true do
 														%>
@@ -73,7 +73,7 @@
 																new_status: "pass"
 															),
 															role: "button",
-															class: "btn btn-success",
+															class: "btn btn-success btn-block",
 															method: :patch,
 															remote: true do
 														%>

@@ -6,23 +6,13 @@ class Classroom < ActiveRecord::Base
   validates :teacher, presence: true
   validates :grade, presence: true
 
-  # TODO Create test
+  # TODO Create test shell
   def has_students?
     !Student.where(classroom: self).empty?
   end
 
-  # TODO Create test
+  # TODO Create test shell
   def num_students
     students.count
-  end
-
-  def self.puts_pwds(classroom_id)
-    classroom = self.find(classroom_id)
-    puts "Classroom: #{classroom.name}"
-    puts
-    
-    classroom.students.each do |s|
-      puts "Username: #{s.username}, Password: #{s.username}2017"
-    end
   end
 end

@@ -9,12 +9,12 @@ class Student < User
     order(:username)
   end
 
-  # TODO Create test
+  # TODO Create test shell
   def has_classmates?
     !classroom.students.empty?
   end
 
-  # TODO Create test
+  # TODO Create test shell
   def classmates
     classroom.students if has_classmates?
   end

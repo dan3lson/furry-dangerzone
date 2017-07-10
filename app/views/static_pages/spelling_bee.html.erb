@@ -13,66 +13,109 @@
   description: "Learn more about the very exciting, first Harlem Spelling Bee competition."
 } %>
 
-<section class="spe-bee-top-section text-center spe-bee-yellow">
-  <div class="row">
-    <div class="col-lg-3">
-      <%= image_tag(
-        "spelling-bee.png",
-        class: "mx-auto d-block",
-        width: 300,
-        height: 300
-      ) %>
-    </div>
-    <div class="col-lg-9">
-      <h4>* Leksi Presents *</h4>
-      <h1 class="display-3">1<sup>st</sup> Annual <br>Harlem Spelling Bee</h1>
-      <p class="lead">
-        Learn more below about this exciting event for the Harlem community.
-      </p>
-      <div id="row">
-        <div class="col-md-6 offset-md-3">
-          <%= render "static_pages/spelling_bee/mailchimp" %>
-        </div>
+<section id="home-hero">
+  <div>
+    <h4>* Leksi Presents *</h4>
+    <h1 class="display-2">Harlem Spelling Bee</h1>
+    <p class="lead mt-4">
+      The 2nd Bee is in the works! Learn more below.
+    </p>
+  </div>
+</section>
+<section class="spe-bee-top-section text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <%#= image_tag(
+          "spelling-bee.png",
+          width: 300,
+          height: 300
+        ) %>
+        <h2>About the Bee<div></div></h2>
+        <p class="lead">
+          This exciting event is a first of its kind for the entire Harlem
+          community. The
+          <%= link_to "inaugural Harlem Spelling Bee",
+                      blog_first_harlem_spelling_bee_path,
+                      alt: "Recapping the First Ever Harlem Spelling Bee",
+                      title: "Recapping the First Ever Harlem Spelling Bee"
+          %>
+          was held in June 2017 at a KIPP NYC school, where 10 Finalists, out of
+          150 enrolled students from 5 registered schools, competed to become
+          the first Harlem Spelling Bee champs.
+        </p>
+          <%= link_to "Learn more",
+                      "#",
+                      class: "btn btn-outline-primary btn-lg",
+                      role: "button",
+                      alt: "Learn more about the Harlem Spelling Bee",
+                      title: "Learn more about the Harlem Spelling Bee"
+          %>
+        </p>
       </div>
     </div>
   </div>
 </section>
-<section class="spee-bee-trail">
-  <div class="row text-center spe-bee-redange">
-    <div class="col-md-4">
-      <div class="card mb-3">
-        <div class="card-block">
-          <h2><i class="fa fa-calendar"></i>
-             When
-             <br>
-             <small>
-               Monday, June 12<sup>th</sup>, 2017
-             </small>
-          </h2>
+<section>
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-block">
+            <h1 class="spe-bee-redange">
+              <%= icon "user-circle" %>
+              Teachers
+            </h1>
+            <p>
+              Continue helping your students reach their fullest potential.
+            </p>
+            <%= link_to "Enroll today",
+                        "#",
+                        role: "button",
+                        class: "btn btn-primary btn-lg",
+                        alt: "Support the Harlem Spelling Bee",
+                        title: "Support the Harlem Spelling Bee"
+            %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card mb-3">
-        <div class="card-block">
-          <h2><i class="fa fa-globe"></i>
-             Where
-             <br>
-             <small>
-               KIPP NYC
-             </small>
-          </h2>
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-block">
+            <h1 class="spe-bee-redange">
+              <%= icon "globe" %> Parents
+            </h1>
+            <p>
+              Introduce your children to a world of words and opportunities.
+            </p>
+            <%= link_to "Learn more",
+                        "#",
+                        role: "button",
+                        class: "btn btn-primary btn-lg",
+                        alt: "Support the Harlem Spelling Bee",
+                        title: "Support the Harlem Spelling Bee"
+            %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card mb-3">
-        <div class="card-block">
-          <h2><i class="fa fa-money"></i>
-             Cost
-             <br>
-             <small>Free</small>
-          </h2>
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-block">
+            <h1 class="spe-bee-redange">
+              <%= icon "handshake-o" %> Sponsors
+            </h1>
+            <p>
+              Play a leading role towards a more educated and economically sound
+              Harlem.
+            </p>
+            <%= link_to "Support the Bee",
+                        "#",
+                        role: "button",
+                        class: "btn btn-primary btn-lg",
+                        alt: "Support the Harlem Spelling Bee",
+                        title: "Support the Harlem Spelling Bee"
+            %>
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <% provide(:title, "Stats") %>
 <% provide(:header, "Stats") %>
 <div class="text-muted mb-5">
-  Filter:
+  Filter by Classroom:
 	<% current_user.classrooms.each do |classroom| %>
 		<%= link_to school_stats_path(classroom_id: classroom.id),
 								remote: true do
