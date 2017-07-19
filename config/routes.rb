@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root "static_pages#home"
   get "about_us" => "static_pages#about_us"
   get "research" => "static_pages#research"
-  get "spelling-bee" => "static_pages#spelling_bee"
   get "our_approach" => "static_pages#our_approach"
   get "results" => "static_pages#results"
   controller :blog do
@@ -10,6 +9,15 @@ Rails.application.routes.draw do
     get "blog/first-harlem-spelling-bee" => :june_19_2017_first_harlem_spelling_bee
     get "blog/six-words-that-dont-mean-what-you-think" => :june_19_2017_six_words_that_dont_mean_what_you_think
     get "blog/about-our-name" => :june_19_2017_about_our_name
+  end
+  controller :spelling_bee do
+    get "spelling-bee" => :index
+    get "spelling-bee/about" => :about
+    get "spelling-bee/competition" => :competition
+    get "spelling-bee/teachers" => :teachers
+    get "spelling-bee/parents" => :parents
+    get "spelling-bee/sponsors" => :sponsors
+    get "spelling-bee/contact-us" => :contact_us
   end
   get "feedback" => "current_users#feedback"
   get "search" => "searches#search"

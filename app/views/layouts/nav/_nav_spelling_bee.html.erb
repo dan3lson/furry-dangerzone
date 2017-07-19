@@ -8,7 +8,21 @@
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <h1 class="navbar-brand mb-0">Harlem Spelling Bee</h1>
+  <%= link_to spelling_bee_path,
+      class: "navbar-brand",
+      title: "Harlem Spelling Bee homepage",
+      alt: "Harlem Spelling Bee homepage" do
+  %>
+    <%= image_tag(
+      "spelling-bee.png",
+      alt: "Leksi Bee Mascot",
+      title: "Leksi Harlem Spelling Bee Homepage",
+      width: 30,
+      height: 30,
+      class: "d-inline align-top")
+    %>
+    Harlem Spelling Bee
+  <% end %>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <div class="navbar-nav mr-auto">
       <%= render "layouts/nav/nav_spelling_bee_links" %>

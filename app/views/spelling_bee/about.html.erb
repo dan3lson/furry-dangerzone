@@ -1,0 +1,110 @@
+<% title "Harlem Spelling Bee - Learn about our History, Mission, and the Competition itself." %>
+<% description "Promoting literacy and education in Harlem, we have high hopes for our students and exciting Bee competitions." %>
+<% set_meta_tags keywords: %w[harlem spelling bee competition fun schools about history education vocabulary vocab literacy english language study dictionary words games notebook] %>
+
+<% set_meta_tags og: {
+  title: "Promoting literacy and education in Harlem, we have high hopes for our students and exciting Bee competitions.",
+	description: "Designed with academic vocabulary research and gamification, Leksi helps students master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Which Harlem school students will become spelling bee champs?",
+  title: "Promoting literacy and education in Harlem, we have high hopes for our students and exciting Bee competitions.",
+  description: "It just takes one word to lead a lifetime of learning and growth."
+} %>
+
+<div class="container">
+  <h1 class="display-4 spe-bee-redange mb-5">
+    <%= icon "info-circle" %>
+    About the Bee
+  </h1>
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">Our first Bee is in the books.
+        <span class="text-muted">And it's just the beginning.</span>
+      </h2>
+      <p class="lead">
+        In June 2017, we held the inaugural Harlem Spelling Bee at KIPP NYC
+        Infinity Elementary school in West Harlem. By the numbers:
+        over 150 enrolled students; 10 Finalists; 9 classrooms; 5 registered
+        schools; 3 winners. Now that our first Bee is history, we excitedly
+        look forward to all of the future Bee competitions
+        and the impact they have in Harlem.
+        <%= link_to "Read about the first Harlem Spelling Bee on our Blog",
+                    blog_first_harlem_spelling_bee_path,
+                    title: "Read about the first Harlem Spelling Bee."
+        %>.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-fluid mx-auto img-thumbnail"
+           src="<%= asset_path('spelling-bee/leksi-about-the-bee-inaugural-winners.png') %>"
+           alt="Generic placeholder image">
+    </div>
+  </div>
+  <hr class="featurette-divider">
+  <div class="row featurette">
+    <div class="col-md-7 push-md-5">
+      <h2 class="featurette-heading">Our mission.
+        <span class="text-muted">Our purpose.</span>
+      </h2>
+      <p class="lead">
+        We want to close the word gap for Harlem students and strongly believe
+        that promoting literacy and education, specifically vocabulary
+        development, will help lead the way.
+        <%= link_to "Read more about the huge importance of vocabulary.",
+                    blog_first_harlem_spelling_bee_path,
+                    title: "Read more about the huge importance of vocabulary."
+        %>.
+      </p>
+    </div>
+    <div class="col-md-5 pull-md-7">
+      <img class="featurette-image img-fluid mx-auto img-thumbnail"
+           src="<%= asset_path('spelling-bee/leksi-our-mission.jpg') %>"
+           alt="Generic placeholder image">
+    </div>
+  </div>
+  <hr class="featurette-divider">
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">Our goals.
+        <span class="text-muted">
+          Achieving these together, one word at a time.
+        </span>
+      </h2>
+      <p class="lead">
+        Our spelling bee competition fosters a fun learning environment
+        that improves students' reading and writing skills. One goal that we
+        have is for the winners of the Harlem Spelling Bee to not only compete
+        in the National Spelling Bee, but win it all.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-fluid mx-auto img-thumbnail"
+           src="<%= asset_path('spelling-bee/leksi-our-goals.jpg') %>"
+           alt="Generic placeholder image">
+    </div>
+  </div>
+  <hr class="featurette-divider">
+  <div class="row featurette">
+    <div class="col-md-7 push-md-5">
+      <h2 class="featurette-heading">The Competition.
+        <span class="text-muted">Where there's a will, there's a way.</span>
+      </h2>
+      <p class="lead">
+        Before reaching the Main Event's big stage, students must prepare
+        for and outscore their peers on Leksi's grade-specific Local
+        School Competition.
+        <%= link_to "Learn about all the details.",
+                    spelling_bee_competition_path,
+                    title: "6 Words That Don't Mean What You Think"
+        %>
+      </p>
+    </div>
+    <div class="col-md-5 pull-md-7">
+      <img class="featurette-image img-fluid mx-auto img-thumbnail"
+           src="<%= asset_path('spelling-bee/leksi-about-the-bee-the-competition.jpg') %>"
+           alt="Generic placeholder image">
+    </div>
+  </div>
+</div>

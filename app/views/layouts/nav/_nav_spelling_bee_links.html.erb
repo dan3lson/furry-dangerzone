@@ -1,59 +1,59 @@
-<% if action?("about_us") %>
+<% if controller?("spelling_bee") && action?("about") %>
 	<%= link_to "About the Bee",
-							about_us_path,
+							spelling_bee_about_path,
 							class: "nav-item nav-link active"
 	%>
 <% else %>
 	<%= link_to "About the Bee",
-							about_us_path,
+							spelling_bee_about_path,
 							class: "nav-item nav-link"
 	%>
 <% end %>
 
-<% if action?("home") %>
+<% if controller?("spelling_bee") && action?("competition") %>
 	<%= link_to "Competition",
-							root_path,
+							spelling_bee_competition_path,
 							class: "nav-item nav-link active"
 	%>
 <% else %>
 	<%= link_to "Competition",
-							root_path,
+							spelling_bee_competition_path,
 							class: "nav-item nav-link"
 	%>
 <% end %>
 
-<% if action?("home") %>
+<% if controller?("spelling_bee") && action?("teachers") %>
 	<%= link_to "Teachers",
-							root_path,
+							spelling_bee_teachers_path,
 							class: "nav-item nav-link active"
 	%>
 <% else %>
 	<%= link_to "Teachers",
-							root_path,
+							spelling_bee_teachers_path,
 							class: "nav-item nav-link"
 	%>
 <% end %>
 
-<% if action?("home") %>
+<% if controller?("spelling_bee") && action?("parents") %>
 	<%= link_to "Parents",
-							root_path,
+							spelling_bee_parents_path,
 							class: "nav-item nav-link active"
 	%>
 <% else %>
 	<%= link_to "Parents",
-							root_path,
+							spelling_bee_parents_path,
 							class: "nav-item nav-link"
 	%>
 <% end %>
 
-<% if action?("home") %>
+<% if controller?("spelling_bee") && action?("sponsors") %>
 	<%= link_to "Sponsors",
-							root_path,
+							spelling_bee_sponsors_path,
 							class: "nav-item nav-link active"
 	%>
 <% else %>
 	<%= link_to "Sponsors",
-							root_path,
+							spelling_bee_sponsors_path,
 							class: "nav-item nav-link"
 	%>
 <% end %>
@@ -66,6 +66,18 @@
 <% else %>
 	<%= link_to "Blog",
 							blog_path,
+							class: "nav-item nav-link"
+	%>
+<% end %>
+
+<% if controller?("spelling_bee") && action?("contact_us") %>
+	<%= link_to "Contact Us",
+							spelling_bee_contact_us_path,
+							class: "nav-item nav-link active"
+	%>
+<% else %>
+	<%= link_to "Contact Us",
+							spelling_bee_contact_us_path,
 							class: "nav-item nav-link"
 	%>
 <% end %>

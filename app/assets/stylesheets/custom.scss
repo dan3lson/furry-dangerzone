@@ -1,3 +1,9 @@
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 //**********
 //*
 //* A-Z
@@ -31,12 +37,6 @@ a, a:active {
 	word-break: break-word;
 }
 
-.class-default-image {
-	background-image: url(image-path("classes_color_100.png"));
-	height: 100px;
-	width: 100px;
-}
-
 .clear {
 	clear: both;
 }
@@ -54,6 +54,7 @@ a, a:active {
   float: left;
   margin-top: 45px;
   width: 100%;
+	@include box_sizing;
 }
 
 .text-white a {
@@ -65,7 +66,7 @@ a, a:active {
 	&:hover {
 		color: $white;
 	}
-	
+
 	&:active {
 	}
 }

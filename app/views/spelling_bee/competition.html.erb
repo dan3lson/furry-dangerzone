@@ -1,0 +1,209 @@
+<% title "Harlem Spelling Bee - Learn about our History, Mission, and the Competition itself." %>
+<% description "Promoting literacy and education in Harlem, we have high hopes for our students and exciting Bee competitions." %>
+<% set_meta_tags keywords: %w[harlem spelling bee competition fun schools about history education vocabulary vocab literacy english language study dictionary words games notebook] %>
+
+<% set_meta_tags og: {
+  title: "Promoting literacy and education in Harlem, we have high hopes for our students and exciting Bee competitions.",
+	description: "Designed with academic vocabulary research and gamification, Leksi helps students master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Which Harlem school students will become spelling bee champs?",
+  title: "Promoting literacy and education in Harlem, we have high hopes for our students and exciting Bee competitions.",
+  description: "It just takes one word to lead a lifetime of learning and growth."
+} %>
+<div class="container">
+  <h1 class="display-4 spe-bee-redange mb-5">
+    <%= icon "trophy" %>
+    Competition
+  </h1>
+</div>
+<div class="competition jumbotron mb-3">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">
+        <small class="text-muted">Round 1</small>
+        <br>
+        Local School Competition
+      </h1>
+      <p class="lead">
+        This is an online exam that tests students' vocabulary. Each
+        registered school will have what's known as a "Local School competition"
+        to determine which students make it to the finals or
+        <em>Main Event</em>. The students who score the highest on this test
+        from each grade within each school will become <em>Finalists</em>.
+      </p>
+    </div>
+    <div class="col-md-8 offset-md-2">
+      <hr class="featurette-divider">
+      <h1 class="display-4">
+        <small class="text-muted">Round 2</small>
+        <br>
+        Main Event
+      </h1>
+      <p class="lead mb-5">
+        This is the actual on-stage, spelling portion of the
+        Bee also known as the "Main Event". It will excitedly determine the top
+        three winners per grade, who spell their way to victory one letter
+        at a time.
+      </p>
+      <%= link_to "#",
+                  role: "button",
+                  title: "See more Harlem Spelling Bee Competition details",
+                  class: "btn btn-outline-secondary mt-5 disabled" do %>
+        <%= icon "long-arrow-down" %>
+        see more details
+        <%= icon "long-arrow-down" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row marketing">
+    <div class="col-lg-6">
+      <h4><%= emoji "video_game" %> Leksi</h4>
+      <p>
+        The online app that students and teachers use for the Harlem Spelling
+        Bee:
+        <ul>
+          <li>
+            Students not only use it to practice for the Bee by completing
+            vocabulary and spelling games, but it's also where they take the
+            Local School Competition
+          </li>
+          <li>
+            Teachers will use Leksi to create classrooms and student accounts,
+            provide support, and track progress
+          </li>
+        </ul>
+      </p>
+      <h4><%= emoji "book" %> Words</h4>
+      <p>
+        Each grade from one (1) through eight (8) has 100 spelling bee
+        words. All words are grouped by grade and can be found within the Leksi
+        app and in the resource section for teachers/coordinators.
+      </p>
+      <p>
+        In terms of the Main Event, if all 100 words are used for a given grade,
+        the next grade's words will be used.
+      </p>
+      <h4><%= emoji "muscle" %> Preparation</h4>
+      <p>
+        Using Leksi, an online tool that helps students improve their reading
+        and writing skills, students will build vocabulary and sharpen
+        spelling skills. Other
+        tools exist that might help like vocabulary.com, Quizlet, or traditional
+        methods like flashcards.
+      </p>
+      <h4><%= emoji "clipboard" %> Tips and Tricks</h4>
+      <p>
+        The National Spelling Bee has a great guide so be sure to check it out:
+        <%= link_to "How to Study for a Spelling Bee",
+                    "http://spellingbee.com/sites/default/files/inline-files/How%20to%20Study%20for%20a%20Spelling%20Bee.pdf",
+                    target: "_blank"
+        %>.
+      </p>
+    </div>
+    <div class="col-lg-6">
+      <h4><%= emoji "door" %> Registration</h4>
+      <p>
+        To enter the 2nd Harlem Spelling Bee, a teacher/coordinator has to
+        enroll their school. There are three different enrollment periods,
+        i.e. Early-bird, Regular, and Late, when the teacher/coordinator can
+        register. See the Timeline section below for the exact dates.
+      </p>
+      <h4><%= emoji "moneybag" %> Cost</h4>
+      <p>
+        <ul>
+          <li>Early Bird Enrollment: $45 per classroom</li>
+          <li>Regular Enrollment: $60 per classroom</li>
+          <li>Late Enrollment: $75 per classroom</li>
+          <li>School-wide Enrollment: please contact us</li>
+        </ul>
+      </p>
+      <h4><%= emoji "trophy" %> Prizes</h4>
+      <p>
+        The winners for each grade level will indeed receive prizes.
+        All active participants will receive medals for their effort and courage
+        in preparing for and competing in this big event.
+      </p>
+      <h4><%= emoji "clock3" %> Timeline</h4>
+      <div class="activity-feed">
+        <%= render "shared/activity_feed_item",
+                   title: "Early Bird Enrollment",
+                   date: "Monday, August 21st, 2017",
+                   text: ""
+        %>
+        <%= render "shared/activity_feed_item",
+                   title: "Regular Enrollment",
+                   date: "Monday, September 11th, 2017",
+                   text: ""
+        %>
+        <%= render "shared/activity_feed_item",
+                   title: "Late Enrollment Begins",
+                   date: "Friday, October 6th, 2017",
+                   text: ""
+        %>
+        <%= render "shared/activity_feed_item",
+                   title: "2nd Harlem Spelling Bee Officially Begins",
+                   date: "Monday, October 9th, 2017",
+                   text: [
+                     "This marks the beginning of the competition. All ",
+                     "students and teachers/coordinators can begin using the",
+                     "online Leksi app to study and prepare for their ",
+                     "Local School Competition."
+                   ].join
+        %>
+        <%= render "shared/activity_feed_item",
+                   title: "Local School Competitions",
+                   date: "Monday, October 30th - Friday, November 3rd 2017",
+                   text: [
+                     "These will determine which students advance to the next ",
+                     "and final round, i.e. Main Event."
+                   ].join
+        %>
+        <%= render "shared/activity_feed_item",
+                   title: "Main Event Finalists Announced",
+                   date: "Monday, November 10th, 2017",
+                   text: [
+                     "We will inform all schools which students have made it ",
+                     "to the Main Event."
+                   ].join
+        %>
+        <%= render "shared/activity_feed_item",
+                   title: "Main Event",
+                   date: "Thursday, November 16th, 2017",
+                   text: [
+                     "This is what everyone has been waiting for - the ",
+                     "actual on-stage spelling portion of the competition."
+                   ].join
+        %>
+      </div>
+    </div>
+  </div>
+  <section class="spee-bee-about-section text-center spe-bee-yellow-bg">
+    <div class="row">
+      <div class="col-lg-3">
+        <%= image_tag(
+          "spelling-bee.png",
+          class: "mx-auto d-block",
+          width: 300,
+          height: 300
+        ) %>
+      </div>
+      <div class="col-lg-9">
+        <h4><%= icon "star" %> 2nd Harlem Spelling Bee <%= icon "star" %></h4>
+        <h1 class="display-3">Enroll soon</h1>
+        <p class="lead">
+          Early-bird registration will start on Monday, August 21st, 2017.
+        </p>
+        <p class="text-center">
+          <%#= link_to "Enroll your school",
+                      spelling_bee_path,
+                      class: "btn btn-primary btn-lg disabled",
+                      role: "button" %>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

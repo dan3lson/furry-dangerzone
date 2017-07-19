@@ -1,24 +1,24 @@
 $(document).ready(function() {
-	$(".spe-bee-nav").click(function(e) {
-		e.preventDefault();
-		var sectionName = $(this).text().trim();
-		var section = $(".spe-bee-section").filter(function() {
-			return $(this).find("h1").text().trim() == sectionName;
-		});
-
-		switch (sectionName) {
-			case "Students":
-				scrollToSection(section);
-				break;
-			case "Teachers":
-				scrollToSection(section);
-				break;
-			case "Sponsors":
-				scrollToSection(section);
-				break;
-			default: "Students"
-		}
-	});
+	// $(".spe-bee-nav").click(function(e) {
+	// 	e.preventDefault();
+	// 	var sectionName = $(this).text().trim();
+	// 	var section = $(".spe-bee-section").filter(function() {
+	// 		return $(this).find("h1").text().trim() == sectionName;
+	// 	});
+	//
+	// 	switch (sectionName) {
+	// 		case "Students":
+	// 			scrollToSection(section);
+	// 			break;
+	// 		case "Teachers":
+	// 			scrollToSection(section);
+	// 			break;
+	// 		case "Sponsors":
+	// 			scrollToSection(section);
+	// 			break;
+	// 		default: "Students"
+	// 	}
+	// });
 
 	$(".spe-bee-contact-us").click(function(e) {
 		e.preventDefault();

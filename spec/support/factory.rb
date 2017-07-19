@@ -9,6 +9,29 @@ FactoryGirl.define do
     login_history "Sat, 06 Aug 1988 00:00:00 +0000"
   end
 
+  factory :teacher do
+    sequence(:username) { |n| "teacher#{n}" }
+    type "Teacher"
+    password "password"
+    password_confirmation "password"
+    sequence(:email) { |n| "teacher#{n}@foo.com" }
+    num_logins 1
+    login_history "Sat, 06 Aug 1988 00:00:00 +0000"
+  end
+
+  factory :student do
+    sequence(:username) { |n| "student#{n}" }
+    type "Student"
+    password "password"
+    password_confirmation "password"
+    sequence(:email) { |n| "student#{n}@foo.com" }
+    num_logins 1
+    login_history "Sat, 06 Aug 1988 00:00:00 +0000"
+
+    teacher
+    classroom
+  end
+
   factory :word do
     sequence(:name) { |n| "chess #{n}" }
     phonetic_spelling "/tʃes/"
@@ -60,5 +83,12 @@ FactoryGirl.define do
 
     word
     user
+  end
+
+  factory :classroom do
+    sequence(:name) { |n| "Classroom#{n}" }
+    grade 8
+
+    teacher
   end
 end

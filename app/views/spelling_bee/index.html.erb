@@ -1,0 +1,118 @@
+<% title "Harlem Spelling Bee - Promoting literacy and education in the Harlem community." %>
+<% description "Learn more about the very exciting Harlem Spelling Bee competition." %>
+<% set_meta_tags keywords: %w[harlem spelling bee competition fun schools education vocabulary vocab literacy english language study dictionary words games notebook] %>
+
+<% set_meta_tags og: {
+  title: "Learn more about the very exciting Harlem Spelling Bee competition.",
+	description: "Designed with academic vocabulary research and gamification, Leksi helps students master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Which Harlem school students will become spelling bee champs?",
+  title: "Learn more about the very exciting Harlem Spelling Bee competition.",
+  description: "Learn more about the very exciting, first Harlem Spelling Bee competition."
+} %>
+
+<section id="spe-bee-index-hero">
+  <div>
+    <h4><%= icon "star" %> Leksi Presents <%= icon "star" %></h4>
+    <h1 class="display-2">Harlem Spelling Bee</h1>
+    <h4 class="mt-4 ">
+      See what the buzz is about below and get ready for our 2nd Bee!
+    </h4>
+  </div>
+</section>
+<section class="spee-bee-about-section text-center">
+  <div class="container pb-5">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h2>About the Bee<div></div></h2>
+        <p class="lead">
+          This exciting event is a first of its kind for the entire Harlem
+          community. The inaugural Harlem Spelling Bee
+          was held in June 2017 at a KIPP NYC school, where 10 Finalists, out of
+          150 enrolled students from 5 registered schools, competed to become
+          the first Harlem Spelling Bee champs.
+        </p>
+          <%= link_to "History and Mission",
+                      spelling_bee_about_path,
+                      class: "btn btn-outline-primary btn-lg",
+                      role: "button",
+                      title: "Learn more about the history and mission."
+          %>
+          <%= link_to "Competition Details",
+                      spelling_bee_competition_path,
+                      class: "btn btn-outline-primary btn-lg",
+                      role: "button",
+                      title: "Learn more about the Competition."
+          %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="pt-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="card mb-5">
+          <div class="card-block">
+            <h1 class="spe-bee-redange">
+              <%= icon "user-circle" %>
+              Teachers
+            </h1>
+            <p>
+              Continue helping your students reach their fullest potential.
+            </p>
+            <%= link_to "Enroll today",
+                        spelling_bee_teachers_path,
+                        role: "button",
+                        class: "btn btn-primary btn-lg",
+                        alt: "Support the Harlem Spelling Bee",
+                        title: "Support the Harlem Spelling Bee"
+            %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-5">
+          <div class="card-block">
+            <h1 class="spe-bee-redange">
+              <%= icon "globe" %> Parents
+            </h1>
+            <p>
+              Introduce your children to a world of words and opportunities.
+            </p>
+            <%= link_to "Learn more",
+                        spelling_bee_parents_path,
+                        role: "button",
+                        class: "btn btn-primary btn-lg",
+                        alt: "Join the Harlem Spelling Bee",
+                        title: "Join the Harlem Spelling Bee"
+            %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-block">
+            <h1 class="spe-bee-redange">
+              <%= icon "handshake-o" %> Sponsors
+            </h1>
+            <p>
+              Play a leading role towards a more literate and educated
+              Harlem.
+            </p>
+            <%= link_to "Support the Bee",
+                        spelling_bee_sponsors_path,
+                        role: "button",
+                        class: "btn btn-primary btn-lg",
+                        alt: "Support the Harlem Spelling Bee",
+                        title: "Support the Harlem Spelling Bee"
+            %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

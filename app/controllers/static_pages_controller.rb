@@ -31,10 +31,4 @@ class StaticPagesController < ApplicationController
 
   def results
   end
-
-  def spelling_bee
-    flash[:success] = "We\'re updating the Harlem Spelling Bee site. Stay tuned!"
-    redirect_to blog_first_harlem_spelling_bee_path
-    # render layout: "application_spelling_bee"
-  end
 end

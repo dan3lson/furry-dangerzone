@@ -1,0 +1,96 @@
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: .05rem solid #e5e5e5;
+}
+.competition.jumbotron {
+  background: url(image-path("spelling-bee/competition-bee-swarm.jpg"));
+  background-color: default;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-bottom: .05rem solid #e5e5e5;
+  text-align: center;
+
+  .display-4 {
+    color: $white;
+    font-weight: bold;
+
+    small {
+      color: antiquewhite !important;
+    }
+  }
+
+  .lead {
+    color: $white;
+  }
+
+  hr {
+    border-color: $white;
+  }
+}
+
+.teachers.jumbotron {
+  background: url(image-path("spelling-bee/teachers-jumbotron.jpg"));
+  background-color: default;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-bottom: .05rem solid #e5e5e5;
+
+  text-align: center;
+
+  .display-4 {
+    color: $white;
+    font-weight: bold;
+    background: rgba(0, 0, 0, .5);
+
+    small {
+      color: antiquewhite !important;
+    }
+  }
+
+  hr {
+    border-color: $white;
+  }
+
+  .lead {
+    color: $white;
+    background: rgba(0, 0, 0, .5);
+  }
+}
+.jumbotron .btn {
+  padding: .75rem 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 3rem 0;
+}
+.marketing p + h4 {
+  margin-top: 1.5rem;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 48em) {
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}

@@ -1,0 +1,36 @@
+<% title "Harlem Spelling Bee - Promoting literacy and education in the Harlem community." %>
+<% description "See how you can continue helping your students reach their full potential." %>
+<% set_meta_tags keywords: %w[harlem spelling bee competition fun schools education vocabulary vocab literacy english language study dictionary words games notebook] %>
+
+<% set_meta_tags og: {
+  title: "See how you can continue helping your students reach their full potential.",
+	description: "Designed with academic vocabulary research and gamification, Leksi helps students master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Which Harlem school students will become spelling bee champs?",
+  title: "See how you can continue helping your students reach their full potential.",
+  description: "It just takes one word to lead a lifetime of learning and growth."
+} %>
+
+<div class="container">
+  <h1 class="display-4 spe-bee-redange mb-5">
+    <%= icon "globe" %>
+    Parents
+  </h1>
+  <p>
+    Help your students reach their fullest potential by enrolling in the
+    2nd Harlem Spelling Bee.
+  </p>
+  <%= render "spelling_bee/spelling_bee/questions_parents" %>
+  <section class="spe-bee-enroll">
+    <div class="card card-inverse card-primary mb-3 text-center">
+      <div class="card-block">
+        <h1>Enroll Your Students</h1>
+        <p>
+          It just takes one word to lead a lifetime of learning and growth.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

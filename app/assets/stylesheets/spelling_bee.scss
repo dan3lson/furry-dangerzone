@@ -1,14 +1,15 @@
-#home-hero {
+#spe-bee-index-hero {
 	background: url(image-path("spelling-bee/leksi-spelling-bee-home.jpg"));
 	background-color: #000;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+	background-attachment: fixed;
 	background-position: center center;
 	background-repeat: no-repeat;
 	height: 40rem;
-	margin-top: -4rem;
+	margin-top: -6rem;
 
 	div {
 		color: $white;
@@ -17,8 +18,7 @@
 	}
 }
 
-.spe-bee-top-section {
-	background-image: url(image-path("spelling-bee/leksi-mini-bee.png"));
+.spee-bee-about-section {
 	background-image: url(image-path("spelling-bee/bee-trail-home.png"));
 	background-color: #FFFF00;
 	background-position: left bottom;

@@ -11,17 +11,14 @@ class Teacher < User
     !Student.where(teacher: self).empty?
   end
 
-  # TODO Create test shell
   def has_classroom?(classroom)
     !classrooms.where(name: classroom.name).empty?
   end
 
-  # TODO Create test shell
   def has_classrooms?
     !Classroom.where(teacher: self).empty?
   end
 
-  # TODO Create test shell
   def has_classroom_activity?
     students = Student.where(teacher: self)
     has_classrooms? ? students.any? { |s| s.has_recent_activity? } : false

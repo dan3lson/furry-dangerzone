@@ -1,6 +1,6 @@
 <footer class="footer static text-center mt-5 bg-faded">
 	<div class="row text-muted mt-5">
-		<div class="col-md-4 mb-3">
+		<div class="col-md-4 mb-5">
 			<div>
 				<h5 class="mb-5">As featured in...</h5>
 				<div>
@@ -14,19 +14,53 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<h5 class="mb-5">Socialize with us on...</h5>
-			<%= link_to "https://www.facebook.com/LeksiEducation",
-									target: "_blank",
-									alt: "Leksi on Facebook",
-									title: "Leksi on Facebook" do
+		<div class="col-md-4 mb-5">
+			<h5 class="mb-5">Talk to Us!</h5>
+			<%= link_to spelling_bee_contact_us_path,
+									title: "Contact Leksi via our online form." do
 			%>
-				<i class="fa fa-facebook fa-3x"></i>
+				<%= icon "envelope fa-3x" %>
 			<% end %>
 			&nbsp;
-			<%= link_to "https://twitter.com/LeksiEducation", target: "_blank" do %>
-				<i class="fa fa-twitter fa-3x"></i>
+			<%= link_to "https://www.facebook.com/LeksiEducation",
+									title: "Say hello to Leksi on Facebook!",
+									target: "_blank" do
+			%>
+				<%= icon "facebook fa-3x" %>
 			<% end %>
+			&nbsp;
+			<%= link_to "https://twitter.com/LeksiEducation",
+									title: "Say hello to Leksi on Twitter",
+									target: "_blank" do
+			%>
+				<%= icon "twitter fa-3x" %>
+			<% end %>
+			&nbsp;
+			<%= link_to "https://www.linkedin.com/company-beta/9219103/",
+									title: "Connect with Leksi via LinkedIn" do
+			%>
+				<%= icon "linkedin fa-3x" %>
+			<% end %>
+		</div>
+		<div class="col-md-4 mb-5">
+			<h5 class="mb-5">The Legal Stuff...</h5>
+				<%= link_to "Legal Notice",
+										"https://www.facebook.com/LeksiEducation",
+										target: "_blank",
+										title: "Leksi Legal Notice"
+				%>
+				<br>
+				<%= link_to "Privacy Policy",
+										"https://www.facebook.com/LeksiEducation",
+										target: "_blank",
+										title: "Leksi Privacy Policy"
+				%>
+				<br>
+				<%= link_to "User Agreement",
+										"https://www.facebook.com/LeksiEducation",
+										target: "_blank",
+										title: "Leksi User Agreement"
+				%>
 		</div>
 	</div>
 	<div class="pb-3">

@@ -1,0 +1,59 @@
+<% title "Harlem Spelling Bee - Promoting literacy and education in the Harlem community." %>
+<% description "See how you can continue helping your students reach their full potential." %>
+<% set_meta_tags keywords: %w[harlem spelling bee competition fun schools education vocabulary vocab literacy english language study dictionary words games notebook] %>
+
+<% set_meta_tags og: {
+  title: "See how you can continue helping your students reach their full potential.",
+	description: "Designed with academic vocabulary research and gamification, Leksi helps students master new words."
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Which Harlem school students will become spelling bee champs?",
+  title: "See how you can continue helping your students reach their full potential.",
+  description: "It just takes one word to lead a lifetime of learning and growth."
+} %>
+
+<div class="container">
+  <h1 class="display-4 spe-bee-redange mb-5">
+    <%= icon "user-circle" %>
+    Teachers
+  </h1>
+  <div class="teachers jumbotron mb-3">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h1 class="display-4">
+          Help your students reach their fullest potential.
+        </h1>
+        <p class="lead">
+          Spelling bees have been around for a really long time, yet it's
+          a competition that doesn't grow old with students, teachers, and the
+          community.
+        </p>
+        <%= link_to "#",
+                    role: "button",
+                    title: "See more Harlem Spelling Bee Competition details",
+                    class: "btn btn-outline-secondary mt-5 disabled" do %>
+          <%= icon "long-arrow-down" %>
+          see more details
+          <%= icon "long-arrow-down" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <p>
+
+    Help your students reach their fullest potential by enrolling in the
+    2nd Harlem Spelling Bee.
+  </p>
+  <%= render "spelling_bee/spelling_bee/questions_teachers" %>
+  <section class="spe-bee-enroll">
+    <div class="card card-inverse card-primary mb-3 text-center">
+      <div class="card-block">
+        <h1>Enroll Your School</h1>
+        <p>
+          It just takes one word to lead a lifetime of learning and growth.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

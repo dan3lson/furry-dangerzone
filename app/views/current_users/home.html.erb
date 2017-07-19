@@ -1,7 +1,3 @@
-<% if current_user.has_rand_incomplete_word? %>
-	<%= play_btn_big(@user_word, @user_word.word.id, @user_word.current_game) %>
-<% end %>
-
 <% if current_user.is_teacher? %>
 	<div class="alert alert-info">
 		<%= icon "info-circle" %>
@@ -15,6 +11,10 @@
 								title: "Leksi Sample Student Homepage"
 	%>
 <% else %>
+	<% if current_user.has_rand_incomplete_word? %>
+		<%= play_btn_big(@user_word, @user_word.word.id, @user_word.current_game) %>
+	<% end %>
+
 	<div class="row mt-3">
 		<div class="col-md-6">
 			<div class="card mb-3">
