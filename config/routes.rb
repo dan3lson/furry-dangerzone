@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     get "spelling-bee/about" => :about
     get "spelling-bee/competition" => :competition
     get "spelling-bee/teachers" => :teachers
-    get "spelling-bee/parents" => :parents
     get "spelling-bee/sponsors" => :sponsors
     get "spelling-bee/contact-us" => :contact_us
   end

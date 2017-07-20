@@ -64,8 +64,8 @@ FactoryGirl.define do
   end
 
   factory :game do
-    description "Begin to understand a word ..."
-    name "Fundamentals"
+    description "Type the word as fast as you can!"
+    name "Speed Speller"
   end
 
   factory :game_stat do

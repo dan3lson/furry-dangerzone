@@ -15,11 +15,13 @@
 
 <section id="spe-bee-index-hero">
   <div>
-    <h4><%= icon "star" %> Leksi Presents <%= icon "star" %></h4>
-    <h1 class="display-2">Harlem Spelling Bee</h1>
-    <h4 class="mt-4 ">
-      See what the buzz is about below and get ready for our 2nd Bee!
-    </h4>
+    <h2 class="spe-bee-redange">
+      <%= icon "star" %> Leksi Presents <%= icon "star" %>
+    </h2>
+    <h1 class="display-1">Harlem Spelling Bee</h1>
+    <h5 class="mt-4">
+      Learn about the buzz below and get ready for our 2nd Bee!
+    </h5>
   </div>
 </section>
 <section class="spee-bee-about-section text-center">
@@ -54,7 +56,7 @@
 <section class="pt-5">
   <div class="container">
     <div class="row text-center">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="card mb-5">
           <div class="card-block">
             <h1 class="spe-bee-redange">
@@ -62,38 +64,19 @@
               Teachers
             </h1>
             <p>
-              Continue helping your students reach their fullest potential.
+              Bring the excitement and challenge of the Harlem Spelling Bee to
+              your school.
             </p>
             <%= link_to "Enroll today",
                         spelling_bee_teachers_path,
                         role: "button",
                         class: "btn btn-primary btn-lg",
-                        alt: "Support the Harlem Spelling Bee",
                         title: "Support the Harlem Spelling Bee"
             %>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-5">
-          <div class="card-block">
-            <h1 class="spe-bee-redange">
-              <%= icon "globe" %> Parents
-            </h1>
-            <p>
-              Introduce your children to a world of words and opportunities.
-            </p>
-            <%= link_to "Learn more",
-                        spelling_bee_parents_path,
-                        role: "button",
-                        class: "btn btn-primary btn-lg",
-                        alt: "Join the Harlem Spelling Bee",
-                        title: "Join the Harlem Spelling Bee"
-            %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="card">
           <div class="card-block">
             <h1 class="spe-bee-redange">
@@ -101,13 +84,12 @@
             </h1>
             <p>
               Play a leading role towards a more literate and educated
-              Harlem.
+              Harlem community.
             </p>
             <%= link_to "Support the Bee",
                         spelling_bee_sponsors_path,
                         role: "button",
                         class: "btn btn-primary btn-lg",
-                        alt: "Support the Harlem Spelling Bee",
                         title: "Support the Harlem Spelling Bee"
             %>
           </div>

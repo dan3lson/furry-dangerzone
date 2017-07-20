@@ -14,8 +14,7 @@
 } %>
 <div class="container">
   <h1 class="display-4 spe-bee-redange mb-5">
-    <%= icon "trophy" %>
-    Competition
+    <%= icon "trophy" %> Competition
   </h1>
 </div>
 <div class="competition jumbotron mb-3">
@@ -109,7 +108,7 @@
       <p>
         To enter the 2nd Harlem Spelling Bee, a teacher/coordinator has to
         enroll their school. There are three different enrollment periods,
-        i.e. Early-bird, Regular, and Late, when the teacher/coordinator can
+        i.e. Early Bird, Regular, and Late, when the teacher/coordinator can
         register. See the Timeline section below for the exact dates.
       </p>
       <h4><%= emoji "moneybag" %> Cost</h4>
@@ -128,6 +127,14 @@
         in preparing for and competing in this big event.
       </p>
       <h4><%= emoji "clock3" %> Timeline</h4>
+      <p>
+        If you'd like calendar invites to the dates below, please
+        <%= link_to "contact us",
+                    spelling_bee_contact_us_path,
+                    class: "spe-bee-contact-us",
+                    "data-sub": "tea"
+        %>.
+      </p>
       <div class="activity-feed">
         <%= render "shared/activity_feed_item",
                    title: "Early Bird Enrollment",
@@ -181,29 +188,5 @@
       </div>
     </div>
   </div>
-  <section class="spee-bee-about-section text-center spe-bee-yellow-bg">
-    <div class="row">
-      <div class="col-lg-3">
-        <%= image_tag(
-          "spelling-bee.png",
-          class: "mx-auto d-block",
-          width: 300,
-          height: 300
-        ) %>
-      </div>
-      <div class="col-lg-9">
-        <h4><%= icon "star" %> 2nd Harlem Spelling Bee <%= icon "star" %></h4>
-        <h1 class="display-3">Enroll soon</h1>
-        <p class="lead">
-          Early-bird registration will start on Monday, August 21st, 2017.
-        </p>
-        <p class="text-center">
-          <%#= link_to "Enroll your school",
-                      spelling_bee_path,
-                      class: "btn btn-primary btn-lg disabled",
-                      role: "button" %>
-        </p>
-      </div>
-    </div>
-  </section>
+  <%= render "spelling_bee/enroll" %>
 </div>

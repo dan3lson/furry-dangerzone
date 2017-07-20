@@ -11,9 +11,9 @@ class GameStat < ActiveRecord::Base
   validates :game, presence: true
 
   # TODO Create test shell
-  scope :funds, -> { where(game: (1..6).to_a) }
+  scope :funds, -> { where(game: (4..9).to_a) }
   # TODO Create test shell
-  scope :jeops, -> { where(game: ([5, 6])) }
+  scope :jeops, -> { where(game: ([10, 11])) }
   # TODO Create test shell
   scope :frees, -> { where(game: (12..30).to_a) }
   # TODO Create test shell

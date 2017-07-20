@@ -34,18 +34,6 @@
 	%>
 <% end %>
 
-<% if controller?("spelling_bee") && action?("parents") %>
-	<%= link_to "Parents",
-							spelling_bee_parents_path,
-							class: "nav-item nav-link active"
-	%>
-<% else %>
-	<%= link_to "Parents",
-							spelling_bee_parents_path,
-							class: "nav-item nav-link"
-	%>
-<% end %>
-
 <% if controller?("spelling_bee") && action?("sponsors") %>
 	<%= link_to "Sponsors",
 							spelling_bee_sponsors_path,

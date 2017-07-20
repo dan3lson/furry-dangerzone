@@ -74,6 +74,40 @@
     background: rgba(0, 0, 0, .5);
   }
 }
+
+.sponsors.jumbotron {
+  background: url(image-path("spelling-bee/sponsors-jumbotron.jpg"));
+  background-color: default;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-bottom: .05rem solid #e5e5e5;
+
+  text-align: center;
+
+  .display-4 {
+    color: $white;
+    font-weight: bold;
+    background: rgba(0, 0, 0, .5);
+
+    small {
+      color: antiquewhite !important;
+    }
+  }
+
+  hr {
+    border-color: $white;
+  }
+
+  .lead {
+    color: $white;
+    background: rgba(0, 0, 0, .5);
+  }
+}
 .jumbotron .btn {
   padding: .75rem 1.5rem;
   font-size: 1.5rem;
