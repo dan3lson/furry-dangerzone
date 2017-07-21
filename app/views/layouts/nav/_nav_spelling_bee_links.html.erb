@@ -46,17 +46,17 @@
 	%>
 <% end %>
 
-<% if controller?("blog") %>
-	<%= link_to "Blog",
+<%# if controller?("blog") %>
+	<%#= link_to "Blog",
 							blog_path,
 							class: "nav-item nav-link active"
 	%>
-<% else %>
-	<%= link_to "Blog",
+<%# else %>
+	<%#= link_to "Blog",
 							blog_path,
 							class: "nav-item nav-link"
 	%>
-<% end %>
+<%# end %>
 
 <% if controller?("spelling_bee") && action?("contact_us") %>
 	<%= link_to "Contact Us",

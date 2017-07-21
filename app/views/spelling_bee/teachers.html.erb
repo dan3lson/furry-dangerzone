@@ -12,34 +12,29 @@
   title: "See how you can continue helping your students reach their full potential.",
   description: "It just takes one word to lead a lifetime of learning and growth."
 } %>
-
-<div class="container">
-  <h1 class="display-4 spe-bee-redange mb-5">
-    <%= icon "user-circle" %>
-    Teachers
-  </h1>
-  <div class="teachers jumbotron mb-3">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h1 class="display-4">
-          Help your students reach their fullest potential.
-        </h1>
-        <p class="lead">
-          Spelling bees have been around for a really long time, yet it's
-          a competition that doesn't grow old with students, teachers, and the
-          community.
-        </p>
-        <%= link_to "#",
-                    role: "button",
-                    title: "See more Harlem Spelling Bee Competition details",
-                    class: "btn btn-outline-secondary mt-5 disabled" do %>
-          <%= icon "long-arrow-down" %>
-          see more details
-          <%= icon "long-arrow-down" %>
-        <% end %>
-      </div>
+<div class="teachers jumbotron mb-3">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-3 text-white">
+        <b>Teachers</b>, help your students reach their full potential.
+      </h1>
+      <p class="lead">
+        Spelling bees have been around for a really long time, yet it's
+        a competition that doesn't grow old with students, teachers, and the
+        community.
+      </p>
+      <%= link_to "#",
+                  role: "button",
+                  title: "See more Harlem Spelling Bee Competition details",
+                  class: "btn btn-outline-secondary mt-5 disabled" do %>
+        <%= icon "long-arrow-down" %>
+        see more details
+        <%= icon "long-arrow-down" %>
+      <% end %>
     </div>
   </div>
+</div>
+<div class="container">
   <%= render "spelling_bee/q_and_a/teachers" %>
   <%= render "spelling_bee/enroll" %>
 </div>

@@ -12,34 +12,29 @@
   title: "See how you can continue helping your students reach their full potential.",
   description: "It just takes one word to lead a lifetime of learning and growth."
 } %>
-
-<div class="container">
-  <h1 class="display-4 spe-bee-redange mb-5">
-    <%= icon "handshake-o" %>
-    Sponsors
-  </h1>
-  <div class="sponsors jumbotron mb-3">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h1 class="display-4">
-          Leave your mark in Harlem.
-        </h1>
-        <p class="lead">
-          Vocabulary development and literacy overall is a leading indicator
-          of a students' success in and out of school. There's much to gain
-          by supporting the education of students in Harlem.
-        </p>
-        <%= link_to "#",
-                    role: "button",
-                    title: "See more Harlem Spelling Bee Competition details",
-                    class: "btn btn-outline-secondary mt-5 disabled" do %>
-          <%= icon "long-arrow-down" %>
-          see more details
-          <%= icon "long-arrow-down" %>
-        <% end %>
-      </div>
+<div class="sponsors jumbotron mb-3">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-3">
+        <b>Sponsors</b>, leave your mark in Harlem.
+      </h1>
+      <p class="lead">
+        Vocabulary development and literacy overall is a leading indicator
+        of a students' success in and out of school. There's much to gain
+        by supporting the education of students in Harlem.
+      </p>
+      <%= link_to "#",
+                  role: "button",
+                  title: "See more Harlem Spelling Bee Competition details",
+                  class: "btn btn-outline-secondary mt-5 disabled" do %>
+        <%= icon "long-arrow-down" %>
+        see more details
+        <%= icon "long-arrow-down" %>
+      <% end %>
     </div>
   </div>
+</div>
+<div class="container">
   <%= render "spelling_bee/q_and_a/sponsors" %>
   <%= render "spelling_bee/enroll" %>
 </div>

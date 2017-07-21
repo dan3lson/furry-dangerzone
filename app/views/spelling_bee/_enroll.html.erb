@@ -9,14 +9,25 @@
 			) %>
 		</div>
 		<div class="col-lg-9">
-			<h4><%= icon "star" %> 2nd Harlem Spelling Bee <%= icon "star" %></h4>
-			<h1 class="display-3">Enroll soon</h1>
+			<h4 class="spe-bee-redange">
+				<%= icon "star" %> Leksi's 2nd Harlem Spelling Bee <%= icon "star" %>
+			</h4>
+			<h1 class="display-3">Enrollment opens soon</h1>
 			<p class="lead">
-				Early Bird registration will start on Monday, August 21st, 2017.
+				Early Bird registration will start on Monday, August 21st, 2017. All
+				details are on the
+				<%= link_to "Competition page",
+										spelling_bee_competition_path,
+										title: "Visit the HSB Competition page."
+				%>.
 			</p>
 			<p class="lead">
 				Until then, if you have any questions, comments, or concerns, we'd love
-				to hear from you.
+				to hear from you: use our online form to
+				<%= link_to "contact us",
+										spelling_bee_contact_us_path,
+										title: "Contact the Harlem Spelling Bee."
+				%>.
 			</p>
 			<p class="text-center">
 				<%#= link_to "Enroll your school",

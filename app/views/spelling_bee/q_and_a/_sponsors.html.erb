@@ -1,4 +1,4 @@
-<section class="guest-section-home spe-bee-section">
+<section>
   <%= render "spelling_bee/q_and_a/question",
              q: "Why should we sponsor this event?"
   %>
@@ -19,20 +19,18 @@
     you provide in-kind donations, financial contributions, or just give
     out flyers - will go a long way. Please
     <%= link_to "submit the form below",
-                "#",
-                class: "spe-bee-contact-us",
-                "data-sub": "spo-his"
-    %> to get started.
+                "#"
+    %>
+    to get started.
   </p>
   <%= render "spelling_bee/q_and_a/question",
              q: "What if I have a question or comment?"
   %>
   <p class="mb-4">
-    If you have any questions, comments, or concerns, please
+    We'd love to hear from you;
+    if you have any questions, comments, or concerns, please
     <%= link_to "contact us",
-                "#",
-                class: "spe-bee-contact-us",
-                "data-sub": "spo"
+                spelling_bee_contact_us_path
     %>.
   </p>
 </section>

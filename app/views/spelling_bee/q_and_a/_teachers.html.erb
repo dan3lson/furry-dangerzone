@@ -1,4 +1,4 @@
-<section class="guest-section-home spe-bee-section">
+<section>
   <%= render "spelling_bee/q_and_a/question",
              q: "Sounds great - what are the details?!"
   %>
@@ -16,8 +16,8 @@
              q: "Is this free?"
   %>
   <p class="mb-4">
-    No. The cost to register your school depends on when you enroll, as there
-    are Early Bird, Regular, and Late registration periods.
+    This is not free. The cost to register your school depends on when you
+    enroll, as there are Early Bird, Regular, and Late registration periods.
   </p>
   <%= render "spelling_bee/q_and_a/question",
              q: "What if I have a question or comment?"
@@ -26,9 +26,7 @@
     We'd love to hear from you;
     if you have any questions, comments, or concerns, please
     <%= link_to "contact us",
-                spelling_bee_contact_us_path,
-                class: "spe-bee-contact-us",
-                "data-sub": "tea"
+                spelling_bee_contact_us_path
     %>.
   </p>
 </section>

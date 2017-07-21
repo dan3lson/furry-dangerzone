@@ -12,12 +12,10 @@
   title: "Promoting literacy and education in Harlem, we have high hopes for our students and exciting Bee competitions.",
   description: "It just takes one word to lead a lifetime of learning and growth."
 } %>
-<div class="container">
-  <h1 class="display-4 spe-bee-redange mb-5">
-    <%= icon "trophy" %> Competition
-  </h1>
-</div>
 <div class="competition jumbotron mb-3">
+  <h1 class="display-3 mb-5 text-left">
+    2nd Harlem Spelling Bee
+  </h1>
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <h1 class="display-4">
@@ -106,10 +104,15 @@
     <div class="col-lg-6">
       <h4><%= emoji "door" %> Registration</h4>
       <p>
-        To enter the 2nd Harlem Spelling Bee, a teacher/coordinator has to
+        To enter the 2nd Harlem Spelling Bee, a teacher/coordinator from an
+        elementary or middle school, i.e. grades 1 through 8, has to
         enroll their school. There are three different enrollment periods,
         i.e. Early Bird, Regular, and Late, when the teacher/coordinator can
         register. See the Timeline section below for the exact dates.
+      </p>
+      <p>
+        High schoolers, don't worry! There will be a Harlem Spelling Bee for
+        you, too, in early 2018. Stay tuned!
       </p>
       <h4><%= emoji "moneybag" %> Cost</h4>
       <p>
@@ -130,9 +133,7 @@
       <p>
         If you'd like calendar invites to the dates below, please
         <%= link_to "contact us",
-                    spelling_bee_contact_us_path,
-                    class: "spe-bee-contact-us",
-                    "data-sub": "tea"
+                    spelling_bee_contact_us_path
         %>.
       </p>
       <div class="activity-feed">
