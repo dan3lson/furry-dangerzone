@@ -2,8 +2,6 @@ class SpellingBeeController < ApplicationController
   layout "application_spelling_bee"
 
   def index
-    # flash[:success] = "We\'re updating the entire Harlem Spelling Bee site. It will be ready soon so stay tuned!"
-    # redirect_to blog_first_harlem_spelling_bee_path
   end
 
   def about
