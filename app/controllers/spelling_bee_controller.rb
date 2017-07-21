@@ -13,9 +13,6 @@ class SpellingBeeController < ApplicationController
   def teachers
   end
 
-  def parents
-  end
-
   def sponsors
   end
 

@@ -13,8 +13,8 @@
   description: "It just takes one word to lead a lifetime of learning and growth."
 } %>
 <div class="competition jumbotron mb-3">
-  <h1 class="display-3 mb-5 text-left">
-    2nd Harlem Spelling Bee
+  <h1 class="display-3 mb-5">
+    <b>2nd Harlem Spelling Bee</b>
   </h1>
   <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -57,50 +57,6 @@
 </div>
 <div class="container">
   <div class="row marketing">
-    <div class="col-lg-6">
-      <h4><%= emoji "video_game" %> Leksi</h4>
-      <p>
-        The online app that students and teachers use for the Harlem Spelling
-        Bee:
-        <ul>
-          <li>
-            Students not only use it to practice for the Bee by completing
-            vocabulary and spelling games, but it's also where they take the
-            Local School Competition
-          </li>
-          <li>
-            Teachers will use Leksi to create classrooms and student accounts,
-            provide support, and track progress
-          </li>
-        </ul>
-      </p>
-      <h4><%= emoji "book" %> Words</h4>
-      <p>
-        Each grade from one (1) through eight (8) has 100 spelling bee
-        words. All words are grouped by grade and can be found within the Leksi
-        app and in the resource section for teachers/coordinators.
-      </p>
-      <p>
-        In terms of the Main Event, if all 100 words are used for a given grade,
-        the next grade's words will be used.
-      </p>
-      <h4><%= emoji "muscle" %> Preparation</h4>
-      <p>
-        Using Leksi, an online tool that helps students improve their reading
-        and writing skills, students will build vocabulary and sharpen
-        spelling skills. Other
-        tools exist that might help like vocabulary.com, Quizlet, or traditional
-        methods like flashcards.
-      </p>
-      <h4><%= emoji "clipboard" %> Tips and Tricks</h4>
-      <p>
-        The National Spelling Bee has a great guide so be sure to check it out:
-        <%= link_to "How to Study for a Spelling Bee",
-                    "http://spellingbee.com/sites/default/files/inline-files/How%20to%20Study%20for%20a%20Spelling%20Bee.pdf",
-                    target: "_blank"
-        %>.
-      </p>
-    </div>
     <div class="col-lg-6">
       <h4><%= emoji "door" %> Registration</h4>
       <p>
@@ -187,6 +143,50 @@
                    ].join
         %>
       </div>
+    </div>
+    <div class="col-lg-6">
+      <h4><%= emoji "video_game" %> Leksi</h4>
+      <p>
+        The online app that students and teachers use for the Harlem Spelling
+        Bee:
+        <ul>
+          <li>
+            Students not only use it to practice for the Bee by completing
+            vocabulary and spelling games, but it's also where they take the
+            Local School Competition
+          </li>
+          <li>
+            Teachers will use Leksi to create classrooms and student accounts,
+            provide support, and track progress
+          </li>
+        </ul>
+      </p>
+      <h4><%= emoji "book" %> Words</h4>
+      <p>
+        Each grade from one (1) through eight (8) has 100 spelling bee
+        words. All words are grouped by grade and can be found within the Leksi
+        app and in the resource section for teachers/coordinators.
+      </p>
+      <p>
+        In terms of the Main Event, if all 100 words are used for a given grade,
+        the next grade's words will be used.
+      </p>
+      <h4><%= emoji "muscle" %> Preparation</h4>
+      <p>
+        Using Leksi, an online tool that helps students improve their reading
+        and writing skills, students will build vocabulary and sharpen
+        spelling skills. Other
+        tools exist that might help like vocabulary.com, Quizlet, or traditional
+        methods like flashcards.
+      </p>
+      <h4><%= emoji "clipboard" %> Tips and Tricks</h4>
+      <p>
+        The National Spelling Bee has a great guide so be sure to check it out:
+        <%= link_to "How to Study for a Spelling Bee",
+                    "http://spellingbee.com/sites/default/files/inline-files/How%20to%20Study%20for%20a%20Spelling%20Bee.pdf",
+                    target: "_blank"
+        %>.
+      </p>
     </div>
   </div>
   <%= render "spelling_bee/enroll" %>
