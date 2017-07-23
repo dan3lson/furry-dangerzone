@@ -44,22 +44,21 @@
 		</div>
 		<div class="col-md-4 mb-5">
 			<h5 class="mb-5">The Legal Stuff...</h5>
-				<%= link_to "Legal Notice",
-										"https://www.facebook.com/LeksiEducation",
+				<%#= link_to "Legal Notice",
+										"#",
 										target: "_blank",
 										title: "Leksi Legal Notice"
 				%>
-				<br>
-				<%= link_to "Privacy Policy",
+				<!-- <br> -->
+				<%#= link_to "Privacy Policy",
 										"https://www.facebook.com/LeksiEducation",
 										target: "_blank",
 										title: "Leksi Privacy Policy"
 				%>
-				<br>
-				<%= link_to "User Agreement",
-										"https://www.facebook.com/LeksiEducation",
-										target: "_blank",
-										title: "Leksi User Agreement"
+				<!-- <br> -->
+				<%= link_to "Terms of Use",
+										terms_of_use_path,
+										title: "Leksi Terms of Use"
 				%>
 		</div>
 	</div>

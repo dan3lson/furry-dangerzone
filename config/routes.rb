@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "research" => "static_pages#research"
   get "our_approach" => "static_pages#our_approach"
   get "results" => "static_pages#results"
+  get "terms-of-use" => "static_pages#terms_of_use"
+  get "privacy-policy" => "static_pages#privacy_policy"
   controller :blog do
     get "blog" => :index
     get "blog/first-harlem-spelling-bee" => :june_19_2017_first_harlem_spelling_bee
