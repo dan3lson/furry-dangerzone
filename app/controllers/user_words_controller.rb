@@ -60,11 +60,11 @@ class UserWordsController < ApplicationController
 
     if @user_word.destroy
       flash[:success] = "Success: \'#{@word.name}\' has been removed."
-      redirect_to myLeksi_path
+      redirect_to notebook_path
     else
       msg = "Yikes! Removing that word didn\'t work - please try again."
       flash[:danger] = msg
-      redirect_to myLeksi_path
+      redirect_to notebook_path
     end
   end
 end

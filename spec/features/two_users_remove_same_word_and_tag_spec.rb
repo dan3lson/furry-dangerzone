@@ -33,7 +33,7 @@ feature "two users remove same word and tag", %{
     scenario "#{s} user_1 and user_2 remove same word (1st) and tag (2nd)" do
       log_in_as(user_1)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -49,7 +49,7 @@ feature "two users remove same word and tag", %{
 
       log_in_as(user_2)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -75,7 +75,7 @@ feature "two users remove same word and tag", %{
 
       find(".my_tags-remove-btn").click
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -87,7 +87,7 @@ feature "two users remove same word and tag", %{
 
       find(".my_tags-remove-btn").click
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 

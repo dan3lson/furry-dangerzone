@@ -10,13 +10,9 @@ class GameStat < ActiveRecord::Base
   validates :user_word, presence: true
   validates :game, presence: true
 
-  # TODO Create test shell
   scope :funds, -> { where(game: (4..9).to_a) }
-  # TODO Create test shell
   scope :jeops, -> { where(game: ([10, 11])) }
-  # TODO Create test shell
   scope :frees, -> { where(game: (12..30).to_a) }
-  # TODO Create test shell
   scope :last_24_hours, -> (time = "updated_at") {
     where("#{time} > ?", 24.hours.ago)
   }

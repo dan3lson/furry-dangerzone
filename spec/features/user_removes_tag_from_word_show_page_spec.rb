@@ -28,7 +28,7 @@ feature "user removes tag from word show page", %{
     scenario "scenario: remove one tag from word show page" do
       log_in_as(user)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -54,7 +54,7 @@ feature "user removes tag from word show page", %{
 
       log_in_as(user)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -62,7 +62,7 @@ feature "user removes tag from word show page", %{
         click_on "remove tag"
       end
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -88,7 +88,7 @@ feature "user removes tag from word show page", %{
 
       log_in_as(user)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 

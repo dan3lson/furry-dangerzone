@@ -22,7 +22,7 @@ feature "user removes a word", %{
     scenario "scenario: remove word that is untagged" do
       log_in_as(user)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -51,7 +51,7 @@ feature "user removes a word", %{
 
       log_in_as(user)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 

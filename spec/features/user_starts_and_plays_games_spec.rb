@@ -163,7 +163,7 @@
 #
 #       complete_game_one_for(word1)
 #
-#       visit myLeksi_path
+#       visit notebook_path
 #
 #       click_on "start"
 #
@@ -181,7 +181,7 @@
 #
 #       complete_game_one_for(word1)
 #
-#       visit myLeksi_path
+#       visit notebook_path
 #
 #       click_on word1.name
 #
@@ -284,7 +284,7 @@
 #       complete_game_one_for(word)
 #       complete_game_two_for(word)
 #
-#       visit myLeksi_path
+#       visit notebook_path
 #
 #       click_on "start"
 #
@@ -302,7 +302,7 @@
 #       complete_game_one_for(word)
 #       complete_game_two_for(word)
 #
-#       visit myLeksi_path
+#       visit notebook_path
 #
 #       click_on word.name
 #

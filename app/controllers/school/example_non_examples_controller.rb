@@ -49,6 +49,11 @@ class School::ExampleNonExamplesController < BaseSchoolController
     end
   end
 
+  def second_grade
+    @e_non_e = ExampleNonExample.new
+    @second_grade_words = Word.second_grade
+  end
+
   def fourth_grade
     @e_non_e = ExampleNonExample.new
     @fourth_grade_words = Word.fourth_grade
@@ -57,6 +62,11 @@ class School::ExampleNonExamplesController < BaseSchoolController
   def fifth_grade
     @e_non_e = ExampleNonExample.new
     @fifth_grade_words = Word.fifth_grade
+  end
+
+  def sixth_grade
+    @e_non_e = ExampleNonExample.new
+    @sixth_grade_words = Word.sixth_grade
   end
 
   private

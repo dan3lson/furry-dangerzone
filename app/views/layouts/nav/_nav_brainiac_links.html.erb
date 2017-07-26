@@ -11,22 +11,22 @@
 <% end %>
 
 <% if params[:controller].include?("my_leksi") %>
-	<%= link_to myLeksi_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-book"></i> Words
+	<%= link_to notebook_path, class: "nav-item nav-link active" do %>
+		<i class="fa fa-book"></i> Notebook
 	<% end %>
 <% else %>
-	<%= link_to myLeksi_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-book"></i> Words
+	<%= link_to notebook_path, class: "nav-item nav-link" do %>
+		<i class="fa fa-book"></i> Notebook
 	<% end %>
 <% end %>
 
 <% if controller?("my_tags") %>
 	<%= link_to myTags_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-tags"></i> Tags
+		<i class="fa fa-columns"></i> Sections
 	<% end %>
 <% else %>
 	<%= link_to myTags_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-tags"></i> Tags
+		<i class="fa fa-columns"></i> Sections
 	<% end %>
 <% end %>
 

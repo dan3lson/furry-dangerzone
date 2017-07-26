@@ -6,7 +6,6 @@ class Teacher < User
   has_many :sent_stems, dependent: :destroy
   has_many :describe_mes, dependent: :destroy
 
-  # TODO Create test shell
   def has_students?
     !Student.where(teacher: self).empty?
   end
@@ -24,7 +23,6 @@ class Teacher < User
     has_classrooms? ? students.any? { |s| s.has_recent_activity? } : false
   end
 
-  # TODO Create test shell
   def has_unreviewed_frees?
     students = Student.where(teacher: self)
     has_classrooms? ? students.any? { |s| !s.unreviewed_frees.empty? } : false

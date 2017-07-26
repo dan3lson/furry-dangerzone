@@ -91,4 +91,11 @@ FactoryGirl.define do
 
     teacher
   end
+
+  factory :freestyle do
+    input "Technology is the future."
+    status "not reviewed"
+
+    user_word
+  end
 end

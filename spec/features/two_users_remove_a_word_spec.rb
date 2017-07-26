@@ -35,7 +35,7 @@ feature "two users remove a word", %{
     scenario "scenario: user_1 removes untagged word (not tagged for user_2)" do
       log_in_as(user_1)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -62,7 +62,7 @@ feature "two users remove a word", %{
 
       log_in_as(user_1)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -95,7 +95,7 @@ feature "two users remove a word", %{
 
       log_in_as(user_1)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -128,7 +128,7 @@ feature "two users remove a word", %{
 
       log_in_as(user_1)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -142,7 +142,7 @@ feature "two users remove a word", %{
 
       log_in_as(user_2)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 

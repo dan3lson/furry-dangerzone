@@ -59,7 +59,7 @@ feature "user views freestyle responses", %{
 
 			log_in_as(user)
 
-			visit myLeksi_path
+			visit notebook_path
 
 			click_on word.name.capitalize
 

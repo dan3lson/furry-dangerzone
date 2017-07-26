@@ -37,7 +37,7 @@ feature "two users add same word and tag", %{
 
       log_in_as(user_1)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 
@@ -51,7 +51,7 @@ feature "two users add same word and tag", %{
 
       log_in_as(user_2)
 
-      visit myLeksi_path
+      visit notebook_path
 
       click_on word.name.capitalize
 

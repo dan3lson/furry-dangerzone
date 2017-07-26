@@ -7,13 +7,15 @@ RSpec.describe Teacher, type: :model do
 	let(:student2) { FactoryGirl.create(:student, classroom: classroom, teacher: teacher) }
 	let(:student3) { FactoryGirl.create(:student, classroom: classroom, teacher: teacher) }
 
-  pending "#has_students?" do
+  describe "#has_students?" do
     it "returns true" do
+			student1
+
       expect(teacher.has_students?).to eq(true)
     end
 
     it "returns false" do
-			# teacher.students = []
+			teacher.students = []
 
       expect(teacher.has_students?).to eq(false)
     end
@@ -62,11 +64,27 @@ RSpec.describe Teacher, type: :model do
 
   describe "#has_unreviewed_frees?" do
     it "returns true" do
+			freestyle = FactoryGirl.create(:freestyle)
+			user_word = freestyle.user_word
+			student1.user_words << user_word
+
       expect(teacher.has_unreviewed_frees?).to eq(true)
     end
 
-    it "returns false" do
-      expect(teacher.has_unreviewed_frees?).to eq(true)
+    it "returns false, if zero freestyles exist" do
+      expect(teacher.has_unreviewed_frees?).to eq(false)
+    end
+
+    it "returns false, if status is redo" do
+			freestyle = FactoryGirl.create(:freestyle, status: "redo")
+
+      expect(teacher.has_unreviewed_frees?).to eq(false)
+    end
+
+    it "returns false, if status is pass" do
+			freestyle = FactoryGirl.create(:freestyle, status: "pass")
+
+      expect(teacher.has_unreviewed_frees?).to eq(false)
     end
   end
 end
