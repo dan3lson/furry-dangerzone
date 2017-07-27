@@ -1,0 +1,13 @@
+<nav class="breadcrumb">
+	<%= link_to "Classrooms",
+							school_classrooms_path,
+							class: "breadcrumb-item"
+	%>
+	<%= link_to "#{@classroom.name}",
+							school_classroom_path(@classroom),
+							class: "breadcrumb-item"
+	%>
+  <span class="breadcrumb-item active">Students</span>
+</nav>
+
+<%= render "school/students/students", classroom: @classroom %>

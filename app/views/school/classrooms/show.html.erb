@@ -1,8 +1,4 @@
 <% provide(:title, "Classroom") %>
-<h1>
-	Classroom <%= @classroom.name %>
-	<small class="text-muted">Grade <%= @classroom.grade %></small>
-</h1>
 <nav class="breadcrumb">
 	<%= link_to "Classrooms",
 							school_classrooms_path,
@@ -10,15 +6,64 @@
 	%>
   <span class="breadcrumb-item active"><%= @classroom.name %></span>
 </nav>
-<div class="mb-3">
-	<div class="float-right">
-		<%= link_to new_school_classroom_student_path(@classroom),
-		role: "button",
-		class: "btn btn-primary btn-block" do
-			%>
-			<i class="fa fa-plus-circle"></i> Add Students
-			<% end %>
+<h1 class="mb-5">
+	<%= @classroom.name %>
+	<small class="text-muted">Grade <%= @classroom.grade %></small>
+</h1>
+<div class="row">
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-block">
+				<h4 class="card-title">
+					<%= icon "users" %>
+					Students
+				</h4>
+				<%= link_to "View all",
+										school_classroom_students_path(@classroom),
+										role: "button",
+										class: "btn btn-primary btn-block"
+				%>
+				<%= link_to "Add new",
+										new_school_classroom_student_path(@classroom),
+										role: "button",
+										class: "btn btn-primary btn-block"
+				%>
+			</div>
 		</div>
-		<div class="clear"></div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-block">
+				<h4 class="card-title">
+					<%= icon "book" %>
+					Notebook
+				</h4>
+				<%= link_to "View all words",
+										"#",
+										role: "button",
+										class: "btn btn-primary btn-block disabled"
+				%>
+				<%= link_to "Add or create words",
+										"#",
+										role: "button",
+										class: "btn btn-primary btn-block disabled"
+				%>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-block">
+				<h4 class="card-title">
+					<%= icon "line-chart" %>
+					Grades
+				</h4>
+				<%= link_to "View all",
+										"#",
+										role: "button",
+										class: "btn btn-primary btn-block disabled"
+				%>
+			</div>
+		</div>
+	</div>
 </div>
-<%= render "school/classrooms/students", classroom: @classroom %>

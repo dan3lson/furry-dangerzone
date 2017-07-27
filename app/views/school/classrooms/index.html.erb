@@ -20,9 +20,9 @@
 						<%= link_to classroom.name, school_classroom_path(classroom) %>
 					</h4>
 					<p class="card-text text-muted">
-						<small>Grade <%= classroom.grade %></small>
+						Grade <%= classroom.grade %>
 						<br>
-						<small><%= pluralize(classroom.students.count, "student") %></small>
+						<%= pluralize(classroom.students.count, "student") %>
 					</p>
 				</div>
 			</div>

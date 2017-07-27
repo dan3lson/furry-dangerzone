@@ -6,7 +6,7 @@
 							class: "breadcrumb-item"
 	%>
 	<%= link_to @classroom.name,
-							school_classrooms_path,
+							school_classroom_path(@classroom),
 							class: "breadcrumb-item"
 	%>
   <span class="breadcrumb-item active">Add New Students</span>
@@ -15,7 +15,7 @@
 	<div class="card">
 		<div class="card-block">
 			<div class="alert alert-info" role="alert">
-				<%= icon "info-circle" %> 
+				<%= icon "info-circle" %>
 				Use the form below to add one or more students to this class.
 				To create more than one user at a time, separate each username with a
 				comma, for example: <em>username1, username2, username3</em>

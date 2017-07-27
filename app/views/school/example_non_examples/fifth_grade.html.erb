@@ -123,14 +123,8 @@
 				</p>
 
 				<% word.example_non_examples.each do |e_non_e| %>
-					<p class="card-text">
-						<strong>Text</strong> <%= e_non_e.text %>
-						<br>
-						<strong>Answer</strong> <%= e_non_e.answer %>
-						<br>
-						<strong>Feedback</strong> <%= e_non_e.feedback %>
-					</p>
-					<hr>
+					<%= render "school/example_non_examples/card_text",
+										 e_non_e: e_non_e %>
 				<% end %>
 			<% end %>
 		</div>

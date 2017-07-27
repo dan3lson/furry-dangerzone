@@ -23,9 +23,6 @@ class School::WordsController < BaseSchoolController
     end
   end
 
-  def frayer_model
-  end
-
   private
 
   def word_params

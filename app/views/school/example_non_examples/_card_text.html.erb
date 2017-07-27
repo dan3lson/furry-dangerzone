@@ -4,4 +4,11 @@
 	<strong>Answer</strong> <%= e_non_e.answer %>
 	<br>
 	<strong>Feedback</strong> <%= e_non_e.feedback %>
+	<br>
+	<strong>Created by</strong>
+	<%= e_non_e.user.username %>
+	(<%= time_ago_in_words(e_non_e.created_at) %> ago)
+	<br>
+	<strong>Last Update</strong>
+	<%= time_ago_in_words(e_non_e.updated_at) %> ago
 </p>
