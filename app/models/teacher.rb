@@ -27,4 +27,15 @@ class Teacher < User
     students = Student.where(teacher: self)
     has_classrooms? ? students.any? { |s| !s.unreviewed_frees.empty? } : false
   end
+
+  # TODO Delete and figure out database/relationships issue
+  def example_non_examples
+    ExampleNonExample.where(user: self)
+  end
+
+  def example_non_examples_grouped
+    example_non_examples.group_by { |e| e.word.name }.each do |name, array|
+      puts "#{name}: #{array.count}"
+    end
+  end
 end

@@ -51,22 +51,22 @@ class School::ExampleNonExamplesController < BaseSchoolController
 
   def second_grade
     @e_non_e = ExampleNonExample.new
-    @second_grade_words = Word.second_grade
+    @second_grade_words = Word.second_grade_hsb_2
   end
 
   def fourth_grade
     @e_non_e = ExampleNonExample.new
-    @fourth_grade_words = Word.fourth_grade
+    @fourth_grade_words = Word.fourth_grade_hsb_2
   end
 
   def fifth_grade
     @e_non_e = ExampleNonExample.new
-    @fifth_grade_words = Word.fifth_grade
+    @fifth_grade_words = Word.fifth_grade_hsb_2
   end
 
   def sixth_grade
     @e_non_e = ExampleNonExample.new
-    @sixth_grade_words = Word.sixth_grade
+    @sixth_grade_words = Word.sixth_grade_hsb_2
   end
 
   private
