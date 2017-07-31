@@ -105,6 +105,18 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#is_brainiac?" do
+    it "returns false" do
+      expect(user.is_brainiac?).to eq(false)
+    end
+
+    it "returns true" do
+      user.type = "Brainiac"
+
+      expect(user.is_brainiac?).to eq(true)
+    end
+  end
+
   describe "#is_admin?" do
     it "returns false" do
       expect(user.is_admin?).to eq(false)

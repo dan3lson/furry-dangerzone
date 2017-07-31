@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     !UserTag.where(user: self).empty?
   end
 
+  def is_brainiac?
+    type == "Brainiac"
+  end
+
   def is_admin?
     type == "Admin"
   end

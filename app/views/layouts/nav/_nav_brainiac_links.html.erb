@@ -1,12 +1,14 @@
-<% if controller?("current_users") && action?("home") %>
-	<%= link_to root_path,
-							class: "nav-item nav-link active" do %>
-		<i class="fa fa-home"></i> Home
-	<% end %>
-<% else %>
-	<%= link_to root_path,
-							class: "nav-item nav-link" do %>
-		<i class="fa fa-home"></i> Home
+<% unless current_user.is_brainiac? %>
+	<% if controller?("current_users") && action?("home") %>
+		<%= link_to root_path,
+								class: "nav-item nav-link active" do %>
+			<i class="fa fa-home"></i> Home
+		<% end %>
+	<% else %>
+		<%= link_to root_path,
+								class: "nav-item nav-link" do %>
+			<i class="fa fa-home"></i> Home
+		<% end %>
 	<% end %>
 <% end %>
 
