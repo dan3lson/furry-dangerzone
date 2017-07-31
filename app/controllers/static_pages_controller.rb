@@ -3,11 +3,7 @@ class StaticPagesController < ApplicationController
 
   def home
     if logged_in?
-      if current_user.is_admin?
-        redirect_to admin_settings_path
-      else
-        redirect_to home_path
-      end
+      redirect_to home_path
     end
   end
 

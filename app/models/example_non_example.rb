@@ -10,4 +10,9 @@ class ExampleNonExample < ActiveRecord::Base
   validates :feedback, presence: true, uniqueness: true
   validates :user, presence: true
   validates :word, presence: true
+
+  # TODO Test
+  scope :last_24_hours, -> (time = "updated_at") {
+    where("#{time} > ?", 24.hours.ago)
+  }
 end
