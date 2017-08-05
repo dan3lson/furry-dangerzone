@@ -1,4 +1,4 @@
-<% unless current_user.is_brainiac? %>
+<% if logged_in? && current_user.is_brainiac? %>
 	<% if controller?("current_users") && action?("home") %>
 		<%= link_to root_path,
 								class: "nav-item nav-link active" do %>
