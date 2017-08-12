@@ -1,36 +1,57 @@
 <section>
   <%= render "spelling_bee/q_and_a/question",
-             q: "Why should we sponsor this event?"
+             q: "What Benefits Does the Harlem Spelling Bee Bring?"
   %>
   <p class="mb-4">
-    This is the very first Harlem Spelling Bee, which promotes literacy
-    and vocabulary development. We're excited about and focus on vocabulary
-    because it's the biggest indicator of a student's success in and outside
-    of the classroom. If we want a stronger Harlem community that's more
-    educated and econimically sound, we believe vocabulary - and your
-    support - will help get us there.
+    The Spelling Bee helps promote education within the Harlem Community. As
+    literacy is a key part of a child’s future success, furthering education
+    can help secure our local students’ futures. The Spelling Bee is a stepping
+    stone onto a stronger Harlem community that is educated and economically
+    strong. Your support can help us get there.
   </p>
   <%= render "spelling_bee/q_and_a/question",
-             q: "How can we support?"
+             q: "Why Should We Sponsor the Event?"
   %>
   <p class="mb-4">
-    It's great to hear you'd like to be part of this special
-    event. Because this is free for schools/students, your help - whether
-    you provide in-kind donations, financial contributions, or just give
-    out flyers - will go a long way. Please
-    <%= link_to "submit the form below",
-                "#"
+    In addition to helping the Harlem community and influencing the lives of
+    students, sponsoring the event helps strengthen your business's brand.
+    You can post on your social media or add to your marketing materials that
+    you assisted with the Harlem Spelling Bee and helped make it possible.
+  </p>
+  <%= render "spelling_bee/q_and_a/question",
+             q: "How Can We Help?"
+  %>
+  <p class="mb-4">
+    It’s great to hear that you’re interested! Any form of assistance you can
+    provide is greatly appreciated. Whether it be financial contributions,
+    in-kind donations, or just offering man and woman power to help pass out
+    flyers, our sponsors are a vital part of the Spelling Bee.
+  </p>
+  <%= render "spelling_bee/q_and_a/question",
+             q: "Do You Have More Information on the Competition?"
+  %>
+  <p class="mb-4">
+    We sure do! You can check out the
+    <%= link_to "About the Bee",
+                spelling_bee_about_path,
+                title: "Learn more about the Harlem Spelling Bee."
     %>
-    to get started.
+    page for general info and our
+    <%= link_to "Competition",
+                spelling_bee_competition_path,
+                title: "Learn more about the Harlem Spelling Bee Competition."
+    %>
+    page for the specifics on the upcoming Spelling Bee.
   </p>
   <%= render "spelling_bee/q_and_a/question",
-             q: "What if I have a question or comment?"
+             q: "I have a Question or Comment"
   %>
   <p class="mb-4">
-    We'd love to hear from you;
-    if you have any questions, comments, or concerns, please
+    We love to hear from our sponsors. If you have questions, comments,
+    requests, or concerns, please
     <%= link_to "contact us",
-                spelling_bee_contact_us_path
+                spelling_bee_contact_us_path,
+                title: "Submit our online form to contact us"
     %>.
   </p>
 </section>

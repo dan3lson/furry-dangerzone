@@ -1,8 +1,76 @@
 <footer class="footer static text-center mt-5 bg-faded">
 	<div class="row text-muted mt-5 no-gutters">
-		<div class="col-md-4 mb-5">
+		<div class="col-md-3 mb-5">
 			<div>
-				<h5 class="mb-5">As featured in...</h5>
+				<h5 class="mb-5">Site Map</h5>
+				<div>
+					<p>
+						<span class="lead">Leksi</span>
+						<br>
+						<%= link_to "Homepage",
+												root_path,
+												title: "Go to the Leksi homepage."
+						%>
+						<br>
+						<%= link_to "About Us",
+												about_us_path,
+												title: "Go to the Leksi About Us page."
+						%>
+						<br>
+						<%= link_to "Our Approach",
+												our_approach_path,
+												title: "Go to the Leksi Results page."
+						%>
+						<br>
+						<%= link_to "Results",
+												results_path,
+												title: "Go to the Leksi Research page"
+						%>
+						<br>
+						<%= link_to "Research",
+												research_path,
+												title: "Go to the Leksi Research page"
+						%>
+						<br>
+						<%= link_to "Blog",
+												blog_path,
+												title: "Go to the Leksi Blog page."
+						%>
+					</p>
+					<p>
+						<span class="lead">Harlem Spelling Bee</span>
+						<br>
+						<%= link_to "Homepage",
+												spelling_bee_path,
+												title: "Go to the Leksi Harlem Spelling Bee page."
+						%>
+						<br>
+						<%= link_to "About the Bee",
+												spelling_bee_about_path,
+												title: "Go to the Leksi HSB About the Bee page."
+						%>
+						<br>
+						<%= link_to "Competition",
+												spelling_bee_competition_path,
+												title: "Go to the Leksi HSB Competition page."
+						%>
+						<br>
+						<%= link_to "Teachers",
+												spelling_bee_teachers_path,
+												title: "Go to the Leksi HSB Teachers page."
+						%>
+						<br>
+						<%= link_to "Sponsors",
+												spelling_bee_sponsors_path,
+												title: "Go to the Leksi HSB Sponsors page."
+						%>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 mb-5">
+			<div>
+				<h5 class="mb-5">As Featured In...</h5>
 				<div>
 					<%= link_to image_tag("ed-tech-times.png",
 												class: "img-fluid hover",
@@ -14,7 +82,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4 mb-5">
+		<div class="col-md-3 mb-5">
 			<h5 class="mb-5">Talk to Us!</h5>
 			<%= link_to spelling_bee_contact_us_path,
 									title: "Contact Leksi via our online form." do
@@ -28,7 +96,7 @@
 			%>
 				<%= icon "facebook fa-3x" %>
 			<% end %>
-			&nbsp;
+			<br>
 			<%= link_to "https://twitter.com/LeksiEducation",
 									title: "Say hello to Leksi on Twitter",
 									target: "_blank" do
@@ -42,7 +110,7 @@
 				<%= icon "linkedin fa-3x" %>
 			<% end %>
 		</div>
-		<div class="col-md-4 mb-5">
+		<div class="col-md-3 mb-5">
 			<h5 class="mb-5">The Legal Stuff...</h5>
 				<%#= link_to "Legal Notice",
 										"#",
@@ -63,7 +131,9 @@
 		</div>
 	</div>
 	<div class="pb-3">
-		&copy; <%= Date.today.year %>
-		Leksi&#8482; Education
+		<%= link_to root_path, title: "Visit the Leksi homepage." do %>
+			&copy; <%= Date.today.year %>
+			Leksi&#8482; Education
+		<% end %>
 	</div>
 </footer>

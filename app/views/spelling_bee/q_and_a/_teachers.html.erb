@@ -1,32 +1,43 @@
 <section>
   <%= render "spelling_bee/q_and_a/question",
-             q: "Sounds great - what are the details?!"
+             q: "Is This Free?"
   %>
   <p class="mb-4">
-    To check out all of the details,
-    <%= link_to "visit the Competition page",
+    Unfortunately, the Harlem Spelling Bee is not free. However, we have done
+    our best to make it as affordable as possible to ensure that every class has
+    the opportunity to participate. The cost to register depends on when you
+    enroll, with discounts for Early Bird and Advanced registrations.
+  </p>
+  <%= render "spelling_bee/q_and_a/question",
+             q: "How Do the Students Prepare?"
+  %>
+  <p class="mb-4">
+    Students will use Leksi, an online application, to learn their grade’s 100
+    vocabulary words that will be used in the competition. The app uses
+    scientifically backed methods to help instill an understanding of each
+    individual word. Students will be able to practice for the Bee with the
+    Leksi app and will take their Local School Competition via it. Leksi is
+    provided completely free for your classroom while you prepare for the
+    Spelling Bee.
+  </p>
+  <%= render "spelling_bee/q_and_a/question",
+             q: "This Sounds Great! What are the details? "
+  %>
+  <p class="mb-4">
+    You can check out all of the details by visiting our
+    <%= link_to "Competition page",
                 spelling_bee_competition_path,
-                title: "Visit the Bee Competition page."
-    %>
-    where you
-    can get the scoop on the 2nd Harlem Spelling Bee happening in November
-    2017.
+                title: "Visit the Bee Competition page"
+    %>.
   </p>
   <%= render "spelling_bee/q_and_a/question",
-             q: "Is this free?"
+             q: "I Have Another Question!"
   %>
   <p class="mb-4">
-    This is not free. The cost to register your school depends on when you
-    enroll, as there are Early Bird, Regular, and Late registration periods.
-  </p>
-  <%= render "spelling_bee/q_and_a/question",
-             q: "What if I have a question or comment?"
-  %>
-  <p class="mb-4">
-    We'd love to hear from you;
-    if you have any questions, comments, or concerns, please
+    We'd love to hear from you!
+    If you have any questions, comments, or concerns, please
     <%= link_to "contact us",
                 spelling_bee_contact_us_path
-    %>.
+    %>! We'll get back to you as soon as possible.
   </p>
 </section>
