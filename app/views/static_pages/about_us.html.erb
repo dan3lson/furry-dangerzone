@@ -1,63 +1,97 @@
-<% title "About Us" %>
+<% title "About Us | A lack of effective and engaging options led to the creation of Leksi" %>
 <% description "Learn who we are and why we love helping students boost your vocab." %>
 <% set_meta_tags keywords: %w[login signup account tablet desktop signin app vocabulary words preview literacy learning games education vocab fun goal master] %>
 
 <% set_meta_tags og: {
-  title:    "About Us",
+  title:    "About Us | A lack of effective and engaging options led to the creation of Leksi",
 	description: "Learn who we are and why we love helping students boost your vocab."
 } %>
 
 <% set_meta_tags twitter: {
   card: "Learn who we are and why we love helping students boost studentsr vocab.",
-  title: "About Us",
+  title: "About Us | A lack of effective and engaging options led to the creation of Leksi",
   description: "Learn who we are and why we love helping students boost your vocab."
 } %>
 
 <div class="container">
-  <section>
-    <h1 class="mb-5">About Us</h1>
-    <div class="bg-primary text-white text-center p-4 mb-3">
-      <h3>
-        We believe students should be able to define their future and that
-        <em>vocabulary</em>, a major indicator of students' success, will help
-        lead the way.
-      </h3>
-    </div>
-    <p>
-      Leksi began as a way to solve my personal frustrations
-      when learning new vocabulary words: I wanted an app that helped me keep
-      track of, organize, and learn words that I encountered. After looking
-      around, I didn’t find anything that stood out and met my expectations, so I
-      decided to take matters into my own hands and create it myself.
-    </p>
-    <blockquote class="blockquote">
-      As I learned
-      more about the importance of vocabulary and the lack of time and instruction
-      spent in and outside of the classrooms, it felt like I had an opportunity to
-      make a big impact on students if only I could really execute on this idea.
-    </blockquote>
-    <p>
-      Learn more in the
-      <%= link_to "EdTech Times feature on Leksi",
-                  "https://edtechtimes.com/2016/03/17/vocabulary-app-leksi-helps-students-improve-literacy/"
-      %>.
-    </p>
-    <p>
-      From where do our words come, you ask? Some Teachers create their own, but
-      the majority come from
-      <%= link_to "Princeton University\'s WordNet",
-                  "http://wordnet.princeton.edu"
-      %>
-      and the
-      <%= link_to "Moby Project", "https://en.wikipedia.org/wiki/Moby_Project" %>.
-    </p>
-    <p>
-      Happy learning!
-    </p>
+  <h1 class="mb-5">About Us</h1>
+  <p>
+    Leksi started because I was personally frustrated at the options that were
+    available to expand your vocabulary.
+  </p>
+  <p>
+    If you’re a teacher or if you work with students, you may have an idea of
+    what I mean. The current tools that are available for teaching vocabulary
+    <strong>are just not effective</strong>. They’re often just rehashed
+    versions of digital flashcards or based around games that are not actual
+    teaching agents. The games are particularly troublesome; a student may blast
+    their way through an entire vocabulary list without learning a single word.
+  </p>
+  <p>
+    When students struggle to learn new words, it’s not their fault. Nor is it
+    the fault of their teachers. It’s the fault of all the tools that promise an
+    “easy way” to learn hundreds of new words, but just cannot deliver on that
+    promise.
+  </p>
+  <p>
+    We know that having a strong vocabulary is correlated to performing well in
+    college. Some studies have even suggested that an expansive sense of
+    vocabulary leads to a higher earning potential later in life. It’s clear
+    that vocabulary is important.
+    <strong>So why isn’t there anything effective available?</strong>
+  </p>
+  <p>I built Leksi to change that.</p>
+  <p>
+    Leksi uses a different approach than anything else on the market. Rather
+    than one or two games, or constant repetition, Leksi is built on a
+    multi-method model. Students start with the basic fundamentals of a word,
+    such as its meaning or how it’s spelled. By the end, they’re using the word
+    in abstract games that test their knowledge of the very concept of the word.
+  </p>
+  <p>
+    All the games are designed
+    <strong>around scientifically backed research</strong> to help
+    maximize a student’s understanding of a word. Rather than crude memorization
+    drills, students learn to use the word in conversation and associate it with
+    memories and images. Not only is it more enjoyable than rote memorization,
+    it’s more effective.
+  </p>
+  <p>
+    You can learn more about Leksi as company by reading our
+    <%= link_to "interview with EdTech Times",
+                "https://edtechtimes.com/2016/03/17/vocabulary-app-leksi-helps-students-improve-literacy/",
+                title: "Leksi interview with EdTech Times",
+                target: "_blank"
+    %>
+    or by learning more about
+    <%= link_to "our approach",
+                our_approach_path,
+                title: "Learn more about Leksi\'s approach",
+                target: "_blank"
+    %>.
+  </p>
+  <div class="text-right mt-5">
+    <p>Happy Learning!</p>
     <p>
       Danelson,
       <br>
-      Founder
+      Leksi Founder and Lifelong Learner
     </p>
-  </section>
+  </div>
+  <p class="mt-5 text-muted">
+    P.S.
+    From where do our words come, you ask? Some Teachers create their own, but
+    the majority come from
+    <%= link_to "Princeton University\'s WordNet",
+                "http://wordnet.princeton.edu",
+                title: "Princeton University\'s WordNet",
+                target: "_blank"
+    %>
+    and the
+    <%= link_to "Moby Project",
+                "https://en.wikipedia.org/wiki/Moby_Project",
+                title: "Moby Project",
+                target: "_blank"
+    %>.
+  </p>
 </div>
