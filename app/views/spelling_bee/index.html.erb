@@ -1,12 +1,10 @@
 <% title "Harlem Spelling Bee - Promoting literacy and education in the Harlem community." %>
 <% description "Learn more about the very exciting Harlem Spelling Bee competition." %>
 <% set_meta_tags keywords: %w[harlem spelling bee competition fun schools education vocabulary vocab literacy english language study dictionary words games notebook] %>
-
 <% set_meta_tags og: {
   title: "Learn more about the very exciting Harlem Spelling Bee competition.",
 	description: "Designed with academic vocabulary research and gamification, Leksi helps students master new words."
 } %>
-
 <% set_meta_tags twitter: {
   card: "Which Harlem school students will become spelling bee champs?",
   title: "Learn more about the very exciting Harlem Spelling Bee competition.",
@@ -30,7 +28,12 @@
       <div class="col-md-8 offset-md-2">
         <h2>About the Bee<div></div></h2>
         <p class="lead">
-          The Harlem Spelling Bee is about more than remembering a few words.
+          The
+          <%= link_to "Leksi",
+                      root_path,
+                      title: "Visit the Leksi homepage."
+          %>
+          Harlem Spelling Bee is about more than remembering a few words.
           It’s a challenge that teaches students they can do anything if
           they’re willing to set their mind to it. And if they can study hard
           enough to become Finalists at the Main Event, then there is nothing

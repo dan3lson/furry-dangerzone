@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root "static_pages#home"
-  get "about_us" => "static_pages#about_us"
+  get "about-us" => "static_pages#about_us"
   get "research" => "static_pages#research"
-  get "our_approach" => "static_pages#our_approach"
+  get "our-approach" => "static_pages#our_approach"
   get "results" => "static_pages#results"
   get "terms-of-use" => "static_pages#terms_of_use"
   get "privacy-policy" => "static_pages#privacy_policy"

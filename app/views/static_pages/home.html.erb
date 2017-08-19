@@ -1,53 +1,79 @@
-<% title "Boost your vocabulary in a fun and simple way." %>
-<% description "Designed with vocabulary academic research and gamification, Leksi helps you master new words." %>
-<% set_meta_tags keywords: %w[learn education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
+<% title "A Better Way to Learn Vocabulary" %>
+<% description "Leksi Uses a Research Driven Approach to Give Students a Better Way to Learn" %>
+<% set_meta_tags keywords: %w[education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
 
 <% set_meta_tags og: {
-  title:    "Boost your vocabulary in a fun and simple way.",
-	description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+  title:    "A Better Way to Learn Vocabulary",
+	description: "Leksi Uses a Research Driven Approach to Give Students a Better Way to Learn"
 } %>
 
 <% set_meta_tags twitter: {
   card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun, and based on evidence.",
-  title: "Boost your vocabulary in a fun and simple way.",
-  description: "Designed with vocabulary academic research and gamification, Leksi helps you master new words."
+  title: "A Better Way to Learn Vocabulary",
+  description: "Leksi Uses a Research Driven Approach to Give Students a Better Way to Learn"
 } %>
 
-<section class="text-center guest-section-home">
-  <h1 class="display-1">Words equal wealth.</h1>
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <p class="lead">
-        Leksi increases vocabulary, which leads to stronger reading and
-        writing skills.
-      </p>
-      <div class="embed-responsive embed-responsive-16by9">
-      	<iframe src="https://player.vimeo.com/video/213363688"
-      					class="embed-responsive-item"
-      					webkitallowfullscreen mozallowfullscreen allowfullscreen>
-				</iframe>
+<section class="guest-about-section text-center">
+  <div class="container pb-5">
+    <h1 class="display-3">A Better Way to Learn Vocabulary</h1>
+    <div class="row no-gutters">
+      <div class="col-md-8 offset-md-2">
+        <h3 class="mt-4">
+          Leksi Uses a Research Driven Approach to Give Students a Better Way
+          to Learn.
+        </h3>
+        <%#= link_to new_user_path,
+                    class: "btn btn-danger btn-lg",
+                    role: "button" do
+        %>
+          <!-- Teachers, Get Started -->
+        <%# end %>
       </div>
     </div>
   </div>
 </section>
-<section class="mt-5 mb-5 bg-faded p-5 text-center text-muted">
-  <div>
-    <h2 class="mb-5">As featured in...</h2>
-    <div>
-      <%= link_to image_tag("ed-tech-times.png",
-                    class: "img-fluid hover",
-                    alt: "EdTech Times Leksi Feature",
-                    title: "EdTech Times Leksi Feature"),
-                    "https://edtechtimes.com/2016/03/17/vocabulary-app-leksi-helps-students-improve-literacy/",
-                    target: "_blank"
-      %>
+<section class="guest-section-home about">
+  <div class="row no-gutters">
+    <div class="col-md-8 offset-md-2">
+      <h2 class="text-center">About Leksi<div></div></h2>
+      <p class="lead">
+        Using a research driven approach, Leksi helps students learn and use new
+        vocabulary. Students are walked through multiple activities that help
+        build and reinforce connections in the brain for each new word. The
+        process brings them from basic activities, such as spelling vocabulary,
+        to more complicated exercises such as composing a short story or poem.
+      </p>
+    </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-md-4 offset-md-4">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="https://player.vimeo.com/video/213363688"
+                class="embed-responsive-item"
+                webkitallowfullscreen mozallowfullscreen allowfullscreen>
+        </iframe>
+      </div>
     </div>
   </div>
 </section>
+<section class="cred mb-5 bg-faded p-5 text-center text-muted">
+  <%= icon "angellist fa-3x" %>
+  &nbsp;
+  <span class="p-5"></span>
+  <%= link_to image_tag("edtechtimes.png",
+                class: "img-fluid hover",
+                alt: "EdTech Times Leksi Feature",
+                title: "EdTech Times Leksi Feature"),
+                "https://edtechtimes.com/2016/03/17/vocabulary-app-leksi-helps-students-improve-literacy/",
+                target: "_blank"
+  %>
+  <span class="p-5"></span>
+  <%= icon "quora fa-3x" %>
+</section>
 <section class="guest-section-home">
-  <div class="row">
+  <div class="row no-gutters">
     <div class="col-md-8 offset-md-2">
-      <h1 class="display-4">The Opportunity</h1>
+      <h1 class="display-4">The Problem</h1>
       <blockquote class="blockquote">
         There’s a positive correlation between a student’s vocabulary size in
         grade 12, the likelihood that she will graduate from college, and her
@@ -57,82 +83,128 @@
           Dr. E.D. Hirsch, Jr.
         </small>
       </blockquote>
-      <p class="highlight">
-        The more words students can recognize and use by senior
-        year in high school, the better off they'll be in college and beyond.
-        It's that simple.
+      <p>
+        Although it may not seem like it, the number of words that a child
+        learns throughout their schooling is a key indicator of their future
+        success. Simply put, the more vocabulary a child is exposed to, the
+        better their chances at a future.
+      </p>
+      <p>
+        A strong vocabulary helps reading comprehension, which is invaluable
+        as a student ages and deals with increasingly difficult
+        assignments. If their vocabulary knowledge is limited early on, then
+        their academics can suffer as they make their way through high school.
+        This difficulty stops many students from attending college, and for
+        others, it means they’re unable to graduate high school.
+      </p>
+      <p>
+        A small vocabulary affects literacy. This can destroy
+        <strong>any</strong> chance a student can have at a future.
+      </p>
+      <p>
+        Luckily, with the right tools, one can expand their vocabulary. And at
+        any age.
       </p>
       <p class="text-center">
-        <%= link_to "See more research",
+        <%= link_to "Read Our Whitepaper: The Vocabulary Crisis",
                     research_path,
-                    class: "btn btn-outline-primary btn-lg",
+                    class: "btn btn-primary btn-lg",
                     role: "button" %>
       </p>
     </div>
   </div>
 </section>
 <section class="guest-section-home">
-  <div class="row">
+  <div class="row no-gutters">
     <div class="col-md-8 offset-md-2">
-      <h1 class="display-4">Our Approach</h1>
-      <p class="lead">
-        Students need exposure and practice to Tier 2 words. We want them to own
-        and be excited about expanding their vocabulary. To that end,
+      <h1 class="display-4">The Leksi Road</h1>
+      <p>
+        For years, the most common way to learn vocabulary has been brute
+        repetition, for example flashboards and memorization drills.
+        Unfortunately, this style of learning comes at a cost. Often, a student
+        can recite the word and its definition but does not possess a true
+        concept of the meaning. So, if they encounter the word, they may
+        recognize it, but fail to comprehend its intended purpose. This hurts
+        literacy.
       </p>
-      <h5>
-        we combine...
-      </h5>
-      <div class="row text-center">
-        <div class="col-sm-4">
-          <i class="fa fa-lightbulb-o fa-3x"></i>
-          <br>
-          Vocabulary research
-        </div>
-        <div class="col-sm-4">
-          <i class="fa fa-connectdevelop fa-3x"></i>
-          <br>
-          Science
-        </div>
-        <div class="col-sm-4">
-          <i class="fa fa-gamepad fa-3x"></i>
-          <br>
-          Game-like activities
-        </div>
-      </div>
-      <h5>
-        ...which directly improves:
-      </h5>
-      <div class="row text-center">
-        <div class="col-sm-4">
-          <i class="fa fa-book fa-3x"></i>
-          <br>
-          Literacy profiency
-        </div>
-        <div class="col-sm-4">
-          <i class="fa fa-graduation-cap fa-3x"></i>
-          <br>
-          Likelihood of academic success
-        </div>
-        <div class="col-sm-4">
-          <i class="fa fa-black-tie fa-3x"></i>
-          <br>
-          College and career readiness
-        </div>
+      <p>
+        So, Leksi takes a new approach. Based on scientific studies and years of
+        research, the Leksi Road has students complete multiple activities of
+        varying difficulty on their journey to master each new vocabulary term.
+        From traditional memorization techniques (such as spelling) to our
+        Leksi Tales and Word Relationship games, it’s an expedition designed to
+        give a true understanding to our students.
+      </p>
+      <p class="text-center">
+        <%= link_to "See Our Approach",
+                    our_approach_path,
+                    class: "btn btn-primary btn-lg",
+                    role: "button" %>
+      </p>
+    </div>
+  </div>
+</section>
+<section class="guest-section-home">
+  <div class="row no-gutters">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">We Care About Students</h1>
+      <p>
+        Leksi’s mission doesn’t stop at an online app. We know that students are
+        the future, so we go above and beyond to instill a love of education
+        wherever we go.
+      </p>
+      <p>
+        That’s why we host the Harlem Spelling Bee, where we recognize the
+        courage and determination of all Harlem students.
+      </p>
+      <div class="text-center">
+        <%= link_to "Bee Part of the Competition",
+                    spelling_bee_path,
+                    class: "btn btn-primary btn-lg",
+                    role: "button",
+                    title: "Visit the Harlem Spelling Bee site."
+        %>
       </div>
     </div>
   </div>
-  <p class="text-center">
-    <%= link_to "Learn more",
-                our_approach_path,
-                class: "btn btn-outline-primary btn-lg",
-                role: "button" %>
-  </p>
 </section>
 <section class="guest-section-home">
-  <div class="row">
+  <div class="row no-gutters">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4">Built in the Classroom</h1>
+      <p>
+        Leksi was built during the spare minutes that could be found in the
+        classroom. Because we understand how challenging (and rewarding) it can
+        be to teach, we designed the Leksi Interface to be as friendly and
+        helpful as possible to you.
+      </p>
+      <ul class="fa-ul">
+        <li>
+          <%= icon "fa-li fa fa-check" %>
+          <b>Easy to Use</b> – You can set up a classroom and student accounts
+          in a matter of minutes.
+        </li>
+        <li>
+          <%= icon "fa-li fa fa-check" %>
+          <b>Stats</b> – Comprehensive stats will let you know who is using
+          Leksi the most, keep track of those who are mastering their
+          fundamentals, and which students could use a bit of help.
+        </li>
+        <li>
+          <%= icon "fa-li fa fa-check" %>
+          <b>Keep an Eye Out</b> - Sometimes, students can be mischievous. For
+          open-ended responses, you’ll be able to check over work to make sure
+          students are completing them correctly.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="guest-section-home">
+  <div class="row no-gutters">
     <div class="col-md-8 offset-md-2">
       <h1 class="display-4">Our Results</h1>
-      <div class="row text-center mb-3">
+      <div class="row no-gutters text-center mb-3">
         <div class="col-md-6">
           <h3>
             93%
@@ -148,59 +220,40 @@
           </h3>
         </div>
       </div>
-      <blockquote class="blockquote">
-        <p>
-          The extra practice Leksi afforded my scholars enabled them to master
-          new words more quickly and more deeply than before.
-        </p>
-        <footer class="blockquote-footer">
-          Leana P., Friends Seminary Middle School Teacher
-        </footer>
-      </blockquote>
-      <blockquote class="blockquote">
-        <p>
-          Helps you really know the words, love it!
-        </p>
-        <footer class="blockquote-footer">
-          5th Grader, Friends Seminary
-        </footer>
-      </blockquote>
+      <div class="row">
+        <div class="col-md-6">
+          <blockquote class="blockquote">
+            <p>
+              The extra practice Leksi afforded my scholars enabled them to
+              master new words more quickly and more deeply than before.
+            </p>
+            <footer class="blockquote-footer">
+              Leana P., Friends Seminary Middle School Teacher
+            </footer>
+          </blockquote>
+        </div>
+        <div class="col-md-6">
+          <blockquote class="blockquote">
+            <p>
+              Helps you really know the words, love it!
+            </p>
+            <footer class="blockquote-footer">
+              5th Grader, Friends Seminary Middle School
+            </footer>
+          </blockquote>
+        </div>
+      </div>
     </div>
   </div>
   <p class="text-center">
-    <%= link_to "See more reactions",
+    <%= link_to "See More Reactions",
                 results_path,
-                class: "btn btn-outline-primary btn-lg",
+                class: "btn btn-primary btn-lg",
                 role: "button" %>
   </p>
 </section>
-<section class="spee-bee-about-section text-center spe-bee-yellow-bg">
-  <div class="row">
-    <div class="col-lg-3">
-      <%= image_tag(
-        "spelling-bee.png",
-        class: "mx-auto d-block",
-        width: 300,
-        height: 300
-      ) %>
-    </div>
-    <div class="col-lg-9">
-      <h4>* Leksi Presents *</h4>
-      <h1 class="display-3">2nd Harlem <br> Spelling Bee</h1>
-      <p class="lead">
-        Learn more below about this exciting event for the Harlem community.
-      </p>
-      <p class="text-center">
-        <%= link_to "Bee part of the competition",
-                    spelling_bee_path,
-                    class: "btn btn-outline-primary btn-lg",
-                    role: "button" %>
-      </p>
-    </div>
-  </div>
-</section>
 <section class="guest-section-home">
-  <div class="row">
+  <div class="row no-gutters">
     <div class="col-md-8 offset-md-2">
       <h1 class="display-4">Contact Us</h1>
       <%= render "contact_us_mailer/form" %>

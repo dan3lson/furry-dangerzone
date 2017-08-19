@@ -1,15 +1,30 @@
-<section>
+<div class="container">
 	<h1>
 		Research
 	</h1>
-	<p class="lead">
+	<p class="lead mb-5">
 		So much exists to explain the challenges guardians, educators, and
-		ultimately students face with vocabulary and why
-		it's crucial to do more. This page isn't exhaustive by any means, however
-		it's meant to expose, educate, and motivate you.
+		ultimately students face with vocabulary and why it's crucial to do more.
+		You can find reading material and research on the matter below.
 	</p>
-</section>
-<section>
+	<div class="card card-outline-primary mb-3">
+		<div class="card-block text-center">
+			<h4 class="card-title">
+				<%= icon "newspaper-o" %>
+				White Paper: The Vocabulary Crisis
+				<br>
+				<small class="text-muted">How Teachers Can Combat the Word Gap</small>
+			</h4>
+			<p>
+				<%= link_to "Read and Download",
+										asset_path("Leksi - The Vocabulary Crisis White Paper.pdf"),
+										class: "btn btn-primary",
+										role: "button",
+										title: "Leksi - The Vocabulary Crisis White Paper",
+										target: "_blank" %>
+			</p>
+		</div>
+	</div>
 	<div class="card-columns">
 		<div class="card card-block text-xs-right">
 			<%= render "static_pages/card_blockquote",
@@ -104,4 +119,4 @@
 				source_title: "Wealth of Words" %>
 	  </div>
 	</div>
-</section>
+</div>

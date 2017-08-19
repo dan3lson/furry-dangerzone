@@ -1,4 +1,4 @@
-<nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
+<nav class="navbar navbar-toggleable-sm navbar-light bg-faded guest">
   <button class="navbar-toggler navbar-toggler-right"
           type="button"
           data-toggle="collapse"
@@ -8,16 +8,17 @@
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <h1 class="navbar-brand mb-0">Leksi</h1>
+  <a class="navbar-brand" href="<%= root_path %>">Leksi</a>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <div class="navbar-nav mr-auto">
       <%= render "layouts/nav/nav_guest_links" %>
     </div>
     <div>
     	<%= link_to login_path,
-    							class: "btn btn-primary",
+    							class: "btn btn-outline-secondary",
     							role: "button" do
     	%>
+        <%= icon "sign-in" %>
     		Log In
     	<% end %>
     	<%#= link_to new_user_path,

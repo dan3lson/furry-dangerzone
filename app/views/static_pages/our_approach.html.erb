@@ -1,2 +1,73 @@
-<h1>Our Approach</h1>
-<%= render "games/game_zone", header: false %>
+<% title "Our Approach For A Better Way to Learn Vocabulary" %>
+<% description "Leksi Uses a Research Driven Approach to Give Students a Better Way to Learn" %>
+<% set_meta_tags keywords: %w[education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook] %>
+
+<% set_meta_tags og: {
+  title:    "Our Approach For A Better Way to Learn Vocabulary",
+	description: "Leksi Uses a Research Driven Approach to Give Students a Better Way to Learn"
+} %>
+
+<% set_meta_tags twitter: {
+  card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun, and based on evidence.",
+  title: "Our Approach For A Better Way to Learn Vocabulary",
+  description: "Leksi Uses a Research Driven Approach to Give Students a Better Way to Learn"
+} %>
+
+<div class="container">
+	<h1 class="mb-5">Our Approach</h1>
+  <p>
+    For students trying to expand their vocabulary, there can be precious few
+    tools to help them. The main method found is through brute force
+    memorization. Drilling with flashcards can help students recall a word, but
+    it comes with severe limitations.
+  </p>
+  <p>
+    Learning via flashcards and forced memorization is crude, and unfortunately,
+    ineffective. While a student may be able to recall a definition on command,
+    memorization is unable to make multiple connections between the word and its
+    true meaning. Just because students can recite a word’s definition, does not
+    mean that they’re comfortable using it in a sentence.
+  </p>
+  <p>
+    This becomes a severe problem down the line. Either a student will not use
+    the word, and likely forget it, or they fail to comprehend the meaning when
+    they read it.
+  </p>
+  <p>
+    This is a severe problem for those attempting to learn vocabulary. What is
+    the point of learning something if it cannot be used?
+  </p>
+  <p>So, we developed the Leksi Road.</p>
+  <h3>The Leksi Road</h3>
+  <p>
+    The Leksi Road is a journey that a student takes for every word they need to
+    learn. After starting off with an introduction of the target word and
+    simple activities, such as spelling, students
+    make their way down the Leksi Road by completing more intricate exercises
+    like electing examples, making decisions based on the definition, and
+    connecting their new word with previous vocabulary terms.
+  </p>
+  <div class="row mt-3 mb-3">
+    <div class="col-md-6 offset-md-3">
+      <%= image_tag "leksi-lesson-sample.png",
+                    class: "img-fluid img-thumbnail",
+                    alt: "Leksi Lesson: Examples/Non-Examples",
+                    title: "Leksi Lesson: Examples/Non-Examples"
+      %>
+      <small class="text-muted">
+        Snapshot of the Examples/Non-Examples activity for the word "abate".
+      </small>
+    </div>
+  </div>
+  <p>
+    By the time a student has made it to the end of the Road, they’ll have a
+    greater understanding of the vocabulary word. Instead of brute memorization,
+    they will have used the word in sentences, made new connections, and
+    considered the meaning in various scenarios.
+  </p>
+  <p>
+    The Road is built not just on reciting a single definition, but on truly
+    <em>learning</em> new words. So that when they encounter the words, whether
+    in life or on a test, they’re prepared.
+  </p>
+</div>
