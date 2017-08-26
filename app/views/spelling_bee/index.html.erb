@@ -17,12 +17,18 @@
       <%= icon "star" %> Leksi Presents <%= icon "star" %>
     </h2>
     <h1 class="display-1">The Harlem Spelling Bee</h1>
-    <h3 class="mt-4">
+    <h3 class="mt-4 mb-4">
       Giving Harlem Students a Chance to Bee Champions
     </h5>
+    <%= link_to "Enroll Your School Today",
+                spelling_bee_teachers_path,
+                role: "button",
+                class: "btn btn-success btn-lg",
+                title: "Support the Harlem Spelling Bee"
+    %>
   </div>
 </section>
-<section class="spee-bee-about-section text-center">
+<section class="spee-bee-trail-section text-center">
   <div class="container pb-5">
     <div class="row">
       <div class="col-md-8 offset-md-2">
@@ -39,6 +45,7 @@
           enough to become Finalists at the Main Event, then there is nothing
           out of their reach.
         </p>
+        <p>
           <%= link_to "Learn More",
                       spelling_bee_about_path,
                       class: "btn btn-outline-primary btn-lg",
@@ -70,7 +77,7 @@
               Give your students a chance to expand their knowledge and become a
               Bee Champion.
             </p>
-            <%= link_to "Enroll today",
+            <%= link_to "Enroll Today",
                         spelling_bee_teachers_path,
                         role: "button",
                         class: "btn btn-primary btn-lg",

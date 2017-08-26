@@ -57,18 +57,8 @@ a, a:active {
 	@include box_sizing;
 }
 
-.text-white a {
-	color: $white;
-
-	&:visited {
-	}
-
-	&:hover {
-		color: $white;
-	}
-
-	&:active {
-	}
+.form-group label {
+  font-weight: bold;
 }
 
 .hover {
@@ -124,6 +114,20 @@ table {
 
 	th, td {
 	  border-top: none !important;
+	}
+}
+
+.text-white a {
+	color: $white;
+
+	&:visited {
+	}
+
+	&:hover {
+		color: $white;
+	}
+
+	&:active {
 	}
 }
 
