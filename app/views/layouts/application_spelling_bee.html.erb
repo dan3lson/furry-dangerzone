@@ -4,12 +4,9 @@
   <body>
     <%= render "sessions/facebook_sdk" %>
     <%= render "layouts/nav/nav_spelling_bee" %>
-    <div class="coontainer">
-      <%= render "shared/flash_messages" %>
-      <%= yield %>
-      <%= render "layouts/nav/footer_guest" %>
-      <%#= debug(params) if Rails.env.development? %>
-    </div>
+    <%= render "shared/flash_messages" %>
+    <%= yield %>
+    <%= render "layouts/nav/footer_guest" %>
     <%= render "shared/google_analytics" %>
     <%= render "shared/script_src" %>
   </body>
