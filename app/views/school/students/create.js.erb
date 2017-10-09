@@ -1,5 +1,5 @@
 var $card = $(".card");
-var $cardBlock = $card.find(".card-block");
+var $cardBlock = $card.find(".card-body");
 $(".container").find(".alert").remove();
 var msgs = JSON.parse("<%= j @msgs.to_json.html_safe %>");
 var $resultsPartial = $("<%= j render(partial: 'school/students/create', locals: { results: @msgs }) %>");

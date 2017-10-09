@@ -6,7 +6,7 @@
 	<%= icon "tag" %> <%= @tag.name %>
 </h1>
 <div class="card mb-3">
-	<div class="card-block">
+	<div class="card-body">
 		<h5 class="card-title">
 			Stats
 		</h5>
@@ -17,7 +17,7 @@
 </div>
 <%= render "my_tags/words", tag: @tag %>
 <div class="card text-center mb-3">
-	<div class="card-block">
+	<div class="card-body">
     <p class="text-muted">
       You added this tag <%= time_ago_in_words(@tag.created_at) %> ago.
     </p>

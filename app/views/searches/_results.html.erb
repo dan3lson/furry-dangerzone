@@ -2,33 +2,19 @@
 	<div class="alert alert-danger"><%= error %></div>
 <% else %>
 	<% word_groups.each do |name, words| %>
-		<div class="card card-inverse dark text-center mb-3">
-			<div class="card-block">
-				<h2 class="card-title">
-					<%= name %>
-					<%# if words.first.has_pronunciation? %>
-					<% if false %>
-						<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= name %>.mp3"
-									 id="audio"
-									 preload="auto">
-						</audio>
-						<small>
-							<i class="fa fa-volume-up hover pointer text-primary"></i>
-						</small>
-					<% end %>
-				</h2>
-				<small><%= pluralize(words.count, "result") %></small>
-			</div>
-		</div>
-		<div class="search card-columns">
+		<div class="card mb-3">
+		  <h4 class="card-header">
+				<%= name %>
+				<small class="text-muted">
+					<%= pluralize(words.count, "result") %>
+				</small>
+			</h4>
 			<% words.each do |word| %>
-				<div class="card mb-3">
-					<div class="card-block" data-word-id="<%= word.id %>">
-						<h2 class="card-title">
-							<%= render "words/pos_def", word: word %>
-						</h2>
-						<%= render "searches/results_options", word: word %>
-					</div>
+				<div class="card-body" data-word-id="<%= word.id %>">
+					<h4 class="card-title">
+						<%= render "words/pos_def", word: word %>
+					</h4>
+					<%= render "searches/results_options", word: word %>
 				</div>
 			<% end %>
 		</div>

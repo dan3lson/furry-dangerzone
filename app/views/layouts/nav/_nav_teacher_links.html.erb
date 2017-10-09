@@ -28,6 +28,26 @@
 	<% end %>
 <% end %>
 
+<div class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle"
+		 href="#"
+		 id="navbarDropdownMenuLink"
+		 data-toggle="dropdown"
+		 aria-haspopup="true"
+		 aria-expanded="false">
+		 <%= icon "pencil" %>
+    Content
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		<%= link_to new_school_word_path, class: "dropdown-item" do %>
+			Create New Word
+		<% end %>
+		<%= link_to "#", class: "dropdown-item" do %>
+			View My Words
+		<% end %>
+  </div>
+</div>
+
 <%# if controller?("school/searches") %>
 	<%#= link_to school_search_path, class: "nav-item nav-link active" do %>
 		<!-- <i class="fa fa-search"></i> Look Up -->

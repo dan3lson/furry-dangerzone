@@ -1,29 +1,28 @@
-
-  <div class="input-group input-group-lg">
-    <%= label_tag :'input-search',
-                  "Search",
-                  class: "form-control-label sr-only"
+<div class="input-group input-group-lg">
+  <%= label_tag :'input-search',
+                "Search",
+                class: "form-control-label sr-only"
+  %>
+  <%= text_field_tag :search,
+                     params[:search],
+                     type: "search",
+                     class: "form-control",
+                     id: "input_search",
+                     placeholder: "Type word(s) here",
+                     autofocus: true
+  %>
+  <span class="input-group-btn">
+    <%= button_tag type: "submit",
+                   class: "btn btn-primary",
+                   id: "search-btn" do
     %>
-    <%= text_field_tag :search,
-                       params[:search],
-                       type: "search",
-                       class: "form-control",
-                       id: "input_search",
-                       placeholder: "Type word(s) here",
-                       autofocus: true
-    %>
-    <span class="input-group-btn">
-      <%= button_tag type: "submit",
-                     class: "btn btn-primary",
-                     id: "search-btn" do
-      %>
-        <i class="fa fa-search"></i>
-      <% end %>
-    </span>
-  </div>
-  <p class="form-text text-muted">
-    <small>
-      <i class="fa fa-lightbulb-o"></i> Tip: Look up multiple words by
-      separating them with commas, for example: <em>one, two, three</em>
-    </small>
-  </p>
+      <i class="fa fa-search"></i>
+    <% end %>
+  </span>
+</div>
+<p class="form-text text-muted">
+  <small>
+    <i class="fa fa-lightbulb-o"></i> Tip: Look up multiple words by
+    separating them with commas, for example: <em>one, two, three</em>
+  </small>
+</p>

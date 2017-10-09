@@ -1,13 +1,4 @@
-<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
-  <button class="navbar-toggler navbar-toggler-right"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark true-dark">
   <%= link_to spelling_bee_path,
       class: "navbar-brand",
       title: "Harlem Spelling Bee homepage" do
@@ -22,8 +13,17 @@
     %>
     Harlem Spelling Bee
   <% end %>
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <div class="navbar-nav mr-auto">
+    <div class="navbar-nav">
       <%= render "layouts/nav/nav_spelling_bee_links" %>
     </div>
   </div>

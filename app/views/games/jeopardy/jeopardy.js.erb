@@ -315,7 +315,7 @@ function updateHeader(string) {
 
 function createMotionCard($btn, promoted) {
 	var $card = createElem("div", "card mb-3");
-	var $cardBlock = createElem("div", "card-block");
+	var $cardBlock = createElem("div", "card-body");
 	$card.append($cardBlock);
 	var word = "<mark>" + $btn.text() + "</mark>";
 
@@ -334,7 +334,7 @@ function createMotionCard($btn, promoted) {
 
 function createResultCard(round) {
 	var $card = createElem("div", "card mb-3");
-	var $cardBlock = createElem("div", "card-block");
+	var $cardBlock = createElem("div", "card-body");
 	var $cardTitle = createElem("h4", "card-title");
 	var correctString = "Correct answer: " + round.correct_ans.name;
 	var urAnswerString = "Your Answer: " + round.selected_ans;

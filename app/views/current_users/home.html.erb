@@ -1,15 +1,5 @@
 <% if current_user.is_teacher? %>
-	<div class="alert alert-info">
-		<%= icon "info-circle" %>
-		Because you are a Teacher,
-		<strong>below is a sample snapshot</strong> of what your students
-		see on their "<%= icon "home" %> Home" page.
-	</div>
-	<%= image_tag "leksi-sample-student-home-view.png",
-								class: "img-fluid img-thumbnail",
-								alt: "Leksi Sample Student Homepage",
-								title: "Leksi Sample Student Homepage"
-	%>
+	Teacher is logged in!
 <% else %>
 	<% if current_user.has_rand_incomplete_word? %>
 		<%= play_btn_big(@user_word, @user_word.word.id, @user_word.current_game) %>
@@ -22,7 +12,7 @@
 					<%= icon "clock-o" %> Recent Classroom Activity
 					<small class="text-muted">Last 24 hours</small>
 				</div>
-				<div class="card-block">
+				<div class="card-body">
 					<% if current_user.has_classmates? &&
 						current_user.teacher.has_classroom_activity?
 					%>
@@ -44,7 +34,7 @@
 					<%= icon "quote-left" %> Teacher Reviews
 					<small class="text-muted">Last 24 hours</small>
 				</div>
-				<div class="card-block">
+				<div class="card-body">
 					<% if current_user.has_reviewed_frees_last_24_hrs? %>
 						<%= render "school/students/freestyles",
 											 freestyles: current_user.freestyles

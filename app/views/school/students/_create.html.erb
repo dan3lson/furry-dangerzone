@@ -15,7 +15,7 @@
 <% else %>
 	<% unless results[:successes].empty? %>
 		<div class="card card-outline-success mb-3">
-			<div class="card-block">
+			<div class="card-body">
 				<h4 class="card-title text-success">
 					Success!
 					<%= pluralize(results[:successes].count, "Username") %> Created
@@ -55,7 +55,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="card-block">
+			<div class="card-body">
 				<h4 class="card-title">
 					Add Words for These Students (Optional)
 				</h4>
@@ -74,7 +74,7 @@
 					<%= icon "book" %> Add Grade <%= @classroom.grade %> Words
 				<% end %>
 			</div>
-			<div class="card-block">
+			<div class="card-body">
 				<h4 class="card-title">
 					Create More Usernames (Optional)
 				</h4>
@@ -94,7 +94,7 @@
 	<% end %>
 	<% unless results[:errors].empty? %>
 		<div class="card card-outline-danger">
-			<div class="card-block">
+			<div class="card-body">
 				<h4 class="card-title text-danger">
 					<%= pluralize(results[:errors].count, "Username") %> Not Created
 				</h4>
@@ -118,7 +118,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="card-block">
+			<div class="card-body">
 				<div class="alert alert-danger" role="alert">
 					<%= icon "warning" %>
 					Since there was an issue creating the username above, please try again

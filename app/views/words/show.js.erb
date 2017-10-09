@@ -1,6 +1,6 @@
 const $wordPartial = $("<%= j render(partial: 'words/basics', locals: { word: @word }) %>");
 $("#word-basics").remove();
-$card = createElem("div", "card card-block mt-3", "word-basics");
+$card = createElem("div", "card card-body mt-3", "word-basics");
 $card.append($wordPartial);
 $("#activity-div").append($card);
 
