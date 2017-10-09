@@ -38,10 +38,10 @@ $(document).ready(function() {
 			$word_being_spelled = $.trim($(this).val());
 
 			if ($word_being_spelled == string) {
-				inputValidation(input_selector, "success");
+				inputValidation(input_selector, "valid");
 				validateFormFields("#cf-submit-btn");
 			} else {
-				inputValidation(input_selector, "danger");
+				inputValidation(input_selector, "invalid");
 				validateFormFields("#cf-submit-btn");
 			}
 		});
@@ -54,17 +54,17 @@ $(document).ready(function() {
 			$text = $.trim($(this).val());
 
 			if ($text != "" && $regex.test($text)) {
-				inputValidation(this, "success");
+				inputValidation(this, "valid");
 				validateFormFields("#cf-submit-btn");
 			} else {
-				inputValidation(this, "danger");
+				inputValidation(this, "invalid");
 				validateFormFields("#cf-submit-btn");
 			}
 		});
 	}
 
 	function validateFormFields(btn_selector) {
-		if($(".has-success").length == 5) {
+		if($(".is-valid").length == 5) {
 			$(btn_selector).attr("disabled", false);
 		} else {
 			$(btn_selector).attr("disabled", true);
@@ -72,13 +72,8 @@ $(document).ready(function() {
 	}
 
 	function inputValidation(field_selector, className) {
-		$(field_selector).removeClass("form-control-danger")
-										 .removeClass("form-control-warning")
-										 .removeClass("form-control-success")
-										 .addClass("form-control-" + className);
-		$(field_selector).parent().removeClass("has-danger")
-															.removeClass("has-warning")
-															.removeClass("has-success")
-															.addClass("has-" + className);
+		$(field_selector).removeClass("is-invalid")
+										 .removeClass("is-valid")
+										 .addClass("is-" + className);
 	}
 });

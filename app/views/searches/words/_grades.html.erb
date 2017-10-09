@@ -3,7 +3,7 @@
 	<% word_groups.each_with_index do |(name, words), i| %>
 	  <div class="card">
 			<% words.take(3).each do |word| %>
-				<div class="card-block" data-word-id="<%= word.id %>">
+				<div class="card-body" data-word-id="<%= word.id %>">
 					<h4 class="card-title">
 						<%= name %>
 					</h4>

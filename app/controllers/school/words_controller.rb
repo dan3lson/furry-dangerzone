@@ -27,10 +27,10 @@ class School::WordsController < BaseSchoolController
 
   def word_params
     params.require(:word).permit(
-      :name,
+      :definition,
       :phonetic_spelling,
       :part_of_speech,
-      :definition
+      :name
     )
   end
 end

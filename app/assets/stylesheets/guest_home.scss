@@ -2,8 +2,6 @@
 	background: #187DC0 !important;
 }
 .guest-about-section {
-	background-image: url(image-path("tree_background3.jpg"));
-	background-image: url(image-path("tree_background2.png"));
 	background-image: url(image-path("tree_background.jpg"));
 	background-color: $sky-blue;
 	-webkit-background-size: cover;
@@ -83,6 +81,11 @@
 			width: 4rem;
 		}
 	}
+}
+
+.guest-section-home.last {
+	border-bottom: none;
+	margin-bottom: 0rem;
 }
 
 .navbar {

@@ -4,7 +4,7 @@
 	<small class="text-muted">4th Grade</small>
 </h1>
 <div class="card card-primary text-white mb-3">
-	<div class="card-block">
+	<div class="card-body">
 		<h4 class="card-title">Instructions</h4>
 		<p class="card-text">
 			Create 3-5 questions around each target word by asking students which
@@ -60,7 +60,7 @@
 
 <% @fourth_grade_words.each do |word| %>
 	<div class="card mb-3">
-		<div class="card-block" data-word-id="<%= word.id %>">
+		<div class="card-body" data-word-id="<%= word.id %>">
 			<div class="float-right">
 				<% if word.meaning_alts.count > 1 %>
 					<i class="fa fa-check fa-3x text-success"></i>
@@ -79,7 +79,7 @@
 		</div>
 		<% if word.has_meaning_alts? %>
 			<% word.meaning_alts.each do |meaning_alt| %>
-				<div class="card-block" data-meaning-alt-id="<%= meaning_alt.id %>">
+				<div class="card-body" data-meaning-alt-id="<%= meaning_alt.id %>">
 					<%= render "school/meaning_alts/card_text", m_a: meaning_alt %>
 					<%= render "school/meaning_alts/edit_btn", m_a: meaning_alt %>
 				</div>

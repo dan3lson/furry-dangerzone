@@ -7,7 +7,7 @@
 				<%= icon "clock-o" %> Recent Activity Feed
 				<small class="text-muted">Last 24 Hours</small>
 			</div>
-			<div class="card-block">
+			<div class="card-body">
 				<% if current_user.has_classroom_activity? %>
 					<% current_user.students.alphabetical.each do |student| %>
 						<%= render "users/recent_activity", user: student, meta: true %>
@@ -29,7 +29,7 @@
 				<%= icon "quote-left" %> Freestyle Responses
 				<small class="text-muted">Not Reviewed</small>
 			</div>
-			<div class="card-block">
+			<div class="card-body">
 				<% if current_user.has_unreviewed_frees? %>
 					<%= render "school/students/unreviewed_frees" %>
 				<% else %>

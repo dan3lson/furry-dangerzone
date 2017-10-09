@@ -15,7 +15,7 @@
 	<div class="card-deck">
 		<% @classrooms.each do |classroom| %>
 			<div class="card mb-3">
-				<div class="card-block">
+				<div class="card-body">
 					<h4 class="card-title">
 						<%= link_to classroom.name, school_classroom_path(classroom) %>
 					</h4>

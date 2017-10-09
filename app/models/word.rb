@@ -19,7 +19,7 @@ class Word < ActiveRecord::Base
   has_many :antonyms, through: :word_antonyms
 
   validates :name, presence: true
-  validates :definition, uniqueness: { scope: :name }
+  validates :definition, presence: true, uniqueness: { scope: :name }
 
   before_create { self.name = name.downcase }
 

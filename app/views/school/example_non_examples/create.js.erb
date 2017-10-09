@@ -1,7 +1,7 @@
 var created = "<%= @created %>";
 var wordID = "<%= @word.id %>";
 var $card = $("div").find("[data-word-id='" + wordID + "']");
-var $cardBlock = $card.find(".card-block");
+var $cardBlock = $card.find(".card-body");
 var $footer = $card.find(".card-footer");
 var $form = $card.find("form");
 $card.find(".alert").remove();

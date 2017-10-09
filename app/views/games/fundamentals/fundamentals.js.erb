@@ -431,7 +431,7 @@ function startDecisionsDecisionsActivity() {
 		$selAnswer = $(this);
 		$selAnswerText = $selAnswer.text().trim();
 		$selAnswerCard = $selAnswer.parents(".card");
-		$selAnswerBlock = $selAnswerCard.find(".card-block");
+		$selAnswerBlock = $selAnswerCard.find(".card-body");
 		$selAnswerTitle = $selAnswerCard.find(".card-title");
 		$btnRow = $selAnswer.parent().parent();
 		index = $btnRow.data("index");
@@ -506,7 +506,7 @@ function startExampleNonExamplesActivity() {
 		$selAnswer = $(this);
 		$selAnswerText = $selAnswer.text().trim();
 		$selAnswerCard = $selAnswer.parents(".card");
-		$selAnswerBlock = $selAnswerCard.find(".card-block");
+		$selAnswerBlock = $selAnswerCard.find(".card-body");
 		$selAnswerTitle = $selAnswerCard.find(".card-title");
 		$btnRow = $selAnswer.parent().parent();
 		index = $btnRow.data("index");
@@ -875,7 +875,7 @@ function createBtn(_class, text) {
 
 function createExNonExQues(exNonEx, index) {
 	$card = createElem("div", "card mb-3");
-	$cardBlock = createElem("div", "card-block");
+	$cardBlock = createElem("div", "card-body");
 	$cardTitle = createElem("h4", "card-title");
 	$rightOrWrongIcon = createElem("div", "float-right");
 	$btnsDiv = createElem("div", "row text-center");
@@ -909,7 +909,7 @@ function createExNonExQues(exNonEx, index) {
 
 function createMeaningAltQues(meaningAlt, index) {
 	$card = createElem("div", "card mb-3");
-	$cardBlock = createElem("div", "card-block");
+	$cardBlock = createElem("div", "card-body");
 	$cardTitle = createElem("h4", "card-title");
 	$rightOrWrongIcon = createElem("div", "float-right");
 	$btnsDiv = createElem("div", "row text-center");

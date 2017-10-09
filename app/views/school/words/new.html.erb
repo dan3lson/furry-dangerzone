@@ -1,9 +1,9 @@
-<% provide(:header, "New Word") %>
-<% provide(:title, "New Word") %>
+<% provide(:header, "Create a New Word") %>
+<% provide(:title, "Create a New Word") %>
 <div class="row">
   <div class="col-md-6">
     <div class="card mb-3">
-      <div class="card-block">
+      <div class="card-body">
         <ol>
           <li>
             Want to add a word, but are unsure if it already exists? Try
@@ -17,11 +17,11 @@
         <%= render "searches/form" %>
       </div>
     </div>
-    <div class="search-results-container"></div>
+    <div class="search-container"></div>
   </div>
   <div class="col-md-6">
     <div class="card mb-3">
-      <div class="card-block">
+      <div class="card-body">
         <h4 class="card-title">
           Create a New Word
         </h4>
@@ -30,17 +30,22 @@
           <div class="form-group">
             <%= f.label :name, class: "sr-only" %>
             <%= f.text_field :name, class: "form-control",
-            placeholder: "Name *"  %>
-          </div>
-          <div class="form-group">
-            <%= f.label :part_of_speech, class: "sr-only" %>
-            <%= f.text_field :part_of_speech, class: "form-control",
-            placeholder: "Part of Speech"  %>
+            placeholder: "Name"  %>
           </div>
           <div class="form-group">
             <%= f.label :definition, class: "sr-only" %>
             <%= f.text_field :definition, class: "form-control",
-            placeholder: "Definition *"  %>
+            placeholder: "Definition"  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :phonetic_spelling, class: "sr-only" %>
+            <%= f.text_field :phonetic_spelling, class: "form-control",
+            placeholder: "Phonetic Spelling (Optional)"  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :part_of_speech, class: "sr-only" %>
+            <%= f.text_field :part_of_speech, class: "form-control",
+            placeholder: "Part of Speech (Optional)"  %>
           </div>
           <%= f.submit "Create new word", class: "btn btn-primary btn-block" %>
         <% end %>

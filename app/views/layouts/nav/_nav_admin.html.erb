@@ -1,5 +1,6 @@
-<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
-  <button class="navbar-toggler navbar-toggler-right"
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="<%= root_path %>">Leksi</a>
+  <button class="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNavDropdown"
@@ -8,9 +9,8 @@
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <h1 class="navbar-brand mb-0">Leksi</h1>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <div class="navbar-nav text-center">
+    <div class="navbar-nav">
       <%= render "layouts/nav/nav_admin_links" %>
     </div>
   </div>

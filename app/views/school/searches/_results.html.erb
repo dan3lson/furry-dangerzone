@@ -6,7 +6,7 @@
 			<% word_groups.each do |name, words| %>
 				<% words.each do |word| %>
 					<div class="card mb-3">
-						<div class="card-block" data-word-id="<%= word.id %>">
+						<div class="card-body" data-word-id="<%= word.id %>">
 							<%= render "words/basics", word: word %>
 						</div>
 						<% if object %>

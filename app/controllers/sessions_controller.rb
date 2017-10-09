@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
       log_in(user)
 
       if user.is_admin?
-        redirect_to root_path
+        redirect_to admin_root_path
       elsif user.is_teacher?
         redirect_to school_root_path
       else

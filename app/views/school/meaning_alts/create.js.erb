@@ -10,7 +10,7 @@ if (created == "true") {
 	var count = parseInt("<%= @meaning_alt_count %>");
 	var $cardTextPartial = $("<%= j render(partial: 'school/meaning_alts/card_text', locals: { m_a: @m_a }) %>");
 	var $editPartial = $("<%= j render(partial: 'school/meaning_alts/edit_btn', locals: { m_a: @m_a }) %>");
-	var $newCardBlock = createElem("div", "card-block")
+	var $newCardBlock = createElem("div", "card-body")
 											.attr("data-meaning-alt-id", "<%= @m_a.id %>");
   var $flash = createFlash(
 		"success", "Success; thanks! You can create another one below."

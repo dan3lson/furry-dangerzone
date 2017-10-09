@@ -32,23 +32,23 @@
 	<% end %>
 <% end %>
 
-<% if action?("stats") %>
-	<%= link_to stats_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-line-chart"></i> Stats
-	<% end %>
-<% else %>
-	<%= link_to stats_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-line-chart"></i> Stats
-	<% end %>
-<% end %>
+<%# if action?("stats") %>
+	<%#= link_to stats_path, class: "nav-item nav-link active" do %>
+		<!-- <i class="fa fa-line-chart"></i> Stats -->
+	<%# end %>
+<%# else %>
+	<%#= link_to stats_path, class: "nav-item nav-link" do %>
+		<!-- <i class="fa fa-line-chart"></i> Stats -->
+	<%# end %>
+<%# end %>
 
 <% if controller?("searches") && action?("search") %>
 	<%= link_to search_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-search"></i> Explore
+		<i class="fa fa-search"></i> Dictionary
 	<% end %>
 <% else %>
 	<%= link_to search_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-search"></i> Explore
+		<i class="fa fa-search"></i> Dictionary
 	<% end %>
 <% end %>
 

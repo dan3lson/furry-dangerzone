@@ -2,7 +2,7 @@
 	Example/Non-Examples
 </h1>
 <div class="card card-primary text-white mb-3">
-	<div class="card-block">
+	<div class="card-body">
 		<h4 class="card-title">Instructions</h4>
 		<p class="card-text">
 			Create two to four "example/non-examples" for each word. As you see
@@ -92,7 +92,7 @@
 
 <% @fourth_grade_words.each do |word| %>
 	<div class="card mb-3" data-word-id="<%= word.id %>">
-		<div class="card-block">
+		<div class="card-body">
 			<div class="float-right">
 				<% if word.example_non_examples.count > 1 %>
 					<i class="fa fa-check fa-3x text-success"></i>
