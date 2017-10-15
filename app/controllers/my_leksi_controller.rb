@@ -6,13 +6,6 @@ class MyLeksiController < ApplicationController
 																			 .alphabetical
 																			 .includes(:word)
 																			 .latest
-		@user_words = @current_user_user_words
-		@current_user_words_count = @current_user.user_words_count
-
-		respond_to do |format|
-			format.html
-			format.js
-		end
 	end
 
 	def show

@@ -54,10 +54,11 @@ module GamesHelper
 
   def link_to_small_btn(path, color, user_word)
     link_to path,
-            class: "btn btn-#{color} rounded",
+            class: "btn btn-#{color} rounded-circle",
             role: "button",
             remote: true do
-      play_icon + " #{user_word.game}"
+      # play_icon + " Play #{user_word.game}"
+      play_icon + " Play"
     end
   end
 

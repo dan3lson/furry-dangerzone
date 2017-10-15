@@ -17,17 +17,5 @@
 			<%= play_btn_small(user_word, word.id, user_word.current_game) %>
 		</div>
 		<%= render "words/basics", word: word %>
-		<%= link_to myLeksi_show_path(word), class: "card-link" do %>
-			<%= icon "play-circle" %>
-			Play
-		<% end %>
-		<%= link_to myLeksi_show_path(word), class: "card-link" do %>
-			<i class="fa fa-eye"></i>
-			Meaning
-		<% end %>
-		<%= link_to myLeksi_show_path(word), class: "card-link" do %>
-			<i class="fa fa-eye"></i>
-			See details
-		<% end %>
 	</div>
 </div>

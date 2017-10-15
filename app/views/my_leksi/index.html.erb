@@ -5,15 +5,40 @@
 <h1><%= icon "book" %> Notebook</h1>
 
 <% if current_user.has_words? %>
-  <div class="myLeksi card-columns"
-       id="myLeksi-words"
-       data-total="<%= @current_user_words_count %>">
-    <% @user_words.each do |user_word| %>
-      <%= render "my_leksi/index_word", user_word: user_word,
-                                        word: user_word.word
-      %>
-    <% end %>
+  <div class="card">
+    <ul class="list-group list-group-flush">
+      <% @current_user_user_words.each_with_index do |user_word, i| %>
+        <% word = user_word.word %>
+        <li class="list-group-item">
+          <div class="d-inline">
+            <% if word.has_photo? %>
+        			<%= image_tag word.photo, alt: "#{word.name}",
+        																class: "rounded border border-secondary",
+                                        width: "100rem",
+                                        height: "100rem"
+        			%>
+        		<% end %>
+          </div>
+          <h4 class="card-title d-inline">
+            <small class="text-muted">
+              <%= i + 1 %>.
+            </small>
+            <%= word.name %>
+          </h4>
+          <p class="card-text d-inline">
+            <em><%= word.part_of_speech %></em>
+            <%= array_of(word, "definition").first %>
+          </p>
+          <div class="mt-3 d-inline">
+            <%= play_btn_small(user_word, word.id, user_word.current_game) %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   </div>
+  <%#= render "my_leksi/index_word", user_word: user_word,
+                                    word: user_word.word
+  %>
 <% else %>
   <%= render "my_leksi/no_words_guide" %>
 <% end %>
