@@ -10,12 +10,17 @@ class Student < User
   end
 
   # TODO Create test shell
+  def belongs_to_classroom?
+    !classroom.nil?
+  end
+
+  # TODO Create test shell
   def has_classmates?
-    !classroom.students.empty?
+    belongs_to_classroom? ? !classroom.students.empty? : nil
   end
 
   # TODO Create test shell
   def classmates
-    classroom.students if has_classmates?
+    has_classmates? ? classroom.students : nil
   end
 end

@@ -4,27 +4,9 @@
   <div class="col-md-6">
     <div class="card mb-3">
       <div class="card-body">
-        <ol>
-          <li>
-            Want to add a word, but are unsure if it already exists? Try
-            searching for it first.
-          </li>
-          <li>
-            If the exact word you want isn't there, use the form down below to
-            create a new word.
-          </li>
-        </ol>
-        <%= render "searches/form" %>
-      </div>
-    </div>
-    <div class="search-container"></div>
-  </div>
-  <div class="col-md-6">
-    <div class="card mb-3">
-      <div class="card-body">
-        <h4 class="card-title">
-          Create a New Word
-        </h4>
+        <p class="card-title">
+          Complete the form below to create a new word.
+        </p>
         <%= form_for([:school, @word]) do |f| %>
           <%= render 'shared/error_messages', object: @word %>
           <div class="form-group">
@@ -47,9 +29,32 @@
             <%= f.text_field :part_of_speech, class: "form-control",
             placeholder: "Part of Speech (Optional)"  %>
           </div>
-          <%= f.submit "Create new word", class: "btn btn-primary btn-block" %>
+          <div class="form-group">
+            <%= f.label :photo do %>
+              <%= f.file_field :photo %>
+            <% end %>
+          </div>
+          <%= f.submit "Create", class: "btn btn-primary btn-block" %>
         <% end %>
       </div>
     </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <ol>
+          <li>
+            Want to add a word, but are unsure if it already exists? Try
+            searching for it first.
+          </li>
+          <li>
+            If the exact word you want isn't there, use the form down below to
+            create a new word.
+          </li>
+        </ol>
+        <%= render "searches/form" %>
+      </div>
+    </div>
+    <div class="search-container"></div>
   </div>
 </div>

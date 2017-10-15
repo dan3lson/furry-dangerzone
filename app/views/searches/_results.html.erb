@@ -10,6 +10,11 @@
 				</small>
 			</h4>
 			<% words.each do |word| %>
+				<% if word.has_photo? %>
+					<%= image_tag word.photo, alt: "#{word.name}",
+																	  class: "card-img-top"
+					%>
+				<% end %>
 				<div class="card-body" data-word-id="<%= word.id %>">
 					<h4 class="card-title">
 						<%= render "words/pos_def", word: word %>

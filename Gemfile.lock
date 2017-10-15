@@ -61,6 +61,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (1.2.1)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     chartkick (2.2.4)
     cliver (0.3.2)
     coderay (1.1.1)
@@ -257,6 +261,7 @@ DEPENDENCIES
   bootstrap (~> 4.0.0.beta)
   bullet
   capybara
+  carrierwave
   chartkick
   coffee-rails (~> 4.1.0)
   database_cleaner

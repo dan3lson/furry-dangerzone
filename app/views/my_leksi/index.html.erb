@@ -1,23 +1,17 @@
 <% title "View and master all of the words in your personal list." %>
 <% description "Designed with vocabulary academic research and gamification, Leksi helps students master new words." %>
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
+
 <h1><%= icon "book" %> Notebook</h1>
+
 <% if current_user.has_words? %>
-  <!-- <div class="text-muted filter-div">
-    Filter:
-    <span class="text-primary active">
-      <i class="fa fa-list-alt"></i> Cards
-    </span>
-    |
-    <span>
-      <i class="fa fa-trophy"></i> Levels
-    </span>
-  </div> -->
   <div class="myLeksi card-columns"
        id="myLeksi-words"
        data-total="<%= @current_user_words_count %>">
     <% @user_words.each do |user_word| %>
-      <%= render "my_leksi/index_word", user_word: user_word %>
+      <%= render "my_leksi/index_word", user_word: user_word,
+                                        word: user_word.word
+      %>
     <% end %>
   </div>
 <% else %>

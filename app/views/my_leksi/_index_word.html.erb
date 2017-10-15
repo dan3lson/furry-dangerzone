@@ -8,12 +8,26 @@
 	<div class="card card-outline-danger mb-3">
 <% end %>
 	<div class="card-body">
+		<% if word.has_photo? %>
+			<%= image_tag word.photo, alt: "#{word.name}",
+																class: "card-img-top"
+			%>
+		<% end %>
 		<div class="float-right">
-			<%= render "my_leksi/current_game", user_word: user_word %>
+			<%= play_btn_small(user_word, word.id, user_word.current_game) %>
 		</div>
-		<%= render "words/basics", word: user_word.word %>
-		<div class="text-center">
-			<%= play_btn_small(user_word, user_word.word.id, user_word.current_game) %>
-		</div>
+		<%= render "words/basics", word: word %>
+		<%= link_to myLeksi_show_path(word), class: "card-link" do %>
+			<%= icon "play-circle" %>
+			Play
+		<% end %>
+		<%= link_to myLeksi_show_path(word), class: "card-link" do %>
+			<i class="fa fa-eye"></i>
+			Meaning
+		<% end %>
+		<%= link_to myLeksi_show_path(word), class: "card-link" do %>
+			<i class="fa fa-eye"></i>
+			See details
+		<% end %>
 	</div>
 </div>
