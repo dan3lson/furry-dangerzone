@@ -2,6 +2,8 @@ class Word < ActiveRecord::Base
   include Nokogiri
   require 'open-uri'
 
+  mount_uploader :photo, WordPhotoUploader
+
   default_scope -> { order('words.name ASC') }
 
   has_many :examples, dependent: :destroy
@@ -17,6 +19,7 @@ class Word < ActiveRecord::Base
   has_many :synonyms, through: :word_synonyms
   has_many :word_antonyms
   has_many :antonyms, through: :word_antonyms
+  belongs_to :user
 
   validates :name, presence: true
   validates :definition, presence: true, uniqueness: { scope: :name }
@@ -29,8 +32,13 @@ class Word < ActiveRecord::Base
   end
 
   # TODO: Create shell test
+  def is_duplicate?
+    Word.search(name).map { |w| w.definition }.include?(definition)
+  end
+
+  # TODO: Create shell test
   def self.search(name)
-    where(name: name)
+    where(name: name.downcase)
   end
 
   # TODO: Create shell test
@@ -79,6 +87,11 @@ class Word < ActiveRecord::Base
     rescue => e
       false
     end
+  end
+
+  # TODO: Create shell test
+  def has_photo?
+    photo?
   end
 
   # TODO: Create shell test

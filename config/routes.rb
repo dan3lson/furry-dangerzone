@@ -113,7 +113,9 @@ Rails.application.routes.draw do
     resources :classrooms do
       resources :students
     end
-    resources :words, only: [:index, :new, :create]
+    resources :words, only: [:index, :new, :create] do
+    end
+    get "content" => "current_user#content"
     resource :add_words_for_student, only: [:update] do
       member do
         post "by_grade"

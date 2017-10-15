@@ -4,16 +4,6 @@
 	<% else %>
 		<%= word.name %>
 	<% end %>
-	<%# if word.has_pronunciation? %>
-	<% if false %>
-		<audio src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/<%= word.name %>.mp3"
-					 id="audio"
-					 preload="auto">
-		</audio>
-		<small>
-			<i class="fa fa-volume-up hover pointer text-primary"></i>
-		</small>
-	<% end %>
 	<br>
 	<%= render "words/pos_def", word: word %>
 </h2>

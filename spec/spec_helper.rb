@@ -98,6 +98,6 @@ def log_in_as(user)
   fill_in "Password", with: user.password
 
   within ".form-signin" do
-    click_on "Log in"
+    click_on "Log In"
   end
 end

@@ -1,6 +1,7 @@
 class Teacher < User
   has_many :classrooms, dependent: :destroy
   has_many :students, through: :classrooms, dependent: :destroy
+  has_many :words
   has_many :meaning_alts, dependent: :destroy
   has_many :example_non_examples, dependent: :destroy
   has_many :sent_stems, dependent: :destroy
@@ -37,5 +38,20 @@ class Teacher < User
     example_non_examples.group_by { |e| e.word.name }.each do |name, array|
       puts "#{name}: #{array.count}"
     end
+  end
+
+  # TODO Create test
+  def created_words
+    Word.where(user: self)
+  end
+
+  # TODO Create test
+  def has_created_words?
+    !created_words.empty?
+  end
+
+  # TODO Create test
+  def has_created_content?
+    has_created_words?
   end
 end
