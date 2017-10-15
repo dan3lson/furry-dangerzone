@@ -17,10 +17,10 @@
 						<%= link_to user_word_tag_tag_show_page_path(
 							word_id: word.id,
 							tag_id: tag.id),
-							class: "word-on-tag-show-page-remove-btn btn btn-outline-secondary btn-sm btn-block",
+							class: "word-on-tag-show-page-remove-btn btn btn-outline-secondary",
 							method: :delete do
 						%>
-							<i class="fa fa-trash"></i> Remove Word From Tag
+							<%= icon "trash" %> Remove Word From Tag
 						<% end %>
 					</div>
 				<% end %>
