@@ -42,7 +42,7 @@ class Teacher < User
 
   # TODO Create test
   def created_words
-    Word.where(user: self)
+    Word.where(creator: self)
   end
 
   # TODO Create test

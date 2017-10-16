@@ -5,7 +5,7 @@ class School::WordsController < BaseSchoolController
 
   def create
     @word = Word.new(word_params)
-    @word.user = current_user
+    @word.creator = current_user
 
     if @word.is_duplicate?
       msg = [
