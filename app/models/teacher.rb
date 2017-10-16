@@ -1,7 +1,6 @@
 class Teacher < User
   has_many :classrooms, dependent: :destroy
   has_many :students, through: :classrooms, dependent: :destroy
-  has_many :words
   has_many :meaning_alts, dependent: :destroy
   has_many :example_non_examples, dependent: :destroy
   has_many :sent_stems, dependent: :destroy

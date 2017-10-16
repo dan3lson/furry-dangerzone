@@ -19,7 +19,6 @@ class Word < ActiveRecord::Base
   has_many :synonyms, through: :word_synonyms
   has_many :word_antonyms
   has_many :antonyms, through: :word_antonyms
-  belongs_to :creator, class_name: "User", foreign_key: "user_id"
 
   validates :name, presence: true
   validates :definition, presence: true, uniqueness: { scope: :name }
