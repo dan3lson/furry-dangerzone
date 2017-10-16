@@ -5,7 +5,7 @@ class School::WordsController < BaseSchoolController
 
   def create
     @word = Word.new(word_params)
-    @word.creator = current_user
+    @word.creator_id = current_user.id
 
     if @word.is_duplicate?
       msg = [
@@ -40,7 +40,7 @@ class School::WordsController < BaseSchoolController
       :part_of_speech,
       :name,
       :photo,
-      :user
+      :creator_id
     )
   end
 end
