@@ -7,20 +7,21 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = Brainiac.new
+    @user = User.new
     render layout: "application_guest"
   end
 
   def create
-    @user = Brainiac.new(user_params)
+    @user = User.new(user_params)
     User.set_up_login_data(@user)
+    @user.type = "Teacher"
 
     if @user.save
       log_in(@user)
       flash[:success] = "Welcome to Leksi!"
-      redirect_to root_path
+      redirect_to school_root_path
     else
-      render :new
+      render :new, layout: "application_guest"
     end
   end
 
@@ -58,20 +59,13 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    @symbol = if @user.is_admin?
-                :admin
-              elsif @user.is_teacher?
-                :teacher
-              else
-                :student
-              end
-    params.require(@symbol).permit(
+    params.require(:user).permit(
+      :username,
+      :password,
+      :password_confirmation,
       :first_name,
       :last_name,
-      :username,
-      :email,
-      :password,
-      :password_confirmation
+      :email
     )
   end
 
