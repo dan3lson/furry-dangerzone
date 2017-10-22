@@ -1,12 +1,11 @@
 <%= form_for [:school, word, e_non_e],
-						 method: :post,
+						 method: method,
 						 remote: true do |f|
 %>
   <%= render "shared/error_messages", object: e_non_e %>
   <div class="form-group">
     <%= f.label :text, class: "form-control-label" %>
-    <%= f.text_area :text, class: "form-control"
-    %>
+    <%= f.text_area :text, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :answer, class: "form-control-label" %>

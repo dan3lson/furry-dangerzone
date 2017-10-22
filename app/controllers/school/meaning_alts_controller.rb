@@ -16,8 +16,6 @@ class School::MeaningAltsController < BaseSchoolController
       @created = false
     end
 
-    @meaning_alt_count = @word.meaning_alts.count
-
     respond_to do |format|
       format.js
     end
@@ -35,14 +33,7 @@ class School::MeaningAltsController < BaseSchoolController
 
   def update
     @m_a = MeaningAlt.find(params[:id])
-    @word = @m_a.word
-    @saved = false
-
-    if @m_a.update(meaning_alt_params)
-      @saved = true
-    else
-      @saved = false
-    end
+    @updated = @m_a.update(meaning_alt_params)
 
     respond_to do |format|
       format.js
@@ -51,14 +42,7 @@ class School::MeaningAltsController < BaseSchoolController
 
   def destroy
     @m_a = MeaningAlt.find(params[:id])
-    @saved = false
-
-    if @m_a.destroy
-      @meaning_alts_count = MeaningAlt.count
-      @destroyed = true
-    else
-      @destroyed = false
-    end
+    @destroyed = @m_a.destroy ? true : false
 
     respond_to do |format|
       format.js

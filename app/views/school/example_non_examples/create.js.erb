@@ -1,26 +1,34 @@
 var created = "<%= @created %>";
 var wordID = "<%= @word.id %>";
-var $card = $("div").find("[data-word-id='" + wordID + "']");
-var $cardBlock = $card.find(".card-body");
-var $footer = $card.find(".card-footer");
+var $card = $("div").find("[data-word-id-ex-non-ex='" + wordID + "']");
+var $cardHeader = $card.find(".card-header");
 var $form = $card.find("form");
-$card.find(".alert").remove();
+// removeAlerts();
 
 if (created == "true") {
-	var count = parseInt("<%= @e_non_e_count %>");
-	var $cardBlockPartial = $("<%= j render(partial: 'school/example_non_examples/card_text', locals: { e_non_e: @e_non_e }) %>");
-	$cardBlock.append($cardBlockPartial).append("<hr>").hide().fadeIn();
-	$cardBlock.find("p.card-text:last").prepend(
-		createFlash("success", "Success! You can create another one below.")
-	).hide().fadeIn();
+	var $cardTextPartial = $("<%= j render(partial: 'school/example_non_examples/card_text', locals: { e_non_e: @e_non_e }) %>");
+	var $editPartial = $("<%= j render(partial: 'school/example_non_examples/edit_btn', locals: { e_non_e: @e_non_e }) %>");
+	var $newCardBody = createElem("div", "card-body").attr(
+		"data-ex-non-ex-id",
+		"<%= @e_non_e.id %>"
+	);
+	$newCardBody.insertAfter($cardHeader);
+	$newCardBody.append($cardTextPartial, $editPartial)
+							.prepend(flashSuccess())
+							.hide()
+							.fadeIn();
 	$form[0].reset();
-
-	if (count > 1) {
-		$card.find(".fa-check").addClass("text-success");
-	}
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @e_non_e }) %>");
 	$footer.prepend($errorsPartial);
+}
+
+function flashSuccess() {
+	createFlash("success", "Success! You can create another one below.");
+}
+
+function removeAlerts() {
+	$(".alert").remove();
 }
 
 function createFlash(_class, text) {
