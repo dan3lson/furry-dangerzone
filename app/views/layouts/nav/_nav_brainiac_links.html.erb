@@ -14,11 +14,11 @@
 
 <% if params[:controller].include?("my_leksi") %>
 	<%= link_to notebook_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-book"></i> Notebook
+		<%= emoji "notebook" %> <strong>Notebook</strong>
 	<% end %>
 <% else %>
 	<%= link_to notebook_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-book"></i> Notebook
+		<%= emoji "notebook" %> Notebook
 	<% end %>
 <% end %>
 
@@ -44,10 +44,10 @@
 
 <% if controller?("searches") && action?("dictionary") %>
 	<%= link_to dictionary_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-search"></i> Dictionary
+		<%= emoji "mag_right" %> <strong>Dictionary</strong>
 	<% end %>
 <% else %>
 	<%= link_to dictionary_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-search"></i> Dictionary
+		<%= emoji "mag_right" %> Dictionary
 	<% end %>
 <% end %>
