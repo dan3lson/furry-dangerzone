@@ -2,37 +2,29 @@
 <% description "Designed with vocabulary academic research and gamification, Leksi helps students master new words." %>
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
 
-<h1><%= icon "book" %> Notebook</h1>
-
 <% if current_user.has_words? %>
-  <div class="card">
-    <ul class="list-group list-group-flush">
-      <% @current_user_user_words.each do |user_word| %>
-        <% word = user_word.word %>
-        <li class="list-group-item">
-          <div class="d-inline">
-            <% if word.has_photo? %>
-        			<%= image_tag word.photo, alt: "#{word.name}",
-        																class: "rounded border border-secondary",
-                                        width: "100rem",
-                                        height: "100rem"
-        			%>
-        		<% end %>
-          </div>
-          <h4 class="card-title d-inline">
-            <%= word.name %>
-          </h4>
-          <p class="card-text d-inline">
-            <em class="text-muted"><%= word.part_of_speech %></em>
-            <%= array_of(word, "definition").first %>
-          </p>
-          <div class="mt-3 d-inline">
-            <%= play_btn_small(user_word, word.id, user_word.current_game) %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+  <dl class="row">
+    <% @current_user_user_words.each do |user_word| %>
+      <% word = user_word.word %>
+      <dt class="col-sm-3">
+        <%= word.name %>
+        <span class="text-muted"><%= word.part_of_speech %></span>
+        <br>
+        <% if word.has_photo? %>
+          <%= image_tag word.photo, alt: "#{word.name}",
+                                    class: "rounded border border-secondary",
+                                    width: "100rem",
+                                    height: "100rem"
+          %>
+        <% end %>
+      </dt>
+      <dd class="col-sm-9">
+
+        <%= array_of(word, "definition").first %>
+        <%= play_btn_small(user_word, word.id, user_word.current_game) %>
+      </dd>
+    <% end %>
+  </dl>
   <%#= render "my_leksi/index_word", user_word: user_word,
                                     word: user_word.word
   %>

@@ -22,7 +22,7 @@ feature "two users add the same word", %{
     scenario "scenario: add word" do
       log_in_as(user_2)
 
-      visit search_path
+      visit dictionary_path
 
       fill_in "Search", with: word.name
 

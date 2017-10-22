@@ -162,6 +162,18 @@ class Word < ActiveRecord::Base
   end
 
   ######################################################
+  #  EXPLORE WORDS BY SUBJECTS
+  #  Source: https://www.flocabulary.com/wordlists/
+  ######################################################
+
+  def self.science
+    ids = [
+      10498, 10499, 10500, 10501
+    ]
+    Word.find(ids)
+  end
+
+  ######################################################
   #  EXPLORE WORDS BY GRADES
   #  Source: https://www.flocabulary.com/wordlists/
   ######################################################

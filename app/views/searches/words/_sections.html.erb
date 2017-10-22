@@ -1,0 +1,32 @@
+<h4 class="mb-3"><%= name.split("_").map(&:capitalize).join(" ") %></h4>
+<div class="card">
+	<ul class="list-group list-group-flush">
+		<div class="card">
+			<% word_groups.each_with_index do |(name, words), i| %>
+					<% words.take(3).each do |word| %>
+						<li class="list-group-item" data-word-id="<%= word.id %>">
+							<div class="d-inline">
+								<% if word.has_photo? %>
+									<%= image_tag word.photo, alt: "#{word.name}",
+																						class: "rounded border border-secondary",
+																						width: "100rem",
+																						height: "100rem"
+									%>
+								<% end %>
+							</div>
+							<h4 class="card-title">
+								<%= word.name %>
+							</h4>
+							<p class="card-text d-inline">
+								<em class="text-muted"><%= word.part_of_speech %></em>
+								<%= array_of(word, "definition").first %>
+							</p>
+							<div class="mt-3">
+								<%= render "searches/results_options", word: word %>
+							</div>
+						</li>
+					<% end %>
+			<% end %>
+		</div>
+	</ul>
+</div>

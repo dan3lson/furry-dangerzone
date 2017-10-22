@@ -8,7 +8,7 @@ feature "user searches for a word", %{
 
   # Acceptance Criteria
   #
-  # [x] I can visit search_path
+  # [x] I can visit dictionary_path
   # [x] I see a form to submit my query
   # [x] I can see results
   # [x] I can see a remove button for a
@@ -21,7 +21,7 @@ feature "user searches for a word", %{
     scenario "scenario: query is blank" do
       log_in_as(user)
 
-      visit search_path
+      visit dictionary_path
 
       fill_in "search", with: word.name
 
@@ -37,7 +37,7 @@ feature "user searches for a word", %{
     scenario "scenario: query should be found" do
       log_in_as(user)
 
-      visit search_path
+      visit dictionary_path
 
       fill_in "search", with: "hacker"
 
@@ -53,7 +53,7 @@ feature "user searches for a word", %{
     scenario "scenario: query should not be found" do
       log_in_as(user)
 
-      visit search_path
+      visit dictionary_path
 
       fill_in "search", with: "foobar"
 
@@ -68,7 +68,7 @@ feature "user searches for a word", %{
 
       log_in_as(user)
 
-      visit search_path
+      visit dictionary_path
 
       fill_in "search", with: "chess"
 

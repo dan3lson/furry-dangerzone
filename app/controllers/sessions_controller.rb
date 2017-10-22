@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
       elsif user.is_teacher?
         redirect_to school_root_path
       else
-        redirect_to root_path
+        redirect_to notebook_path
       end
     else
       msg = "That username and/or password didn\'t work. Please try again."

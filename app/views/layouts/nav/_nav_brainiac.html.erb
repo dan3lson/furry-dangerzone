@@ -14,14 +14,24 @@
       <%= render "layouts/nav/nav_brainiac_links" %>
     </div>
     <div>
-      <%= link_to logout_path,
-                  method: :delete,
-    							class: "btn btn-primary",
-    							role: "button" do
-    	%>
-    		<%= icon "sign-in" %>
-    		Log Out
-    	<% end %>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= icon "user" %> Hello, <%= current_user.username %>!
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <%= link_to settings_path, class: "dropdown-item" do %>
+            <%= icon "gear" %> Settings
+          <% end %>
+          <div class="dropdown-divider"></div>
+          <%= link_to logout_path,
+                      method: :delete,
+                      class: "dropdown-item" do
+          %>
+            <%= icon "sign-in" %>
+            Log Out
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

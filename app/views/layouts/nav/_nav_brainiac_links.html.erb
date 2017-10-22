@@ -22,15 +22,15 @@
 	<% end %>
 <% end %>
 
-<% if controller?("my_tags") %>
-	<%= link_to myTags_path, class: "nav-item nav-link active" do %>
-		<i class="fa fa-columns"></i> Sections
-	<% end %>
-<% else %>
-	<%= link_to myTags_path, class: "nav-item nav-link" do %>
-		<i class="fa fa-columns"></i> Sections
-	<% end %>
-<% end %>
+<%# if controller?("my_tags") %>
+	<%#= link_to myTags_path, class: "nav-item nav-link active" do %>
+		<!-- <%#= icon "columns" %> Sections -->
+	<%# end %>
+<%# else %>
+	<%#= link_to myTags_path, class: "nav-item nav-link" do %>
+		<!-- <%#= icon "columns" %> Sections -->
+	<%# end %>
+<%# end %>
 
 <%# if action?("stats") %>
 	<%#= link_to stats_path, class: "nav-item nav-link active" do %>
@@ -42,14 +42,12 @@
 	<%# end %>
 <%# end %>
 
-<% if controller?("searches") && action?("search") %>
-	<%= link_to search_path, class: "nav-item nav-link active" do %>
+<% if controller?("searches") && action?("dictionary") %>
+	<%= link_to dictionary_path, class: "nav-item nav-link active" do %>
 		<i class="fa fa-search"></i> Dictionary
 	<% end %>
 <% else %>
-	<%= link_to search_path, class: "nav-item nav-link" do %>
+	<%= link_to dictionary_path, class: "nav-item nav-link" do %>
 		<i class="fa fa-search"></i> Dictionary
 	<% end %>
 <% end %>
-
-<%= render "layouts/nav/settings", path: settings_path %>

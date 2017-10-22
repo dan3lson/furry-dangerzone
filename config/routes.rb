@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "static_pages#home"
+  root "my_leksi#index"
   get "about-us" => "static_pages#about_us"
   get "research" => "static_pages#research"
   get "our-approach" => "static_pages#our_approach"
@@ -21,10 +21,10 @@ Rails.application.routes.draw do
     get "spelling-bee/contact-us" => :contact_us
   end
   get "feedback" => "current_users#feedback"
-  get "search" => "searches#search"
-  get "search_grades" => "searches#grades"
-  get "search_results" => "searches#results"
+  get "dictionary" => "searches#dictionary"
+  get "searches/section"
   get "searches/random"
+  get "search_results" => "searches#results"
   get "home" => "current_users#home"
   get "settings" => "current_users#settings"
   get "stats" => "current_users#stats"

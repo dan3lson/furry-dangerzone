@@ -1,19 +1,16 @@
 var created = "<%= @created %>";
 var wordID = "<%= @word.id %>";
-var $cardBlock = $("div").find("[data-word-id='" + wordID + "']");
-var $card = $cardBlock.parent();
-var $btnsP = $cardBlock.find("p");
+var $cardBody = $("div").find("[data-word-id='" + wordID + "']");
+var $card = $cardBody.parent();
+var $btnsP = $cardBody.find("div.mt-3");
 $card.find(".alert").remove();
 
 if (created == "true") {
-	var $resultsOptions = $("<%= j render(partial: 'searches/results_options', locals: { word: @word }) %>");
 	var $linero = createElem("span").append(
-		"Success! You earned ",
-		createElem("i", "fa fa-money"),
-		" 100 Linero."
+		"Successfully saved to your Notebook!"
 	);
-	$cardBlock.prepend(createFlash("success", $linero));
-	$btnsP.html($resultsOptions);
+	$cardBody.prepend(createFlash("success", $linero));
+	$btnsP.remove();
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @user_word }) %>");
 	$card.prepend($errorsPartial);

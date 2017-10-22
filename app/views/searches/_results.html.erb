@@ -1,27 +1,33 @@
 <% if word_groups.nil? %>
 	<div class="alert alert-danger"><%= error %></div>
 <% else %>
-	<% word_groups.each do |name, words| %>
-		<div class="card mb-3">
-		  <h4 class="card-header">
-				<%= name %>
-				<small class="text-muted">
-					<%= pluralize(words.count, "result") %>
-				</small>
-			</h4>
-			<% words.each do |word| %>
-				<% if word.has_photo? %>
-					<%= image_tag word.photo, alt: "#{word.name}",
-																	  class: "card-img-top"
-					%>
+	<div class="card">
+		<ul class="list-group list-group-flush">
+			<% word_groups.each do |name, words| %>
+				<% words.each do |word| %>
+					<li class="list-group-item">
+						<div>
+							<% if word.has_photo? %>
+								<%= image_tag word.photo, alt: "#{word.name}",
+																					class: "rounded border border-secondary",
+																					width: "100rem",
+																					height: "100rem"
+								%>
+							<% end %>
+						</div>
+						<h4 class="card-title mt-3">
+							<%= word.name %>
+						</h4>
+						<p class="card-text">
+							<span class="text-muted"><%= word.part_of_speech %></span>
+							<%= array_of(word, "definition").first %>
+						</p>
+						<div class="mt-3">
+							<%= render "searches/results_options", word: word %>
+						</div>
+					</li>
 				<% end %>
-				<div class="card-body" data-word-id="<%= word.id %>">
-					<h4 class="card-title">
-						<%= render "words/pos_def", word: word %>
-					</h4>
-					<%= render "searches/results_options", word: word %>
-				</div>
 			<% end %>
-		</div>
-	<% end %>
+		</ul>
+	</div>
 <% end %>

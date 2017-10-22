@@ -1,0 +1,93 @@
+<% title "Dictionary: Look up words or choose one randomly or from a list." %>
+<% description "Explore new words to add to your Notebook. Then master them!" %>
+<% set_meta_tags keywords: "learn education vocabulary vocab research engage fun langauge literacy english language study dictionary words flashcards games list notebook" %>
+<% set_meta_tags og: {
+  title:    "Dictionary: Look up words or choose one randomly or from a list.",
+	description: "Look up words you don\'t know or select ones from a specific list"
+} %>
+<% set_meta_tags twitter: {
+  card: "Learn vocabulary free, without ads or hidden charges. It's simple, fun, and works.",
+  title: "Leksi Dictionary",
+  description: "Look up words you don\'t know or select ones from a specific list"
+} %>
+
+<h1><%= icon("search") %> Dictionary</h1>
+<div class="explore filter-div mb-3 card">
+  <div class="card-body">
+    <div class="btn-group mb-3"
+         role="group"
+         aria-label="Dictionary filter">
+      <%= link_to searches_random_path, role: "button",
+                                        class: "btn btn-secondary",
+                                        remote: true do
+      %>
+        Random
+      <% end %>
+
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1"
+                type="button"
+                class="btn btn-secondary dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+          Grades
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <%= link_to "1st Grade", searches_section_path(name: "first_grade"),
+                                   class: "dropdown-item disabled",
+                                   remote: true
+          %>
+          <%= link_to "2nd Grade", searches_section_path(name: "second_grade"),
+                                   class: "dropdown-item",
+                                   remote: true
+          %>
+          <%= link_to "3rd Grade", searches_section_path(name: "third_grade"),
+                                   class: "dropdown-item",
+                                   remote: true
+          %>
+          <%= link_to "4th Grade", searches_section_path(name: "fourth_grade"),
+                                   class: "dropdown-item",
+                                   remote: true
+          %>
+          <%= link_to "5th Grade", searches_section_path(name: "fifth_grade"),
+                                   class: "dropdown-item",
+                                   remote: true
+          %>
+          <%= link_to "6th Grade", searches_section_path(name: "sixth_grade"),
+                                   class: "dropdown-item",
+                                   remote: true
+          %>
+          <%= link_to "7th Grade", searches_section_path(name: "seventh_grade"),
+                                   class: "dropdown-item",
+                                   remote: true
+          %>
+          <%= link_to "8th Grade", searches_section_path(name: "eigth_grade"),
+                                   class: "dropdown-item",
+                                   remote: true
+          %>
+        </div>
+      </div>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1"
+                type="button"
+                class="btn btn-secondary dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+          Subjects
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <%= link_to "Science", searches_section_path(name: "science"),
+                                 class: "dropdown-item",
+                                 remote: true
+          %>
+        </div>
+      </div>
+    </div>
+    <div class="search-form-container">
+      <%= render "searches/form" %>
+    </div>
+  </div>
+</div>
+<div class="search-container"></div>

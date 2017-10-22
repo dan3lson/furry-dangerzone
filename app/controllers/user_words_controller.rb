@@ -2,28 +2,17 @@ class UserWordsController < ApplicationController
   def create
     @word = Word.find(params[:word_id])
     @user_word = UserWord.new(user: current_user, word: @word)
-    @play = params[:search_btn]
-    fund_game_link = "/fundamentals?word_id=#{@word.id}"
-    @created = false
 
-    if current_user.has_word?(@word)
-      redirect_to fund_game_link if @play
-    else
-      if @user_word.save
-        @created = true
+    if @user_word.save
+      @created = true
 
-        if @play
-          redirect_to fund_game_link
-        else
-          respond_to do |format|
-            format.js
-          end
-        end
-      else
-        msg = "Saving that word didn\'t work. Please try again."
-        flash[:danger] = msg
-        redirect_to search_path
+      respond_to do |format|
+        format.js
       end
+    else
+      msg = "Saving that word didn\'t work. Please try again."
+      flash[:danger] = msg
+      redirect_to dictionary_path
     end
   end
 

@@ -9,7 +9,6 @@
 				<th>Name</th>
 				<th>Definition</th>
 				<th>Phonetic Spelling</th>
-				<th>Part of Speech</th>
 				<th>Photo</th>
 				<th>Decisions, Decisions</th>
 				<th>Example/Non-Example</th>
@@ -26,12 +25,11 @@
 					<td><%= word.name %></td>
 					<td><%= word.definition %></td>
 					<td><%= word.phonetic_spelling %></td>
-					<td><%= word.part_of_speech %></td>
-					<td><%= word.has_photo? %></td>
-					<td><%= word.has_meaning_alts? %></td>
-					<td><%= word.has_ex_non_exs? %></td>
-					<td><%= word.has_sent_stems? %></td>
-					<td><%= word.has_describe_mes? %></td>
+					<td><%= display_content_status(word.has_photo?) %></td>
+					<td><%= display_content_status(word.has_meaning_alts?) %></td>
+					<td><%= display_content_status(word.has_ex_non_exs?) %></td>
+					<td><%= display_content_status(word.has_sent_stems?) %></td>
+					<td><%= display_content_status(word.has_describe_mes?) %></td>
 					<td><%= time_ago_in_words(word.created_at) %></td>
 					<td>Edit</td>
 				</tr>

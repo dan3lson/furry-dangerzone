@@ -1,11 +1,18 @@
 <% if logged_in? %>
-	<p>
-		<% if current_user.has_word?(word) %>
-			<%= play_btn_small(UserWord.object(current_user, word), word.id) %>
-		<% else %>
-			<%= render "searches/user_play", word: word %>
-		<% end %>
-
-		<%= render "searches/user_add", word: word %>
-	</p>
+	<% if current_user.has_word?(word) %>
+		<div class="alert alert-info">
+			<%= icon "info-circle" %> You already saved this in your Notebook.
+		</div>
+	<% else %>
+		<p>
+			<%= link_to user_word_path(word_id: word.id),
+									class: "btn btn-success",
+									method: :post,
+									remote: true do
+			%>
+				<i class="fa fa-plus-circle"></i>
+				Add to Notebook
+			<% end %>
+		</p>
+	<% end %>
 <% end %>

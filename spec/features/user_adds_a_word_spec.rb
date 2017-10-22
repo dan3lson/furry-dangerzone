@@ -21,7 +21,7 @@ feature "user adds a word", %{
 
       log_in_as(user)
 
-      visit search_path
+      visit dictionary_path
 
       fill_in "Search", with: "chess"
       click_on "look up"

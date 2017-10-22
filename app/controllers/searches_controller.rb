@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-  def search
+  def dictionary
   end
 
   def random
@@ -10,12 +10,12 @@ class SearchesController < ApplicationController
     end
   end
 
-  def grades
-    @grade = params[:grade]
-    @word_groups = Word.send(@grade).group_by(&:name)
+  def section
+    @section = params[:name]
+    @word_groups = Word.send(@section).group_by(&:name)
 
     respond_to do |format|
-      format.js { render template: "searches/words/grades.js.erb" }
+      format.js { render template: "searches/words/section.js.erb" }
     end
   end
 

@@ -58,12 +58,12 @@ module GamesHelper
             role: "button",
             remote: true do
       # play_icon + " Play #{user_word.game}"
-      play_icon + " Play"
+      play_icon
     end
   end
 
   def play_icon
-    icon("play-circle")
+    icon("play")
   end
 
   def random_congrats

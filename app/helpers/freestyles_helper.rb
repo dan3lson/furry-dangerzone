@@ -9,6 +9,15 @@ module FreestylesHelper
   end
 
   # TODO Create test
+  def display_content_status(created)
+    if created
+      content_tag(:i, nil, class: "fa fa-check text-success")
+    else
+      content_tag(:i, nil, class: "fa fa-close text-danger")
+    end
+  end
+
+  # TODO Create test
   def free_game_num(game_name)
     if game_name == "Sentence Stems"
       9
