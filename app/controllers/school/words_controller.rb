@@ -23,7 +23,7 @@ class School::WordsController < BaseSchoolController
         format.js
       end
     else
-      @created = false;
+      @created = false
       render :new
     end
   end
