@@ -1,17 +1,17 @@
 var meaningAltID = "<%= @m_a.id %>";
-var $cardBlock = $("div").find("[data-meaning-alt-id='" + meaningAltID + "']");
+var $cardody = $("div").find("[data-meaning-alt-id='" + meaningAltID + "']");
 var $cardTextPartial = $("<%= j render(partial: 'school/meaning_alts/card_text', locals: { m_a: @m_a }) %>");
 var $editPartial = $("<%= j render(partial: 'school/meaning_alts/edit_btn', locals: { m_a: @m_a }) %>");
-var saved = "<%= @saved %>";
+var updated = "<%= @updated %>";
 removeAlerts();
 
-if (saved == "true") {
-	$cardBlock.html($cardTextPartial).fadeIn();
-	$cardBlock.prepend(createFlash("success", "Updated!"));
-	$cardBlock.append($editPartial);
+if (updated == "true") {
+	$cardody.html($cardTextPartial).fadeIn();
+	$cardody.prepend(createFlash("success", "Updated!"));
+	$cardody.append($editPartial);
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @m_a }) %>");
-	$cardBlock.prepend($errorsPartial);
+	$cardody.prepend($errorsPartial);
 }
 
 function removeAlerts() {

@@ -1,0 +1,42 @@
+var created = "<%= @created %>";
+var wordID = "<%= @word.id %>";
+var wordName = "<%= @word.name %>";
+var $formsDiv = $(".forms");
+
+if (created == "true") {
+	$formsDiv.find(".card:first").remove();
+	var $exNonExForm = $("<%= j render(partial: 'school/example_non_examples/form', locals: { word: @word, e_non_e: @e_non_e, method: :post, btn_text: 'Create' }) %>");
+	var $meaningAltForm = $("<%= j render(partial: 'school/meaning_alts/form', locals: { word: @word, m_a: @m_a, method: :post, btn_text: 'Create' }) %>");
+	$(".alert-info").removeClass("alert-info")
+									.addClass("alert-success")
+									.html(
+										"Success! Now use the two new forms below to create " +
+										"context for <b>" + wordName + "</b>. This context will " +
+										"be used as extra practice in the Leksi games."
+									);
+	appendForm($exNonExForm, "Create Example/Non-Examples", "word-id-ex-non-ex", wordID);
+	appendForm($meaningAltForm, "Create Meaning Alternatives", "word-id-mean-alt", wordID);
+} else {
+	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @e_non_e }) %>");
+	$card.prepend($errorsPartial);
+}
+
+function appendForm($form, header, dataName, dataVal) {
+	var $card = createElem("div", "card bg-light mb-3").attr("data-" + dataName, dataVal);
+	var $cardBody = createElem("div", "card-body");
+	var $cardHeader = createElem("div", "card-header").html(header);
+	$card.append($cardHeader, $cardBody);
+	$cardBody.append($form);
+	$formsDiv.append($card);
+}
+
+function createFlash(_class, text) {
+	return createElem("div", "alert alert-" + _class).append(text)
+																									 .attr("role", "alert");
+}
+
+function createElem(elem, elemClass, elemID) {
+	_class = elemClass || null;
+	_id = elemID || null;
+	return $("<" + elem + ">", { class: _class, id: _id });
+}

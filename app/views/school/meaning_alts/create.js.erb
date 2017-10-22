@@ -1,33 +1,30 @@
 var created = "<%= @created %>";
 var wordID = "<%= @word.id %>";
-var $cardBlock = $("div").find("[data-word-id='" + wordID + "']");
-var $card = $cardBlock.parent();
-var $footer = $card.find(".card-footer");
+var $card = $("div").find("[data-word-id-mean-alt='" + wordID + "']");
+var $cardHeader = $card.find(".card-header");
 var $form = $card.find("form");
-removeAlerts();
+// removeAlerts();
 
 if (created == "true") {
-	var count = parseInt("<%= @meaning_alt_count %>");
 	var $cardTextPartial = $("<%= j render(partial: 'school/meaning_alts/card_text', locals: { m_a: @m_a }) %>");
 	var $editPartial = $("<%= j render(partial: 'school/meaning_alts/edit_btn', locals: { m_a: @m_a }) %>");
-	var $newCardBlock = createElem("div", "card-body")
-											.attr("data-meaning-alt-id", "<%= @m_a.id %>");
-  var $flash = createFlash(
-		"success", "Success; thanks! You can create another one below."
+	var $newCardBody = createElem("div", "card-body").attr(
+		"data-meaning-alt-id",
+		"<%= @m_a.id %>"
 	);
-	$newCardBlock.append($cardTextPartial, $editPartial)
-							 .prepend($flash)
-							 .insertBefore($footer)
-							 .hide()
-							 .fadeIn();
+	$newCardBody.insertAfter($cardHeader);
+	$newCardBody.append($cardTextPartial, $editPartial)
+							.prepend(flashSuccess())
+							.hide()
+							.fadeIn();
 	$form[0].reset();
-
-	if (count > 1) {
-		$card.find(".fa-check").addClass("text-success");
-	}
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @m_a }) %>");
-	$footer.prepend($errorsPartial);
+	$card.prepend($errorsPartial);
+}
+
+function flashSuccess() {
+	createFlash("success", "Success! You can create another one below.");
 }
 
 function removeAlerts() {

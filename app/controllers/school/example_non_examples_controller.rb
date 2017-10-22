@@ -8,8 +8,6 @@ class School::ExampleNonExamplesController < BaseSchoolController
     @word = Word.find(params[:word_id])
     @e_non_e.user = current_user
     @e_non_e.word = @word
-    # TODO Refactor - look at FreestylesController for example
-    @created = false
 
     if @e_non_e.save
       @created = true
@@ -17,8 +15,6 @@ class School::ExampleNonExamplesController < BaseSchoolController
       @created = false
       @errors = @e_non_e.errors.full_messages
     end
-
-    @e_non_e_count = @word.example_non_examples.count
 
     respond_to do |format|
       format.js
@@ -36,18 +32,22 @@ class School::ExampleNonExamplesController < BaseSchoolController
 
   def update
     @e_non_e = ExampleNonExample.find(params[:id])
-    @updated = false
-
-    if @e_non_e.update(example_non_example_params)
-      @updated = true
-    else
-      @updated = false
-    end
+    @updated = @e_non_e.update(example_non_example_params)
 
     respond_to do |format|
       format.js
     end
   end
+
+  def destroy
+    @e_non_e = ExampleNonExample.find(params[:id])
+    @destroyed = @e_non_e.destroy ? true : false
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
 
   def second_grade
     @e_non_e = ExampleNonExample.new

@@ -1,13 +1,13 @@
-// TODO Maybe refactor this and meaning_alts edit.js.erb file into one
-var updated = "<%= @updated %>";
 var exNonExID = "<%= @e_non_e.id %>";
-var $cardText = $("div").find("[data-ex-non-ex-id='" + exNonExID + "']");
-var $card = $cardText.parents(".card");
-var $cardBlock = $card.find(".card-body");
-var $buttons = $card.find(".float-right");
-var $footer = $card.find(".card-footer");
-var $partial = $("<%= j render(partial: 'school/example_non_examples/form', locals: { e_non_e: @e_non_e, btn_text: 'Update', word: @word }) %>");
+var $cardBlock = $("div").find("[data-ex-non-ex-id='" + exNonExID + "']");
+var $buttons = $cardBlock.find("p:last");
+var $formPartial = $("<%= j render(partial: 'school/example_non_examples/form', locals: { e_non_e: @e_non_e, method: :patch, btn_text: 'Update', word: @word }) %>");
+var $deleteBtnPartial = $("<%= j render(partial: 'school/example_non_examples/delete_btn', locals: { e_non_e: @e_non_e, word: @word }) %>");
 $buttons.hide();
-$footer.find("p").remove();
-$footer.append($partial);
-$footer.find(".alert").remove();
+$cardBlock.find("p").remove();
+$cardBlock.append($formPartial, $deleteBtnPartial);
+removeAlerts();
+
+function removeAlerts() {
+	$(".alert").remove();
+}

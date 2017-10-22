@@ -1,33 +1,51 @@
-<% provide(:header, "Create a New Word") %>
 <% provide(:title, "Create a New Word") %>
+<% provide(:header, "Create a New Word") %>
+
+<!-- <div>
+  <div class="card mb-3">
+    <div class="card-body">
+      <ol>
+        <li>
+          Want to add a word, but are unsure if it already exists? Try
+          searching for it first.
+        </li>
+        <li>
+          If the exact word you want isn't there, use the form down below to
+          create a new word.
+        </li>
+      </ol>
+      <%#= render "searches/form" %>
+    </div>
+  </div>
+  <div class="search-container"></div>
+</div> -->
+<div class="alert alert-info">
+  <%= icon "info-circle" %>
+  Complete the form below to create a new word. Then you can create content for
+  that word via new forms that appear. Any content you create will be used for
+  the Leksi games, which will help students truly learn these new words.
+</div>
 <div class="row">
-  <div class="col-md-6">
-    <div class="card mb-3">
+  <div class="col-md-6 forms">
+    <div class="card bg-light mb-3">
       <div class="card-body">
-        <p class="card-title">
-          Complete the form below to create a new word.
-        </p>
-        <%= form_for([:school, @word]) do |f| %>
+        <%= form_for([:school, @word], remote: true) do |f| %>
           <%= render 'shared/error_messages', object: @word %>
           <div class="form-group">
-            <%= f.label :name, class: "sr-only" %>
-            <%= f.text_field :name, class: "form-control",
-            placeholder: "Name"  %>
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control" %>
           </div>
           <div class="form-group">
-            <%= f.label :definition, class: "sr-only" %>
-            <%= f.text_field :definition, class: "form-control",
-            placeholder: "Definition"  %>
+            <%= f.label :definition %>
+            <%= f.text_field :definition, class: "form-control" %>
           </div>
           <div class="form-group">
-            <%= f.label :phonetic_spelling, class: "sr-only" %>
-            <%= f.text_field :phonetic_spelling, class: "form-control",
-            placeholder: "Phonetic Spelling (Optional)"  %>
+            <%= f.label :phonetic_spelling, "Phonetic Spelling (Optional)" %>
+            <%= f.text_field :phonetic_spelling, class: "form-control" %>
           </div>
           <div class="form-group">
-            <%= f.label :part_of_speech, class: "sr-only" %>
-            <%= f.text_field :part_of_speech, class: "form-control",
-            placeholder: "Part of Speech (Optional)"  %>
+            <%= f.label :part_of_speech, "Part of Speech (Optional)" %>
+            <%= f.text_field :part_of_speech, class: "form-control" %>
           </div>
           <div class="form-group">
             <%= f.label :photo do %>
@@ -38,23 +56,5 @@
         <% end %>
       </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card mb-3">
-      <div class="card-body">
-        <ol>
-          <li>
-            Want to add a word, but are unsure if it already exists? Try
-            searching for it first.
-          </li>
-          <li>
-            If the exact word you want isn't there, use the form down below to
-            create a new word.
-          </li>
-        </ol>
-        <%= render "searches/form" %>
-      </div>
-    </div>
-    <div class="search-container"></div>
   </div>
 </div>

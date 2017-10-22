@@ -1,19 +1,19 @@
-var meaningAltID = "<%= @m_a.id %>";
-var $cardBlock = $("div").find("[data-meaning-alt-id='" + meaningAltID + "']");
+var exNonExID = "<%= @e_non_e.id %>";
+var $cardBody = $("div").find("[data-ex-non-ex-id='" + exNonExID + "']");
 var destroyed = "<%= @destroyed %>";
 removeAlerts();
 
 if (destroyed == "true") {
 	var $flash = createFlash("success", "Successfully deleted.");
-	$cardBlock.prepend($flash);
-	$cardBlock.find("form").slideUp("slow");
+	$cardBody.prepend($flash);
+	$cardBody.find("form").slideUp("slow");
 
 	setTimeout(function() {
-		$cardBlock.remove();
+		$cardBody.remove();
 	}, 4000);
 } else {
-	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @m_a }) %>");
-	$cardBlock.prepend($errorsPartial);
+	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @e_non_e }) %>");
+	$cardBody.prepend($errorsPartial);
 }
 
 function removeAlerts() {

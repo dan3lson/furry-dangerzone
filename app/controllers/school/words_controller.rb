@@ -15,9 +15,15 @@ class School::WordsController < BaseSchoolController
       flash.now[:warning] = msg
       render :new
     elsif @word.save
-      flash[:success] = "Success! You created \'#{@word.name}\'."
-      redirect_to new_school_word_path
+      @created = true;
+      @e_non_e = ExampleNonExample.new
+      @m_a = MeaningAlt.new
+
+      respond_to do |format|
+        format.js
+      end
     else
+      @created = false;
       render :new
     end
   end
