@@ -1,6 +1,5 @@
 const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', locals: { target_word: @target_word }) %>");
-const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: '' }) %>");
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
 var currentGame = parseInt("<%= @current_game %>");
@@ -11,7 +10,6 @@ $(".container").empty()
 							 .append(
 								 $scoreboardPartial,
 								 $headerPartial,
-								 $directionsPartial,
 								 $activityDiv
 							 ).hide()
 							 .fadeIn("slow")
@@ -185,7 +183,7 @@ function startLeksiTaleActivity() {
 				"data-remote": "true",
 				href: "/words/" + word.id
 			});
-			var $span = createElem("span", "badge badge-pill badge-default")
+			var $span = createElem("span", "badge badge-pill badge-secondary")
 									.attr("data-word-id", word.id)
 									.append(word.name);
 		  $link.append($span);
@@ -204,7 +202,7 @@ function startLeksiTaleActivity() {
 			}
 		});
 
-		$(".container").on("click", ".badge-default", function() {
+		$(".container").on("click", ".badge-secondary", function() {
 			$badge = $(this);
 			deactivateBadges();
 			activateBadge($badge);
@@ -367,20 +365,20 @@ function activateBadge($badge) {
 
 function deactivateBadges() {
 	$(".badge-primary").removeClass("badge-primary")
-										 .addClass("badge-default");
+										 .addClass("badge-secondary");
 }
 
 function highlightUsedWords(textareaWords, names) {
 	var words = usedWords(textareaWords, names);
-	$(".badge-success").removeClass("badge-success").addClass("badge-default");
+	$(".badge-success").removeClass("badge-success").addClass("badge-secondary");
 
 	if (words.length) {
 		$.each(words, function() {
 			var usedWord = this;
-			var $badge = $(".badge-default").filter(function() {
+			var $badge = $(".badge-secondary").filter(function() {
 				return $(this).text().trim() == usedWord;
 			});
-			$badge.removeClass("badge-default").addClass("badge-success");
+			$badge.removeClass("badge-secondary").addClass("badge-success");
 		});
 	}
 }

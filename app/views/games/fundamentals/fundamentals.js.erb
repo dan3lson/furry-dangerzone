@@ -1,6 +1,5 @@
 const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', locals: { target_word: @target_word }) %>");
-const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: '' }) %>");
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
 var gameToPlay = parseInt("<%= @game_to_play %>");
@@ -9,7 +8,6 @@ var $activityDiv = createElem("div", null, "activity-div");
 $fundamentalsDiv.append(
 									$scoreboardPartial,
 									$headerPartial,
-									$directionsPartial,
 									$activityDiv
 								);
 $(".container").empty()
@@ -17,7 +15,7 @@ $(".container").empty()
 							 .css("margin-bottom", "5rem")
 							 .hide()
 							 .fadeIn();
-var $targetWordDiv = $(".target-word-header-div");
+var $targetWordH1 = $(".target-word-header");
 var newPointsTotal = 0;
 var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
@@ -162,7 +160,7 @@ $(".container").off().on("click", ".continue-btn", function() {
 		updateUserPoints(200);
 		updateGameStat("funds_three", timeGameStarted, dataThree);
 		flashPointsUpdate(arrowSuccess());
-		$targetWordDiv.html(targetWord.name).removeClass("text-success");
+		$targetWordH1.html(targetWord.name).removeClass("text-success");
 		emptyActivityDiv();
 
 		if (availableGames.dec_dec) {
@@ -249,7 +247,7 @@ function startSpellByTypingActivity() {
 		targetWordSpanLetters.push(wordLetterSpan);
 	})
 
-	$targetWordDiv.html(targetWordSpanLetters);
+	$targetWordH1.html(targetWordSpanLetters);
 
 	var $firstInput;
 	var firstInputText;
@@ -267,12 +265,12 @@ function startSpellByTypingActivity() {
 		wordSubstring = targetWord.name.substring(0, numLettersTyped);
 
 		if (firstInputText == wordSubstring) {
-			makeLettersGreen($targetWordDiv, numLettersTyped);
-			successLetters = $targetWordDiv.find("span.text-success").length;
+			makeLettersGreen($targetWordH1, numLettersTyped);
+			successLetters = $targetWordH1.find("span.text-success").length;
 
 			if (successLetters != numLettersTyped) {
-				makeLettersDefault($targetWordDiv);
-				makeLettersGreen($targetWordDiv, numLettersTyped);
+				makeLettersDefault($targetWordH1);
+				makeLettersGreen($targetWordH1, numLettersTyped);
 			}
 		}
 
@@ -303,24 +301,23 @@ function startSpellByTypingActivity() {
 
 function startSpellByClickingLettersActiivty() {
 	timeGameStarted = getDate();
-	giveDirections(
-		"Tap the letters to spell that same word, whose definition is <mark>" +
-		targetWord.definition + "</mark>."
-	);
+	giveDirections("Tap the letters to spell that same word.");
 	var $letter;
-	var targetWordLetters = targetWord.name.split('');
+	var targetWordLetters = targetWord.name
+																		.split('')
+																		.filter(function(v) { return v !== ' '} );
 	var $tappedLetterBtn;
 	var tappedLetter;
 	var firstLetter;
 	var underscores = "";
-	var $underscoreContainer = createElem("div", null, "underscore-container");
+	var $underscoreContainer = createElem("span", null, null);
 	var $alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
 	var	$randomAlphabet;
 	var $alphabetRandLetters = [];
 	var $mergedLettersArray = [];
 
-	makeLettersDefault($targetWordDiv);
-	$targetWordDiv.html($underscoreContainer);
+	makeLettersDefault($targetWordH1);
+	$targetWordH1.html($underscoreContainer);
 
 	$.each(targetWordLetters, function() {
 		underscores += "_ ";
@@ -382,14 +379,14 @@ function startPronunciationActivity() {
 	timeGameStarted = getDate();
 	var numSyllables = targetWord.phonetic_spelling.split("·").length;
 	giveDirections(
-		"<mark>This word has " + numSyllables + " syllable(s).</mark> Click " +
+		"This word has " + numSyllables + " syllable(s). Click " +
 		"the volume button to hear its pronunciation."
 	);
 	const $sayItRightPartial = $("<%= j render(partial: 'games/fundamentals/say_it_right') %>");
 	$activityDiv.append($sayItRightPartial);
 	const $audioBtn = $(".funds-audio-btn");
 	var attr = $(".audiooo").attr("src") + targetWord.name + ".mp3";
-	$targetWordDiv.html(targetWord.phonetic_spelling);
+	$targetWordH1.html(targetWord.phonetic_spelling);
 	$(".audiooo").attr("src", attr);
 
 	$audioBtn.click(function() {
@@ -406,7 +403,7 @@ function startPronunciationActivity() {
 					 		 .addClass("fa-volume-off");
 		}, 500);
 
-		$targetWordDiv.addClass("text-success");
+		$targetWordH1.addClass("text-success");
 		addPoints(1);
 		flashPointsUpdate(arrowSuccess());
 		numHeard += 1;
@@ -488,9 +485,8 @@ function startDecisionsDecisionsActivity() {
 function startExampleNonExamplesActivity() {
 	timeGameStarted = getDate();
 	giveDirections(
-		"Are the statements below an example or non-example of " +
-		"the word above, whose definition is <mark>" + targetWord.definition +
-		"</mark>."
+		"Decide if the statements below are an example or non-example of " +
+		"the word above."
 	);
 	var exNonExArray = [];
 

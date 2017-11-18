@@ -1,6 +1,12 @@
-<div class="card">
-	<div class="card-body" data-word-id="<%= word.id %>">
-		<%= render "words/basics", word: word %>
+<dl class="row">
+	<dt class="col-sm-3" data-word-id="<%= word.id %>">
+		<h3><%= word.name %></h3>
+	</dt>
+	<dd class="col-sm-6">
+		<span class="text-muted"><%= word.part_of_speech %></span>
+		<%= array_of(word, "definition").first %>
+	</dd>
+	<dd class="col-sm-3">
 		<%= render "searches/results_options", word: word %>
-	</div>
-</div>
+	</dd>
+</dl>

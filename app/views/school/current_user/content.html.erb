@@ -8,7 +8,6 @@
 				<th>ID</th>
 				<th>Name</th>
 				<th>Definition</th>
-				<th>Phonetic Spelling</th>
 				<th>Photo</th>
 				<th>Decisions, Decisions</th>
 				<th>Example/Non-Example</th>
@@ -24,7 +23,6 @@
 					<th scope="row"><%= word.id %></th>
 					<td><%= word.name %></td>
 					<td><%= word.definition %></td>
-					<td><%= word.phonetic_spelling %></td>
 					<td><%= display_content_status(word.has_photo?) %></td>
 					<td><%= display_content_status(word.has_meaning_alts?) %></td>
 					<td><%= display_content_status(word.has_ex_non_exs?) %></td>

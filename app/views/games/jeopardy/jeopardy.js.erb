@@ -5,7 +5,6 @@ var nonNullRounds = rounds.filter(function(round) {
     return round.correct_ans != null;
 });
 const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
-const $directionsPartial = $("<%= j render(partial: 'games/directions', locals: { directions: @directions }) %>");
 const $lineroTablePartial = $("<%= j render(partial: 'games/jeopardy/linero_table', locals: { rows: @rows }) %>");
 const $headerPartial = $("<%= j render(partial: 'games/jeopardy/header') %>");
 const $buttonsPartial = $("<%= j render(partial: 'games/jeopardy/buttons', locals: { words: @words }) %>");
@@ -17,7 +16,6 @@ var question;
 $(".container").empty().append($jeopardyDiv);
 $jeopardyDiv.append(
 							$scoreboardPartial,
-							$directionsPartial,
 							$lineroTablePartial,
 							$headerPartial,
 							$buttonsPartial

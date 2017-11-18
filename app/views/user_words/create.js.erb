@@ -1,19 +1,16 @@
 var created = "<%= @created %>";
 var wordID = "<%= @word.id %>";
-var $cardBody = $("div").find("[data-word-id='" + wordID + "']");
-var $card = $cardBody.parent();
-var $btnsP = $cardBody.find("div.mt-3");
-$card.find(".alert").remove();
+var $dd = $("dd[data-word-id='" + wordID + "']");
+$dd.find(".alert").remove();
 
 if (created == "true") {
-	var $linero = createElem("span").append(
-		"Successfully saved to your Notebook!"
+	var $message = createElem("span").append(
+		"Successfully added to your notebook!"
 	);
-	$cardBody.prepend(createFlash("success", $linero));
-	$btnsP.remove();
+	$dd.html(createFlash("success", $message));
 } else {
 	var $errorsPartial = $("<%= j render(partial: 'shared/error_messages', locals: { object: @user_word }) %>");
-	$card.prepend($errorsPartial);
+	$dd.prepend($errorsPartial);
 }
 
 function createFlash(_class, text) {
