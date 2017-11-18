@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "my_leksi#index"
+  root "static_pages#home"
   get "about-us" => "static_pages#about_us"
   get "research" => "static_pages#research"
   get "our-approach" => "static_pages#our_approach"

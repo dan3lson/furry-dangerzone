@@ -6,10 +6,12 @@
   <dl class="row">
     <% @current_user_user_words.each do |user_word| %>
       <% word = user_word.word %>
+
       <dt class="col-sm-3">
-        <%= word.name %>
-        <span class="text-muted"><%= word.part_of_speech %></span>
-        <br>
+        <%= play_btn_small(user_word, word.id, user_word.current_game) %>
+        <h3 class="d-inline"><%= word.name %></h3>
+      </dt>
+      <dd class="col-sm-6">
         <% if word.has_photo? %>
           <%= image_tag word.photo, alt: "#{word.name}",
                                     class: "rounded border border-secondary",
@@ -17,11 +19,17 @@
                                     height: "100rem"
           %>
         <% end %>
-      </dt>
-      <dd class="col-sm-9">
 
+        <span class="text-muted"><%= word.part_of_speech %></span>
         <%= array_of(word, "definition").first %>
-        <%= play_btn_small(user_word, word.id, user_word.current_game) %>
+      </dd>
+      <dd class="col-sm-3 mb-5">
+        <%= button_to user_word_path(id: user_word.id),
+          class: "btn btn-outline-secondary btn-sm",
+          method: :delete do
+        %>
+          <i class="fa fa-trash"></i> Remove
+        <% end %>
       </dd>
     <% end %>
   </dl>

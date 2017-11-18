@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="<%= root_path %>">Leksi</a>
+  <a class="navbar-brand" href="<%= notebook_path %>">Leksi</a>
   <button class="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -21,7 +21,7 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false">
-          <%= icon "user" %> Hello, <%= current_user.username %>!
+          <%= emoji "blush" %> Hello, <%= current_user.username %>!
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <%= link_to settings_path, class: "dropdown-item" do %>
