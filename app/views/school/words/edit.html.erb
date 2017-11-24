@@ -1,0 +1,16 @@
+<% provide(:title, "Edit Word: #{@word.name}") %>
+<% provide(:header, "Edit Word: #{@word.name}") %>
+
+<div class="row">
+  <!-- TODO Delete forms class and update how to add content for created word  -->
+  <div class="col-md-6 forms">
+    <div class="card bg-light mb-3">
+      <div class="card-body">
+        <%= render "school/words/form", word: @word,
+                                        remote: false,
+                                        btn_text: "Update"
+        %>
+      </div>
+    </div>
+  </div>
+</div>

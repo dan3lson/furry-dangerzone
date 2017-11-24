@@ -29,22 +29,44 @@
 <% end %>
 
 <div class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle"
-		 href="#"
-		 id="navbarDropdownMenuLink"
-		 data-toggle="dropdown"
-		 aria-haspopup="true"
-		 aria-expanded="false">
-		 <%= icon "pencil" %>
-    Content
-  </a>
+	<% if controller?("school/words") ||
+				controller?("school/example_non_examples") ||
+				controller?("school/meaning_alts")
+	%>
+		<a class="nav-link dropdown-toggle active"
+			 href="#"
+			 id="navbarDropdownMenuLink"
+			 data-toggle="dropdown"
+			 aria-haspopup="true"
+			 aria-expanded="false">
+			 <%= icon "pencil" %>
+	    My Content
+	  </a>
+	<% else %>
+		<a class="nav-link dropdown-toggle"
+			 href="#"
+			 id="navbarDropdownMenuLink"
+			 data-toggle="dropdown"
+			 aria-haspopup="true"
+			 aria-expanded="false">
+			 <%= icon "pencil" %>
+	    My Content
+	  </a>
+	<% end %>
   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 		<%= link_to new_school_word_path, class: "dropdown-item" do %>
-			Create New Word
+			New Word
 		<% end %>
-		<%= link_to school_content_path, class: "dropdown-item" do %>
-			View Mine
+		<%= link_to school_words_path, class: "dropdown-item" do %>
+			Words
 		<% end %>
+		<%= link_to school_meaning_alts_path, class: "dropdown-item" do %>
+			Decisions, Decisions
+		<% end %>
+		<%= link_to school_example_non_examples_path, class: "dropdown-item" do %>
+			Example/Non-Examples
+		<% end %>
+
   </div>
 </div>
 

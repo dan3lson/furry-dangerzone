@@ -2,6 +2,7 @@ module WordsHelper
   def myLeksi_show_path(word)
     "/myLeksi/#{word.id}"
   end
+
   def word_ids_for(user, tag)
     user.word_ids_for(tag)
   end

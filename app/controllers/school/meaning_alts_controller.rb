@@ -1,4 +1,8 @@
 class School::MeaningAltsController < BaseSchoolController
+  def index
+    @meaning_alts = current_user.meaning_alts
+  end
+
   def new
     @m_a = MeaningAlt.new
   end

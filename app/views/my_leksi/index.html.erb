@@ -3,36 +3,36 @@
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
 
 <% if current_user.has_words? %>
-  <dl class="row">
     <% @current_user_user_words.each do |user_word| %>
-      <% word = user_word.word %>
+      <dl class="row mb-5 lead">
+        <% word = user_word.word %>
 
-      <dt class="col-sm-3">
-        <%= play_btn_small(user_word, word.id, user_word.current_game) %>
-        <h3 class="d-inline"><%= word.name %></h3>
-      </dt>
-      <dd class="col-sm-6">
-        <% if word.has_photo? %>
-          <%= image_tag word.photo, alt: "#{word.name}",
-                                    class: "rounded border border-secondary",
-                                    width: "100rem",
-                                    height: "100rem"
+        <dt class="col-sm-3">
+          <%= play_btn_small(user_word, word.id, user_word.current_game) %>
+          <span class="d-inline"><%= word.name %></span>
+        </dt>
+        <dd class="col-sm-6">
+          <% if word.has_photo? %>
+            <%= image_tag word.photo, alt: "#{word.name}",
+                                      class: "rounded border border-secondary",
+                                      width: "100rem",
+                                      height: "100rem"
+            %>
+          <% end %>
+
+          <span class="text-muted"><%= word.part_of_speech %></span>
+          <%= array_of(word, "definition").first %>
+        </dd>
+        <dd class="col-sm-3">
+          <%= button_to user_word_path(id: user_word.id),
+            class: "btn btn-outline-secondary btn-sm",
+            method: :delete do
           %>
-        <% end %>
-
-        <span class="text-muted"><%= word.part_of_speech %></span>
-        <%= array_of(word, "definition").first %>
-      </dd>
-      <dd class="col-sm-3 mb-5">
-        <%= button_to user_word_path(id: user_word.id),
-          class: "btn btn-outline-secondary btn-sm",
-          method: :delete do
-        %>
-          <i class="fa fa-trash"></i> Remove
-        <% end %>
-      </dd>
+            <i class="fa fa-trash"></i> Remove
+          <% end %>
+        </dd>
+      </dl>
     <% end %>
-  </dl>
   <%#= render "my_leksi/index_word", user_word: user_word,
                                     word: user_word.word
   %>

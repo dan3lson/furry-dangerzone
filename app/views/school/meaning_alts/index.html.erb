@@ -1,0 +1,44 @@
+<% provide(:title, "Decisions, Decisions") %>
+<% provide(:header, "Decisions, Decisions") %>
+
+<% if current_user.has_meaning_alts? %>
+	<table class="table table-sm table-bordered table-responsive">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Word</th>
+				<th>Text</th>
+				<th>Choices</th>
+				<th>Answer</th>
+				<th>Feedback</th>
+				<th>Created</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @meaning_alts.each do |meaning_alt| %>
+				<tr>
+					<th scope="row"><%= meaning_alt.id %></th>
+					<td><%= Word.find(meaning_alt.word_id).name %></td>
+					<td><%= meaning_alt.text %></td>
+					<td><%= meaning_alt.answer %></td>
+					<td><%= meaning_alt.feedback %></td>
+					<!-- TODO Either create helper method or better yet update DB/models -->
+					<td><%= meaning_alt.feedback %></td>
+					<td><%= time_ago_in_words(meaning_alt.created_at) %></td>
+					<td>
+						<%= link_to "Edit",
+								edit_school_meaning_alt_path(meaning_alt),
+								class: "btn btn-warning",
+								title: "Edit this Decisions, Decision"
+						%>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<div class="alert alert-info" role="alert">
+		You haven't created any Decisions, Decisions-related content yet.
+	</div>
+<% end %>

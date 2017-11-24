@@ -6,12 +6,14 @@ Rails.application.routes.draw do
   get "results" => "static_pages#results"
   get "terms-of-use" => "static_pages#terms_of_use"
   get "privacy-policy" => "static_pages#privacy_policy"
+
   controller :blog do
     get "blog" => :index
     get "blog/first-harlem-spelling-bee" => :june_19_2017_first_harlem_spelling_bee
     get "blog/six-words-that-dont-mean-what-you-think" => :june_19_2017_six_words_that_dont_mean_what_you_think
     get "blog/about-our-name" => :june_19_2017_about_our_name
   end
+
   controller :spelling_bee do
     get "spelling-bee" => :index
     get "spelling-bee/about" => :about
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
     get "spelling-bee/sponsors" => :sponsors
     get "spelling-bee/contact-us" => :contact_us
   end
+
   get "feedback" => "current_users#feedback"
   get "dictionary" => "searches#dictionary"
   get "searches/section"
@@ -47,22 +50,29 @@ Rails.application.routes.draw do
   delete "logout" => "sessions#destroy"
   resources :users, except: [:index]
   resources :words, only: [:show]
+
   resources :words do
     resources :examples
   end
+
   get "thesaurus/:word_name" => "words#thesaurus"
+
   resources :words do
     resources :meaning_alts, only: [:index]
   end
+
   resources :words do
     resources :example_non_examples, only: [:index]
   end
+
   resources :words do
     resources :sent_stems, only: [:index]
   end
+
   resource :user_word, only: [:create, :update, :destroy]
   resource :user_points, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]
+
   resource :freestyle do
     member do
       post "sent_stem"
@@ -72,6 +82,7 @@ Rails.application.routes.draw do
       post "in_my_life"
     end
   end
+
   resource :game_stat do
     member do
       post "funds_one"
@@ -83,6 +94,7 @@ Rails.application.routes.draw do
       post "jeopardy"
     end
   end
+
   resource :jeopardy_result, only: [:update]
   resources :tags, except: [:destroy]
   resource :user_tag, only: [:create, :edit, :destroy]
@@ -90,10 +102,12 @@ Rails.application.routes.draw do
   resource :user_word_tag, only: [:create, :edit, :destroy]
   resource :user_word_tag_word_show_page, only: [:destroy]
   resource :user_word_tag_tag_show_page, only: [:destroy]
+
   namespace :games do
     resources :word_relationships, only: [:index]
     resources :describe_mes, only: [:index]
   end
+
   namespace :school do
     root "current_user#home"
     get "home" => "current_user#home"
@@ -108,31 +122,36 @@ Rails.application.routes.draw do
     get "search_words_for_students" => "searches#student_words"
     get "student_words" => "words#student_words"
     get "stats" => "stats#index"
-    get "my_meaning_alts" => "current_user#my_meaning_alts"
-    get "words" => "classrooms#words"
+
     resources :classrooms do
       resources :students
     end
-    resources :words, only: [:index, :new, :create] do
-    end
-    get "content" => "current_user#content"
+
+    resources :words, except: [:show, :destroy]
+
     resource :add_words_for_student, only: [:update] do
       member do
         post "by_grade"
       end
     end
+
     resources :freestyles do
       resources :comments
     end
+
     resources :example_non_examples
+
     resources :word do
       resources :example_non_examples
     end
+
     resources :meaning_alts
+
     resources :word do
       resources :meaning_alts
     end
   end
+
   namespace :admin do
     root "admins#settings"
     get "stats" => "admins#stats"

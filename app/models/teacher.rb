@@ -29,8 +29,25 @@ class Teacher < User
   end
 
   # TODO Delete and figure out database/relationships issue
+  # TODO Create test
   def example_non_examples
     ExampleNonExample.where(user: self)
+  end
+
+  # TODO Create test
+  def has_ex_non_exs?
+    !example_non_examples.blank?
+  end
+
+  # TODO Delete and figure out database/relationships issue
+  # TODO Create test
+  def meaning_alts
+    MeaningAlt.where(user_id: self)
+  end
+
+  # TODO Create test
+  def has_meaning_alts?
+    !meaning_alts.blank?
   end
 
   def example_non_examples_grouped

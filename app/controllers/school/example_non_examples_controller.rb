@@ -1,4 +1,8 @@
 class School::ExampleNonExamplesController < BaseSchoolController
+  def index
+    @example_non_examples = current_user.example_non_examples
+  end
+  
   def new
     @e_non_e = ExampleNonExample.new
   end

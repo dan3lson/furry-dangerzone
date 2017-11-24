@@ -1,22 +1,42 @@
-<% title "" %>
-<% description "" %>
-<% set_meta_tags keywords: "" %>
+<% provide(:title, "Example/Non-Examples") %>
+<% provide(:header, "Example/Non-Examples") %>
 
-<% set_meta_tags og: {
-  title: "",
-	description: ""
-} %>
-
-<% set_meta_tags twitter: {
-  card: "",
-  title: "",
-  description: ""
-} %>
-
-<% @example_non_examples.each do |e_non_e| %>
-  <div class="card">
-    <div class="card-body">
-      <%= render "example_non_examples/example_non_example", e_non_e: e_non_e %>
-    </div>
-  </div>
+<% if current_user.has_ex_non_exs? %>
+	<table class="table table-sm table-bordered table-responsive">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Word</th>
+				<th>Text</th>
+				<th>Answer</th>
+				<th>Feedback</th>
+				<th>Created</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @example_non_examples.each do |ex_non_ex| %>
+				<tr>
+					<th scope="row"><%= ex_non_ex.id %></th>
+					<td><%= Word.find(ex_non_ex.word_id).name %></td>
+					<td><%= ex_non_ex.text %></td>
+					<td><%= ex_non_ex.answer %></td>
+					<td><%= ex_non_ex.feedback %></td>
+          <!-- TODO Either create helper method or better yet update DB/models -->
+					<td><%= time_ago_in_words(ex_non_ex.created_at) %></td>
+					<td>
+						<%= link_to "Edit",
+								edit_school_example_non_example_path(ex_non_ex),
+								class: "btn btn-warning",
+								title: "Edit this Example/Non-Example"
+						%>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<div class="alert alert-info" role="alert">
+		You haven't created any ex_non_ex-related content yet.
+	</div>
 <% end %>

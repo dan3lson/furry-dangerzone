@@ -1,4 +1,8 @@
 class School::WordsController < BaseSchoolController
+  def index
+    @words = current_user.created_words
+  end
+
   def new
     @word = Word.new
   end
@@ -16,15 +20,31 @@ class School::WordsController < BaseSchoolController
       render :new
     elsif @word.save
       @created = true;
-      @e_non_e = ExampleNonExample.new
-      @m_a = MeaningAlt.new
-
-      respond_to do |format|
-        format.js
-      end
+      redirect_to school_words_path
+      # @e_non_e = ExampleNonExample.new
+      # @m_a = MeaningAlt.new
+      #
+      # respond_to do |format|
+      #   format.js
+      # end
     else
       @created = false
       render :new
+    end
+  end
+
+  def edit
+    @word = Word.find(params[:id])
+  end
+
+  def update
+    @word = Word.find(params[:id])
+
+    if @word.update(word_params)
+      flash[:success] = "You successfully updated the word \'#{@word.name}\'."
+      redirect_to school_words_path
+    else
+      render :edit
     end
   end
 
