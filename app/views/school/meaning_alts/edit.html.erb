@@ -1,19 +1,25 @@
-<% provide(:title, "Edit Meaning Alternative") %>
+<% provide(:title, "Edit Decisions, Decisions") %>
+<% provide(:header, "Edit Decisions, Decisions: #{@m_a.word.name}") %>
 
 <div class="card">
-  <div class="card-body">
-		<h4 class="card-title">
-			Update Meaning Alternative for <mark><%= @m_a.word.name %></mark>
-		</h4>
+  <div class="card-body bg-light">
     <%= render "shared/error_messages", object: @m_a %>
-    <%= render "school/meaning_alts/form",
-               text: "Update",
-               method: :patch,
-               m_a: @m_a
+    <%= render "school/meaning_alts/form", btn_text: "Update",
+                                           word: @word,
+                                           m_a: @m_a
     %>
   </div>
   <div class="card-footer text-muted text-center">
     You added this tag <%= time_ago_in_words(@m_a.created_at) %> ago.
-		REMOVE
+    <p class="mt-3">
+      <%= link_to school_word_meaning_alt_path(@word, @m_a),
+        role: "button",
+        class: "btn btn-sm btn-danger",
+        method: :delete do
+      %>
+        <i class="fa fa-trash"></i>
+        Delete
+      <% end %>
+    </p>
   </div>
 </div>

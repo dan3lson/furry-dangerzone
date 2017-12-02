@@ -11,7 +11,7 @@
 				<th>Choices</th>
 				<th>Answer</th>
 				<th>Feedback</th>
-				<th>Created</th>
+				<th>Updated</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -21,11 +21,11 @@
 					<th scope="row"><%= meaning_alt.id %></th>
 					<td><%= Word.find(meaning_alt.word_id).name %></td>
 					<td><%= meaning_alt.text %></td>
+					<td><%= meaning_alt.choices %></td>
 					<td><%= meaning_alt.answer %></td>
 					<td><%= meaning_alt.feedback %></td>
 					<!-- TODO Either create helper method or better yet update DB/models -->
-					<td><%= meaning_alt.feedback %></td>
-					<td><%= time_ago_in_words(meaning_alt.created_at) %></td>
+					<td><%= time_ago_in_words(meaning_alt.updated_at) %> ago</td>
 					<td>
 						<%= link_to "Edit",
 								edit_school_meaning_alt_path(meaning_alt),

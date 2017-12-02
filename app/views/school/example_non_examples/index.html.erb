@@ -10,7 +10,7 @@
 				<th>Text</th>
 				<th>Answer</th>
 				<th>Feedback</th>
-				<th>Created</th>
+				<th>Updated</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -23,7 +23,7 @@
 					<td><%= ex_non_ex.answer %></td>
 					<td><%= ex_non_ex.feedback %></td>
           <!-- TODO Either create helper method or better yet update DB/models -->
-					<td><%= time_ago_in_words(ex_non_ex.created_at) %></td>
+					<td><%= time_ago_in_words(ex_non_ex.updated_at) %> ago</td>
 					<td>
 						<%= link_to "Edit",
 								edit_school_example_non_example_path(ex_non_ex),

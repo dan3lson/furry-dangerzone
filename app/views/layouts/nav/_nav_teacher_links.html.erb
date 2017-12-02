@@ -54,11 +54,11 @@
 	  </a>
 	<% end %>
   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-		<%= link_to new_school_word_path, class: "dropdown-item" do %>
-			New Word
-		<% end %>
 		<%= link_to school_words_path, class: "dropdown-item" do %>
 			Words
+		<% end %>
+		<%= link_to new_school_word_path, class: "dropdown-item" do %>
+			New Word
 		<% end %>
 		<%= link_to school_meaning_alts_path, class: "dropdown-item" do %>
 			Decisions, Decisions

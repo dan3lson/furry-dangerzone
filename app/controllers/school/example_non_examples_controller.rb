@@ -1,8 +1,8 @@
 class School::ExampleNonExamplesController < BaseSchoolController
   def index
-    @example_non_examples = current_user.example_non_examples
+    @example_non_examples = current_user.example_non_examples.show(:updated_at, :desc)
   end
-  
+
   def new
     @e_non_e = ExampleNonExample.new
   end
@@ -27,31 +27,33 @@ class School::ExampleNonExamplesController < BaseSchoolController
 
   def edit
     @e_non_e = ExampleNonExample.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    @word = @e_non_e.word
   end
 
   def update
     @e_non_e = ExampleNonExample.find(params[:id])
-    @updated = @e_non_e.update(example_non_example_params)
 
-    respond_to do |format|
-      format.js
+    if @e_non_e.update(example_non_example_params)
+      flash[:success] = "You successfully updated content for this word."
+      redirect_to school_example_non_examples_path
+    else
+      flash[:danger] = "Sorry, updating that didn\'t work. Please try again."
+      render :edit
     end
   end
 
   def destroy
     @e_non_e = ExampleNonExample.find(params[:id])
-    @destroyed = @e_non_e.destroy ? true : false
+    @word = Word.find(params[:word_id])
 
-    respond_to do |format|
-      format.js
+    if @e_non_e.destroy
+      flash[:success] = "You successfully deleted content for #{@word.name}."
+      redirect_to school_example_non_examples_path
+    else
+      flash[:danger] = "Sorry, deleting that didn\'t work. Please try again."
+      render :edit
     end
   end
-
 
   def second_grade
     @e_non_e = ExampleNonExample.new

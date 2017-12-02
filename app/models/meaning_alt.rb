@@ -10,4 +10,8 @@ class MeaningAlt < ActiveRecord::Base
   validates :feedback, presence: true
   validates :word, presence: true
   validates :creator, presence: true
+
+  scope :show, -> (type = "created_at", order = "ASC") {
+    order("#{type} #{order}")
+  }
 end

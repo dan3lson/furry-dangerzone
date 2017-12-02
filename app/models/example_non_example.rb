@@ -15,4 +15,8 @@ class ExampleNonExample < ActiveRecord::Base
   scope :last_24_hours, -> (time = "updated_at") {
     where("#{time} > ?", 24.hours.ago)
   }
+  # TODO Test
+  scope :show, -> (type = "created_at", order = "ASC") {
+    order("#{type} #{order}")
+  }
 end

@@ -1,6 +1,6 @@
 class School::MeaningAltsController < BaseSchoolController
   def index
-    @meaning_alts = current_user.meaning_alts
+    @meaning_alts = current_user.meaning_alts.show(:updated_at, :desc)
   end
 
   def new
@@ -28,28 +28,30 @@ class School::MeaningAltsController < BaseSchoolController
   def edit
     @m_a = MeaningAlt.find(params[:id])
     @word = @m_a.word
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def update
     @m_a = MeaningAlt.find(params[:id])
-    @updated = @m_a.update(meaning_alt_params)
 
-    respond_to do |format|
-      format.js
+    if @m_a.update(meaning_alt_params)
+      flash[:success] = "You successfully updated content for this word."
+      redirect_to school_meaning_alts_path
+    else
+      flash[:danger] = "Sorry, updating that didn\'t work. Please try again."
+      render :edit
     end
   end
 
   def destroy
     @m_a = MeaningAlt.find(params[:id])
-    @destroyed = @m_a.destroy ? true : false
+    @word = Word.find(params[:word_id])
 
-    respond_to do |format|
-      format.js
+    if @m_a.destroy
+      flash[:success] = "You successfully deleted content for #{@word.name}."
+      redirect_to school_meaning_alts_path
+    else
+      flash[:danger] = "Sorry, deleting that didn\'t work. Please try again."
+      render :edit
     end
   end
 
