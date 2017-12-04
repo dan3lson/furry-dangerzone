@@ -5,6 +5,7 @@ class School::MeaningAltsController < BaseSchoolController
 
   def new
     @m_a = MeaningAlt.new
+    @word = Word.find(params[:word_id])
   end
 
   def create
@@ -12,16 +13,13 @@ class School::MeaningAltsController < BaseSchoolController
     @word = Word.find(params[:word_id])
     @m_a.word = @word
     @m_a.creator = current_user
-    @created = false
 
-    if @m_a.save
-      @created = true
+    if @m_a.save(meaning_alt_params)
+      flash[:success] = "You successfully created content for this word."
+      redirect_to school_meaning_alts_path
     else
-      @created = false
-    end
-
-    respond_to do |format|
-      format.js
+      flash[:danger] = "Sorry, creating that didn\'t work. Please try again."
+      render :new
     end
   end
 

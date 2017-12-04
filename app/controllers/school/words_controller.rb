@@ -20,7 +20,8 @@ class School::WordsController < BaseSchoolController
       render :new
     elsif @word.save
       @created = true;
-      redirect_to school_words_path
+      @meaning_alt = MeaningAlt.new
+      redirect_to new_school_word_meaning_alt_path(@word, @meaning_alt)
       # @e_non_e = ExampleNonExample.new
       # @m_a = MeaningAlt.new
       #

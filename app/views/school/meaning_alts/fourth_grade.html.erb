@@ -3,60 +3,6 @@
 	<br>
 	<small class="text-muted">4th Grade</small>
 </h1>
-<div class="card card-primary text-white mb-3">
-	<div class="card-body">
-		<h4 class="card-title">Instructions</h4>
-		<p class="card-text">
-			Create 3-5 questions around each target word by asking students which
-			they would prefer between the given alternatives. As you see
-			down below, there are four fields to fill in:
-			<em>text</em>, <em>choices</em>, <em>answer</em> and <em>feedback</em>.
-		</p>
-		<p class="card-text">
-			Here is an example:
-		</p>
-		<ol>
-			<li>
-				<h5>Anticipate</h5>
-				<p class="card-text">
-					<p class="form-group">
-						<%= label_tag "Text", nil, class: "form-control-label" %>
-						<%= text_field_tag :text,
-															 nil,
-															 class: "form-control",
-															 placeholder: "Which would you rather anticipate - your birthday or a dentist appointment?",
-															 readonly: true %>
-					</p>
-					<p class="form-group">
-						<%= label_tag "Choices", nil, class: "form-control-label" %>
-						<%= text_field_tag :choices,
-															 nil,
-															 class: "form-control",
-															 placeholder: "birthday, dentist appointment",
-															 readonly: true %>
-					</p>
-					<p class="form-group">
-						<%= label_tag "Answer", nil, class: "form-control-label" %>
-						<%= text_field_tag :answer,
-															 nil,
-															 class: "form-control",
-															 placeholder: "birthday",
-															 readonly: true %>
-					</p>
-					<p class="form-group">
-						<%= label_tag "Feedback", nil, class: "form-control-label" %>
-						<%= text_area_tag :textarea,
-															 nil,
-															 class: "form-control",
-															 placeholder: "Birthdays are events where people have fun and celebrate someone they care about. A dentist appointment, though, usually isn’t something people look forward to because it likely involves discomfort and dealing with bad news like having a cavity.",
-															 rows: 6,
-															 readonly: true %>
-					</p>
-				</p>
-			</li>
-		</ol>
-	</div>
-</div>
 
 <% @fourth_grade_words.each do |word| %>
 	<div class="card mb-3">

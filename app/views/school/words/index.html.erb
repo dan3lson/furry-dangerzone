@@ -24,7 +24,15 @@
 					<td><%= word.name %></td>
 					<td><%= word.definition %></td>
 					<td><%= display_content_status(word.has_photo?) %></td>
-					<td><%= display_content_status(word.has_meaning_alts?) %></td>
+					<td>
+						<%= display_content_status(word.has_meaning_alts?) %>
+						<hr>
+						<%= link_to "New",
+								new_school_word_meaning_alt_path(word, MeaningAlt.new),
+								class: "btn btn-primary",
+								title: "Edit this Decisions, Decision"
+						%>
+					</td>
 					<td><%= display_content_status(word.has_ex_non_exs?) %></td>
 					<td><%= display_content_status(word.has_sent_stems?) %></td>
 					<td><%= display_content_status(word.has_describe_mes?) %></td>

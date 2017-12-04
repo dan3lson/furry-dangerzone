@@ -1,18 +1,78 @@
-<% provide(:header, "New Meaning Alternative") %>
-<section>
-  <ol class="lead">
-    <li>
-      Find words by typing one word (or multiple words separated by a comma)
-    </li>
-    <li>
-      Click the <i class="fa fa-search"></i> button
-    </li>
-    <li>
-      Use the corresponding forms that show up to add as many
-      meaning alternatives as you'd like
-    </li>
-  </ol>
-  <%= render "school/searches/form", form_action: "meaning_alt" %>
-  <br>
-  <div class="search-results-container"></div>
-</section>
+<% provide(:header, "New Decisions, Decisions: #{@word.name}") %>
+<% provide(:title, "New Decisions, Decisions: #{@word.name}") %>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card bg-primary text-white mb-3">
+    	<div class="card-body">
+    		<h4 class="card-title">Instructions</h4>
+    		<p class="card-text">
+    			Fill in the four fields below.
+          Here is an example with the word <b>anticipate</b>:
+    		</p>
+        <p class="card-text">
+          <p class="form-group">
+            <%= label_tag "Text", nil, class: "form-control-label" %>
+            <%= text_field_tag :text,
+                               nil,
+                               class: "form-control",
+                               placeholder: "Which would you rather anticipate - your birthday or a dentist appointment?",
+                               readonly: true
+            %>
+          </p>
+          <p class="form-group">
+            <%= label_tag "Choices", nil, class: "form-control-label" %>
+            <%= text_field_tag :choices,
+            nil,
+            class: "form-control",
+            placeholder: "birthday, dentist appointment",
+            readonly: true %>
+          </p>
+          <p class="form-group">
+            <%= label_tag "Answer", nil, class: "form-control-label" %>
+            <%= text_field_tag :answer,
+            nil,
+            class: "form-control",
+              placeholder: "birthday",
+              readonly: true %>
+          </p>
+          <p class="form-group">
+            <%= label_tag "Feedback", nil, class: "form-control-label" %>
+            <%= text_area_tag :textarea,
+            nil,
+            class: "form-control",
+              placeholder: "Birthdays are events where people have fun and celebrate someone they care about. A dentist appointment, though, usually isn’t something people look forward to because it likely involves discomfort and dealing with bad news like having a cavity.",
+              readonly: true %>
+          </p>
+        </p>
+    	</div>
+    </div>
+    <div class="card">
+      <div class="card-body bg-light">
+        <%= render "shared/error_messages", object: @m_a %>
+        <%= render "school/meaning_alts/form", btn_text: "Create",
+                                               word: @word,
+                                               m_a: @m_a
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        Create Other Content
+      </div>
+      <div class="card-body">
+        <%= link_to "New Decisions, Decisions",
+            new_school_word_meaning_alt_path(@word, @m_a),
+            title: "Create new Deciisons, Decisions content for #{@word.name}"
+        %>
+        <br>
+        <%= link_to "New Example/Non-Example",
+            new_school_word_example_non_example_path(@word, @e_non_e),
+            title: "Create new Example/Non-Example content for #{@word.name}"
+        %>
+      </div>
+    </div>
+  </div>
+</div>
