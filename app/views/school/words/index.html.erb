@@ -2,7 +2,7 @@
 <% provide(:header, "Words") %>
 
 <% if current_user.has_created_content? %>
-	<table class="table table-sm table-bordered table-responsive">
+	<table class="table table-sm table-bordered table-responsive table-hover">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -30,10 +30,18 @@
 						<%= link_to "New",
 								new_school_word_meaning_alt_path(word, MeaningAlt.new),
 								class: "btn btn-primary",
-								title: "Edit this Decisions, Decision"
+								title: "New Decisions, Decision"
 						%>
 					</td>
-					<td><%= display_content_status(word.has_ex_non_exs?) %></td>
+					<td>
+						<%= display_content_status(word.has_ex_non_exs?) %>
+						<hr>
+						<%= link_to "New",
+								new_school_word_example_non_example_path(word, Example.new),
+								class: "btn btn-primary",
+								title: "New Example/Non-Example"
+						%>
+					</td>
 					<td><%= display_content_status(word.has_sent_stems?) %></td>
 					<td><%= display_content_status(word.has_describe_mes?) %></td>
 					<td><%= time_ago_in_words(word.created_at) %></td>

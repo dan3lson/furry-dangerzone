@@ -12,7 +12,7 @@
 } %>
 
 <h1><%= icon("search") %> Dictionary</h1>
-<div class="explore filter-div mb-3 card">
+<div class="mb-3 card bg-light">
   <div class="card-body">
     <div class="btn-group mb-3"
          role="group"
@@ -68,26 +68,10 @@
           %>
         </div>
       </div>
-      <div class="btn-group" role="group">
-        <button id="btnGroupDrop1"
-                type="button"
-                class="btn btn-secondary dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false">
-          Subjects
-        </button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <%= link_to "Science", searches_section_path(name: "science"),
-                                 class: "dropdown-item",
-                                 remote: true
-          %>
-        </div>
-      </div>
     </div>
     <div class="search-form-container">
       <%= render "searches/form" %>
     </div>
   </div>
 </div>
-<div class="search-container"></div>
+<div class="search-results-container"></div>

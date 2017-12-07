@@ -1,18 +1,121 @@
-<% provide(:header, "New Example/Non-Examples") %>
-<section>
-  <ol class="lead">
-    <li>
-      Find words by typing one word (or multiple words separated by a comma)
-    </li>
-    <li>
-      Click the <i class="fa fa-search"></i> button
-    </li>
-    <li>
-      Use the corresponding forms that show up to add as many
-      example/non-examples as you'd like
-    </li>
-  </ol>
-  <%= render "school/searches/form", form_action: "e_non_e" %>
-  <br>
-  <div class="search-results-container"></div>
-</section>
+<% provide(:header, "New Example/Non-Example: #{@word.name}") %>
+<% provide(:title, "New Example/Non-Example: #{@word.name}") %>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card bg-primary text-white mb-3">
+    	<div class="card-body">
+    		<h4 class="card-title">Instructions</h4>
+        <p class="card-text">
+          Fill in the fields below. Here are two exampels for "ex"
+          <em>text</em>, <em>answer (either "example" or "non-example")</em>,
+          and <em>feedback</em>.
+        </p>
+        <p class="card-text">
+          Here are two examples:
+        </p>
+        <ol>
+          <li>
+            <h5>Abate</h5>
+            <strong>Part of Speech</strong> verb
+            <br>
+            <strong>Definition</strong> become less in amount or intensity
+            <br>
+            <strong>Examples</strong> The storm abated
+            <p class="card-text">
+              <p class="form-group">
+                <%= label_tag "Text", nil, class: "form-control-label" %>
+                <%= text_field_tag :text,
+                                   nil,
+                                   class: "form-control",
+                                   placeholder: "The heavy storm turns into a light drizzle.",
+                                   readonly: true %>
+              </p>
+              <p class="form-group">
+                <%= label_tag "Answer", nil, class: "form-control-label" %>
+                <%= text_field_tag :answer,
+                                   nil,
+                                   class: "form-control",
+                                   placeholder: "example",
+                                   readonly: true %>
+              </p>
+              <p class="form-group">
+                <%= label_tag "Feedback", nil, class: "form-control-label" %>
+                <%= text_area_tag :textarea,
+                                   nil,
+                                   class: "form-control",
+                                   placeholder: "If a heavy storm abated, then umbrellas might actually keep people dry since the rain has died down.",
+                                   readonly: true %>
+              </p>
+            </p>
+          </li>
+          <li>
+            <h5>Abate</h5>
+            <strong>Part of Speech</strong> verb
+            <br>
+            <strong>Definition</strong> become less in amount or intensity
+            <br>
+            <strong>Examples</strong> The storm abated
+            <p class="card-text">
+              <p class="form-group">
+                <%= label_tag "Text", nil, class: "form-control-label" %>
+                <%= text_area_tag :text,
+                                   nil,
+                                   class: "form-control",
+                                   placeholder: "A sports stadium that gets louder and fiercer",
+                                   readonly: true
+                %>
+              </p>
+              <p class="form-group">
+                <%= label_tag "Answer", nil, class: "form-control-label" %>
+                <%= text_area_tag :answer,
+                                   nil,
+                                   class: "form-control",
+                                   placeholder: "non-example",
+                                   readonly: true
+                %>
+              </p>
+              <p class="form-group">
+                <%= label_tag "Feedback", nil, class: "form-control-label" %>
+                <%= text_area_tag :textarea,
+                                   nil,
+                                   class: "form-control",
+                                   placeholder: "If the volume and atmosphere at a sports stadium increases, then that's the opposite of something abating.",
+                                   readonly: true,
+                                   rows: 4
+                %>
+              </p>
+            </p>
+          </li>
+        </ol>
+    	</div>
+    </div>
+    <div class="card">
+      <div class="card-body bg-light">
+        <%= render "shared/error_messages", object: @e_non_e %>
+        <%= render "school/example_non_examples/form", btn_text: "Create",
+                                                       word: @word,
+                                                       e_non_e: @e_non_e
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        Create Other Content
+      </div>
+      <div class="card-body">
+        <%= link_to "New Decisions, Decisions",
+            new_school_word_meaning_alt_path(@word, @m_a),
+            title: "Create new Deciisons, Decisions content for #{@word.name}"
+        %>
+        <br>
+        <%= link_to "New Example/Non-Example",
+            new_school_word_example_non_example_path(@word, @e_non_e),
+            title: "Create new Example/Non-Example content for #{@word.name}"
+        %>
+      </div>
+    </div>
+  </div>
+</div>

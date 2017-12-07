@@ -5,6 +5,7 @@ class School::ExampleNonExamplesController < BaseSchoolController
 
   def new
     @e_non_e = ExampleNonExample.new
+    @word = Word.find(params[:word_id])
   end
 
   def create
@@ -13,15 +14,12 @@ class School::ExampleNonExamplesController < BaseSchoolController
     @e_non_e.user = current_user
     @e_non_e.word = @word
 
-    if @e_non_e.save
-      @created = true
+    if @e_non_e.save(example_non_example_params)
+      flash[:success] = "You successfully created content for #{@word.names} word."
+      redirect_to school_example_non_examples_path
     else
-      @created = false
-      @errors = @e_non_e.errors.full_messages
-    end
-
-    respond_to do |format|
-      format.js
+      flash[:danger] = "Sorry, creating #{@word.name} didn\'t work. Please try again."
+      render :new
     end
   end
 
@@ -32,12 +30,13 @@ class School::ExampleNonExamplesController < BaseSchoolController
 
   def update
     @e_non_e = ExampleNonExample.find(params[:id])
+    @word = Word.find(params["word_id"])
 
     if @e_non_e.update(example_non_example_params)
-      flash[:success] = "You successfully updated content for this word."
+      flash[:success] = "You successfully updated content for #{@word.name}."
       redirect_to school_example_non_examples_path
     else
-      flash[:danger] = "Sorry, updating that didn\'t work. Please try again."
+      flash[:danger] = "Sorry, updating #{@word.name} didn\'t work. ry again."
       render :edit
     end
   end
@@ -50,7 +49,7 @@ class School::ExampleNonExamplesController < BaseSchoolController
       flash[:success] = "You successfully deleted content for #{@word.name}."
       redirect_to school_example_non_examples_path
     else
-      flash[:danger] = "Sorry, deleting that didn\'t work. Please try again."
+      flash[:danger] = "Sorry, deleting #{@word.name} didn\'t work. Please try again."
       render :edit
     end
   end
