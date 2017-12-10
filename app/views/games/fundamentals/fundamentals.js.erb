@@ -237,7 +237,8 @@ function startSpellByTypingActivity() {
 	var $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
 	$activityDiv.append($spellingSpeedsterPartial);
 	giveDirections(
-		"Type the word above. Earn more Linero each time you spell it."
+		"Type <em>" + targetWord.name + "</em> three times. Then hit the " +
+		"blue Continue button."
 	);
 	var wordLetterSpan;
 	var targetWordSpanLetters = [];
@@ -301,7 +302,9 @@ function startSpellByTypingActivity() {
 
 function startSpellByClickingLettersActiivty() {
 	timeGameStarted = getDate();
-	giveDirections("Tap the letters to spell that same word.");
+	giveDirections(
+		"Tap the letters to spell the word <em>" + targetWord.name + "</em>."
+	);
 	var $letter;
 	var targetWordLetters = targetWord.name
 																		.split('')
@@ -342,6 +345,7 @@ function startSpellByClickingLettersActiivty() {
 	});
 
 	$(".fitb-letter").click(function() {
+		giveDirections("Finish tapping the letters to spell that word.");
 		$tappedLetterBtn = $(this);
 		tappedLetter = $(this).text();
 
@@ -413,7 +417,10 @@ function startPronunciationActivity() {
 
 function startDecisionsDecisionsActivity() {
 	timeGameStarted = getDate();
-	giveDirections("Decide which of the statements below makes more sense.");
+	giveDirections(
+		"Read the meaning for <em>" + targetWord.name +
+		"</em> above. Then decide which of the statements below makes more sense."
+	);
 	var meaningAltArray = [];
 
 	getMeaningAlts(targetWord.id).done(function(response) {
@@ -485,8 +492,9 @@ function startDecisionsDecisionsActivity() {
 function startExampleNonExamplesActivity() {
 	timeGameStarted = getDate();
 	giveDirections(
-		"Decide if the statements below are an example or non-example of " +
-		"the word above."
+		"Read the meaning above for <em>" + targetWord.name + "</em>. Decide if " +
+		"the statements below are an example or non-example of <em>" +
+		targetWord.name + "."
 	);
 	var exNonExArray = [];
 
@@ -559,7 +567,9 @@ function startExampleNonExamplesActivity() {
 
 // TODO Include three or four dummy words and a "neither/not applicable" button
 function startSynsVsAntsActivity() {
-	giveDirections("Match the synonym and antonym pairs for the word above.");
+	giveDirections(
+		"Match the synonym and antonym pairs for <em>" + targetWord.name + "</em>."
+	);
 	var $selectedBtn;
 	var $selectedBtns;
 	var twoBtnsAreSelected = false;

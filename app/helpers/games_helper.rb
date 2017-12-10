@@ -61,6 +61,33 @@ module GamesHelper
     end
   end
 
+  def play_funds_game(word_id)
+    link_to fund_game_link(word_id),
+            class: "btn btn-danger btn-lg rounded-circle",
+            role: "button",
+            remote: true do
+      play_icon
+    end
+  end
+
+  def play_jeop_game(word_id)
+    link_to jeop_game_link(word_id),
+            class: "btn btn-warning btn-lg rounded-circle disabled",
+            role: "button",
+            remote: true do
+      icon("lock")
+    end
+  end
+
+  def play_free_game(word_id)
+    link_to free_game_link(word_id),
+            class: "btn btn-success btn-lg rounded-circle disabled",
+            role: "button",
+            remote: true do
+      icon("lock")
+    end
+  end
+
   def play_icon
     icon("play")
   end

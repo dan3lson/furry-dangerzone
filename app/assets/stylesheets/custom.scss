@@ -41,20 +41,17 @@ a, a:active {
 	clear: both;
 }
 
-#frayer-word-container {
-	padding: 5rem;
-}
-
 .data-url {
 	cursor: pointer;
 }
 
 .debug_dump {
+  @include box_sizing;
+
 	clear: both;
   float: left;
   margin-top: 45px;
   width: 100%;
-	@include box_sizing;
 }
 
 .form-group label {
@@ -109,28 +106,6 @@ a, a:active {
 	font-size: 35px;
 }
 
-table {
-	border: none;
-
-	th, td {
-	  border-top: none !important;
-	}
-}
-
-.text-white a {
-	color: $white;
-
-	&:visited {
-	}
-
-	&:hover {
-		color: $white;
-	}
-
-	&:active {
-	}
-}
-
-.valign-middle {
-	vertical-align: -webkit-baseline-middle;
+dl:hover {
+  background: $light-gray;
 }

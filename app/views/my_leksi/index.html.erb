@@ -4,32 +4,39 @@
 
 <% if current_user.has_words? %>
     <% @current_user_user_words.each do |user_word| %>
-      <dl class="row mb-4 lead">
+      <dl class="row mb-5 lead">
         <% word = user_word.word %>
 
         <dt class="col-lg-4">
           <h1 class="d-inline">
-            <%= play_btn_small(user_word, word.id, user_word.current_game) %>
             <%= word.name %>
           </h1>
+          <%= link_to user_word_path(id: user_word.id), class: "text-secondary",
+            method: :delete do
+          %>
+            <i class="fa fa-trash"></i>
+          <% end %>
         </dt>
         <dd class="col-lg-6">
           <span class="text-muted"><%= word.part_of_speech %></span>
           <%= array_of(word, "definition").first %>
         </dd>
         <dd class="col-lg-2">
-          <%= button_to user_word_path(id: user_word.id),
-            class: "btn btn-outline-secondary btn-sm",
-            method: :delete do
-          %>
-            <i class="fa fa-trash"></i> Remove
+          
+          <%= play_funds_game(word.id) %>
+
+          <% if user_word.fundamental_completed? %>
+            <%= play_jeop_game(word.id) %>
+          <% end %>
+
+          <% if user_word.jeopardy_completed? %>
+            <%= play_free_game(word.id) %>
           <% end %>
         </dd>
       </dl>
     <% end %>
-  <%#= render "my_leksi/index_word", user_word: user_word,
-                                    word: user_word.word
-  %>
+  <!-- SHow different colors based on current game -->
+  <%#= render "my_leksi/index_word", user_word: user_word, word: user_word.word %>
 <% else %>
   <%= render "my_leksi/no_words_guide" %>
 <% end %>
