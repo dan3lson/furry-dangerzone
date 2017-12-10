@@ -3,8 +3,7 @@
     <% m_a_groups.each do |id, array| %>
       <div class="card mb-3">
         <div class="card-body" data-word-id="<%= id %>">
-
-          <%= render "words/basics", word: Word.find(id) %>
+          <%= render "searches/dict_display", word: Word.find(id) %>
         </div>
         <% array.each do |m_a| %>
           <% word = m_a.word %>

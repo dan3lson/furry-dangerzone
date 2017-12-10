@@ -32,4 +32,13 @@ module UsersHelper
     array_values = students.map { |s| s.send(method).count }
     array_values.inject(&:+) / array_values.count
   end
+
+  # TODO: Create test
+  def display_greeting(user)
+    if user.has_name?
+      emoji("blush") + " Hello, #{user.first_name}!"
+    else
+      emoji("blush") + " Hello, #{user.username}!"
+    end
+  end
 end

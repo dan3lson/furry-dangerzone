@@ -24,7 +24,7 @@
 </div>
 <div class="table-responsive mt-3">
   <%= paginate @users %>
-  <table class="table table-bordered table-hover">
+  <table class="table table-bordered table-responsive table-hover table-sm">
     <th>ID</th>
     <th>Username</th>
     <th>First Name</th>
@@ -34,9 +34,10 @@
     <th>Last Login</th>
     <th>Joined</th>
     <th>Num Words</th>
+    <th></th>
 
     <% @users.each do |u| %>
-      <tr>
+      <tr data-user-id="<%= u.id %>">
         <td><%= u.id %></td>
         <td><%= link_to u.username, user_path(u) %></td>
         <td><%= u.first_name || "-" %></td>
@@ -52,6 +53,12 @@
         </td>
         <td><%= time_ago_in_words(u.created_at) %> ago</td>
         <td><%= u.num_words %></td>
+        <td>
+          <%= link_to "Delete", admin_user_path(u),
+                                method: :delete,
+                                class: "btn btn-danger"
+          %>
+        </td>
       </tr>
     <% end %>
     </table>

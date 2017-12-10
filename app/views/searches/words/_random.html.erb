@@ -1,12 +1,3 @@
 <dl class="row">
-	<dt class="col-sm-3">
-		<h3><%= word.name %></h3>
-	</dt>
-	<dd class="col-sm-6">
-		<span class="text-muted"><%= word.part_of_speech %></span>
-		<%= array_of(word, "definition").first %>
-	</dd>
-	<dd class="col-sm-3" data-word-id="<%= word.id %>">
-		<%= render "searches/results_options", word: word %>
-	</dd>
+	<%= render "searches/dict_display", word: word %>
 </dl>

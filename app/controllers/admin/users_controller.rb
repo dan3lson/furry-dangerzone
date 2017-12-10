@@ -17,4 +17,13 @@ class Admin::UsersController < BaseAdminController
       @users = User.order("created_at DESC").page(params[:page])
     end
   end
+
+	def destroy
+    @user = User.find(params[:id])
+
+    if @user.destroy
+      flash[:success] = "Success: account deleted for \'#{@user.username}\'."
+      redirect_to admin_users_path
+    end
+  end
 end

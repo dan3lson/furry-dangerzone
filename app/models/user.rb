@@ -31,6 +31,11 @@ class User < ActiveRecord::Base
     user.num_logins += 1
   end
 
+  # TODO: Create test
+  def has_name?
+    !first_name.nil? || !last_name.nil?
+  end
+
   def has_email_address?
     !email.nil?
   end

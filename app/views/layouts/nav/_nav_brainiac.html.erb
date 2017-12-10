@@ -21,7 +21,7 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false">
-          <%= emoji "blush" %> Hello, <%= current_user.username %>!
+          <%= display_greeting(current_user) %>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <%= link_to settings_path, class: "dropdown-item" do %>

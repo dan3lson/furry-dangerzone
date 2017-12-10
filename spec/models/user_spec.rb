@@ -45,18 +45,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#has_email_address?" do
-    it "returns true" do
-      expect(user.has_email_address?).to eq(true)
-    end
-
-    it "returns false" do
-      user.email = nil
-
-      expect(user.has_email_address?).to eq(false)
-    end
-  end
-
   describe "#has_word?" do
     it "returns false" do
       expect(user.has_word?(word)).to eq(false)

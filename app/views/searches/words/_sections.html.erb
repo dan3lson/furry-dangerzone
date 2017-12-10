@@ -2,16 +2,7 @@
 <dl class="row">
 	<% word_groups.each_with_index do |(name, words), i| %>
 			<% words.take(3).each do |word| %>
-				<dt class="col-sm-3">
-					<%= word.name %>
-				</dt>
-				<dd class="col-sm-6">
-					<span class="text-muted"><%= word.part_of_speech %></span>
-					<%= array_of(word, "definition").first %>
-				</dd>
-				<dd class="col-sm-3" data-word-id="<%= word.id %>">
-					<%= render "searches/results_options", word: word %>
-				</dd>
+				<%= render "searches/dict_display", word: word %>
 			<% end %>
 	<% end %>
 </dl>
