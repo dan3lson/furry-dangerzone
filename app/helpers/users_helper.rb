@@ -36,9 +36,9 @@ module UsersHelper
   # TODO: Create test
   def display_greeting(user)
     if user.has_name?
-      emoji("blush") + " Hello, #{user.first_name}!"
+      emoji("bust_in_silhouette") + " Hello, #{user.first_name}!"
     else
-      emoji("blush") + " Hello, #{user.username}!"
+      emoji("bust_in_silhouette") + " Hello, #{user.username}!"
     end
   end
 end

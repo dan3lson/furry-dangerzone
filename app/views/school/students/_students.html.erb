@@ -5,7 +5,7 @@
 	    <th>Username</th>
 	    <th>Logins</th>
 	    <th>Words</th>
-	    <td>Total: <%= pluralize(@classroom_stu_count, "student") %></td>
+	    <td>Total: <%= pluralize(classroom.students.count, "student") %></td>
 
 	    <% classroom.students.alphabetical.each do |student| %>
 	      <tr>
@@ -28,10 +28,11 @@
 					</td>
 	        <td>
 						<%= link_to user_path(student),
-							role: "button",
-							method: :delete, data: { confirm: @del_account_msg },
-							class: "btn btn-sm btn-secondary",
-							method: :delete do
+												role: "button",
+												method: :delete,
+												class: "btn btn-danger",
+												title: "Remove #{student.username} from classroom?",
+												method: :delete do
 						%>
 							<i class="fa fa-trash"></i>
 							Remove

@@ -4,18 +4,4 @@
 		<%= @classroom.teacher.username %>
 	</small>
 </h1>
-<div class="card mb-3">
-	<div class="card-body">
-		<h4>
-			Students
-			<small class="text-muted"><%= @classroom.students.count %></h4>
-		</small>
-		<%= render "school/classrooms/students", classroom: @classroom %>
-	</div>
-</div>
-<div class="card">
-	<div class="card-body">
-		<%= icon "calendar" %> Created:
-		<%= time_ago_in_words(@classroom.created_at) %> ago
-	</div>
-</div>
+<%= render "school/students/students", classroom: @classroom %>

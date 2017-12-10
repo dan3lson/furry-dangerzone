@@ -3,35 +3,23 @@
   <small class="text-muted"><%= @classrooms_count %></small>
 </h1>
 <%= paginate @classrooms %>
-<div class="card-columns">
+<table class="table table-responsive table-bordered table-sm table-striped table-hover">
+  <th>ID</th>
+  <th>Name</th>
+  <th>Num Students</th>
+  <th>Teacher</th>
+  <th>Grade</th>
+  <th>Created</th>
+
   <% @classrooms.each do |classroom| %>
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">
-            <%= link_to classroom.name, admin_classroom_path(classroom) %>
-            <br>
-            <small class="text-muted">
-              <%= icon "hashtag" %>
-              Students: <%= classroom.num_students %>
-            </small>
-            <br>
-            <small class="text-muted">
-              <%= icon "user" %> Teacher:
-              <%= classroom.teacher.username %>
-            </small>
-            <br>
-            <small class="text-muted">
-              <%= icon "hashtag" %> Grade:
-              <%= classroom.grade %>
-            </small>
-            <br>
-            <small class="text-muted">
-              <%= icon "calendar" %> Created:
-              <%= time_ago_in_words(classroom.created_at) %> ago
-            </small>
-          </h4>
-        </div>
-      </div>
+    <tr>
+      <td><%= classroom.id %></td>
+      <td><%= link_to classroom.name, admin_classroom_path(classroom) %></td>
+      <td><%= classroom.num_students %></td>
+      <td><%= classroom.teacher.username %></td>
+      <td><%= classroom.grade %></td>
+      <td><%= time_ago_in_words(classroom.created_at) %> ago</td>
+    </tr>
   <% end %>
-</div>
+</table>
 <%= paginate @classrooms %>

@@ -27,6 +27,7 @@
   <table class="table table-bordered table-responsive table-hover table-sm">
     <th>ID</th>
     <th>Username</th>
+    <th>Type</th>
     <th>First Name</th>
     <th>Last Name</th>
     <th>Email</th>
@@ -40,6 +41,7 @@
       <tr data-user-id="<%= u.id %>">
         <td><%= u.id %></td>
         <td><%= link_to u.username, user_path(u) %></td>
+        <td><%= u.type %></td>
         <td><%= u.first_name || "-" %></td>
         <td><%= u.last_name || "-" %></td>
         <td><%= u.email || "-" %></td>
