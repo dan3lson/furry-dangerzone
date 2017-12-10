@@ -657,10 +657,7 @@ function startSynsVsAntsActivity() {
 function startReviewActivity() {
 	clearTimeout(scoreboardTimerID);
 	const $reviewPartial = $("<%= j render(partial: 'games/review', locals: { game: 'Fundamentals', word_name: @target_word.name }) %>");
-	const $nextGamePartial = $("<%= j render(partial: 'games/next_game', locals: { next_game: 'Jeopardy', color: 'warning', seconds: '5' }) %>");
-	$(".container").empty().append($reviewPartial, $nextGamePartial);
-	var $gameCountdown = $(".game-countdown");
-	startCountdown($gameCountdown, 5);
+	$(".container").empty().append($reviewPartial);
 };
 
 /***********************
@@ -826,19 +823,6 @@ function startCountup($section, seconds) {
 	return setInterval(function() {
 		seconds++;
 		$section.html(seconds);
-	}, 1000);
-}
-
-function startCountdown($selector, seconds) {
-	var countdownID = setInterval(function() {
-		seconds--;
-		$selector.html(seconds);
-
-		if (seconds == 0) {
-			clearInterval(countdownID);
-			var url = "/jeopardy?word_id=" + targetWord.id;
-			$.getScript(url);
-		}
 	}, 1000);
 }
 
