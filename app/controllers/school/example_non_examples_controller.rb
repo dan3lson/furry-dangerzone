@@ -15,7 +15,7 @@ class School::ExampleNonExamplesController < BaseSchoolController
     @e_non_e.word = @word
 
     if @e_non_e.save(example_non_example_params)
-      flash[:success] = "You successfully created content for #{@word.names} word."
+      flash[:success] = "Successfully created content for #{@word.name} word."
       redirect_to school_example_non_examples_path
     else
       flash[:danger] = "Sorry, creating #{@word.name} didn\'t work. Please try again."
