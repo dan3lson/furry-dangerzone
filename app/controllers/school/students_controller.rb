@@ -16,8 +16,8 @@ class School::StudentsController < BaseSchoolController
     @usernames.each do |username|
       @student = @classroom.students.new(
         username: username,
-        password: "#{username}2017",
-        password_confirmation: "#{username}2017"
+        password: "leksi#{Date.today.year}",
+        password_confirmation: "leksi#{Date.today.year}"
       )
       @student.teacher = current_user
 

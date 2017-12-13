@@ -128,16 +128,7 @@ Rails.application.routes.draw do
     end
 
     resources :words, except: [:show, :destroy]
-
-    resource :add_words_for_student, only: [:update] do
-      member do
-        post "by_grade"
-      end
-    end
-
-    resources :freestyles do
-      resources :comments
-    end
+    resource :add_words_for_student, only: [:update]
 
     resources :example_non_examples
 
@@ -149,6 +140,10 @@ Rails.application.routes.draw do
 
     resources :word do
       resources :meaning_alts
+    end
+
+    resources :freestyles do
+      resources :comments
     end
   end
 

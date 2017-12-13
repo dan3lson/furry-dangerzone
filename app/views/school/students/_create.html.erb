@@ -22,8 +22,6 @@
 				</h4>
 				<div class="alert alert-success" role="alert">
 					<%= icon "info-circle" %>
-					Each respective
-					Password will be the same as the Username with "2017" appended to it.
 					Your new students can now log into Leksi with the link
 					<em>Leksi.education/login</em> and
 					should change their passwords upon logging in for the first time.
@@ -38,7 +36,7 @@
 							<tr>
 								<td><%= student.id %></td>
 								<td><%= student.username %></td>
-								<td><%= "#{student.username}2017" %></td>
+								<td><%= "leksi#{Date.today.year}" %></td>
 								<td>
 									<%= link_to user_path(student),
 										role: "button",
@@ -54,25 +52,6 @@
 						<% end %>
 					</table>
 				</div>
-			</div>
-			<div class="card-body">
-				<h4 class="card-title">
-					Add Words for These Students (Optional)
-				</h4>
-				<div class="alert alert-info" role="alert">
-					<%= icon "info-circle" %>
-					Since this classroom is for Grade <%= @classroom.grade %>,
-					do you want to add the words from this grade-list to the
-					<%= pluralize(results[:successes].count, "student") %> above?
-				</div>
-				<%= link_to by_grade_school_add_words_for_student_path(
-											classroom_id: @classroom,
-											new_student_ids: results[:successes].map(&:id)
-										), class: "btn btn-primary btn-block",
-										method: :post do
-				%>
-					<%= icon "book" %> Add Grade <%= @classroom.grade %> Words
-				<% end %>
 			</div>
 			<div class="card-body">
 				<h4 class="card-title">

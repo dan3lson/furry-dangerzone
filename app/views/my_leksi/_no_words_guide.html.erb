@@ -1,7 +1,22 @@
-<div class="alert alert-info" role="alert">
-  <%= icon "info-circle" %>
-  You haven't added any words:
-  <%= link_to "Click here",
-              dictionary_path
-  %> to find and add some.
+<div class="jumbotron mt-3">
+  <h1 class="display-3">Welcome to Leksi!</h1>
+  <p class="lead">
+    <%= emoji "fist" %> We will help you <%= emoji "fist" %>
+    <br>
+    <%= emoji "muscle" %> build your vocabulary
+    <%= emoji "muscle" %>
+    <br>
+    <%= emoji "chart_with_upwards_trend" %> and earn
+    better grades <%= emoji "chart_with_upwards_trend" %>.
+  </p>
+  <p>
+    To get going, click the button below to add new words to your Notebook.
+  </p>
+  <p>
+    <%= link_to "Start",
+                dictionary_path,
+                class: "btn btn-lg btn-success",
+                role: "button"
+    %>.
+  </p>
 </div>

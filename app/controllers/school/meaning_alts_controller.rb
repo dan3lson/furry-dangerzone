@@ -16,7 +16,8 @@ class School::MeaningAltsController < BaseSchoolController
 
     if @m_a.save(meaning_alt_params)
       flash[:success] = "You successfully created content for this word."
-      redirect_to school_meaning_alts_path
+      @m_a = MeaningAlt.new
+      redirect_to new_school_word_meaning_alt_path(@word, @m_a)
     else
       flash[:danger] = "Sorry, creating that didn\'t work. Please try again."
       render :new
