@@ -1,0 +1,68 @@
+<% provide(:title, "Edit Profile") %>
+<% provide(:header, "Edit Profile") %>
+
+<h1>Edit Profile: <%= @user.username %></h1>
+<div class="card">
+  <%= form_for(@user, url: admin_user_path(@user)) do |f| %>
+    <div class="card-body">
+      <%= render "shared/error_messages", object: @user %>
+      <div class="form-group">
+        <%= f.label :type %> <span class="text-muted"></span>
+        <%= f.text_field :type, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :username %>
+        <%= f.text_field :username, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :teacher_id, "Teacher" %>
+        <%= f.collection_select :teacher_id,
+                                Teacher.all,
+                                :id,
+                                :username,
+                                { prompt: "Select one" },
+                                { class: "form-control" }
+        %>
+      </div>
+      <div class="form-group">
+        <%= f.label :classroom_id, "Classroom" %>
+        <%= f.collection_select :classroom_id,
+                                Classroom.all,
+                                :id,
+                                :name,
+                                { prompt: "Select one" },
+                                { class: "form-control" }
+        %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Password Confirmation" %>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :first_name %> <span class="text-muted">(Optional)</span>
+        <%= f.text_field :first_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+      <%= f.submit "Update", class: "btn btn-primary btn-block" %>
+      <div class="text-center mt-5">
+        <p>
+          <%= link_to "Delete User", admin_user_path(@user),
+          method: :delete,
+          class: "btn btn-danger"
+            %>
+          </p>
+        </div>
+    </div>
+  <% end %>
+</div>

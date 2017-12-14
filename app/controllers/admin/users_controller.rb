@@ -18,6 +18,24 @@ class Admin::UsersController < BaseAdminController
     end
   end
 
+	def edit
+		@user = User.find(params[:id])
+	end
+
+	def update
+		#TODO Fix update of Teacher and Classroom for Student
+		@user = User.find(params[:id])
+		# @user.teacher = Teacher.find(params[:student][:teacher_id])
+		# @user.classroom = Classroom.find(params[:student][:classroom_id])
+
+    if @user.update(user_params)
+      flash[:success] = "Successfully updated #{@user.username}\'s profile."
+      redirect_to admin_users_path
+    else
+      render :edit
+    end
+  end
+
 	def destroy
     @user = User.find(params[:id])
 
@@ -26,4 +44,22 @@ class Admin::UsersController < BaseAdminController
       redirect_to admin_users_path
     end
   end
+
+	private
+
+	def user_params
+		@user = User.find(params[:id])
+		@symbol = @user.is_teacher? ? :teacher : :student
+		params.require(@symbol).permit(
+			:type,
+			:teacher,
+			:classroom,
+			:username,
+			:password,
+			:password_confirmation,
+			:first_name,
+			:last_name,
+			:email
+		)
+	end
 end
