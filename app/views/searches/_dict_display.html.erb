@@ -6,5 +6,5 @@
 	<%= array_of(word, "definition").first %>
 </dd>
 <dd class="col-sm-3" data-word-id="<%= word.id %>">
-	<%= render "searches/results_options", word: word %>
+	<%= render "searches/dict_display_btns", word: word, account_type: account_type %>
 </dd>

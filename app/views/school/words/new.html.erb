@@ -1,24 +1,6 @@
 <% provide(:title, "Create a New Word") %>
 <% provide(:header, "Create a New Word") %>
 
-<!-- <div>
-  <div class="card mb-3">
-    <div class="card-body">
-      <ol>
-        <li>
-          Want to add a word, but are unsure if it already exists? Try
-          searching for it first.
-        </li>
-        <li>
-          If the exact word you want isn't there, use the form down below to
-          create a new word.
-        </li>
-      </ol>
-      <%#= render "searches/form" %>
-    </div>
-  </div>
-  <div class="search-container"></div>
-</div> -->
 <div class="alert alert-info">
   <%= icon "info-circle" %>
   Complete the form below to create a new word. Then you can create content for
@@ -30,7 +12,6 @@
     <div class="card bg-light mb-3">
       <div class="card-body">
         <%= render "school/words/form", word: @word,
-                                        remote: false,
                                         btn_text: "Create"
         %>
       </div>

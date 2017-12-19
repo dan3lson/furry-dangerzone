@@ -2,14 +2,14 @@ $(document).ready(function() {
 	var $searchBtn = $("#search-form button");
 
 	$(".container").on("input", "#input_search", function() {
-		if (empty($(this))) {
+		if (isEmpty($(this))) {
 			updateBtnProp($searchBtn, true);
 		} else {
 			updateBtnProp($searchBtn, false);
 		}
 	});
 
-	function empty($field) {
+	function isEmpty($field) {
 		return $field.val().trim() == "";
 	}
 

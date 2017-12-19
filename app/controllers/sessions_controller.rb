@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
     else
       msg = "That username and/or password didn\'t work. Please try again."
       flash.now[:danger] = msg
-      render :new
+      render :new, layout: "application_guest"
     end
   end
 

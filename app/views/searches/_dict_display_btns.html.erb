@@ -1,0 +1,40 @@
+<% if logged_in? %>
+	<% if account_type == "student" %>
+		<% if current_user.has_word?(word) %>
+			<div class="alert alert-info">
+				<%= icon "info-circle" %> You already saved this in your Notebook.
+			</div>
+		<% else %>
+			<p>
+				<%= link_to user_word_path(word_id: word.id),
+										class: "btn btn-success",
+										method: :post,
+										remote: true do
+				%>
+					<%= icon "plus-circle" %>
+					Add to Notebook
+				<% end %>
+			</p>
+		<% end %>
+	<% elsif account_type == "teacher" %>
+		<button type="button"
+						class="btn btn-primary dropdown-toggle"
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded="false">
+			<%= icon "plus-circle" %> Create
+		</button>
+		<div class="dropdown-menu">
+			<%= link_to "New Example/Non-Example",
+					new_school_word_example_non_example_path(word, Example.new),
+					class: "dropdown-item",
+					title: "New Example/Non-Example"
+			%>
+			<%= link_to "New Decisions, Decisions",
+					new_school_word_meaning_alt_path(word, MeaningAlt.new),
+					class: "dropdown-item",
+					title: "New Decisions, Decision"
+			%>
+		</div>
+	<% end %>
+<% end %>

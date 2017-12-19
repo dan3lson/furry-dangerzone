@@ -1,8 +1,19 @@
 <% provide(:title, "Words") %>
 <% provide(:header, "Words") %>
 
+<div class="btn-group mb-3" role="group" aria-label="Basic example">
+	<%= link_to new_school_word_path, role: "button",
+																		class: "btn btn-primary" do
+  %>
+		<%= icon "plus-circle" %> New
+	<% end %>
+	<%= link_to school_search_path, role: "button", class: "btn btn-primary" do %>
+		<%= icon "search" %> Search
+	<% end %>
+</div>
+
 <% if current_user.has_created_content? %>
-	<table class="table table-sm table-bordered table-striped table-responsive table-hover">
+	<table class="table table-sm table-bordered table-striped table-responsive">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -44,7 +55,7 @@
 					</td>
 					<td><%= display_content_status(word.has_sent_stems?) %></td>
 					<td><%= display_content_status(word.has_describe_mes?) %></td>
-					<td><%= time_ago_in_words(word.created_at) %></td>
+					<td><%= time_ago_in_words(word.created_at) %> ago</td>
 					<td>
 						<%= link_to "Edit",
 								edit_school_word_path(word),

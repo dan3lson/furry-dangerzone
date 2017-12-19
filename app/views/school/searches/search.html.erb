@@ -1,4 +1,5 @@
-<% provide(:header, "Look Up") %>
-<%= render "school/searches/form", form_action: nil %>
-<br>
-<div class="search-results-container"></div>
+<% provide(:title, "Search") %>
+<% provide(:header, "Search") %>
+
+<%= render "searches/form", account_type: "teacher" %>
+<div class="search-results-container mt-3"></div>

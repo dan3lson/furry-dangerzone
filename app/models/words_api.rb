@@ -35,8 +35,8 @@ class WordsApi
 
 		rescue
 			msg = [
-				"Sorry, we didn\'t find the word '#{name}' from your search. ",
-				"Please check the spelling and then try again."
+				"Sorry, we didn\'t find '#{name}' from your search. ",
+				"Please check the spelling and try again."
 			].join
 			raise WordsApi::NoWordError, msg
 			nil

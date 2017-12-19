@@ -21,6 +21,7 @@ class SearchesController < ApplicationController
 
   def results
     @search = params[:search]
+    @account_type = params[:account_type]
 
     begin
       if @search

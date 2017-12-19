@@ -118,7 +118,6 @@ Rails.application.routes.draw do
     get "example_non_examples/fifth" => "example_non_examples#fifth_grade"
     get "example_non_examples/sixth" => "example_non_examples#sixth_grade"
     get "search" => "searches#search"
-    get "search_results" => "searches#results"
     get "search_words_for_students" => "searches#student_words"
     get "student_words" => "words#student_words"
     get "stats" => "stats#index"
@@ -150,8 +149,6 @@ Rails.application.routes.draw do
   namespace :admin do
     root "admins#settings"
     get "stats" => "admins#stats"
-    get "search" => "searches#search"
-    get "search_results" => "searches#results"
     get "settings" => "admins#settings"
     resources :users
     resources :words

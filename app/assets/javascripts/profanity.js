@@ -1,22 +1,26 @@
 $(document).ready(function() {
 	$(".container").on("click", "#search-btn", function(e) {
 		var $search = $("input[type='search']");
-		var text = $search.val();
+		var search = $search.val();
+		var accountType = $(this).data("account-type");
 		$(".alert").remove();
 
 		getBadWords().done(function(response) {
 			var badRegex = new RegExp("\\b(" + response.join("|") + ")\\b", "ig");
 
-			if (hasBadWords(text, badRegex)) {
+			if (hasBadWords(search, badRegex)) {
 				var $alert = createElem("div", "alert alert-danger");
 				var $icon = createElem("i", "fa fa-warning");
 				$alert.append(
 					$icon,
 					" Don\'t use bad words; your Teacher may see what you just did."
 				);
-				$(".search-container").append($alert);
+				$(".search-results-container").append($alert);
 			} else {
-				$.getScript("/search_results?search=" + text);
+				$.getScript(
+					"/search_results?search=" + search +
+					"&account_type=" + accountType
+				);
 			}
 		});
 	});
