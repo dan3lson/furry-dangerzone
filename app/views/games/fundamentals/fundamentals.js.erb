@@ -233,12 +233,13 @@ $(".container").off().on("click", ".continue-btn", function() {
 ************************/
 
 function startSpellByTypingActivity() {
+	hideDefinition();
 	timeGameStarted = getDate();
 	var $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
 	$activityDiv.append($spellingSpeedsterPartial);
 	giveDirections(
-		"Type <em>" + targetWord.name + "</em> three times. Then hit the " +
-		"blue Continue button."
+		"Type the word <em class='text-purple'>" + targetWord.name + "</em> separately three times. Then " +
+		"hit the blue Continue button."
 	);
 	var wordLetterSpan;
 	var targetWordSpanLetters = [];
@@ -250,60 +251,42 @@ function startSpellByTypingActivity() {
 
 	$targetWordH1.html(targetWordSpanLetters);
 
-	var $firstInput;
-	var firstInputText;
-	var wordSubstring;
-	var numLettersTyped = 0;
-	var successLetters = 0;
+	var $inputs = $(".spell-the-word");
+	var inputNum = 0;
+	var $currentInput = $($inputs[inputNum]);
+	var currentInputText;
 	var timeStartedTyping;
-	var numInputs = 0;
 
 	$("#activity-div").off().on("input", ".spell-the-word", function() {
-		timeStartedTyping = timeStartedTyping || $scoreboardTimer.text();
-		$firstInput = $(".spell-the-word:first");
-		firstInputText = $(this).val().trim().toLowerCase();
-		numLettersTyped = firstInputText.length;
-		wordSubstring = targetWord.name.substring(0, numLettersTyped);
+		currentInputText = $(this).val().trim().toLowerCase();
+		$formGroup = $currentInput.parent();
 
-		if (firstInputText == wordSubstring) {
-			makeLettersGreen($targetWordH1, numLettersTyped);
-			successLetters = $targetWordH1.find("span.text-success").length;
+		if (currentInputText == targetWord.name) {
+			$formGroup.removeClass("bg-primary p-2");
+			$currentInput.prop("disabled", true);
 
-			if (successLetters != numLettersTyped) {
-				makeLettersDefault($targetWordH1);
-				makeLettersGreen($targetWordH1, numLettersTyped);
+			if (inputNum < 3) {
+				inputNum += 1;
+				$currentInput = $($inputs[inputNum]);
+				$currentInput.focus();
+				$formGroup = $currentInput.parent();
+				$formGroup.addClass("bg-primary p-2");
 			}
-		}
 
-		if (firstInputText == targetWord.name) {
-			var $spellingSpeedsterInputPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
-			numInputs = $(".spell-the-word.form-control-success").length + 1;
-			$firstInput.parent()
-								 .addClass("has-success")
-								 .append(
-								   createFormText(
-									   "(" + numInputs + ") typed in "
-										 + timeDiff(timeStartedTyping)
-										 + " secs"
-								   )
-							   );
-			timeStartedTyping = null;
-			$firstInput.addClass("form-control-success")
-								 .prop("disabled", true);
-			addPoints(50);
-			flashPointsUpdate(arrowSuccess());
-			showContinueBtn("start-spell-by-clicking-activity");
-			createInputGroup().prependTo($activityDiv);
-			// $spellingSpeedsterInputPartial.prependTo($activityDiv);
-			$firstInput = $(".spell-the-word:first").focus();
+			if (inputNum == 3) {
+				addPoints(50);
+				flashPointsUpdate(arrowSuccess());
+				showContinueBtn("start-spell-by-clicking-activity");
+			}
 		}
 	});
 };
 
 function startSpellByClickingLettersActiivty() {
+	showDefinition();
 	timeGameStarted = getDate();
 	giveDirections(
-		"Tap the letters to spell the word <em>" + targetWord.name + "</em>."
+		"Tap the letters to spell the word <em class='text-purple'>" + targetWord.name + "</em>."
 	);
 	var $letter;
 	var targetWordLetters = targetWord.name
@@ -319,7 +302,6 @@ function startSpellByClickingLettersActiivty() {
 	var $alphabetRandLetters = [];
 	var $mergedLettersArray = [];
 
-	makeLettersDefault($targetWordH1);
 	$targetWordH1.html($underscoreContainer);
 
 	$.each(targetWordLetters, function() {
@@ -416,10 +398,11 @@ function startPronunciationActivity() {
 };
 
 function startDecisionsDecisionsActivity() {
+	showDefinition();
 	timeGameStarted = getDate();
 	giveDirections(
-		"Read the meaning for <em>" + targetWord.name +
-		"</em> above. Then decide which of the statements below makes more sense."
+		"Read the meaning for <em class='text-purple'>" + targetWord.name +
+		"</em> below. Then decide which of the statements below makes more sense."
 	);
 	var meaningAltArray = [];
 
@@ -490,10 +473,11 @@ function startDecisionsDecisionsActivity() {
 };
 
 function startExampleNonExamplesActivity() {
+	showDefinition();
 	timeGameStarted = getDate();
 	giveDirections(
-		"Read the meaning above for <em>" + targetWord.name + "</em>. Decide if " +
-		"the statements below are an example or non-example of <em>" +
+		"Read the meaning below for <em class='text-purple'>" + targetWord.name + "</em>. Decide if " +
+		"the statements below are an example or non-example of <em class='text-purple'>" +
 		targetWord.name + "."
 	);
 	var exNonExArray = [];
@@ -567,8 +551,9 @@ function startExampleNonExamplesActivity() {
 
 // TODO Include three or four dummy words and a "neither/not applicable" button
 function startSynsVsAntsActivity() {
+	hideDefinition();
 	giveDirections(
-		"Match the synonym and antonym pairs for <em>" + targetWord.name + "</em>."
+		"Match the synonym and antonym pairs for <em class='text-purple'>" + targetWord.name + "</em>."
 	);
 	var $selectedBtn;
 	var $selectedBtns;
@@ -673,6 +658,14 @@ function startReviewActivity() {
 /***********************
 		HELPER FUNCTIONS
 ************************/
+
+function hideDefinition() {
+	$(".jumbotron").hide();
+}
+
+function showDefinition() {
+	$(".jumbotron").show();
+}
 
 function emptyActivityDiv() {
 	$activityDiv.empty();
@@ -817,14 +810,6 @@ function flashPointsUpdate($arrow) {
 	}, 300);
 }
 
-function makeLettersGreen($section, numLetters) {
-	$($section.find("span").splice(0, numLetters)).addClass("text-success");
-}
-
-function makeLettersDefault($section) {
-	$($section.find("span.text-success")).removeClass("text-success");
-}
-
 function timeDiff(timeGameStarted) {
 	return $scoreboardTimer.text() - timeGameStarted;
 }
@@ -853,7 +838,8 @@ function showContinueBtn(_class) {
 			.append(
 				createBtn(
 					"btn-primary btn-block btn-lg continue-btn " + _class, "Continue"
-				)
+				).append(" ").append(createElem("i", "em em-point_right"))
+
 			)
 		);
 	}
@@ -936,9 +922,6 @@ function createFormText(text) {
 				 .append(createElem("small").text(text));
 }
 
-function createInputGroup() {
-	return createFormGroup().append(createLabel(), createInput());
-}
 
 function createInput() {
 	return createElem("input", "form-control input-lg spell-the-word")

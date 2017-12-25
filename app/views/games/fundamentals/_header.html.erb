@@ -1,4 +1,8 @@
-<div class="jumbotron p-2 text-left m-0 mb-3">
+<h3 id="directions mt-5 mb-5">
+	<stroong><%= emoji "female-teacher" %> Directions:</stroong>
+	<span class="game-directions"></span>
+</h3>
+<div class="jumbotron p-2 text-left m-0 mb-4">
 	<h1 class="display-4 target-word-header d-inline pr-3">
 		<%= target_word.name %>
 	</h1>
@@ -6,9 +10,4 @@
 		<span class="text-muted"><%= target_word.part_of_speech %></span>
 		<%= array_of(target_word, "definition").first %>
 	</p>
-	<hr class="my-4">
-	<h5 id="directions">
-		<strong><%= emoji "female-teacher" %> Directions:</strong>
-		<span class="game-directions"></span>
-	</h5>
 </div>
