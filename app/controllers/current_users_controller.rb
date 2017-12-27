@@ -1,17 +1,6 @@
 class CurrentUsersController < ApplicationController
   before_action :logged_in_user
 
-  def home
-    if current_user.is_brainiac?
-      redirect_to notebook_path
-    else
-      @user_word = @current_user.rand_incomplete_word
-    end
-  end
-
-  def settings
-  end
-
   def stats
   end
 

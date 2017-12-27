@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-  <a class="navbar-brand" href="<%= school_root_path %>">Leksi</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="<%= notebook_path %>">Leksi</a>
   <button class="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -13,15 +13,6 @@
     <div class="navbar-nav mr-auto">
       <%= render "layouts/nav/nav_teacher_links" %>
     </div>
-    <div>
-      <%= link_to logout_path,
-                  method: :delete,
-    							class: "btn btn-danger",
-    							role: "button" do
-    	%>
-    		<%= icon "sign-in" %>
-    		Log Out
-    	<% end %>
-    </div>
+    <%= render "layouts/nav/dropdown_menu" %>
   </div>
 </nav>

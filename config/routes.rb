@@ -28,8 +28,6 @@ Rails.application.routes.draw do
   get "searches/section"
   get "searches/random"
   get "search_results" => "searches#results"
-  get "home" => "current_users#home"
-  get "settings" => "current_users#settings"
   get "stats" => "current_users#stats"
   get "freestyles" => "current_users#freestyles"
   get "notebook" => "my_leksi#index"
@@ -109,9 +107,7 @@ Rails.application.routes.draw do
   end
 
   namespace :school do
-    root "current_user#home"
-    get "home" => "current_user#home"
-    get "settings" => "current_user#settings"
+    root "classrooms#index"
     get "example_non_examples/fourth" => "example_non_examples#fourth_grade"
     get "decisions_decisions/fourth" => "meaning_alts#fourth_grade"
     get "example_non_examples/second" => "example_non_examples#second_grade"
@@ -147,9 +143,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    root "admins#settings"
+    root "users#index"
     get "stats" => "admins#stats"
-    get "settings" => "admins#settings"
     resources :users
     resources :words
     resources :classrooms

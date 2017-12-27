@@ -1,0 +1,45 @@
+<div>
+  <div class="dropdown">
+    <button class="btn btn-light dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+      <%= display_greeting(current_user) %>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <%= link_to edit_user_path(current_user), class: "dropdown-item" do %>
+        <%= icon "edit" %> Edit profile
+      <% end %>
+      <div class="dropdown-divider"></div>
+      <%= link_to feedback_path(type: "bug"), class: "dropdown-item" do %>
+        <%= icon "bug" %> Report a problem
+      <% end %>
+      <%= link_to feedback_path(type: "wish"), class: "dropdown-item" do %>
+        <%= icon "magic" %> Leksi should...
+      <% end %>
+
+      <% if current_user.is_teacher? %>
+        <div class="dropdown-divider"></div>
+        <%= link_to notebook_path, class: "dropdown-item" do %>
+          <%= icon "book" %> Student View
+        <% end %>
+        <%= link_to school_root_path, class: "dropdown-item" do %>
+          <%= icon "apple" %> Teacher View
+        <% end %>
+      <% end %>
+
+      <% if current_user.is_admin? %>
+        <%= link_to admin_root_path, class: "dropdown-item" do %>
+          <%= icon "user-secret" %> Admin View
+        <% end %>
+      <% end %>
+
+      <div class="dropdown-divider"></div>
+      <%= link_to logout_path, method: :delete, class: "dropdown-item" do %>
+        <%= icon "sign-in" %> Log Out
+      <% end %>
+    </div>
+  </div>
+</div>

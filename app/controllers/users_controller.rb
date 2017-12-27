@@ -32,7 +32,14 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = "You successfully updated your profile."
-      redirect_to settings_path
+
+      if current_user.is_admin?
+        redirect_to admin_users_path
+      elsif current_user.is_teacher?
+        redirect_to school_classrooms_path
+      else
+        redirect_to notebook_path
+      end
     else
       render :edit
     end
@@ -52,14 +59,23 @@ class UsersController < ApplicationController
       end
     else
       flash[:danger] = "Sorry, something went wrong. Please try again."
-      redirect_to settings_path
+      redirect_to root_path
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(
+    # TODO Should be in respective namespaced UsersController
+    @symbol = if current_user.is_admin?
+                :admin
+              elsif current_user.is_teacher?
+                :teacher
+              else
+                :student
+              end
+
+    params.require(@symbol).permit(
       :username,
       :password,
       :password_confirmation,
@@ -81,7 +97,7 @@ class UsersController < ApplicationController
 
     unless current_user?(@user)
       flash[:danger] = "Access denied."
-      redirect_to settings_path
+      redirect_to root_path
     end
   end
 end
