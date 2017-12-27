@@ -49,15 +49,6 @@ class School::WordsController < BaseSchoolController
     end
   end
 
-  def student_words
-    @classrooms = current_user.classrooms
-
-    respond_to do |format|
-      format.html
-      format.json { render json: { student_usernames: @student_usernames } }
-    end
-  end
-
   private
 
   def word_params

@@ -210,7 +210,7 @@ feature "teacher adds words to student(s) myLeksi", %{
       find("#random-search-btn").click
       sleep(1)
 
-      find(".awfs-select-word-btn").click
+      find(".awfs-add-word-btn").click
 
       expect(page).to have_content("Number selected: 1")
       expect(page).to have_button("Finish")
@@ -233,7 +233,7 @@ feature "teacher adds words to student(s) myLeksi", %{
       find("#random-search-btn").click
       sleep(1)
 
-      find(".awfs-select-word-btn").click
+      find(".awfs-add-word-btn").click
 
       click_on "Finish"
       sleep(1)

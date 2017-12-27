@@ -238,7 +238,9 @@ function startSpellByTypingActivity() {
 	var $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
 	$activityDiv.append($spellingSpeedsterPartial);
 	giveDirections(
-		"Type the word <em class='text-purple'>" + targetWord.name + "</em> separately three times. Then " +
+		"Type the word <em class='text-purple'>" +
+		targetWord.name +
+		"</em> separately three times. " +
 		"hit the blue Continue button."
 	);
 	var wordLetterSpan;

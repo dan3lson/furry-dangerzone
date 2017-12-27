@@ -1,6 +1,7 @@
 class School::AddWordsForStudentsController < BaseSchoolController
   def update
-    @students = params[:usernames].map { |s| User.find_by(username: s) }
+    @classrooms = params[:names].map { |c| Classroom.find_by(name: c) }
+    @students = @classrooms.map { |classroom| classroom.students }.flatten
     @words = params[:word_ids].split(",").uniq.map { |w| Word.find(w) }
     @all_info = []
 

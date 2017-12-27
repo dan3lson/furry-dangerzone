@@ -12,7 +12,7 @@
 										remote: true do
 				%>
 					<%= icon "plus-circle" %>
-					Add to Notebook
+					Add to their Notebook
 				<% end %>
 			</p>
 		<% end %>
@@ -22,18 +22,26 @@
 						data-toggle="dropdown"
 						aria-haspopup="true"
 						aria-expanded="false">
-			<%= icon "plus-circle" %> Create
+			<%= icon "bars" %> Actions
 		</button>
 		<div class="dropdown-menu">
-			<%= link_to "New Example/Non-Example",
+			<%= link_to "Create New Example/Non-Example",
 					new_school_word_example_non_example_path(word, Example.new),
 					class: "dropdown-item",
-					title: "New Example/Non-Example"
+					title: "Create New Example/Non-Example"
 			%>
-			<%= link_to "New Decisions, Decisions",
+			<%= link_to "Create New Decisions, Decisions",
 					new_school_word_meaning_alt_path(word, MeaningAlt.new),
 					class: "dropdown-item",
-					title: "New Decisions, Decision"
+					title: "Create New Decisions, Decision"
+			%>
+			<div class="dropdown-divider"></div>
+			<%= link_to "Add to Notebook",
+					"#",
+					"data-word-id": word.id,
+					"data-word-name": word.name,
+					class: "dropdown-item awfs-add-word-btn",
+					title: "Add to Notebook"
 			%>
 		</div>
 	<% end %>

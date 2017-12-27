@@ -1,141 +1,100 @@
 $(document).ready(function() {
-	$(".select-class-container").click(function() {
-		$("#awfs-step-1-container").hide();
-		$("#awfs-step-2-container").show();
-
-		var $class_name = $(this).find("h4").text();
-
-		var $usernames_request = $.ajax({
-		  method: "GET",
-		  url: "/school/student_words.json?selection=" + $class_name
-		});
-
-		$usernames_request.done(function(data) {
-		  data["student_usernames"].forEach(function(username) {
-				var $student = add_bubble("stu-bubble", username, "user", "plus-sign",
-					username);
-
-				$("#available-students").append($student);
-		  })
-		});
+	$("#select-multi-classrooms").change(function() {
+		$(".num-classrooms").html(numClassrooms());
 	});
 
-	$("#available-students").on("click", ".stu-bubble", function() {
-		$("#num-students-added").html(num_classes(".glyphicon-remove-circle") + 1);
-
-		$("#selected-students").append($(this));
-
-		$(this).addClass("selected-stu");
-		$(this.lastChild).removeClass("glyphicon-plus-sign");
-		$(this.lastChild).addClass("glyphicon-remove-circle");
-
-		var $current_num = $("#num-students-added").html();
-		display_next_btn("#select-stu-cont-btn", $current_num);
-	});
-
-	$("#select-all").click(function() {
-		$(this).fadeOut("fast");
-		$(".stu-bubble").each(function(index) {
-			$("#selected-students").append($(this));
-
-			$(this).addClass("selected-stu");
-			$(this.lastChild).removeClass("glyphicon-plus-sign");
-			$(this.lastChild).addClass("glyphicon-remove-circle hover");
-		});
-
-		var $current_num = num_classes(".glyphicon-remove-circle")
-		$("#num-students-added").html($current_num );
-
-		display_next_btn("#select-stu-cont-btn", $current_num);
-	});
-
-	$("#step-2-selected-container").on("click", ".selected-stu", function() {
-		$current_num = $("#num-students-added").html();
-		$("#num-students-added").html($current_num - 1);
-
-		$("#available-students").append($(this));
-		$(this.lastChild).removeClass("glyphicon-remove-circle");
-		$(this.lastChild).addClass("glyphicon-plus-sign");
-
-		display_next_btn("#select-stu-cont-btn", $current_num - 1);
-	});
-
-	$("#select-stu-cont-btn").click(function() {
-		$("#awfs-step-2-container").hide();
-		$("#awfs-step-3-container").show();
-	});
-
-	$(".search-results-container").on("click", ".awfs-select-word-btn", function(){
-		$(".search-results-container").hide();
-
+	$(".search-results-container").on("click", ".awfs-add-word-btn", function(e) {
+		e.preventDefault();
 		var $index = 0;
-		var $word_id = $(this).data('word-id');
-		var $word_name = $(this).data('word-name');
-
-		var $current_num = num_classes(".teacher-selected-word") + 1;
-		$("#num-words-selected").html($current_num);
-
-		var $word = add_bubble("teacher-selected-word", $word_name, "book",
-			"remove-circle", $word_id
-		);
-
+		var wordID = $(this).data('word-id');
+		var wordName = $(this).data('word-name');
+		var numSelected = classLength(".teacher-selected-word") + 1;
+		$(".num-words-selected").html(numSelected);
+		var $word = displaySelectedWord(wordName, wordID);
 		$("#selected-words").append($word);
-		$("#selected-words-ids").append($word_id + ",");
-
-		display_next_btn("#select-words-finish-btn", $current_num);
+		$("#selected-words-ids").append(wordID + ",");
+		var $dd = $("dd[data-word-id='" + wordID + "']");
+		var $message = createElem("span").append(
+			"Successfully added to the queue above."
+		);
+		$dd.html(createFlash("success", $message));
+		activateOrDeactivateFinishBtn(numSelected);
 	});
 
 	$("#teacher-words").on("click", ".teacher-selected-word", function() {
-		$current_num = num_classes(".teacher-selected-word") - 1
-		$("#num-words-selected").html($current_num);
-		var $current_word_ids = $("#selected-words-ids").html();
-		var $id = $current_word_ids.split(",")[$(this).index()];
-		var $updated_word_ids = $current_word_ids.replace($id + ",", "");
-		$("#selected-words-ids").html($updated_word_ids);
+		numSelected = classLength(".teacher-selected-word") - 1;
+		$(".num-words-selected").html(numSelected);
+		var selectedWordIDs = $("#selected-words-ids").html();
+		var $id = selectedWordIDs.split(",")[$(this).index()];
+		var updatedWordIDs = selectedWordIDs.replace($id + ",", "");
+		$("#selected-words-ids").html(updatedWordIDs);
 		$(this).remove();
-		display_next_btn("#select-words-finish-btn", $current_num);
+		activateOrDeactivateFinishBtn(numSelected);
 	});
 
 	$("#select-words-finish-btn").click(function() {
-		$("#awfs-step-2-container").hide();
-		$("#awfs-step-3-container").hide();
-		$("#awfs-review-container").show("fade");
-		send_to_rails();
+		showOrHideResults("show");
+		sendToRails();
 	});
 
-	function add_bubble(container_class, display_name, glyph_1, glyph_2, id) {
-		return "<span class='tag lead pointer hover " + container_class + "' id='" +
-			container_class + "-" + id + "'>" +
-			"<span class='glyphicon glyphicon-" + glyph_1 + "'" +
-			"aria-hidden='true'" + "data-username='" + display_name + "'></span>" +
-			"\xa0" + "\xa0" + display_name + "\xa0" + "\xa0" +	"\xa0" +
-			"<span class='text-muted fa fa-" + glyph_2 + "'" +
-			"aria-hidden='true'></span>" +
-		"</span>";
+	function createFlash(_class, text) {
+		return createElem("div", "alert alert-" + _class)
+					 .append(text)
+					 .attr("role", "alert");
 	}
 
-	function display_next_btn(button, current_num) {
-		if (current_num > 0) {
-			$(button).fadeIn();
+	function createElem(elem, elemClass, elemID) {
+		_class = elemClass || null;
+		_id = elemID || null;
+		return $("<" + elem + ">", { class: _class, id: _id });
+	}
+
+	function activateOrDeactivateFinishBtn(numSelected) {
+		if (numSelected > 0) {
+			$("#select-words-finish-btn").prop("disabled", false);
 		} else {
-			$(button).fadeOut();
+			$("#select-words-finish-btn").prop("disabled", true);
+			showOrHideResults("hide");
 		}
 	}
 
-	function num_classes(class_name) {
-		return $(class_name).length;
+	function showOrHideResults(string) {
+		if (string == "show") {
+			$("#awfs-suc-war-err-container").removeClass("d-none");
+		} else {
+			$("#awfs-suc-war-err-container").addClass("d-none");
+		}
 	}
 
-	function send_to_rails() {
-		var $selected_students = $("#selected-students .glyphicon-user").map(
-			function() { return $(this).data("username"); }
-		).get();
+	function displaySelectedWord(text, id) {
+		return "<button type='button' class='btn btn-light teacher-selected-word mr-2'>" +
+	  				 text +
+						 " <span class='fa fa-remove text-danger'></span>" +
+	  			 	 "<span class='sr-only'>unread messages</span>" +
+					 "</button>";
+	}
 
-		var $selected_words_ids = $("#selected-words-ids").html();
+	function selectedClassroomNames() {
+		return $("#select-multi-classrooms").val();
+	}
 
+	function numClassrooms() {
+		if (selectedClassroomNames() == null) {
+			return 0;
+		} else {
+			return selectedClassroomNames().length;
+		}
+	}
+
+	function classLength(_class) {
+		return $(_class).length;
+	}
+
+	function sendToRails() {
+		var selectedWordIDs = $("#selected-words-ids").html();
 		var myLeksi_info = {
-			"usernames": $selected_students,
-			"word_ids": $selected_words_ids
+			"names": selectedClassroomNames(),
+			"word_ids": selectedWordIDs
 		};
 
 		$.ajax({
@@ -144,6 +103,8 @@ $(document).ready(function() {
 			dataType: "json",
 			data: myLeksi_info,
 			success: function(response) {
+				$("#select-words-finish-btn").remove();
+				$("#awfs-step-1-div, #awfs-step-2-div").remove();
 				display_results(
 					response.num_words,
 					response.num_students,
@@ -158,28 +119,36 @@ $(document).ready(function() {
 		});
 	}
 
-	function display_results(num_words, num_stu, num_warnings, num_successes,
-		num_errors, warnings, successes, errors
+	function display_results(
+		num_words,
+		num_stu,
+		num_warnings,
+		num_successes,
+		num_errors,
+		warnings,
+		successes,
+		errors
 	) {
-		$("#awfs-review-container h4").append(
+		$("#add-more-words-btn").removeClass("d-none");
+		$("#success-results, #warning-resultss, #error-resultss").empty();
+		$("#finish-stats").html(
 			"<small> Students (" + num_stu + ") " + "Words (" + num_words +
 			")</small>"
 		);
-		$(".total").html(num_words * num_stu);
 
 		$.each(successes, function(index, value) {
-			$("#success-result").append(value, "<hr>");
+			$("#success-results").append(value, "<hr>");
 		});
 		$("#num-successes").html(num_successes);
 
 
 		$.each(warnings, function(index, value) {
-			$("#warning-result").append(value, "<hr>");
+			$("#warning-results").append(value, "<hr>");
 		});
 		$("#num-warnings").html(num_warnings);
 
 		$.each(errors, function(index, value) {
-			$("#error-result").append(value, "<hr>");
+			$("#error-results").append(value, "<hr>");
 		});
 		$("#num-errors").html(num_errors);
 	}

@@ -16,18 +16,20 @@
 			<div class="card-body">
 				<h4 class="card-title">
 					<%= icon "users" %>
-					Students
+					Students <span class="text-muted">(<%= @classroom_stu_count %>)</span>
 				</h4>
-				<%= link_to "View",
-										school_classroom_students_path(@classroom),
+				<%= link_to school_classroom_students_path(@classroom),
 										role: "button",
-										class: "btn btn-primary btn-block"
+										class: "btn btn-primary btn-block" do
 				%>
-				<%= link_to "Add",
-										new_school_classroom_student_path(@classroom),
+					<%= icon "eye" %> View
+				<% end %>
+				<%= link_to new_school_classroom_student_path(@classroom),
 										role: "button",
-										class: "btn btn-primary btn-block"
+										class: "btn btn-primary btn-block" do
 				%>
+					<%= icon "plus-circle" %> Add
+				<% end %>
 			</div>
 		</div>
 	</div>
@@ -38,31 +40,12 @@
 					<%= icon "book" %>
 					Notebook
 				</h4>
-				<%= link_to "View words",
-										"#",
+				<%= link_to school_classroom_add_words_path(@classroom),
 										role: "button",
-										class: "btn btn-primary btn-block disabled"
+										class: "btn btn-primary btn-block" do
 				%>
-				<%= link_to "Add words",
-										"#",
-										role: "button",
-										class: "btn btn-primary btn-block disabled"
-				%>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div class="card">
-			<div class="card-body">
-				<h4 class="card-title">
-					<%= icon "line-chart" %>
-					Grades
-				</h4>
-				<%= link_to "View",
-										"#",
-										role: "button",
-										class: "btn btn-primary btn-block disabled"
-				%>
+					<%= icon "plus-circle" %> Add words
+				<% end %>
 			</div>
 		</div>
 	</div>

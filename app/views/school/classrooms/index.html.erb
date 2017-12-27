@@ -1,7 +1,7 @@
 <% provide(:title, "Classrooms (#{@classrooms_count})") %>
-<% provide(:header, "Classrooms (#{@classrooms_count})") %>
+<h1>Classrooms <span class="text-muted">(<%= @classrooms_count %>)</span></h1>
 <div class="mb-3">
-	<div class="float-right">
+	<div>
 			<%= link_to new_school_classroom_path,
 									role: "button",
 									class: "btn btn-primary btn-block" do

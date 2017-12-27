@@ -36,6 +36,10 @@ class School::ClassroomsController < BaseSchoolController
     @classroom_stu_count = @classroom.students.count
   end
 
+  def add_words
+    @classroom = Classroom.find(params[:classroom_id])
+  end
+
   # def words
   #   @class = params[:filter]
   #   @class_name = @class == "fs_class_one" ? "Class One" : "Class Two"

@@ -23,10 +23,7 @@ class Admin::UsersController < BaseAdminController
 	end
 
 	def update
-		#TODO Fix update of Teacher and Classroom for Student
 		@user = User.find(params[:id])
-		# @user.teacher = Teacher.find(params[:student][:teacher_id])
-		# @user.classroom = Classroom.find(params[:student][:classroom_id])
 
     if @user.update(user_params)
       flash[:success] = "Successfully updated #{@user.username}\'s profile."
@@ -52,8 +49,8 @@ class Admin::UsersController < BaseAdminController
 		@symbol = @user.is_teacher? ? :teacher : :student
 		params.require(@symbol).permit(
 			:type,
-			:teacher,
-			:classroom,
+			:teacher_id,
+			:classroom_id,
 			:username,
 			:password,
 			:password_confirmation,
