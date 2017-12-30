@@ -1,5 +1,10 @@
-<% provide(:title, "Search") %>
-<% provide(:header, "Search") %>
+<% provide(:title, "Dictionary: Find Existing Words") %>
+<% provide(:header, "Dictionary: Find Existing Words") %>
 
+<div class="alert alert-info alert-primary">
+	<%= icon "info-circle" %> There's a good chance a word you want to create
+	content for already exists; use the form below to check and then take
+	the appropriate action.
+</div>
 <%= render "searches/form", account_type: "teacher" %>
 <div class="search-results-container mt-3"></div>

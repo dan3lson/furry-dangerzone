@@ -1,16 +1,5 @@
-<% provide(:title, "Words") %>
-<% provide(:header, "Words") %>
-
-<div class="btn-group mb-3" role="group" aria-label="Basic example">
-	<%= link_to new_school_word_path, role: "button",
-																		class: "btn btn-primary" do
-  %>
-		<%= icon "plus-circle" %> New
-	<% end %>
-	<%= link_to school_search_path, role: "button", class: "btn btn-primary" do %>
-		<%= icon "search" %> Search
-	<% end %>
-</div>
+<% provide(:title, "My Content: Words") %>
+<% provide(:header, "My Content: Words") %>
 
 <% if current_user.has_created_content? %>
 	<table class="table table-sm table-bordered table-striped table-responsive">

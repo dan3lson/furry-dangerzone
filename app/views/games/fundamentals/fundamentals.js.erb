@@ -240,8 +240,7 @@ function startSpellByTypingActivity() {
 	giveDirections(
 		"Type the word <em class='text-purple'>" +
 		targetWord.name +
-		"</em> separately three times. " +
-		"hit the blue Continue button."
+		"</em> three times."
 	);
 	var wordLetterSpan;
 	var targetWordSpanLetters = [];
@@ -285,11 +284,15 @@ function startSpellByTypingActivity() {
 };
 
 function startSpellByClickingLettersActiivty() {
-	showDefinition();
+	hideDefinition();
 	timeGameStarted = getDate();
 	giveDirections(
-		"Tap the letters to spell the word <em class='text-purple'>" + targetWord.name + "</em>."
+		"Spell the word <em class='text-purple'>" + targetWord.name +
+		"</em> by tapping the letters."
 	);
+	var $spellByClickingLettersPartial = $("<%= j render(partial: 'games/fundamentals/spell_by_clicking_letters') %>");
+	$activityDiv.append($spellByClickingLettersPartial);
+
 	var $letter;
 	var targetWordLetters = targetWord.name
 																		.split('')
@@ -304,7 +307,7 @@ function startSpellByClickingLettersActiivty() {
 	var $alphabetRandLetters = [];
 	var $mergedLettersArray = [];
 
-	$targetWordH1.html($underscoreContainer);
+	$("#spell-by-clicking-letters").html($underscoreContainer);
 
 	$.each(targetWordLetters, function() {
 		underscores += "_ ";
@@ -331,7 +334,7 @@ function startSpellByClickingLettersActiivty() {
 	$(".fitb-letter").click(function() {
 		giveDirections("Finish tapping the letters to spell that word.");
 		$tappedLetterBtn = $(this);
-		tappedLetter = $(this).text();
+		tappedLetter = $tappedLetterBtn.text();
 
 		for (var i = 0; i < targetWordLetters.length; i++) {
 			firstLetter = targetWordLetters[0];

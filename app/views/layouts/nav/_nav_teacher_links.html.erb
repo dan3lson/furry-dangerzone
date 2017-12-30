@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="nav-item dropdown">
-	<% if controller?("school/words") ||
+	<% if controller?("school/words") && action?("index") ||
 				controller?("school/example_non_examples") ||
 				controller?("school/meaning_alts")
 	%>
@@ -42,6 +42,43 @@
 		<% end %>
 		<%= link_to school_example_non_examples_path, class: "dropdown-item" do %>
 			Example/Non-Examples
+		<% end %>
+  </div>
+</div>
+<div class="nav-item dropdown">
+	<% if controller?("school/words") && action?("new") ||
+				controller?("school/searches")
+	%>
+		<a class="nav-link dropdown-toggle active"
+			 href="#"
+			 id="navbarDropdownMenuLink"
+			 data-toggle="dropdown"
+			 aria-haspopup="true"
+			 aria-expanded="false">
+			 <%= emoji "book" %>
+	    <strong>Dictionary</strong>
+	  </a>
+	<% else %>
+		<a class="nav-link dropdown-toggle"
+			 href="#"
+			 id="navbarDropdownMenuLink"
+			 data-toggle="dropdown"
+			 aria-haspopup="true"
+			 aria-expanded="false">
+			 <%= emoji "book" %>
+	    Dictionary
+	  </a>
+	<% end %>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		<%= link_to new_school_word_path, class: "dropdown-item",
+																			title: "Create New Dictionary Word" do
+    %>
+			Create New Word
+		<% end %>
+		<%= link_to school_search_path, class: "dropdown-item",
+																			title: "Find Existing Dictionary Words" do
+    %>
+			Find Existing Words
 		<% end %>
   </div>
 </div>
