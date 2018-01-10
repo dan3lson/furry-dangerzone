@@ -9,8 +9,7 @@ class GamesController < ApplicationController
     @available_games = {
       "pronun": @target_word.has_pronunciation?,
       "dec_dec": @target_word.has_meaning_alts?,
-      "ex_non_ex": @target_word.has_ex_non_exs?,
-      "syns_vs_ants": @target_word.has_syns_or_ants?
+      "ex_non_ex": @target_word.has_ex_non_exs?
     }
 
     respond_to do |format|

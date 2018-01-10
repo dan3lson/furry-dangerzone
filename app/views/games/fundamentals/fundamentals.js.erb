@@ -46,10 +46,6 @@ switch (gameToPlay) {
 			updateUserWordGamesCompleted(4);
 			updateProgress(68);
 			startExampleNonExamplesActivity();
-		} else if (availableGames.syns_vs_ants) {
-			updateUserWordGamesCompleted(5);
-			updateProgress(85);
-			startSynsVsAntsActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
 			updateProgress(100);
@@ -65,10 +61,6 @@ switch (gameToPlay) {
 			updateUserWordGamesCompleted(4);
 			updateProgress(68);
 			startExampleNonExamplesActivity();
-		} else if (availableGames.syns_vs_ants) {
-			updateUserWordGamesCompleted(5);
-			updateProgress(85);
-			startSynsVsAntsActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
 			updateProgress(100);
@@ -80,21 +72,6 @@ switch (gameToPlay) {
 		if (availableGames.ex_non_ex) {
 			updateProgress(68);
 			startExampleNonExamplesActivity();
-		} else if (availableGames.syns_vs_ants) {
-			updateUserWordGamesCompleted(5);
-			updateProgress(85);
-			startSynsVsAntsActivity();
-		} else {
-			updateUserWordGamesCompleted(6);
-			updateProgress(100);
-			startReviewActivity();
-		}
-
-		break;
-	case 6:
-		if (availableGames.syns_vs_ants) {
-			updateProgress(85);
-			startSynsVsAntsActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
 			updateProgress(100);
@@ -146,10 +123,6 @@ $(".container").off().on("click", ".continue-btn", function() {
 			updateProgress(68);
 			emptyActivityDiv();
 			startExampleNonExamplesActivity();
-		} else if (availableGames.syns_vs_ants) {
-			updateUserWordGamesCompleted(5);
-			updateProgress(85);
-			startSynsVsAntsActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
 			updateProgress(100);
@@ -171,10 +144,6 @@ $(".container").off().on("click", ".continue-btn", function() {
 			updateUserWordGamesCompleted(4);
 			updateProgress(68);
 			startExampleNonExamplesActivity();
-		} else if (availableGames.syns_vs_ants) {
-			updateUserWordGamesCompleted(5);
-			updateProgress(85);
-			startSynsVsAntsActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
 			updateProgress(100);
@@ -190,26 +159,6 @@ $(".container").off().on("click", ".continue-btn", function() {
 			updateUserWordGamesCompleted(4);
 			updateProgress(68);
 			startExampleNonExamplesActivity();
-		} else if (availableGames.syns_vs_ants) {
-			updateUserWordGamesCompleted(5);
-			updateProgress(85);
-			startSynsVsAntsActivity();
-		} else {
-			updateUserWordGamesCompleted(6);
-			updateProgress(100);
-			startReviewActivity();
-		}
-	} else if ($btn.hasClass("start-syns-vs-ant-activity")) {
-		updateUserWordGamesCompleted(5);
-		addPoints(500);
-		updateUserPoints(500);
-		flashPointsUpdate(arrowSuccess());
-		emptyActivityDiv();
-
-		if (availableGames.syns_vs_ants) {
-			updateUserWordGamesCompleted(5);
-			updateProgress(85);
-			startSynsVsAntsActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
 			updateProgress(100);
@@ -549,111 +498,10 @@ function startExampleNonExamplesActivity() {
 		var numBtnsDisabled = $activityDiv.find(".btn:disabled").length;
 
 		if (numBtns == numBtnsDisabled) {
-			showContinueBtn("start-syns-vs-ant-activity");
-			// show an emoji pointing down and when clicked, scrollToBottom();
+			showContinueBtn("review-activity");
 		}
 	});
 }
-
-// TODO Include three or four dummy words and a "neither/not applicable" button
-function startSynsVsAntsActivity() {
-	hideDefinition();
-	giveDirections(
-		"Match the synonym and antonym pairs for <em class='text-purple'>" + targetWord.name + "</em>."
-	);
-	var $selectedBtn;
-	var $selectedBtns;
-	var twoBtnsAreSelected = false;
-	var btnsAreTheSame = false;
-	var gameCompleted = false;
-	var matchIsFound = false;
-	var matches = [];
-
-	getThesaurus(targetWord.name).done(function(response) {
-		const synonyms = response[0];
-		const antonyms = response[1];
-
-		matches = shuffleArray(merge(
-			createMatchObjects(synonyms, "synonym"),
-			createMatchObjects(antonyms, "antonym")
-		));
-		$activityDiv.empty().append(createMatchingCards(matches));
-	});
-
-	$("#activity-div").off().on("click", ".match", function() {
-		$selectedBtn = $(this);
-		$selectedBtn.addClass("selected");
-		$selectedBtns = $(".selected");
-		numSelected = $selectedBtns.length;
-		twoBtnsAreSelected = numSelected > 1;
-
-		if (twoBtnsAreSelected) {
-			$firstBtn = $($selectedBtns[0]);
-			$secondBtn = $($selectedBtns[1]);
-			btnsAreTheSame = $firstBtn.text() == $secondBtn.text();
-
-			if (btnsAreTheSame) {
-				$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
-										 .addClass("btn-outline-primary");
-			}
-
-			if ($firstBtn.text() == "synonym" || $secondBtn.text() == "synonym") {
-				var $wordBtn = findBtnNot($selectedBtns, "synonym");
-				matchIsFound = findMatch(matches, $wordBtn, "synonym").length;
-			} else {
-				var $wordBtn = findBtnNot($selectedBtns, "antonym");
-				matchIsFound = findMatch(matches, $wordBtn, "antonym").length;
-			}
-
-			if (matchIsFound) {
-				$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
-										 .addClass("btn-success")
-										 .prop("disabled", true);
-				addPoints(30);
-				flashPointsUpdate(arrowSuccess());
-				var data = {
-					"category": $selectedBtns.not($wordBtn).text(),
-					"word_name": $wordBtn.text(),
-					"result": true
-				};
-				updateGameStat("funds_six", timeGameStarted, data);
-				gameCompleted = $(".match.btn-success").length == matches.length * 2;
-
-				if (gameCompleted) {
-					showContinueBtn("review-activity");
-					$("#syn-vs-ant-cont-btn").fadeIn();
-				}
-			} else {
-				$selectedBtns.removeClass("btn-primary btn-outline-primary selected")
-										 .addClass("btn-outline-primary");
-				removePoints(10);
-				flashPointsUpdate(arrowDanger());
-				var wordName = $wordBtn.text() || "n/a";
-
-				if (wordName == "n/a") {
-					var category = $firstBtn.text();
-				} else {
-					var category = $selectedBtns.not($wordBtn).text();
-				}
-
-				var data = {
-					"category": category,
-					"word_name": wordName,
-					"result": false
-				};
-				updateGameStat("funds_six", timeGameStarted, data);
-			}
-		} else {
-			if ($selectedBtn.hasClass("btn-primary")) {
-				$selectedBtn.removeClass("btn-primary selected")
-										.addClass("btn-outline-primary");
-			} else {
-				$selectedBtn.removeClass("btn-outline-primary")
-										.addClass("btn-primary");
-			}
-		}
-	});
-};
 
 function startReviewActivity() {
 	clearTimeout(scoreboardTimerID);
