@@ -1,7 +1,7 @@
 <h4 class="mb-3"><%= name.split("_").map(&:capitalize).join(" ") %></h4>
 	<% word_groups.each_with_index do |(name, words), i| %>
 		<% words.take(3).each do |word| %>
-			<dl class="row">
+			<dl class="notebook row">
 				<%= render "searches/dict_display", word: word, account_type: "student" %>
 			</dl>
 		<% end %>
