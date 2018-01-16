@@ -5,21 +5,24 @@
 <% if current_user.has_words? %>
 
     <% @current_user_user_words.each do |user_word| %>
-      <dl class="notebook row mb-5 lead">
+      <dl class="notebook row lead">
         <% word = user_word.word %>
 
         <dt class="col-lg-4">
           <h1 class="d-inline">
             <%= word.name %>
           </h1>
-          <%= link_to user_word_path(id: user_word.id), class: "text-secondary",
-            method: :delete do
+          <%= link_to user_word_path(id: user_word.id),
+                      class: "text-secondary",
+                      method: :delete do
           %>
             <i class="fa fa-trash"></i>
           <% end %>
         </dt>
         <dd class="col-lg-6">
-          <span class="text-muted"><%= word.part_of_speech %></span>
+          <span class="text-muted">
+            <%= word.part_of_speech %>
+          </span>
           <%= array_of(word, "definition").first %>
         </dd>
         <dd class="col-lg-2">
