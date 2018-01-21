@@ -1,55 +1,104 @@
-<% provide(:header, "New Decisions, Decisions: #{@word.name}") %>
-<% provide(:title, "New Decisions, Decisions: #{@word.name}") %>
+<% provide(:header, "New Decisions, Decisions Content: #{@word.name}") %>
+<% provide(:title, "New Decisions, Decisions Content: #{@word.name}") %>
 
 <div class="row">
   <div class="col-md-8">
-    <div class="card bg-primary text-white mb-3">
-    	<div class="card-body">
-    		<h4 class="card-title">Instructions</h4>
-    		<p class="card-text">
-    			Fill in the four fields below.
-          Here is an example with the word <b>anticipate</b>:
-    		</p>
-        <p class="card-text">
-          <p class="form-group">
-            <%= label_tag "Text", nil, class: "form-control-label" %>
-            <%= text_field_tag :text,
-                               nil,
-                               class: "form-control",
-                               placeholder: "Which would you rather anticipate - your birthday or a dentist appointment?",
-                               readonly: true
-            %>
-          </p>
-          <p class="form-group">
-            <%= label_tag "Choices", nil, class: "form-control-label" %>
-            <%= text_field_tag :choices,
-            nil,
-            class: "form-control",
-            placeholder: "birthday, dentist appointment",
-            readonly: true %>
-          </p>
-          <p class="form-group">
-            <%= label_tag "Answer", nil, class: "form-control-label" %>
-            <%= text_field_tag :answer,
-            nil,
-            class: "form-control",
-              placeholder: "birthday",
-              readonly: true %>
-          </p>
-          <p class="form-group">
-            <%= label_tag "Feedback", nil, class: "form-control-label" %>
-            <%= text_area_tag :textarea,
-            nil,
-            class: "form-control",
-              placeholder: "Birthdays are events where people have fun and celebrate someone they care about. A dentist appointment, though, usually isn’t something people look forward to because it likely involves discomfort and dealing with bad news like having a cavity.",
-              readonly: true %>
-          </p>
-        </p>
-    	</div>
-    </div>
     <div class="card">
       <div class="card-body bg-light">
+        <div>
+          <%= link_to "#newDecDecHelp",
+                      role: "button",
+                      class: "btn btn-outline-primary btn-lg btn-block mb-3",
+                      "data-toggle": "modal",
+                      "aria-target": "newDecDecHelp" do %>
+            <%= icon "question-circle" %> Need help?
+          <% end %>
+          <div class="modal fade" id="newDecDecHelp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Instructions for Creating New Decisions, Decisions content
+                    for the word <em>anticipate</em>
+                  </h5>
+                  <button type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p class="mb-2">
+                    There are four required fields: <em>text</em>,
+                    <em>choices</em>, <em>answer</em>, and <em>feedback</em>.
+                  </p>
+                  <p class="mb-4">
+                    When creating content for a word, you will always see basic
+                    details like its part of speech, definition, and any
+                    examples followed by the fields you must complete:
+                  </p>
+                  <p class="mb-2">
+                    <strong>Part of Speech</strong> verb
+                    <br>
+                    <strong>Definition</strong> become less in amount or intensity
+                    <br>
+                    <strong>Examples</strong> The storm abated
+                  </p>
+                  <hr>
+                  <p class="form-group">
+                    <%= label_tag "Text", nil, class: "form-control-label" %>
+                    <%= text_field_tag :text,
+                                       nil,
+                                       class: "form-control",
+                                       placeholder: "Which would you rather anticipate - your birthday or a dentist appointment?",
+                                       readonly: true
+                    %>
+                  </p>
+                  <p class="form-group">
+                    <%= label_tag "Choices", nil, class: "form-control-label" %>
+                    <%= text_field_tag :choices,
+                                        nil,
+                                        class: "form-control",
+                                        placeholder: "birthday, dentist appointment",
+                                        readonly: true %>
+                  </p>
+                  <p class="form-group">
+                    <%= label_tag "Answer", nil, class: "form-control-label" %>
+                    <%= text_field_tag :answer,
+                                       nil,
+                                       class: "form-control",
+                                       placeholder: "birthday",
+                                       readonly: true
+                    %>
+                  </p>
+                  <p class="form-group">
+                    <%= label_tag "Feedback", nil, class: "form-control-label" %>
+                    <%= text_area_tag :textarea,
+                                      nil,
+                                      class: "form-control",
+                                      rows: "3",
+                                      placeholder: "Birthdays are events where people have fun and celebrate someone they care about. A dentist appointment, though, usually isn’t something people look forward to because it likely involves discomfort and dealing with bad news like having a cavity.",
+                                      readonly: true
+                    %>
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal">
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <%= render "shared/error_messages", object: @m_a %>
+        <div class="mb-3">
+          <%= render "school/words/new_content_dict_display", word: @word %>
+          <hr>
+        </div>
         <%= render "school/meaning_alts/form", btn_text: "Create",
                                                word: @word,
                                                m_a: @m_a

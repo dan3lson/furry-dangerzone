@@ -1,0 +1,16 @@
+<strong>Part of Speech</strong> <%= word.part_of_speech %>
+<br>
+<strong>Definition</strong> <%= array_of(word, "definition").first %>
+<br>
+<strong>Examples</strong>
+
+<% if word.has_examples? %>
+	<% word.examples.each do |example| %>
+		<% example.text.split("***").each do |example| %>
+			&#8605; <%= example %>
+			<br>
+		<% end %>
+	<% end %>
+<% else %>
+	<small class="text-muted">none</small>
+<% end %>

@@ -1,98 +1,136 @@
-<% provide(:header, "New Example/Non-Example: #{@word.name}") %>
-<% provide(:title, "New Example/Non-Example: #{@word.name}") %>
+<% provide(:header, "New Example/Non-Example Content: #{@word.name}") %>
+<% provide(:title, "New Example/Non-Example Content: #{@word.name}") %>
 
 <div class="row">
   <div class="col-md-8">
-    <div class="card bg-primary text-white mb-3">
-    	<div class="card-body">
-    		<h4 class="card-title">Instructions</h4>
-        <p class="card-text">
-          Fill in the fields below. Here are two exampels for "ex"
-          <em>text</em>, <em>answer (either "example" or "non-example")</em>,
-          and <em>feedback</em>.
-        </p>
-        <p class="card-text">
-          Here are two examples:
-        </p>
-        <ol>
-          <li>
-            <h5>Abate</h5>
-            <strong>Part of Speech</strong> verb
-            <br>
-            <strong>Definition</strong> become less in amount or intensity
-            <br>
-            <strong>Examples</strong> The storm abated
-            <p class="card-text">
-              <p class="form-group">
-                <%= label_tag "Text", nil, class: "form-control-label" %>
-                <%= text_field_tag :text,
-                                   nil,
-                                   class: "form-control",
-                                   placeholder: "The heavy storm turns into a light drizzle.",
-                                   readonly: true %>
-              </p>
-              <p class="form-group">
-                <%= label_tag "Answer", nil, class: "form-control-label" %>
-                <%= text_field_tag :answer,
-                                   nil,
-                                   class: "form-control",
-                                   placeholder: "example",
-                                   readonly: true %>
-              </p>
-              <p class="form-group">
-                <%= label_tag "Feedback", nil, class: "form-control-label" %>
-                <%= text_area_tag :textarea,
-                                   nil,
-                                   class: "form-control",
-                                   placeholder: "If a heavy storm abated, then umbrellas might actually keep people dry since the rain has died down.",
-                                   readonly: true %>
-              </p>
-            </p>
-          </li>
-          <li>
-            <h5>Abate</h5>
-            <strong>Part of Speech</strong> verb
-            <br>
-            <strong>Definition</strong> become less in amount or intensity
-            <br>
-            <strong>Examples</strong> The storm abated
-            <p class="card-text">
-              <p class="form-group">
-                <%= label_tag "Text", nil, class: "form-control-label" %>
-                <%= text_area_tag :text,
-                                   nil,
-                                   class: "form-control",
-                                   placeholder: "A sports stadium that gets louder and fiercer",
-                                   readonly: true
-                %>
-              </p>
-              <p class="form-group">
-                <%= label_tag "Answer", nil, class: "form-control-label" %>
-                <%= text_area_tag :answer,
-                                   nil,
-                                   class: "form-control",
-                                   placeholder: "non-example",
-                                   readonly: true
-                %>
-              </p>
-              <p class="form-group">
-                <%= label_tag "Feedback", nil, class: "form-control-label" %>
-                <%= text_area_tag :textarea,
-                                   nil,
-                                   class: "form-control",
-                                   placeholder: "If the volume and atmosphere at a sports stadium increases, then that's the opposite of something abating.",
-                                   readonly: true,
-                                   rows: 4
-                %>
-              </p>
-            </p>
-          </li>
-        </ol>
-    	</div>
-    </div>
     <div class="card">
       <div class="card-body bg-light">
+        <div>
+          <%= link_to "#exNonExSample",
+                      role: "button",
+                      class: "btn btn-outline-primary btn-lg btn-block mb-3",
+                      "data-toggle": "modal",
+                      "aria-target": "exNonExSample" do %>
+            <%= icon "question-circle" %> Need help?
+          <% end %>
+          <div class="modal fade" id="exNonExSample" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Example/Non-Examples for the word <em>abate</em>
+                  </h5>
+                  <button type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p class="mb-2">
+                    There are three required fields: <em>text</em>,
+                    <em>answer</em>, and <em>feedback</em>.
+                  </p>
+                  <p class="mb-2">
+                    When creating content for a word, you will always see basic
+                    details like its part of speech, definition, and any
+                    examples:
+                  </p>
+                  <hr>
+                  <p class="mb-2">
+                    <strong>Part of Speech</strong> verb
+                    <br>
+                    <strong>Definition</strong> become less in amount or intensity
+                    <br>
+                    <strong>Examples</strong> The storm abated
+                  </p>
+                  <ol>
+                    <li>
+                      <p class="card-text">
+                        <p class="form-group">
+                          <%= label_tag "Text", nil, class: "form-control-label" %>
+                          <%= text_field_tag :text,
+                                             nil,
+                                             class: "form-control",
+                                             placeholder: "The heavy storm turns into a light drizzle.",
+                                             readonly: true %>
+                        </p>
+                        <p class="form-group">
+                          <%= label_tag "Answer", nil, class: "form-control-label" %>
+                          <%= text_field_tag :answer,
+                                             nil,
+                                             class: "form-control",
+                                             placeholder: "example",
+                                             readonly: true %>
+                        </p>
+                        <p class="form-group">
+                          <%= label_tag "Feedback", nil, class: "form-control-label" %>
+                          <%= text_area_tag :textarea,
+                                             nil,
+                                             class: "form-control",
+                                             rows: "3",
+                                             placeholder: "If a heavy storm abated, then umbrellas might actually keep people dry since the rain has died down.",
+                                             readonly: true %>
+                        </p>
+                      </p>
+                    </li>
+                    <li>
+                      <h5>Abate</h5>
+                      <strong>Part of Speech</strong> verb
+                      <br>
+                      <strong>Definition</strong> become less in amount or intensity
+                      <br>
+                      <strong>Examples</strong> The storm abated
+                      <p class="card-text">
+                        <p class="form-group">
+                          <%= label_tag "Text", nil, class: "form-control-label" %>
+                          <%= text_area_tag :text,
+                                             nil,
+                                             class: "form-control",
+                                             placeholder: "A sports stadium that gets louder and fiercer",
+                                             readonly: true
+                          %>
+                        </p>
+                        <p class="form-group">
+                          <%= label_tag "Answer", nil, class: "form-control-label" %>
+                          <%= text_area_tag :answer,
+                                             nil,
+                                             class: "form-control",
+                                             placeholder: "non-example",
+                                             readonly: true
+                          %>
+                        </p>
+                        <p class="form-group">
+                          <%= label_tag "Feedback", nil, class: "form-control-label" %>
+                          <%= text_area_tag :textarea,
+                                             nil,
+                                             class: "form-control",
+                                             placeholder: "If the volume and atmosphere at a sports stadium increases, then that's the opposite of something abating.",
+                                             readonly: true,
+                                             rows: 4
+                          %>
+                        </p>
+                      </p>
+                    </li>
+                  </ol>
+                </div>
+                <div class="modal-footer">
+                  <button type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal">
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <%= render "shared/error_messages", object: @e_non_e %>
+        <div class="mb-3">
+          <%= render "school/words/new_content_dict_display", word: @word %>
+          <hr>
+        </div>
         <%= render "school/example_non_examples/form", btn_text: "Create",
                                                        word: @word,
                                                        e_non_e: @e_non_e
