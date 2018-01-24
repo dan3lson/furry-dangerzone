@@ -1,0 +1,32 @@
+<% provide(:title, "Home") %>
+<% provide(:header, "Home") %>
+
+<div class="card-deck">
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">
+			<%= emoji "notebook" %>
+			<br>
+			<%= link_to "Student Home", notebook_path, title: "Student Home" %>
+		</h5>
+    </div>
+  </div>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">
+			<%= emoji "apple" %>
+			<br>
+			<%= link_to "Teacher Home", school_root_path, title: "Student Home" %>
+		</h5>
+    </div>
+  </div>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">
+			<%= emoji "100" %>
+			<br>
+			<%= link_to "Admin Home", admin_root_path, title: "Student Home" %>
+		</h5>
+    </div>
+  </div>
+</div>

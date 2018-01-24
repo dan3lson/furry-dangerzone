@@ -143,7 +143,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    root "users#index"
+    root "admins#home"
+    get "home" => "admins#home"
     get "stats" => "admins#stats"
     resources :users
     resources :words

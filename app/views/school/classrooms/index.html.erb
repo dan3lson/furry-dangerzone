@@ -4,9 +4,10 @@
 	<div>
 			<%= link_to new_school_classroom_path,
 									role: "button",
-									class: "btn btn-primary btn-block" do
+									class: "btn btn-primary btn-block btn-lg",
+									title: "Create a new Classroom" do
 			%>
-				<i class="fa fa-plus-circle"></i> Create New Classroom
+				<%= icon "plus-circle" %> Create New Classroom
 			<% end %>
 	</div>
 	<div class="clear"></div>

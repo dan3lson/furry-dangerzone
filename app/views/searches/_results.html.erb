@@ -2,7 +2,7 @@
 	<div class="alert alert-danger"><%= error %></div>
 <% else %>
 		<% word_groups.each_with_index do |(name, words), i| %>
-				<% words.take(5).each do |word| %>
+				<% words.take(10).each do |word| %>
 				<dl class="notebook row">
 					<%= render "searches/dict_display", word: word,
 																							account_type: account_type

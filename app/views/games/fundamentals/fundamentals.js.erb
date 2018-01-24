@@ -389,7 +389,7 @@ function startDecisionsDecisionsActivity() {
 																			 .removeClass("btn-outline-primary")
 																			 .addClass("btn-outline-secondary");
 			$feedbackCardText.prepend("<br>")
-											 .addClass("text-success")
+											 .addClass("text-success lead")
 											 .removeClass("d-none");
 			$feedbackCardText.find("strong").prepend("Correct! ");
 			addPoints(30);
@@ -406,7 +406,7 @@ function startDecisionsDecisionsActivity() {
 																			 .removeClass("btn-outline-primary")
 																			 .addClass("btn-outline-secondary");
 			$feedbackCardText.prepend("<br>")
-											 .addClass("text-danger")
+											 .addClass("text-danger lead")
 											 .removeClass("d-none");
 			$feedbackCardText.find("strong").prepend("Incorrect. ");
 			removePoints(20);
@@ -466,7 +466,7 @@ function startExampleNonExamplesActivity() {
 																				.removeClass("btn-outline-primary")
 																				.addClass("btn-outline-secondary");
 			$feedbackCardText.prepend("<br>")
-											 .addClass("text-success")
+											 .addClass("text-success lead")
 											 .removeClass("d-none");
 			$feedbackCardText.find("strong").prepend("Correct! ");
 			addPoints(1);
@@ -483,7 +483,7 @@ function startExampleNonExamplesActivity() {
 																				.removeClass("btn-outline-primary")
 																				.addClass("btn-outline-secondary");
 			$feedbackCardText.prepend("<br>")
-											 .addClass("text-danger")
+											 .addClass("text-danger lead")
 											 .removeClass("d-none");
 			$feedbackCardText.find("strong").prepend("Incorrect. ");
 			removePoints(1);
