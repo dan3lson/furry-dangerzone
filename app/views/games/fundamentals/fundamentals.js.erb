@@ -382,7 +382,7 @@ function startDecisionsDecisionsActivity() {
 		createElem("div", "clear").insertAfter($selAnswerTitle);
 
 		if ($selAnswerText == answer) {
-			$selAnswerCard.addClass("card-outline-success");
+			$selAnswerCard.addClass("border-success");
 			$selAnswerBlock.find(".float-right")
 										 .append(createFontAweIcon("check fa-2x text-success"));
 			$btnRow.find(".mean-alts-answer").prop("disabled", true)
@@ -399,7 +399,7 @@ function startDecisionsDecisionsActivity() {
 			};
 			updateGameStat("funds_four", timeGameStarted, data);
 		} else {
-			$selAnswerCard.addClass("card-outline-danger");
+			$selAnswerCard.addClass("border-danger");
 			$selAnswerBlock.find(".float-right")
 										 .append(createFontAweIcon("close fa-2x text-danger"));
 			$btnRow.find(".mean-alts-answer").prop("disabled", true)
@@ -417,8 +417,8 @@ function startDecisionsDecisionsActivity() {
 			updateGameStat("funds_four", timeGameStarted, data);
 		}
 
-		var numBtns = $("#meaning-alts-div .btn").length;
-		var numBtnsDisabled = $("#meaning-alts-div .btn:disabled").length;
+		var numBtns = $activityDiv.find(".btn").length;
+		var numBtnsDisabled = $activityDiv.find(".btn:disabled").length;
 
 		if (numBtns == numBtnsDisabled) {
 			showContinueBtn("start-ex-non-exs-activity");
@@ -691,7 +691,8 @@ function showContinueBtn(_class) {
 			createElem("div", "fixed-bottom mb-0")
 			.append(
 				createBtn(
-					"btn-primary btn-block btn-lg continue-btn " + _class, "Continue"
+					"btn-primary btn-block btn-lg continue-btn " + _class,
+					"C O N T I N U E "
 				).append(" ").append(createElem("i", "em em-point_right"))
 
 			)
