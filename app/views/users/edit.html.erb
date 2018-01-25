@@ -42,13 +42,13 @@
       </div>
     </div>
     <div class="card-body">
-      <%= f.submit "Save changes", class: "btn btn-primary btn-block" %>
+      <%= f.submit "Update", class: "btn btn-primary btn-block btn-lg" %>
       <div class="text-center mt-5">
         <p>
-          <%= link_to "Delete my account", user_path(current_user),
+          <%= link_to "Delete My Account", user_path(current_user),
               method: :delete,
               data: { confirm: @del_account_msg },
-              class: "btn btn-secondary form-control"
+              class: "btn btn-danger form-control"
           %>
         </p>
       </div>

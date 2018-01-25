@@ -2,33 +2,39 @@
 <% provide(:header, "My Content: Example/Non-Examples") %>
 
 <% if current_user.has_ex_non_exs? %>
-	<table class="table table-sm table-bordered table-responsive">
+	<table class="table table-sm table-bordered table-striped table-responsive">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Word</th>
-				<th>Text</th>
-				<th>Answer</th>
-				<th>Feedback</th>
-				<th>Updated</th>
-				<th></th>
+				<th scope="col">ID</th>
+				<th scope="col">Word</th>
+				<th scope="col">Text</th>
+				<th scope="col">Answer</th>
+				<th scope="col">Feedback</th>
+				<th scope="col">Updated</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @example_non_examples.each do |ex_non_ex| %>
+				<% word = ex_non_ex.word %>
 				<tr>
 					<th scope="row"><%= ex_non_ex.id %></th>
-					<td><%= Word.find(ex_non_ex.word_id).name %></td>
+					<td><%= word.name %></td>
 					<td><%= ex_non_ex.text %></td>
 					<td><%= ex_non_ex.answer %></td>
 					<td><%= ex_non_ex.feedback %></td>
-          <!-- TODO Either create helper method or better yet update DB/models -->
 					<td><%= time_ago_in_words(ex_non_ex.updated_at) %> ago</td>
 					<td>
 						<%= link_to "Edit",
 								edit_school_example_non_example_path(ex_non_ex),
 								class: "btn btn-warning",
 								title: "Edit this Example/Non-Example"
+						%>
+					</td>
+					<td>
+						<%= link_to "New",
+								new_school_word_example_non_example_path(word, Example.new),
+								class: "btn btn-primary",
+								title: "New Example/Non-Example"
 						%>
 					</td>
 				</tr>

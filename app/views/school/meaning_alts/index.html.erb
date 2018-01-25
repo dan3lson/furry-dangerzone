@@ -2,35 +2,41 @@
 <% provide(:header, "My Content: Decisions, Decisions") %>
 
 <% if current_user.has_meaning_alts? %>
-	<table class="table table-sm table-bordered table-responsive">
+	<table class="table table-sm table-bordered table-striped table-responsive">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Word</th>
-				<th>Text</th>
-				<th>Choices</th>
-				<th>Answer</th>
-				<th>Feedback</th>
-				<th>Updated</th>
-				<th></th>
+				<th scope="col">ID</th>
+				<th scope="col">Word</th>
+				<th scope="col">Text</th>
+				<th scope="col">Choices</th>
+				<th scope="col">Answer</th>
+				<th scope="col">Feedback</th>
+				<th scope="col">Updated</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @meaning_alts.each do |meaning_alt| %>
+				<% word = meaning_alt.word %>
 				<tr>
 					<th scope="row"><%= meaning_alt.id %></th>
-					<td><%= Word.find(meaning_alt.word_id).name %></td>
+					<td><%= word.name %></td>
 					<td><%= meaning_alt.text %></td>
 					<td><%= meaning_alt.choices %></td>
 					<td><%= meaning_alt.answer %></td>
 					<td><%= meaning_alt.feedback %></td>
-					<!-- TODO Either create helper method or better yet update DB/models -->
 					<td><%= time_ago_in_words(meaning_alt.updated_at) %> ago</td>
 					<td>
 						<%= link_to "Edit",
 								edit_school_meaning_alt_path(meaning_alt),
 								class: "btn btn-warning",
 								title: "Edit this Decisions, Decision"
+						%>
+					</td>
+					<td>
+						<%= link_to "New",
+								new_school_word_meaning_alt_path(word, MeaningAlt.new),
+								class: "btn btn-primary",
+								title: "New Decisions, Decision"
 						%>
 					</td>
 				</tr>

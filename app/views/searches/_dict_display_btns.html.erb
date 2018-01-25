@@ -25,16 +25,22 @@
 			<%= icon "bars" %> Actions
 		</button>
 		<div class="dropdown-menu">
-			<%= link_to "Create New Example/Non-Example",
-					new_school_word_example_non_example_path(word, Example.new),
+			<%= link_to new_school_word_example_non_example_path(word, Example.new),
 					class: "dropdown-item",
-					title: "Create New Example/Non-Example"
+					title: "Create New Example/Non-Example" do
 			%>
-			<%= link_to "Create New Decisions, Decisions",
-					new_school_word_meaning_alt_path(word, MeaningAlt.new),
+				Create New Example/Non-Example
+				<%= display_content_status(word.has_ex_non_exs?) %>
+			<% end %>
+
+
+			<%= link_to new_school_word_meaning_alt_path(word, MeaningAlt.new),
 					class: "dropdown-item",
-					title: "Create New Decisions, Decision"
+					title: "Create New Decisions, Decision" do
 			%>
+				Create New Decisions, Decisions
+				<%= display_content_status(word.has_meaning_alts?) %>
+			<% end %>
 			<div class="dropdown-divider"></div>
 			<%= link_to "Add to Notebook",
 					"#",

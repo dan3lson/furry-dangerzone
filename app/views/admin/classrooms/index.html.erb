@@ -3,17 +3,21 @@
   <small class="text-muted"><%= @classrooms_count %></small>
 </h1>
 <%= paginate @classrooms %>
-<table class="table table-responsive table-bordered table-sm table-striped table-hover">
-  <th>ID</th>
-  <th>Name</th>
-  <th>Num Students</th>
-  <th>Teacher</th>
-  <th>Grade</th>
-  <th>Created</th>
+<table class="table table-responsive table-bordered table-sm table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Num Students</th>
+      <th scope="col">Teacher</th>
+      <th scope="col">Grade</th>
+      <th scope="col">Created</th>
+    </tr>
+  </thead>
 
   <% @classrooms.each do |classroom| %>
     <tr>
-      <td><%= classroom.id %></td>
+      <th scope="row"><%= classroom.id %></th>
       <td><%= link_to classroom.name, admin_classroom_path(classroom) %></td>
       <td><%= classroom.num_students %></td>
       <td><%= classroom.teacher.username %></td>

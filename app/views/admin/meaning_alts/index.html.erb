@@ -1,4 +1,6 @@
+<% provide(:title, "Meaning Alternatives (#{@m_a_count})") %>
 <% provide(:header, "Meaning Alternatives (#{@m_a_count})") %>
+
 <div class="text-muted">
   Filter:
   <%= link_to admin_meaning_alts_path do %>
@@ -23,7 +25,7 @@
                   role: "button",
                   class: "btn btn-primary btn-block" do
       %>
-        <i class="fa fa-plus-circle"></i> Create
+        <%= icon "plus-circle" %> Create
       <% end %>
     </p>
   </div>
