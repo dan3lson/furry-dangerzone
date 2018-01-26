@@ -1,17 +1,16 @@
-<% provide(:title, "Classrooms (#{@classrooms_count})") %>
-<h1>Classrooms <span class="text-muted">(<%= @classrooms_count %>)</span></h1>
+<% provide(:title, "Classrooms") %>
+<% provide(:header, "Classrooms") %>
+
 <div class="mb-3">
-	<div>
-			<%= link_to new_school_classroom_path,
-									role: "button",
-									class: "btn btn-primary btn-block btn-lg",
-									title: "Create a new Classroom" do
-			%>
-				<%= icon "plus-circle" %> Create New Classroom
-			<% end %>
-	</div>
-	<div class="clear"></div>
+	<%= link_to new_school_classroom_path,
+							role: "button",
+							class: "btn btn-primary btn-block btn-lg",
+							title: "Create a new Classroom" do
+	%>
+		<%= icon "plus-circle" %> Create a New Classroom
+	<% end %>
 </div>
+
 <% if current_user.has_classrooms? %>
 	<div class="card-deck">
 		<% @classrooms.each do |classroom| %>

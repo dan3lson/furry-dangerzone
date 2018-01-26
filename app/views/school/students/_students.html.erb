@@ -1,15 +1,19 @@
 <% if classroom.has_students? %>
 	<div class="table-responsive">
-	  <table class="table table-bordered table-hover">
-	    <th>ID</th>
-	    <th>Username</th>
-	    <th>Logins</th>
-	    <th>Words</th>
-	    <td>Total: <%= pluralize(classroom.students.count, "student") %></td>
+	  <table class="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Username</th>
+					<th>Logins</th>
+					<th>Words</th>
+					<th>Total: <%= pluralize(classroom.students.count, "student") %></th>
+				</tr>
+			</thead>
 
 	    <% classroom.students.alphabetical.each do |student| %>
 	      <tr>
-	        <td><%= student.id %></td>
+	        <th scope="row"><%= student.id %></th>
 	        <td><%= student.username %></td>
 	        <td>
 						Number of Logins: <%= student.num_logins %>
