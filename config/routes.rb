@@ -73,6 +73,7 @@ Rails.application.routes.draw do
 
   resource :freestyle do
     member do
+      post "ex_non_ex"
       post "sent_stem"
       post "word_rel"
       post "leksi_tale"

@@ -7,6 +7,7 @@ class Freestyle < ActiveRecord::Base
   has_one :freestyle_desc_me, dependent: :destroy
   has_one :describe_me, through: :freestyle_desc_me
   has_one :game_stat_freestyle, dependent: :destroy
+  has_one :freestyle_ex_non_ex, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :input, presence: true

@@ -1,12 +1,12 @@
 <% if classroom.has_students? %>
 	<div class="table-responsive">
-	  <table class="table table-bordered table-hover table-striped">
+	  <table class="table table-bordered table-striped table-sm">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Username</th>
-					<th>Logins</th>
-					<th>Words</th>
+					<th>Num Logins</th>
+					<th>Last Login</th>
 					<th>Total: <%= pluralize(classroom.students.count, "student") %></th>
 				</tr>
 			</thead>
@@ -16,19 +16,14 @@
 	        <th scope="row"><%= student.id %></th>
 	        <td><%= student.username %></td>
 	        <td>
-						Number of Logins: <%= student.num_logins %>
-						<br>
-						Last Login Time:
-	          <% if student.last_login.nil? %>
-							<span class="text-danger">Never</span>
-	          <% else %>
-	            <%= time_ago_in_words(student.last_login) %> ago
-	          <% end %>
+						<%= student.num_logins %>
 	        </td>
-	        <td>
-						Number of Words: <%= student.num_words %>
-						<br>
-						Words Mastered: <%= student.myLeksi_mastery %>%
+					<td>
+						<% if student.last_login.nil? %>
+							<span class="text-danger">never</span>
+						<% else %>
+							<%= time_ago_in_words(student.last_login) %> ago
+						<% end %>
 					</td>
 	        <td>
 						<%= link_to user_path(student),

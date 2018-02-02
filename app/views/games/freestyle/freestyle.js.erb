@@ -330,7 +330,7 @@ function saveSentStemResponse(timeStarted) {
 function createFreestyle(route, timeStarted, uniqData) {
 	uniqData = uniqData || null;
 	var url = "/freestyle/" + route;
-	var redoFreestyleID = "<%= @redo_freestyle_id %>"
+	var redoFreestyleID = "<%= @redo_freestyle_id %>";
 	var data = {
 		"word_id": targetWord.id,
 		"time_started": timeStarted,

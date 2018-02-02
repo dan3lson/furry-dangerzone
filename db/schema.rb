@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016011549) do
+ActiveRecord::Schema.define(version: 20180202014716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,15 @@ ActiveRecord::Schema.define(version: 20171016011549) do
 
   add_index "freestyle_desc_mes", ["describe_me_id"], name: "index_freestyle_desc_mes_on_describe_me_id", using: :btree
   add_index "freestyle_desc_mes", ["freestyle_id"], name: "index_freestyle_desc_mes_on_freestyle_id", using: :btree
+
+  create_table "freestyle_ex_non_exes", force: :cascade do |t|
+    t.integer  "freestyle_id", null: false
+    t.string   "kind",         null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "freestyle_ex_non_exes", ["freestyle_id"], name: "index_freestyle_ex_non_exes_on_freestyle_id", using: :btree
 
   create_table "freestyle_lek_tales", force: :cascade do |t|
     t.integer  "freestyle_id", null: false

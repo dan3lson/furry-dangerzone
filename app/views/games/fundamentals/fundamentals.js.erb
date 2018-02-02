@@ -23,7 +23,7 @@ var scoreboardTimerID = startCountup($scoreboardTimer, 0);
 var timeGameStarted;
 var numBadClicks = 0;
 var numHeard = 0;
-var $regex = /^[a-zA-Z. ]+$/;
+var $regex = /^[a-zA-Z. -]+$/;
 
 switch (gameToPlay) {
 	case 1:
@@ -162,14 +162,23 @@ $(".container").off().on("click", ".continue-btn", function() {
 		} else {
 			updateUserWordGamesCompleted(6);
 			updateProgress(100);
-			startReviewActivity();
+			startCreateYourExampleNonExamplesActivity();
 		}
+	} else if ($btn.hasClass("create-your-ex-non-ex-activity")) {
+		updateUserWordGamesCompleted(7);
+		updateProgress(85);
+		addPoints(1500);
+		updateUserPoints(1500);
+		flashPointsUpdate(arrowSuccess());
+		emptyActivityDiv();
+		startCreateYourExampleNonExamplesActivity();
 	} else if ($btn.hasClass("review-activity")) {
 		updateUserWordGamesCompleted(6);
 		updateProgress(100);
 		addPoints(1000);
 		updateUserPoints(1000);
 		flashPointsUpdate(arrowSuccess());
+		saveExNonExResponse(timeGameStarted);
 		emptyActivityDiv();
 		startReviewActivity();
 	}
@@ -429,12 +438,6 @@ function startDecisionsDecisionsActivity() {
 function startExampleNonExamplesActivity() {
 	showDefinition();
 	timeGameStarted = getDate();
-	giveDirections(
-		"Read the meaning below for <em class='text-purple'>" +
-		targetWord.name + "</em>. Decide if the statements below " +
-		"are an example or non-example of <em class='text-purple'>" +
-		targetWord.name + "."
-	);
 	var exNonExArray = [];
 
 	getExampleNonExamples(targetWord.id).done(function(response) {
@@ -443,6 +446,14 @@ function startExampleNonExamplesActivity() {
 		$.each(exNonExArray, function(index) {
 			$activityDiv.append(createExNonExQues(this, index));
 		});
+
+		giveDirections(
+			"Read the meaning for <em class='text-purple'>" +
+			targetWord.name + "</em> and decide if the " + exNonExArray.length +
+			" statements below " +
+			"are an example or non-example of <em class='text-purple'>" +
+			targetWord.name + "</em>."
+		);
 	});
 
 	$("#activity-div").off().on("click", ".ex-non-exs-answer", function() {
@@ -459,7 +470,7 @@ function startExampleNonExamplesActivity() {
 		createElem("div", "clear").insertAfter($selAnswerTitle);
 
 		if ($selAnswerText == answer) {
-			$selAnswerCard.addClass("card-outline-success");
+			$selAnswerCard.addClass("border-success");
 			$selAnswerBlock.find(".float-right")
 										 .append(createFontAweIcon("check fa-2x text-success"));
 			$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
@@ -476,7 +487,7 @@ function startExampleNonExamplesActivity() {
 			};
 			updateGameStat("funds_five", timeGameStarted, data);
 		} else {
-			$selAnswerCard.addClass("card-outline-danger");
+			$selAnswerCard.addClass("border-danger");
 			$selAnswerBlock.find(".float-right")
 										 .append(createFontAweIcon("close fa-2x text-danger"));
 			$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
@@ -498,7 +509,51 @@ function startExampleNonExamplesActivity() {
 		var numBtnsDisabled = $activityDiv.find(".btn:disabled").length;
 
 		if (numBtns == numBtnsDisabled) {
+			showContinueBtn("create-your-ex-non-ex-activity");
+		}
+	});
+}
+
+function startCreateYourExampleNonExamplesActivity() {
+	showDefinition();
+	timeGameStarted = getDate();
+	giveDirections(
+		"Create your own example and non-example for <em class='text-purple'>" +
+		targetWord.name + "</em>."
+	);
+	$activityDiv.append(createCardWithInput("example").attr("autofocus", "true"));
+	$activityDiv.append(createCardWithInput("non-example"));
+	var $exampleInput = $(".card-input:first");
+	var inpunEx = $exampleInput.val().trim();
+	var $nonExampleInput = $(".card-input:last");
+	var inputNonEx = $nonExampleInput.val().trim();
+	var isExampleTextFilled;
+	var isNonExampleTextFilled;
+
+	// TODO Refactor lines the two blocks below
+	$exampleInput.on("input", function() {
+		inpunEx = $exampleInput.val().trim();
+		isExampleTextFilled = inpunEx.length > 0 && $regex.test(inpunEx);
+		isNonExampleTextFilled = inputNonEx.length > 0 &&
+														 $regex.test(inputNonEx);
+
+		if (isExampleTextFilled && isNonExampleTextFilled) {
 			showContinueBtn("review-activity");
+		} else {
+			hideContinueBtn();
+		}
+	});
+
+	$nonExampleInput.on("input", function() {
+		inputNonEx = $nonExampleInput.val().trim();
+		isExampleTextFilled = inpunEx.length > 0 && $regex.test(inpunEx);
+		isNonExampleTextFilled = inputNonEx.length > 0 &&
+														 $regex.test(inputNonEx);
+
+		if (isExampleTextFilled && isNonExampleTextFilled) {
+			showContinueBtn("review-activity");
+		} else {
+			hideContinueBtn();
 		}
 	});
 }
@@ -512,6 +567,37 @@ function startReviewActivity() {
 /***********************
 		HELPER FUNCTIONS
 ************************/
+
+function saveExNonExResponse(timeGameStarted) {
+	var $exampleInput = $(".card-input:first");
+	var inputEx = $exampleInput.val().trim();
+	var $nonExampleInput = $(".card-input:last");
+	var inputNonEx = $nonExampleInput.val().trim();
+	var data = {
+		"word_id": targetWord.id,
+		"input_ex": inputEx,
+		"input_non_ex": inputNonEx
+	};
+	createFreestyle("ex_non_ex", timeGameStarted, data);
+}
+
+function createFreestyle(route, timeGameStarted, uniqData) {
+	uniqData = uniqData || null;
+	var url = "/freestyle/" + route;
+	var redoFreestyleID = "<%= @redo_freestyle_id %>";
+	var data = {
+		"word_id": targetWord.id,
+		"time_started": timeGameStarted,
+		"time_ended": getDate(),
+		"uniq_data": uniqData,
+		"redo_freestyle_id": redoFreestyleID
+	}
+	makeAjaxCall("POST", url, data);
+}
+
+function hideContinueBtn() {
+	$(".fixed-bottom").remove();
+}
 
 function hideDefinition() {
 	$(".jumbotron").hide();
@@ -535,16 +621,6 @@ function findBtnNot($btns, type) {
 	});
 }
 
-function findMatch(matches, $btn, type) {
-	return matches.filter(function(match) {
-		return isMatch(match, $btn, type);
-	});
-}
-
-function isMatch(match, $btn, type) {
-	return match.word == $btn.text() && match.type == type;
-}
-
 function createMatchObjects(words, type) {
 	matches = [];
 
@@ -559,36 +635,12 @@ function createMatchObjects(words, type) {
 	return matches;
 }
 
-function createMatchingCards(matches) {
-	var $row = createElem("div", "row text-center");
-	var $typeBtn;
-	var $wordBtn;
-	var $typeColSmallThree;
-	var $wordColSmallThree;
-
-	$.each(matches, function(index, match) {
-		$wordColSmallThree = createElem("div", "col-sm-4 mb-3");
-		$typeColSmallThree = createElem("div", "col-sm-4 mb-3");
-		$wordBtn = createBtn(
-			"btn-outline-primary btn-lg btn-block match", match.word
-		)
-		$typeBtn = createBtn(
-			"btn-outline-primary btn-lg btn-block match", match.type
-		);
-		$typeColSmallThree.append($typeBtn);
-		$wordColSmallThree.append($wordBtn);
-		$row.append($wordColSmallThree).append($typeColSmallThree);
-	});
-
-	return $row;
-}
-
-function updateGameStat(route, timeStarted, uniqData) {
+function updateGameStat(route, timeGameStarted, uniqData) {
 	uniqData = uniqData || null;
 	var url = "/game_stat/" + route;
 	var data = {
 		"word_id": targetWord.id,
-		"time_started": timeStarted,
+		"time_started": timeGameStarted,
 		"time_ended": getDate(),
 		"uniq_data": uniqData
 	}
@@ -619,10 +671,6 @@ function makeAjaxCall(type, url, data) {
 function logResponse(response) {
 	console.log(response);
 }
-
-function getThesaurus() {
-	return getData("/thesaurus/" + targetWord.name);
-};
 
 function getExampleNonExamples(wordID) {
 	return getData("/words/" + wordID + "/example_non_examples");
@@ -769,6 +817,22 @@ function createMeaningAltQues(meaningAlt, index) {
 	$halfCol1.append($btn1);
 	$halfCol2.append($btn2);
 	$feedback.find("strong").append(meaningAlt.feedback);
+	return $card;
+}
+
+function createCardWithInput(cardTitle) {
+	$card = createElem("div", "card mb-3");
+	$cardBlock = createElem("div", "card-body");
+	$cardTitle = createElem("h4", "card-title");
+	$input = createElem("input", "form-control input-lg card-input")
+					 .attr("type", "text");
+	$card.append($cardBlock);
+	$cardBlock.append($cardTitle);
+	$cardBlock.append($input);
+	$cardTitle.html(
+		"Write your own <b>" + cardTitle + "</b> of <em class='text-purple'>" +
+		targetWord.name + "</em>."
+	);
 	return $card;
 }
 

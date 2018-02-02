@@ -15,6 +15,43 @@ class FreestylesController < ApplicationController
 		end
 	end
 
+	def ex_non_ex
+		@game = Game.find_by(name: "Examples/Non-Examples")
+		@target_word = Word.find(params[:word_id])
+		@user_word = UserWord.object(current_user, @target_word)
+		@input_ex = params[:uniq_data][:input_ex]
+		@input_non_ex = params[:uniq_data][:input_non_ex]
+		@free_input_ex = Freestyle.new(input: @input_ex, user_word: @user_word)
+		@free_input_non_ex = Freestyle.new(input: @input_non_ex, user_word: @user_word)
+		@msgs = { successes: [], errors: [] }
+
+		[@free_input_ex, @free_input_non_ex].each_with_index do |object, index|
+			if object.save
+				Freestyle.update_status_redone(params[:redo_freestyle_id])
+				@msgs[:successes] << "Free (#{object.id}) created for UW #{@user_word.id}."
+				GameMailer.new_freestyle(object, current_user, @game).deliver_later
+
+				@free_ex_non_ex = if index == 0
+														FreestyleExNonEx.new(freestyle: object, kind: "example")
+													else
+														FreestyleExNonEx.new(freestyle: object, kind: "non-example")
+													end
+
+				if @free_ex_non_ex.save
+					@msgs[:successes] << "Free ExNonEx created for UW #{@user_word.id}."
+				else
+					@msgs[:errors] << "Free ExNonEx not created for UW #{@user_word.id}."
+					@msgs[:errors] << @free_ex_non_ex.errors.full_messages
+				end
+			else
+				@msgs[:errors] << "Freestyle not created for UW #{@user_word.id}."
+				@msgs[:errors] << object.errors.full_messages
+			end
+		end
+
+		render json: { response: @msgs }
+	end
+
 	def sent_stem
 		@game = Game.find_by(name: "Sentence Stems")
 		@target_word = Word.find(params[:word_id])
