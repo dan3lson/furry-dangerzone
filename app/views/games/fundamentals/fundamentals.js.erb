@@ -125,8 +125,9 @@ $(".container").off().on("click", ".continue-btn", function() {
 			startExampleNonExamplesActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
-			updateProgress(100);
-			startReviewActivity();
+			updateProgress(85);
+			emptyActivityDiv();
+			startCreateYourExampleNonExamplesActivity();
 		}
 	} else if ($btn.hasClass("start-decisions-decisions-activity")) {
 		addPoints(200);
@@ -146,8 +147,8 @@ $(".container").off().on("click", ".continue-btn", function() {
 			startExampleNonExamplesActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
-			updateProgress(100);
-			startReviewActivity();
+			updateProgress(85);
+			startCreateYourExampleNonExamplesActivity();
 		}
 	} else if ($btn.hasClass("start-ex-non-exs-activity")) {
 		addPoints(325);
@@ -161,7 +162,7 @@ $(".container").off().on("click", ".continue-btn", function() {
 			startExampleNonExamplesActivity();
 		} else {
 			updateUserWordGamesCompleted(6);
-			updateProgress(100);
+			updateProgress(85);
 			startCreateYourExampleNonExamplesActivity();
 		}
 	} else if ($btn.hasClass("create-your-ex-non-ex-activity")) {
