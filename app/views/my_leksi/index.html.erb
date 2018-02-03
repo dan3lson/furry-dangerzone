@@ -3,6 +3,13 @@
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
 
 <% if current_user.has_words? %>
+  <div class="card bg-light mb-4">
+    <div class="card-body text-muted">
+      <%= icon "lightbulb-o" %> Tip: click a word to see more details or
+      remove it from your Notebook.
+    </div>
+  </div>
+
   <% @current_user_user_words.each do |user_word| %>
     <dl class="notebook row ">
       <% word = user_word.word %>
@@ -16,12 +23,14 @@
                       "aria-controls": "collapse#{word.id}",
                       title: "Click to see the meaning of #{word.name}." do
           %>
-            <%= word.name %> <small><%= icon "angle-down" %></small>
+            <%= word.name %>
+
+            <% if user_word.fundamental_completed? %>
+              <small><%= icon "trophy text-danger" %></small>
+            <% end %>
           <% end %>
           <p class="collapse" id="collapse<%= word.id %>">
-            <span class="text-muted">
-              <%= word.part_of_speech %>
-            </span>
+            <span class="text-muted"><%= word.part_of_speech %></span>
             <%= array_of(word, "definition").first %>
             <br>
             <br>
@@ -38,9 +47,9 @@
       </dt>
       <dd class="col-lg-4">
         <% if user_word.fundamental_completed? %>
-          <%= play_funds_game(word.id, "warning") %>
+          <%= play_funds_game(word.id) %>
         <% else %>
-          <%= play_funds_game(word.id, "danger") %>
+          <%= play_funds_game(word.id) %>
         <% end %>
       </dd>
     </dl>

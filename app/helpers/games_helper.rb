@@ -61,9 +61,9 @@ module GamesHelper
     end
   end
 
-  def play_funds_game(word_id, color)
+  def play_funds_game(word_id)
     link_to fund_game_link(word_id),
-            class: "btn btn-#{color} rounded-circle",
+            title: "Play the Fundamentals!",
             remote: true do
       play_icon
     end
