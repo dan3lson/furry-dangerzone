@@ -21,24 +21,6 @@ class UserWord < ActiveRecord::Base
   }
 
   # TODO: Create test
-  def self.search(user, name)
-    if name
-      if name.blank?
-        "You\'re so silly; type in a word first."
-      else
-        words = Word.where(name: name)
-        user_words = UserWord.object(user, words) unless words.empty?
-
-        if user_words
-          user_words.map { |uw| uw.word }
-        else
-          "You don\'t have that word."
-        end
-      end
-    end
-  end
-
-  # TODO: Create test
   def self.object(user, word)
     find_by(user: user, word: word)
   end

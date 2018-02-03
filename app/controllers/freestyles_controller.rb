@@ -28,13 +28,19 @@ class FreestylesController < ApplicationController
 		[@free_input_ex, @free_input_non_ex].each_with_index do |object, index|
 			if object.save
 				Freestyle.update_status_redone(params[:redo_freestyle_id])
-				@msgs[:successes] << "Free (#{object.id}) created for UW #{@user_word.id}."
+				@msgs[:successes] << "Free (#{object.id}) created: UW #{@user_word.id}."
 				GameMailer.new_freestyle(object, current_user, @game).deliver_later
 
 				@free_ex_non_ex = if index == 0
-														FreestyleExNonEx.new(freestyle: object, kind: "example")
+														FreestyleExNonEx.new(
+															freestyle: object,
+															kind: "example"
+														)
 													else
-														FreestyleExNonEx.new(freestyle: object, kind: "non-example")
+														FreestyleExNonEx.new(
+															freestyle: object,
+															kind: "non-example"
+														)
 													end
 
 				if @free_ex_non_ex.save

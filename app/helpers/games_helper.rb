@@ -61,10 +61,9 @@ module GamesHelper
     end
   end
 
-  def play_funds_game(word_id)
+  def play_funds_game(word_id, color)
     link_to fund_game_link(word_id),
-            class: "btn btn-danger btn-lg rounded-circle",
-            role: "button",
+            class: "btn btn-#{color} rounded-circle",
             remote: true do
       play_icon
     end
@@ -89,7 +88,7 @@ module GamesHelper
   end
 
   def play_icon
-    icon("play")
+    emoji("video_game fa-4x")
   end
 
   def random_congrats
