@@ -4,9 +4,27 @@
 
 <% if current_user.has_words? %>
   <div class="card bg-light mb-4">
-    <div class="card-body text-muted">
-      <%= icon "lightbulb-o" %> Tip: click a word to see more details or
-      remove it from your Notebook.
+    <%= link_to "#collapse-need-help",
+                class: "text-dark",
+                "data-toggle": "collapse",
+                "aria-expanded": "false",
+                "aria-controls": "collapse-need-help",
+                title: "Click to get help for this page." do
+    %>
+      <div class="card-header">
+        <%= icon "question-circle" %>
+        Need Help?
+      </div>
+    <% end %>
+    <div class="collapse card-body text-muted" id="collapse-need-help">
+      <%= icon "lightbulb-o" %> Tip #1: click a word to see more details or
+      remove it from your Notebook
+      <br>
+      <%= icon "lightbulb-o" %> Tip #2: click the game controller to play
+      the activities for a word
+      <br>
+      <%= icon "lightbulb-o" %> Tip #3: a thumbs up means you
+      completed the activities for that word. If not, get going!
     </div>
   </div>
 
@@ -14,8 +32,9 @@
     <dl class="notebook row ">
       <% word = user_word.word %>
 
-      <dt class="col-lg-8">
-        <h1 class="display-3">
+      <dt class="col-lg-9">
+        <h1 class="display-3 text-centter">
+          <%= play_funds_game(word.id) %>
           <%= link_to "#collapse#{word.id}",
                       class: "text-dark",
                       "data-toggle": "collapse",
@@ -24,10 +43,9 @@
                       title: "Click to see the meaning of #{word.name}." do
           %>
             <%= word.name %>
-
-            <% if user_word.fundamental_completed? %>
-              <small><%= icon "trophy text-danger" %></small>
-            <% end %>
+          <% end %>
+          <% if user_word.fundamental_completed? %>
+            <%= emoji "--1" %>
           <% end %>
           <p class="collapse" id="collapse<%= word.id %>">
             <span class="text-muted"><%= word.part_of_speech %></span>
@@ -45,13 +63,6 @@
           </p>
         </h1>
       </dt>
-      <dd class="col-lg-4">
-        <% if user_word.fundamental_completed? %>
-          <%= play_funds_game(word.id) %>
-        <% else %>
-          <%= play_funds_game(word.id) %>
-        <% end %>
-      </dd>
     </dl>
   <% end %>
   <!-- Show different colors based on current game -->
