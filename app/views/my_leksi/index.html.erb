@@ -24,46 +24,43 @@
       the activities for a word
       <br>
       <%= icon "lightbulb-o" %> Tip #3: a thumbs up means you
-      completed the activities for that word. If not, get going!
+      completed the activities for that word
     </div>
   </div>
 
   <% @current_user_user_words.each do |user_word| %>
-    <dl class="notebook row ">
+    <div class="notebook row mb-3">
       <% word = user_word.word %>
-
-      <dt class="col-lg-9">
-        <h1 class="display-3 text-centter">
-          <%= play_funds_game(word.id) %>
-          <%= link_to "#collapse#{word.id}",
-                      class: "text-dark",
-                      "data-toggle": "collapse",
-                      "aria-expanded": "false",
-                      "aria-controls": "collapse#{word.id}",
-                      title: "Click to see the meaning of #{word.name}." do
+      <h1 class="display-3 text-centter">
+        <%= play_funds_game(word.id) %>
+        <%= link_to "#collapse#{word.id}",
+                    class: "text-dark",
+                    "data-toggle": "collapse",
+                    "aria-expanded": "false",
+                    "aria-controls": "collapse#{word.id}",
+                    title: "Click to see the meaning of #{word.name}." do
+        %>
+          <%= word.name %>
+        <% end %>
+        <% if user_word.fundamental_completed? %>
+          <%= emoji "--1" %>
+        <% end %>
+        <p class="collapse" id="collapse<%= word.id %>">
+          <span class="text-muted"><%= word.part_of_speech %></span>
+          <%= array_of(word, "definition").first %>
+          <br>
+          <br>
+          <%= link_to user_word_path(id: user_word.id),
+                      role: "button",
+                      class: "btn btn-danger btn-small",
+                      title: "Remove this word from your Notebook",
+                      method: :delete do
           %>
-            <%= word.name %>
+            <%= icon "trash" %> Remove
           <% end %>
-          <% if user_word.fundamental_completed? %>
-            <%= emoji "--1" %>
-          <% end %>
-          <p class="collapse" id="collapse<%= word.id %>">
-            <span class="text-muted"><%= word.part_of_speech %></span>
-            <%= array_of(word, "definition").first %>
-            <br>
-            <br>
-            <%= link_to user_word_path(id: user_word.id),
-                        role: "button",
-                        class: "btn btn-danger btn-small",
-                        title: "Remove this word from your Notebook",
-                        method: :delete do
-            %>
-              <%= icon "trash" %> Remove
-            <% end %>
-          </p>
-        </h1>
-      </dt>
-    </dl>
+        </p>
+      </h1>
+    </div>
   <% end %>
   <!-- Show different colors based on current game -->
   <%#= render "my_leksi/index_word", user_word: user_word, word: user_word.word %>

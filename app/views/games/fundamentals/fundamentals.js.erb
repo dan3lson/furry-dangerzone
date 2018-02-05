@@ -246,8 +246,8 @@ function startSpellByClickingLettersActiivty() {
 	hideDefinition();
 	timeGameStarted = getDate();
 	giveDirections(
-		"Spell the word <em class='text-purple'>" + targetWord.name +
-		"</em> by tapping the letters."
+		"Click the letters to spell the word <em class='text-purple'>" +
+		targetWord.name + "</em>."
 	);
 	var $spellByClickingLettersPartial = $("<%= j render(partial: 'games/fundamentals/spell_by_clicking_letters') %>");
 	$activityDiv.append($spellByClickingLettersPartial);
