@@ -18,15 +18,12 @@
 	<%# end %>
 <%# end %>
 
-<%# if action?("stats") %>
-	<%#= link_to stats_path, class: "nav-item nav-link active" do %>
-		<!-- <i class="fa fa-line-chart"></i> Stats -->
-	<%# end %>
-<%# else %>
-	<%#= link_to stats_path, class: "nav-item nav-link" do %>
-		<!-- <i class="fa fa-line-chart"></i> Stats -->
-	<%# end %>
-<%# end %>
+<%= link_to games_spellmasters_path,
+					  class: "nav-item nav-link active",
+						title: "Practice spelling all of the words in your Notebook!",
+						remote: true do %>
+	<%= emoji "bee" %> Spellmaster
+<% end %>
 
 <% if controller?("searches") && action?("dictionary") %>
 	<%= link_to dictionary_path, class: "nav-item nav-link active" do %>

@@ -1,0 +1,217 @@
+const $headerPartial = $("<%= j render(partial: 'games/spellmasters/header', locals: { target_word: @target_word }) %>");
+var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
+var $spellmasterDiv = createElem("div", null, "spellmaster-div");
+var $activityDiv = createElem("div", null, "activity-div");
+$spellmasterDiv.append(
+									$headerPartial,
+									$activityDiv
+								);
+$(".container").empty()
+							 .append($spellmasterDiv)
+							 .css("margin-bottom", "5rem")
+							 .hide()
+							 .fadeIn();
+var $targetWordH1 = $(".target-word-header");
+var timeGameStarted;
+var numBadClicks = 0;
+var numHeard = 0;
+var $regex = /^[a-zA-Z. -]+$/;
+playRandomGame();
+
+/***********************
+	 ACTIVITY FUNCTIONS
+************************/
+
+function startSpellByTypingActivity() {
+	var $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
+	$activityDiv.append($spellingSpeedsterPartial);
+	giveDirections(
+		"Type the word <em class='text-purple'>" +
+		targetWord.name +
+		"</em> three times."
+	);
+	var wordLetterSpan;
+	var targetWordSpanLetters = [];
+
+	$.each(targetWord.name.split(""), function() {
+		wordLetterSpan = $(createElem("span")).append(this);
+		targetWordSpanLetters.push(wordLetterSpan);
+	})
+
+	$targetWordH1.html(targetWordSpanLetters);
+
+	var $inputs = $(".spell-the-word");
+	var inputNum = 0;
+	var $currentInput = $($inputs[inputNum]).focus();
+	var currentInputText;
+	var timeStartedTyping;
+
+	$("#activity-div").off().on("input", ".spell-the-word", function() {
+		currentInputText = $(this).val().trim().toLowerCase();
+		$formGroup = $currentInput.parent();
+
+		if (currentInputText == targetWord.name) {
+			$formGroup.removeClass("bg-primary p-2");
+			$currentInput.prop("disabled", true);
+
+			if (inputNum < 3) {
+				inputNum += 1;
+				$currentInput = $($inputs[inputNum]);
+				$currentInput.focus();
+				$formGroup = $currentInput.parent();
+				$formGroup.addClass("bg-primary p-2");
+			}
+
+			if (inputNum == 3) {
+				playRandomGameWithNewWord();
+			}
+		}
+	});
+};
+
+function startSpellByClickingLettersActivity() {
+	timeGameStarted = getDate();
+	giveDirections(
+		"Click the letters to spell the word <em class='text-purple'>" +
+		targetWord.name + "</em>."
+	);
+	var $spellByClickingLettersPartial = $("<%= j render(partial: 'games/fundamentals/spell_by_clicking_letters') %>");
+	$activityDiv.append($spellByClickingLettersPartial);
+
+	var $letter;
+	var targetWordLetters = targetWord.name
+																		.split('')
+																		.filter(function(v) { return v !== ' '} );
+	var $tappedLetterBtn;
+	var tappedLetter;
+	var firstLetter;
+	var underscores = "";
+	var $underscoreContainer = createElem("span", null, null);
+	var $alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+	var	$randomAlphabet;
+	var $alphabetRandLetters = [];
+	var $mergedLettersArray = [];
+
+	$("#spell-by-clicking-letters").html($underscoreContainer);
+
+	$.each(targetWordLetters, function() {
+		underscores += "_ ";
+	});
+
+	$underscoreContainer.text(underscores);
+
+	for (var i = 0; i < 3; i++) {
+		$randomAlphabet = $alphabets[randNumInRange(0, 26)];
+		$alphabetRandLetters.push($randomAlphabet);
+	}
+
+	$mergedLettersArray = merge(targetWordLetters, $alphabetRandLetters);
+	$mergedLettersArray = shuffleArray($mergedLettersArray);
+
+	$.each($mergedLettersArray, function(index, letter) {
+		$letter = createBtn(
+			"btn-lg btn-outline-primary fitb-letter letter_" + letter,
+			letter
+		);
+		$activityDiv.append($letter);
+	});
+
+	$(".fitb-letter").click(function() {
+		giveDirections("Finish tapping the letters to spell that word.");
+		$tappedLetterBtn = $(this);
+		tappedLetter = $tappedLetterBtn.text();
+
+		for (var i = 0; i < targetWordLetters.length; i++) {
+			firstLetter = targetWordLetters[0];
+		}
+
+		if (firstLetter == tappedLetter) {
+			$tappedLetterBtn.removeClass("btn-outline-primary")
+											.addClass("btn-success");
+			$tappedLetterBtn.prop("disabled", true);
+			underscores = underscores.replace(/_ /, tappedLetter);
+			$underscoreContainer.text(underscores);
+			targetWordLetters.shift();
+		} else {
+			numBadClicks += 1;
+			$tappedLetterBtn.removeClass("animated shake")
+											.addClass("animated shake");
+		}
+
+		if (targetWordLetters.length == 0) {
+			$underscoreContainer.addClass("text-success");
+			$(".fitb-letter").prop("disabled", true);
+			playRandomGameWithNewWord();
+		}
+	});
+};
+
+/***********************
+		HELPER FUNCTIONS
+************************/
+
+function playRandomGame() {
+	emptyActivityDiv();
+	var spellingGames = [
+		startSpellByTypingActivity,
+		startSpellByClickingLettersActivity
+	]
+	var rand = randNumInRange(0, spellingGames.length);
+	var startGame = spellingGames[rand];
+	startGame();
+}
+
+function playRandomGameWithNewWord() {
+	$.getScript("/games/spellmasters");
+};
+
+function emptyActivityDiv() {
+	$activityDiv.empty();
+}
+
+function getDate() {
+	return new Date();
+}
+
+function logResponse(response) {
+	console.log(response);
+}
+
+function giveDirections(directions) {
+	$(".game-directions").html(directions);
+};
+
+function createBtn(_class, text) {
+	return createElem("button", "btn " + _class).text(text.trim());
+}
+
+function createFontAweIcon(_class) {
+	return createElem("i", "fa fa-" + _class);
+}
+
+function createElem(elem, elemClass, elemID) {
+	_class = elemClass || null;
+	_id = elemID || null;
+	return $("<" + elem + ">", { class: _class, id: _id });
+}
+
+function randNumInRange(start, end) {
+	return Math.floor(Math.random()* (start - end) + end);
+};
+
+function shuffleArray(array) {
+	var m = array.length, t, i;
+
+	while (m) {
+		i = Math.floor(Math.random() * m--);
+		t = array[m];
+		array[m] = array[i];
+		array[i] = t;
+	}
+
+	return array;
+};
+
+function merge(array1, array2) {
+	return $.merge($.merge([], array1), array2);
+}

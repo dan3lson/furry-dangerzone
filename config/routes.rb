@@ -105,6 +105,7 @@ Rails.application.routes.draw do
   namespace :games do
     resources :word_relationships, only: [:index]
     resources :describe_mes, only: [:index]
+    resources :spellmasters, only: [:index]
   end
 
   namespace :school do

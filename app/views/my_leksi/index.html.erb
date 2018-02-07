@@ -31,8 +31,7 @@
   <% @current_user_user_words.each do |user_word| %>
     <div class="notebook row mb-3">
       <% word = user_word.word %>
-      <h1 class="display-3 text-centter">
-        <%= play_funds_game(word.id) %>
+      <h1 class="display-4 mb-1">
         <%= link_to "#collapse#{word.id}",
                     class: "text-dark",
                     "data-toggle": "collapse",
@@ -45,6 +44,7 @@
         <% if user_word.fundamental_completed? %>
           <%= emoji "--1" %>
         <% end %>
+        <%= play_funds_game(word.id) %>
         <p class="collapse" id="collapse<%= word.id %>">
           <span class="text-muted"><%= word.part_of_speech %></span>
           <%= array_of(word, "definition").first %>

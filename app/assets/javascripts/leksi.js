@@ -3,14 +3,6 @@ $(document).ready(function() {
     FastClick.attach(document.body);
 	});
 
-	$(".data-url").click(function() {
-		$(location).attr("href", $(this).data("url"));
-	});
-
-	$(".reload-page").click(function() {
-		location.reload();
-	});
-
 	$(".container").on("click", ".fa-volume-up, .fa-volume-off", function() {
 		const audio = $(this).parent().prev()[0];
 		audio.play();
