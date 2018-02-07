@@ -6,6 +6,8 @@ class Classroom < ActiveRecord::Base
   validates :grade, presence: true
   validates :teacher, presence: true
 
+  scope :alphabetical, -> { order("LOWER(classrooms.name)") }
+
   def has_students?
     !Student.where(classroom: self).empty?
   end

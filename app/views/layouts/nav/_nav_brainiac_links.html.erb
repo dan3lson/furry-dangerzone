@@ -1,9 +1,13 @@
 <% if params[:controller].include?("my_leksi") %>
-	<%= link_to notebook_path, class: "nav-item nav-link active" do %>
+	<%= link_to notebook_path,
+							class: "nav-item nav-link active",
+							title: "Click to see the words in your Notebook."  do %>
 		<%= emoji "notebook" %> <strong>Notebook</strong>
 	<% end %>
 <% else %>
-	<%= link_to notebook_path, class: "nav-item nav-link" do %>
+	<%= link_to notebook_path,
+							class: "nav-item nav-link",
+							title: "Click to see the words in your Notebook."  do %>
 		<%= emoji "notebook" %> Notebook
 	<% end %>
 <% end %>

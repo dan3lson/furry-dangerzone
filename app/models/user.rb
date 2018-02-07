@@ -374,13 +374,4 @@ class User < ActiveRecord::Base
     total = completed + not_started
     (completed / total.to_f * 100).round
   end
-
-  def self.reset_dev_pwds
-    if Rails.env == "development"
-      User.all.each { |u| u.update_attributes(
-        password: "password",
-        password_confirmation: "password"
-      )}
-    end
-  end
 end
