@@ -46,7 +46,7 @@
 					name of another Classroom to choose additional Classrooms.
 				</label>
 		    <select multiple class="form-control" id="select-multi-classrooms">
-					<% current_user.classrooms.each do |classroom| %>
+					<% current_user.classrooms.alphabetical.each do |classroom| %>
 						<% if classroom.id == @classroom.id %>
 		      		<option selected><%= classroom.name %></option>
 						<% else %>

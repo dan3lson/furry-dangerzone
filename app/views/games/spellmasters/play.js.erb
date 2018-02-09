@@ -14,7 +14,6 @@ $(".container").empty()
 var $targetWordH1 = $(".target-word-header");
 var timeGameStarted;
 var numBadClicks = 0;
-var numHeard = 0;
 var $regex = /^[a-zA-Z. -]+$/;
 playRandomGame();
 
@@ -146,15 +145,57 @@ function startSpellByClickingLettersActivity() {
 	});
 };
 
+function startSpellByChoosingActivity() {
+	timeGameStarted = getDate();
+	giveDirections("Choose the word that is correctly spelled.");
+	var $spellByChoosingPartial = $("<%= j render(partial: 'games/spellmasters/spell_by_choosing') %>");
+	$activityDiv.append($spellByChoosingPartial);
+	var choices = shuffleArray([
+		targetWord.name,
+		scrambleWord(targetWord.name),
+		scrambleWord(targetWord.name),
+		scrambleWord(targetWord.name)
+	]);
+
+	$.each($("h1"), function(index, value) {
+		$(this).html(choices[index]);
+	});
+
+	$(".choose-word-option").click(function() {
+		var $cardDiv = $(this);
+		var $chosenAnswer = $.trim($cardDiv.text());
+
+		if ($chosenAnswer == targetWord.name) {
+			$cardDiv.addClass("bg-success text-white");
+			setTimeout(function() {
+				playRandomGameWithNewWord();
+			}, 200)
+		} else {
+			$cardDiv.addClass("bg-danger text-white");
+		}
+	});
+};
+
 /***********************
 		HELPER FUNCTIONS
 ************************/
+
+function scrambleWord(string) {
+	var letters = shuffleArray(string.split(""));
+	var randomLetter = letters[0];
+	var randomStringPosition = randNumInRange(1, letters.length);
+	string = string.slice(0, randomStringPosition) +
+					 randomLetter +
+					 string.slice(randomStringPosition);
+	return string;
+}
 
 function playRandomGame() {
 	emptyActivityDiv();
 	var spellingGames = [
 		startSpellByTypingActivity,
-		startSpellByClickingLettersActivity
+		startSpellByClickingLettersActivity,
+		startSpellByChoosingActivity
 	]
 	var rand = randNumInRange(0, spellingGames.length);
 	var startGame = spellingGames[rand];
