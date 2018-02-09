@@ -2,37 +2,6 @@
 <% description "Designed with vocabulary academic research and gamification, Leksi helps students master new words." %>
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
 
-<% if !current_user.is_teacher? || !current_user.is_admin? %>
-  <% if current_user.classroom.grade == 5 %>
-    <h1 class="display-4 mb-5">
-      <mark>
-        <%= link_to "5th Grade Spelling Bee Round 1 Quiz!",
-                    "https://goo.gl/forms/XO8KZ72flR4hL6g23",
-                    title: "Click here to take the Round 1 Spelling Bee Quiz!"
-        %>
-      </mark>
-    </h1>
-  <% elsif current_user.classroom.grade == 6 %>
-    <h1 class="display-4 mb-5">
-      <mark>
-        <%= link_to "6th Grade Spelling Bee Round 1 Quiz!",
-                    "https://goo.gl/forms/TVute1FzceQueLbD3",
-                    title: "Click here to take the Round 1 Spelling Bee Quiz!"
-        %>
-      </mark>
-    </h1>
-  <% elsif current_user.classroom.grade == 7 %>
-    <h1 class="display-4 mb-5">
-      <mark>
-        <%= link_to "7th Grade Spelling Bee Round 1 Quiz!",
-                    "https://goo.gl/forms/bTyBqjVqybd9RYxc2",
-                    title: "Click here to take the Round 1 Spelling Bee Quiz!"
-        %>
-      </mark>
-    </h1>
-  <% end %>
-<% end %>
-
 <% if current_user.has_words? %>
   <div class="card bg-light mb-4">
     <%= link_to "#collapse-need-help",
