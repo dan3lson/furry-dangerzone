@@ -13,15 +13,14 @@
 	}
 }
 
-.fa-arrow-up.text-success,
-.fa-arrow-down.text-danger {
-	opacity: 0.1;
-}
-
 .scoreboard {
 	font-size: 1.5rem;
 }
 
 .continue-btn {
 	font-size: -webkit-xxx-large;
+}
+
+.mean-alts-feedback, .ex-non-exs-feedback {
+	font-size: larger
 }

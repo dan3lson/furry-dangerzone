@@ -164,12 +164,11 @@ function startSpellByChoosingActivity() {
 	$(".choose-word-option").click(function() {
 		var $cardDiv = $(this);
 		var $chosenAnswer = $.trim($cardDiv.text());
+		$cardDiv.removeClass("hover");
 
 		if ($chosenAnswer == targetWord.name) {
 			$cardDiv.addClass("bg-success text-white");
-			setTimeout(function() {
-				playRandomGameWithNewWord();
-			}, 200)
+			setTimeout(playRandomGameWithNewWord, 150); 
 		} else {
 			$cardDiv.addClass("bg-danger text-white");
 		}

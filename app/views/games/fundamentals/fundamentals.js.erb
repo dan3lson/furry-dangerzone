@@ -389,37 +389,21 @@ function startDecisionsDecisionsActivity() {
 		var meaningAlt = meaningAltArray[index];
 		answer = meaningAlt.answer.trim();
 		$feedbackCardText = $btnRow.siblings(".mean-alts-feedback");
-		createElem("div", "clear").insertAfter($selAnswerTitle);
+		$selAnswerTitle.remove();
+		$btnRow.remove();
+		$feedbackCardText.addClass("text-white").removeClass("d-none");
 
 		if ($selAnswerText == answer) {
-			$selAnswerCard.addClass("border-success");
-			$selAnswerBlock.find(".float-right")
-										 .append(createFontAweIcon("check fa-2x text-success"));
-			$btnRow.find(".mean-alts-answer").prop("disabled", true)
-																			 .removeClass("btn-outline-primary")
-																			 .addClass("btn-outline-secondary");
-			$feedbackCardText.prepend("<br>")
-											 .addClass("text-success lead")
-											 .removeClass("d-none");
+			$selAnswerCard.addClass("bg-success");
 			$feedbackCardText.find("strong").prepend("Correct! ");
-			addPoints(30);
 			var data = {
 				"meaning_alt_id": meaningAlt.id,
 				"result": true
 			};
 			updateGameStat("funds_four", timeGameStarted, data);
 		} else {
-			$selAnswerCard.addClass("border-danger");
-			$selAnswerBlock.find(".float-right")
-										 .append(createFontAweIcon("close fa-2x text-danger"));
-			$btnRow.find(".mean-alts-answer").prop("disabled", true)
-																			 .removeClass("btn-outline-primary")
-																			 .addClass("btn-outline-secondary");
-			$feedbackCardText.prepend("<br>")
-											 .addClass("text-danger lead")
-											 .removeClass("d-none");
+			$selAnswerCard.addClass("bg-danger");
 			$feedbackCardText.find("strong").prepend("Incorrect. ");
-			removePoints(20);
 			var data = {
 				"meaning_alt_id": meaningAlt.id,
 				"result": false
@@ -469,36 +453,21 @@ function startExampleNonExamplesActivity() {
 		answer = exNonEx.answer.trim();
 		$feedbackCardText = $btnRow.siblings(".ex-non-exs-feedback");
 		createElem("div", "clear").insertAfter($selAnswerTitle);
+		$selAnswerTitle.remove();
+		$btnRow.remove();
+		$feedbackCardText.addClass("text-white").removeClass("d-none");
 
 		if ($selAnswerText == answer) {
-			$selAnswerCard.addClass("border-success");
-			$selAnswerBlock.find(".float-right")
-										 .append(createFontAweIcon("check fa-2x text-success"));
-			$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
-																				.removeClass("btn-outline-primary")
-																				.addClass("btn-outline-secondary");
-			$feedbackCardText.prepend("<br>")
-											 .addClass("text-success lead")
-											 .removeClass("d-none");
+			$selAnswerCard.addClass("bg-success");
 			$feedbackCardText.find("strong").prepend("Correct! ");
-			addPoints(1);
 			var data = {
 				"ex_non_ex_id": exNonEx.id,
 				"result": true
 			};
 			updateGameStat("funds_five", timeGameStarted, data);
 		} else {
-			$selAnswerCard.addClass("border-danger");
-			$selAnswerBlock.find(".float-right")
-										 .append(createFontAweIcon("close fa-2x text-danger"));
-			$btnRow.find(".ex-non-exs-answer").prop("disabled", true)
-																				.removeClass("btn-outline-primary")
-																				.addClass("btn-outline-secondary");
-			$feedbackCardText.prepend("<br>")
-											 .addClass("text-danger lead")
-											 .removeClass("d-none");
+			$selAnswerCard.addClass("bg-danger");
 			$feedbackCardText.find("strong").prepend("Incorrect. ");
-			removePoints(1);
 			var data = {
 				"ex_non_ex_id": exNonEx.id,
 				"result": false
