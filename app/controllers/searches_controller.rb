@@ -27,7 +27,7 @@ class SearchesController < ApplicationController
       if @search
         if @search.empty?
           @word_groups = nil
-          @error = "Please click \'Dictionary\' and type in a word."
+          @error = "Please type in a word for us to search."
         else
           @input_words = @search.split(",").map(&:strip)
           @word_groups = @input_words.map { |w| Word.define(w) }

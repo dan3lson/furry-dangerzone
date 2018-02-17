@@ -18,21 +18,29 @@
 				<th>ID</th>
 				<th>Name</th>
 				<th>Grade</th>
-				<th># Students</th>
 			</tr>
 		</thead>
 
 		<% @classrooms.each do |classroom| %>
 			<tr>
 				<th scope="row"><%= classroom.id %></th>
-				<td>
-					<%= link_to classroom.name,
-											school_classroom_path(classroom),
-											title: "View details and take actions"
-					%>
-				</td>
+				<td><%= classroom.name %></td>
 				<td><%= classroom.grade %></td>
-				<td><%= classroom.num_students %></td>
+				<td>
+					<%= link_to school_classroom_students_path(classroom) do %>
+						<%= icon "eye" %> View <%= pluralize(classroom.num_students, "student") %>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to new_school_classroom_student_path(classroom) do %>
+						<%= icon "plus-circle" %> New Student(s)
+					<% end %>
+				</td>
+				<td>
+					<%= link_to school_classroom_add_words_path(classroom) do %>
+						<%= icon "plus-circle" %> Add words
+					<% end %>
+				</td>
 			</tr>
 		<% end %>
 	</table>

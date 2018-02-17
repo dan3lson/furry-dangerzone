@@ -1,109 +1,142 @@
 <% provide(:title, "Add Word(s) for Students") %>
 
-<nav class="breadcrumb mb-3">
-	<%= link_to "Classrooms",
-							school_classrooms_path,
-							class: "breadcrumb-item"
-	%>
-	<%= link_to "#{@classroom.name}",
-							school_classroom_path(@classroom),
-							class: "breadcrumb-item"
-	%>
-  <span class="breadcrumb-item active">Add words</span>
-</nav>
-
-<h1 class="mb-3"><%= @classroom.name %>: Add Classroom Words</h1>
-
-<div id="awfs-step-2-div" class="mb-3">
-	<div class="card">
-		<h3 class="card-header">
-			<%= emoji "notebook" %>
-			Step 1. Search for and Select Words
-		</h3>
-		<div class="card-body">
-			<h4 id="teacher-words" class="mb-3">
-				Selected words (<span class="num-words-selected">0</span>):
-				<span id="selected-words"></span>
-				<span class="d-none" id="selected-words-ids"></span>
-			</h4>
-			<%= render "searches/form", account_type: "teacher" %>
-			<div class="search-results-container"></div>
+<div class="row text-center mb-5">
+	<div class="col-md-6">
+		<div class="card pointer hover awfs-classrooms-or-individuals">
+			<div class="card-body">
+				<h1><%= emoji "busts_in_silhouette" %>
+				<br>
+				Add Words For Entire Classrooms
+			</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card pointer hover awfs-classrooms-or-individuals">
+			<div class="card-body">
+				<h1><%= emoji "1234" %>
+				<br>
+				Add Words For Individual Students
+			</h1>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div id="awfs-step-1-div" class="mb-3">
-	<div class="card">
-		<h3 class="card-header">
-			<%= emoji "busts_in_silhouette" %>
-			Step 2. Select More Classrooms (Optional)
-		</h3>
-		<div class="card-body">
-			<div class="form-group">
-		    <label for="select-multi-classrooms">
-					<%= icon "lightbulb-o" %> Tip:
-					Click <em>Ctrl</em> (Windows) or <em>command</em> (Mac) and then the
-					name of another Classroom to choose additional Classrooms.
-				</label>
-		    <select multiple class="form-control" id="select-multi-classrooms">
-					<% current_user.classrooms.alphabetical.each do |classroom| %>
-						<% if classroom.id == @classroom.id %>
-		      		<option selected><%= classroom.name %></option>
-						<% else %>
-		      		<option><%= classroom.name %></option>
+<div class="d-none">
+	<h1 class="mb-3" id="awfs-header"></h1>
+
+	<div id="awfs-step-1-div" class="mb-3">
+		<div class="card">
+			<h3 class="card-header">
+				<%= emoji "notebook" %>
+				Step 1. Search for and Select Words
+			</h3>
+			<div class="card-body">
+				<h4 id="teacher-words" class="mb-3">
+					Selected words (<span class="num-words-selected">0</span>):
+					<span id="selected-words"></span>
+					<span class="d-none" id="selected-words-ids"></span>
+				</h4>
+				<%= render "searches/form", account_type: "teacher" %>
+				<div class="search-results-container"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="awfs-step-2-div" class="mb-3">
+		<div class="card">
+			<h3 class="card-header">
+				<%= emoji "busts_in_silhouette" %>
+				Step 2. Select More Classrooms (Optional)
+			</h3>
+			<div class="card-body">
+				<div class="form-group">
+			    <label for="select-multi-classrooms">
+						<%= icon "lightbulb-o" %> Tip:
+						Click <em>Ctrl</em> (Windows) or <em>command</em> (Mac) and then the
+						name of another Classroom to choose additional ones.
+					</label>
+			    <select multiple class="form-control" id="select-multi-classrooms">
+						<% current_user.classrooms.alphabetical.each do |classroom| %>
+							<option><%= classroom.name %></option>
 						<% end %>
-					<% end %>
-		    </select>
-		  </div>
+			    </select>
+			  </div>
+			</div>
 		</div>
 	</div>
-</div>
 
-<div id="awfs-review-container">
-	<%= link_to "Add More Words",
-							school_classroom_add_words_path(@classroom),
-							role: "button",
-							class: "btn btn-primary d-none mb-3 btn-block",
-							id: "add-more-words-btn"
-  %>
-	<div class="card">
-		<h4 class="card-header">
-			<%= emoji "checkered_flag" %> Step 3. Finish
-			<span id="finish-stats"></span>
-		</h4>
-		<div class="card-body">
-			<div class="mb-3">
-				<button type="button"
-								class="btn btn-primary btn-block btn-lg"
-								id="select-words-finish-btn" disabled>
-					Add the <span class="num-words-selected">0</span> words above to
-					<span class="num-classrooms">1</span> Classrooms
-				</button>
+	<div id="awfs-step-3-div" class="mb-3">
+		<div class="card">
+			<h3 class="card-header">
+				<%= emoji "1234" %>
+				Step 2. Select Individual Students from Any Classroom
+			</h3>
+			<div class="card-body">
+				<div class="form-group">
+			    <label for="select-multi-individual-students">
+						<%= icon "lightbulb-o" %> Tip:
+						Click <em>Ctrl</em> (Windows) or <em>command</em> (Mac) and then the
+						name of other students to choose more than one.
+					</label>
+			    <select multiple class="form-control" id="select-multi-individual-students">
+						<% @all_students.each do |username| %>
+							<option><%= username %></option>
+						<% end %>
+			    </select>
+			  </div>
 			</div>
-			<div id="awfs-suc-war-err-container" class="d-none">
-				<div class="card text-white bg-success mb-3" id="successes-div">
-					<div class="card-header">
-						<%= icon "check-circle" %> Successes
-						(<span id="num-successes">0</span>)
-					</div>
-					<div class="card-body" id="success-results"></div>
+		</div>
+	</div>
+
+	<div id="awfs-review-container">
+		<%= link_to school_classroom_add_words_path(@classroom),
+								role: "button",
+								class: "btn btn-primary btn-lg d-none mb-3 btn-block",
+								id: "add-more-words-btn" do
+	  %>
+			<%= icon "plus-circle" %> Add More Words
+	  <% end %>
+		<div class="card">
+			<h4 class="card-header">
+				<%= emoji "checkered_flag" %> Step 3. Finish
+			</h4>
+			<div class="card-body">
+				<div class="mb-3">
+					<button type="button"
+									class="btn btn-primary btn-block btn-lg"
+									id="select-words-finish-btn" disabled>
+						Add the <span class="num-words-selected">0</span> words above to
+						<span class="num-classrooms">0</span> Classrooms and/or
+						<span class="num-students">0</span> Students
+					</button>
 				</div>
-				<div class="card text-white bg-warning mb-3" id="warnings-div">
-					<div class="card-header">
-						<%= icon "warning" %> Alerts
-						(<span id="num-warnings">0</span>)
+				<div id="awfs-suc-war-err-container" class="d-none">
+					<div class="card text-white bg-success mb-3" id="successes-div">
+						<div class="card-header">
+							<%= icon "check-circle" %> Successes
+							(<span id="num-successes">0</span>)
+						</div>
+						<div class="card-body" id="success-results"></div>
 					</div>
-					<div class="card-body" id="warning-results"></div>
-				</div>
-				<div class="card text-white bg-danger" id="errors-div">
-					<div class="card-header">
-						<%= icon "minus-circle" %> Errors
-						(<span id="num-errors">0</span>)
+					<div class="card text-white bg-warning mb-3" id="warnings-div">
+						<div class="card-header">
+							<%= icon "warning" %> Alerts
+							(<span id="num-warnings">0</span>)
+						</div>
+						<div class="card-body" id="warning-results"></div>
 					</div>
-					<div class="card-body" id="error-results"></div>
+					<div class="card text-white bg-danger" id="errors-div">
+						<div class="card-header">
+							<%= icon "minus-circle" %> Errors
+							(<span id="num-errors">0</span>)
+						</div>
+						<div class="card-body" id="error-results"></div>
+					</div>
 				</div>
+				<%= render "shared/spinner" %>
 			</div>
-			<%= render "shared/spinner" %>
 		</div>
 	</div>
 </div>

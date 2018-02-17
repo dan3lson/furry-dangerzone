@@ -1,16 +1,6 @@
 <% provide(:title, "#{@classroom.name}: Add New Students") %>
 <% provide(:header, "#{@classroom.name}: Add New Students") %>
-<nav class="breadcrumb">
-	<%= link_to "Classrooms",
-							school_classrooms_path,
-							class: "breadcrumb-item"
-	%>
-	<%= link_to @classroom.name,
-							school_classroom_path(@classroom),
-							class: "breadcrumb-item"
-	%>
-  <span class="breadcrumb-item active">Add New Students</span>
-</nav>
+
 <div id="new-classroom-student-div">
 	<div class="card">
 		<div class="card-body">

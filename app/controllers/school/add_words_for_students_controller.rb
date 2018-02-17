@@ -1,11 +1,23 @@
 class School::AddWordsForStudentsController < BaseSchoolController
   def update
-    @classrooms = params[:names].map { |c| Classroom.find_by(name: c) }
-    @students = @classrooms.map { |classroom| classroom.students }.flatten
+    @students = []
+    @classroom_names_params = params[:classroom_names]
+
+    unless @classroom_names_params.blank?
+      @classrooms = @classroom_names_params.map { |c| Classroom.find_by(name: c) }
+      @students << @classrooms.map { |classroom| classroom.students }
+    end
+
+    @individual_usernames_params = params[:individual_usernames]
+
+    unless @individual_usernames_params.blank?
+      @students << @individual_usernames_params.map { |u| Student.find_by(username: u) }
+    end
+
     @words = params[:word_ids].split(",").uniq.map { |w| Word.find(w) }
     @all_info = []
 
-    @students.each do |s|
+    @students.flatten.each do |s|
       @info = {}
       @info[s.username] = {}
       @info[s.username][:warnings] = []
@@ -81,8 +93,6 @@ class School::AddWordsForStudentsController < BaseSchoolController
       warnings: @w_strings,
       successes: @s_strings,
       errors: @e_strings,
-      num_words: @words.count,
-      num_students: @students.count,
       num_warnings: @num_warnings,
       num_successes: @num_successes,
       num_successes: @num_successes,

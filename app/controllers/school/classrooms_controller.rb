@@ -30,13 +30,9 @@ class School::ClassroomsController < BaseSchoolController
     end
   end
 
-  def show
-    @classroom = Classroom.find(params[:id])
-    @classroom_stu_count = @classroom.students.count
-  end
-
   def add_words
     @classroom = Classroom.find(params[:classroom_id])
+    @all_students = current_user.classrooms.map { |c| c.students }.flatten.map { |s| s.username }.flatten.sort
   end
 
   # def words

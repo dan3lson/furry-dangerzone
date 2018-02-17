@@ -4,37 +4,39 @@
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Username</th>
+					<th>
+						Username
+						<%= link_to new_school_classroom_student_path(classroom) do %>
+							<%= icon "plus-circle" %> New
+						<% end %>
+					</th>
 					<th>Num Logins</th>
 					<th>Last Login</th>
-					<th>Total: <%= pluralize(classroom.students.count, "student") %></th>
 				</tr>
 			</thead>
 
 	    <% classroom.students.alphabetical.each do |student| %>
 	      <tr>
 	        <th scope="row"><%= student.id %></th>
-	        <td><%= student.username %></td>
+	        <td>
+						<%= student.username %>
+						<%= link_to user_path(student),
+												method: :delete,
+												class: "text-danger",
+												title: "Remove #{student.username} from classroom?",
+												method: :delete do
+						%>
+							<%= icon "remove" %>
+						<% end %>
+					</td>
 	        <td>
 						<%= student.num_logins %>
 	        </td>
 					<td>
 						<% if student.last_login.nil? %>
-							<span class="text-danger">never</span>
+							<span class="text-warning">never</span>
 						<% else %>
 							<%= time_ago_in_words(student.last_login) %> ago
-						<% end %>
-					</td>
-	        <td>
-						<%= link_to user_path(student),
-												role: "button",
-												method: :delete,
-												class: "btn btn-danger",
-												title: "Remove #{student.username} from classroom?",
-												method: :delete do
-						%>
-							<i class="fa fa-trash"></i>
-							Remove
 						<% end %>
 					</td>
 	      </tr>
