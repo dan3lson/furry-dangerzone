@@ -36,4 +36,13 @@ class School::StudentsController < BaseSchoolController
   def show
     @student = User.find(params[:id])
   end
+
+  def add_words
+    @all_students = current_user.classrooms
+                                .map { |c| c.students }
+                                .flatten
+                                .map { |s| s.username }
+                                .flatten
+                                .sort
+  end
 end

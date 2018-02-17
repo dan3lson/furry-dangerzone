@@ -118,9 +118,9 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     get "search_words_for_students" => "searches#student_words"
     get "stats" => "stats#index"
+    get "add_words" => "students#add_words"
 
     resources :classrooms do
-      get "add_words" => "classrooms#add_words"
       resources :students
     end
 

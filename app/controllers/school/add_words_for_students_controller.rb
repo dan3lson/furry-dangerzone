@@ -4,14 +4,18 @@ class School::AddWordsForStudentsController < BaseSchoolController
     @classroom_names_params = params[:classroom_names]
 
     unless @classroom_names_params.blank?
-      @classrooms = @classroom_names_params.map { |c| Classroom.find_by(name: c) }
+      @classrooms = @classroom_names_params.map do |c|
+        Classroom.find_by(name: c)
+      end
       @students << @classrooms.map { |classroom| classroom.students }
     end
 
     @individual_usernames_params = params[:individual_usernames]
 
     unless @individual_usernames_params.blank?
-      @students << @individual_usernames_params.map { |u| Student.find_by(username: u) }
+      @students << @individual_usernames_params.map do |u|
+        Student.find_by(username: u)
+      end
     end
 
     @words = params[:word_ids].split(",").uniq.map { |w| Word.find(w) }

@@ -4,10 +4,16 @@
 <div class="mb-3">
 	<%= link_to new_school_classroom_path,
 							role: "button",
-							class: "btn btn-primary btn-block btn-lg",
+							class: "btn btn-primary btn-lg",
 							title: "Create a new Classroom" do
 	%>
 		<%= icon "plus-circle" %> Create a New Classroom
+	<% end %>
+	<%= link_to school_add_words_path,
+							role: "button",
+							class: "btn btn-primary btn-lg",
+							title: "Add Classroom or Individual Words" do %>
+		<%= icon "plus-circle" %> Add Words
 	<% end %>
 </div>
 
@@ -34,11 +40,6 @@
 				<td>
 					<%= link_to new_school_classroom_student_path(classroom) do %>
 						<%= icon "plus-circle" %> New Student(s)
-					<% end %>
-				</td>
-				<td>
-					<%= link_to school_classroom_add_words_path(classroom) do %>
-						<%= icon "plus-circle" %> Add words
 					<% end %>
 				</td>
 			</tr>
