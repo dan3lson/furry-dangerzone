@@ -68,7 +68,6 @@ Rails.application.routes.draw do
   end
 
   resource :user_word, only: [:create, :update, :destroy]
-  resource :user_points, only: [:update]
   resource :jeopardy_game, only: [:create, :update, :destroy]
 
   resource :freestyle do

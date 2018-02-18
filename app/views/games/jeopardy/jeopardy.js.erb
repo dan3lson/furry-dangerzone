@@ -26,7 +26,6 @@ var validCells = "#linero-table td:not(.exclude)";
 var $scoreboardTimer = $(".scoreboard-timer");
 var scoreboardTimerID = startCountup($scoreboardTimer, 0);
 var totalLinero = 0;
-var $points = $(".scoreboard-points");
 var category;
 updateProgress(10);
 
@@ -71,8 +70,6 @@ $("#jeopardy-div").on("click", ".jeop-btn", function() {
 			word.numCorrect += 1;
 			markResult(question, true);
 			addThumbsUp($selectedBtn);
-			addPoints(parseInt(question.linero));
-			flashPointsUpdate(arrowSuccess());
 			updateGameStatIfIsUserWord(
 				timeGameStarted,
 				$selectedBtn,
@@ -83,8 +80,6 @@ $("#jeopardy-div").on("click", ".jeop-btn", function() {
 			word.numIncorrect += 1;
 			markResult(question, false);
 			addThumbsDown($selectedBtn);
-			removePoints(parseInt(question.linero));
-			flashPointsUpdate(arrowDanger());
 			updateGameStatIfIsUserWord(
 				timeGameStarted,
 				$selectedBtn,
@@ -104,7 +99,6 @@ $("#jeopardy-div").on("click", ".jeop-btn", function() {
 		}
 
 		if (gameIsOver()) {
-			updateUserPoints(totalLinero);
 			startReviewActivity();
 		}
 	}
@@ -220,11 +214,6 @@ function updateGameStat(route, timeStarted, uniqData) {
 	}
 	makeAjaxCall("POST", url, data);
 }
-
-function updateUserPoints(linero) {
-	var data = { "points": linero };
-	makeAjaxCall("PATCH", "/user_points", data);
-};
 
 function makeAjaxCall(type, url, data) {
 	$.ajax({
@@ -381,24 +370,6 @@ function arrowSuccess() {
 function arrowDanger() {
 	return $(".fa-arrow-down.text-danger");
 }
-
-function flashPointsUpdate($arrow) {
-	$arrow.css("opacity", "1");
-
-	setTimeout(function() {
-		$arrow.css("opacity", "0.1");
-	}, 300);
-}
-
-function addPoints(points) {
-	totalLinero += points;
-	$points.html(totalLinero);
-};
-
-function removePoints(points) {
-	totalLinero -= points;
-	$points.html(totalLinero);
-};
 
 function startCountup($section, seconds) {
 	return setInterval(function() {

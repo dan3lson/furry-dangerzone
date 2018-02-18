@@ -55,8 +55,6 @@ feature "user plays game one", %{
       expect(page).to have_content("Congratulations!")
       expect(page).to have_content("You\'ve completed the Fundamentals for")
       expect(page).to have_content(word.name)
-      expect(page).to have_content("and earned")
-      expect(page).to have_content("experience points!")
       # expect(user_word.games_completed).to eq(1)
     end
   end

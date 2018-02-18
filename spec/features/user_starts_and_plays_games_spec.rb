@@ -118,7 +118,6 @@
 #       expect(page).to have_content("You\'ve completed Game 1 for")
 #       expect(page).to have_content(word.name)
 #       expect(page).to have_content("and earned")
-#       expect(page).to have_content("experience points!")
 #       expect(page).to have_link("start next game")
 #       expect(user_word.game.where(name: "game one").status).to eq("complete")
 #       expect(user_word.activities.pluck(:completed).include?(false)).to eq(false)
@@ -238,7 +237,6 @@
 #       expect(page).to have_content("You\'ve completed Game 2 for")
 #       expect(page).to have_content("the words below")
 #       expect(page).to have_content("and earned")
-#       expect(page).to have_content("experience points!")
 #       expect(page).to have_content(word1.name)
 #       expect(page).to have_content(word2.name)
 #       expect(page).to have_content(word3.name)
@@ -369,7 +367,6 @@
 #       expect(page).to have_content("You\'ve completed Game 3 for")
 #       expect(page).to have_content("\'#{word.name}\'")
 #       expect(page).to have_content("and earned")
-#       expect(page).to have_content("experience points!")
 #       expect(user_word.games.where(name: "game three").status).to eq("complete")
 #     end
 #   end

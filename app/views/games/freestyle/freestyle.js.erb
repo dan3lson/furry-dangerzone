@@ -14,11 +14,9 @@ $(".container").empty()
 							 ).hide()
 							 .fadeIn("slow")
 							 .css("margin-bottom", "5rem");
-var $points = $(".scoreboard-points");
 var $scoreboardTimer = $(".scoreboard-timer");
 var timerID = startCountup($scoreboardTimer, 0);
 var $regex = /^[a-zA-Z0-9 .';,?!-:]+$/;
-var newPointsTotal = 0;
 var timeStarted;
 updateProgress(10);
 
@@ -53,8 +51,6 @@ $(".container").on("click", ".continue-btn", function() {
 	if ($btn.hasClass("start-word-relationship-activity")) {
 		updateUserWordGamesCompleted(9);
 		updateProgress(25);
-		addPoints(750);
-		flashPointsUpdate(getArrowSuccess());
 		saveSentStemResponse(timeStarted);
 		emptyActivityDiv();
 		startWordRelationshipActivity();
@@ -62,39 +58,30 @@ $(".container").on("click", ".continue-btn", function() {
 		saveWordRelResponse(timeStarted);
 		updateUserWordGamesCompleted(10);
 		updateProgress(50);
-		addPoints(1330);
-		flashPointsUpdate(getArrowSuccess());
 		emptyActivityDiv();
 		startLeksiTaleActivity();
 	} else if ($btn.hasClass("start-describe-me-activity")) {
-		flashPointsUpdate(getArrowSuccess());
 		saveLeksiTaleResponse(timeStarted);
 		emptyActivityDiv();
 
 		if (availableGames.describe_me) {
 			updateUserWordGamesCompleted(11);
-			addPoints(1690);
 			updateProgress(75);
 			startDescribeMeActivity();
 		} else {
 			updateUserWordGamesCompleted(12);
-			addPoints(2380);
 			updateProgress(100);
 			startReviewActivity();
 		}
 	} else if ($btn.hasClass("start-review-activity")) {
 		updateUserWordGamesCompleted(12);
 		updateProgress(100);
-		addPoints(2360);
-		flashPointsUpdate(getArrowSuccess());
 		saveDescMeResponse(timeStarted);
 		emptyActivityDiv();
 		startReviewActivity();
 	} else if ($btn.hasClass("start-review-in-my-life-activity")) {
 		updateUserWordGamesCompleted(currentGame);
 		updateProgress(100);
-		addPoints(4310);
-		flashPointsUpdate(getArrowSuccess());
 		saveInMyLifeResponse(timeStarted);
 		emptyActivityDiv();
 		startReviewActivity();
@@ -400,34 +387,6 @@ function usedWords(textareaWords, names) {
 Array.prototype.notIn = function(otherArray) {
 	return $(this).not(otherArray).get();
 };
-
-function addPoints(points) {
-	newPointsTotal += points;
-	$points.html(newPointsTotal);
-};
-
-function removePoints(points) {
-	if (newPointsTotal > 0) {
-		newPointsTotal -= points;
-		$points.html(newPointsTotal);
-	}
-};
-
-function flashPointsUpdate($arrow) {
-	$arrow.css("opacity", "1");
-
-	setTimeout(function() {
-		$arrow.css("opacity", "0.1");
-	}, 300);
-}
-
-function getArrowSuccess() {
-	return $(".fa-arrow-up.text-success");
-}
-
-function getArrowDanger() {
-	return $(".fa-arrow-down.text-danger");
-}
 
 function updateProgress(value) {
 	var $progressBar = $(".progress-bar");
