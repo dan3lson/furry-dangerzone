@@ -1,3 +1,13 @@
+<% if controller?("school/activities") %>
+	<%= link_to school_activities_path, class: "nav-item nav-link active" do %>
+		<%= emoji "clipboard" %> <strong>Activity</strong>
+	<% end %>
+<% else %>
+	<%= link_to school_activities_path, class: "nav-item nav-link" do %>
+		<%= emoji "clipboard" %> Activity
+	<% end %>
+<% end %>
+
 <% if controller?("school/classrooms") || controller?("school/students") %>
 	<%= link_to school_classrooms_path, class: "nav-item nav-link active" do %>
 		<%= emoji "busts_in_silhouette" %> <strong>Classrooms</strong>

@@ -119,6 +119,8 @@ Rails.application.routes.draw do
     get "stats" => "stats#index"
     get "add_words" => "students#add_words"
 
+    resources :activities, only: [:index]
+
     resources :classrooms do
       resources :students
     end
