@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202014716) do
+ActiveRecord::Schema.define(version: 20180218160506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -219,20 +219,6 @@ ActiveRecord::Schema.define(version: 20180202014716) do
   end
 
   add_index "games", ["name"], name: "index_games_on_name", using: :btree
-
-  create_table "get_started_stats", force: :cascade do |t|
-    t.integer  "get_started_top_btn",              default: 0
-    t.integer  "get_started_btm_btn",              default: 0
-    t.integer  "get_started_skip_btn",             default: 0
-    t.integer  "get_started_goal_cont_btn",        default: 0
-    t.integer  "get_started_goal_skip_btn",        default: 0
-    t.integer  "get_started_mastery_circle_btn",   default: 0
-    t.integer  "get_started_finish_btn",           default: 0
-    t.integer  "get_started_save_my_progress_btn", default: 0
-    t.integer  "get_started_create_my_acct_btn",   default: 0
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-  end
 
   create_table "meaning_alts", force: :cascade do |t|
     t.string   "text",       null: false
