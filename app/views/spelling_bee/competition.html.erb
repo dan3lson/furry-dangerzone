@@ -16,7 +16,7 @@
   <h1 class="display-3 mb-5">
     <b>2nd Harlem Spelling Bee</b>
     <p class="lead mt-4">
-      The Spelling Bee is Broken into Two Phases for the Competing Students
+      The Spelling Bee is Broken into Two Rounds for the Competing Students
     </p>
   </h1>
   <div class="row">
@@ -24,14 +24,15 @@
       <h1 class="display-4">
         <small class="text-muted">Round 1</small>
         <br>
-        Local School Competition
+        The Preliminaries
       </h1>
       <p class="lead">
-        This is an online exam that tests each student’s vocabulary. The Local
-        School Competition is used to determine which students from each school
-        make it to the finals for the <em>Main Event</em>. The students who
-        score the highest on this test from each grade will become
-        <em>Finalists</em>.
+        <strong>
+          This is an online exam that tests each student’s vocabulary. The
+          Preliminaries are used to determine which students
+          make it to the finals for the Main Event. The students who
+          score the highest on this assessment will become Finalists.
+        </strong>
       </p>
     </div>
     <div class="col-md-8 mx-auto">
@@ -42,16 +43,18 @@
         Main Event
       </h1>
       <p class="lead mb-5">
-        This is the exciting on-stage portion of the Harlem Spelling Bee. Known
-        as the Main Event, the finalists will be quizzed on their ability to
-        spell their words in front of an audience of their friends and family.
-        It determines the top three winners per grade, who will spell their way
-        to victory one letter at a time.
+        <strong>
+          This is the exciting on-stage portion of the Harlem Spelling Bee. Known
+          as the Main Event, the Finalists will prove their ability to
+          spell words in front of an audience of their friends and family.
+          This Main Event is what determines the top three winners, who will
+          spell their way to victory one letter at a time.
+        </strong>
       </p>
       <%= link_to "#",
                   role: "button",
                   title: "See more Harlem Spelling Bee Competition details",
-                  class: "btn btn-outline-secondary mt-5 disabled" do %>
+                  class: "btn btn-outline-light mt-5 disabled" do %>
         <%= icon "long-arrow-down" %>
         see more details
         <%= icon "long-arrow-down" %>
@@ -64,78 +67,79 @@
     <div class="col-lg-6">
       <h4><%= emoji "door" %> Registration</h4>
       <p>
-        To enter the 2nd Harlem Spelling Bee, a teacher or coordinator from an
-        elementary or middle school (Grades 1-8) must enroll their school by
-        completing the form down below.
+        To enter the 2nd Harlem Spelling Bee, an adult
+        for an elementary or middle school student (Grades 1-8) must enroll
+        their student by completing the form down below.
       </p>
       <p>
         There are three different enrollment periods, i.e. Early Bird, Advanced,
-        and Regular, when the teacher or coordinator can register. See the
+        and Regular, when the adult can register. See the
         Timeline section below for the exact dates.
       </p>
       <p>
-        High schoolers, don't worry! There will be a Harlem Spelling Bee for
-        you, too, in early 2018. Stay tuned!
+        High schoolers and adults, don't worry! There will be a Harlem Spelling
+        Bee for you, too - stay tuned!
       </p>
       <h4><%= emoji "moneybag" %> Cost</h4>
       <p>
         <ul>
-          <li>Early Bird Enrollment: $45 per classroom</li>
-          <li>Advanced Enrollment: $60 per classroom</li>
-          <li>Regular Enrollment: $75 per classroom</li>
-          <li>School-wide Enrollment: please contact us for special rates</li>
+          <li>Early Bird Enrollment: $5 per student</li>
+          <li>Advanced Enrollment: $9 per student</li>
+          <li>Regular Enrollment: $15 per student</li>
+          <li>
+            Classwide or Schoolwide Enrollment:
+            <%= link_to "please contact us",
+                        spelling_bee_contact_us_path
+            %>
+            for special rates
+          </li>
         </ul>
       </p>
       <h4><%= emoji "trophy" %> Prizes</h4>
       <p>
-        The winners for each grade level will receive prizes.
+        The top three (3) winners will receive prizes.
         All Finalists will receive medals for their courage and effort
         in preparing for this big event.
       </p>
       <h4><%= emoji "clock3" %> Timeline</h4>
-      <p>
-        If you'd like calendar invites to the dates below, please
-        <%= link_to "contact us",
-                    spelling_bee_contact_us_path
-        %>.
-      </p>
       <div class="activity-feed">
         <%= render "shared/activity_feed_item",
                    title: "Early Bird Enrollment",
-                   date: "Monday, September 11th, 2017",
+                   date: "Monday, February 26th, 2018",
                    text: ""
         %>
         <%= render "shared/activity_feed_item",
                    title: "Advanced Enrollment",
-                   date: "Monday, September 25th, 2017",
+                   date: "Monday, March 5th, 2018",
                    text: ""
         %>
         <%= render "shared/activity_feed_item",
                    title: "Regular Enrollment Begins",
-                   date: "Friday, October 6th, 2017",
+                   date: "Monday, March 12th, 2018",
                    text: ""
         %>
         <%= render "shared/activity_feed_item",
                    title: "2nd Harlem Spelling Bee Officially Begins",
-                   date: "Monday, October 9th, 2017",
+                   date: "Monday, February 26th, 2018",
                    text: [
                      "This marks the beginning of the competition. All ",
-                     "students and teachers/coordinators can begin using the ",
-                     "online Leksi app to study and prepare for their ",
-                     "Local School Competition."
+                     "registered contestants from this point forward can ",
+                     "begin using the online Leksi app to study and prepare ",
+                     "for the Preliminaries."
                    ].join
         %>
         <%= render "shared/activity_feed_item",
-                   title: "Local School Competitions",
-                   date: "Monday, October 30th - Friday, November 3rd 2017",
+                   title: "The Preliminaries",
+                   date: "Tuesday, March 27th - Thursday, March 29th 2018",
                    text: [
-                     "These will determine which students advance to the next ",
-                     "and final round, i.e. Main Event."
+                     "Contestants complete the online exam that will ",
+                     "deermine who advances to the next who advances to the ",
+                     "next and final round, i.e. Main Event."
                    ].join
         %>
         <%= render "shared/activity_feed_item",
                    title: "Main Event Finalists Announced",
-                   date: "Monday, November 10th, 2017",
+                   date: "Monday, April 2nd, 2018",
                    text: [
                      "We will inform all schools which students have made it ",
                      "to the Main Event."
@@ -143,7 +147,7 @@
         %>
         <%= render "shared/activity_feed_item",
                    title: "Main Event",
-                   date: "Thursday, November 16th, 2017",
+                   date: "Thursday, April 19th, 2018",
                    text: [
                      "This is what everyone has been waiting for - the ",
                      "actual on-stage spelling portion of the competition."
@@ -155,40 +159,33 @@
       <h4><%= emoji "video_game" %> Leksi</h4>
       <p>
         Leksi is an online app that uses scientifically-backed methods to teach
-        vocabulary in a fun environment. It is provided completely free for the
-        duration of the Harlem Spelling Bee.
+        vocabulary and spelling in a fun environment. It is completely free for
+        the duration of each Harlem Spelling Bee competition.
         <ul>
           <li>
-            Students will use Leksi to practice their grade’s 100 words by
+            Students will use Leksi to prepare for the Preliminaries and
+            Main Event by
             completing a variety of games and exercises. All activities were
             created following researched methods to ensure the students can
             learn and retain as they study
           </li>
           <li>
-            Leksi will also provide the online exam for the Local School
-            Competition. Those who score at the top of their school will be
-            considered finalists
-          </li>
-          <li>
-            Teachers will use Leksi to create classrooms and student accounts,
-            provide support, and track student progress
+            Leksi will also provide the online exam for the Preliminaries.
+            The top ten (10) contestants who score the highest will become
+            Finalists
           </li>
         </ul>
       </p>
       <h4><%= emoji "book" %> Words</h4>
       <p>
-        Each grade will have 100 words. All words are grouped by grade and can
-        be found within the Leksi app and in the resource section for
-        teachers/coordinators.
-      </p>
-      <p>
-        During the Main Event, if all 100 words are used for a given
-        grade, the next grade's words will be used.
+        The Preliminaries will feature a total word-bank of 200 words.
+        All words can be found within the Leksi app and will already be in each
+        students' account after they are registered.
       </p>
       <h4><%= emoji "muscle" %> Preparation</h4>
       <p>
         Using Leksi, the students will build their vocabulary and sharpen their
-        spelling skills for their grade’s 100 words. Other tools that might help
+        spelling skills. Other tools that might help
         are vocabulary.com, Quizlet, or traditional methods like flashcards.
       </p>
       <h4><%= emoji "clipboard" %> Tips and Tricks</h4>
