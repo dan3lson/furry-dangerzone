@@ -2,7 +2,6 @@ const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', locals: { target_word: @target_word }) %>");
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
-var currentGame = parseInt("<%= @current_game %>");
 var gameToPlay = parseInt("<%= @game_to_play %>");
 var isStudent = "<%= @is_student %>";
 var $activityDiv = createElem("div", null, "activity-div");
@@ -80,7 +79,6 @@ $(".container").on("click", ".continue-btn", function() {
 		emptyActivityDiv();
 		startReviewActivity();
 	} else if ($btn.hasClass("start-review-in-my-life-activity")) {
-		updateUserWordGamesCompleted(currentGame);
 		updateProgress(100);
 		saveInMyLifeResponse(timeStarted);
 		emptyActivityDiv();

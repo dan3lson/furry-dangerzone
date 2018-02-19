@@ -83,13 +83,7 @@ Rails.application.routes.draw do
 
   resource :game_stat do
     member do
-      post "funds_one"
-      post "funds_two"
-      post "funds_three"
-      post "funds_four"
-      post "funds_five"
-      post "funds_six"
-      post "jeopardy"
+      post "fundamentals"
     end
   end
 

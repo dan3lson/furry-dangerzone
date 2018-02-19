@@ -71,7 +71,6 @@ class FreestylesController < ApplicationController
 		@msgs = { successes: [], errors: [] }
 
 		if @game_stat.save
-			track_activity(@game_stat)
 			@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			@sent_stems = params[:uniq_data]
 
@@ -127,7 +126,6 @@ class FreestylesController < ApplicationController
 			)
 
 			if @game_stat.save
-				track_activity(@game_stat)
 				@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			else
 				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."
@@ -171,7 +169,6 @@ class FreestylesController < ApplicationController
 			)
 
 			if @game_stat.save
-				track_activity(@game_stat)
 				@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			else
 				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."
@@ -215,7 +212,6 @@ class FreestylesController < ApplicationController
 			)
 
 			if @game_stat.save
-				track_activity(@game_stat)
 				@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			else
 				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."
@@ -257,7 +253,6 @@ class FreestylesController < ApplicationController
 			)
 
 			if @game_stat.save
-				track_activity(@game_stat)
 				@msgs[:successes] << "GameStat #{@game_stat.id} created."
 			else
 				@msgs[:errors] << "GameStat not created for UW #{@user_word.id}."

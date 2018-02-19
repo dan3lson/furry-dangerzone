@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218163029) do
+ActiveRecord::Schema.define(version: 20180219045454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,23 +192,12 @@ ActiveRecord::Schema.define(version: 20180218163029) do
   end
 
   create_table "game_stats", force: :cascade do |t|
-    t.integer  "user_word_id",                           null: false
-    t.integer  "game_id",                                null: false
-    t.integer  "num_played"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "num_jeop_won"
-    t.integer  "num_jeop_lost"
-    t.decimal  "time_spent",     precision: 5, scale: 2
+    t.integer  "user_word_id", null: false
+    t.integer  "game_id",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "time_started"
     t.datetime "time_ended"
-    t.integer  "num_typed"
-    t.integer  "num_bad_clicks"
-    t.integer  "num_heard"
-    t.boolean  "result"
-    t.string   "category"
-    t.string   "word_name"
-    t.integer  "linero"
   end
 
   create_table "games", force: :cascade do |t|
@@ -273,11 +262,10 @@ ActiveRecord::Schema.define(version: 20180218163029) do
   add_index "user_word_tags", ["word_tag_id"], name: "index_user_word_tags_on_word_tag_id", using: :btree
 
   create_table "user_words", force: :cascade do |t|
-    t.integer  "user_id",                     null: false
-    t.integer  "word_id",                     null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "games_completed", default: 0, null: false
+    t.integer  "user_id",    null: false
+    t.integer  "word_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "user_words", ["user_id", "word_id"], name: "index_user_words_on_user_id_and_word_id", unique: true, using: :btree

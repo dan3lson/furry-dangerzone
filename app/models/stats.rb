@@ -24,9 +24,6 @@ User.where(id: UserTag.select(:user_id).uniq).count
 # Fundamentals Completed
 UserWord.where.not(games_completed: 0).count
 
-# Time Spent Completing Fundamentals
-GameStat.where(game_id: 1).sum(:time_spent).to_s
-
 # Num Fundamentals Played
 GameStat.where(game_id: 1).sum(:num_played)
 
@@ -36,9 +33,6 @@ UserWord.where(games_completed: 0).count
 # Jeopardys Completed
 UserWord.where(games_completed: 2).count +
 UserWord.where(games_completed: 3).count
-
-# Time Spent Completing Jeopardys
-GameStat.where(game_id: 2).sum(:time_spent).to_s
 
 # Num Jeopardys Played
 GameStat.where(game_id: 2).sum(:num_played)
@@ -54,9 +48,6 @@ GameStat.sum(:num_jeop_lost)
 
 # Freestyles Completed
 UserWord.where(games_completed: 3).count
-
-# Time Spent Completing Freestyles
-GameStat.where(game_id: 3).sum(:time_spent).to_s
 
 # Num Freestyles Played
 GameStat.where(game_id: 3).sum(:num_played)

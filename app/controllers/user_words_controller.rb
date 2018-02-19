@@ -16,18 +16,6 @@ class UserWordsController < ApplicationController
     end
   end
 
-  # TODO If only for Fundamentals, create specific controller just for this.
-  def update
-    @word = Word.find(params[:word_id])
-    @games_completed = params[:games_completed].to_i
-    @results = UserWord.update_games_completed(
-      current_user,
-      @word,
-      @games_completed
-    )
-    render json: { response: @results }
-  end
-
   def destroy
     @user_word = UserWord.find(params[:id])
     @word = @user_word.word

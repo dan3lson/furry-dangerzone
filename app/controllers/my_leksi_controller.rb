@@ -5,7 +5,6 @@ class MyLeksiController < ApplicationController
 		@current_user_user_words = UserWord.where(user: current_user)
 																			 .alphabetical
 																			 .includes(:word)
-																			 .latest
 	end
 
 	def show

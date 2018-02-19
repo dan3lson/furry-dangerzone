@@ -10,14 +10,10 @@ class GameStat < ActiveRecord::Base
   validates :user_word, presence: true
   validates :game, presence: true
 
-  scope :funds, -> { where(game: (4..9).to_a) }
-  scope :jeops, -> { where(game: ([10, 11])) }
-  scope :frees, -> { where(game: (12..30).to_a) }
-  scope :last_24_hours, -> (time = "updated_at") {
+  scope :last_24_hours, -> (time = "game_stats.created_at") {
     where("#{time} > ?", 24.hours.ago)
   }
 
-  # TODO Move to GameStats controller
   def self.universal(user_word, game, time_started, time_ended)
     GameStat.new(
       user_word: user_word,

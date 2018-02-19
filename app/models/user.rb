@@ -72,64 +72,6 @@ class User < ActiveRecord::Base
     type == "Student" || is_teacher? || is_admin?
   end
 
-  def incomplete_fundamentals
-    UserWord.where(user: self).incomplete_fundamentals
-  end
-
-  def incomplete_jeopardys
-    UserWord.where(user: self).incomplete_jeopardys
-  end
-
-  def incomplete_freestyles
-    UserWord.where(user: self).incomplete_freestyles
-  end
-
-  def incomplete_words
-    incomplete_fundamentals + incomplete_jeopardys + incomplete_freestyles
-  end
-
-  def has_incomplete_word?
-    incomplete_words.any?
-  end
-
-  # TODO Delete method/test case and render JS after user_word is updated
-  def has_incomplete_words_not?(word)
-    incomplete_words.delete_if { |uw| uw.word.id == word.id }.any?
-  end
-
-  def rand_incomplete_word
-    incomplete_words.sample
-  end
-
-  def has_rand_incomplete_word?
-    !rand_incomplete_word.nil?
-  end
-
-  # TODO Create test
-  def rand_incomplete_not(word)
-    incomplete_words.delete_if { |uw| uw.word.id == word.id }.sample
-  end
-
-  # TODO Create test
-  def incomplete_jeop_ids_not(word)
-    incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
-  end
-
-  # TODO: Create test
-  def incomplete_tag_jeop_ids_not(word)
-    incomplete_jeopardys.where.not(word_id: word.id).pluck(:word_id)
-  end
-
-  # TODO Create test
-  def incomplete_free_ids_not(word)
-    incomplete_freestyles.where.not(word_id: word.id).pluck(:word_id)
-  end
-
-  # TODO Create test
-  def incomplete_frees_not(word)
-    Word.find(incomplete_free_ids_not(word))
-  end
-
   # TODO Create test
   def word_ids_for(tag)
     word_tags.joins(:word)
@@ -137,30 +79,6 @@ class User < ActiveRecord::Base
              .includes(:word)
              .where(tag: tag)
              .pluck(:word_id)
-  end
-
-  def has_incomplete_fundamentals?
-    incomplete_fundamentals.any?
-  end
-
-  def has_incomplete_jeopardys?
-    incomplete_jeopardys.any?
-  end
-
-  def has_incomplete_freestyles?
-    incomplete_freestyles.any?
-  end
-
-  def completed_fundamentals
-    UserWord.where(user: self).completed_fundamentals
-  end
-
-  def completed_jeopardys
-    UserWord.where(user: self).completed_jeopardys
-  end
-
-  def completed_freestyles
-    UserWord.where(user: self).completed_freestyles
   end
 
   # TODO Create test
@@ -183,68 +101,9 @@ class User < ActiveRecord::Base
     freestyles.redo.includes(:user_word)
   end
 
-  def has_completed_fundamentals?
-    completed_fundamentals.any?
-  end
-
-  def has_completed_freestyles?
-    completed_freestyles.any?
-  end
-
   # TODO Create test
   def has_reviewed_frees_last_24_hrs?
     !freestyles.reviewed.last_24_hours.empty?
-  end
-
-  def has_enough_incomplete_jeops?
-    num_incomplete_jeops > 1
-  end
-
-  def has_enough_incomplete_and_complete_jeops?
-    num_incomplete_and_complete_jeops > 2
-  end
-
-  # TODO: Create test
-  def num_rands_needed
-    if has_enough_incomplete_jeops?
-      if num_incomplete_jeops == 2
-        2
-      elsif num_incomplete_jeops == 3
-        1
-      else
-        0
-      end
-    else
-      3
-    end
-  end
-
-  # TODO: Create test
-  # refactor into two methods
-  def combine_jeop_words(word)
-    my_ids = self.incomplete_jeop_ids_not(word)
-    my_words = Word.find(my_ids);
-
-    if num_rands_needed == 2
-      random_words = Word.random_excluding(num_rands_needed, my_ids)
-    elsif num_rands_needed == 1
-      my_words = my_words.sample(2)
-      random_words = Word.random_excluding(num_rands_needed, my_ids)
-    else
-      my_words = my_words.sample(3)
-      random_words = []
-    end
-
-    my_words + random_words
-  end
-
-  # TODO: Create test
-  def get_jeop_words(word)
-    if has_enough_incomplete_jeops?
-      combine_jeop_words(word) << word
-    else
-      Word.random_excluding(3, word.id) << word
-    end
   end
 
   # TODO: Create test
@@ -256,62 +115,8 @@ class User < ActiveRecord::Base
   end
 
   # TODO: Create test
-  def funds_compl_last_24_hrs
-    user_words.completed_fundamentals
-              .last_24_hours
-              .order(updated_at: :desc)
-  end
-
-  # TODO: Create test
-  def jeops_compl_last_24_hrs
-    user_words.completed_jeopardys
-              .last_24_hours
-              .order(updated_at: :desc)
-  end
-
-  # TODO: Create test
-  def frees_compl_last_24_hrs
-    completed_freestyles.last_24_hours.order(updated_at: :desc)
-  end
-
-  # TODO: Create test
   def has_recent_activity?
     !Activity.where(user: self).last_24_hours.empty?
-  end
-
-  # TODO: Create test (used to calculate streak in UserHelper)
-  def completed_freestyle_on?(date)
-    UserWord.where(user: self, games_completed: 3)
-            .select { |uw| uw.updated_at.to_date == date }
-            .any?
-  end
-
-  # TODO: Create test
-  def myLeksi_mastery
-    words = self.num_words
-    return 0 if words == 0
-    (completed_freestyles.count / words.to_f * 100).round
-  end
-
-  # TODO: Create test
-  def time_spent_playing
-    if has_words?
-      uw_ids = UserWord.where(user: self).pluck(:id)
-      game_stats = GameStat.where(user_word: uw_ids)
-                           .where.not(time_ended: nil, time_started: nil)
-      game_stats.map do |gs|
-        (gs.time_ended - gs.time_started) / 1.hour
-      end.sum.round
-    else
-      0
-    end
-  end
-
-  # TODO: Create test
-  def sort_words_by_progress(asc_or_desc)
-    user_words.order("games_completed #{asc_or_desc}")
-              .joins(:word)
-              .order("words.name")
   end
 
   # TODO: Create test
@@ -322,56 +127,5 @@ class User < ActiveRecord::Base
   # TODO: Create test
   def num_tags
     tags.count
-  end
-
-  # MOVED AS A RESULT OF SCEC & SCHOOL REFACTOR.
-  # TODO UPDATE TEST FILES/LOCATIONS
-  def num_incomplete_funds
-    incomplete_fundamentals.count
-  end
-
-  def num_completed_fundamentals
-    completed_fundamentals.count
-  end
-
-  def num_incomplete_jeops
-    incomplete_jeopardys.count
-  end
-
-  def num_completed_jeops
-    completed_jeopardys.count
-  end
-
-  def num_incomplete_and_complete_jeops
-    num_incomplete_jeops + num_completed_jeops
-  end
-
-  def num_incomplete_frees
-    incomplete_freestyles.count
-  end
-
-  def num_completed_frees
-    completed_freestyles.count
-  end
-
-  def percentage_of_fundamental_games_completed
-    completed = self.num_completed_fundamentals
-    not_started = self.num_incomplete_funds
-    total = completed + not_started
-    (completed / total.to_f * 100).round
-  end
-
-  def percentage_of_jeopardy_games_completed
-    completed = self.num_completed_jeops
-    not_started = self.num_incomplete_jeops
-    total = completed + not_started
-    (completed / total.to_f * 100).round
-  end
-
-  def percentage_of_freestyle_games_completed
-    completed = self.num_completed_frees
-    not_started = self.num_incomplete_frees
-    total = completed + not_started
-    (completed / total.to_f * 100).round
   end
 end

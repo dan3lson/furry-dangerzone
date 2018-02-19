@@ -6,8 +6,9 @@
 		Click any of the blue buttons to try again.
 	</p>
 </h1>
-<% if current_user.has_completed_freestyles? %>
-	<%= render "school/students/freestyles", freestyles: @frees %>
-<% else %>
-	<small class="text-muted">None</small>
-<% end %>
+<!-- Method below removed with update to tracking -->
+<%# if current_user.has_completed_freestyles? %>
+	<%#= render "school/students/freestyles", freestyles: @frees %>
+<%# else %>
+	<!-- <small class="text-muted">None</small> -->
+<%# end %>

@@ -69,11 +69,6 @@ FactoryGirl.define do
   end
 
   factory :game_stat do
-    num_played 3
-    num_jeop_won 5
-    num_jeop_lost 2
-    time_spent 3
-
     user_word
     game
   end

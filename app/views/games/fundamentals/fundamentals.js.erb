@@ -2,7 +2,6 @@ const $scoreboardPartial = $("<%= j render(partial: 'games/scoreboard') %>");
 const $headerPartial = $("<%= j render(partial: 'games/fundamentals/header', locals: { target_word: @target_word }) %>");
 var targetWord = JSON.parse("<%= j @target_word.to_json.html_safe %>");
 var availableGames = JSON.parse("<%= j @available_games.to_json.html_safe %>");
-var gameToPlay = parseInt("<%= @game_to_play %>");
 var $fundamentalsDiv = createElem("div", null, "fundamentals-div");
 var $activityDiv = createElem("div", null, "activity-div");
 $fundamentalsDiv.append(
@@ -23,62 +22,8 @@ var numBadClicks = 0;
 var numHeard = 0;
 var $regex = /^[a-zA-Z. -]+$/;
 
-switch (gameToPlay) {
-	case 1:
-		startSpellByTypingActivity();
-		updateProgress(10);
-		break;
-	case 2:
-		startSpellByClickingLettersActiivty();
-		updateProgress(17);
-		break;
-	case 3:
-		if (availableGames.pronun) {
-			updateProgress(34);
-			startPronunciationActivity();
-		} else if (availableGames.dec_dec) {
-			updateUserWordGamesCompleted(3);
-			updateProgress(51);
-			startDecisionsDecisionsActivity();
-		} else if (availableGames.ex_non_ex) {
-			updateUserWordGamesCompleted(4);
-			updateProgress(68);
-			startExampleNonExamplesActivity();
-		} else {
-			updateUserWordGamesCompleted(6);
-			updateProgress(100);
-			startReviewActivity();
-		}
-
-		break;
-	case 4:
-		if (availableGames.dec_dec) {
-			updateProgress(51);
-			startDecisionsDecisionsActivity();
-		} else if (availableGames.ex_non_ex) {
-			updateUserWordGamesCompleted(4);
-			updateProgress(68);
-			startExampleNonExamplesActivity();
-		} else {
-			updateUserWordGamesCompleted(6);
-			updateProgress(100);
-			startReviewActivity();
-		}
-
-		break;
-	case 5:
-		if (availableGames.ex_non_ex) {
-			updateProgress(68);
-			startExampleNonExamplesActivity();
-		} else {
-			updateUserWordGamesCompleted(6);
-			updateProgress(100);
-			startReviewActivity();
-		}
-
-		break;
-	default: startSpellByTypingActivity();
-}
+startSpellByTypingActivity();
+updateProgress(10);
 
 $(".container").off().on("click", ".continue-btn", function() {
 	var $btn = $(this);
@@ -93,49 +38,38 @@ $(".container").off().on("click", ".continue-btn", function() {
 	};
 
 	if ($btn.hasClass("start-spell-by-clicking-activity")) {
-		updateUserWordGamesCompleted(1);
 		updateProgress(17);
-		updateGameStat("funds_one", timeGameStarted, dataOne);
 		emptyActivityDiv();
 		startSpellByClickingLettersActiivty();
 	} else if ($btn.hasClass("start-pronunciation-activity")) {
 		if (availableGames.pronun) {
-			updateUserWordGamesCompleted(2);
 			updateProgress(34);
-			updateGameStat("funds_two", timeGameStarted, dataTwo);
 			emptyActivityDiv();
 			startPronunciationActivity();
 		} else if (availableGames.dec_dec) {
-			updateUserWordGamesCompleted(3);
 			updateProgress(51);
 			emptyActivityDiv();
 			startDecisionsDecisionsActivity();
 		} else if (availableGames.ex_non_ex) {
-			updateUserWordGamesCompleted(4);
 			updateProgress(68);
 			emptyActivityDiv();
 			startExampleNonExamplesActivity();
 		} else {
-			updateUserWordGamesCompleted(6);
 			updateProgress(85);
 			emptyActivityDiv();
 			startCreateYourExampleNonExamplesActivity();
 		}
 	} else if ($btn.hasClass("start-decisions-decisions-activity")) {
-		updateGameStat("funds_three", timeGameStarted, dataThree);
 		$targetWordH1.html(targetWord.name).removeClass("text-success");
 		emptyActivityDiv();
 
 		if (availableGames.dec_dec) {
-			updateUserWordGamesCompleted(3);
 			updateProgress(51);
 			startDecisionsDecisionsActivity();
 		} else if (availableGames.ex_non_ex) {
-			updateUserWordGamesCompleted(4);
 			updateProgress(68);
 			startExampleNonExamplesActivity();
 		} else {
-			updateUserWordGamesCompleted(6);
 			updateProgress(85);
 			startCreateYourExampleNonExamplesActivity();
 		}
@@ -143,23 +77,20 @@ $(".container").off().on("click", ".continue-btn", function() {
 		emptyActivityDiv();
 
 		if (availableGames.ex_non_ex) {
-			updateUserWordGamesCompleted(4);
 			updateProgress(68);
 			startExampleNonExamplesActivity();
 		} else {
-			updateUserWordGamesCompleted(6);
 			updateProgress(85);
 			startCreateYourExampleNonExamplesActivity();
 		}
 	} else if ($btn.hasClass("create-your-ex-non-ex-activity")) {
-		updateUserWordGamesCompleted(7);
 		updateProgress(85);
 		emptyActivityDiv();
 		startCreateYourExampleNonExamplesActivity();
 	} else if ($btn.hasClass("review-activity")) {
-		updateUserWordGamesCompleted(6);
-		updateProgress(100);
+		createGameStat(timeGameStarted);
 		saveExNonExResponse(timeGameStarted);
+		updateProgress(100);
 		emptyActivityDiv();
 		startReviewActivity();
 	}
@@ -372,7 +303,6 @@ function startDecisionsDecisionsActivity() {
 				"meaning_alt_id": meaningAlt.id,
 				"result": true
 			};
-			updateGameStat("funds_four", timeGameStarted, data);
 		} else {
 			$selAnswerCard.addClass("bg-danger");
 			$feedbackCardText.find("strong").prepend("Incorrect. ");
@@ -380,7 +310,6 @@ function startDecisionsDecisionsActivity() {
 				"meaning_alt_id": meaningAlt.id,
 				"result": false
 			};
-			updateGameStat("funds_four", timeGameStarted, data);
 		}
 
 		var numBtns = $activityDiv.find(".btn").length;
@@ -436,7 +365,6 @@ function startExampleNonExamplesActivity() {
 				"ex_non_ex_id": exNonEx.id,
 				"result": true
 			};
-			updateGameStat("funds_five", timeGameStarted, data);
 		} else {
 			$selAnswerCard.addClass("bg-danger");
 			$feedbackCardText.find("strong").prepend("Incorrect. ");
@@ -444,7 +372,6 @@ function startExampleNonExamplesActivity() {
 				"ex_non_ex_id": exNonEx.id,
 				"result": false
 			};
-			updateGameStat("funds_five", timeGameStarted, data);
 		}
 
 		var numBtns = $activityDiv.find(".btn").length;
@@ -577,23 +504,15 @@ function createMatchObjects(words, type) {
 	return matches;
 }
 
-function updateGameStat(route, timeGameStarted, uniqData) {
-	uniqData = uniqData || null;
-	var url = "/game_stat/" + route;
+function createGameStat(timeGameStarted) {
+	var url = "/game_stat/fundamentals";
 	var data = {
 		"word_id": targetWord.id,
 		"time_started": timeGameStarted,
-		"time_ended": getDate(),
-		"uniq_data": uniqData
+		"time_ended": getDate()
 	}
 	makeAjaxCall("POST", url, data);
 }
-
-function updateUserWordGamesCompleted(gamesCompleted) {
-	var url = "/user_word";
-	var data = { "word_id": targetWord.id, "games_completed": gamesCompleted };
-	makeAjaxCall("PATCH", url, data);
-};
 
 function makeAjaxCall(type, url, data) {
 	$.ajax({
