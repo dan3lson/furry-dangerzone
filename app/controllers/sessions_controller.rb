@@ -8,16 +8,16 @@ class SessionsController < ApplicationController
            User.find_by(username: params[:session][:email_or_username])
 
     if user && user.authenticate(params[:session][:password])
-      @datetime_now = DateTime.now
-      user.last_login = @datetime_now
-      user.login_history = "" if user.login_history.nil?
-      user.login_history += @datetime_now.to_s << "|"
-      user.num_logins += 1
-
-      unless user.save
-        msg = user.errors.full_messages
-        Rails.logger.error "ERROR updating #{user.username}\' info: #{msg}."
-      end
+      # @datetime_now = DateTime.now
+      # user.last_login = @datetime_now
+      # user.login_history = "" if user.login_history.nil?
+      # user.login_history += @datetime_now.to_s << "|"
+      # user.num_logins += 1
+      #
+      # unless user.save
+      #   msg = user.errors.full_messages
+      #   Rails.logger.error "ERROR updating #{user.username}\' info: #{msg}."
+      # end
 
       log_in(user)
 

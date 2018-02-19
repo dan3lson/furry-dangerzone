@@ -14,7 +14,7 @@ class GameStatsController < ApplicationController
 
 			if @game_stat.save
 				track_activity(@game_stat)
-				render json: { response: "Success: GameStat #{@game_stat.id} updated." }
+				render json: { response: "Success: GameStat #{@game_stat.id} created." }
 			else
 				render json: { response: @game_stat.errors.full_messages }
 			end
