@@ -1,29 +1,6 @@
 <% provide(:title, "My Content: Words") %>
 <% provide(:header, "My Content: Words") %>
 
-<div class="btn-group mb-3"
-		 role="group"
-		 aria-label="Dictionary filter">
-	<%= link_to searches_random_path, role: "button",
-																		class: "btn btn-secondary",
-																		remote: true do
-	%>
-		All
-	<% end %>
-	<%= link_to searches_random_path, role: "button",
-																		class: "btn btn-secondary",
-																		remote: true do
-	%>
-		Decisions, Decisions
-	<% end %>
-	<%= link_to searches_random_path, role: "button",
-																		class: "btn btn-secondary",
-																		remote: true do
-	%>
-		Example/Non-Examples
-	<% end %>
-</div>
-
 <% if current_user.has_created_content? %>
 	<table class="table table-sm table-bordered table-striped table-responsive">
 		<thead>
