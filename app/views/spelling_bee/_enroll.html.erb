@@ -3,25 +3,47 @@
 		<h4 class="spe-bee-redange">
 			<%= icon "star" %> Leksi's 2nd Harlem Spelling Bee <%= icon "star" %>
 		</h4>
-		<% if controller?("spelling_bee") &&
-					(action?("teachers") || action?("competition"))
-		%>
+		<% if controller?("spelling_bee") && action?("competition") %>
+			<%= render "spelling_bee/enroll_msg",
+								 h1: "Enroll Students Today",
+								 lead1: [
+									 "Complete the form below to get started with enrollment ",
+									 "(all fields are required)."
+								 ].join,
+								 lead2: [
+									 "Please include your name and the names of all students ",
+									 "who will "
+								 ].join,
+								 lead3: "be competing in the Message field below."
+			%>
+		<% elsif controller?("spelling_bee") && action?("teachers") %>
 			<%= render "spelling_bee/enroll_msg",
 								 h1: "Enroll Your School Today",
-								 lead: [
-									 "Complete the form below to get started with enrollment. ",
-									 "Please include your school name, the grade(s)",
-									 "participating, and how many classrooms will be competing."
+								 lead1: [
+									 "Complete the form below to get started with enrollment ",
+									 "(all fields are required). ",
+								 ].join,
+								 lead2: [
+									 "Please include your school name, the grade(s) ",
+									 "participating, and how many classrooms/students ",
+								 ].join,
+								 lead3: [
+									 "will be competing in the Message field below."
 								 ].join
 			%>
 		<% else %>
 			<%= render "spelling_bee/enroll_msg",
 								 h1: "Sponsor the Bee Today",
-								 lead: [
-									 "Complete the form below to get started with sponsorships. ",
-									 "Please include your business name and how you can ",
-									 "contribute."
-								 ].join			%>
+								 lead1: [
+									 "Complete the form below to get started with sponsoring ",
+									 "the Bee (all fields are required).",
+								 ].join,
+								 lead2: [
+									 "Please include your business name and how you will ",
+									 "contribute in the Message field below."
+								 ].join,
+								 lead3: ""
+			%>
 		<% end %>
 	</div>
 	<div class="container">
