@@ -1,42 +1,31 @@
 <section>
   <%= render "spelling_bee/q_and_a/question",
-             q: "How Can I Enroll?"
+             q: "Can I Enroll An Entire Classroom Or School?"
   %>
   <p class="mb-4">
-    To enroll, complete the form down below to get started. The cost to register
-    depends on when you enroll, with discounts for Early Bird and Advanced
-    registrations.
-  </p>
-  <%= render "spelling_bee/q_and_a/question",
-             q: "Can I Enroll Just One Classroom Or My Entire School?"
-  %>
-  <p class="mb-4">
-    To simplify the enrollment process, registration is available on a per
-    classroom basis. If you just want to enroll one classroom - great! If you
-    want to enroll your entire grade or school - awesome! Complete the form
-    down below to get started.
+    Absolutely; complete the form down below to get started.
   </p>
   <%= render "spelling_bee/q_and_a/question",
              q: "How Do the Students Prepare?"
   %>
   <p class="mb-4">
-    Students will use Leksi, an online application, to learn their grade’s 100
-    vocabulary words that will be used in the competition. The app uses
-    scientifically backed methods to help instill an understanding of each
-    individual word. Students will be able to practice for the Bee with the
-    Leksi app and will take their Local School Competition via it. Leksi is
-    provided completely free for your classroom while you prepare for the
-    Spelling Bee.
+    Students will use Leksi, an online application, to learn the
+    words that will be used in the Preliminaries and Main Event competition.
+    When a student is registered for the Bee, they will get a Leksi account
+    comes with each registration free for your classroom while you prepare for
+    the Spelling Bee.
   </p>
   <%= render "spelling_bee/q_and_a/question",
-             q: "This Sounds Great! Where Are All The Details?"
+             q: "Where Are All The Competition Details?"
   %>
   <p class="mb-4">
-    You can check out all of the details by visiting our
+    Check out all of the details by visiting the
     <%= link_to "Competition page",
                 spelling_bee_competition_path,
                 title: "Visit the Bee Competition page"
     %>.
+    There you'll learn more about the Preliminaries, Main Event,
+    registration, and more.
   </p>
   <%= render "spelling_bee/q_and_a/question",
              q: "I Have Another Question!"
@@ -46,6 +35,7 @@
     If you have any questions, comments, or concerns, please
     <%= link_to "contact us",
                 spelling_bee_contact_us_path
-    %>! We'll get back to you as soon as possible.
+    %>!
+    We'll get back to you as soon as possible.
   </p>
 </section>

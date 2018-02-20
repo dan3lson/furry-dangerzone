@@ -1,40 +1,33 @@
 <% provide(:title, "Activity") %>
 <% provide(:header, "Activity") %>
 
-<% if @any_activities_exist %>
-	<div class="card">
-		<div class="card-header">
-			<h5>Up Until Today</h5>
-		</div>
-		<div class="card-body">
-			<dl class="row">
-				<% @user_activities.each do |username, activities| %>
-					<dt class="col-sm-2 col-md-1">
-						<%= emoji "video_game" %>
-					</dt>
-					<dd class="col-sm-6 col-md-11">
-						<b><%= username %></b> completed
+<% if current_user.has_classroom_activity? %>
+		<% @activities.each do |username, activities| %>
+			<%= emoji "video_game" %>
+			&nbsp;
+			<b><%= username %></b> completed
+			<%= link_to "#{activities.count} Fundamentals games",
+									"#collapse-activities-funds-#{username.sub(".", "-")}",
+									"data-toggle": "collapse",
+									"aria-expanded": "false",
+									"aria-controls": "collapse-activities-funds-#{username.sub(".", "-")}",
+									title: "View the words #{username} played."
 
-						<%= link_to "#{activities.count} Fundamentals games",
-												"#",
-												title: "View the words John played."
-						%>
-						<ul class="bg-light">
-							<% activities.group_by { |a| a.trackable.user_word.word.name }
-													 .each do |word_name, activity| %>
-								<li>
-									<%= word_name %>
-									<span class="badge badge-secondary">
-										<%= activity.count %>
-									</span>
-								</li>
-							<% end %>
-						</ul>
-					</dd>
+			%>
+			<%= time_ago_in_words(activities.last.created_at) %> ago
+			<ul class="collapse bg-light"
+					id="collapse-activities-funds-<%= username.sub(".", "-") %>">
+				<% activities.group_by { |a| a.trackable.user_word.word.name }
+										 .each do |word_name, activity| %>
+					<li>
+						<%= word_name %>
+						<span class="badge badge-secondary"><%= activity.count %></span>
+					</li>
 				<% end %>
-			</dl>
-		</div>
-	</div>
+			</ul>
+			<hr>
+		<% end %>
 <% else %>
-	Nothing to track!
+	<%= icon "info-circle" %>
+	There isn't any recent activity.
 <% end %>

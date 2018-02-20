@@ -1,25 +1,9 @@
 <!-- https://www.youtube.com/watch?v=RHXASH7b9_o -->
-<% if user.has_recent_activity? %>
-	<% unless user.words_added_last_day.empty? %>
-		<% user.words_added_last_day.each do |uw| %>
-			<div class="mb-2">
-				<i class="fa fa-plus-circle text-primary"></i>
-				<strong><%= user.username %></strong>
-				added the word <mark><%= uw.word.name %></mark>
-				<% if meta %>
-					<small class="text-muted">
-						<%= time_ago_in_words(uw.updated_at) %> ago |
-						<%= user.classroom.name %>
-					</small>
-				<% end %>
-			</div>
-		<% end %>
-	<% end %>
-	<% user.activities.select("distinct on (action) *").each do |act| %>
+<% if user.has_any_activity? %>
+	<% user.activities.each do |act| %>
 		<% next unless act.trackable.present? %>
 		<%= render "activities/#{act.trackable_type.underscore}/#{act.action}",
-				activity: act,
-				meta: meta
+				activity: act
 		%>
 	<% end %>
 <% end %>

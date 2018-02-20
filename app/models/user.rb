@@ -115,8 +115,8 @@ class User < ActiveRecord::Base
   end
 
   # TODO: Create test
-  def has_recent_activity?
-    !Activity.where(user: self).last_24_hours.empty?
+  def has_any_activity?
+    !Activity.where(user: self).empty?
   end
 
   # TODO: Create test
