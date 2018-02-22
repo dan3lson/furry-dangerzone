@@ -22,6 +22,7 @@ playRandomGame();
 ************************/
 
 function startSpellByTypingActivity() {
+	timeGameStarted = getDate();
 	var $spellingSpeedsterPartial = $("<%= j render(partial: 'games/fundamentals/spelling_speedster', locals: { rows: @rows }) %>");
 	$activityDiv.append($spellingSpeedsterPartial);
 	giveDirections(
@@ -62,6 +63,7 @@ function startSpellByTypingActivity() {
 			}
 
 			if (inputNum == 3) {
+				createGameStat(timeGameStarted);
 				playRandomGameWithNewWord();
 			}
 		}
@@ -140,6 +142,7 @@ function startSpellByClickingLettersActivity() {
 		if (targetWordLetters.length == 0) {
 			$underscoreContainer.addClass("text-success");
 			$(".fitb-letter").prop("disabled", true);
+			createGameStat(timeGameStarted);
 			playRandomGameWithNewWord();
 		}
 	});
@@ -168,7 +171,8 @@ function startSpellByChoosingActivity() {
 
 		if ($chosenAnswer == targetWord.name) {
 			$cardDiv.addClass("bg-success text-white");
-			setTimeout(playRandomGameWithNewWord, 150); 
+			createGameStat(timeGameStarted);
+			setTimeout(playRandomGameWithNewWord, 150);
 		} else {
 			$cardDiv.addClass("bg-danger text-white");
 		}
@@ -178,6 +182,26 @@ function startSpellByChoosingActivity() {
 /***********************
 		HELPER FUNCTIONS
 ************************/
+
+function createGameStat(timeGameStarted) {
+	var url = "/game_stat/generic_game";
+	var data = {
+		"game_name": "Spellmaster",
+		"word_id": targetWord.id,
+		"time_started": timeGameStarted,
+		"time_ended": getDate()
+	}
+	makeAjaxCall("POST", url, data);
+}
+
+function makeAjaxCall(type, url, data) {
+	$.ajax({
+		type: type,
+		url: url,
+		dataType: "json",
+		data: data
+	}).done(logResponse);
+}
 
 function scrambleWord(string) {
 	var letters = shuffleArray(string.split(""));

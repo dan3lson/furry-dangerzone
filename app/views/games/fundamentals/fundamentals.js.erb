@@ -484,29 +484,10 @@ function getDate() {
 	return new Date();
 }
 
-function findBtnNot($btns, type) {
-	return $btns.filter(function() {
-		return $(this).text() != type;
-	});
-}
-
-function createMatchObjects(words, type) {
-	matches = [];
-
-	$.each(words, function(index, word) {
-		match = new Object();
-		match.id = index;
-		match.word = word;
-		match.type = type;
-		matches.push(match);
-	});
-
-	return matches;
-}
-
 function createGameStat(timeGameStarted) {
-	var url = "/game_stat/fundamentals";
+	var url = "/game_stat/generic_game";
 	var data = {
+		"game_name": "Fundamentals",
 		"word_id": targetWord.id,
 		"time_started": timeGameStarted,
 		"time_ended": getDate()

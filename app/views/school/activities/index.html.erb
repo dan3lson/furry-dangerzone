@@ -2,11 +2,11 @@
 <% provide(:header, "Activity") %>
 
 <% if current_user.has_classroom_activity? %>
-		<% @activities.each do |username, activities| %>
+		<% @grouped_activities.each do |username, activities| %>
 			<%= emoji "video_game" %>
 			&nbsp;
-			<b><%= username %></b> completed
-			<%= link_to "#{activities.count} Fundamentals games",
+			<b><%= username %></b> played
+			<%= link_to "#{activities.count} games",
 									"#collapse-activities-funds-#{username.sub(".", "-")}",
 									"data-toggle": "collapse",
 									"aria-expanded": "false",
@@ -14,14 +14,17 @@
 									title: "View the words #{username} played."
 
 			%>
-			<%= time_ago_in_words(activities.last.created_at) %> ago
 			<ul class="collapse bg-light"
 					id="collapse-activities-funds-<%= username.sub(".", "-") %>">
-				<% activities.group_by { |a| a.trackable.user_word.word.name }
-										 .each do |word_name, activity| %>
+				<% activities.each do |activity| %>
 					<li>
-						<%= word_name %>
-						<span class="badge badge-secondary"><%= activity.count %></span>
+						<%= activity.trackable.user_word.word.name %>
+						<span class="badge badge-secondary">
+							<%= activity.trackable.game.name %>
+						</span>
+						<span class="text-muted">
+							played <%= time_ago_in_words(activity.created_at) %> ago
+						</span>
 					</li>
 				<% end %>
 			</ul>

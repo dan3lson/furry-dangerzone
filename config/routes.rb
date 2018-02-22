@@ -83,7 +83,7 @@ Rails.application.routes.draw do
 
   resource :game_stat do
     member do
-      post "fundamentals"
+      post "generic_game"
     end
   end
 

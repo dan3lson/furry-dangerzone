@@ -1,6 +1,6 @@
 class GameStatsController < ApplicationController
-	def fundamentals
-		@game = Game.find_by(name: "Fundamentals")
+	def generic_game
+		@game = Game.find_by(name: params[:game_name])
 		@word = Word.find(params[:word_id])
 		@user_word = UserWord.object(current_user, @word)
 
