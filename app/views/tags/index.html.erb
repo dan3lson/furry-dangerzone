@@ -1,8 +1,28 @@
-<% provide(:title, "All tags") %>
-<% provide(:header, "All tags") %>
-<div>
-  <% @tags.each do |tag| %>
-    <h1><%= link_to tag.name, tag %></h1>
-    <hr>
+<% provide(:title, "Sections") %>
+<% title "Organize all of your words in groups with Tags." %>
+<% description "Organize all of your words in groups with Tags." %>
+<% set_meta_tags keywords: "organize words group list notebook wordbook tags" %>
+
+<h1 class="mb-5"><%= emoji "bookmark_tabs" %> Sections</h1>
+
+<% if current_user.has_tags? %>
+  <% @user_words.each do |user_word| %>
+    <div class="notebook-row mb-3">
+      <h1 class="display-5 mb-1">
+        <% user_word.user_tags.each do |user_tag| %>
+          <%= user_tag.tag.name %>
+        <% end %>
+      </h1>
+
+      <% @user_words.each do |user_word| %>
+      	<%= play_funds_game(user_word.word.id) %>
+      	<%= user_word.word.name %>
+      <% end %>
+    </div>
   <% end %>
-</div>
+<% else %>
+  <span class="text-muted">
+    <%= icon "info-circle" %>
+    Hang tight - your teacher will organize the words in your Notebook soon.
+  </span>
+<% end %>

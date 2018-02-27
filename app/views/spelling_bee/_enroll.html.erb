@@ -3,7 +3,9 @@
 		<h4 class="spe-bee-redange">
 			<%= icon "star" %> Leksi's 2nd Harlem Spelling Bee <%= icon "star" %>
 		</h4>
-		<% if controller?("spelling_bee") && action?("competition") %>
+		<% if controller?("spelling_bee") &&
+					(action?("competition") || action?("about"))
+		%>
 			<%= render "spelling_bee/enroll_msg",
 								 h1: "Enroll Students Today",
 								 lead1: [

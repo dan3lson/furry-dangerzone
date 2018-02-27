@@ -35,7 +35,6 @@ feature "two users add the same tag", %{
       expect(UserTag.count).to eq(2)
       expect(Word.count).to eq(0)
       expect(UserWord.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
   end

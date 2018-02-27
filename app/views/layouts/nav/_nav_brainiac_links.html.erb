@@ -12,15 +12,15 @@
 	<% end %>
 <% end %>
 
-<%# if controller?("my_tags") %>
-	<%#= link_to myTags_path, class: "nav-item nav-link active" do %>
-		<!-- <%#= icon "columns" %> Sections -->
-	<%# end %>
-<%# else %>
-	<%#= link_to myTags_path, class: "nav-item nav-link" do %>
-		<!-- <%#= icon "columns" %> Sections -->
-	<%# end %>
-<%# end %>
+<% if controller?("tags") %>
+	<%= link_to tags_path, class: "nav-item nav-link active" do %>
+		<%= emoji "bookmark_tabs" %> <strong>Sections</strong>
+	<% end %>
+<% else %>
+	<%= link_to tags_path, class: "nav-item nav-link" do %>
+		<%= emoji "bookmark_tabs" %> Sections
+	<% end %>
+<% end %>
 
 <%= link_to games_spellmasters_path,
 					  class: "nav-item nav-link active",

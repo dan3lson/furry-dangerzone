@@ -1,5 +1,6 @@
 <% provide(:title, "Activity") %>
-<% provide(:header, "Activity") %>
+
+<h1 class="mb-5"><%= emoji "clipboard" %> Activity</h1>
 
 <% if current_user.has_classroom_activity? %>
 		<% @grouped_activities.each do |username, activities| %>
@@ -31,6 +32,8 @@
 			<hr>
 		<% end %>
 <% else %>
-	<%= icon "info-circle" %>
-	There isn't any recent activity.
+	<span class="text-muted">
+		<%= icon "info-circle" %>
+		There isn't any recent activity.
+	</span>
 <% end %>

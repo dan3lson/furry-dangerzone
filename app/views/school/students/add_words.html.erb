@@ -2,7 +2,7 @@
 
 <div class="row text-center mb-5">
 	<div class="col-md-6">
-		<div class="card pointer hover awfs-classrooms-or-individuals">
+		<div class="card pointer hover awfs-classrooms-or-individuals mb-3">
 			<div class="card-body">
 				<h1><%= emoji "busts_in_silhouette" %>
 				<br>
@@ -58,7 +58,7 @@
 						name of another Classroom to choose additional ones.
 					</label>
 			    <select multiple class="form-control" id="select-multi-classrooms">
-						<% current_user.classrooms.alphabetical.each do |classroom| %>
+						<% @classrooms.each do |classroom| %>
 							<option><%= classroom.name %></option>
 						<% end %>
 			    </select>
@@ -81,11 +81,34 @@
 						name of other students to choose more than one.
 					</label>
 			    <select multiple class="form-control" id="select-multi-individual-students">
-						<% @all_students.each do |username| %>
+						<% @students.each do |username| %>
 							<option><%= username %></option>
 						<% end %>
 			    </select>
 			  </div>
+			</div>
+		</div>
+	</div>
+
+	<div id="awfs-step-3-div" class="mb-3">
+		<div class="card">
+			<h3 class="card-header">
+				<%= emoji "bookmark_tabs" %>
+				Step 3. Group Words into a Section (Optional, but Recommended)
+			</h3>
+			<div class="card-body">
+				<p class="card-text">
+					<%= icon "lightbulb-o" %> Tip:
+					Organizing words into Sections will enable students to quickly
+					access certain words from a particular lesson that you're teaching
+					or have already taught. Create a name for a New or Existing Section
+					and the words you selected above will automatically be organized
+					for your students.
+				</p>
+				<%= render "school/tags/form",
+									 tag: @tag,
+									 show_btn: false,
+									 btn_text: "" %>
 			</div>
 		</div>
 	</div>
@@ -101,7 +124,7 @@
 	  <% end %>
 		<div class="card">
 			<h4 class="card-header">
-				<%= emoji "checkered_flag" %> Step 3. Finish
+				<%= emoji "checkered_flag" %> Step 4. Finish
 			</h4>
 			<div class="card-body">
 				<div class="mb-3">

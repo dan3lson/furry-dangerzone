@@ -1,8 +1,5 @@
 module WordsHelper
-  def myLeksi_show_path(word)
-    "/myLeksi/#{word.id}"
-  end
-
+  # TODO: Create test
   def word_ids_for(user, tag)
     user.word_ids_for(tag)
   end
@@ -20,11 +17,6 @@ module WordsHelper
   # TODO: Create test
   def tag_has_words?(user, tag)
     num_words_for(user, tag) > 0
-  end
-
-  # TODO: Create test
-  def user_words(user, tag)
-    UserWord.where(user: user, word: word_ids_for(user, tag))
   end
 
   # TODO: Create test

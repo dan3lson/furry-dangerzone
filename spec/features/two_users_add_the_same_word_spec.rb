@@ -36,7 +36,6 @@ feature "two users add the same word", %{
       expect(page).to have_content("Success! You now have")
       expect(UserWord.count).to eq(2)
       expect(UserTag.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
   end

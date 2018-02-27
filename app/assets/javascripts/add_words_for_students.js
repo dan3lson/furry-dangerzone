@@ -106,6 +106,10 @@ $(document).ready(function() {
 					 "</button>";
 	}
 
+	function tagName() {
+		return $("#tag_name").val();
+	}
+
 	function selectedClassroomNames() {
 		return $("#select-multi-classrooms").val();
 	}
@@ -147,7 +151,8 @@ $(document).ready(function() {
 		var myLeksi_info = {
 			"classroom_names": selectedClassroomNames(),
 			"individual_usernames": selectedUsernames(),
-			"word_ids": selectedWordIDs
+			"word_ids": selectedWordIDs,
+			"tag_name": tagName()
 		};
 
 		$.ajax({

@@ -1,6 +1,8 @@
 class Teacher < User
   has_many :classrooms, dependent: :destroy
-  has_many :students, through: :classrooms, dependent: :destroy
+  has_many :students, through: :classrooms, dependent: :destroy, class_name: "User"
+  has_many :user_tags, dependent: :destroy, foreign_key: :user_id
+  has_many :tags, through: :user_tags, dependent: :destroy
   has_many :meaning_alts, dependent: :destroy
   has_many :example_non_examples, dependent: :destroy
   has_many :sent_stems, dependent: :destroy
@@ -69,5 +71,21 @@ class Teacher < User
   # TODO Create test
   def has_created_content?
     has_created_words?
+  end
+
+  # TODO Create test
+  def has_tag?(tag)
+    !tags.pluck(:name).include?(tag.name)
+  end
+
+  # TODO Create test
+  def has_tags?
+    !UserTag.where(teacher: self).empty?
+  end
+
+  # TODO Create test
+  def word_ids_for(tag)
+    ut = UserTag.find_by(teacher: self, tag: tag)
+    ut.user_words.pluck(:word_id)
   end
 end

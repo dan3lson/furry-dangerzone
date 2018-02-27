@@ -33,7 +33,6 @@ feature "two users remove tag from tag show page", %{
     let!(:user_word_2) { UserWord.create(user: user_2, word: word) }
     let!(:user_tag_1) { UserTag.create(user: user_1, tag: tag) }
     let!(:user_tag_2) { UserTag.create(user: user_2, tag: tag) }
-    let!(:word_tag) { WordTag.create(word: word, tag: tag) }
 
     scenario "scenario: user_1 and user_2 remove same tag w/o words" do
       log_in_as(user_1)
@@ -56,7 +55,6 @@ feature "two users remove tag from tag show page", %{
       expect(UserWord.count).to eq(2)
       expect(Tag.count).to eq(0)
       expect(UserTag.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
 
@@ -84,7 +82,6 @@ feature "two users remove tag from tag show page", %{
       expect(UserWord.count).to eq(2)
       expect(Tag.count).to eq(0)
       expect(UserTag.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
 
@@ -94,7 +91,6 @@ feature "two users remove tag from tag show page", %{
       user_word_3 = UserWord.create!(user: user_1, word: word_2)
       user_word_4 = UserWord.create!(user: user_2, word: word_2)
 
-      word_tag_2 = WordTag.create!(word: word_2, tag: tag)
 
       user_word_tag_1 = UserWordTag.create(user: user_1, word_tag: word_tag)
       user_word_tag_2 = UserWordTag.create(user: user_1, word_tag: word_tag_2)
@@ -121,7 +117,6 @@ feature "two users remove tag from tag show page", %{
       expect(UserWord.count).to eq(4)
       expect(Tag.count).to eq(0)
       expect(UserTag.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
   end

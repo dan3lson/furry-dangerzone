@@ -14,7 +14,6 @@ RSpec.describe TagsHelper, type: :helper do
     it "returns 1 Tag -> only one user" do
       UserWord.create!(user: user, word: word)
       UserTag.create!(user: user, tag: tag)
-      wt = WordTag.create!(word: word, tag: tag)
       UserWordTag.create!(user: user, word_tag: wt)
 
       expect(tags_for(user, word).count).to eq(1)
@@ -28,9 +27,6 @@ RSpec.describe TagsHelper, type: :helper do
       UserTag.create!(user: user, tag: tag_2)
       UserTag.create!(user: user, tag: tag_3)
 
-      wt = WordTag.create!(word: word, tag: tag)
-      wt_2 = WordTag.create!(word: word, tag: tag_2)
-      wt_3 = WordTag.create!(word: word, tag: tag_3)
 
       UserWordTag.create!(user: user, word_tag: wt)
       UserWordTag.create!(user: user, word_tag: wt_2)
@@ -55,11 +51,6 @@ RSpec.describe TagsHelper, type: :helper do
       UserTag.create!(user: user_2, tag: tag)
       UserTag.create!(user: user_2, tag: tag_3)
 
-      wt = WordTag.create!(word: word, tag: tag)
-      wt_2 = WordTag.create!(word: word, tag: tag_2)
-      wt_3 = WordTag.create!(word: word, tag: tag_3)
-      wt_4 = WordTag.create!(word: word_2, tag: tag)
-      wt_5 = WordTag.create!(word: word_2, tag: tag_3)
 
       UserWordTag.create!(user: user, word_tag: wt)
       UserWordTag.create!(user: user, word_tag: wt_2)
@@ -91,8 +82,6 @@ RSpec.describe TagsHelper, type: :helper do
 
       UserTag.create!(user: user, tag: tag)
 
-      wt = WordTag.create!(word: word, tag: tag)
-      wt_2 = WordTag.create!(word: word_3, tag: tag)
 
       UserWordTag.create!(user: user, word_tag: wt)
       UserWordTag.create!(user: user, word_tag: wt_2)
@@ -112,8 +101,6 @@ RSpec.describe TagsHelper, type: :helper do
       UserTag.create!(user: user, tag: tag_2)
       UserTag.create!(user: user_2, tag: tag_2)
 
-      wt = WordTag.create!(word: word, tag: tag)
-      wt_2 = WordTag.create!(word: word, tag: tag_2)
 
       UserWordTag.create!(user: user, word_tag: wt)
       UserWordTag.create!(user: user_2, word_tag: wt_2)
@@ -138,7 +125,6 @@ RSpec.describe TagsHelper, type: :helper do
       UserTag.create!(user: user, tag: tag)
       UserTag.create!(user: user_2, tag: tag)
 
-      wt = WordTag.create!(word: word, tag: tag)
 
       UserWordTag.create!(user: user, word_tag: wt)
       UserWordTag.create!(user: user_2, word_tag: wt)
@@ -162,8 +148,6 @@ RSpec.describe TagsHelper, type: :helper do
 
       UserTag.create!(user: user, tag: tag)
 
-      wt = WordTag.create!(word: word, tag: tag)
-      wt_2 = WordTag.create!(word: word_3, tag: tag)
 
       UserWordTag.create!(user: user, word_tag: wt)
       UserWordTag.create!(user: user, word_tag: wt_2)
@@ -200,8 +184,6 @@ RSpec.describe TagsHelper, type: :helper do
       UserTag.create!(user: user, tag: tag)
       UserTag.create!(user: user, tag: tag_2)
 
-      wt = WordTag.create!(word: word, tag: tag)
-      wt_2 = WordTag.create!(word: word_2, tag: tag)
 
       UserWordTag.create!(user: user, word_tag: wt)
       UserWordTag.create!(user: user, word_tag: wt_2)
@@ -216,7 +198,6 @@ RSpec.describe TagsHelper, type: :helper do
       UserTag.create!(user: user, tag: tag)
       UserTag.create!(user: user_2, tag: tag)
 
-      wt = WordTag.create!(word: word, tag: tag)
 
       UserWordTag.create!(user: user, word_tag: wt)
 
@@ -230,8 +211,6 @@ RSpec.describe TagsHelper, type: :helper do
       UserTag.create!(user: user, tag: tag)
       UserTag.create!(user: user, tag: tag_2)
 
-      wt = WordTag.create!(word: word, tag: tag)
-      wt_2 = WordTag.create!(word: word, tag: tag_2)
 
       UserWordTag.create!(user: user, word_tag: wt)
       UserWordTag.create!(user: user, word_tag: wt_2)

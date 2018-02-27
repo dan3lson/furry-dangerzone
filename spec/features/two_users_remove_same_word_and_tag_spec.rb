@@ -63,8 +63,6 @@ feature "two users remove same word and tag", %{
       expect(Tag.count).to eq(0)
       expect(UserWord.count).to eq(0)
       expect(UserTag.count).to eq(0)
-      expect(WordTag.count).to eq(0)
-      expect(UserWordTag.count).to eq(0)
     end
 
     s = "scenario:"
@@ -97,8 +95,6 @@ feature "two users remove same word and tag", %{
       expect(Tag.count).to eq(0)
       expect(UserWord.count).to eq(0)
       expect(UserTag.count).to eq(0)
-      expect(WordTag.count).to eq(0)
-      expect(UserWordTag.count).to eq(0)
     end
   end
 end

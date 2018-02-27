@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219045454) do
+ActiveRecord::Schema.define(version: 20180224180458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,16 +250,16 @@ ActiveRecord::Schema.define(version: 20180219045454) do
   add_index "user_tags", ["user_id", "tag_id"], name: "index_user_tags_on_user_id_and_tag_id", unique: true, using: :btree
   add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
 
-  create_table "user_word_tags", force: :cascade do |t|
-    t.integer  "word_tag_id", null: false
-    t.integer  "user_id",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "user_word_user_tags", force: :cascade do |t|
+    t.integer  "user_word_id", null: false
+    t.integer  "user_tag_id",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "user_word_tags", ["user_id", "word_tag_id"], name: "index_user_word_tags_on_user_id_and_word_tag_id", unique: true, using: :btree
-  add_index "user_word_tags", ["user_id"], name: "index_user_word_tags_on_user_id", using: :btree
-  add_index "user_word_tags", ["word_tag_id"], name: "index_user_word_tags_on_word_tag_id", using: :btree
+  add_index "user_word_user_tags", ["user_tag_id"], name: "index_user_word_user_tags_on_user_tag_id", using: :btree
+  add_index "user_word_user_tags", ["user_word_id", "user_tag_id"], name: "index_user_word_user_tags_on_user_word_id_and_user_tag_id", unique: true, using: :btree
+  add_index "user_word_user_tags", ["user_word_id"], name: "index_user_word_user_tags_on_user_word_id", using: :btree
 
   create_table "user_words", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -312,17 +312,6 @@ ActiveRecord::Schema.define(version: 20180219045454) do
   add_index "word_synonyms", ["synonym_id"], name: "index_word_synonyms_on_synonym_id", using: :btree
   add_index "word_synonyms", ["word_id", "synonym_id"], name: "index_word_synonyms_on_word_id_and_synonym_id", unique: true, using: :btree
   add_index "word_synonyms", ["word_id"], name: "index_word_synonyms_on_word_id", using: :btree
-
-  create_table "word_tags", force: :cascade do |t|
-    t.integer  "word_id",    null: false
-    t.integer  "tag_id",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "word_tags", ["tag_id"], name: "index_word_tags_on_tag_id", using: :btree
-  add_index "word_tags", ["word_id", "tag_id"], name: "index_word_tags_on_word_id_and_tag_id", unique: true, using: :btree
-  add_index "word_tags", ["word_id"], name: "index_word_tags_on_word_id", using: :btree
 
   create_table "words", force: :cascade do |t|
     t.string   "definition",        null: false

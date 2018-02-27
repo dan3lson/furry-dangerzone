@@ -1,0 +1,9 @@
+<% if tag_has_words?(current_user, tag) %>
+	<% words_for(current_user, tag).each do |word| %>
+		<%= word.name %>
+	<% end %>
+<% else %>
+	<span class="text-muted">
+		This Section doesn't have any words yet -- check back soon.
+	</span>
+<% end %>

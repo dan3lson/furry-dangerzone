@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
   let(:word_3) { FactoryGirl.create(:word) }
   let(:word_4) { FactoryGirl.create(:word) }
   let!(:tag) { FactoryGirl.create(:tag) }
-  let!(:word_tag) { WordTag.create(word: word, tag: tag) }
   let(:user_word_tag) { UserWordTag.create!(user: user, word_tag: word_tag) }
 
   describe "associatons" do

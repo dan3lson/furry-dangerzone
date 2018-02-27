@@ -37,14 +37,12 @@ feature "user removes a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: remove word that is tagged" do
       user_tag = FactoryGirl.create(:user_tag, user: user)
       tag = user_tag.tag
-      word_tag = WordTag.create(word: word, tag: tag)
       user_word_tag = UserWordTag.create(
         user: user, word_tag: word_tag
       )
@@ -66,7 +64,6 @@ feature "user removes a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
   end

@@ -21,7 +21,6 @@ feature "user removes word from tag show page", %{
     let!(:tag) { FactoryGirl.create(:tag) }
     let!(:user_tag) { UserTag.create(user: user, tag: tag) }
     let!(:user_word_1) { UserWord.create(user: user, word: word_1) }
-    let!(:word_tag_1) { WordTag.create(word: word_1, tag: tag) }
     let!(:user_word_tag_1) { UserWordTag.create(
       user: user, word_tag: word_tag_1)
     }
@@ -39,14 +38,12 @@ feature "user removes word from tag show page", %{
       expect(UserWord.count).to eq(1)
       expect(Tag.count).to eq(1)
       expect(UserTag.count).to eq(1)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: remove one of two words from tag show page" do
       word_2 = FactoryGirl.create(:word, name: "chess_2")
       UserWord.create(user: user, word: word_2)
-      word_tag_2 = WordTag.create(word: word_2, tag: tag)
       UserWordTag.create(
         user: user, word_tag: word_tag_2
       )
@@ -63,7 +60,6 @@ feature "user removes word from tag show page", %{
       expect(UserWord.count).to eq(2)
       expect(Tag.count).to eq(1)
       expect(UserTag.count).to eq(1)
-      expect(WordTag.count).to eq(1)
       expect(UserWordTag.count).to eq(1)
     end
   end

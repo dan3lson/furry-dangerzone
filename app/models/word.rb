@@ -13,8 +13,6 @@ class Word < ActiveRecord::Base
   has_many :describe_mes, dependent: :destroy
   has_many :user_words, dependent: :destroy
   has_many :users, through: :user_words
-  has_many :word_tags, dependent: :destroy
-  has_many :tags, through: :word_tags
   has_many :word_synonyms
   has_many :synonyms, through: :word_synonyms
   has_many :word_antonyms

@@ -2,6 +2,8 @@
 <% description "Designed with vocabulary academic research and gamification, Leksi helps students master new words." %>
 <% set_meta_tags keywords: "vocabulary notebook wordlist word list vocab research study dictionary words" %>
 
+<h1 class="mb-5"><%= emoji "notebook" %> Notebook</h1>
+
 <% if current_user.has_words? %>
   <div class="card bg-light mb-4">
     <%= link_to "#collapse-need-help",
@@ -28,10 +30,10 @@
     </div>
   </div>
 
-  <% @current_user_user_words.each do |user_word| %>
-    <div class="notebook row mb-3">
+  <% @user_words.each do |user_word| %>
+    <div class="notebook-row mb-3">
       <% word = user_word.word %>
-      <h1 class="display-4 mb-1">
+      <h1 class="display-5 mb-1">
         <%= play_funds_game(word.id) %>
         <%= link_to "#collapse#{word.id}",
                     class: "text-dark",
@@ -42,14 +44,14 @@
         %>
           <%= word.name %>
         <% end %>
-        <p class="collapse" id="collapse<%= word.id %>">
+        <p class="collapse lead" id="collapse<%= word.id %>">
           <span class="text-muted"><%= word.part_of_speech %></span>
           <%= array_of(word, "definition").first %>
           <br>
           <br>
           <%= link_to user_word_path(id: user_word.id),
                       role: "button",
-                      class: "btn btn-danger btn-small",
+                      class: "btn btn-danger btn-sm",
                       title: "Remove this word from your Notebook",
                       method: :delete do
           %>

@@ -34,7 +34,6 @@ feature "user adds tag to a word", %{
 
       expect(page).to have_content("Success!")
       expect(page).not_to have_content("Yikes!")
-      expect(WordTag.count).to eq(1)
       expect(UserWordTag.count).to eq(1)
     end
 
@@ -51,7 +50,6 @@ feature "user adds tag to a word", %{
       expect(page).to have_content(
         "Please select a tag before clicking \'add\'."
       )
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
   end

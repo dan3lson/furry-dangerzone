@@ -1,7 +1,9 @@
 class School::AddWordsForStudentsController < BaseSchoolController
   def update
-    @students = []
     @classroom_names_params = params[:classroom_names]
+    @words = params[:word_ids].split(",").uniq.map { |w| Word.find(w) }
+    @tag_name_params = params[:tag_name]
+    @students = []
 
     unless @classroom_names_params.blank?
       @classrooms = @classroom_names_params.map do |c|
@@ -18,26 +20,65 @@ class School::AddWordsForStudentsController < BaseSchoolController
       end
     end
 
-    @words = params[:word_ids].split(",").uniq.map { |w| Word.find(w) }
+    unless @tag_name_params.blank?
+      @tag = Tag.where(name: @tag_name_params).first_or_initialize
+      @tag_msg = if @tag.save
+                   "Tag #{@tag.name} successfully saved."
+                 else
+                   "ERROR: Tag #{@tag.name} not saved."
+                 end
+    end
+
     @all_info = []
 
-    @students.flatten.each do |s|
+    @students.flatten.each do |student|
       @info = {}
-      @info[s.username] = {}
-      @info[s.username][:warnings] = []
-      @info[s.username][:successes] = []
-      @info[s.username][:errors] = []
+      @info[student.username] = {}
+      @info[student.username][:warnings] = []
+      @info[student.username][:successes] = []
+      @info[student.username][:errors] = []
 
-      @words.each do |w|
-        if s.has_word?(w)
-          @info[s.username][:warnings] << w.name
+      @words.each do |word|
+        if student.has_word?(word)
+          @info[student.username][:warnings] << word.name
+
+          if @tag
+            @user_word = UserWord.object(student, word)
+            @user_tag = UserTag.where(teacher: current_user, tag: @tag)
+                               .first_or_initialize
+
+            if @user_tag.save
+              @user_tag_msg = "Success: UserTag #{@user_tag.id} created."
+              @uw_user_tag = @user_tag.user_word_user_tags.create!(
+                user_tag: @user_tag,
+                user_word: @user_word
+              )
+            else
+              @user_tag_msg = "ERROR: UserTag #{@user_tag.id} not created."
+            end
+          end
         else
-          @user_word = UserWord.new(user: s, word: w)
+          @user_word = UserWord.new(user: student, word: word)
 
           if @user_word.save
-            @info[s.username][:successes] << w.name
+            @info[student.username][:successes] << word.name
+
+            if @tag
+              @user_tag = UserTag.where(teacher: current_user, tag: @tag)
+                                 .first_or_initialize
+
+              if @user_tag.save
+                @user_tag_msg = "Success: UserTag #{@user_tag.id} created."
+                @uw_user_tag = @user_tag.user_word_user_tags.create!(
+                  user_tag: @user_tag,
+                  user_word: @user_word
+                )
+              else
+                @user_tag_msg = "ERROR: UserTag #{@user_tag.id} not created."
+              end
+            end
           else
-            @info[s.username][:errors] << w.name
+            @info[student.username][:errors] << word.name
           end
         end
       end
@@ -98,7 +139,6 @@ class School::AddWordsForStudentsController < BaseSchoolController
       successes: @s_strings,
       errors: @e_strings,
       num_warnings: @num_warnings,
-      num_successes: @num_successes,
       num_successes: @num_successes,
       num_errors: @num_errors
     }

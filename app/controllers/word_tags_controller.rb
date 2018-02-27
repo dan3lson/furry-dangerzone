@@ -1,2 +1,0 @@
-class WordTagsController < ApplicationController
-end

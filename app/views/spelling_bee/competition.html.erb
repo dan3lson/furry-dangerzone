@@ -83,11 +83,9 @@
       <h4><%= emoji "moneybag" %> Cost</h4>
       <p>
         <ul>
-          <li>Early Bird Enrollment: $5 per student</li>
-          <li>Advanced Enrollment: $10 per student</li>
-          <li>Regular Enrollment: $15 per student</li>
+          <li>Regular Enrollment: $10 per student</li>
           <li>
-            Classwide or Schoolwide Enrollment:
+            Schoolwide Enrollment:
             <%= link_to "please contact us",
                         spelling_bee_contact_us_path
             %>
@@ -104,27 +102,17 @@
       <h4><%= emoji "clock3" %> Timeline</h4>
       <div class="activity-feed">
         <%= render "shared/activity_feed_item",
-                   title: "Early Bird Enrollment",
-                   date: "Monday, February 26th, 2018",
-                   text: ""
-        %>
-        <%= render "shared/activity_feed_item",
-                   title: "Advanced Enrollment",
-                   date: "Monday, March 5th, 2018",
-                   text: ""
-        %>
-        <%= render "shared/activity_feed_item",
                    title: "Regular Enrollment Begins",
-                   date: "Monday, March 12th, 2018",
+                   date: "Monday, February 26th, 2018",
                    text: ""
         %>
         <%= render "shared/activity_feed_item",
                    title: "2nd Harlem Spelling Bee Officially Begins",
-                   date: "Monday, February 26th, 2018",
+                   date: "Monday, March 5th, 2018",
                    text: [
                      "This marks the beginning of the competition. All ",
                      "registered contestants from this point forward can ",
-                     "begin using the online Leksi app to study and prepare ",
+                     "begin using the online Leksi app to prepare ",
                      "for the Preliminaries."
                    ].join
         %>
@@ -133,7 +121,7 @@
                    date: "Tuesday, March 27th - Thursday, March 29th 2018",
                    text: [
                      "Contestants complete the online exam that will ",
-                     "deermine who advances to the next who advances to the ",
+                     "determine who advances to the ",
                      "next and final round, i.e. Main Event."
                    ].join
         %>
@@ -141,8 +129,7 @@
                    title: "Main Event Finalists Announced",
                    date: "Monday, April 2nd, 2018",
                    text: [
-                     "We will inform all schools which students have made it ",
-                     "to the Main Event."
+                     "The Finalists will be announced!"
                    ].join
         %>
         <%= render "shared/activity_feed_item",
@@ -171,14 +158,14 @@
           </li>
           <li>
             Leksi will also provide the online exam for the Preliminaries.
-            The top ten (10) contestants who score the highest will become
+            The top contestants who score the highest will become
             Finalists
           </li>
         </ul>
       </p>
       <h4><%= emoji "book" %> Words</h4>
       <p>
-        The Preliminaries will feature a total word-bank of 200 words.
+        The Preliminaries will feature a total word-bank of 300 words.
         All words can be found within the Leksi app and will already be in each
         students' account after they are registered.
       </p>

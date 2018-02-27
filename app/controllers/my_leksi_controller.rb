@@ -2,9 +2,9 @@ class MyLeksiController < ApplicationController
 	before_action :logged_in_user
 
 	def index
-		@current_user_user_words = UserWord.where(user: current_user)
-																			 .alphabetical
-																			 .includes(:word)
+		@user_words = UserWord.where(user: current_user)
+												  .alphabetical
+												  .includes(:word)
 	end
 
 	def show

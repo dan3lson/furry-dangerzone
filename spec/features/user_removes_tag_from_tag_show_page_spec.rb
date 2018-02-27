@@ -30,13 +30,11 @@ feature "user removes tag from tag show page", %{
       expect(page).not_to have_content("Please try again.")
       expect(Tag.count).to eq(0)
       expect(UserTag.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: remove tag with words" do
       UserWord.create(user: user, word: word)
-      wt = WordTag.create(word: word, tag: tag)
       UserWordTag.create(user: user, word_tag: wt)
 
       log_in_as(user)
@@ -52,13 +50,11 @@ feature "user removes tag from tag show page", %{
       expect(UserWord.count).to eq(1)
       expect(Tag.count).to eq(0)
       expect(UserTag.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: remove tag with words used by other users" do
       UserWord.create!(user: user, word: word)
-      wt = WordTag.create!(word: word, tag: tag)
       UserWordTag.create!(user: user, word_tag: wt)
 
       user_2 = FactoryGirl.create(:user)
@@ -79,7 +75,6 @@ feature "user removes tag from tag show page", %{
       expect(UserWord.count).to eq(2)
       expect(Tag.count).to eq(1)
       expect(UserTag.count).to eq(1)
-      expect(WordTag.count).to eq(1)
       expect(UserWordTag.count).to eq(1)
     end
   end

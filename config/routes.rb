@@ -33,8 +33,6 @@ Rails.application.routes.draw do
   get "notebook" => "my_leksi#index"
   get "my_leksi/words"
   get "myLeksi/:id" => "my_leksi#show"
-  get "myTags" => "my_tags#index"
-  get "myTags/:id" => "my_tags#show"
   get "gamezone" => "games#gamezone"
   get "fundamentals" => "games#fundamentals"
   get "jeopardy" => "games#jeopardy"
@@ -88,12 +86,10 @@ Rails.application.routes.draw do
   end
 
   resource :jeopardy_result, only: [:update]
-  resources :tags, except: [:destroy]
+  resources :tags, only: [:index]
   resource :user_tag, only: [:create, :edit, :destroy]
   resource :word_tag, only: [:create, :destroy]
   resource :user_word_tag, only: [:create, :edit, :destroy]
-  resource :user_word_tag_word_show_page, only: [:destroy]
-  resource :user_word_tag_tag_show_page, only: [:destroy]
 
   namespace :games do
     resources :word_relationships, only: [:index]
@@ -137,6 +133,8 @@ Rails.application.routes.draw do
     resources :freestyles do
       resources :comments
     end
+
+    resources :tags
   end
 
   namespace :admin do

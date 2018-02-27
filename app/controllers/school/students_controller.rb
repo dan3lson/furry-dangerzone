@@ -38,11 +38,14 @@ class School::StudentsController < BaseSchoolController
   end
 
   def add_words
-    @all_students = current_user.classrooms
-                                .map { |c| c.students }
-                                .flatten
-                                .map { |s| s.username }
-                                .flatten
-                                .sort
+    @classrooms = current_user.classrooms.alphabetical
+    @students = current_user.classrooms
+                            .includes(:students)
+                            .map(&:students)
+                            .flatten
+                            .map(&:username)
+                            .flatten
+                            .sort
+    @tag = Tag.new
   end
 end

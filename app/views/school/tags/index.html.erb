@@ -1,0 +1,21 @@
+<% provide(:title, "All tags") %>
+
+<h1 class="mb-5"><%= emoji "bookmark_tabs" %> Sections</h1>
+
+<% if current_user.has_tags? %>
+  <% @tags.each do |tag| %>
+    <div class="notebook-row mb-3">
+      <h1 class="display-5 mb-1">
+        <%= tag.name %>
+      </h1>
+      <%= render "school/tags/words", tag: tag %>
+    </div>
+  <% end %>
+<% else %>
+  <span class="text-muted">
+    <%= icon "info-circle" %> You haven't created any Sections yet.
+    Sections enable students to quickly access words for a particular lesson
+    that you're teaching or have already taught. You can add Sections when
+    adding words to your students' Notebook.
+  </span>
+<% end %>

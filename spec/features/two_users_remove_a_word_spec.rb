@@ -48,14 +48,12 @@ feature "two users remove a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
 
     scenario "scenario: user_1 removes tagged word (not tagged for user_2)" do
       user_tag = FactoryGirl.create(:user_tag, user: user_1)
       tag = user_tag.tag
-      word_tag = WordTag.create(word: word, tag: tag)
       user_word_tag = UserWordTag.create(
         user: user_1, word_tag: word_tag
       )
@@ -77,7 +75,6 @@ feature "two users remove a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
 
@@ -85,7 +82,6 @@ feature "two users remove a word", %{
       user_tag = FactoryGirl.create(:user_tag, user: user_1)
       tag = user_tag.tag
       user_tag_2 = UserTag.create(tag: tag, user: user_2)
-      word_tag = WordTag.create(word: word, tag: tag)
       user_word_tag = UserWordTag.create(
         user: user_1, word_tag: word_tag
       )
@@ -110,7 +106,6 @@ feature "two users remove a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(1)
-      expect(WordTag.count).to eq(1)
       expect(UserWordTag.count).to eq(1)
     end
 
@@ -118,7 +113,6 @@ feature "two users remove a word", %{
       user_tag = FactoryGirl.create(:user_tag, user: user_1)
       tag = user_tag.tag
       user_tag_2 = UserTag.create(tag: tag, user: user_2)
-      word_tag = WordTag.create(word: word, tag: tag)
       user_word_tag = UserWordTag.create(
         user: user_1, word_tag: word_tag
       )
@@ -157,7 +151,6 @@ feature "two users remove a word", %{
       expect(page).not_to have_content("noun")
       expect(Word.count).to eq(1)
       expect(UserWord.count).to eq(0)
-      expect(WordTag.count).to eq(0)
       expect(UserWordTag.count).to eq(0)
     end
   end

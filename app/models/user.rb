@@ -3,10 +3,6 @@ class User < ActiveRecord::Base
 
   has_many :user_words, dependent: :destroy
   has_many :words, through: :user_words
-  has_many :user_tags, dependent: :destroy
-  has_many :tags, through: :user_tags
-  has_many :user_word_tags, dependent: :destroy
-  has_many :word_tags, through: :user_word_tags
   has_many :freestyles, through: :user_words
   has_many :activities, dependent: :destroy
 
@@ -48,14 +44,6 @@ class User < ActiveRecord::Base
     !UserWord.where(user: self).empty?
   end
 
-  def has_tag?(tag)
-    !tags.where(name: tag.name).empty?
-  end
-
-  def has_tags?
-    !UserTag.where(user: self).empty?
-  end
-
   def is_brainiac?
     type == "Brainiac"
   end
@@ -70,15 +58,6 @@ class User < ActiveRecord::Base
 
   def is_student?
     type == "Student" || is_teacher? || is_admin?
-  end
-
-  # TODO Create test
-  def word_ids_for(tag)
-    word_tags.joins(:word)
-             .order("words.name ASC")
-             .includes(:word)
-             .where(tag: tag)
-             .pluck(:word_id)
   end
 
   # TODO Create test
@@ -122,10 +101,5 @@ class User < ActiveRecord::Base
   # TODO: Create test
   def num_words
     words.count
-  end
-
-  # TODO: Create test
-  def num_tags
-    tags.count
   end
 end

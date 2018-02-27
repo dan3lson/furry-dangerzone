@@ -1,0 +1,16 @@
+<%= form_for([:school, tag]) do |f| %>
+  <%= render "shared/error_messages", object: tag %>
+  <div class="form-group">
+    <%= f.label :name, class: "form-control-label" %>
+    <%= f.text_field :name,
+                     class: "form-control",
+                     placeholder: "Name"
+    %>
+  </div>
+  <% if show_btn %>
+    <%= f.button type: "submit", class: "btn btn-primary btn-block" do %>
+      <%= icon "plus-circle" %>
+      <%= btn_text %>
+    <% end %>
+  <% end %>
+<% end %>

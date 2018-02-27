@@ -18,6 +18,17 @@
 	<% end %>
 <% end %>
 
+<% if controller?("school/tags") %>
+	<%= link_to school_tags_path, class: "nav-item nav-link active" do %>
+		<%= emoji "bookmark_tabs" %> <strong>Sections</strong>
+	<% end %>
+<% else %>
+	<%= link_to school_tags_path, class: "nav-item nav-link" do %>
+		<%= emoji "bookmark_tabs" %> Sections
+	<% end %>
+<% end %>
+
+
 <div class="nav-item dropdown">
 	<% if controller?("school/words") && action?("index") ||
 				controller?("school/example_non_examples") ||
