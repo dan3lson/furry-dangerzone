@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   scope :most_logins, -> { order("users.num_logins DESC") }
   scope :least_logins, -> { order("users.num_logins ASC") }
+  scope :alphabetical, -> { order("LOWER(users.username)") }
 
   before_create { self.username = username.downcase }
 
