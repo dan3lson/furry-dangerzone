@@ -6,17 +6,14 @@
 <h1 class="mb-5"><%= emoji "bookmark_tabs" %> Sections</h1>
 
 <% if current_user.has_tags? %>
-  <% @user_words.each do |user_word| %>
+  <% @user_tags.each do |user_tag| %>
     <div class="notebook-row mb-3">
       <h1 class="display-5 mb-1">
-        <% user_word.user_tags.each do |user_tag| %>
           <%= user_tag.tag.name %>
-        <% end %>
       </h1>
-
-      <% @user_words.each do |user_word| %>
-      	<%= play_funds_game(user_word.word.id) %>
-      	<%= user_word.word.name %>
+      <% user_tag.user_words.includes(:word).uniq { |user_word| user_word.id }.each do |user_word| %>
+        <%= play_funds_game(user_word.word.id) %>
+        <p class="lead d-inline"><%= user_word.word.name %>&nbsp;</p>
       <% end %>
     </div>
   <% end %>

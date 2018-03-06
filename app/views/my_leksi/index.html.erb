@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <% @user_words.each do |user_word| %>
+  <% @user_words.includes(:user_tags).each do |user_word| %>
     <div class="notebook-row mb-3">
       <% word = user_word.word %>
       <h1 class="display-5 mb-1">
@@ -43,6 +43,13 @@
                     title: "Click to see the meaning of #{word.name}." do
         %>
           <%= word.name %>
+        <% end %>
+
+        <% user_word.user_tags.each do |user_tag| %>
+          <span class="notebook badge badge-pill badge-dark">
+            <%= emoji "bookmark_tabs" %>
+            <%= user_tag.tag.name %>
+          </span>
         <% end %>
         <p class="collapse lead" id="collapse<%= word.id %>">
           <span class="text-muted"><%= word.part_of_speech %></span>
