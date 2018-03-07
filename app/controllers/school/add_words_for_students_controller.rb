@@ -1,6 +1,7 @@
 class School::AddWordsForStudentsController < BaseSchoolController
   def update
     @classroom_names_params = params[:classroom_names]
+    @individual_usernames_params = params[:individual_usernames]
     @words = params[:word_ids].split(",").uniq.map { |w| Word.find(w) }
     @tag_name_params = params[:tag_name]
     @students = []
@@ -11,8 +12,6 @@ class School::AddWordsForStudentsController < BaseSchoolController
       end
       @students << @classrooms.map { |classroom| classroom.students }
     end
-
-    @individual_usernames_params = params[:individual_usernames]
 
     unless @individual_usernames_params.blank?
       @students << @individual_usernames_params.map do |u|
@@ -49,10 +48,15 @@ class School::AddWordsForStudentsController < BaseSchoolController
 
             if @user_tag.save
               @user_tag_msg = "Success: UserTag #{@user_tag.id} created."
-              @uw_user_tag = @user_tag.user_word_user_tags.create!(
+              @uw_user_tag = @user_tag.user_word_user_tags.where(
                 user_tag: @user_tag,
                 user_word: @user_word
-              )
+              ).first_or_initialize
+              @uw_user_tag_msg = if @uw_user_tag.save
+                                   "Success:"
+                                 else
+                                   "NOT SAVED: Figure out why lol"
+                                 end
             else
               @user_tag_msg = "ERROR: UserTag #{@user_tag.id} not created."
             end
@@ -69,10 +73,15 @@ class School::AddWordsForStudentsController < BaseSchoolController
 
               if @user_tag.save
                 @user_tag_msg = "Success: UserTag #{@user_tag.id} created."
-                @uw_user_tag = @user_tag.user_word_user_tags.create!(
+                @uw_user_tag = @user_tag.user_word_user_tags.where(
                   user_tag: @user_tag,
                   user_word: @user_word
-                )
+                ).first_or_initialize
+                @uw_user_tag_msg = if @uw_user_tag.save
+                                     "Success:"
+                                   else
+                                     "NOT SAVED: Figure out why lol"
+                                   end
               else
                 @user_tag_msg = "ERROR: UserTag #{@user_tag.id} not created."
               end
