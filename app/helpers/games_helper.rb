@@ -64,7 +64,7 @@ module GamesHelper
   def play_funds_game(word_id)
     link_to fund_game_link(word_id),
             title: "Play the Fundamentals!",
-            class: "btn btn-light text-warning font-weight-bold",
+            class: "btn btn-light btn-lg text-warning font-weight-bold",
             remote: true do
       play_icon + tag(:br) + "P L A Y"
     end

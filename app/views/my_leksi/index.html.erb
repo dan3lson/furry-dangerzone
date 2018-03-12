@@ -46,11 +46,12 @@
         <% end %>
 
         <% user_word.user_tags.each do |user_tag| %>
-          <span class="notebook badge badge-pill badge-dark">
+          <span class="notebook badge badge-secondary">
             <%= emoji "bookmark_tabs" %>
             <%= user_tag.tag.name %>
           </span>
         <% end %>
+
         <p class="collapse lead" id="collapse<%= word.id %>">
           <span class="text-muted"><%= word.part_of_speech %></span>
           <%= array_of(word, "definition").first %>
