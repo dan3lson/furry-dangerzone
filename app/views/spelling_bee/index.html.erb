@@ -20,12 +20,14 @@
     <h3 class="mt-4 mb-4">
       Giving Harlem Students a Chance to Bee Champions
     </h5>
-    <%= link_to "Register Students Today",
-                spelling_bee_competition_path(anchor: "enroll"),
+    <%= link_to spelling_bee_competition_path(anchor: "enroll"),
                 role: "button",
                 class: "btn btn-success btn-lg",
-                title: "Enroll Your Students Today for the Harlem Spelling Bee"
+                title: "Enroll Students for the 2nd Harlem Spelling Bee!" do
     %>
+      <%= icon "users" %>
+      Register Students Today
+    <% end %>
     <%= render "static_pages/mailing_list.html.erb" %>
   </div>
 </section>
