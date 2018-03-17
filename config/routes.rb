@@ -117,6 +117,7 @@ Rails.application.routes.draw do
 
     resources :words, except: [:show, :destroy]
     resource :add_words_for_student, only: [:update]
+    resource :reset_passwords, only: [:update]
 
     resources :example_non_examples
 

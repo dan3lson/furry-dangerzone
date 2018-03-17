@@ -16,7 +16,7 @@
 			</thead>
 
 	    <% classroom.students.each do |student| %>
-	      <tr>
+	      <tr data-student-id="<%= student.id %>">
 	        <th scope="row"><%= student.id %></th>
 	        <td>
 						<%= student.username %>
@@ -37,6 +37,14 @@
 							<span class="text-warning">never</span>
 						<% else %>
 							<%= time_ago_in_words(student.last_login) %> ago
+						<% end %>
+					</td>
+					<td>
+						<%= link_to school_reset_passwords_path(id: student),
+												method: :patch,
+												remote: true do
+						%>
+							<%= icon "repeat" %> Reset password
 						<% end %>
 					</td>
 	      </tr>
